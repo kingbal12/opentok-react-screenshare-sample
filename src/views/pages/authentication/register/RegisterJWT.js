@@ -1,5 +1,5 @@
 import React from "react"
-import { Form, FormGroup, Input, Label, Button } from "reactstrap"
+import { InputGroup, InputGroupAddon, InputGroupText, Form, FormGroup, Input, Label, Button } from "reactstrap"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import { Check } from "react-feather"
 import { connect } from "react-redux"
@@ -8,7 +8,7 @@ import { history } from "../../../../history"
 
 class RegisterJWT extends React.Component {
   state = {
-    email: "",
+    photo: "",
     password: "",
     name: "",
     confirmPass: ""
@@ -27,52 +27,83 @@ class RegisterJWT extends React.Component {
     return (
       <Form action="/" onSubmit={this.handleRegister}>
         <FormGroup className="form-label-group">
-          <Input
-            type="text"
-            placeholder="Name"
-            required
-            value={this.state.name}
-            onChange={e => this.setState({ name: e.target.value })}
-          />
-          <Label>Name</Label>
+          <InputGroup>
+          <InputGroupAddon addonType="prepend">
+            <InputGroupText>프로필 사진 등록</InputGroupText>
+          </InputGroupAddon>
+            <Input
+              type="text"
+              required
+              value={this.state.photo}
+              onChange={e => this.setState({ photo: e.target.value })}
+            />
+            <InputGroupAddon addonType="append"><Button color="secondary">파일첨부</Button></InputGroupAddon>
+          </InputGroup>
         </FormGroup>
         <FormGroup className="form-label-group">
-          <Input
-            type="email"
-            placeholder="Email"
-            required
-            value={this.state.email}
-            onChange={e => this.setState({ email: e.target.value })}
-          />
-          <Label>Email</Label>
+          <InputGroup>
+          <InputGroupAddon addonType="prepend">
+            <InputGroupText>진료과</InputGroupText>
+          </InputGroupAddon>
+            <Input
+              type="text"
+              required
+              value={this.state.name}
+              onChange={e => this.setState({ name: e.target.value })}
+            />
+          </InputGroup>
         </FormGroup>
         <FormGroup className="form-label-group">
-          <Input
-            type="password"
-            placeholder="Password"
-            required
-            value={this.state.password}
-            onChange={e => this.setState({ password: e.target.value })}
-          />
-          <Label>Password</Label>
+          <InputGroup>
+          <InputGroupAddon addonType="prepend">
+            <InputGroupText>진료가능분야</InputGroupText>
+          </InputGroupAddon>
+            <Input
+              type="text"
+              required
+              value={this.state.name}
+              onChange={e => this.setState({ name: e.target.value })}
+            />
+          </InputGroup>
         </FormGroup>
         <FormGroup className="form-label-group">
-          <Input
-            type="password"
-            placeholder="Confirm Password"
-            required
-            value={this.state.confirmPass}
-            onChange={e => this.setState({ confirmPass: e.target.value })}
-          />
-          <Label>Confirm Password</Label>
+          <InputGroup>
+          <InputGroupAddon addonType="prepend">
+            <InputGroupText>약력</InputGroupText>
+          </InputGroupAddon>
+            <Input
+              type="text"
+              required
+              value={this.state.name}
+              onChange={e => this.setState({ name: e.target.value })}
+            />
+          </InputGroup>
         </FormGroup>
-        <FormGroup>
-          <Checkbox
-            color="primary"
-            icon={<Check className="vx-icon" size={16} />}
-            label=" I accept the terms & conditions."
-            defaultChecked={true}
-          />
+        <FormGroup className="form-label-group">
+          <InputGroup>
+          <InputGroupAddon addonType="prepend">
+            <InputGroupText>자기소개</InputGroupText>
+          </InputGroupAddon>
+            <Input
+              type="text"
+              required
+              value={this.state.name}
+              onChange={e => this.setState({ name: e.target.value })}
+            />
+          </InputGroup>
+        </FormGroup>
+        <FormGroup className="form-label-group">
+          <InputGroup>
+          <InputGroupAddon addonType="prepend">
+            <InputGroupText>면허번호</InputGroupText>
+          </InputGroupAddon>
+            <Input
+              type="text"
+              required
+              value={this.state.name}
+              onChange={e => this.setState({ name: e.target.value })}
+            />
+          </InputGroup>
         </FormGroup>
         <div className="d-flex justify-content-between">
           <Button.Ripple
