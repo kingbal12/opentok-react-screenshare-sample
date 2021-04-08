@@ -97,9 +97,8 @@ class Register extends React.Component {
                             onChange={this.handleRemember}
                           />
                         </FormGroup>
-                        <FormGroup className="form-label-group">
+                        <FormGroup className="row pl-1 form-label-group">
                           <Checkbox
-                            className="float-left"
                             color="primary"
                             icon={<Check className="vx-icon" size={16} />}
                             label="앱 푸시알림"
@@ -107,6 +106,7 @@ class Register extends React.Component {
                             onChange={this.handleRemember}
                           />
                           <Checkbox
+                            className="pl-1"
                             color="primary"
                             icon={<Check className="vx-icon" size={16} />}
                             label="이메일"
