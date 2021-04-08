@@ -171,8 +171,11 @@ const lockScreen = lazy(() => import("./views/pages/authentication/LockScreen"))
 const resetPassword = lazy(() =>
   import("./views/pages/authentication/ResetPassword")
 )
-const register = lazy(() =>
-  import("./views/pages/authentication/register/Register")
+const register1 = lazy(() =>
+  import("./views/pages/authentication/register/Register1")
+)
+const register2 = lazy(() =>
+  import("./views/pages/authentication/register/Register2")
 )
 const accessControl = lazy(() =>
   import("./extensions/access-control/AccessControl")
@@ -343,7 +346,8 @@ class AppRouter extends React.Component {
           />
           <AppRoute path="/misc/error/404" component={error404} fullLayout />
           <AppRoute path="/pages/login" component={Login} fullLayout />
-          <AppRoute path="/pages/register" component={register} fullLayout />
+          <AppRoute path="/pages/register1" component={register1} fullLayout />
+          <AppRoute path="/pages/register2" component={register2} fullLayout />
           <AppRoute
             path="/pages/forgot-password"
             component={forgotPassword}

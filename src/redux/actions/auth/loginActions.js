@@ -190,7 +190,7 @@ export const loginWithJWT = user => {
         console.log(response);
         let loggedInUser;
 
-        if (response.data) {
+        if (response.data.data) {
           loggedInUser = response.data.data
           console.log(loggedInUser);
           // dispatch({

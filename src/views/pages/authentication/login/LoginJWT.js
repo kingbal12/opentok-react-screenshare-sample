@@ -76,7 +76,7 @@ class LoginJWT extends React.Component {
                   size="lg" 
                   block
                   onClick={() => {
-                    history.push("/pages/register")
+                    history.push("/pages/register1")
                   }}
                 >
                   Register
