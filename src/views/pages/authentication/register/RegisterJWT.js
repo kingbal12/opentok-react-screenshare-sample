@@ -1,5 +1,5 @@
 import React from "react"
-import { InputGroup, InputGroupAddon, InputGroupText, Form, FormGroup, Input, Label, Button } from "reactstrap"
+import { InputGroup, InputGroupAddon, InputGroupText, Form, FormGroup, Input, Label, Button, CustomInput } from "reactstrap"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import { Check } from "react-feather"
 import { connect } from "react-redux"
@@ -28,16 +28,7 @@ class RegisterJWT extends React.Component {
       <Form action="/" onSubmit={this.handleRegister}>
         <FormGroup className="form-label-group">
           <InputGroup>
-          <InputGroupAddon addonType="prepend">
-            <InputGroupText>프로필 사진 등록</InputGroupText>
-          </InputGroupAddon>
-            <Input
-              type="text"
-              required
-              value={this.state.photo}
-              onChange={e => this.setState({ photo: e.target.value })}
-            />
-            <InputGroupAddon addonType="append"><Button color="secondary">파일첨부</Button></InputGroupAddon>
+            <CustomInput type="file" id="exampleCustomFileBrowser" name="customFile" label="프로필 사진 등록" /> 
           </InputGroup>
         </FormGroup>
         <FormGroup className="form-label-group">

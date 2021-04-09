@@ -126,7 +126,7 @@ class Register extends React.Component {
                           </Button.Ripple>
                           <Button.Ripple 
                           color="primary" 
-                          type="submit"
+                          type="button"
                           onClick={() => {
                             history.push("/pages/register2")
                           }}>

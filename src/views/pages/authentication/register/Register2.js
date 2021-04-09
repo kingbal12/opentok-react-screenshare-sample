@@ -57,8 +57,8 @@ class Register extends React.Component {
                               type="text"
                               placeholder="이름"
                               required
-                              value={this.state.photo}
-                              onChange={e => this.setState({ photo: e.target.value })}
+                              value={this.state.name}
+                              onChange={e => this.setState({ name: e.target.value })}
                             />   
                           </InputGroup>
                         </FormGroup>
@@ -68,10 +68,10 @@ class Register extends React.Component {
                               type="text"
                               placeholder="이메일"
                               required
-                              value={this.state.name}
-                              onChange={e => this.setState({ name: e.target.value })}
+                              value={this.state.email}
+                              onChange={e => this.setState({ email: e.target.value })}
                             />
-                            <InputGroupAddon addonType="append"><Button color="secondary">이메일 인증</Button></InputGroupAddon>
+                            <InputGroupAddon addonType="append"><Button color="secondary" type="button">이메일 인증</Button></InputGroupAddon>
                           </InputGroup>
                         </FormGroup>
                         <FormGroup className="form-label-group">
@@ -80,10 +80,10 @@ class Register extends React.Component {
                               type="text"
                               placeholder="인증번호"
                               required
-                              value={this.state.name}
-                              onChange={e => this.setState({ name: e.target.value })}
+                              value={this.state.idnumber}
+                              onChange={e => this.setState({ idnumber: e.target.value })}
                             />
-                            <InputGroupAddon addonType="append"><Button color="secondary">인증 확인</Button></InputGroupAddon>
+                            <InputGroupAddon addonType="append"><Button color="secondary" type="button">인증 확인</Button></InputGroupAddon>
                           </InputGroup>
                         </FormGroup>
                         <FormGroup className="form-label-group">
@@ -92,8 +92,8 @@ class Register extends React.Component {
                               type="text"
                               placeholder="비밀번호"
                               required
-                              value={this.state.name}
-                              onChange={e => this.setState({ name: e.target.value })}
+                              value={this.state.password}
+                              onChange={e => this.setState({ password: e.target.value })}
                             />
                           </InputGroup>
                         </FormGroup>
@@ -103,8 +103,8 @@ class Register extends React.Component {
                               type="text"
                               placeholder="비밀번호확인"
                               required
-                              value={this.state.name}
-                              onChange={e => this.setState({ name: e.target.value })}
+                              value={this.state.chkpassword}
+                              onChange={e => this.setState({ chkpassword: e.target.value })}
                             />
                           </InputGroup>
                         </FormGroup>
@@ -120,9 +120,9 @@ class Register extends React.Component {
                           </Button.Ripple>
                           <Button.Ripple 
                           color="primary" 
-                          type="submit"
+                          type="button"
                           onClick={() => {
-                            history.push("/pages/register2")
+                            history.push("/pages/register3")
                           }}>
                             Register
                           </Button.Ripple>
