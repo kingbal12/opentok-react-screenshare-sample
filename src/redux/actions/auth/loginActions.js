@@ -198,7 +198,7 @@ export const loginWithJWT = user => {
           //   payload: { loggedInUser }
           // })
 
-          history.push("/")
+          history.push("/analyticsDashboard")
         }
       })
       .catch(err => console.log(err))
