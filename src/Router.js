@@ -180,6 +180,9 @@ const register2 = lazy(() =>
 const register3 = lazy(() =>
   import("./views/pages/authentication/register/Register3")
 )
+const register4 = lazy(() =>
+  import("./views/pages/authentication/register/Register4")
+)
 const accessControl = lazy(() =>
   import("./extensions/access-control/AccessControl")
 )
@@ -356,6 +359,7 @@ class AppRouter extends React.Component {
           <AppRoute path="/pages/register1" component={register1} fullLayout />
           <AppRoute path="/pages/register2" component={register2} fullLayout />
           <AppRoute path="/pages/register3" component={register3} fullLayout />
+          <AppRoute path="/pages/register4" component={register4} fullLayout />
           <AppRoute
             path="/pages/forgot-password"
             component={forgotPassword}

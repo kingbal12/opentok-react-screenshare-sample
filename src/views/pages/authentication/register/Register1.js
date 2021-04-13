@@ -1,5 +1,5 @@
 import React from "react"
-import {InputGroup, InputGroupAddon, InputGroupText, Form, FormGroup, Input, Label, Button,
+import {Form, FormGroup, Button,
   Card,
   CardHeader,
   CardTitle,
@@ -9,7 +9,7 @@ import {InputGroup, InputGroupAddon, InputGroupText, Form, FormGroup, Input, Lab
   TabContent,
   TabPane
 } from "reactstrap"
-import { Mail, Lock, Check } from "react-feather"
+import { Check } from "react-feather"
 import { history } from "../../../../history"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import "../../../../assets/scss/pages/authentication.scss"
