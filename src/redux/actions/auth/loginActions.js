@@ -193,8 +193,8 @@ export const loginWithJWT = user => {
           loggedInUser = response.data.data
           console.log(loggedInUser);
           dispatch({
-            type: "LOGIN_WITH_JWT"
-            //payload: { loggedInUser }
+            type: "LOGIN_WITH_JWT",
+            payload: { loggedInUser }
           })
 
           history.push("/analyticsDashboard")

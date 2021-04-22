@@ -13,11 +13,29 @@ import userImg from "../../../assets/img/portrait/small/avatar-s-11.jpg"
 import Clock from "react-digital-clock"
 import HicareLogo from "../../../assets/img/logo/user_register_logo.png"
 
+ // const UserName = props => {
+  //   let username = ""
+  //   if (props.userdata !== undefined) {
+  //     username = props.userdata.name
+  //   } else if (props.user.login.values !== undefined) {
+  //     username = props.user.login.values.name
+  //     if (
+  //       props.user.login.values.loggedInWith !== undefined &&
+  //       props.user.login.values.loggedInWith === "jwt"
+  //     ) {
+  //       username = props.user.login.values.loggedInUser.name
+  //     }
+  //   } else {
+  //     username = "John Doe"
+  //   }
+  
+  //   return username
+  // }
 
 const UserName = props => {
   let username = ""
-  if (props.userdata !== undefined) {
-    username = props.userdata.name
+  if (props.user.login.values.loggedInUser) {
+    username = props.user.login.values.loggedInUser.f_name
   } else if (props.user.login.values !== undefined) {
     username = props.user.login.values.name
     if (
