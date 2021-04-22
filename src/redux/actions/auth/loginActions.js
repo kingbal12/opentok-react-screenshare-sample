@@ -187,7 +187,6 @@ export const loginWithJWT = user => {
         password: user.password
       })
       .then(response => {
-        console.log(response);
         let loggedInUser;
 
         if (response.data.data) {
@@ -195,7 +194,7 @@ export const loginWithJWT = user => {
           console.log(loggedInUser);
           dispatch({
             type: "LOGIN_WITH_JWT"
-          //   payload: { loggedInUser }
+            //payload: { loggedInUser }
           })
 
           history.push("/analyticsDashboard")

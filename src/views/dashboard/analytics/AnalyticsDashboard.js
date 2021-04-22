@@ -34,8 +34,7 @@ class AnalyticsDashboard extends React.Component {
           </Col>
         </Row>
         <Row>
-          <Col sm="8"></Col>
-          <Col sm="4">데이트피커가 들어갈 위치</Col>
+          
         </Row>
       </React.Fragment>
     )
