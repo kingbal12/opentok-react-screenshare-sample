@@ -5,6 +5,25 @@ import { Award } from "react-feather"
 import decorLeft from "../../../assets/img/elements/decore-left.png"
 import decorRight from "../../../assets/img/elements/decore-right.png"
 
+// const UserName = props => {
+//   let username = ""
+//   if (props.user.login.values.loggedInUser) {
+//     username = props.user.login.values.loggedInUser.f_name
+//   } else if (props.user.login.values !== undefined) {
+//     username = props.user.login.values.name
+//     if (
+//       props.user.login.values.loggedInWith !== undefined &&
+//       props.user.login.values.loggedInWith === "jwt"
+//     ) {
+//       username = props.user.login.values.loggedInUser.name
+//     }
+//   } else {
+//     username = "John Doe"
+//   }
+
+//   return username
+// }
+
 class SalesCard extends React.Component {
   render() {
     return (
@@ -18,10 +37,9 @@ class SalesCard extends React.Component {
             </div>
           </div>
           <div className="award-info text-center">
-            <h1 className="mb-2 text-white">Congratulations John,</h1>
+            <h1 className="mb-2 text-white">안녕하세요. 님</h1>
             <p className="m-auto mb-0 w-75">
-              You have done <strong>57.6%</strong> more sales today. Check your
-              new badge in your profile.
+              2021년 4월 23일 금요일입니다.
             </p>
           </div>
         </CardBody>

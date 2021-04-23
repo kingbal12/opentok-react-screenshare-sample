@@ -1,8 +1,8 @@
 import React from "react"
 import { Row, Col } from "reactstrap"
-// import SalesCard from "./SalesCard"
-// import SuberscribersGained from "../../ui-elements/cards/statistics/SubscriberGained"
-// import OrdersReceived from "../../ui-elements/cards/statistics/OrdersReceived"
+import SalesCard from "./SalesCard"
+import SuberscribersGained from "../../ui-elements/cards/statistics/SubscriberGained"
+import OrdersReceived from "../../ui-elements/cards/statistics/OrdersReceived"
 // import AvgSession from "../../ui-elements/cards/analytics/AvgSessions"
 // import SupportTracker from "../../ui-elements/cards/analytics/SupportTracker"
 // import ProductOrders from "../../ui-elements/cards/analytics/ProductOrders"
@@ -48,13 +48,22 @@ class AnalyticsDashboard extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Row>
-          <Col sm="12">
-            <DataTableCustom />
+        <Row className="match-height row">
+          <Col sm="6">
+            <SalesCard />
+          </Col>
+          <Col sm="3">
+            <SuberscribersGained />
+          </Col>
+          <Col sm="3">
+            <OrdersReceived />
           </Col>
         </Row>
         <Row>
           {/* <UserName></UserName> */}
+          <Col sm="12">
+            <DataTableCustom />
+          </Col>
         </Row>
       </React.Fragment>
     )

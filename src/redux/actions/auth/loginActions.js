@@ -197,7 +197,7 @@ export const loginWithJWT = user => {
           
           loggedInUser.displayName = (fName ==  null?"":fName) 
 													+ " " + (mName ==  null?"":mName) 
-													+ " " + (lName ==  null?"":lName) ;
+													+ " " + (lName ==  null?"":lName);
           console.log(loggedInUser);
           dispatch({
             type: "LOGIN_WITH_JWT",
