@@ -1,8 +1,6 @@
 import React from "react"
-import {InputGroup, InputGroupAddon, InputGroupText, Form, FormGroup, Input, Label, Button,
+import {InputGroup, InputGroupAddon, Form, FormGroup, Input, Button,
   Card,
-  CardHeader,
-  CardTitle,
   CardBody,
   Row,
   Col,

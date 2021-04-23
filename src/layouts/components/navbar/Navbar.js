@@ -35,7 +35,7 @@ import HicareLogo from "../../../assets/img/logo/user_register_logo.png"
 const UserName = props => {
   let username = ""
   if (props.user.login.values.loggedInUser) {
-    username = props.user.login.values.loggedInUser.f_name
+    username = props.user.login.values.loggedInUser.displayName
   } else if (props.user.login.values !== undefined) {
     username = props.user.login.values.name
     if (

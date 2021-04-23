@@ -77,7 +77,7 @@ const UserDropdown = props => {
             })
           } else {
             const provider = props.loggedInWith
-            if (provider !== null) {
+            if (provider != null) {
               if (provider === "jwt") {
                 return props.logoutWithJWT()
               }

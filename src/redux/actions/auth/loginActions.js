@@ -191,6 +191,13 @@ export const loginWithJWT = user => {
 
         if (response.data.data) {
           loggedInUser = response.data.data
+          let fName = loggedInUser.f_name;
+					let mName = loggedInUser.m_name;
+					let lName = loggedInUser.l_name;
+          
+          loggedInUser.displayName = (fName ==  null?"":fName) 
+													+ " " + (mName ==  null?"":mName) 
+													+ " " + (lName ==  null?"":lName) ;
           console.log(loggedInUser);
           dispatch({
             type: "LOGIN_WITH_JWT",
@@ -213,6 +220,9 @@ export const logoutWithJWT = () => {
 
 export const logoutWithFirebase = user => {
   return dispatch => {
+    // axios
+    //   .post()
+    // 로그아웃 api
     dispatch({ type: "LOGOUT_WITH_FIREBASE", payload: {} })
     history.push("/pages/login")
   }
