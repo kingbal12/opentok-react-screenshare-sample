@@ -213,6 +213,9 @@ export const loginWithJWT = user => {
 
 export const logoutWithJWT = () => {
   return dispatch => {
+    // axios
+    //   .post()
+    // 로그아웃 api
     dispatch({ type: "LOGOUT_WITH_JWT", payload: {} })
     history.push("/pages/login")
   }
@@ -220,9 +223,7 @@ export const logoutWithJWT = () => {
 
 export const logoutWithFirebase = user => {
   return dispatch => {
-    // axios
-    //   .post()
-    // 로그아웃 api
+    
     dispatch({ type: "LOGOUT_WITH_FIREBASE", payload: {} })
     history.push("/pages/login")
   }
