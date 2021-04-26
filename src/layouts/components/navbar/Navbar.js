@@ -37,12 +37,12 @@ const UserName = props => {
   if (props.user.login.values.loggedInUser) {
     username = props.user.login.values.loggedInUser.displayName
   } else if (props.user.login.values !== undefined) {
-    username = props.user.login.values.name
+    username = props.user.login.values.loggedInUser.displayName
     if (
       props.user.login.values.loggedInWith !== undefined &&
       props.user.login.values.loggedInWith === "jwt"
     ) {
-      username = props.user.login.values.loggedInUser.name
+      username = props.user.login.values.loggedInUser.displayName
     }
   } else {
     username = "John Doe"

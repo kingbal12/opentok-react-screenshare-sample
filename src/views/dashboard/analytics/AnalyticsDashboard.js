@@ -26,24 +26,7 @@ import DataTableCustom from "./DataTableCustom"
 //   $label_color = "#e7eef7",
 //   $white = "#fff"
 
-  // const UserName = props => {
-  //   let username = ""
-  //   if (props.userdata !== undefined) {
-  //     username = props.userdata.name
-  //   } else if (props.user.login.values !== undefined) {
-  //     username = props.user.login.values.name
-  //     if (
-  //       props.user.login.values.loggedInWith !== undefined &&
-  //       props.user.login.values.loggedInWith === "jwt"
-  //     ) {
-  //       username = props.user.login.values.loggedInUser.name
-  //     }
-  //   } else {
-  //     username = "John Doe"
-  //   }
-  
-  //   return username
-  // }
+ 
 class AnalyticsDashboard extends React.Component {
   render() {
     return (
@@ -60,7 +43,7 @@ class AnalyticsDashboard extends React.Component {
           </Col>
         </Row>
         <Row>
-          {/* <UserName></UserName> */}
+          
           <Col sm="12">
             <DataTableCustom />
           </Col>
