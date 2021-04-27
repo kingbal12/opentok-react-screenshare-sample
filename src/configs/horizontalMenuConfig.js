@@ -13,7 +13,7 @@ const horizontalMenuConfig = [
         title: "Home",
         type: "item",
         icon: <Icon.Circle size={10} />,
-        navLink: "/",
+        navLink: "/analyticsDashboard",
         permissions: ["admin", "editor"]
       },
       {
