@@ -103,7 +103,6 @@ const ThemeNavbar = props => {
                 <div className="logo d-flex align-items-center col-4">
                   {/* <div className="brand-logo mr-50"></div> */}
                   <h2 className="text-primary brand-text mb-0"><img className="col-3" src={HicareLogo} alt="HicareLogo"/></h2>
-                   
                 </div>
               ) : null}
               <NavbarUser
