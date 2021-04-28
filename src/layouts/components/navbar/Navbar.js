@@ -86,7 +86,25 @@ const ThemeNavbar = props => {
           }
         )}
       >
-        <div className="navbar-wrapper">
+         <div className="navbar-wrapper">
+          <div className="navbar-container content">
+            <div
+              className="navbar-collapse d-flex justify-content-between align-items-center"
+              id="navbar-mobile"
+            >
+              <div className="bookmark-wrapper">
+                <NavbarBookmarks
+                  sidebarVisibility={props.sidebarVisibility}
+                  handleAppOverlay={props.handleAppOverlay}
+                />
+              </div>
+              {props.horizontal ? (
+                <div className="logo d-flex align-items-center">
+                  <div className="brand-logo mr-50"></div>
+                  <h2 className="text-primary brand-text mb-0">Vuexy</h2>
+                </div>
+              ) : null}
+        {/* <div className="navbar-wrapper">
           <div className="navbar-container content">
             <div
               className="navbar-collapse d-flex justify-content-between align-items-center"
@@ -94,17 +112,17 @@ const ThemeNavbar = props => {
             >
               <div className="bookmark-wrapper col-5 row justify-content-start">
                 <Clock />
-                {/* <NavbarBookmarks
+                <NavbarBookmarks
                   sidebarVisibility={props.sidebarVisibility}
                   handleAppOverlay={props.handleAppOverlay}
-                /> */}
+                />
               </div>
               {props.horizontal ? (
                 <div className="logo d-flex align-items-center col-4">
-                  {/* <div className="brand-logo mr-50"></div> */}
+                  <div className="brand-logo mr-50"></div>
                   <h2 className="text-primary brand-text mb-0"><img className="col-3" src={HicareLogo} alt="HicareLogo"/></h2>
                 </div>
-              ) : null}
+              ) : null} */}
               <NavbarUser
                 handleAppOverlay={props.handleAppOverlay}
                 changeCurrentLang={props.changeCurrentLang}

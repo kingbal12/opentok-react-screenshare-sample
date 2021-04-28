@@ -4,18 +4,19 @@ import { Award } from "react-feather"
 
 import decorLeft from "../../../assets/img/elements/decore-left.png"
 import decorRight from "../../../assets/img/elements/decore-right.png"
+import DisplayName from "./DisplayName";
 
 // const UserName = props => {
 //   let username = ""
-//   if (props.user.login.values.loggedInUser) {
-//     username = props.user.login.values.loggedInUser.f_name
+//   console.log('프롭스: ',props);
+//   if (props.userdata !== undefined) {
 //   } else if (props.user.login.values !== undefined) {
-//     username = props.user.login.values.name
+//     username = props.user.login.values.loggedInUser.displayName
 //     if (
 //       props.user.login.values.loggedInWith !== undefined &&
 //       props.user.login.values.loggedInWith === "jwt"
 //     ) {
-//       username = props.user.login.values.loggedInUser.name
+//       username = props.user.login.values.loggedInUser.displayName
 //     }
 //   } else {
 //     username = "John Doe"
@@ -37,7 +38,9 @@ class SalesCard extends React.Component {
             </div>
           </div>
           <div className="award-info text-center">
-            <h1 className="mb-2 text-white">안녕하세요. 님</h1>
+            <h1 className="mb-2 text-white">안녕하세요.
+            {/* <DisplayName />  props.login */}
+            님</h1>
             <p className="m-auto mb-0 w-75">
               2021년 4월 23일 금요일입니다.
             </p>

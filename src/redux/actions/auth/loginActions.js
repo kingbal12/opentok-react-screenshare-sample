@@ -179,6 +179,8 @@ export const loginWithGithub = () => {
   }
 }
 
+
+// 로그인 액션 부분(현재 인성 api사용중)
 export const loginWithJWT = user => {
   return dispatch => {
     axios

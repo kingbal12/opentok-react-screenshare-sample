@@ -15,6 +15,7 @@ const analyticsDashboard = lazy(() =>
 const ecommerceDashboard = lazy(() =>
   import("./views/dashboard/ecommerce/EcommerceDashboard")
 )
+
 const email = lazy(() => import("./views/apps/email/Email"))
 const chat = lazy(() => import("./views/apps/chat/Chat"))
 const todo = lazy(() => import("./views/apps/todo/Todo"))
@@ -46,6 +47,10 @@ const analyticsCards = lazy(() =>
 )
 const actionCards = lazy(() =>
   import("./views/ui-elements/cards/actions/CardActions")
+)
+
+const displayName = lazy(() =>
+  import("./views/dashboard/analytics/DisplayName")
 )
 const Alerts = lazy(() => import("./components/reactstrap/alerts/Alerts"))
 const Buttons = lazy(() => import("./components/reactstrap/buttons/Buttons"))
@@ -235,6 +240,10 @@ class AppRouter extends React.Component {
           <AppRoute
             path="/analyticsDashboard"
             component={analyticsDashboard}
+          />
+          <AppRoute
+            path="/displayName"
+            component={displayName}
           />
           <AppRoute
             path="/email"
