@@ -1,4 +1,5 @@
 import React from "react"
+import axios from "axios"
 import {
   Card,
   CardBody,
@@ -13,13 +14,13 @@ class DataTableCustom extends React.Component {
   state = {
     columns: [
       {
-        name: "Name",
+        name: "이름",
         selector: "name",
         sortable: true,
         minWidth: "200px",
         cell: row => (
           <div className="d-flex flex-xl-row flex-column align-items-xl-center align-items-start py-xl-0 py-1">
-            <div className="user-img ml-xl-0 ml-2">
+            {/* <div className="user-img ml-xl-0 ml-2">
               <img
                 className="img-fluid rounded-circle"
                 height="36"
@@ -27,14 +28,14 @@ class DataTableCustom extends React.Component {
                 src={row.image}
                 alt={row.name}
               />
-            </div>
+            </div> */}
             <div className="user-info text-truncate ml-xl-50 ml-0">
               <span
                 title={row.name}
                 className="d-block text-bold-500 text-truncate mb-0">
                 {row.name}
               </span>
-              <small title={row.email}>{row.email}</small>
+              {/* <small title={row.email}>{row.email}</small> */}
             </div>
           </div>
         )
@@ -111,7 +112,7 @@ class DataTableCustom extends React.Component {
         }
       }
     ],
-    data: [
+    data: [     
       {
         image: require("../../../assets/img/portrait/small/avatar-s-2.jpg"),
         name: "Alyss Lillecrop",
@@ -221,3 +222,4 @@ class DataTableCustom extends React.Component {
 }
 
 export default DataTableCustom
+

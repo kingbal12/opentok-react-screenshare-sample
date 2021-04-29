@@ -52,6 +52,9 @@ const actionCards = lazy(() =>
 const displayName = lazy(() =>
   import("./views/dashboard/analytics/DisplayName")
 )
+const appointmentlist = lazy (() =>
+  import("./views/dashboard/analytics/DataTableCustom")
+)
 const Alerts = lazy(() => import("./components/reactstrap/alerts/Alerts"))
 const Buttons = lazy(() => import("./components/reactstrap/buttons/Buttons"))
 const Breadcrumbs = lazy(() =>
@@ -244,6 +247,10 @@ class AppRouter extends React.Component {
           <AppRoute
             path="/displayName"
             component={displayName}
+          />
+          <AppRoute 
+            path="/appointmentlist"
+            component={appointmentlist}
           />
           <AppRoute
             path="/email"

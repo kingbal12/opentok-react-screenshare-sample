@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from "react-redux"
+
+
 
 const DisplayName  = (props) => {
     return (
@@ -7,4 +10,11 @@ const DisplayName  = (props) => {
         </div>
     )
 }
-export default DisplayName
+
+const mapStateToProps = state => {
+    return {
+        user: state.auth
+    }
+}
+  
+export default connect(mapStateToProps)(DisplayName)

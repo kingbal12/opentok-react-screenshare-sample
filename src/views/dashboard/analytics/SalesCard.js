@@ -5,25 +5,9 @@ import { Award } from "react-feather"
 import decorLeft from "../../../assets/img/elements/decore-left.png"
 import decorRight from "../../../assets/img/elements/decore-right.png"
 import DisplayName from "./DisplayName";
+import { connect } from "react-redux";
 
-// const UserName = props => {
-//   let username = ""
-//   console.log('프롭스: ',props);
-//   if (props.userdata !== undefined) {
-//   } else if (props.user.login.values !== undefined) {
-//     username = props.user.login.values.loggedInUser.displayName
-//     if (
-//       props.user.login.values.loggedInWith !== undefined &&
-//       props.user.login.values.loggedInWith === "jwt"
-//     ) {
-//       username = props.user.login.values.loggedInUser.displayName
-//     }
-//   } else {
-//     username = "John Doe"
-//   }
 
-//   return username
-// }
 
 class SalesCard extends React.Component {
   render() {
@@ -39,7 +23,7 @@ class SalesCard extends React.Component {
           </div>
           <div className="award-info text-center">
             <h1 className="mb-2 text-white">안녕하세요.
-            {/* <DisplayName />  props.login */}
+            <DisplayName />
             님</h1>
             <p className="m-auto mb-0 w-75">
               2021년 4월 23일 금요일입니다.
@@ -50,4 +34,6 @@ class SalesCard extends React.Component {
     )
   }
 }
+
+
 export default SalesCard

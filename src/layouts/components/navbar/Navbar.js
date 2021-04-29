@@ -36,6 +36,7 @@ const UserName = props => {
   let username = ""
   if (props.userdata !== undefined) {
   } else if (props.user.login.values !== undefined) {
+    console.log(props);
     username = props.user.login.values.loggedInUser.displayName
     if (
       props.user.login.values.loggedInWith !== undefined &&
