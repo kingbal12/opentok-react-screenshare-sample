@@ -192,6 +192,13 @@ const register3 = lazy(() =>
 const register4 = lazy(() =>
 import("./views/pages/authentication/register/Register4")
 )
+
+const addEventButton = lazy(() =>
+  import("./views/pages/authentication/register/Schedule/AddEventButton")
+)
+const addEventSidebar = lazy(() =>
+  import("./views/pages/authentication/register/Schedule/AddEventSidebar")
+)
 const schedule = lazy(() =>
   import("./views/pages/authentication/register/Schedule/Schedule")
 )
@@ -381,7 +388,10 @@ class AppRouter extends React.Component {
           <AppRoute path="/pages/register2" component={register2} fullLayout />
           <AppRoute path="/pages/register3" component={register3} fullLayout />
           <AppRoute path="/pages/register4" component={register4} fullLayout />
-          <AppRoute path="/shedule" component={schedule} fullLayout />
+          {/* <AppRoute path="/addEventButton" component={addEventButton}  />
+          <AppRoute path="/addEventSidebar" component={addEventSidebar}  /> */}
+          <AppRoute path="/shedule" component={schedule}  />
+          
           <AppRoute
             path="/pages/forgot-password"
             component={forgotPassword}
