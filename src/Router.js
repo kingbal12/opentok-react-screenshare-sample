@@ -179,6 +179,7 @@ const lockScreen = lazy(() => import("./views/pages/authentication/LockScreen"))
 const resetPassword = lazy(() =>
   import("./views/pages/authentication/ResetPassword")
 )
+
 const register1 = lazy(() =>
   import("./views/pages/authentication/register/Register1")
 )
@@ -189,8 +190,12 @@ const register3 = lazy(() =>
   import("./views/pages/authentication/register/Register3")
 )
 const register4 = lazy(() =>
-  import("./views/pages/authentication/register/Register4")
+import("./views/pages/authentication/register/Register4")
 )
+const schedule = lazy(() =>
+  import("./views/pages/authentication/register/Schedule/Schedule")
+)
+
 const accessControl = lazy(() =>
   import("./extensions/access-control/AccessControl")
 )
@@ -376,6 +381,7 @@ class AppRouter extends React.Component {
           <AppRoute path="/pages/register2" component={register2} fullLayout />
           <AppRoute path="/pages/register3" component={register3} fullLayout />
           <AppRoute path="/pages/register4" component={register4} fullLayout />
+          <AppRoute path="/shedule" component={schedule} fullLayout />
           <AppRoute
             path="/pages/forgot-password"
             component={forgotPassword}

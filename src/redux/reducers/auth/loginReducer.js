@@ -15,10 +15,10 @@ export const login = (state = { userRole: "admin" }, action) => {
     case "LOGIN_WITH_GITHUB": {
       return { ...state, values: action.payload }
     }
+    // 로그인 리듀서 부분
     case "LOGIN_WITH_JWT": {
       return { ...state, values: action.payload }
     }
-    // 로그인 리듀서 부분
     case "LOGOUT_WITH_JWT": {
       return { ...state, values: action.payload }
     }

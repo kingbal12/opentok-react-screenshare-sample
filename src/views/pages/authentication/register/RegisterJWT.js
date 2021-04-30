@@ -106,7 +106,14 @@ class RegisterJWT extends React.Component {
           >
             Login
           </Button.Ripple>
-          <Button.Ripple color="primary" type="submit">
+          {/* <Button.Ripple color="primary" type="submit">
+            Register
+          </Button.Ripple> */}
+          <Button.Ripple 
+            color="primary"
+            onClick={() => {
+              history.push("/shedule")
+            }} >
             Register
           </Button.Ripple>
         </div>
