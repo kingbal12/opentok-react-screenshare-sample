@@ -39,7 +39,7 @@ class Login extends React.Component {
             <Row className="m-0">
               <Col md="12" className="p-0">
                 <Card className="rounded-0 mb-0 px-2 login-tabs-container">
-                  <CardHeader className="pb-1">
+                  <CardHeader className="pb-4">
                     <CardTitle>
                       <div>
                         <img className="col" src={HicareLogo} alt="HicareLogo"/>

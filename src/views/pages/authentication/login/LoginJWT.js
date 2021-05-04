@@ -33,7 +33,7 @@ class LoginJWT extends React.Component {
               <div className="form-control-position">
                 <Mail size={15} />
               </div>
-              <Label>아이디</Label>
+              {/* <Label>아이디</Label> */}
             </FormGroup>
             <FormGroup className="form-label-group position-relative has-icon-left">
               <Input
@@ -46,7 +46,7 @@ class LoginJWT extends React.Component {
               <div className="form-control-position">
                 <Lock size={15} />
               </div>
-              <Label>비밀번호</Label>
+              {/* <Label>비밀번호</Label> */}
             </FormGroup>
             <FormGroup className="d-flex justify-content-between align-items-center">
               <Checkbox
@@ -58,15 +58,17 @@ class LoginJWT extends React.Component {
               />
               
             </FormGroup>
-            <div className="d-flex justify-content-center">
-             
+            <div className="d-flex justify-content-center pb-1">
               <Button color="primary" type="submit" size="lg" block>
-                Login
+                로그인
               </Button>
             </div>
             
-            <div className="d-flex justify-content-between">
-              <Link to="/pages/forgot-password">Forgot Password?</Link>
+            
+            <div className="d-flex justify-content-center pb-1">
+              <Link to="/pages/forgot-password">아이디 찾기</Link>
+              <div>&nbsp; &nbsp; |&nbsp; &nbsp;</div>
+              <Link to="/pages/forgot-password">비밀번호 찾기</Link>
             </div>
             
             <div className="d-flex justify-content-center">
@@ -79,7 +81,7 @@ class LoginJWT extends React.Component {
                     history.push("/pages/register1")
                   }}
                 >
-                  Register
+                  회원가입
               </Button>
             </div>
           </Form>

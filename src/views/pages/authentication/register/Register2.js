@@ -1,5 +1,7 @@
 import React from "react"
 import {InputGroup, InputGroupAddon, Form, FormGroup, Input, Button,
+  CardHeader,
+  CardTitle,
   Card,
   CardBody,
   Row,
@@ -7,7 +9,9 @@ import {InputGroup, InputGroupAddon, Form, FormGroup, Input, Button,
   TabContent,
   TabPane
 } from "reactstrap"
+import { Check } from "react-feather"
 import { history } from "../../../../history"
+import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import "../../../../assets/scss/pages/authentication.scss"
 
 class Register extends React.Component {
@@ -36,15 +40,11 @@ class Register extends React.Component {
               
               <Col lg="12" md="12" className="p-0">
                 <Card className="rounded-0 mb-0 p-2">
-                  
-                    
-                      <Row>
-                        <Col xs="4 text-center">로고</Col>
-                        <Col xs="7"><h5>회원가입</h5></Col>
-                      </Row>
-                    
-                  
-                  
+                  <CardHeader className="pb-1 pt-50">
+                    <CardTitle>
+                      <h1>회원가입</h1>
+                    </CardTitle>
+                  </CardHeader>   
                   <CardBody className="pt-1 pb-50">
                     <TabContent activeTab={this.state.activeTab}>
                       <TabPane tabId="1">
@@ -64,6 +64,17 @@ class Register extends React.Component {
                           <InputGroup>
                             <Input
                               type="text"
+                              placeholder="전화번호"
+                              required
+                              value={this.state.name}
+                              onChange={e => this.setState({ name: e.target.value })}
+                            />   
+                          </InputGroup>
+                        </FormGroup>
+                        <FormGroup className="form-label-group">
+                          <InputGroup>
+                            <Input
+                              type="text"
                               placeholder="이메일"
                               required
                               value={this.state.email}
@@ -71,7 +82,9 @@ class Register extends React.Component {
                             />
                             <InputGroupAddon addonType="append"><Button color="secondary" type="button">이메일 인증</Button></InputGroupAddon>
                           </InputGroup>
+                          <div className="pt-1 emailidentify">인증번호를 입력해주세요.</div>
                         </FormGroup>
+                        
                         <FormGroup className="form-label-group">
                           <InputGroup>
                             <Input
@@ -106,24 +119,37 @@ class Register extends React.Component {
                             />
                           </InputGroup>
                         </FormGroup>
-                        <div className="d-flex justify-content-between">
-                          <Button.Ripple
+                        <FormGroup className="form-label-group emailagree">
+                          <Checkbox
+                            className="smallcheckbox"
                             color="primary"
-                            outline
-                            onClick={() => {
-                              history.push("/pages/login")
-                            }}
-                          >
-                            Login
-                          </Button.Ripple>
-                          <Button.Ripple 
+                            icon={<Check className="vx-icon" size={16} />}
+                            label="서비스에 대한 소식을 이메일로 받겠습니다."
+                            defaultChecked={false}
+                            onChange={this.handleRemember}
+                          />
+                        </FormGroup>
+                        <FormGroup className="form-label-group seeterm">
+                          <Checkbox
+                            className="smallcheckbox"
+                            color="primary"
+                            icon={<Check className="vx-icon" size={16} />}
+                            label="제공하는 서비스 약관에 동의합니다. 약관보기"
+                            defaultChecked={false}
+                            onChange={this.handleRemember}
+                          />
+                        </FormGroup>
+                        <div className="d-flex justify-content-center">
+                          <Button
                           color="primary" 
                           type="button"
+                          size="lg"
+                          block
                           onClick={() => {
                             history.push("/pages/register3")
                           }}>
-                            Register
-                          </Button.Ripple>
+                            가입하기
+                          </Button>
                         </div>
                       </Form>
                       </TabPane>

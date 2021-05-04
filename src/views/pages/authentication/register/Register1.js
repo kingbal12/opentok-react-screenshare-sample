@@ -42,18 +42,17 @@ class Register extends React.Component {
                 <Card className="rounded-0 mb-0 p-2">
                   <CardHeader className="pb-1 pt-50">
                     <CardTitle>
-                      <h4>약관동의</h4>
-                      
+                      <h1>약관동의</h1>
                     </CardTitle>
                   </CardHeader>
-                  <p className="ml-2">하이케어넷 사용을 위해</p>
-                  <p className="ml-2">아래의 약관에 동의해 주세요!</p>
+                  <p className="ml-2">하이케어넷 사용을 위해 아래의 약관에 동의해 주세요!</p>
                   <CardBody className="pt-1 pb-50">
                     <TabContent activeTab={this.state.activeTab}>
                       <TabPane tabId="1">
                       <Form action="/" onSubmit={this.handleRegister}>
-                        <FormGroup className="form-label-group">
+                        <FormGroup className="form-label-group allagree">
                           <Checkbox
+                            className="pb-1"
                             color="primary"
                             icon={<Check className="vx-icon" size={16} />}
                             label="모든 약관에 동의"
@@ -97,6 +96,7 @@ class Register extends React.Component {
                             onChange={this.handleRemember}
                           />
                         </FormGroup>
+                        <div className="pb-3 select">선택 약관은 동의하지 않아도 회원가입이 가능합니다.</div>
                         <FormGroup className="row pl-1 form-label-group">
                           <Checkbox
                             color="primary"
