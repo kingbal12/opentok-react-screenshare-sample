@@ -26,7 +26,7 @@ class SalesCard extends React.Component {
             <DisplayName />
             님</h1>
             <p className="m-auto mb-0 w-75">
-              2021년 4월 30일 금요일입니다.
+              2021년 5월 04일 화요일입니다.
             </p>
           </div>
         </CardBody>

@@ -33,14 +33,14 @@ class StatisticsCards extends React.Component {
             <p className="mb-0">{this.props.statTitle}</p>
           </div>
         </CardBody>
-        {!this.props.hideChart && (
+        {/* {!this.props.hideChart && (
           <Chart
             options={this.props.options}
             series={this.props.series}
             type={this.props.type}
             height={this.props.height ? this.props.height : 100}
           />
-        )}
+        )} */}
       </Card>
     )
   }

@@ -133,7 +133,7 @@ class Register extends React.Component {
                       color="primary" 
                       type="button"
                       onClick={() => {
-                        history.push("/pages/login")
+                        history.push("/schedule")
                       }}>
                         진료 승인요청
                       </Button>
