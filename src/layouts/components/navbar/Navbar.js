@@ -32,11 +32,13 @@ import HicareLogo from "../../../assets/img/logo/user_register_logo.png"
 //     return username
 //   }
 
+
+// 인성api연결
 const UserName = props => {
   let username = ""
   if (props.userdata !== undefined) {
   } else if (props.user.login.values !== undefined) {
-    console.log(props);
+    console.log(props.user);
     username = props.user.login.values.loggedInUser.displayName
     if (
       props.user.login.values.loggedInWith !== undefined &&
@@ -50,6 +52,29 @@ const UserName = props => {
 
   return username
 }
+
+
+// i4h api 연결
+// const UserName = props => {
+//   let username = ""
+//   if (props.userdata !== undefined) {
+//   } else if (props.user.login.values !== undefined) {
+//     console.log(props);
+//     username = props.user.login.values.loggedInUser.username
+//     if (
+//       props.user.login.values.loggedInWith !== undefined &&
+//       props.user.login.values.loggedInWith === "jwt"
+//     ) {
+//       username = props.user.login.values.loggedInUser.username
+//     }
+//   } else {
+//     username = "John Doe"
+//   }
+
+//   return username
+// }
+
+
 const ThemeNavbar = props => {
   const { user } = useAuth0()
   const colorsArr = [ "primary", "danger", "success", "info", "warning", "dark"]

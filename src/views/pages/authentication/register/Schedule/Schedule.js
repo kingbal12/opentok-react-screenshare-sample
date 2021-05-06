@@ -33,7 +33,7 @@ class Toolbar extends React.Component {
   render() {
     return (
       <div className="calendar-header mb-2 d-flex justify-content-between flex-wrap">
-        <div>
+        {/* <div>
           <AddEventButton />
         </div>
         <div className="text-center view-options mt-1 mt-sm-0 ml-lg-5 ml-0">
@@ -77,7 +77,7 @@ class Toolbar extends React.Component {
               Day
             </button>
           </ButtonGroup>
-        </div>
+        </div> */}
         <div className="month-label d-flex flex-column text-center text-md-right mt-1 mt-md-0">
           <div className="calendar-navigation">
             <Button.Ripple
@@ -88,19 +88,20 @@ class Toolbar extends React.Component {
             >
               <ChevronLeft size={15} />
             </Button.Ripple>
-            <div className="month d-inline-block mx-75 text-bold-500 font-medium-2 align-middle">
-              {this.props.label}
-            </div>
             <Button.Ripple
-              className="btn-icon rounded-circle"
+              className="btn-icon rounded-circle ml-1"
               size="sm"
               color="primary"
               onClick={() => this.props.onNavigate("NEXT")}
             >
               <ChevronRight size={15} />
             </Button.Ripple>
+            <div className="month d-inline-block mx-75 text-bold-500 font-medium-2 align-middle">
+              {this.props.label}
+            </div>
+           
           </div>
-          <div className="event-tags d-none d-sm-flex justify-content-end mt-1">
+          {/* <div className="event-tags d-none d-sm-flex justify-content-end mt-1">
             <div className="tag mr-1">
               <span className="bullet bullet-success bullet-sm mr-50"></span>
               <span>Business</span>
@@ -117,7 +118,7 @@ class Toolbar extends React.Component {
               <span className="bullet bullet-primary bullet-sm mr-50"></span>
               <span>Others</span>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     )
@@ -221,7 +222,7 @@ class CalendarApp extends React.Component {
         ></div>
         <Card>
           <CardBody>
-            <DragAndDropCalendar
+            <DragAndDropCalendar style={{height:"900px", position:"relative"}}
               localizer={localizer}
               events={events}
               onEventDrop={this.moveEvent}
@@ -229,6 +230,7 @@ class CalendarApp extends React.Component {
               startAccessor="start"
               endAccessor="end"
               resourceAccessor="url"
+              defaultView='week'
               views={views}
               components={{ toolbar: Toolbar }}
               eventPropGetter={this.handleEventColors}

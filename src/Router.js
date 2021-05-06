@@ -390,7 +390,7 @@ class AppRouter extends React.Component {
           <AppRoute path="/pages/register4" component={register4} fullLayout />
           {/* <AppRoute path="/addEventButton" component={addEventButton}  />
           <AppRoute path="/addEventSidebar" component={addEventSidebar}  /> */}
-          <AppRoute path="/schedule" component={schedule} fullLayout />
+          <AppRoute path="/schedule" component={schedule} fullLayout/>
           
           <AppRoute
             path="/pages/forgot-password"

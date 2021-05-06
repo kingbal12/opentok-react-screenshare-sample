@@ -146,4 +146,10 @@ class Register extends React.Component {
     )
   }
 }
+
+const mapStateToProps  = state => {
+  return {
+    values : state.register1
+  }
+}
 export default Register

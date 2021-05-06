@@ -180,7 +180,7 @@ export const loginWithGithub = () => {
 }
 
 
-// 로그인 액션 부분(현재 인성 api사용중)
+// 로그인 액션 부분(인성 api)
 export const loginWithJWT = user => {
   return dispatch => {
     axios
@@ -197,7 +197,7 @@ export const loginWithJWT = user => {
 					let mName = loggedInUser.m_name;
 					let lName = loggedInUser.l_name;
           
-          loggedInUser.displayName = (fName ==  null?"":fName) 
+          loggedInUser.displayName = (fName ==  null?"":fName)
 													+ " " + (mName ==  null?"":mName) 
 													+ " " + (lName ==  null?"":lName);
           console.log(loggedInUser);
@@ -212,6 +212,34 @@ export const loginWithJWT = user => {
       .catch(err => console.log(err))
   }
 }
+
+
+// 로그인액션부분 i4h api
+// export const loginWithJWT = user => {
+//   return dispatch => {
+//     axios
+//       .post("http://192.168.0.7:9200/signin", {
+//         user_id: user.email,
+//         user_pwd: user.password
+//       })
+//       .then(response => {
+//         var loggedInUser;
+
+//         if (response) {
+//           loggedInUser = response.data;
+       
+//           console.log(loggedInUser);
+//           dispatch({
+//             type: "LOGIN_WITH_JWT",
+//             payload: { loggedInUser, loggedInWith: "jwt" }
+//           })
+
+//           history.push("/analyticsDashboard")
+//         }
+//       })
+//       .catch(err => console.log(err))
+//   }
+// }
 
 export const logoutWithJWT = () => {
   return dispatch => {
