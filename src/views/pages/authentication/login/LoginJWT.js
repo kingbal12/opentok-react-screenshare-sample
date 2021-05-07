@@ -9,7 +9,7 @@ import { history } from "../../../../history"
 
 class LoginJWT extends React.Component {
   state = {
-    // i4h api 연결
+    // 인성 api 연결
     email: "i4h00001",
     password: "1234",
     remember: true
