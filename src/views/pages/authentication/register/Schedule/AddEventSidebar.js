@@ -8,7 +8,8 @@ import {
   FormGroup,
   Input,
   Label,
-  Button
+  Button,
+  Card, CardBody, ButtonGroup
 } from "reactstrap"
 import Flatpickr from "react-flatpickr";
 
@@ -23,6 +24,7 @@ const eventColors = {
 }
 class AddEvent extends React.Component {
   state = {
+    selectedDay: null,
     startDate: new Date(),
     endDate: new Date(),
     title: "",
@@ -30,6 +32,12 @@ class AddEvent extends React.Component {
     allDay: true,
     selectable: true
   }
+  handleSelectDay = sday => {
+    this.setState({
+      sday
+    })
+  }
+
   handleDateChange = date => {
     this.setState({
       startDate: date
@@ -94,16 +102,16 @@ class AddEvent extends React.Component {
     let newEventId = lastId + 1
     return (
       <div
-        className={`add-event-sidebar ${
+        className={`add-event-sidebar bg-primary ${
           this.props.sidebar ? "show" : "hidden"
         }`}
       >
-        <div className="header d-flex justify-content-between">
-          <h3 className="text-bold-600 mb-0">
+        <div className="header d-flex justify-content-between bg-primary">
+          <h3 className="text-bold-600 mb-0 color-white">
             {this.props.eventInfo !== null &&
             this.props.eventInfo.title.length > 0
-              ? "Update Event"
-              : "Add Event"}
+              ? "Update Schedule"
+              : "Add Schedule"}
           </h3>
           <div
             className="close-icon cursor-pointer"
@@ -112,10 +120,89 @@ class AddEvent extends React.Component {
             <X size={20} />
           </div>
         </div>
-        <div className="add-event-body">
+        <Card className="add-event-body">
           <div className="category-action d-flex justify-content-between my-50">
             <div className="event-category">
-              {this.state.label !== null ? (
+              <h5><strong>요일을 선택해주세요</strong></h5>
+              <ButtonGroup size="sm">
+                <button
+                  onClick={() => this.handleSelectDay("monday")}
+                  className={`btn ${
+                    this.state.sday === "monday"
+                      ? "btn-primary"
+                      : "btn-outline-primary text-primary"
+                  }`}
+                >
+                  월
+                </button>
+
+                <button
+                  onClick={() => this.handleSelectDay("tuesday")}
+                  className={`btn ${
+                    this.state.sday === "tuesday"
+                      ? "btn-primary"
+                      : "btn-outline-primary text-primary"
+                  }`}
+                >
+                  화
+                </button>
+                
+                <button
+                  onClick={() => this.handleSelectDay("wednesday")}
+                  className={`btn ${
+                    this.state.sday === "wednesday"
+                      ? "btn-primary"
+                      : "btn-outline-primary text-primary"
+                  }`}
+                >
+                  수
+                </button>
+                
+                <button
+                  onClick={() => this.handleSelectDay("thursday")}
+                  className={`btn ${
+                    this.state.sday === "thursday"
+                      ? "btn-primary"
+                      : "btn-outline-primary text-primary"
+                  }`}
+                >
+                  목
+                </button>
+
+                <button
+                  onClick={() => this.handleSelectDay("friday")}
+                  className={`btn ${
+                    this.state.sday === "friday"
+                      ? "btn-primary"
+                      : "btn-outline-primary text-primary"
+                  }`}
+                >
+                  금
+                </button>
+
+                <button
+                  onClick={() => this.handleSelectDay("saturday")}
+                  className={`btn ${
+                    this.state.sday === "saturday"
+                      ? "btn-primary"
+                      : "btn-outline-primary text-primary"
+                  }`}
+                >
+                  토
+                </button>
+
+                <button
+                  onClick={() => this.handleSelectDay("sunday")}
+                  className={`btn ${
+                    this.state.sday === "sunday"
+                      ? "btn-primary"
+                      : "btn-outline-primary text-primary"
+                  }`}
+                >
+                  일
+                </button>
+              </ButtonGroup>
+              {/* {this.state.label !== null ? (
                 <div className={`chip ${eventColors[this.state.label]}`}>
                   <div className="chip-body">
                     <div className="chip-text text-capitalize">
@@ -123,9 +210,9 @@ class AddEvent extends React.Component {
                     </div>
                   </div>
                 </div>
-              ) : null}
+              ) : null} */}
             </div>
-            <div className="category-dropdown">
+            {/* <div className="category-dropdown">
               <UncontrolledDropdown>
                 <DropdownToggle tag="div" className="cursor-pointer">
                   <Tag size={18} />
@@ -161,7 +248,7 @@ class AddEvent extends React.Component {
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
-            </div>
+            </div> */}
           </div>
           <div className="add-event-fields mt-2">
             <FormGroup className="form-label-group">
@@ -196,7 +283,7 @@ class AddEvent extends React.Component {
             </FormGroup>
           </div>
           <hr className="my-2" />
-          <div className="add-event-actions text-right">
+          <div className="add-event-actions text-right mb-1">
             <Button.Ripple
               disabled={this.state.title.length > 0 ? false : true}
               color="primary"
@@ -237,7 +324,7 @@ class AddEvent extends React.Component {
               Cancel
             </Button.Ripple>
           </div>
-        </div>
+        </Card>
       </div>
     )
   }

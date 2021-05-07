@@ -13,7 +13,7 @@
   z-index: 1;
   .add-event-sidebar {
     min-height: calc(100% - 15.5rem);
-    height: 100%;
+    height: 60%;
     width: 400px;
     display: block;
     position: absolute;
@@ -33,6 +33,7 @@
     }
     .add-event-body {
       padding: 1rem;
+      margin-top: 9rem;
     }
   }
 

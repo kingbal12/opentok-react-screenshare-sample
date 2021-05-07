@@ -20,6 +20,7 @@ import { ChevronLeft, ChevronRight } from "react-feather"
 import "react-big-calendar/lib/addons/dragAndDrop/styles.scss"
 import "react-big-calendar/lib/css/react-big-calendar.css"
 import "../../../../../assets/scss/plugins/calendars/react-big-calendar.scss"
+import { history } from "../../../../../history"
 const DragAndDropCalendar = withDragAndDrop(Calendar)
 const localizer = momentLocalizer(moment)
 const eventColors = {
@@ -222,7 +223,7 @@ class CalendarApp extends React.Component {
         ></div>
         <Card>
           <CardBody>
-            <DragAndDropCalendar style={{height:"900px", position:"relative"}}
+            <DragAndDropCalendar style={{height:"600px", position:"relative"}}
               localizer={localizer}
               events={events}
               onEventDrop={this.moveEvent}
@@ -250,6 +251,17 @@ class CalendarApp extends React.Component {
               }}
               selectable={true}
             />
+            <div className="pt-1 text-right">
+              <Button
+                color="primary"
+                type="button"
+                size="lg"
+                onClick={() => {
+                  history.push("/pages/login")
+                }}>
+                저장
+              </Button>
+            </div>
           </CardBody>
         </Card>
         <AddEventSidebar
@@ -262,6 +274,7 @@ class CalendarApp extends React.Component {
           updateEvent={this.props.updateEvent}
           resizable
         />
+        
       </div>
     )
   }
