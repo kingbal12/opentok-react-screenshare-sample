@@ -56,7 +56,7 @@ class Register extends React.Component {
   render() {
     let profile_preview = null;
     if(this.state.file !== ''){
-      profile_preview = <CardImg className='profile_preview'  src={this.state.previewURL} />
+      profile_preview = <CardImg style={{borderRadius:"100%"}} className='profile_preview'  src={this.state.previewURL} />
     }
     return (
       <Row className="m-0 justify-content-center">

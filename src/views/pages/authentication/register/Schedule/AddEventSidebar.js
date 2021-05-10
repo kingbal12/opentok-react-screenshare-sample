@@ -15,6 +15,7 @@ import Flatpickr from "react-flatpickr";
 
 import "flatpickr/dist/themes/light.css";
 import "../../../../../assets/scss/plugins/forms/flatpickr/flatpickr.scss"
+import Radio from "../../../../../components/@vuexy/radio/RadioVuexy"
 
 const eventColors = {
   business: "chip-success",
@@ -282,6 +283,40 @@ class AddEvent extends React.Component {
               />
             </FormGroup>
           </div>
+
+          
+          <div className="mt-1">
+            <div>
+              <strong>자동반복설정을 하시겠습니까?</strong>
+            </div>
+            <div className="d-inline-block mr-1">
+              <Radio label="네" defaultChecked={true} name="autorepeat" />
+            </div>
+            <div className="d-inline-block mr-1">
+              <Radio
+                label="아니오"
+                defaultChecked={false}
+                name="autorepeat"
+              />
+            </div>
+          </div>
+
+          <div className="mt-1">
+            <div>
+              <strong>공휴일은 제외하시겠습니까?</strong>
+            </div>
+            <div className="d-inline-block mr-1">
+              <Radio label="네" defaultChecked={true} name="holiday" />
+            </div>
+            <div className="d-inline-block mr-1">
+              <Radio
+                label="아니오"
+                defaultChecked={false}
+                name="holiday"
+              />
+            </div>
+          </div>
+          
           <hr className="my-2" />
           <div className="add-event-actions text-right mb-1">
             <Button.Ripple
