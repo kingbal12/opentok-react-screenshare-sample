@@ -5,9 +5,7 @@ import {Form, FormGroup, Button,
   CardTitle,
   CardBody,
   Row,
-  Col,
-  TabContent,
-  TabPane
+  Col
 } from "reactstrap"
 import { Check } from "react-feather"
 import { history } from "../../../../history"
@@ -15,16 +13,7 @@ import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import "../../../../assets/scss/pages/authentication.scss"
 
 class Register extends React.Component {
-  state = {
-    activeTab: "1"
-  }
-  toggle = tab => {
-    if (this.state.activeTab !== tab) {
-      this.setState({
-        activeTab: tab
-      })
-    }
-  }
+ 
   render() {
     return (
       <Row className="m-0 justify-content-center">
@@ -47,8 +36,7 @@ class Register extends React.Component {
                   </CardHeader>
                   <p className="ml-2">하이케어넷 사용을 위해 아래의 약관에 동의해 주세요!</p>
                   <CardBody className="pt-1 pb-50">
-                    <TabContent activeTab={this.state.activeTab}>
-                      <TabPane tabId="1">
+                    
                       <Form action="/" onSubmit={this.handleRegister}>
                         <FormGroup className="form-label-group allagree">
                           <Checkbox
@@ -134,8 +122,7 @@ class Register extends React.Component {
                           </Button.Ripple>
                         </div>
                       </Form>
-                      </TabPane>
-                    </TabContent>
+                     
                   </CardBody>
                 </Card>
               </Col>

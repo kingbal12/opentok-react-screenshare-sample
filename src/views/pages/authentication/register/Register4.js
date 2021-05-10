@@ -8,7 +8,8 @@ import {InputGroup, InputGroupAddon, InputGroupText, Form, FormGroup, Input, Lab
   Row,
   Col,
   TabContent,
-  TabPane
+  TabPane,
+  CardImg 
 } from "reactstrap"
 // import classnames from "classnames"
 // import RegisterFirebase from "./RegisterFirebase"
@@ -19,10 +20,31 @@ import "../../../../assets/scss/pages/authentication.scss"
 
 import { history } from "../../../../history"
 
+
+
 class Register extends React.Component {
-  state = {
-    activeTab: "1"
+  constructor(props){
+    super(props)
+    this.state = {
+      activeTab: "1",
+      file : '',
+      previewURL : ''
+    }
   }
+  handleFileOnChange = (event) => {
+    event.preventDefault();
+    let reader = new FileReader();
+    let file = event.target.files[0];
+    reader.onloadend = () => {
+      this.setState({
+        file : file,
+        previewURL : reader.result
+      })
+    }
+    reader.readAsDataURL(file);
+  }
+
+
   toggle = tab => {
     if (this.state.activeTab !== tab) {
       this.setState({
@@ -30,7 +52,12 @@ class Register extends React.Component {
       })
     }
   }
+
   render() {
+    let profile_preview = null;
+    if(this.state.file !== ''){
+      profile_preview = <CardImg className='profile_preview'  src={this.state.previewURL} />
+    }
     return (
       <Row className="m-0 justify-content-center">
       <Col
@@ -56,8 +83,15 @@ class Register extends React.Component {
                   <Form action="/" onSubmit={this.handleRegister}>
                     <FormGroup className="form-label-group">
                       <div><b>프로필 사진 등록</b></div>
+                      {profile_preview}
                       <InputGroup>
-                        <CustomInput type="file" id="exampleCustomFileBrowser" name="customFile" label=""/> 
+                        <CustomInput 
+                          type="file" 
+                          accept="image/gif,image/jpeg,image/png" 
+                          id="exampleCustomFileBrowser" 
+                          name="customFile" 
+                          label=""
+                          onChange={this.handleFileOnChange}/> 
                       </InputGroup>
                     </FormGroup> 
 
