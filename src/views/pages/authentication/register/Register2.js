@@ -18,19 +18,25 @@ import { connect } from "react-redux"
 
 class Register extends React.Component {
   state = {
-    activeTab: "1"
+    name: "",
+    phone: "",
+    email: "",
+    idnumber: "",
+    password: "",
+    chkpassword: "",
   }
-  toggle = tab => {
-    if (this.state.activeTab !== tab) {
-      this.setState({
-        activeTab: tab
-      })
-    }
-  }
+  
 
   handleRegister1 = e => {
     e.preventDefault()
-    this.props.register2(this.state)
+    this.props.register2(
+      this.state.name,
+      this.state.phone,
+      this.state.email,
+      this.state.idnumber,
+      this.state.password,
+      this.state.chkpassword
+    )
   }
   render() {
     return (
@@ -53,8 +59,6 @@ class Register extends React.Component {
                     </CardTitle>
                   </CardHeader>   
                   <CardBody className="pt-1 pb-50">
-                    <TabContent activeTab={this.state.activeTab}>
-                      <TabPane tabId="1">
                       <Form action="/" onSubmit={this.handleRegister1}>
                         <FormGroup className="form-label-group">
                           <InputGroup>
@@ -73,8 +77,8 @@ class Register extends React.Component {
                               type="text"
                               placeholder="전화번호"
                               required
-                              value={this.state.name}
-                              onChange={e => this.setState({ name: e.target.value })}
+                              value={this.state.phone}
+                              onChange={e => this.setState({ phone: e.target.value })}
                             />   
                           </InputGroup>
                         </FormGroup>
@@ -159,8 +163,6 @@ class Register extends React.Component {
                           </Button>
                         </div>
                       </Form>
-                      </TabPane>
-                    </TabContent>
                   </CardBody>
                 </Card>
               </Col>

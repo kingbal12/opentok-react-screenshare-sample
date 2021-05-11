@@ -58,7 +58,8 @@ export const register2 = (name, phone, email, password) => {
   return dispatch => {
     axios
       .post("http://192.168.0.7:9300/signup", {
-        // name: name, 두개는 건의
+        // 아래 두개는 건의
+        // name: name, 
         // phone: phone,
         user_id: email,
         user_pwd: password
