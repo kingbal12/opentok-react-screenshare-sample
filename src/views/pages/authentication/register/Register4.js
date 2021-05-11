@@ -11,6 +11,7 @@ import {InputGroup, InputGroupAddon, InputGroupText, Form, FormGroup, Input, Lab
   TabPane,
   CardImg 
 } from "reactstrap"
+import PerfectScrollbar from "react-perfect-scrollbar"
 // import classnames from "classnames"
 // import RegisterFirebase from "./RegisterFirebase"
 // import RegisterAuth0 from "./RegisterAuth0"
@@ -59,6 +60,7 @@ class Register extends React.Component {
       profile_preview = <CardImg style={{borderRadius:"100%"}} className='profile_preview'  src={this.state.previewURL} />
     }
     return (
+      
       <Row className="m-0 justify-content-center">
       <Col
         sm="8"
@@ -68,6 +70,7 @@ class Register extends React.Component {
         className="d-flex justify-content-center"
       >
         <Card className="bg-authentication rounded-0 mb-0 w-100">
+          
           <Row className="m-0">
             
             <Col lg="12" md="12" className="p-0">
@@ -179,9 +182,11 @@ class Register extends React.Component {
             </Card>
             </Col>
           </Row>
+          
         </Card>
       </Col>
     </Row>
+    
     )
   }
 }

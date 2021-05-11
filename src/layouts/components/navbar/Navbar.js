@@ -12,6 +12,7 @@ import NavbarUser from "./NavbarUser"
 import userImg from "../../../assets/img/portrait/small/avatar-s-11.jpg"
 import Clock from "react-digital-clock"
 import HicareLogo from "../../../assets/img/logo/user_register_logo.png"
+import { history } from "../../../history"
 
 //  const UserName = props => {
 //     let username = ""
@@ -39,15 +40,15 @@ const UserName = props => {
   if (props.userdata !== undefined) {
   } else if (props.user.login.values !== undefined) {
     console.log(props.user);
-    username = props.user.login.values.loggedInUser.displayName
+    username = props.user.login.values.loggedInUser.username
     if (
       props.user.login.values.loggedInWith !== undefined &&
       props.user.login.values.loggedInWith === "jwt"
     ) {
-      username = props.user.login.values.loggedInUser.displayName
+      username = props.user.login.values.loggedInUser.username
     }
   } else {
-    username = "John Doe"
+    history.push("/")
   }
 
   return username

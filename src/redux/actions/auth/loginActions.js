@@ -4,6 +4,7 @@ import "firebase/auth"
 import "firebase/database"
 import axios from "axios"
 import { config } from "../../../authServices/firebase/firebaseConfig"
+import { persistor } from "../../storeConfig/store"
 
 // Init firebase if not already initialized
 if (!firebase.apps.length) {
@@ -181,53 +182,25 @@ export const loginWithGithub = () => {
 
 
 // 로그인 액션 부분(인성 api)
-export const loginWithJWT = user => {
-  return dispatch => {
-    axios
-      .post("https://test-api.hicare.net:7000/api/healthcareworker/login", {
-        login_id: user.email,
-        password: user.password
-      })
-      .then(response => {
-        var loggedInUser;
-
-        if (response.data.data) {
-          loggedInUser = response.data.data
-          let fName = loggedInUser.f_name;
-					let mName = loggedInUser.m_name;
-					let lName = loggedInUser.l_name;
-          
-          loggedInUser.displayName = (fName ==  null?"":fName)
-													+ " " + (mName ==  null?"":mName) 
-													+ " " + (lName ==  null?"":lName);
-          console.log(loggedInUser);
-          dispatch({
-            type: "LOGIN_WITH_JWT",
-            payload: { loggedInUser, loggedInWith: "jwt" }
-          })
-
-          history.push("/analyticsDashboard")
-        }
-      })
-      .catch(err => console.log(err))
-  }
-}
-
-
-// 로그인액션부분 i4h api
 // export const loginWithJWT = user => {
 //   return dispatch => {
 //     axios
-//       .post("http://192.168.0.7:9200/signin", {
-//         user_id: user.email,
-//         user_pwd: user.password
+//       .post("https://test-api.hicare.net:7000/api/healthcareworker/login", {
+//         login_id: user.email,
+//         password: user.password
 //       })
 //       .then(response => {
 //         var loggedInUser;
 
-//         if (response) {
-//           loggedInUser = response.data;
-       
+//         if (response.data.data) {
+//           loggedInUser = response.data.data
+//           let fName = loggedInUser.f_name;
+// 					let mName = loggedInUser.m_name;
+// 					let lName = loggedInUser.l_name;
+          
+//           loggedInUser.displayName = (fName ==  null?"":fName)
+// 													+ " " + (mName ==  null?"":mName) 
+// 													+ " " + (lName ==  null?"":lName);
 //           console.log(loggedInUser);
 //           dispatch({
 //             type: "LOGIN_WITH_JWT",
@@ -241,14 +214,49 @@ export const loginWithJWT = user => {
 //   }
 // }
 
+
+// 로그인액션부분 i4h api
+export const loginWithJWT = user => {
+  return dispatch => {
+    axios
+      .get("http://192.168.0.7:9300/signin", {
+        params: {
+          user_id: user.email,
+          user_pwd: user.password
+        }
+      })
+      
+      .then(response => {
+        
+        let loggedInUser;
+
+        if (response.data) {
+          loggedInUser = response.data;
+       
+          console.log(loggedInUser);
+          dispatch({
+            type: "LOGIN_WITH_JWT",
+            payload: { loggedInUser, loggedInWith: "jwt" }
+          })
+
+          history.push("/analyticsDashboard")
+        }
+      })
+      .catch(err => console.log(err))
+  }
+}
+
 export const logoutWithJWT = () => {
   return dispatch => {
     // axios
     //   .post()
     // 로그아웃 api
+    
     dispatch({ type: "LOGOUT_WITH_JWT", payload: {} })
     history.push("/pages/login")
+    persistor.purge();
   }
+  
 }
 
 export const logoutWithFirebase = user => {

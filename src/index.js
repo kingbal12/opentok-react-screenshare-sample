@@ -6,28 +6,34 @@ import config from "./authServices/auth0/auth0Config.json"
 import { IntlProviderWrapper } from "./utility/context/Internationalization"
 import { Layout } from "./utility/context/Layout"
 import * as serviceWorker from "./serviceWorker"
-import { store } from "./redux/storeConfig/store"
+import { store,persistor } from "./redux/storeConfig/store"
 import Spinner from "./components/@vuexy/spinner/Fallback-spinner"
 import "./index.scss"
 import "./@fake-db"
+import { PersistGate } from 'redux-persist/integration/react'
+
+
 
 const LazyApp = lazy(() => import("./App"))
 
 // configureDatabase()
 
 ReactDOM.render(
+  
   <Auth0Provider
     domain={config.domain}
     client_id={config.clientId}
     redirect_uri={window.location.origin + process.env.REACT_APP_PUBLIC_PATH}>
     <Provider store={store}>
-      <Suspense fallback={<Spinner />}>
-        <Layout>
-          <IntlProviderWrapper>
-            <LazyApp />
-          </IntlProviderWrapper>
-        </Layout>
-      </Suspense>
+      <PersistGate persistor={persistor}>
+        <Suspense fallback={<Spinner />}>
+          <Layout>
+            <IntlProviderWrapper>
+              <LazyApp />
+            </IntlProviderWrapper>
+          </Layout>
+        </Suspense>
+      </PersistGate>
     </Provider>
   </Auth0Provider>,
   document.getElementById("root")

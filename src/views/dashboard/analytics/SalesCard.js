@@ -21,10 +21,8 @@ class SalesCard extends React.Component {
               <Award className="text-white" size={28} />
             </div>
           </div>
-          <div className="award-info text-center">
-            <h1 className="mb-2 text-white">안녕하세요.
-            <DisplayName />
-            님</h1>
+          <div className="award-info text-center w-125">
+            <h1 className="mb-2 text-white">안녕하세요.<DisplayName />님</h1>
             <p className="m-auto mb-0 w-75">
               2021년 5월 04일 화요일입니다.
             </p>
