@@ -66,8 +66,8 @@ class Register extends React.Component {
                               type="text"
                               placeholder="전화번호"
                               required
-                              value={this.state.name}
-                              onChange={e => this.setState({ name: e.target.value })}
+                              value={this.state.phone}
+                              onChange={e => this.setState({ phone: e.target.value })}
                             />   
                           </InputGroup>
                         </FormGroup>
