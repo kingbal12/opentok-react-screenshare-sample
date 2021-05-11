@@ -13,6 +13,8 @@ import { Check } from "react-feather"
 import { history } from "../../../../history"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import "../../../../assets/scss/pages/authentication.scss"
+import { register2 } from "../../../../redux/actions/auth/registerActions"
+import { connect } from "react-redux"
 
 class Register extends React.Component {
   state = {
@@ -24,6 +26,11 @@ class Register extends React.Component {
         activeTab: tab
       })
     }
+  }
+
+  handleRegister1 = e => {
+    e.preventDefault()
+    this.props.register2(this.state)
   }
   render() {
     return (
@@ -48,7 +55,7 @@ class Register extends React.Component {
                   <CardBody className="pt-1 pb-50">
                     <TabContent activeTab={this.state.activeTab}>
                       <TabPane tabId="1">
-                      <Form action="/" onSubmit={this.handleRegister}>
+                      <Form action="/" onSubmit={this.handleRegister1}>
                         <FormGroup className="form-label-group">
                           <InputGroup>
                             <Input
@@ -142,12 +149,12 @@ class Register extends React.Component {
                         <div className="d-flex justify-content-center">
                           <Button
                           color="primary" 
-                          type="button"
+                          type="submit"
                           size="lg"
                           block
-                          onClick={() => {
-                            history.push("/pages/register3")
-                          }}>
+                          // onClick={() => {
+                          //   history.push("/pages/register3")}}
+                          >
                             가입하기
                           </Button>
                         </div>
@@ -164,4 +171,11 @@ class Register extends React.Component {
     )
   }
 }
-export default Register
+
+const mapStateToProps = state => {
+  return {
+    values: state.auth.register2
+  }
+}
+export default connect(mapStateToProps, { register2 })(Register)
+
