@@ -8,6 +8,11 @@ export const register = (state = {}, action) => {
         ...state,
         values: action.payload
       }
+    case "REGISTER_USER":
+        return {
+          ...state,
+          values: action.payload
+        }
     default: {
       return state
     }

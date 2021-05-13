@@ -11,18 +11,59 @@ import {InputGroup, InputGroupAddon, InputGroupText, Form, FormGroup, Input, Lab
 } from "reactstrap"
 import { history } from "../../../../history"
 import "../../../../assets/scss/pages/authentication.scss"
+import { register3 } from "../../../../redux/actions/auth/registerActions"
+import { connect } from "react-redux"
 
 class Register extends React.Component {
-  state = {
-    activeTab: "1"
+  constructor(props) {
+    super(props);
+    this.state={
+      // userid: this.props.register.registeruser 클래스 형식에서 리덕스 스토어에서 데이터를 불러오는것을 볼것,
+      userid: props.user.register.values.registeruser,
+      // userid: "",
+      hospitalname: "",
+      businessnumber: "",
+      zipcode: "",
+      address1: "",
+      address2: "",
+      phonenumber: "",
+      accountname: "",
+      bankname: "",
+      accountnumber: "",
   }
-  toggle = tab => {
-    if (this.state.activeTab !== tab) {
-      this.setState({
-        activeTab: tab
-      })
-    }
+}
+  // state = {
+  //   // userid: this.props.register.registeruser 클래스 형식에서 리덕스 스토어에서 데이터를 불러오는것을 볼것,
+  //   userid: "iot",
+  //   hospitalname: "",
+  //   businessnumber: "",
+  //   zipcode: "",
+  //   address1: "",
+  //   address2: "",
+  //   phonenumber: "",
+  //   accountname: "",
+  //   bankname: "",
+  //   accountnumber: "",
+  // }
+  
+
+  handleRegister = e => {
+    e.preventDefault()
+    this.props.register3(
+      // this.user.register.values.registeruser,
+      this.state.userid,
+      this.state.hospitalname,
+      this.state.businessnumber,
+      this.state.zipcode,
+      this.state.address1,
+      this.state.address2,
+      this.state.phonenumber,
+      this.state.accountname,
+      this.state.bankname,
+      this.state.accountnumber
+    )
   }
+  
   render() {
     return (
       <Row className="m-0 justify-content-center">
@@ -44,8 +85,6 @@ class Register extends React.Component {
                   </CardTitle>
                 </CardHeader>   
               <CardBody className="pt-1 pb-50">
-                <TabContent activeTab={this.state.activeTab}>
-                  <TabPane tabId="1">
                   <Form action="/" onSubmit={this.handleRegister}>
                     <FormGroup className="form-label-group">
                       <div>회원인증</div>            
@@ -58,8 +97,8 @@ class Register extends React.Component {
                           type="text"
                           placeholder="상호명을 입력해주세요"
                           required
-                          value={this.state.name}
-                          onChange={e => this.setState({ name: e.target.value })}
+                          value={this.state.hospitalname}
+                          onChange={e => this.setState({ hospitalname: e.target.value })}
                         />   
                       </InputGroup>
                     </FormGroup>
@@ -70,8 +109,8 @@ class Register extends React.Component {
                           type="text"
                           placeholder="하이픈(-)을 생략하고 입력해주세요"
                           required
-                          value={this.state.email}
-                          onChange={e => this.setState({ email: e.target.value })}
+                          value={this.state.businessnumber}
+                          onChange={e => this.setState({ businessnumber: e.target.value })}
                         />
                         <InputGroupAddon addonType="append"><Button color="secondary" type="button">중복확인</Button></InputGroupAddon>
                       </InputGroup>
@@ -82,8 +121,15 @@ class Register extends React.Component {
                         <Input
                           type="text"
                           required
-                          value={this.state.idnumber}
-                          onChange={e => this.setState({ idnumber: e.target.value })}
+                          value={this.state.address1}
+                          onChange={e => this.setState({ address1: e.target.value })}
+                        />
+                     
+                        <Input
+                          type="text"
+                          required
+                          value={this.state.zipcode}
+                          onChange={e => this.setState({ zipcode: e.target.value })}
                         />
                         <InputGroupAddon addonType="append"><Button color="secondary" type="button">우편번호 검색</Button></InputGroupAddon>
                       </InputGroup>
@@ -92,8 +138,8 @@ class Register extends React.Component {
                         <Input
                           type="text"
                           required
-                          value={this.state.idnumber}
-                          onChange={e => this.setState({ idnumber: e.target.value })}
+                          value={this.state.address2}
+                          onChange={e => this.setState({ address2: e.target.value })}
                         />
                       </InputGroup>
                     </FormGroup>
@@ -104,8 +150,8 @@ class Register extends React.Component {
                           type="text"
                           placeholder="하이픈(-)을 생략하고 입력해주세요"
                           required
-                          value={this.state.password}
-                          onChange={e => this.setState({ password: e.target.value })}
+                          value={this.state.phonenumber}
+                          onChange={e => this.setState({ phonenumber: e.target.value })}
                         />
                       </InputGroup>
                     </FormGroup>
@@ -120,8 +166,8 @@ class Register extends React.Component {
                             <Input
                               type="text"
                               required
-                              value={this.state.chkpassword}
-                              onChange={e => this.setState({ chkpassword: e.target.value })}
+                              value={this.state.accountname}
+                              onChange={e => this.setState({ accountname: e.target.value })}
                             />
                           </InputGroup> 
                         </div>
@@ -133,8 +179,8 @@ class Register extends React.Component {
                             <Input
                               type="text"
                               required
-                              value={this.state.chkpassword}
-                              onChange={e => this.setState({ chkpassword: e.target.value })}
+                              value={this.state.bankname}
+                              onChange={e => this.setState({ bankname: e.target.value })}
                             />
                           </InputGroup> 
                         </div>
@@ -146,29 +192,24 @@ class Register extends React.Component {
                         <Input
                           type="text"
                           required
-                          value={this.state.chkpassword}
-                          onChange={e => this.setState({ chkpassword: e.target.value })}
+                          value={this.state.accountnumber}
+                          onChange={e => this.setState({ accountnumber: e.target.value })}
                         />
                       </InputGroup> 
-                 
                     </FormGroup>
                     <div className="d-flex justify-content-between">
                       <Button
                       size="lg"
                       block
                       color="primary" 
-                      type="button"
-                      onClick={() => {
-                        history.push("/pages/register4")
-                      }}>
+                      type="submit"
+                      >
                         저장하기
                       </Button>
                     </div>
                   </Form>
-                  </TabPane>
-                </TabContent>
-              </CardBody>
-            </Card>
+                  </CardBody>
+                </Card>
               </Col>
             </Row>
           </Card>
@@ -177,4 +218,11 @@ class Register extends React.Component {
     )
   }
 }
-export default Register
+
+const mapStateToProps = state =>{
+  return {
+    user: state.auth
+  }
+}
+
+export default connect(mapStateToProps, {register3})(Register)

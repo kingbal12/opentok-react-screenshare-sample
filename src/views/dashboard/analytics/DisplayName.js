@@ -3,8 +3,6 @@ import { Fragment } from 'react';
 import { connect } from "react-redux"
 import { history } from "../../../history"
 
-
-
 const DisplayName  = (props) => {
     return (
         <Fragment>

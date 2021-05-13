@@ -231,14 +231,14 @@ export const loginWithJWT = user => {
         let loggedInUser;
 
         if (response.data) {
-          loggedInUser = response.data;
+          loggedInUser = response.data.data;
        
           console.log(loggedInUser);
           dispatch({
             type: "LOGIN_WITH_JWT",
             payload: { loggedInUser, loggedInWith: "jwt" }
           })
-
+          // persistor.purge()
           history.push("/analyticsDashboard")
         }
       })

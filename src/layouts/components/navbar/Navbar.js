@@ -35,19 +35,34 @@ import { history } from "../../../history"
 
 
 // 인성api연결
+// const UserName = props => {
+//   let username = ""
+//   if (props.user !== undefined) {
+//   } else if (props.user.login.values !== undefined) {
+//     console.log(props.user);
+//     username = props.user.login.values.loggedInUser.username
+//     if (
+//       props.user.login.values.loggedInWith !== undefined &&
+//       props.user.login.values.loggedInWith === "jwt"
+//     ) {
+//       username = props.user.login.values.loggedInUser.username
+//     }
+//   } else {
+//     history.push("/")
+//   }
+
+//   return username
+// }
+
 const UserName = props => {
   let username = ""
-  if (props.userdata !== undefined) {
-  } else if (props.user.login.values !== undefined) {
-    console.log(props.user);
-    username = props.user.login.values.loggedInUser.username
-    if (
-      props.user.login.values.loggedInWith !== undefined &&
-      props.user.login.values.loggedInWith === "jwt"
-    ) {
+  if (props.user.login.values !== undefined) {
+    if (props.user.login.values.loggedInWith ==="jwt") {
       username = props.user.login.values.loggedInUser.username
+    }else {
+      history.push("/")
     }
-  } else {
+  }else {
     history.push("/")
   }
 

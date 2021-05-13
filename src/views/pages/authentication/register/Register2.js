@@ -16,6 +16,8 @@ import "../../../../assets/scss/pages/authentication.scss"
 import { register2 } from "../../../../redux/actions/auth/registerActions"
 import { connect } from "react-redux"
 
+
+
 class Register extends React.Component {
   state = {
     name: "",
@@ -75,7 +77,7 @@ class Register extends React.Component {
                           <InputGroup>
                             <Input
                               type="text"
-                              placeholder="전화번호"
+                              placeholder="휴대폰번호"
                               required
                               value={this.state.phone}
                               onChange={e => this.setState({ phone: e.target.value })}
@@ -85,7 +87,7 @@ class Register extends React.Component {
                         <FormGroup className="form-label-group">
                           <InputGroup>
                             <Input
-                              type="text"
+                              type="email"
                               placeholder="이메일"
                               required
                               value={this.state.email}
@@ -111,7 +113,7 @@ class Register extends React.Component {
                         <FormGroup className="form-label-group">
                           <InputGroup>
                             <Input
-                              type="text"
+                              type="password"
                               placeholder="비밀번호"
                               required
                               value={this.state.password}
@@ -122,7 +124,7 @@ class Register extends React.Component {
                         <FormGroup className="form-label-group">
                           <InputGroup>
                             <Input
-                              type="text"
+                              type="password"
                               placeholder="비밀번호확인"
                               required
                               value={this.state.chkpassword}
