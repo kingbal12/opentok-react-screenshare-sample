@@ -13,9 +13,6 @@ const DisplayName  = (props) => {
               {props.user.login.values != null 
                 ?props.user.login.values.loggedInUser.username
                 :history.push("/")}
-
-            {/* i4h api 연결시 */}
-            {/* {props.user.login.values.loggedInUser.username } */}
         </Fragment>
     )
 }

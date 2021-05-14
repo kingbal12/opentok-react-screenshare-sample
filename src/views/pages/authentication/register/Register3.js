@@ -5,11 +5,8 @@ import {InputGroup, InputGroupAddon, InputGroupText, Form, FormGroup, Input, Lab
   Card,
   CardBody,
   Row,
-  Col,
-  TabContent,
-  TabPane
+  Col
 } from "reactstrap"
-import { history } from "../../../../history"
 import "../../../../assets/scss/pages/authentication.scss"
 import { register3 } from "../../../../redux/actions/auth/registerActions"
 import { connect } from "react-redux"
@@ -18,9 +15,7 @@ class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      // userid: this.props.register.registeruser 클래스 형식에서 리덕스 스토어에서 데이터를 불러오는것을 볼것,
       userid: props.user.register.values.registeruser,
-      // userid: "",
       hospitalname: "",
       businessnumber: "",
       zipcode: "",
@@ -32,25 +27,11 @@ class Register extends React.Component {
       accountnumber: "",
   }
 }
-  // state = {
-  //   // userid: this.props.register.registeruser 클래스 형식에서 리덕스 스토어에서 데이터를 불러오는것을 볼것,
-  //   userid: "iot",
-  //   hospitalname: "",
-  //   businessnumber: "",
-  //   zipcode: "",
-  //   address1: "",
-  //   address2: "",
-  //   phonenumber: "",
-  //   accountname: "",
-  //   bankname: "",
-  //   accountnumber: "",
-  // }
-  
+
 
   handleRegister = e => {
     e.preventDefault()
     this.props.register3(
-      // this.user.register.values.registeruser,
       this.state.userid,
       this.state.hospitalname,
       this.state.businessnumber,

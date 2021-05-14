@@ -5,12 +5,9 @@ import {InputGroup, InputGroupAddon, Form, FormGroup, Input, Button,
   Card,
   CardBody,
   Row,
-  Col,
-  TabContent,
-  TabPane
+  Col
 } from "reactstrap"
 import { Check } from "react-feather"
-import { history } from "../../../../history"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import "../../../../assets/scss/pages/authentication.scss"
 import { register2 } from "../../../../redux/actions/auth/registerActions"
