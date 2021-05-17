@@ -112,12 +112,12 @@ export const register3 = (userid, hospitalname, businessnumber, zipcode, address
   }
 }
 
-export const register4 = (userid, file, medicalpart, medicalable, medicaldesc, medicalnum, userdesc) => {
+export const register4 = (userid, filename, medicalpart, medicalable, medicaldesc, medicalnum, userdesc) => {
   return dispatch => {
     axios
       .put("http://192.168.0.7:9300/v1/doctor/account/user-info", {
         user_id : userid, 
-        file_name : file,
+        file_name : filename,
         medical_part : medicalpart,
         medical_able : medicalable,
         medical_desc : medicaldesc,
