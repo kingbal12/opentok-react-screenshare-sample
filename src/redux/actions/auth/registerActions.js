@@ -112,12 +112,12 @@ export const register3 = (userid, hospitalname, businessnumber, zipcode, address
   }
 }
 
-export const register4 = (userid, filename, medicalpart, medicalable, medicaldesc, medicalnum, userdesc) => {
+export const register4 = (userid, file, medicalpart, medicalable, medicaldesc, medicalnum, userdesc) => {
   return dispatch => {
     axios
-      .post("http://192.168.0.7:9300/v1/doctor/account/hospital-info", {
+      .put("http://192.168.0.7:9300/v1/doctor/account/user-info", {
         user_id : userid, 
-        file_name : filename,
+        file_name : file,
         medical_part : medicalpart,
         medical_able : medicalable,
         medical_desc : medicaldesc,
@@ -127,7 +127,7 @@ export const register4 = (userid, filename, medicalpart, medicalable, medicaldes
       .then(response => {
         console.log(response);
         if(response.data.status === "200") {
-          history.push("/pages/register4");
+          // history.push("/pages/register4");
         } else {
           alert(response.data.message);
         }

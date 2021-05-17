@@ -1,5 +1,5 @@
 import React from "react"
-import {InputGroup, InputGroupAddon, InputGroupText, Form, FormGroup, Input, Label, Button,
+import {InputGroup, Form, FormGroup, Input, Label, Button,
   CustomInput,
   CardHeader,
   CardTitle,
@@ -7,8 +7,6 @@ import {InputGroup, InputGroupAddon, InputGroupText, Form, FormGroup, Input, Lab
   CardBody,
   Row,
   Col,
-  TabContent,
-  TabPane,
   CardImg 
 } from "reactstrap"
 import PerfectScrollbar from "react-perfect-scrollbar"
@@ -28,15 +26,16 @@ class Register extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      userid: '',
-      file : '',
-      previewURL : '',
-      // filename: '', 
-      medicalpart: '', 
-      medicalable: '', 
-      medicaldesc: '', 
-      medicalnum: '', 
-      userdesc: ''
+      // userid: props.user.register.values.registeruser,
+      userid: "kang@kang",
+      file : "",
+      previewURL : "",
+      // filename: "", 
+      medicalpart: "", 
+      medicalable: "", 
+      medicaldesc: "", 
+      medicalnum: "", 
+      userdesc: ""
     }
   }
   // 20210517 여기까지 작업함
@@ -52,6 +51,20 @@ class Register extends React.Component {
       })
     }
     reader.readAsDataURL(file);
+  }
+
+  handleRegister = e => {
+    e.preventDefault()
+    this.props.register4(
+      this.state.userid,
+      this.state.file,
+      this.state.previewURL,
+      this.state.medicalpart,
+      this.state.medicalable,
+      this.state.medicaldesc,
+      this.state.medicalnum,
+      this.state.userdesc
+    )
   }
 
 
@@ -104,8 +117,8 @@ class Register extends React.Component {
                           type="text"
                           placeholder="TEXT를 입력해주세요"
                           required
-                          value={this.state.name}
-                          onChange={e => this.setState({ name: e.target.value })}
+                          value={this.state.medicalpart}
+                          onChange={e => this.setState({ medicalpart: e.target.value })}
                         />   
                       </InputGroup>
                     </FormGroup>
@@ -117,8 +130,8 @@ class Register extends React.Component {
                           type="text"
                           placeholder="TEXT를 입력해주세요"
                           required
-                          value={this.state.name}
-                          onChange={e => this.setState({ name: e.target.value })}
+                          value={this.state.medicalable}
+                          onChange={e => this.setState({ medicalable: e.target.value })}
                         />   
                       </InputGroup>
                     </FormGroup>
@@ -130,8 +143,8 @@ class Register extends React.Component {
                           type="text"
                           placeholder="TEXT를 입력해주세요"
                           required
-                          value={this.state.name}
-                          onChange={e => this.setState({ name: e.target.value })}
+                          value={this.state.medicaldesc}
+                          onChange={e => this.setState({ medicaldesc: e.target.value })}
                         />   
                       </InputGroup>
                     </FormGroup>
@@ -143,8 +156,8 @@ class Register extends React.Component {
                           type="text"
                           placeholder="TEXT를 입력해주세요"
                           required
-                          value={this.state.name}
-                          onChange={e => this.setState({ name: e.target.value })}
+                          value={this.state.userdesc}
+                          onChange={e => this.setState({ userdesc: e.target.value })}
                         />   
                       </InputGroup>
                     </FormGroup>
@@ -156,8 +169,8 @@ class Register extends React.Component {
                           type="text"
                           placeholder="TEXT를 입력해주세요"
                           required
-                          value={this.state.name}
-                          onChange={e => this.setState({ name: e.target.value })}
+                          value={this.state.medicalnum}
+                          onChange={e => this.setState({ medicalnum: e.target.value })}
                         />   
                       </InputGroup>
                     </FormGroup>
@@ -167,10 +180,8 @@ class Register extends React.Component {
                       size="lg"
                       block
                       color="primary" 
-                      type="button"
-                      onClick={() => {
-                        history.push("/schedule")
-                      }}>
+                      type="submit"
+                      >
                         진료 승인요청
                       </Button>
                     </div>
@@ -187,4 +198,10 @@ class Register extends React.Component {
     )
   }
 }
-export default Register
+
+const mapStateToProps = state => {
+  return {
+    user: state.auth
+  }
+}
+export default connect(mapStateToProps, {register4})(Register)
