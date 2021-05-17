@@ -112,6 +112,31 @@ export const register3 = (userid, hospitalname, businessnumber, zipcode, address
   }
 }
 
+export const register4 = (userid, filename, medicalpart, medicalable, medicaldesc, medicalnum, userdesc) => {
+  return dispatch => {
+    axios
+      .post("http://192.168.0.7:9300/v1/doctor/account/hospital-info", {
+        user_id : userid, 
+        file_name : filename,
+        medical_part : medicalpart,
+        medical_able : medicalable,
+        medical_desc : medicaldesc,
+        medical_num : medicalnum,
+        user_desc : userdesc
+      })
+      .then(response => {
+        console.log(response);
+        if(response.data.status === "200") {
+          history.push("/pages/register4");
+        } else {
+          alert(response.data.message);
+        }
+
+      })
+  }
+}
+
+
 export const signupWithJWT = (email, password, name) => {
   return dispatch => {
     axios

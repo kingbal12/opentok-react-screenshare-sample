@@ -90,7 +90,7 @@ class Register extends React.Component {
                               value={this.state.email}
                               onChange={e => this.setState({ email: e.target.value })}
                             />
-                            <InputGroupAddon addonType="append"><Button color="secondary" type="button">이메일 인증</Button></InputGroupAddon>
+                            <InputGroupAddon addonType="append"><Button color="primary" type="button">이메일 인증</Button></InputGroupAddon>
                           </InputGroup>
                           <div className="pt-1 emailidentify">인증번호를 입력해주세요.</div>
                         </FormGroup>
@@ -104,7 +104,7 @@ class Register extends React.Component {
                               value={this.state.idnumber}
                               onChange={e => this.setState({ idnumber: e.target.value })}
                             />
-                            <InputGroupAddon addonType="append"><Button color="secondary" type="button">인증 확인</Button></InputGroupAddon>
+                            <InputGroupAddon addonType="append"><Button color="primary" type="button">인증 확인</Button></InputGroupAddon>
                           </InputGroup>
                         </FormGroup>
                         <FormGroup className="form-label-group">

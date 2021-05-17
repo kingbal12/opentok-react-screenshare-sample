@@ -18,7 +18,8 @@ import PerfectScrollbar from "react-perfect-scrollbar"
 import RegisterJWT from "./RegisterJWT"
 // import registerImg from "../../../../assets/img/pages/register.jpg"
 import "../../../../assets/scss/pages/authentication.scss"
-
+import { register4 } from "../../../../redux/actions/auth/registerActions"
+import { connect } from "react-redux"
 import { history } from "../../../../history"
 
 
@@ -27,11 +28,19 @@ class Register extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      activeTab: "1",
+      userid: '',
       file : '',
-      previewURL : ''
+      previewURL : '',
+      // filename: '', 
+      medicalpart: '', 
+      medicalable: '', 
+      medicaldesc: '', 
+      medicalnum: '', 
+      userdesc: ''
     }
   }
+  // 20210517 여기까지 작업함
+
   handleFileOnChange = (event) => {
     event.preventDefault();
     let reader = new FileReader();
@@ -46,13 +55,6 @@ class Register extends React.Component {
   }
 
 
-  toggle = tab => {
-    if (this.state.activeTab !== tab) {
-      this.setState({
-        activeTab: tab
-      })
-    }
-  }
 
   render() {
     let profile_preview = null;
@@ -70,9 +72,7 @@ class Register extends React.Component {
         className="d-flex justify-content-center"
       >
         <Card className="bg-authentication rounded-0 mb-0 w-100">
-          
           <Row className="m-0">
-            
             <Col lg="12" md="12" className="p-0">
               <Card className="rounded-0 mb-0 p-2">
                 <CardHeader className="pb-1 pt-50">
@@ -81,8 +81,7 @@ class Register extends React.Component {
                   </CardTitle>
                 </CardHeader>   
               <CardBody className="pt-1 pb-50">
-                <TabContent activeTab={this.state.activeTab}>
-                  <TabPane tabId="1">
+                
                   <Form action="/" onSubmit={this.handleRegister}>
                     <FormGroup className="form-label-group">
                       <div><b>프로필 사진 등록</b></div>
@@ -176,8 +175,6 @@ class Register extends React.Component {
                       </Button>
                     </div>
                   </Form>
-                  </TabPane>
-                </TabContent>
               </CardBody>
             </Card>
             </Col>
