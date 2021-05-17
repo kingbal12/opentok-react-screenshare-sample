@@ -30,7 +30,7 @@ class Register extends React.Component {
       userid: "kang@kang",
       file : "",
       previewURL : "",
-      // filename: "", 
+      filename: "", 
       medicalpart: "", 
       medicalable: "", 
       medicaldesc: "", 
@@ -44,10 +44,12 @@ class Register extends React.Component {
     event.preventDefault();
     let reader = new FileReader();
     let file = event.target.files[0];
+    let filename = event.target.files[0].name
     reader.onloadend = () => {
       this.setState({
         file : file,
-        previewURL : reader.result
+        previewURL : reader.result,
+        filename: filename
       })
     }
     reader.readAsDataURL(file);
@@ -59,6 +61,7 @@ class Register extends React.Component {
       this.state.userid,
       this.state.file,
       this.state.previewURL,
+      this.state.filename,
       this.state.medicalpart,
       this.state.medicalable,
       this.state.medicaldesc,
@@ -109,7 +112,6 @@ class Register extends React.Component {
                           onChange={this.handleFileOnChange}/> 
                       </InputGroup>
                     </FormGroup> 
-
                     <FormGroup className="form-label-group">
                       <div><b>진료과</b></div>
                       <InputGroup>
