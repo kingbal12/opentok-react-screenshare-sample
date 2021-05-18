@@ -26,16 +26,15 @@ class Register extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      // userid: props.user.register.values.registeruser,
-      userid: "kang@kang",
-      file : "",
-      previewURL : "",
-      filename: "", 
+      userid: props.user.register.values.registeruser,
+      filename: "",
+      file : "", 
       medicalpart: "", 
       medicalable: "", 
       medicaldesc: "", 
       medicalnum: "", 
-      userdesc: ""
+      userdesc: "",
+      previewURL : ""
     }
   }
   // 20210517 여기까지 작업함
@@ -59,14 +58,14 @@ class Register extends React.Component {
     e.preventDefault()
     this.props.register4(
       this.state.userid,
-      this.state.file,
-      this.state.previewURL,
       this.state.filename,
+      this.state.file,
       this.state.medicalpart,
       this.state.medicalable,
       this.state.medicaldesc,
       this.state.medicalnum,
-      this.state.userdesc
+      this.state.userdesc,    
+      this.state.previewURL
     )
   }
 

@@ -21,7 +21,7 @@ class Register extends React.Component {
     super(props);
     this.state={
       userid: props.user.register.values.registeruser,
-      // userid: "kang@kang",
+      // userid: "kang@knag",
       hospitalname: "",
       businessnumber: "",
       zipcode: "",
@@ -33,7 +33,6 @@ class Register extends React.Component {
       accountnumber: "",
       modal: false
   }
-  // this.handleComplete.bind(this);
 }
 
 

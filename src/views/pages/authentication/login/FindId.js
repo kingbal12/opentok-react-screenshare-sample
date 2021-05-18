@@ -7,7 +7,7 @@ import { loginWithJWT } from "../../../../redux/actions/auth/loginActions"
 import { connect } from "react-redux"
 import { history } from "../../../../history"
 
-class LoginJWT extends React.Component {
+class FindId extends React.Component {
   state = {
     // 인성 api 연결
     // email: "i4h00001",
@@ -73,7 +73,9 @@ class LoginJWT extends React.Component {
             
             
             <div className="d-flex justify-content-center pb-1">
-              <Link to="/pages/finduser">아이디 / 비밀번호 찾기</Link>
+              <Link to="/pages/forgot-password">아이디 찾기</Link>
+              <div>&nbsp; &nbsp; |&nbsp; &nbsp;</div>
+              <Link to="/pages/forgot-password">비밀번호 찾기</Link>
             </div>
             
             <div className="d-flex justify-content-center">
@@ -95,9 +97,5 @@ class LoginJWT extends React.Component {
     )
   }
 }
-const mapStateToProps = state => {
-  return {
-    values: state.auth.login
-  }
-}
-export default connect(mapStateToProps, { loginWithJWT })(LoginJWT)
+
+export default FindId
