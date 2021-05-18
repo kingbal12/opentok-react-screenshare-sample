@@ -233,6 +233,8 @@ class CalendarApp extends React.Component {
               resourceAccessor="url"
               defaultView='week'
               views={views}
+              // 15분 간격 설정(기존은 30분)
+              step={15}
               components={{ toolbar: Toolbar }}
               eventPropGetter={this.handleEventColors}
               popup={true}
