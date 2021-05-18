@@ -63,8 +63,8 @@ class FindId extends React.Component {
                 defaultChecked={false}
                 onChange={this.handleRemember}
               />
-              
             </FormGroup>
+            
             <div className="d-flex justify-content-center pb-1">
               <Button color="primary" type="submit" size="lg" block>
                 로그인
