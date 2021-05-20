@@ -149,6 +149,8 @@ class CalendarApp extends React.Component {
   }
 
   handleAddEvent = id => {
+    // 첫번째 방법 : onselectslot 부분에 handleaddevent를 추가하여 해결
+    // 두번째 방법 : 과정은 그대로 두고 addeventslidebar부분이 자동으로 진행되도록 해결
     //아래쪽 render 부분에서 id + 1값을 해주는것이 아니라
     //함수 내에서 + 1을 추가해나가야 할것 같음
     // this.props.handleSidebar(false)
