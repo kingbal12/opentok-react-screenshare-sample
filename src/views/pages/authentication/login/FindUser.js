@@ -16,6 +16,7 @@ import classnames from "classnames"
 import LoginAuth0 from "./LoginAuth0"
 import LoginFirebase from "./LoginFirebase"
 import FindId from "./FindId"
+import FindPw from "./FindPw"
 import HicareLogo from "../../../../assets/img/logo/user_register_logo.png"
 
 class Login extends React.Component {
@@ -43,12 +44,12 @@ class Login extends React.Component {
             <Row className="m-0">
               <Col md="12" className="p-0">
                 <Card className="rounded-0 mb-0 px-2 login-tabs-container">
-                  <CardHeader className="pb-4">
+                  <CardHeader className="pb-4 mt-2 justify-content-center">
                     <CardTitle>
-                      <h2>Find ID/PW</h2>
+                      <h2>아이디/비밀번호 찾기</h2>
                     </CardTitle>
                   </CardHeader>
-                  <Nav tabs className="px-2">
+                  <Nav tabs className="px-2 justify-content-center inline-block">
                     <NavItem>
                       <NavLink
                         className={classnames({
@@ -58,9 +59,10 @@ class Login extends React.Component {
                           this.toggle("1")
                         }}
                       >
-                        JWT
+                        아이디 찾기
                       </NavLink>
                     </NavItem>
+                    <NavItem className="pt-1">&nbsp; &nbsp; &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp; &nbsp;</NavItem>
                     <NavItem>
                       <NavLink
                         className={classnames({
@@ -70,19 +72,7 @@ class Login extends React.Component {
                           this.toggle("2")
                         }}
                       >
-                        Firebase
-                      </NavLink>
-                    </NavItem>
-                    <NavItem>
-                      <NavLink
-                        className={classnames({
-                          active: this.state.activeTab === "3"
-                        })}
-                        onClick={() => {
-                          this.toggle("3")
-                        }}
-                      >
-                        Auth0
+                        비밀번호 찾기
                       </NavLink>
                     </NavItem>
                   </Nav>
@@ -91,10 +81,7 @@ class Login extends React.Component {
                       <FindId />
                     </TabPane>
                     <TabPane tabId="2">
-                      <LoginFirebase />
-                    </TabPane>
-                    <TabPane tabId="3">
-                      <LoginAuth0 />
+                      <FindPw />
                     </TabPane>
                   </TabContent>
                 </Card>
