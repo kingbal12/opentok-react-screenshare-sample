@@ -6,6 +6,7 @@ import { Calendar, momentLocalizer } from "react-big-calendar"
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop"
 import moment from "moment"
 import { connect } from "react-redux"
+import {handleAddEvent} from "./AddEventSidebar"
 import {
   fetchEvents,
   handleSidebar,
@@ -34,51 +35,6 @@ class Toolbar extends React.Component {
   render() {
     return (
       <div className="calendar-header mb-2 d-flex justify-content-between flex-wrap">
-        {/* <div>
-          <AddEventButton />
-        </div>
-        <div className="text-center view-options mt-1 mt-sm-0 ml-lg-5 ml-0">
-          <ButtonGroup>
-            <button
-              className={`btn ${
-                this.props.view === "month"
-                  ? "btn-primary"
-                  : "btn-outline-primary text-primary"
-              }`}
-              onClick={() => {
-                this.props.onView("month")
-              }}
-            >
-              Month
-            </button>
-              <button
-              className={`btn ${
-                this.props.view === "week"
-                  ? "btn-primary"
-                  : "btn-outline-primary text-primary"
-              }`}
-              onClick={() => {
-                this.props.onView("week")
-              }}
-            >
-              Week
-            </button>
-            
-            
-            <button
-              className={`btn ${
-                this.props.view === "day"
-                  ? "btn-primary"
-                  : "btn-outline-primary text-primary"
-              }`}
-              onClick={() => {
-                this.props.onView("day")
-              }}
-            >
-              Day
-            </button>
-          </ButtonGroup>
-        </div> */}
         <div className="month-label d-flex flex-column text-center text-md-right mt-1 mt-md-0">
           <div className="calendar-navigation">
             <Button.Ripple
@@ -102,24 +58,6 @@ class Toolbar extends React.Component {
             </div>
            
           </div>
-          {/* <div className="event-tags d-none d-sm-flex justify-content-end mt-1">
-            <div className="tag mr-1">
-              <span className="bullet bullet-success bullet-sm mr-50"></span>
-              <span>Business</span>
-            </div>
-            <div className="tag mr-1">
-              <span className="bullet bullet-warning bullet-sm mr-50"></span>
-              <span>Work</span>
-            </div>
-            <div className="tag mr-1">
-              <span className="bullet bullet-danger bullet-sm mr-50"></span>
-              <span>Personal</span>
-            </div>
-            <div className="tag">
-              <span className="bullet bullet-primary bullet-sm mr-50"></span>
-              <span>Others</span>
-            </div>
-          </div> */}
         </div>
       </div>
     )
@@ -231,8 +169,54 @@ class CalendarApp extends React.Component {
     })
   }
 
+  handleAddEvent = id => {
+    // 첫번째 방법 : onselectslot 부분에 handleaddevent를 추가하여 해결
+    // 두번째 방법 : 과정은 그대로 두고 addeventslidebar부분이 자동으로 진행되도록 해결
+    //아래쪽 render 부분에서 id + 1값을 해주는것이 아니라
+    //함수 내에서 + 1을 추가해나가야 할것 같음
+    // this.props.handleSidebar(false)
+    this.props.addEvent({
+      id: id,
+      title: this.state.title,
+      start: this.state.startDate,
+      end: this.state.endDate,
+      label: this.state.label === null ? "others" : this.state.label,
+      allDay: this.state.allDay,
+      selectable: this.state.selectable
+    })
+    this.setState({
+      startDate: new Date(),
+      endDate: new Date(),
+      title: "",
+      label: null,
+      allDay: true,
+      selectable: true
+    })
+  }
+
+  // UNSAFE_componentWillReceiveProps(nextProps) {
+  //   this.setState({
+  //     title: nextProps.eventInfo === null ? "" : nextProps.eventInfo.title,
+  //     url: nextProps.eventInfo === null ? "" : nextProps.eventInfo.url,
+  //     startDate:
+  //       nextProps.eventInfo === null
+  //         ? new Date()
+  //         : new Date(nextProps.eventInfo.start),
+  //     endDate:
+  //       nextProps.eventInfo === null
+  //         ? new Date()
+  //         : new Date(nextProps.eventInfo.end),
+  //     label: nextProps.eventInfo === null ? null : nextProps.eventInfo.label,
+  //     allDay: nextProps.eventInfo === null ? true : nextProps.eventInfo.allDay,
+  //     selectable:
+  //       nextProps.eventInfo === null ? true : nextProps.eventInfo.selectable
+  //   })
+  // }
+
   render() {
     const { events, views, sidebar } = this.state
+    // let lastId = events.pop()
+    // let newEventId = lastId + 1
     return (
       <div className="app-calendar position-relative">
         <div
@@ -271,7 +255,9 @@ class CalendarApp extends React.Component {
                   end: new Date(end),
                   url: ""
                 })
+                console.log(this.state);
               }}
+              
               selectable={true}
             />
             <div className="pt-1 text-right">

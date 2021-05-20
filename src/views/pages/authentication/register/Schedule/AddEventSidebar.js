@@ -323,6 +323,7 @@ class AddEvent extends React.Component {
               disabled={this.state.title.length > 0 ? false : true}
               color="primary"
               onClick={() => {
+                console.log(this.state)
                 this.props.handleSidebar(false)
                 if (
                   this.props.eventInfo === null ||
