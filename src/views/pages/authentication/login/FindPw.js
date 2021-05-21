@@ -1,5 +1,6 @@
 import React from "react"
 import { CardBody, FormGroup, Form, Input, Button, Label } from "reactstrap"
+import { loginWithJWT } from "../../../../redux/actions/auth/loginActions"
 import Radio from "../../../../components/@vuexy/radio/RadioVuexy"
 import Select from "react-select"
 
@@ -9,8 +10,11 @@ const colourOptions = [
 ]
 
 
-class FindId extends React.Component {
+
+
+class FindPw extends React.Component {
   state = {
+    id: "",
     name: "",
     email: ""
   }
@@ -47,6 +51,14 @@ class FindId extends React.Component {
             </FormGroup>
             <FormGroup className="form-label-group position-relative">
               <Input
+                placeholder="아이디"
+                value={this.state.id}
+                onChange={e => this.setState({ id: e.target.value })}
+                required
+              />
+            </FormGroup>
+            <FormGroup className="form-label-group position-relative">
+              <Input
                 placeholder="이름을 입력하세요"
                 value={this.state.name}
                 onChange={e => this.setState({ name: e.target.value })}
@@ -74,4 +86,4 @@ class FindId extends React.Component {
   }
 }
 
-export default FindId
+export default FindPw

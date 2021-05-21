@@ -10,9 +10,9 @@ import {
 import NavbarBookmarks from "./NavbarBookmarks"
 import NavbarUser from "./NavbarUser"
 import userImg from "../../../assets/img/portrait/small/avatar-s-11.jpg"
-import Clock from "react-digital-clock"
 import HicareLogo from "../../../assets/img/logo/user_register_logo.png"
 import { history } from "../../../history"
+import Clock from 'react-live-clock';
 
 //  const UserName = props => {
 //     let username = ""
@@ -135,10 +135,17 @@ const ThemeNavbar = props => {
               id="navbar-mobile"
             >
               <div className="bookmark-wrapper">
-                <NavbarBookmarks
+                {/* <NavbarBookmarks
                   sidebarVisibility={props.sidebarVisibility}
                   handleAppOverlay={props.handleAppOverlay}
-                />
+                /> */}
+                <Clock 
+                format={'YYYY, MM, DD, dddd'} 
+                ticking={true}  />
+                <p></p>
+                <Clock 
+                format={'hh:mm:ss A'} 
+                ticking={true}  />
               </div>
               {props.horizontal ? (
                 <div className="logo d-flex align-items-center">
