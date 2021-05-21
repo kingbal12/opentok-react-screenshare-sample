@@ -13,11 +13,9 @@ import {
 } from "reactstrap"
 import "../../../../assets/scss/pages/authentication.scss"
 import classnames from "classnames"
-import LoginAuth0 from "./LoginAuth0"
-import LoginFirebase from "./LoginFirebase"
 import FindId from "./FindId"
 import FindPw from "./FindPw"
-import HicareLogo from "../../../../assets/img/logo/user_register_logo.png"
+
 
 class Login extends React.Component {
   state = {
@@ -44,12 +42,13 @@ class Login extends React.Component {
             <Row className="m-0">
               <Col md="12" className="p-0">
                 <Card className="rounded-0 mb-0 px-2 login-tabs-container">
-                  <CardHeader className="pb-4 mt-2 justify-content-center">
+
+                  <CardHeader className="pb-2 pt-3 justify-content-center">
                     <CardTitle>
-                      <h2>아이디/비밀번호 찾기</h2>
+                      <h4><b>아이디/비밀번호 찾기</b></h4>
                     </CardTitle>
                   </CardHeader>
-                  <Nav tabs className="px-2 justify-content-center inline-block">
+                  <Nav tabs className="px-3 justify-content-center">
                     <NavItem>
                       <NavLink
                         className={classnames({
@@ -59,10 +58,12 @@ class Login extends React.Component {
                           this.toggle("1")
                         }}
                       >
-                        아이디 찾기
+                        <h5>아이디 찾기</h5>
                       </NavLink>
                     </NavItem>
-                    <NavItem className="pt-1">&nbsp; &nbsp; &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp; &nbsp;</NavItem>
+                    <NavItem className="pt-1">
+                      &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+                    </NavItem>
                     <NavItem>
                       <NavLink
                         className={classnames({
@@ -72,7 +73,7 @@ class Login extends React.Component {
                           this.toggle("2")
                         }}
                       >
-                        비밀번호 찾기
+                        <h5>비밀번호 찾기</h5>
                       </NavLink>
                     </NavItem>
                   </Nav>

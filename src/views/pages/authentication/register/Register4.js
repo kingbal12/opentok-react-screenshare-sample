@@ -1,5 +1,5 @@
 import React from "react"
-import {InputGroup, Form, FormGroup, Input, Label, Button,
+import {InputGroup, Form, FormGroup, Input, Button,
   CustomInput,
   CardHeader,
   CardTitle,
@@ -26,7 +26,8 @@ class Register extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      userid: props.user.register.values.registeruser,
+      userid: "kang@kang",
+      // userid: props.user.register.values.registeruser,
       filename: "",
       file : "", 
       medicalpart: "", 
@@ -77,15 +78,15 @@ class Register extends React.Component {
       profile_preview = <CardImg style={{borderRadius:"100%"}} className='profile_preview'  src={this.state.previewURL} />
     }
     return (
-      
       <Row className="m-0 justify-content-center">
       <Col
         sm="8"
-        xl="4"
+        xl="8"
         lg="10"
         md="8"
         className="d-flex justify-content-center"
       >
+        
         <Card className="bg-authentication rounded-0 mb-0 w-100">
           <Row className="m-0">
             <Col lg="12" md="12" className="p-0">
@@ -195,7 +196,6 @@ class Register extends React.Component {
         </Card>
       </Col>
     </Row>
-    
     )
   }
 }
