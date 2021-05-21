@@ -2,6 +2,7 @@ import React from "react"
 import { CardBody, FormGroup, Form, Input, Button, Label } from "reactstrap"
 import Radio from "../../../../components/@vuexy/radio/RadioVuexy"
 import Select from "react-select"
+import { history } from "../../../../history"
 
 const colourOptions = [
   { value: "개인회원", label: "개인회원" },
@@ -63,7 +64,10 @@ class FindId extends React.Component {
               />
             </FormGroup>          
             <div className="d-flex justify-content-center py-3">
-              <Button color="primary" type="submit" size="lg" block>
+              <Button color="primary" type="submit" size="lg" block
+              onClick={() => {
+                history.push("/pages/login")
+              }}>
                 확인
               </Button>
             </div>
