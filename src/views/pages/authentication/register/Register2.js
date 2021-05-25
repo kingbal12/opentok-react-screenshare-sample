@@ -10,7 +10,7 @@ import {InputGroup, InputGroupAddon, Form, FormGroup, Input, Button,
 import { Check } from "react-feather"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import "../../../../assets/scss/pages/authentication.scss"
-import { register2 } from "../../../../redux/actions/auth/registerActions"
+import { register2,authemail,verifyemail } from "../../../../redux/actions/auth/registerActions"
 import { connect } from "react-redux"
 
 
@@ -26,17 +26,34 @@ class Register extends React.Component {
   }
   
 
+  emailauth = () => {
+    
+    console.log(this.state)
+    this.props.authemail(
+      this.state.email
+    )
+  }
+
+  verifyauth = () => {
+
+    console.log(this.state.idnumber)
+    this.props.authemail(
+      this.state.email,
+      this.state.idnumber
+    )
+  }
   handleRegister1 = e => {
     e.preventDefault()
-    this.props.register2(
+    this.props.verifyemail(
       this.state.name,
       this.state.phone,
       this.state.email,
-      this.state.idnumber,
       this.state.password,
       this.state.chkpassword
     )
   }
+
+  
   render() {
     return (
       <Row className="m-0 justify-content-center">
@@ -90,7 +107,7 @@ class Register extends React.Component {
                               value={this.state.email}
                               onChange={e => this.setState({ email: e.target.value })}
                             />
-                            <InputGroupAddon addonType="append"><Button color="primary" type="button">이메일 인증</Button></InputGroupAddon>
+                            <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.emailauth}>이메일 인증</Button></InputGroupAddon>
                           </InputGroup>
                           <div className="pt-1 emailidentify">인증번호를 입력해주세요.</div>
                         </FormGroup>
@@ -98,13 +115,13 @@ class Register extends React.Component {
                         <FormGroup className="form-label-group">
                           <InputGroup>
                             <Input
-                              type="text"
+                              type="number"
                               placeholder="인증번호"
                               required
                               value={this.state.idnumber}
                               onChange={e => this.setState({ idnumber: e.target.value })}
                             />
-                            <InputGroupAddon addonType="append"><Button color="primary" type="button">인증 확인</Button></InputGroupAddon>
+                            <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.verifyauth}>인증 확인</Button></InputGroupAddon>
                           </InputGroup>
                         </FormGroup>
                         <FormGroup className="form-label-group">
@@ -178,5 +195,5 @@ const mapStateToProps = state => {
     values: state.auth.register2
   }
 }
-export default connect(mapStateToProps, { register2 })(Register)
+export default connect(mapStateToProps, { register2, authemail, verifyemail })(Register)
 

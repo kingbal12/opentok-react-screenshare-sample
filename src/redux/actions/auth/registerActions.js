@@ -84,6 +84,52 @@ export const register2 = (name, phone, email, password) => {
   }
 }
 
+export const authemail = (email) => {
+  return dispatch => {
+   
+    axios
+      .post("http://192.168.0.7:9300/signup-email", {
+        user_id: email,
+      })
+
+
+      .then(response => {
+        console.log(response);
+        if(response.data.status === "200") {
+          
+        } else {
+          alert(response.data.message);
+        }
+
+      })
+      
+  }
+}
+
+export const verifyemail = (email,idnumber) => {
+  return dispatch => {
+   
+    axios
+      .post("http://192.168.0.7:9300/signup-verify", {
+        user_id: email,
+        auth_code: idnumber
+      })
+
+
+      .then(response => {
+        console.log(response);
+        if(response.data.status === "200") {
+          
+        } else {
+          alert(response.data.message);
+        }
+
+      })
+      
+  }
+}
+
+
 // 회원가입 pages/register3
 export const register3 = (userid, hospitalname, businessnumber, zipcode, address1, address2, phonenumber, accountname, bankname, accountnumber) => {
   return dispatch => {
