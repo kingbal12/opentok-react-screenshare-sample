@@ -42,6 +42,7 @@ class Login extends React.Component {
             <Row className="m-0">
               <Col md="12" className="p-0">
                 <Card className="rounded-0 mb-0 px-2 login-tabs-container">
+
                   <CardHeader className="pb-2 pt-3 justify-content-center">
                     <CardTitle>
                       <h4><b>아이디/비밀번호 찾기</b></h4>

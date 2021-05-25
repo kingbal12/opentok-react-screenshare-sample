@@ -101,6 +101,27 @@ class CalendarApp extends React.Component {
   async componentDidMount() {
     await this.props.fetchEvents()
   }
+  
+  handleAddEvent = id => {
+    this.props.handleSidebar(false)
+    this.props.addEvent({
+      id: id,
+      title: this.state.title,
+      start: this.state.startDate,
+      end: this.state.endDate,
+      label: this.state.label === null ? "others" : this.state.label,
+      allDay: this.state.allDay,
+      selectable: this.state.selectable
+    })
+    this.setState({
+      startDate: new Date(),
+      endDate: new Date(),
+      title: "",
+      label: null,
+      allDay: true,
+      selectable: true
+    })
+  }
 
   handleEventColors = event => {
     return { className: eventColors[event.label] }

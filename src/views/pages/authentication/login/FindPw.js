@@ -60,6 +60,7 @@ class FindPw extends React.Component {
             </FormGroup>
             <FormGroup className="form-label-group position-relative">
               <Input
+
                 placeholder="이름을 입력하세요"
                 value={this.state.name}
                 onChange={e => this.setState({ name: e.target.value })}
