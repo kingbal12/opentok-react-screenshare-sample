@@ -308,7 +308,7 @@ class NavbarUser extends React.PureComponent {
           }}
         </IntlContext.Consumer>
 
-        <NavItem className="nav-search" onClick={this.handleNavbarSearch}>
+        {/* <NavItem className="nav-search" onClick={this.handleNavbarSearch}>
           <NavLink className="nav-link-search">
             <Icon.Search size={21} data-tour="search" />
           </NavLink>
@@ -433,8 +433,8 @@ class NavbarUser extends React.PureComponent {
               />
             </div>
           </div>
-        </NavItem>
-        <UncontrolledDropdown
+        </NavItem> */}
+        {/* <UncontrolledDropdown
           tag="li"
           className="dropdown-notification nav-item"
         >
@@ -655,7 +655,7 @@ class NavbarUser extends React.PureComponent {
               </DropdownItem>
             </li>
           </DropdownMenu>
-        </UncontrolledDropdown>
+        </UncontrolledDropdown> */}
         <UncontrolledDropdown tag="li" className="dropdown-user nav-item">
           <DropdownToggle tag="a" className="nav-link dropdown-user-link">
             <div className="user-nav d-sm-flex d-none">

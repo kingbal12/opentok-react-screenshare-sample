@@ -7,6 +7,7 @@ import customizer from "./customizer/"
 import auth from "./auth/"
 import navbar from "./navbar/Index"
 import dataList from "./data-list/"
+import appoints from "./appoint/"
 import { persistReducer } from 'redux-persist'
 import storageSession from 'redux-persist/lib/storage/session'
 
@@ -30,7 +31,8 @@ const rootReducer = combineReducers({
   customizer: customizer,
   auth: auth,
   navbar: navbar,
-  dataList: dataList
+  dataList: dataList,
+  appoints: appoints
 })
 
 

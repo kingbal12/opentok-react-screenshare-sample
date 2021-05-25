@@ -12,8 +12,9 @@ import OrdersReceived from "../../ui-elements/cards/statistics/OrdersReceived"
 import "../../../assets/scss/pages/dashboard-analytics.scss"
 import DataTableCustom from "./DataTableCustom"
 // import { UserX } from "react-feather"
-// import { connect } from "react-redux"
-
+import { connect } from "react-redux"
+import {getappoints} from "../../../redux/actions/appoint/index"
+import axios from "axios"
 // let $primary = "#7367F0",
 //   $danger = "#EA5455",
 //   $warning = "#FF9F43",
@@ -28,6 +29,20 @@ import DataTableCustom from "./DataTableCustom"
 
  
 class AnalyticsDashboard extends React.Component {
+  // constructor(props){
+  //   super(props)
+  //   this.state = {
+  //     userid: props.user.login.values.loggedInUser.username,
+  //     startdate: "20210101",
+  //     appoints: props.appoints
+  //   }
+  // }
+  async componentDidMount() {
+    await this.props.getappoints(this.props.user.login.values.loggedInUser.username,"20210101")
+
+    console.log(this.props.appoints.appoints.values)
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -43,7 +58,7 @@ class AnalyticsDashboard extends React.Component {
           </Col>
         </Row>
         <Row>
-          
+          {/* {this.props.appoints} */}
           <Col sm="12">
             <DataTableCustom />
           </Col>
@@ -52,5 +67,10 @@ class AnalyticsDashboard extends React.Component {
     )
   }
 }
-
-export default AnalyticsDashboard
+const mapStateToProps = state => {
+  return {
+    user: state.auth,
+    appoints: state.appoints
+  }
+}
+export default connect(mapStateToProps,{getappoints})(AnalyticsDashboard)
