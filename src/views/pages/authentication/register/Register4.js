@@ -19,6 +19,7 @@ import "../../../../assets/scss/pages/authentication.scss"
 import { register4 } from "../../../../redux/actions/auth/registerActions"
 import { connect } from "react-redux"
 import { history } from "../../../../history"
+// import Avatar from "../../../ui-elements/"
 
 
 

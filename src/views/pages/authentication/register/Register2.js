@@ -12,6 +12,7 @@ import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import "../../../../assets/scss/pages/authentication.scss"
 import { register2,authemail,verifyemail } from "../../../../redux/actions/auth/registerActions"
 import { connect } from "react-redux"
+import axios from "axios"
 
 
 
@@ -26,25 +27,24 @@ class Register extends React.Component {
   }
   
 
-  emailauth = () => {
-    
-    console.log(this.state)
+  emailauth = e => {
+    e.preventDefault()
     this.props.authemail(
-      this.state.email
-    )
-  }
+        this.state.email
+      )
+    }
 
-  verifyauth = () => {
-
-    console.log(this.state.idnumber)
-    this.props.authemail(
+  verifyauth = e => {
+    e.preventDefault()
+    this.props.verifyemail(
       this.state.email,
       this.state.idnumber
     )
   }
+
   handleRegister1 = e => {
     e.preventDefault()
-    this.props.verifyemail(
+    this.props.register2(
       this.state.name,
       this.state.phone,
       this.state.email,
@@ -75,7 +75,7 @@ class Register extends React.Component {
                     </CardTitle>
                   </CardHeader>   
                   <CardBody className="pt-1 pb-50">
-                      <Form action="/" onSubmit={this.handleRegister1}>
+                      <Form onSubmit={this.handleRegister1}>
                         <FormGroup className="form-label-group">
                           <InputGroup>
                             <Input
@@ -172,8 +172,6 @@ class Register extends React.Component {
                           type="submit"
                           size="lg"
                           block
-                          // onClick={() => {
-                          //   history.push("/pages/register3")}}
                           >
                             가입하기
                           </Button>
@@ -195,5 +193,5 @@ const mapStateToProps = state => {
     values: state.auth.register2
   }
 }
-export default connect(mapStateToProps, { register2, authemail, verifyemail })(Register)
+export default connect(mapStateToProps, { register2,authemail, verifyemail })(Register)
 
