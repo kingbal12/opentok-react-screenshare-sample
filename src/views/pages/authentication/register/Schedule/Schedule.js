@@ -6,7 +6,6 @@ import { Calendar, momentLocalizer } from "react-big-calendar"
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop"
 import moment from "moment"
 import { connect } from "react-redux"
-import {handleAddEvent} from "./AddEventSidebar"
 import {
   fetchEvents,
   handleSidebar,
@@ -94,7 +93,14 @@ class CalendarApp extends React.Component {
         week: true,
         day: true
       },
-      eventInfo: null
+      // id: null,
+      // eventInfo: null,
+      // startDate: new Date(),
+      // endDate: new Date(),
+      // title: "",
+      // label: null,
+      // allDay: true,
+      // selectable: true
     }
   }
 
@@ -102,26 +108,7 @@ class CalendarApp extends React.Component {
     await this.props.fetchEvents()
   }
   
-  handleAddEvent = id => {
-    this.props.handleSidebar(false)
-    this.props.addEvent({
-      id: id,
-      title: this.state.title,
-      start: this.state.startDate,
-      end: this.state.endDate,
-      label: this.state.label === null ? "others" : this.state.label,
-      allDay: this.state.allDay,
-      selectable: this.state.selectable
-    })
-    this.setState({
-      startDate: new Date(),
-      endDate: new Date(),
-      title: "",
-      label: null,
-      allDay: true,
-      selectable: true
-    })
-  }
+ 
 
   handleEventColors = event => {
     return { className: eventColors[event.label] }
@@ -170,13 +157,11 @@ class CalendarApp extends React.Component {
   }
 
   handleAddEvent = id => {
-    // 첫번째 방법 : onselectslot 부분에 handleaddevent를 추가하여 해결
-    // 두번째 방법 : 과정은 그대로 두고 addeventslidebar부분이 자동으로 진행되도록 해결
-    //아래쪽 render 부분에서 id + 1값을 해주는것이 아니라
-    //함수 내에서 + 1을 추가해나가야 할것 같음
-    // this.props.handleSidebar(false)
+    // id값을 정하는것과
+    // end start date의 state값을 정하는것은 다른 함수로 하는것 같음
+    this.props.handleSidebar(false)
     this.props.addEvent({
-      id: id,
+      id,
       title: this.state.title,
       start: this.state.startDate,
       end: this.state.endDate,
@@ -184,39 +169,22 @@ class CalendarApp extends React.Component {
       allDay: this.state.allDay,
       selectable: this.state.selectable
     })
-    this.setState({
-      startDate: new Date(),
-      endDate: new Date(),
-      title: "",
-      label: null,
-      allDay: true,
-      selectable: true
-    })
+    // this.setState({
+    //   startDate: new Date(),
+    //   endDate: new Date(),
+    //   title: "",
+    //   label: null,
+    //   allDay: true,
+    //   selectable: true
+    // })
   }
 
-  // UNSAFE_componentWillReceiveProps(nextProps) {
-  //   this.setState({
-  //     title: nextProps.eventInfo === null ? "" : nextProps.eventInfo.title,
-  //     url: nextProps.eventInfo === null ? "" : nextProps.eventInfo.url,
-  //     startDate:
-  //       nextProps.eventInfo === null
-  //         ? new Date()
-  //         : new Date(nextProps.eventInfo.start),
-  //     endDate:
-  //       nextProps.eventInfo === null
-  //         ? new Date()
-  //         : new Date(nextProps.eventInfo.end),
-  //     label: nextProps.eventInfo === null ? null : nextProps.eventInfo.label,
-  //     allDay: nextProps.eventInfo === null ? true : nextProps.eventInfo.allDay,
-  //     selectable:
-  //       nextProps.eventInfo === null ? true : nextProps.eventInfo.selectable
-  //   })
-  // }
+
 
   render() {
     const { events, views, sidebar } = this.state
-    // let lastId = events.pop()
-    // let newEventId = lastId + 1
+    // let id = events.pop()
+    // let newEventId = id + 1
     return (
       <div className="app-calendar position-relative">
         <div
@@ -242,19 +210,29 @@ class CalendarApp extends React.Component {
               step={15}
               components={{ toolbar: Toolbar }}
               eventPropGetter={this.handleEventColors}
-              popup={true}
+              popup={false}
               onSelectEvent={event => {
                 this.handleSelectEvent(event)
               }}
               onSelectSlot={({ start, end }) => {
-                this.props.handleSidebar(true)
-                this.props.handleSelectedEvent({
-                  title: "",
+                this.setState({
+                  title: "테스트",
                   label: null,
-                  start: new Date(start),
-                  end: new Date(end),
+                  startDate: new Date(start),
+                  endDate: new Date(end),
                   url: ""
                 })
+                this.handleAddEvent(2)
+                // id 를 1씩 증가하게끔 
+                // this.props.handleSidebar(true)
+                // this.props.handleSelectedEvent({
+                //   title: "",
+                //   label: null,
+                //   start: new Date(start),
+                //   end: new Date(end),
+                //   url: ""
+                // })
+                
                 console.log(this.state);
               }}
               
