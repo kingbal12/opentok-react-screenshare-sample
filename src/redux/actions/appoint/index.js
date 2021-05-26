@@ -15,7 +15,7 @@ export const getappoints = (userid,startdate) => {
         console.log(result)
         dispatch({
           type: "GET_APPOINTS",
-          apppoints: result.data.data 
+          appointsdata: result.data.data 
         })
         
       })

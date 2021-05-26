@@ -20,8 +20,8 @@ class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      userid: props.user.register.values.registeruser,
-      // userid: "kang@knag",
+      // userid: props.user.register.values.registeruser,
+      userid: "kang@knag",
       hospitalname: "",
       businessnumber: "",
       zipcode: "",
@@ -98,7 +98,7 @@ handleComplete = (data) => {
               <Card className="rounded-0 mb-0 p-2">
                 <CardHeader className="pb-1 pt-50">
                   <CardTitle>
-                    <h1>병원정보 입력하기</h1>
+                    <h1>병원정보 입력하기{this.state.userid}</h1>
                   </CardTitle>
                 </CardHeader>   
               <CardBody className="pt-1 pb-50">
