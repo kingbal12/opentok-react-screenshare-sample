@@ -179,6 +179,7 @@ class CalendarApp extends React.Component {
     // })
   }
 
+  
 
 
   render() {
@@ -261,7 +262,6 @@ class CalendarApp extends React.Component {
           updateEvent={this.props.updateEvent}
           resizable
         />
-        
       </div>
     )
   }

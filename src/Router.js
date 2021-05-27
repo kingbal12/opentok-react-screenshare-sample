@@ -97,6 +97,7 @@ const divider = lazy(() => import("./components/@vuexy/divider/Divider"))
 const vuexyWizard = lazy(() => import("./components/@vuexy/wizard/Wizard"))
 const listView = lazy(() => import("./views/ui-elements/data-list/ListView"))
 const thumbView = lazy(() => import("./views/ui-elements/data-list/ThumbView"))
+const patientlsit = lazy(() => import("./views/ui-elements/patient-list/PatientListView"))
 const select = lazy(() => import("./views/forms/form-elements/select/Select"))
 const switchComponent = lazy(() =>
   import("./views/forms/form-elements/switch/Switch")
@@ -292,6 +293,7 @@ class AppRouter extends React.Component {
           />
           <AppRoute path="/data-list/list-view" component={listView} />
           <AppRoute path="/data-list/thumb-view" component={thumbView} />
+          <AppRoute path="/patients-list" component = {patientlsit} />
           <AppRoute path="/ui-element/grid" component={grid} />
           <AppRoute path="/ui-element/typography" component={typography} />
           <AppRoute

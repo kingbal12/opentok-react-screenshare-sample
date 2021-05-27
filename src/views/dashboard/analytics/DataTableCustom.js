@@ -14,6 +14,23 @@ class DataTableCustom extends React.Component {
   state = {
     columns: [
       {
+        name: "예약시간",
+        selector: "date",
+        sortable: true,
+        cell: row => (
+          <p className="text-bold-500 text-truncate mb-0">{row.date}</p>
+        )
+      },
+      {
+        name: "진료수단",
+        // selector: "date",
+        // sortable: true,
+        cell: row => (
+          <p className="text-bold-500 text-truncate mb-0">{}</p>
+        )
+      },
+      
+      {
         name: "이름",
         selector: "name",
         sortable: true,
@@ -40,17 +57,10 @@ class DataTableCustom extends React.Component {
           </div>
         )
       },
+      
       {
-        name: "Date Created",
-        selector: "date",
-        sortable: true,
-        cell: row => (
-          <p className="text-bold-500 text-truncate mb-0">{row.date}</p>
-        )
-      },
-      {
-        name: "Status",
-        selector: "status",
+        name: "성별",
+        selector: "sex",
         sortable: true,
         cell: row => (
           <Badge
@@ -61,13 +71,45 @@ class DataTableCustom extends React.Component {
         )
       },
       {
-        name: "Revenue",
-        selector: "revenue",
+        name: "나이",
+        selector: "age",
         sortable: true,
         cell: row => <p className="text-bold-500 mb-0">{row.revenue}</p>
       },
       {
-        name: "Feedback",
+        name: "생년월일",
+        selector: "birthday",
+        sortable: true,
+        cell: row => (
+          <p className="text-bold-500 text-truncate mb-0">{row.date}</p>
+        )
+      },
+      {
+        name: "진단명",
+        // selector: "date",
+        // sortable: true,
+        cell: row => (
+          <p className="text-bold-500 text-truncate mb-0">{}</p>
+        )
+      },
+      {
+        name: "초진/재진",
+        // selector: "date",
+        // sortable: true,
+        cell: row => (
+          <p className="text-bold-500 text-truncate mb-0">{}</p>
+        )
+      },
+      {
+        name: "주된 증상",
+        // selector: "date",
+        // sortable: true,
+        cell: row => (
+          <p className="text-bold-500 text-truncate mb-0">{}</p>
+        )
+      },
+      {
+        name: "VitalData",
         selector: "",
         sortable: true,
         cell: row => {
@@ -110,63 +152,71 @@ class DataTableCustom extends React.Component {
             </div>
           )
         }
-      }
+      },
+      {
+        name: "차트보기",
+        // selector: "date",
+        // sortable: true,
+        cell: row => (
+          <p className="text-bold-500 text-truncate mb-0">{}</p>
+        )
+      },
     ],
     data: [     
-      {
-        image: require("../../../assets/img/portrait/small/avatar-s-2.jpg"),
-        name: "Alyss Lillecrop",
-        email: "alillecrop0@twitpic.com",
-        date: "May 13, 2018",
-        status: "active",
-        revenue: "$32,000",
-        ratings: "good"
-      },
-      {
-        image: require("../../../assets/img/portrait/small/avatar-s-1.jpg"),
-        name: "Shep Pentlow",
-        email: "spentlow1@home.pl",
-        date: "June 5, 2019",
-        status: "active",
-        revenue: "$50,000",
-        ratings: "good"
-      },
-      {
-        image: require("../../../assets/img/portrait/small/avatar-s-3.jpg"),
-        name: "Gasper Morley",
-        email: "gmorley2@chronoengine.com",
-        date: "December 24, 2019",
-        status: "active",
-        revenue: "$78,000",
-        ratings: "average"
-      },
-      {
-        image: require("../../../assets/img/portrait/small/avatar-s-4.jpg"),
-        name: "Phaedra Jerrard",
-        email: "pjerrard3@blogs.com",
-        date: "November 30, 2018",
-        status: "inactive",
-        revenue: "$10,000",
-        ratings: "bad"
-      },
-      {
-        image: require("../../../assets/img/portrait/small/avatar-s-5.jpg"),
-        name: "Conn Plose",
-        email: "cplose4@geocities.com",
-        date: "April 8, 2017",
-        status: "active",
-        revenue: "$22,000",
-        ratings: "average"
-      },
-      {
-        image: require("../../../assets/img/portrait/small/avatar-s-6.jpg"),
-        name: "Tootsie Brandsma",
-        email: "tbrandsma5@theatlantic.com",
-        date: "August 12, 2019",
-        status: "inactive",
-        revenue: "$49,000",
-        ratings: "bad"
-      }
+      // {
+      //   image: require("../../../assets/img/portrait/small/avatar-s-2.jpg"),
+      //   name: "Alyss Lillecrop",
+      //   email: "alillecrop0@twitpic.com",
+      //   date: "May 13, 2018",
+      //   status: "active",
+      //   revenue: "$32,000",
+      //   ratings: "good"
+      // },
+      // {
+      //   image: require("../../../assets/img/portrait/small/avatar-s-1.jpg"),
+      //   name: "Shep Pentlow",
+      //   email: "spentlow1@home.pl",
+      //   date: "June 5, 2019",
+      //   status: "active",
+      //   revenue: "$50,000",
+      //   ratings: "good"
+      // },
+      // {
+      //   image: require("../../../assets/img/portrait/small/avatar-s-3.jpg"),
+      //   name: "Gasper Morley",
+      //   email: "gmorley2@chronoengine.com",
+      //   date: "December 24, 2019",
+      //   status: "active",
+      //   revenue: "$78,000",
+      //   ratings: "average"
+      // },
+      // {
+      //   image: require("../../../assets/img/portrait/small/avatar-s-4.jpg"),
+      //   name: "Phaedra Jerrard",
+      //   email: "pjerrard3@blogs.com",
+      //   date: "November 30, 2018",
+      //   status: "inactive",
+      //   revenue: "$10,000",
+      //   ratings: "bad"
+      // },
+      // {
+      //   image: require("../../../assets/img/portrait/small/avatar-s-5.jpg"),
+      //   name: "Conn Plose",
+      //   email: "cplose4@geocities.com",
+      //   date: "April 8, 2017",
+      //   status: "active",
+      //   revenue: "$22,000",
+      //   ratings: "average"
+      // },
+      // {
+      //   image: require("../../../assets/img/portrait/small/avatar-s-6.jpg"),
+      //   name: "Tootsie Brandsma",
+      //   email: "tbrandsma5@theatlantic.com",
+      //   date: "August 12, 2019",
+      //   status: "inactive",
+      //   revenue: "$49,000",
+      //   ratings: "bad"
+      // }
     ],
     filteredData: [],
     value: ""

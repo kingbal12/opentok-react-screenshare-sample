@@ -33,7 +33,7 @@
         padding-left: 2.8rem;
         border-radius: 1.428rem;
         border: 1px solid $gray-300;
-        max-width: 200px;
+        max-width: 500px;
       }
       &:after {
         content: "\e8bd";
@@ -79,7 +79,7 @@
     .rdt_TableBody {
       .rdt_TableRow {
         min-height: 69px;
-        margin-bottom: 20px;
+        // margin-bottom: 20px;
         border: 0;
         border-radius: 0.5rem;
         transition: all 0.3s ease;
