@@ -409,7 +409,7 @@ class DataListConfig extends Component {
           )}
           noHeader
           subHeader
-          selectableRows
+          // selectableRows
           responsive
           pointerOnHover
           selectableRowsHighlight
@@ -428,13 +428,13 @@ class DataListConfig extends Component {
             />
           }
           sortIcon={<ChevronDown />}
-          selectableRowsComponent={Checkbox}
-          selectableRowsComponentProps={{
-            color: "primary",
-            icon: <Check className="vx-icon" size={12} />,
-            label: "",
-            size: "sm"
-          }}
+            selectableRowsComponent={Checkbox}
+            selectableRowsComponentProps={{
+              color: "primary",
+              icon: <Check className="vx-icon" size={12} />,
+              label: "",
+              size: "sm"
+            }}
         />
         <Sidebar
           show={sidebar}
