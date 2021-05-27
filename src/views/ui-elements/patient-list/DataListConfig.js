@@ -112,8 +112,8 @@ const CustomHeader = props => {
             <ChevronDown size={15} />
           </DropdownToggle>
           <DropdownMenu tag="div" right>
-            <DropdownItem tag="a" onClick={() => props.handleRowsPerPage(4)}>
-              4
+            <DropdownItem tag="a" onClick={() => props.handleRowsPerPage(5)}>
+              5
             </DropdownItem>
             <DropdownItem tag="a" onClick={() => props.handleRowsPerPage(10)}>
               10
@@ -222,7 +222,7 @@ class DataListConfig extends Component {
     ],
     allData: [],
     value: "",
-    rowsPerPage: 4,
+    rowsPerPage: 5,
     sidebar: false,
     currentData: null,
     selected: [],
