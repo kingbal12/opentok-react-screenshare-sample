@@ -163,15 +163,15 @@ class DataTableCustom extends React.Component {
       },
     ],
     data: [     
-      // {
-      //   image: require("../../../assets/img/portrait/small/avatar-s-2.jpg"),
-      //   name: "Alyss Lillecrop",
-      //   email: "alillecrop0@twitpic.com",
-      //   date: "May 13, 2018",
-      //   status: "active",
-      //   revenue: "$32,000",
-      //   ratings: "good"
-      // },
+      {
+        image: require("../../../assets/img/portrait/small/avatar-s-2.jpg"),
+        name: "Alyss Lillecrop",
+        email: "alillecrop0@twitpic.com",
+        date: "May 13, 2018",
+        status: "active",
+        revenue: "$32,000",
+        ratings: "good"
+      },
       // {
       //   image: require("../../../assets/img/portrait/small/avatar-s-1.jpg"),
       //   name: "Shep Pentlow",
