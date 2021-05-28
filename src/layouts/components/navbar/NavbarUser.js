@@ -242,11 +242,12 @@ class NavbarUser extends React.PureComponent {
 
     return (
       <ul className="nav navbar-nav navbar-nav-user float-right">
-        <Button 
+        <Button.Ripple className="mb-1 mt-1"
           color="primary"
           outline
+          size="sm"
           >문의
-        </Button>
+        </Button.Ripple>
         {/* <IntlContext.Consumer>
           {context => {
             let langArr = {
