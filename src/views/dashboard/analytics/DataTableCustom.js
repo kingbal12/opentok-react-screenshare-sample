@@ -18,7 +18,7 @@ class DataTableCustom extends React.Component {
         selector: "date",
         sortable: true,
         cell: row => (
-          <p className="text-bold-500 text-truncate mb-0">{row.date}</p>
+          <p className="text-bold-500 text-truncate mb-0">{row.APPOINT_TIME}</p>
         )
       },
       {
@@ -48,9 +48,9 @@ class DataTableCustom extends React.Component {
             </div> */}
             <div className="user-info text-truncate ml-xl-50 ml-0">
               <span
-                title={row.name}
+                title={row.F_NAME}
                 className="d-block text-bold-500 text-truncate mb-0">
-                {row.name}
+                {row.F_NAME}
               </span>
               {/* <small title={row.email}>{row.email}</small> */}
             </div>
@@ -60,13 +60,13 @@ class DataTableCustom extends React.Component {
       
       {
         name: "성별",
-        selector: "sex",
+        selector: "gender",
         sortable: true,
         cell: row => (
           <Badge
-            color={row.status === "inactive" ? "light-danger" : "light-success"}
+            color={row.GENDER === "inactive" ? "light-danger" : "light-success"}
             pill>
-            {row.status}
+            {row.GENDER}
           </Badge>
         )
       },
@@ -74,14 +74,14 @@ class DataTableCustom extends React.Component {
         name: "나이",
         selector: "age",
         sortable: true,
-        cell: row => <p className="text-bold-500 mb-0">{row.revenue}</p>
+        cell: row => <p className="text-bold-500 mb-0">{row.AGE}</p>
       },
       {
         name: "생년월일",
         selector: "birthday",
         sortable: true,
         cell: row => (
-          <p className="text-bold-500 text-truncate mb-0">{row.date}</p>
+          <p className="text-bold-500 text-truncate mb-0">{row.BIRTH_DT}</p>
         )
       },
       {
@@ -89,7 +89,7 @@ class DataTableCustom extends React.Component {
         // selector: "date",
         // sortable: true,
         cell: row => (
-          <p className="text-bold-500 text-truncate mb-0">{}</p>
+          <p className="text-bold-500 text-truncate mb-0">{row.NOTE_DX}</p>
         )
       },
       {
@@ -97,7 +97,7 @@ class DataTableCustom extends React.Component {
         // selector: "date",
         // sortable: true,
         cell: row => (
-          <p className="text-bold-500 text-truncate mb-0">{}</p>
+          <p className="text-bold-500 text-truncate mb-0">{row.FIRST_YN}</p>
         )
       },
       {
@@ -105,7 +105,7 @@ class DataTableCustom extends React.Component {
         // selector: "date",
         // sortable: true,
         cell: row => (
-          <p className="text-bold-500 text-truncate mb-0">{}</p>
+          <p className="text-bold-500 text-truncate mb-0">{row.SYMPTOM}</p>
         )
       },
       {
@@ -164,12 +164,11 @@ class DataTableCustom extends React.Component {
     ],
     data: [     
       {
-        image: require("../../../assets/img/portrait/small/avatar-s-2.jpg"),
-        name: "Alyss Lillecrop",
+        APPOINT_TIME: "May 13, 2018",
+        F_NAME: "Alyss Lillecrop",
         email: "alillecrop0@twitpic.com",
-        date: "May 13, 2018",
-        status: "active",
-        revenue: "$32,000",
+        GENDER: "active",
+        AGE: "$32,000",
         ratings: "good"
       },
       // {
