@@ -148,6 +148,13 @@ const horizontalMenuConfig = [
     navLink: "/patients-list"
   },
   {
+    id: "Call Setting",
+    title: "Call Setting",
+    type: "item",
+    permissions: ["admin", "editor"],
+    // navLink: "/patients-list"
+  },
+  {
     id: "uiElements",
     title: "UI Elements",
     type: "dropdown",

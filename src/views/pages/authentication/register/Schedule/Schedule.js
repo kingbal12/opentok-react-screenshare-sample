@@ -34,7 +34,8 @@ const eventColors = {
   personal: "bg-danger",
   others: "bg-primary"
 }
-
+// 중요!!! Date 포맷을 변경하는것을 빠르게 연구하여 적용할것!
+// const Date = new Date('2021-06-01 09:00')
 class Toolbar extends React.Component {
   render() {
     return (
@@ -205,6 +206,16 @@ class CalendarApp extends React.Component {
 
   render() {
     const { events, views, sidebar } = this.state
+    // let formats = {
+    
+      
+    
+    //   timeRangeStartFormat: ({ start, end }, culture, localizer) =>
+    //     localizer.format(start, { date: 'short' }, culture) + ' — ' +
+    //     localizer.format(end, { date: 'short' }, culture)
+    // }
+  
+    // const sformat = "yyyy-MM-dd HH:mm"
     // let id = events.pop()
     // let newEventId = id + 1
     return (
@@ -219,6 +230,7 @@ class CalendarApp extends React.Component {
         <Card>
           <CardBody>
             <DragAndDropCalendar style={{height:"600px", position:"relative"}}
+              // formats={dayFormat}
               localizer={localizer}
               events={events}
               onEventDrop={this.moveEvent}
