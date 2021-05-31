@@ -1,7 +1,10 @@
 import React from "react"
 import AddEventSidebar from "./AddEventSidebar"
 import AddEventButton from "./AddEventButton"
-import { Card, CardBody, Button, ButtonGroup } from "reactstrap"
+import { Card, CardBody, Button, ButtonGroup, Modal, FormGroup, Input, Label,
+  ModalHeader,
+  ModalBody,
+  ModalFooter, } from "reactstrap"
 import { Calendar, momentLocalizer } from "react-big-calendar"
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop"
 import moment from "moment"
@@ -21,6 +24,8 @@ import "react-big-calendar/lib/addons/dragAndDrop/styles.scss"
 import "react-big-calendar/lib/css/react-big-calendar.css"
 import "../../../../../assets/scss/plugins/calendars/react-big-calendar.scss"
 import { history } from "../../../../../history"
+import Radio from "../../../../../components/@vuexy/radio/RadioVuexy"
+import { ThemeConsumer } from "styled-components"
 const DragAndDropCalendar = withDragAndDrop(Calendar)
 const localizer = momentLocalizer(moment)
 const eventColors = {
@@ -64,6 +69,12 @@ class Toolbar extends React.Component {
 }
 
 class CalendarApp extends React.Component {
+  schedulemodal = () => {
+    this.setState(prevState => ({
+      modal: !prevState.modal
+    }))
+  }
+
   static getDerivedStateFromProps(props, state) {
     if (
       props.app.events.length !== state.events ||
@@ -101,6 +112,11 @@ class CalendarApp extends React.Component {
       // label: null,
       // allDay: true,
       // selectable: true
+      auto: "true",
+      rperiod: "",
+      holiday: "true",
+      modal: false
+      
     }
   }
 
@@ -108,6 +124,11 @@ class CalendarApp extends React.Component {
     await this.props.fetchEvents()
   }
   
+  handleRepeatPeriod = rperiod => {
+    this.setState({
+      rperiod
+    })
+  }
  
 
   handleEventColors = event => {
@@ -244,12 +265,112 @@ class CalendarApp extends React.Component {
                 color="primary"
                 type="button"
                 size="lg"
-                onClick={() => {
-                  history.push("/pages/login")
-                }}>
+                // onClick={() => {
+                //   history.push("/pages/login")
+                // }}
+                onClick={this.schedulemodal}
+              >
                 저장
               </Button>
             </div>
+            <Modal
+              isOpen={this.state.modal}
+              toggle={this.toggleModal}
+              className="modal-dialog-centered"
+            >
+              <ModalHeader toggle={this.toggleModal}>
+                설정
+              </ModalHeader>
+              <ModalBody>
+                  <FormGroup>
+                    <div>1. 자동반복을 설정하시겠습니까?</div>
+                    <div id="auto" className="d-inline-block mr-1">
+                      <Radio 
+                        label="네" 
+                        defaultChecked={this.state.auto==="true"?true:false}  
+                        name="auto" 
+                        value="true"
+                        onChange={e => this.setState({ auto: e.target.value })}
+                      />
+                    </div>
+                    <div className="d-inline-block mr-1">
+                      <Radio
+                        label="아니오"
+                        defaultChecked={this.state.auto==="false"?true:false}
+                        name="auto"
+                        value="false"
+                        onChange={e => this.setState({ auto: e.target.value })}
+                      />
+                    </div>
+                  </FormGroup>
+                  <FormGroup>
+                    {/* <Label for="repeat-period">2. 반복기간</Label> */}
+                    <div>2. 반복기간</div>
+                    <ButtonGroup 
+                      // id="repeat-period" 
+                      // size="sm"
+                    >
+                      <button
+                        onClick={() => this.handleRepeatPeriod("1month")}
+                        className={`btn ${
+                          this.state.rperiod === "1month"
+                            ? "btn-primary"
+                            : "btn-outline-primary text-primary"
+                        }`}
+                      >
+                        1개월
+                      </button>
+
+                      <button
+                        onClick={() => this.handleRepeatPeriod("2month")}
+                        className={`btn ${
+                          this.state.rperiod === "2month"
+                            ? "btn-primary"
+                            : "btn-outline-primary text-primary"
+                        }`}
+                      >
+                        2개월
+                      </button>
+                      
+                      <button
+                        onClick={() => this.handleRepeatPeriod("3month")}
+                        className={`btn ${
+                          this.state.rperiod === "3month"
+                            ? "btn-primary"
+                            : "btn-outline-primary text-primary"
+                        }`}
+                      >
+                        3개월
+                      </button>
+                    </ButtonGroup>
+                  </FormGroup>
+                  <FormGroup>
+                    <div>3. 공휴일을 제외하시겠습니까?</div>
+                    <div id="holiday" className="d-inline-block mr-1">
+                      <Radio label="네" 
+                        defaultChecked={this.state.holiday==="true"?true:false}  
+                        name="holiday" 
+                        value="true"
+                        onChange={e => this.setState({ holiday: e.target.value })}
+                      />
+                    </div>
+                    <div className="d-inline-block mr-1">
+                      <Radio
+                        label="아니오"
+                        defaultChecked={this.state.holiday==="false"?true:false}
+                        name="holiday"
+                        value="false"
+                        onChange={e => this.setState({ holiday: e.target.value })}
+                      />
+                    </div>
+                  </FormGroup>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="primary" onClick={this.schedulemodal}>
+                  저장
+                </Button>
+              </ModalFooter>
+            </Modal>
           </CardBody>
         </Card>
         <AddEventSidebar
