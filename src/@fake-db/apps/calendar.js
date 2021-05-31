@@ -10,6 +10,24 @@ let data = {
       allDay: true,
       selectable: true
     }
+
+    // , // 테스트용
+    //   {allDay: undefined,
+    //   end: "Fri May 28 2021 02:45:00 GMT+0900 (대한민국 표준시)",
+    //   id: "0531-0900",
+    //   label: "others",
+    //   selectable: undefined,
+    //   start: "Fri May 28 2021 01:00:00 GMT+0900 (대한민국 표준시)",
+    //   title: "테스트"
+    //   },
+    //   {
+    //   allDay: undefined,
+    //   end: "Fri May 28 2021 02:15:00 GMT+0900 (대한민국 표준시)",
+    //   id: "s12", 
+    //   label: "others",
+    //   selectable: undefined,
+    //   start: "Fri May 28 2021 01:00:00 GMT+0900 (대한민국 표준시)" 
+    //   }
   ]
 }
 

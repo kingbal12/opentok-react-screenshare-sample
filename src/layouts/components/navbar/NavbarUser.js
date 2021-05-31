@@ -8,7 +8,8 @@ import {
   DropdownItem,
   DropdownToggle,
   Media,
-  Badge
+  Badge,
+  Button
 } from "reactstrap"
 import PerfectScrollbar from "react-perfect-scrollbar"
 import axios from "axios"
@@ -19,6 +20,7 @@ import Autocomplete from "../../../components/@vuexy/autoComplete/AutoCompleteCo
 import { useAuth0 } from "../../../authServices/auth0/auth0Service"
 import { history } from "../../../history"
 import { IntlContext } from "../../../utility/context/Internationalization"
+// import { Button } from "bootstrap"
 
 const handleNavigation = (e, path) => {
   e.preventDefault()
@@ -240,7 +242,13 @@ class NavbarUser extends React.PureComponent {
 
     return (
       <ul className="nav navbar-nav navbar-nav-user float-right">
-        <IntlContext.Consumer>
+        <Button.Ripple className="mb-1 mt-1"
+          color="primary"
+          outline
+          size="sm"
+          >문의
+        </Button.Ripple>
+        {/* <IntlContext.Consumer>
           {context => {
             let langArr = {
               "en" : "English",
@@ -306,7 +314,7 @@ class NavbarUser extends React.PureComponent {
               </Dropdown>
             )
           }}
-        </IntlContext.Consumer>
+        </IntlContext.Consumer> */}
 
         {/* <NavItem className="nav-search" onClick={this.handleNavbarSearch}>
           <NavLink className="nav-link-search">

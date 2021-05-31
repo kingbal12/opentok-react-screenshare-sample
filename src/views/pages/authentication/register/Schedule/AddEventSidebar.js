@@ -306,7 +306,7 @@ class AddEvent extends React.Component {
               <strong>공휴일은 제외하시겠습니까?</strong>
             </div>
             <div className="d-inline-block mr-1">
-              <Radio label="네" defaultChecked={true} name="holiday" />
+              <Radio label="네" defaultChecked={true} name="holiday"/>
             </div>
             <div className="d-inline-block mr-1">
               <Radio

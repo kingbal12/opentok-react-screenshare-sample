@@ -219,7 +219,7 @@ export const loginWithGithub = () => {
 export const loginWithJWT = user => {
   return dispatch => {
     axios
-      .get("http://192.168.0.7:9300/signin", {
+      .get("http://203.251.135.81:9300/signin", {
         params: {
           user_id: user.email,
           user_pwd: user.password

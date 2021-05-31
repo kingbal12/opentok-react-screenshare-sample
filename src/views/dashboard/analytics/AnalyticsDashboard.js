@@ -29,19 +29,12 @@ import axios from "axios"
 
  
 class AnalyticsDashboard extends React.Component {
-  // constructor(props){
-  //   super(props)
-  //   this.state = {
-  //     userid: props.user.login.values.loggedInUser.username,
-  //     startdate: "20210101",
-  //     appoints: props.appoints
-  //   }
-  // }
+
   async componentDidMount() {
     await this.props.getappoints(this.props.user.login.values.loggedInUser.username,"20210101")
 
-    console.log(this.props.appoints.appoints.values)
-  }
+    console.log("리덕스를 이용한 데이터",this.props.ap.appoints, this.props.user.login.values.loggedInUser.username)  //제발 오타 주의좀 합시다
+  } 
 
   render() {
     return (
@@ -58,7 +51,7 @@ class AnalyticsDashboard extends React.Component {
           </Col>
         </Row>
         <Row>
-          {/* {this.props.appoints} */}
+          
           <Col sm="12">
             <DataTableCustom />
           </Col>
@@ -70,7 +63,7 @@ class AnalyticsDashboard extends React.Component {
 const mapStateToProps = state => {
   return {
     user: state.auth,
-    appoints: state.appoints
+    ap: state.appoints
   }
 }
 export default connect(mapStateToProps,{getappoints})(AnalyticsDashboard)

@@ -77,27 +77,29 @@ class Register extends React.Component {
                   <CardBody className="pt-1 pb-50">
                       <Form onSubmit={this.handleRegister1}>
                         <FormGroup className="form-label-group">
+                          <div>아이디</div>
                           <InputGroup>
                             <Input
-                              type="text"
-                              placeholder="이름"
+                              type="email"
+                              // placeholder="이메일"
                               required
-                              value={this.state.name}
-                              onChange={e => this.setState({ name: e.target.value })}
-                            />   
+                              value={this.state.email}
+                              onChange={e => this.setState({ email: e.target.value })}
+                            />
+                            <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.emailauth}>중복확인</Button></InputGroupAddon>
                           </InputGroup>
+                          <div>보안이메일 <span className="text-primary">(비밀번호 변경에 사용)</span></div>
+                          <div className="d-flex flex-row-reverse">
+                            <Checkbox
+                              color="primary"
+                              icon={<Check className="vx-icon" size={16} />}
+                              label="아이디와 다른 이메일에 사용"
+                              defaultChecked={false}
+                              onChange={this.handleRemember}
+                            />
+                          </div>                
                         </FormGroup>
-                        <FormGroup className="form-label-group">
-                          <InputGroup>
-                            <Input
-                              type="text"
-                              placeholder="휴대폰번호"
-                              required
-                              value={this.state.phone}
-                              onChange={e => this.setState({ phone: e.target.value })}
-                            />   
-                          </InputGroup>
-                        </FormGroup>
+          
                         <FormGroup className="form-label-group">
                           <InputGroup>
                             <Input
@@ -109,10 +111,10 @@ class Register extends React.Component {
                             />
                             <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.emailauth}>이메일 인증</Button></InputGroupAddon>
                           </InputGroup>
-                          <div className="pt-1 emailidentify">인증번호를 입력해주세요.</div>
                         </FormGroup>
                         
                         <FormGroup className="form-label-group">
+                          <div className="emailidentify">인증번호를 입력해주세요.</div>
                           <InputGroup>
                             <Input
                               type="number"
@@ -124,6 +126,41 @@ class Register extends React.Component {
                             <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.verifyauth}>인증 확인</Button></InputGroupAddon>
                           </InputGroup>
                         </FormGroup>
+
+                        <FormGroup className="form-label-group">
+                          <InputGroup>
+                            <Input
+                              type="text"
+                              placeholder="이름"
+                              required
+                              value={this.state.name}
+                              onChange={e => this.setState({ name: e.target.value })}
+                            />   
+                          </InputGroup>
+                        </FormGroup>
+                        {/* <FormGroup className="form-label-group">
+                          <InputGroup>
+                            <Input
+                              type="text"
+                              placeholder="생년월일"
+                              required
+                              value={this.state.birth}
+                              onChange={e => this.setState({ birth: e.target.value })}
+                            />   
+                          </InputGroup>
+                        </FormGroup> */}
+                        <FormGroup className="form-label-group">
+                          <InputGroup>
+                            <Input
+                              type="text"
+                              placeholder="휴대폰번호"
+                              required
+                              value={this.state.phone}
+                              onChange={e => this.setState({ phone: e.target.value })}
+                            />   
+                          </InputGroup>
+                        </FormGroup>
+
                         <FormGroup className="form-label-group">
                           <InputGroup>
                             <Input

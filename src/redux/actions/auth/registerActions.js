@@ -185,7 +185,7 @@ export const register4 = (userid, filename, file, medicalpart, medicalable, medi
       .then(response => {
         console.log(response);
         if(response.data.status === "200") {
-          // history.push("/pages/register4");
+          history.push("/schedule");
         } else {
           alert(response.data.message);
         }

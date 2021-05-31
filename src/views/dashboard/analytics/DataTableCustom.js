@@ -7,12 +7,58 @@ import {
 } from "reactstrap"
 import DataTable from "react-data-table-component"
 import { Star, Search } from "react-feather"
+import {
+  Edit,
+  Link,
+  Trash,
+  ChevronDown,
+  Plus,
+  Check,
+  ChevronLeft,
+  ChevronRight
+} from "react-feather"
 
-
+const ActionsComponent = props => {
+  return (
+    <div className="data-list-action">
+      <Edit
+        className="cursor-pointer mr-1"
+        size={20}
+        // onClick={() => {
+        //   return props.currentData(props.row)
+        // }}
+      />
+      {/* <Trash
+        className="cursor-pointer"
+        size={20}
+        onClick={() => {
+          props.deleteRow(props.row)
+        }}
+      /> */}
+    </div>
+  )
+}
 
 class DataTableCustom extends React.Component {
   state = {
     columns: [
+      {
+        name: "예약시간",
+        selector: "date",
+        sortable: true,
+        cell: row => (
+          <p className="text-bold-500 text-truncate mb-0">{row.APPOINT_TIME}</p>
+        )
+      },
+      {
+        name: "진료수단",
+        // selector: "date",
+        // sortable: true,
+        cell: row => (
+          <p className="text-bold-500 text-truncate mb-0">{}</p>
+        )
+      },
+      
       {
         name: "이름",
         selector: "name",
@@ -31,142 +77,191 @@ class DataTableCustom extends React.Component {
             </div> */}
             <div className="user-info text-truncate ml-xl-50 ml-0">
               <span
-                title={row.name}
+                title={row.F_NAME}
                 className="d-block text-bold-500 text-truncate mb-0">
-                {row.name}
+                {row.F_NAME}
               </span>
               {/* <small title={row.email}>{row.email}</small> */}
             </div>
           </div>
         )
       },
+      
       {
-        name: "Date Created",
-        selector: "date",
+        name: "성별",
+        selector: "gender",
+        sortable: true,
+        cell: row => <p className="text-bold-500 mb-0">{row.GENDER}</p>
+        // (
+        //   <Badge
+        //     color={row.GENDER === "inactive" ? "light-danger" : "light-success"}
+        //     pill>
+        //     {row.GENDER}
+        //   </Badge>
+        // )
+      },
+      {
+        name: "나이",
+        selector: "age",
+        sortable: true,
+        cell: row => <p className="text-bold-500 mb-0">{row.AGE}</p>
+      },
+      {
+        name: "생년월일",
+        selector: "birthday",
         sortable: true,
         cell: row => (
-          <p className="text-bold-500 text-truncate mb-0">{row.date}</p>
+          <p className="text-bold-500 text-truncate mb-0">{row.BIRTH_DT}</p>
         )
       },
       {
-        name: "Status",
-        selector: "status",
-        sortable: true,
+        name: "진단명",
+        // selector: "date",
+        // sortable: true,
         cell: row => (
-          <Badge
-            color={row.status === "inactive" ? "light-danger" : "light-success"}
-            pill>
-            {row.status}
-          </Badge>
+          <p className="text-bold-500 text-truncate mb-0">{row.NOTE_DX}</p>
         )
       },
       {
-        name: "Revenue",
-        selector: "revenue",
-        sortable: true,
-        cell: row => <p className="text-bold-500 mb-0">{row.revenue}</p>
+        name: "초진/재진",
+        // selector: "date",
+        // sortable: true,
+        cell: row => (
+          <p className="text-bold-500 text-truncate mb-0">{row.FIRST_YN}</p>
+        )
       },
       {
-        name: "Feedback",
-        selector: "",
-        sortable: true,
-        cell: row => {
-          return (
-            <div className="d-flex flex-column align-items-center">
-              <ul className="list-inline mb-0">
-                <li className="list-inline-item">
-                  <Star size="20" className="text-warning" />
-                </li>
-                <li className="list-inline-item">
-                  <Star size="20" className="text-warning" />
-                </li>
-                <li className="list-inline-item">
-                  <Star
-                    size="20"
-                    className={
-                      row.ratings === "good" || row.ratings === "average"
-                        ? "text-warning"
-                        : "text-muted"
-                    }
-                  />
-                </li>
-                <li className="list-inline-item">
-                  <Star
-                    size="20"
-                    className={
-                      row.ratings === "good" ? "text-warning" : "text-muted"
-                    }
-                  />
-                </li>
-                <li className="list-inline-item">
-                  <Star
-                    size="20"
-                    className={
-                      row.ratings === "good" ? "text-warning" : "text-muted"
-                    }
-                  />
-                </li>
-              </ul>
-            </div>
-          )
-        }
-      }
+        name: "주된 증상",
+        // selector: "date",
+        // sortable: true,
+        cell: row => (
+          <p className="text-bold-500 text-truncate mb-0">{row.SYMPTOM}</p>
+        )
+      },
+      {
+        name: "VitalData",
+        // selector: "",
+        // sortable: true,
+        cell: row => (
+          <Link></Link>
+          // 가운데로 옮길것
+          
+        )
+        // cell: row => {
+        //   return (
+        //     <div className="d-flex flex-column align-items-center">
+        //       <ul className="list-inline mb-0">
+        //         <li className="list-inline-item">
+        //           <Star size="20" className="text-warning" />
+        //         </li>
+        //         <li className="list-inline-item">
+        //           <Star size="20" className="text-warning" />
+        //         </li>
+        //         <li className="list-inline-item">
+        //           <Star
+        //             size="20"
+        //             className={
+        //               row.ratings === "good" || row.ratings === "average"
+        //                 ? "text-warning"
+        //                 : "text-muted"
+        //             }
+        //           />
+        //         </li>
+        //         <li className="list-inline-item">
+        //           <Star
+        //             size="20"
+        //             className={
+        //               row.ratings === "good" ? "text-warning" : "text-muted"
+        //             }
+        //           />
+        //         </li>
+        //         <li className="list-inline-item">
+        //           <Star
+        //             size="20"
+        //             className={
+        //               row.ratings === "good" ? "text-warning" : "text-muted"
+        //             }
+        //           />
+        //         </li>
+        //       </ul>
+        //     </div>
+        //   )
+        // }
+      },
+      {
+        name: "차트보기",
+        // selector: "date",
+        // sortable: true,
+        cell: row => (
+          <Edit></Edit>
+          // 가운데로 옮길것
+          // <ActionsComponent
+          //   row={row}
+          //   getData={this.props.getData}
+          //   parsedFilter={this.props.parsedFilter}
+          //   currentData={this.handleCurrentData}
+          // />
+        )
+      },
     ],
     data: [     
       {
-        image: require("../../../assets/img/portrait/small/avatar-s-2.jpg"),
-        name: "Alyss Lillecrop",
+        APPOINT_TIME: "09:00",
+        F_NAME: "김지선",
         email: "alillecrop0@twitpic.com",
-        date: "May 13, 2018",
-        status: "active",
-        revenue: "$32,000",
+        GENDER: "F",
+        AGE: "29",
+        BIRTH_DT:"1993.04.22",
+        NOTE_DX:"-",
+        FIRST_YN:"초진",
+        SYMPTOM:"눈이 아파요",
         ratings: "good"
       },
-      {
-        image: require("../../../assets/img/portrait/small/avatar-s-1.jpg"),
-        name: "Shep Pentlow",
-        email: "spentlow1@home.pl",
-        date: "June 5, 2019",
-        status: "active",
-        revenue: "$50,000",
-        ratings: "good"
-      },
-      {
-        image: require("../../../assets/img/portrait/small/avatar-s-3.jpg"),
-        name: "Gasper Morley",
-        email: "gmorley2@chronoengine.com",
-        date: "December 24, 2019",
-        status: "active",
-        revenue: "$78,000",
-        ratings: "average"
-      },
-      {
-        image: require("../../../assets/img/portrait/small/avatar-s-4.jpg"),
-        name: "Phaedra Jerrard",
-        email: "pjerrard3@blogs.com",
-        date: "November 30, 2018",
-        status: "inactive",
-        revenue: "$10,000",
-        ratings: "bad"
-      },
-      {
-        image: require("../../../assets/img/portrait/small/avatar-s-5.jpg"),
-        name: "Conn Plose",
-        email: "cplose4@geocities.com",
-        date: "April 8, 2017",
-        status: "active",
-        revenue: "$22,000",
-        ratings: "average"
-      },
-      {
-        image: require("../../../assets/img/portrait/small/avatar-s-6.jpg"),
-        name: "Tootsie Brandsma",
-        email: "tbrandsma5@theatlantic.com",
-        date: "August 12, 2019",
-        status: "inactive",
-        revenue: "$49,000",
-        ratings: "bad"
-      }
+      // {
+      //   image: require("../../../assets/img/portrait/small/avatar-s-1.jpg"),
+      //   name: "Shep Pentlow",
+      //   email: "spentlow1@home.pl",
+      //   date: "June 5, 2019",
+      //   status: "active",
+      //   revenue: "$50,000",
+      //   ratings: "good"
+      // },
+      // {
+      //   image: require("../../../assets/img/portrait/small/avatar-s-3.jpg"),
+      //   name: "Gasper Morley",
+      //   email: "gmorley2@chronoengine.com",
+      //   date: "December 24, 2019",
+      //   status: "active",
+      //   revenue: "$78,000",
+      //   ratings: "average"
+      // },
+      // {
+      //   image: require("../../../assets/img/portrait/small/avatar-s-4.jpg"),
+      //   name: "Phaedra Jerrard",
+      //   email: "pjerrard3@blogs.com",
+      //   date: "November 30, 2018",
+      //   status: "inactive",
+      //   revenue: "$10,000",
+      //   ratings: "bad"
+      // },
+      // {
+      //   image: require("../../../assets/img/portrait/small/avatar-s-5.jpg"),
+      //   name: "Conn Plose",
+      //   email: "cplose4@geocities.com",
+      //   date: "April 8, 2017",
+      //   status: "active",
+      //   revenue: "$22,000",
+      //   ratings: "average"
+      // },
+      // {
+      //   image: require("../../../assets/img/portrait/small/avatar-s-6.jpg"),
+      //   name: "Tootsie Brandsma",
+      //   email: "tbrandsma5@theatlantic.com",
+      //   date: "August 12, 2019",
+      //   status: "inactive",
+      //   revenue: "$49,000",
+      //   ratings: "bad"
+      // }
     ],
     filteredData: [],
     value: ""

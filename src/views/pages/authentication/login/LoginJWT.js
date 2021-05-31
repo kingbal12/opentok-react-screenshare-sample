@@ -16,14 +16,20 @@ class LoginJWT extends React.Component {
 
 
     // i4h api 연결
-    email: "doctor@iges.co.kr",
-    password: "user_pw",
+    email: "kjh@iot4health.co.kr",
+    password: "1234",
     remember: true
   }
 
   handleLogin = e => {
     e.preventDefault()
     this.props.loginWithJWT(this.state)
+  }
+
+  handleRemember = e => {
+    this.setState({
+      remember: e.target.checked
+    })
   }
   render() {
     return (
