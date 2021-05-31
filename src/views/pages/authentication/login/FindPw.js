@@ -17,7 +17,9 @@ class FindPw extends React.Component {
   state = {
     id: "",
     name: "",
-    email: ""
+    bt_date: "",
+    phone:"",
+    docnum:""
   }
 
   handleLogin = e => {
@@ -28,19 +30,7 @@ class FindPw extends React.Component {
     return (
       <React.Fragment>
         <CardBody className="pt-1">
-          <Form action="/" onSubmit={this.handleLogin}>      
-            <FormGroup className="d-flex justify-content-center pb-1">
-              <div className="d-inline-block mr-1">
-                <Radio label="이메일" defaultChecked={true} name="auth" />
-              </div>
-              <div className="d-inline-block">
-                <Radio
-                  label="휴대폰 인증"
-                  defaultChecked={false}
-                  name="auth"
-                />
-              </div>
-            </FormGroup>
+          <Form action="/" onSubmit={this.handleLogin}>       
             <FormGroup className="form-label-group position-relative">
               <Select
                 className="React"
@@ -52,7 +42,7 @@ class FindPw extends React.Component {
             </FormGroup>
             <FormGroup className="form-label-group position-relative">
               <Input
-                placeholder="아이디"
+                placeholder="아이디를 입력하세요"
                 value={this.state.id}
                 onChange={e => this.setState({ id: e.target.value })}
                 required
@@ -60,7 +50,6 @@ class FindPw extends React.Component {
             </FormGroup>
             <FormGroup className="form-label-group position-relative">
               <Input
-
                 placeholder="이름을 입력하세요"
                 value={this.state.name}
                 onChange={e => this.setState({ name: e.target.value })}
@@ -70,12 +59,30 @@ class FindPw extends React.Component {
             <FormGroup className="form-label-group position-relative">
               <Input
                 type="text"
-                placeholder="이메일 주소를 입력하세요"
+                placeholder="생년월일 입력, 숫자만 입력"
                 value={this.state.email}
-                onChange={e => this.setState({ email: e.target.value })}
+                onChange={e => this.setState({ bt_date: e.target.value })}
                 required
               />
-            </FormGroup>          
+            </FormGroup>
+            <FormGroup className="form-label-group position-relative">
+              <Input
+                type="text"
+                placeholder="휴대폰 번호를 입력하세요"
+                value={this.state.phone}
+                onChange={e => this.setState({ phone: e.target.value })}
+                required
+              />
+            </FormGroup>  
+            <FormGroup className="form-label-group position-relative">
+              <Input
+                type="text"
+                placeholder="의사면허번호를 입력하세요"
+                value={this.state.docnum}
+                onChange={e => this.setState({ docnum: e.target.value })}
+                required
+              />
+            </FormGroup>           
             <div className="d-flex justify-content-center py-3">
               <Button color="primary" type="submit" size="lg" block
               onClick={() => {

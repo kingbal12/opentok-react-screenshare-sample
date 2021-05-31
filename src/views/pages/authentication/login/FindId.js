@@ -13,7 +13,9 @@ const colourOptions = [
 class FindId extends React.Component {
   state = {
     name: "",
-    email: ""
+    bt_date: "",
+    phone:"",
+    docnum:""
   }
 
   handleLogin = e => {
@@ -25,7 +27,7 @@ class FindId extends React.Component {
       <React.Fragment>
         <CardBody className="pt-1">
           <Form action="/" onSubmit={this.handleLogin}>      
-            <FormGroup className="d-flex justify-content-center pb-1">
+            {/* <FormGroup className="d-flex justify-content-center pb-1">
               <div className="d-inline-block mr-1">
                 <Radio label="이메일" defaultChecked={true} name="auth" />
               </div>
@@ -36,7 +38,7 @@ class FindId extends React.Component {
                   name="auth"
                 />
               </div>
-            </FormGroup>
+            </FormGroup> */}
             <FormGroup className="form-label-group position-relative">
               <Select
                 className="React"
@@ -57,12 +59,30 @@ class FindId extends React.Component {
             <FormGroup className="form-label-group position-relative">
               <Input
                 type="text"
-                placeholder="이메일 주소를 입력하세요"
+                placeholder="생년월일 입력, 숫자만 입력"
                 value={this.state.email}
-                onChange={e => this.setState({ email: e.target.value })}
+                onChange={e => this.setState({ bt_date: e.target.value })}
                 required
               />
-            </FormGroup>          
+            </FormGroup>
+            <FormGroup className="form-label-group position-relative">
+              <Input
+                type="text"
+                placeholder="휴대폰 번호를 입력하세요"
+                value={this.state.phone}
+                onChange={e => this.setState({ phone: e.target.value })}
+                required
+              />
+            </FormGroup>  
+            <FormGroup className="form-label-group position-relative">
+              <Input
+                type="text"
+                placeholder="의사면허번호를 입력하세요"
+                value={this.state.docnum}
+                onChange={e => this.setState({ docnum: e.target.value })}
+                required
+              />
+            </FormGroup>            
             <div className="d-flex justify-content-center py-3">
               <Button color="primary" type="submit" size="lg" block
               onClick={() => {

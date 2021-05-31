@@ -33,7 +33,7 @@ class Login extends React.Component {
       <Row className="m-0 justify-content-center">
         <Col
           sm="8"
-          xl="3"
+          xl="4"
           lg="10"
           md="8"
           className="d-flex justify-content-center"
