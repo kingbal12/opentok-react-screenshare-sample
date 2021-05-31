@@ -7,8 +7,37 @@ import {
 } from "reactstrap"
 import DataTable from "react-data-table-component"
 import { Star, Search } from "react-feather"
+import {
+  Edit,
+  Link,
+  Trash,
+  ChevronDown,
+  Plus,
+  Check,
+  ChevronLeft,
+  ChevronRight
+} from "react-feather"
 
-
+const ActionsComponent = props => {
+  return (
+    <div className="data-list-action">
+      <Edit
+        className="cursor-pointer mr-1"
+        size={20}
+        // onClick={() => {
+        //   return props.currentData(props.row)
+        // }}
+      />
+      {/* <Trash
+        className="cursor-pointer"
+        size={20}
+        onClick={() => {
+          props.deleteRow(props.row)
+        }}
+      /> */}
+    </div>
+  )
+}
 
 class DataTableCustom extends React.Component {
   state = {
@@ -62,13 +91,14 @@ class DataTableCustom extends React.Component {
         name: "성별",
         selector: "gender",
         sortable: true,
-        cell: row => (
-          <Badge
-            color={row.GENDER === "inactive" ? "light-danger" : "light-success"}
-            pill>
-            {row.GENDER}
-          </Badge>
-        )
+        cell: row => <p className="text-bold-500 mb-0">{row.GENDER}</p>
+        // (
+        //   <Badge
+        //     color={row.GENDER === "inactive" ? "light-danger" : "light-success"}
+        //     pill>
+        //     {row.GENDER}
+        //   </Badge>
+        // )
       },
       {
         name: "나이",
@@ -110,65 +140,81 @@ class DataTableCustom extends React.Component {
       },
       {
         name: "VitalData",
-        selector: "",
-        sortable: true,
-        cell: row => {
-          return (
-            <div className="d-flex flex-column align-items-center">
-              <ul className="list-inline mb-0">
-                <li className="list-inline-item">
-                  <Star size="20" className="text-warning" />
-                </li>
-                <li className="list-inline-item">
-                  <Star size="20" className="text-warning" />
-                </li>
-                <li className="list-inline-item">
-                  <Star
-                    size="20"
-                    className={
-                      row.ratings === "good" || row.ratings === "average"
-                        ? "text-warning"
-                        : "text-muted"
-                    }
-                  />
-                </li>
-                <li className="list-inline-item">
-                  <Star
-                    size="20"
-                    className={
-                      row.ratings === "good" ? "text-warning" : "text-muted"
-                    }
-                  />
-                </li>
-                <li className="list-inline-item">
-                  <Star
-                    size="20"
-                    className={
-                      row.ratings === "good" ? "text-warning" : "text-muted"
-                    }
-                  />
-                </li>
-              </ul>
-            </div>
-          )
-        }
+        // selector: "",
+        // sortable: true,
+        cell: row => (
+          <Link></Link>
+          // 가운데로 옮길것
+          
+        )
+        // cell: row => {
+        //   return (
+        //     <div className="d-flex flex-column align-items-center">
+        //       <ul className="list-inline mb-0">
+        //         <li className="list-inline-item">
+        //           <Star size="20" className="text-warning" />
+        //         </li>
+        //         <li className="list-inline-item">
+        //           <Star size="20" className="text-warning" />
+        //         </li>
+        //         <li className="list-inline-item">
+        //           <Star
+        //             size="20"
+        //             className={
+        //               row.ratings === "good" || row.ratings === "average"
+        //                 ? "text-warning"
+        //                 : "text-muted"
+        //             }
+        //           />
+        //         </li>
+        //         <li className="list-inline-item">
+        //           <Star
+        //             size="20"
+        //             className={
+        //               row.ratings === "good" ? "text-warning" : "text-muted"
+        //             }
+        //           />
+        //         </li>
+        //         <li className="list-inline-item">
+        //           <Star
+        //             size="20"
+        //             className={
+        //               row.ratings === "good" ? "text-warning" : "text-muted"
+        //             }
+        //           />
+        //         </li>
+        //       </ul>
+        //     </div>
+        //   )
+        // }
       },
       {
         name: "차트보기",
         // selector: "date",
         // sortable: true,
         cell: row => (
-          <p className="text-bold-500 text-truncate mb-0">{}</p>
+          <Edit></Edit>
+          // 가운데로 옮길것
+          // <ActionsComponent
+          //   row={row}
+          //   getData={this.props.getData}
+          //   parsedFilter={this.props.parsedFilter}
+          //   currentData={this.handleCurrentData}
+          // />
         )
       },
     ],
     data: [     
       {
-        APPOINT_TIME: "May 13, 2018",
-        F_NAME: "Alyss Lillecrop",
+        APPOINT_TIME: "09:00",
+        F_NAME: "김지선",
         email: "alillecrop0@twitpic.com",
-        GENDER: "active",
-        AGE: "$32,000",
+        GENDER: "F",
+        AGE: "29",
+        BIRTH_DT:"1993.04.22",
+        NOTE_DX:"-",
+        FIRST_YN:"초진",
+        SYMPTOM:"눈이 아파요",
         ratings: "good"
       },
       // {
