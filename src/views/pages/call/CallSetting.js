@@ -8,9 +8,10 @@ import {Form, FormGroup, Button,
   Col
 } from "reactstrap"
 import { Check } from "react-feather"
-import { history } from "../../../../history"
-import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
-import "../../../../assets/scss/pages/authentication.scss"
+import { history } from "../../../history"
+import Checkbox from "../../../components/@vuexy/checkbox/CheckboxesVuexy"
+import "../../../assets/scss/pages/authentication.scss"
+import {connect} from "react-redux"
 
 class CallSetting extends React.Component {
  
@@ -134,9 +135,10 @@ class CallSetting extends React.Component {
   }
 }
 
-const mapStateToProps  = state => {
+const mapStateToProps = state => {
   return {
-    values : state.register1
+    user: state.auth
   }
 }
-export default CallSetting
+
+export default connect(mapStateToProps) (CallSetting)
