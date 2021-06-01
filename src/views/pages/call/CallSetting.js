@@ -36,8 +36,7 @@ class CallSetting extends React.Component {
                     </CardTitle>
                   </CardHeader>
                   <p className="ml-2">하이케어넷 사용을 위해 아래의 약관에 동의해 주세요!</p>
-                  <CardBody className="pt-1 pb-50">
-                    
+                  <CardBody className="pt-1 pb-50">              
                       <Form action="/" onSubmit={this.handleRegister}>
                         <FormGroup className="form-label-group allagree">
                           <Checkbox
