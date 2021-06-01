@@ -959,6 +959,22 @@ const horizontalMenuConfig = [
     ]
   },
   {
+    id: "mypage",
+    title: "Setting",
+    type: "dropdown",
+    icon: <Icon.Settings size={16} />,
+    children: [
+      {
+        id: "shcedulesetting",
+        title: "스케쥴 설정",
+        type: "item",
+        icon: <Icon.Calendar size={10} />,
+        navLink: "/schedule",
+        permissions: ["admin", "editor"]
+      }
+    ]
+  },
+  {
     id: "charts-maps",
     title: "Charts & Maps",
     type: "dropdown",
@@ -1082,6 +1098,7 @@ const horizontalMenuConfig = [
       }
     ]
   }
+  
 ]
 
 export default horizontalMenuConfig
