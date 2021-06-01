@@ -18,6 +18,7 @@ import {
   ChevronDown,
   Plus,
   Check,
+  Link,
   ChevronLeft,
   ChevronRight
 } from "react-feather"
@@ -160,63 +161,224 @@ class DataListConfig extends Component {
     totalPages: 0,
     currentPage: 0,
     columns: [
+      // {
+      //   name: "Name",
+      //   selector: "name",
+      //   sortable: true,
+      //   minWidth: "300px",
+      //   cell: row => (
+      //     <p title={row.name} className="text-truncate text-bold-500 mb-0">
+      //       {row.name}
+      //     </p>
+      //   )
+      // },
+      // {
+      //   name: "Category",
+      //   selector: "category",
+      //   sortable: true
+      // },
+      // {
+      //   name: "Popularity",
+      //   selector: "popularity",
+      //   sortable: true,
+      //   cell: row => (
+      //     <Progress
+      //       className="w-100 mb-0"
+      //       color={row.popularity.color}
+      //       value={row.popularity.popValue}
+      //     />
+      //   )
+      // },
+      // {
+      //   name: "Order Status",
+      //   selector: "order_status",
+      //   sortable: true,
+      //   cell: row => (
+      //     <Chip
+      //       className="m-0"
+      //       color={chipColors[row.order_status]}
+      //       text={row.order_status}
+      //     />
+      //   )
+      // },
+      // {
+      //   name: "Price",
+      //   selector: "price",
+      //   sortable: true,
+      //   cell: row => `$${row.price}`
+      // },
+      // {
+      //   name: "Actions",
+      //   sortable: true,
+      //   cell: row => (
+      //     <ActionsComponent
+      //       row={row}
+      //       getData={this.props.getData}
+      //       parsedFilter={this.props.parsedFilter}
+      //       currentData={this.handleCurrentData}
+      //       deleteRow={this.handleDelete}
+      //     />
+      //   )
+      // }
       {
-        name: "Name",
+        name: "예약시간",
+        selector: "date",
+        sortable: true,
+        cell: row => (
+          <p className="text-bold-500 text-truncate mb-0">{row.APPOINT_TIME}</p>
+        )
+      },
+      {
+        name: "진료수단",
+        // selector: "date",
+        // sortable: true,
+        cell: row => (
+          <p className="text-bold-500 text-truncate mb-0">{}</p>
+        )
+      },
+      
+      {
+        name: "이름",
         selector: "name",
         sortable: true,
-        minWidth: "300px",
+        minWidth: "200px",
         cell: row => (
-          <p title={row.name} className="text-truncate text-bold-500 mb-0">
-            {row.name}
-          </p>
+          <div className="d-flex flex-xl-row flex-column align-items-xl-center align-items-start py-xl-0 py-1">
+            {/* <div className="user-img ml-xl-0 ml-2">
+              <img
+                className="img-fluid rounded-circle"
+                height="36"
+                width="36"
+                src={row.image}
+                alt={row.name}
+              />
+            </div> */}
+            <div className="user-info text-truncate ml-xl-50 ml-0">
+              <span
+                title={row.F_NAME}
+                className="d-block text-bold-500 text-truncate mb-0">
+                {row.F_NAME}
+              </span>
+              {/* <small title={row.email}>{row.email}</small> */}
+            </div>
+          </div>
+        )
+      },
+      
+      {
+        name: "성별",
+        selector: "gender",
+        sortable: true,
+        cell: row => <p className="text-bold-500 mb-0">{row.GENDER}</p>
+        // (
+        //   <Badge
+        //     color={row.GENDER === "inactive" ? "light-danger" : "light-success"}
+        //     pill>
+        //     {row.GENDER}
+        //   </Badge>
+        // )
+      },
+      {
+        name: "나이",
+        selector: "age",
+        sortable: true,
+        cell: row => <p className="text-bold-500 mb-0">{row.AGE}</p>
+      },
+      {
+        name: "생년월일",
+        selector: "birthday",
+        sortable: true,
+        cell: row => (
+          <p className="text-bold-500 text-truncate mb-0">{row.BIRTH_DT}</p>
         )
       },
       {
-        name: "Category",
-        selector: "category",
-        sortable: true
-      },
-      {
-        name: "Popularity",
-        selector: "popularity",
-        sortable: true,
+        name: "진단명",
+        // selector: "date",
+        // sortable: true,
         cell: row => (
-          <Progress
-            className="w-100 mb-0"
-            color={row.popularity.color}
-            value={row.popularity.popValue}
-          />
+          <p className="text-bold-500 text-truncate mb-0">{row.NOTE_DX}</p>
         )
       },
       {
-        name: "Order Status",
-        selector: "order_status",
-        sortable: true,
+        name: "초진/재진",
+        // selector: "date",
+        // sortable: true,
         cell: row => (
-          <Chip
-            className="m-0"
-            color={chipColors[row.order_status]}
-            text={row.order_status}
-          />
+          <p className="text-bold-500 text-truncate mb-0">{row.FIRST_YN}</p>
         )
       },
       {
-        name: "Price",
-        selector: "price",
-        sortable: true,
-        cell: row => `$${row.price}`
+        name: "주된 증상",
+        // selector: "date",
+        // sortable: true,
+        cell: row => (
+          <p className="text-bold-500 text-truncate mb-0">{row.SYMPTOM}</p>
+        )
       },
       {
-        name: "Actions",
-        sortable: true,
+        name: "VitalData",
+        // selector: "",
+        // sortable: true,
         cell: row => (
-          <ActionsComponent
-            row={row}
-            getData={this.props.getData}
-            parsedFilter={this.props.parsedFilter}
-            currentData={this.handleCurrentData}
-            deleteRow={this.handleDelete}
-          />
+          <Link></Link>
+          // 가운데로 옮길것
+          
+        )
+        // cell: row => {
+        //   return (
+        //     <div className="d-flex flex-column align-items-center">
+        //       <ul className="list-inline mb-0">
+        //         <li className="list-inline-item">
+        //           <Star size="20" className="text-warning" />
+        //         </li>
+        //         <li className="list-inline-item">
+        //           <Star size="20" className="text-warning" />
+        //         </li>
+        //         <li className="list-inline-item">
+        //           <Star
+        //             size="20"
+        //             className={
+        //               row.ratings === "good" || row.ratings === "average"
+        //                 ? "text-warning"
+        //                 : "text-muted"
+        //             }
+        //           />
+        //         </li>
+        //         <li className="list-inline-item">
+        //           <Star
+        //             size="20"
+        //             className={
+        //               row.ratings === "good" ? "text-warning" : "text-muted"
+        //             }
+        //           />
+        //         </li>
+        //         <li className="list-inline-item">
+        //           <Star
+        //             size="20"
+        //             className={
+        //               row.ratings === "good" ? "text-warning" : "text-muted"
+        //             }
+        //           />
+        //         </li>
+        //       </ul>
+        //     </div>
+        //   )
+        // }
+      },
+      {
+        name: "차트보기",
+        // selector: "date",
+        // sortable: true,
+        cell: row => (
+          <Edit></Edit>
+          // 가운데로 옮길것
+          // <ActionsComponent
+          //   row={row}
+          //   getData={this.props.getData}
+          //   parsedFilter={this.props.parsedFilter}
+          //   currentData={this.handleCurrentData}
+          // />
         )
       }
     ],
@@ -336,7 +498,7 @@ class DataListConfig extends Component {
     if (this.state.data.length - 1 === 0) {
       let urlPrefix = this.props.thumbView
         ? "/data-list/thumb-view/"
-        : "/data-list/list-view/"
+        : "/patients-list"
       history.push(
         `${urlPrefix}list-view?page=${parseInt(
           this.props.parsedFilter.page - 1

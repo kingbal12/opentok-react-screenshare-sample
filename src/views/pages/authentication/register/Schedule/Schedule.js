@@ -311,7 +311,7 @@ class CalendarApp extends React.Component {
                         defaultChecked={this.state.auto==="false"?true:false}
                         name="auto"
                         value="false"
-                        onChange={e => this.setState({ auto: e.target.value })}
+                        onChange={e => this.setState({ auto: e.target.value, rperiod: "" })}
                       />
                     </div>
                   </FormGroup>
@@ -323,6 +323,7 @@ class CalendarApp extends React.Component {
                       // size="sm"
                     >
                       <button
+                        disabled={this.state.auto=="true"?false:true}
                         onClick={() => this.handleRepeatPeriod("1month")}
                         className={`btn ${
                           this.state.rperiod === "1month"
@@ -334,6 +335,7 @@ class CalendarApp extends React.Component {
                       </button>
 
                       <button
+                        disabled={this.state.auto=="true"?false:true}
                         onClick={() => this.handleRepeatPeriod("2month")}
                         className={`btn ${
                           this.state.rperiod === "2month"
@@ -345,6 +347,7 @@ class CalendarApp extends React.Component {
                       </button>
                       
                       <button
+                        disabled={this.state.auto=="true"?false:true}
                         onClick={() => this.handleRepeatPeriod("3month")}
                         className={`btn ${
                           this.state.rperiod === "3month"

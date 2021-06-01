@@ -5,7 +5,7 @@ export const getappoints = (userid,startdate) => {
   return async dispatch => {
     console.log("api실행됨",userid,startdate,"리듀서 부분에서 문제가 생김")
     await axios
-      .get("http://192.168.0.7:9300/v1/doctor/appointment/dashboard", {
+      .get("http://203.251.135.81:9300/v1/doctor/appointment/dashboard", {
         params: {
           user_id: userid,
           start_date: startdate
