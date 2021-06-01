@@ -1,4 +1,10 @@
 {
+  "Home": "Home",
+  "PatientList": "PatientList",
+  "Call Setting": "Call Setting",
+  "Setting": "Setting",
+  "스케쥴 설정": "스케쥴 설정",
+
   "Dashboard": "Dashboard",
   "Analytics": "Analytics",
   "Apps": "Apps",

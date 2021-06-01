@@ -62,17 +62,40 @@ const DataListReducer = (state = initialState, action) => {
       if (value.length) {
         filteredData = state.allData
           .filter(item => {
+            // let startsWithCondition =
+            //   item.name.toLowerCase().startsWith(value.toLowerCase()) ||
+            //   item.category.toLowerCase().startsWith(value.toLowerCase()) ||
+            //   item.price.toLowerCase().startsWith(value.toLowerCase()) ||
+            //   item.order_status.toLowerCase().startsWith(value.toLowerCase())
+
+            // let includesCondition =
+            //   item.name.toLowerCase().includes(value.toLowerCase()) ||
+            //   item.category.toLowerCase().includes(value.toLowerCase()) ||
+            //   item.price.toLowerCase().includes(value.toLowerCase()) ||
+            //   item.order_status.toLowerCase().includes(value.toLowerCase())
+
             let startsWithCondition =
-              item.name.toLowerCase().startsWith(value.toLowerCase()) ||
-              item.category.toLowerCase().startsWith(value.toLowerCase()) ||
-              item.price.toLowerCase().startsWith(value.toLowerCase()) ||
-              item.order_status.toLowerCase().startsWith(value.toLowerCase())
+              item.APPOINT_TIME.toLowerCase().startsWith(value.toLowerCase()) ||
+              item.F_NAME.toLowerCase().startsWith(value.toLowerCase()) ||
+              item.GENDER.toLowerCase().startsWith(value.toLowerCase()) ||
+              item.AGE.toLowerCase().startsWith(value.toLowerCase()) ||
+              item.BIRTH_DT.toLowerCase().startsWith(value.toLowerCase()) ||
+              item.NOTE_DX.toLowerCase().startsWith(value.toLowerCase()) ||
+              item.FIRST_YN.toLowerCase().startsWith(value.toLowerCase()) ||
+              item.SYMPTOM.toLowerCase().startsWith(value.toLowerCase()) ||
+              item.ratings.toLowerCase().startsWith(value.toLowerCase())
+              
 
             let includesCondition =
-              item.name.toLowerCase().includes(value.toLowerCase()) ||
-              item.category.toLowerCase().includes(value.toLowerCase()) ||
-              item.price.toLowerCase().includes(value.toLowerCase()) ||
-              item.order_status.toLowerCase().includes(value.toLowerCase())
+              item.APPOINT_TIME.toLowerCase().startsWith(value.toLowerCase()) ||
+              item.F_NAME.toLowerCase().startsWith(value.toLowerCase()) ||
+              item.GENDER.toLowerCase().startsWith(value.toLowerCase()) ||
+              item.AGE.toLowerCase().startsWith(value.toLowerCase()) ||
+              item.BIRTH_DT.toLowerCase().startsWith(value.toLowerCase()) ||
+              item.NOTE_DX.toLowerCase().startsWith(value.toLowerCase()) ||
+              item.FIRST_YN.toLowerCase().startsWith(value.toLowerCase()) ||
+              item.SYMPTOM.toLowerCase().startsWith(value.toLowerCase()) ||
+              item.ratings.toLowerCase().startsWith(value.toLowerCase())
 
             if (startsWithCondition) {
               return startsWithCondition

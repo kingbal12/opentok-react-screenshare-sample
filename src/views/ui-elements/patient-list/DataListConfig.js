@@ -130,6 +130,7 @@ const CustomHeader = props => {
         <div className="filter-section">
           <Input type="text" onChange={e => props.handleFilter(e)} />
         </div>
+        <Button className="ml-2" color='primary' outline>검색</Button>
       </div>
     </div>
   )
