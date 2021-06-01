@@ -34,6 +34,40 @@ const eventColors = {
   personal: "bg-danger",
   others: "bg-primary"
 }
+/* -----------------  Date ------------------------------------------------------ */
+Date.prototype.ToString = function(){   
+  /*
+    new Date().ToString(); 1973-01-08 01:01:00
+  */
+  
+    let sYear = this.getFullYear();
+    let sMonth = this.getMonth() + 1;
+    let sDay = this.getDate();
+  
+  let sHours = this.getHours();
+    let sMinutes = this.getMinutes();
+    let sSeconds = this.getSeconds();
+  
+    if (sMonth < 10)
+        sMonth = '0' + sMonth;
+  
+    if (sDay < 10)
+        sDay = '0' + sDay;
+  
+   if (sHours < 10)
+        sHours = '0' + sHours;
+  
+    if (sMinutes < 10)
+        sMinutes = '0' + sMinutes;
+  
+   if (sSeconds < 10)
+        sSeconds = '0' + sSeconds;
+  
+  
+    return [sYear, sMonth, sDay].join('-')
+       + " " + [sHours, sMinutes, sSeconds].join(':');
+  }
+  
 // 중요!!! Date 포맷을 변경하는것을 빠르게 연구하여 적용할것!
 // const Date = new Date('2021-06-01 09:00')
 class Toolbar extends React.Component {
@@ -231,6 +265,7 @@ class CalendarApp extends React.Component {
           <CardBody>
             <DragAndDropCalendar style={{height:"600px", position:"relative"}}
               // formats={dayFormat}
+              culture='kr'
               localizer={localizer}
               events={events}
               onEventDrop={this.moveEvent}
@@ -266,7 +301,7 @@ class CalendarApp extends React.Component {
                 //   end: new Date(end),
                 //   url: ""
                 // })
-                
+                console.log(start,"---------------------", this.state.startDate)
                 console.log(this.state);
               }}
               

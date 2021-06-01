@@ -9,6 +9,15 @@ let data = {
       label: "business",
       allDay: true,
       selectable: true
+    },
+    {
+      id: 2,
+      title: "My Event",
+      start: "2021-05-31 00:00:00",
+      end: "2021-05-31 01:00:00",
+      label: "business",
+      allDay: false,
+      selectable: true
     }
 
     // , // 테스트용
