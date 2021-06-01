@@ -64,27 +64,28 @@ class DataTableCustom extends React.Component {
         selector: "name",
         sortable: true,
         minWidth: "200px",
-        cell: row => (
-          <div className="d-flex flex-xl-row flex-column align-items-xl-center align-items-start py-xl-0 py-1">
-            {/* <div className="user-img ml-xl-0 ml-2">
-              <img
-                className="img-fluid rounded-circle"
-                height="36"
-                width="36"
-                src={row.image}
-                alt={row.name}
-              />
-            </div> */}
-            <div className="user-info text-truncate ml-xl-50 ml-0">
-              <span
-                title={row.F_NAME}
-                className="d-block text-bold-500 text-truncate mb-0">
-                {row.F_NAME}
-              </span>
-              {/* <small title={row.email}>{row.email}</small> */}
-            </div>
-          </div>
-        )
+        cell: row => <p className="text-bold-500 mb-0">{row.F_NAME}</p>
+        // (
+        //   <div className="d-flex flex-xl-row flex-column align-items-xl-center align-items-start py-xl-0 py-1">
+        //     {/* <div className="user-img ml-xl-0 ml-2">
+        //       <img
+        //         className="img-fluid rounded-circle"
+        //         height="36"
+        //         width="36"
+        //         src={row.image}
+        //         alt={row.name}
+        //       />
+        //     </div> */}
+        //     <div className="user-info text-truncate ml-xl-50 ml-0">
+        //       <span
+        //         title={row.F_NAME}
+        //         className="d-block text-bold-500 text-truncate mb-0">
+        //         {row.F_NAME}
+        //       </span>
+        //       {/* <small title={row.email}>{row.email}</small> */}
+        //     </div>
+        //   </div>
+        // )
       },
       
       {
