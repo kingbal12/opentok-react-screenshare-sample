@@ -174,7 +174,9 @@ const userEdit = lazy(() => import("./views/apps/user/edit/Edit"))
 const userView = lazy(() => import("./views/apps/user/view/View"))
 const Login = lazy(() => import("./views/pages/authentication/login/Login"))
 const FindUser = lazy(() => import("./views/pages/authentication/login/FindUser"))
-const callsetting = lazy(() => import("./views/pages/call/CallSetting"))
+const callsetting = lazy(() => import("./views/pages/settings/call/CallSetting"))
+const loginsetting = lazy(() => import("./views/pages/settings/loginsetting/loginsetting"))
+const changepassword = lazy(() => import("./views/pages/settings/loginsetting/changepassword"))
 const forgotPassword = lazy(() =>
   import("./views/pages/authentication/ForgotPassword")
 )
@@ -390,6 +392,8 @@ class AppRouter extends React.Component {
           <AppRoute path="/pages/login" component={Login} fullLayout />
           <AppRoute path="/pages/finduser" component={FindUser} fullLayout />
           <AppRoute path="/pages/callsetting" component={callsetting} />
+          <AppRoute path="/pages/loginsetting" component={loginsetting} />
+          <AppRoute path="/pages/changepassword" component={changepassword} />
           <AppRoute path="/pages/register1" component={register1} fullLayout />
           <AppRoute path="/pages/register2" component={register2} fullLayout />
           <AppRoute path="/pages/register3" component={register3} fullLayout />

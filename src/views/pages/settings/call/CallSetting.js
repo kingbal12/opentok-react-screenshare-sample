@@ -9,13 +9,13 @@ import {Form, FormGroup, Button,
   Col
 } from "reactstrap"
 import { Check } from "react-feather"
-import { history } from "../../../history"
-import Checkbox from "../../../components/@vuexy/checkbox/CheckboxesVuexy"
-import "../../../assets/scss/pages/authentication.scss"
+import { history } from "../../../../history"
+import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
+import "../../../../assets/scss/pages/authentication.scss"
 import {connect} from "react-redux"
-import userImg from "../../../assets/img/portrait/small/avatar-s-11.jpg"
+import userImg from "../../../../assets/img/portrait/small/avatar-s-11.jpg"
 import SliderBasic from "./SliderBasic"
-import { ContextLayout } from "../../../utility/context/Layout"
+import { ContextLayout } from "../../../../utility/context/Layout"
 
 class CallSetting extends React.Component {
   state = {

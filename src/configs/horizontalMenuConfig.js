@@ -1017,7 +1017,7 @@ const horizontalMenuConfig = [
         title: "로그인 설정",
         type: "item",
         icon: <Icon.Tool size={16} />,
-        // navLink: "/schedule",
+        navLink: "/pages/loginsetting",
         permissions: ["admin", "editor"]
       }
     ]
