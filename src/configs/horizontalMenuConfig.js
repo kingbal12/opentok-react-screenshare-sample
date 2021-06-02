@@ -965,11 +965,59 @@ const horizontalMenuConfig = [
     icon: <Icon.Settings size={16} />,
     children: [
       {
+        id: "userdata",
+        title: "개인정보",
+        type: "item",
+        icon: <Icon.User size={16} />,
+        // navLink: "/schedule",
+        permissions: ["admin", "editor"]
+      },
+      {
+        id: "hospitaldata",
+        title: "병원정보",
+        type: "item",
+        icon: <Icon.Trello size={16} />,
+        // navLink: "/schedule",
+        permissions: ["admin", "editor"]
+      },
+      {
         id: "shcedulesetting",
         title: "스케쥴 설정",
         type: "item",
-        icon: <Icon.Calendar size={10} />,
+        icon: <Icon.Calendar size={16} />,
         navLink: "/schedule",
+        permissions: ["admin", "editor"]
+      },
+      {
+        id: "paymentsetting",
+        title: "결제관리",
+        type: "item",
+        icon: <Icon.DollarSign size={16} />,
+        // navLink: "/schedule",
+        permissions: ["admin", "editor"]
+      },
+      {
+        id: "termsofservice",
+        title: "이용약관",
+        type: "item",
+        icon: <Icon.Info size={16} />,
+        // navLink: "/schedule",
+        permissions: ["admin", "editor"]
+      },
+      {
+        id: "servicecenter",
+        title: "고객센터",
+        type: "item",
+        icon: <Icon.Users size={16} />,
+        // navLink: "/schedule",
+        permissions: ["admin", "editor"]
+      },
+      {
+        id: "loginsetting",
+        title: "로그인 설정",
+        type: "item",
+        icon: <Icon.Tool size={16} />,
+        // navLink: "/schedule",
         permissions: ["admin", "editor"]
       }
     ]

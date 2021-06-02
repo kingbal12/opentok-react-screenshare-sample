@@ -1,5 +1,6 @@
 import React from "react"
 import {Form, FormGroup, Button,
+  InputGroup, InputGroupAddon,Input,
   Card,
   CardHeader,
   CardTitle,
@@ -12,12 +13,26 @@ import { history } from "../../../history"
 import Checkbox from "../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import "../../../assets/scss/pages/authentication.scss"
 import {connect} from "react-redux"
+import userImg from "../../../assets/img/portrait/small/avatar-s-11.jpg"
+import SliderBasic from "./SliderBasic"
+import { ContextLayout } from "../../../utility/context/Layout"
 
 class CallSetting extends React.Component {
+  state = {
+    value: 20
+  }
+
+  onSliderChange = value => {
+    this.setState({ value })
+  }
+
+  resetSlider = () => {
+    this.setState({ value: null })
+  }
  
   render() {
     return (
-      <Row className="m-0 justify-content-center">
+      <Row className="pt-3 justify-content-center">
         <Col
           sm="8"
           xl="4"
@@ -30,95 +45,87 @@ class CallSetting extends React.Component {
               
               <Col lg="12" md="12" className="p-0">
                 <Card className="rounded-0 mb-0 p-2">
-                  <CardHeader className="pb-1 pt-50">
-                    <CardTitle>
-                      <h1>약관동의</h1>
-                    </CardTitle>
-                  </CardHeader>
-                  <p className="ml-2">하이케어넷 사용을 위해 아래의 약관에 동의해 주세요!</p>
-                  <CardBody className="pt-1 pb-50">              
+                  <Row className="justify-content-md-center">
+                    <div className="dz-thumb ">
+                      <div className="dz-thumb-inner">
+                        <img 
+                          src={userImg}
+                          className="dz-img" 
+                          // alt={file.name} 
+                          />
+                      </div>
+                    </div>
+                  </Row>
+                
+                  <h3 className="ml-1 mt-1"><strong>영상 및 진료 카메라 마이크 설정</strong></h3>
+                  <p className="ml-1">* 원격진료실 안에서도 설정 및 장비 테스트가 가능합니다.</p>
+                  <CardBody className="pt-1 pb-50">           
                       <Form action="/" onSubmit={this.handleRegister}>
+                        {/* <ContextLayout.Consumer>
+                          {context => (
+                            <Row>
+                              <Col sm="12">
+                                <SliderBasic rtl={context.state.direction} />
+                              </Col>
+                            </Row>
+                          )}
+                        </ContextLayout.Consumer> */}
                         <FormGroup className="form-label-group allagree">
-                          <Checkbox
-                            className="pb-1"
-                            color="primary"
-                            icon={<Check className="vx-icon" size={16} />}
-                            label="모든 약관에 동의"
-                            defaultChecked={false}
-                            onChange={this.handleRemember}
-                          />
+                          <InputGroup>
+                            <Input
+                              type="number"
+                              // placeholder="인증번호"
+                              required
+                              // value={this.state.idnumber}
+                              // onChange={e => this.setState({ idnumber: e.target.value })}
+                            />
+                            <InputGroupAddon addonType="append"><Button color="primary" type="button" >적용</Button></InputGroupAddon>
+                          </InputGroup>
+                        </FormGroup>
+                        <FormGroup className="form-label-group allagree">
+                          <InputGroup>
+                            <Input
+                              type="number"
+                              // placeholder="인증번호"
+                              required
+                              // value={this.state.idnumber}
+                              // onChange={e => this.setState({ idnumber: e.target.value })}
+                            />
+                            <InputGroupAddon addonType="append"><Button color="primary" type="button" >적용</Button></InputGroupAddon>
+                          </InputGroup>
+                        </FormGroup>
+                        <FormGroup className="form-label-group allagree">
+                          <InputGroup>
+                            <Input
+                              type="number"
+                              // placeholder="인증번호"
+                              required
+                              // value={this.state.idnumber}
+                              // onChange={e => this.setState({ idnumber: e.target.value })}
+                            />
+                            <InputGroupAddon addonType="append"><Button color="primary" type="button" >적용</Button></InputGroupAddon>
+                          </InputGroup>
                         </FormGroup>
                         <FormGroup className="form-label-group">
                           <Checkbox
                             color="primary"
                             icon={<Check className="vx-icon" size={16} />}
-                            label="서비스 이용약관(필수)"
+                            label="오늘 하루 보지 않기"
                             defaultChecked={false}
                             onChange={this.handleRemember}
                           />
                         </FormGroup>
-                        <FormGroup className="form-label-group">
-                          <Checkbox
-                            color="primary"
-                            icon={<Check className="vx-icon" size={16} />}
-                            label="개인정보 수집 및 이용동의(필수)"
-                            defaultChecked={false}
-                            onChange={this.handleRemember}
-                          />
-                        </FormGroup>
-                        <FormGroup className="form-label-group">
-                          <Checkbox
-                            color="primary"
-                            icon={<Check className="vx-icon" size={16} />}
-                            label="개인정보 제 3자 제공(선택)"
-                            defaultChecked={false}
-                            onChange={this.handleRemember}
-                          />
-                        </FormGroup>
-                        <FormGroup className="form-label-group">
-                          <Checkbox
-                            color="primary"
-                            icon={<Check className="vx-icon" size={16} />}
-                            label="마케팅 정보 수신(선택)"
-                            defaultChecked={false}
-                            onChange={this.handleRemember}
-                          />
-                        </FormGroup>
-                        <div className="pb-3 select">선택 약관은 동의하지 않아도 회원가입이 가능합니다.</div>
-                        <FormGroup className="row pl-1 form-label-group">
-                          <Checkbox
-                            color="primary"
-                            icon={<Check className="vx-icon" size={16} />}
-                            label="앱 푸시알림"
-                            defaultChecked={false}
-                            onChange={this.handleRemember}
-                          />
-                          <Checkbox
-                            className="pl-1"
-                            color="primary"
-                            icon={<Check className="vx-icon" size={16} />}
-                            label="이메일"
-                            defaultChecked={false}
-                            onChange={this.handleRemember}
-                          />
-                        </FormGroup>
-                        <div className="d-flex justify-content-between">
-                          <Button.Ripple
-                            color="primary"
-                            outline
-                            onClick={() => {
-                              history.push("/pages/login")
-                            }}
-                          >
-                            Login
-                          </Button.Ripple>
+                        
+                        <div className="d-flex justify-content-center">
                           <Button.Ripple 
                           color="primary" 
                           type="button"
-                          onClick={() => {
-                            history.push("/pages/register2")
-                          }}>
-                            Register
+                          size="lg"
+                          // onClick={() => {
+                          //   history.push("/pages/register2")
+                          // }}
+                          >
+                            원격의료실 입장하기
                           </Button.Ripple>
                         </div>
                       </Form>

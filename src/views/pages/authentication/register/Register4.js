@@ -27,8 +27,8 @@ class Register extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      // userid: "kjh@iot4health.co.kr",
-      userid: props.user.register.values.registeruser,
+      userid: "kjh@iot4health.co.kr",
+      // userid: props.user.register.values.registeruser,
       filename: "",
       file : "", 
       medicalpart: "", 
@@ -76,13 +76,26 @@ class Register extends React.Component {
   render() {
     let profile_preview = null;
     if(this.state.file !== ''){
-      profile_preview = <CardImg style={{borderRadius:"100%"}} className='profile_preview'  src={this.state.previewURL} />
+      profile_preview = 
+      <div className="dz-thumb ">
+        <div className="dz-thumb-inner">
+          <img
+            width="150px"
+            height="150px" 
+            src={this.state.previewURL} 
+            className="dz-img" 
+            // alt={file.name} 
+            />
+        </div>
+      </div>
+    
+      // <CardImg style={{borderRadius:"100%"}} className='profile_preview'  src={this.state.previewURL} />
     }
     return (
       <Row className="m-0 justify-content-center">
       <Col
-        sm="8"
-        xl="8"
+        sm="7"
+        xl="7"
         lg="10"
         md="8"
         className="d-flex justify-content-center"
@@ -100,11 +113,11 @@ class Register extends React.Component {
               <CardBody className="pt-1 pb-50">
                 
                   <Form action="/" onSubmit={this.handleRegister}>
-                    <FormGroup className="form-label-group">
-                      <div><b>프로필 사진 등록</b></div>
-                      {profile_preview}
+                    <FormGroup className="form-label-group d-flex justify-content-between">
+                      <div className="col-2 align-self-center"><b>프로필 사진 등록</b></div>
                       <InputGroup>
-                        <CustomInput 
+                        <CustomInput
+                          className="col-11" 
                           type="file" 
                           accept="image/gif,image/jpeg,image/png" 
                           id="exampleCustomFileBrowser" 
@@ -112,9 +125,10 @@ class Register extends React.Component {
                           label=""
                           onChange={this.handleFileOnChange}/> 
                       </InputGroup>
+                      <Row className="justify-content-md-center">{profile_preview}</Row>
                     </FormGroup> 
-                    <FormGroup className="form-label-group">
-                      <div><b>진료과</b></div>
+                    <FormGroup className="form-label-group d-flex justify-content-between">
+                      <div className="col-2 align-self-center"><b>진료과</b></div>
                       <InputGroup>
                         <Input
                           type="text"
@@ -126,8 +140,8 @@ class Register extends React.Component {
                       </InputGroup>
                     </FormGroup>
                     
-                    <FormGroup className="form-label-group">
-                      <div><b>진료가능분야</b></div>
+                    <FormGroup className="form-label-group d-flex justify-content-between">
+                      <div className="col-2 align-self-center"><b>진료가능분야</b></div>
                       <InputGroup>
                         <Input
                           type="text"
@@ -140,33 +154,54 @@ class Register extends React.Component {
                     </FormGroup>
 
                     <FormGroup className="form-label-group">
-                      <div><b>약력</b></div>
-                      <InputGroup>
-                        <Input
-                          type="text"
-                          placeholder="TEXT를 입력해주세요"
-                          required
-                          value={this.state.medicaldesc}
-                          onChange={e => this.setState({ medicaldesc: e.target.value })}
-                        />   
-                      </InputGroup>
+                      <div className="d-flex justify-content-between">
+                        <div className="col-2 align-self-start"><b>약력</b></div>
+                        <InputGroup>
+                          <Input
+                            type="textarea"
+                            placeholder="TEXT를 입력해주세요"
+                            required
+                            rows="3"
+                            fixed
+                            value={this.state.medicaldesc}
+                            onChange={e => this.setState({ medicaldesc: e.target.value })}
+                          />   
+                        </InputGroup>
+                      </div>
+                      <small
+                        className={`counter-value float-right ${
+                          this.state.medicaldesc.length > 400 ? "bg-danger" : ""
+                        }`}
+                      >
+                        {`${this.state.medicaldesc.length}/400`}
+                      </small>
                     </FormGroup>
 
-                    <FormGroup className="form-label-group">
-                      <div><b>자기소개</b></div>
-                      <InputGroup>
-                        <Input
-                          type="text"
-                          placeholder="TEXT를 입력해주세요"
-                          required
-                          value={this.state.userdesc}
-                          onChange={e => this.setState({ userdesc: e.target.value })}
-                        />   
-                      </InputGroup>
+                    <FormGroup className="form-label-group pt-1">
+                      <div className="d-flex justify-content-between">
+                        <div className="col-2 align-self-start"><b>자기소개</b></div>
+                        <InputGroup>
+                          <Input
+                            type="textarea"
+                            placeholder="TEXT를 입력해주세요"
+                            required
+                            rows="3"
+                            value={this.state.userdesc}
+                            onChange={e => this.setState({ userdesc: e.target.value })}
+                          />   
+                        </InputGroup>
+                      </div>
+                      <small
+                        className={`counter-value float-right ${
+                          this.state.userdesc.length > 400 ? "bg-danger" : ""
+                        }`}
+                      >
+                        {`${this.state.userdesc.length}/400`}
+                      </small>
                     </FormGroup>
 
-                    <FormGroup className="form-label-group">
-                      <div><b>면허번호</b></div>
+                    <FormGroup className="form-label-group d-flex justify-content-between pt-1">
+                      <div className="col-2 align-self-center"><b>면허번호</b></div>
                       <InputGroup>
                         <Input
                           type="text"
