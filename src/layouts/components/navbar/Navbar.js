@@ -14,6 +14,7 @@ import HicareLogo from "../../../assets/img/logo/user_register_logo.png"
 import { history } from "../../../history"
 import Clock from 'react-live-clock';
 
+// 원본
 //  const UserName = props => {
 //     let username = ""
 //     if (props.userdata !== undefined) {
@@ -29,30 +30,8 @@ import Clock from 'react-live-clock';
 //     } else {
 //       username = "John Doe"
 //     }
-  
 //     return username
 //   }
-
-
-// 인성api연결
-// const UserName = props => {
-//   let username = ""
-//   if (props.user !== undefined) {
-//   } else if (props.user.login.values !== undefined) {
-//     console.log(props.user);
-//     username = props.user.login.values.loggedInUser.username
-//     if (
-//       props.user.login.values.loggedInWith !== undefined &&
-//       props.user.login.values.loggedInWith === "jwt"
-//     ) {
-//       username = props.user.login.values.loggedInUser.username
-//     }
-//   } else {
-//     history.push("/")
-//   }
-
-//   return username
-// }
 
 const UserName = props => {
   let username = ""
@@ -68,27 +47,6 @@ const UserName = props => {
 
   return username
 }
-
-
-// i4h api 연결
-// const UserName = props => {
-//   let username = ""
-//   if (props.userdata !== undefined) {
-//   } else if (props.user.login.values !== undefined) {
-//     console.log(props);
-//     username = props.user.login.values.loggedInUser.username
-//     if (
-//       props.user.login.values.loggedInWith !== undefined &&
-//       props.user.login.values.loggedInWith === "jwt"
-//     ) {
-//       username = props.user.login.values.loggedInUser.username
-//     }
-//   } else {
-//     username = "John Doe"
-//   }
-
-//   return username
-// }
 
 
 const ThemeNavbar = props => {
