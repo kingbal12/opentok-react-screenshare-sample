@@ -1,5 +1,9 @@
 export const login = (state = { userRole: "admin" }, action) => {
   switch (action.type) {
+    // 로그인 리듀서 부분
+    case "LOGIN_WITH_JWT": {
+      return { ...state, values: action.payload }
+    }
     case "LOGIN_WITH_EMAIL": {
       return { ...state, values: action.payload }
     }
@@ -15,10 +19,7 @@ export const login = (state = { userRole: "admin" }, action) => {
     case "LOGIN_WITH_GITHUB": {
       return { ...state, values: action.payload }
     }
-    // 로그인 리듀서 부분
-    case "LOGIN_WITH_JWT": {
-      return { ...state, values: action.payload }
-    }
+    
     case "LOGOUT_WITH_JWT": {
       return { ...state, values: action.payload }
     }

@@ -6,6 +6,51 @@ import axios from "axios"
 import { config } from "../../../authServices/firebase/firebaseConfig"
 import { persistor } from "../../storeConfig/store"
 
+// 로그인액션부분 i4h api
+export const loginWithJWT = user => {
+  return dispatch => {
+    axios
+      .get("http://203.251.135.81:9300/signin", {
+        params: {
+          user_id: user.email,
+          user_pwd: user.password
+        }
+      })
+      
+      .then(response => {
+        
+        let loggedInUser;
+
+        if (response.data) {
+          loggedInUser = response.data.data;
+       
+          console.log(loggedInUser);
+          dispatch({
+            type: "LOGIN_WITH_JWT",
+            payload: { loggedInUser, loggedInWith: "jwt" }
+          })
+          // persistor.purge()
+          history.push("/analyticsDashboard")
+        }
+      })
+      .catch(err => console.log(err))
+  }
+}
+
+export const logoutWithJWT = () => {
+  return dispatch => {
+    // axios
+    //   .post()
+    // 로그아웃 api
+    
+    dispatch({ type: "LOGOUT_WITH_JWT", payload: {} })
+    history.push("/pages/login")
+    persistor.purge();
+  }
+}
+
+
+
 // Init firebase if not already initialized
 if (!firebase.apps.length) {
   firebase.initializeApp(config)
@@ -215,49 +260,7 @@ export const loginWithGithub = () => {
 // }
 
 
-// 로그인액션부분 i4h api
-export const loginWithJWT = user => {
-  return dispatch => {
-    axios
-      .get("http://203.251.135.81:9300/signin", {
-        params: {
-          user_id: user.email,
-          user_pwd: user.password
-        }
-      })
-      
-      .then(response => {
-        
-        let loggedInUser;
 
-        if (response.data) {
-          loggedInUser = response.data.data;
-       
-          console.log(loggedInUser);
-          dispatch({
-            type: "LOGIN_WITH_JWT",
-            payload: { loggedInUser, loggedInWith: "jwt" }
-          })
-          // persistor.purge()
-          history.push("/analyticsDashboard")
-        }
-      })
-      .catch(err => console.log(err))
-  }
-}
-
-export const logoutWithJWT = () => {
-  return dispatch => {
-    // axios
-    //   .post()
-    // 로그아웃 api
-    
-    dispatch({ type: "LOGOUT_WITH_JWT", payload: {} })
-    history.push("/pages/login")
-    persistor.purge();
-  }
-  
-}
 
 export const logoutWithFirebase = user => {
   return dispatch => {
