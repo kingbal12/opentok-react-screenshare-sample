@@ -3,21 +3,21 @@ let data = {
   events: [
     {
       id: 1,
-      title: "My Event",
+      // title: "My Event",
       start: new Date(),
       end: new Date(),
-      label: "business",
-      allDay: true,
-      selectable: true
+      // label: "business",
+      // allDay: true,
+      // selectable: true
     },
     {
       id: 2,
-      title: "My Event",
+      // title: "My Event",
       start: "2021-05-31 00:00:00",
       end: "2021-05-31 01:00:00",
-      label: "business",
-      allDay: false,
-      selectable: true
+      // label: "business",
+      // allDay: false,
+      // selectable: true
     }
 
     // , // 테스트용

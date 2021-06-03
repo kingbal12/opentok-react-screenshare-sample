@@ -44,6 +44,23 @@ export const addEvent = event => {
     dispatch({ type: "ADD_EVENT", event })
   }
 }
+
+export const schedules = (userid, holiday, rperiod, events) => {
+  return dispatch => {
+    axios
+      .post("http://203.251.135.81:9300/v1/doctor/appointment/schedules",{
+          user_id: userid,
+          holiday_yn: holiday,
+          count: rperiod,
+          events: events
+      })
+      .then(response => {
+        console.log(response)
+        // holidayyn의
+      })
+      .catch(err => console.log(err))
+  }
+}
 export const updateEvent = event => {
   return dispatch => {
     dispatch({ type: "UPDATE_EVENT", event })

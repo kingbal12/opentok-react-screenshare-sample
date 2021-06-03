@@ -16,7 +16,8 @@ import {
   handleSelectedEvent,
   updateEvent,
   updateDrag,
-  updateResize
+  updateResize,
+  schedules
 } from "../../../../../redux/actions/calendar/index"
 import { ChevronLeft, ChevronRight } from "react-feather"
 
@@ -34,39 +35,7 @@ const eventColors = {
   personal: "bg-danger",
   others: "bg-primary"
 }
-/* -----------------  Date ------------------------------------------------------ */
-Date.prototype.ToString = function(){   
-  /*
-    new Date().ToString(); 1973-01-08 01:01:00
-  */
-  
-    let sYear = this.getFullYear();
-    let sMonth = this.getMonth() + 1;
-    let sDay = this.getDate();
-  
-  let sHours = this.getHours();
-    let sMinutes = this.getMinutes();
-    let sSeconds = this.getSeconds();
-  
-    if (sMonth < 10)
-        sMonth = '0' + sMonth;
-  
-    if (sDay < 10)
-        sDay = '0' + sDay;
-  
-   if (sHours < 10)
-        sHours = '0' + sHours;
-  
-    if (sMinutes < 10)
-        sMinutes = '0' + sMinutes;
-  
-   if (sSeconds < 10)
-        sSeconds = '0' + sSeconds;
-  
-  
-    return [sYear, sMonth, sDay].join('-')
-       + " " + [sHours, sMinutes, sSeconds].join(':');
-  }
+
   
 // 중요!!! Date 포맷을 변경하는것을 빠르게 연구하여 적용할것!
 // const Date = new Date('2021-06-01 09:00')
@@ -133,6 +102,7 @@ class CalendarApp extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      userid: props.user.login.values.loggedInUser.username,
       events: [],
       views: {
         month: true,
@@ -148,8 +118,8 @@ class CalendarApp extends React.Component {
       // allDay: true,
       // selectable: true
       auto: "true",
-      rperiod: "",
-      holiday: "true",
+      rperiod: "1",
+      holiday: "Y",
       modal: false
       
     }
@@ -213,17 +183,19 @@ class CalendarApp extends React.Component {
   }
 
   handleAddEvent = id => {
+    
     // id값을 정하는것과
     // end start date의 state값을 정하는것은 다른 함수로 하는것 같음
     this.props.handleSidebar(false)
-    this.props.addEvent({
+    this.props.addEvent(
+      {
       id,
-      title: this.state.title,
+      // title: this.state.title,
       start: this.state.startDate,
       end: this.state.endDate,
-      label: this.state.label === null ? "others" : this.state.label,
-      allDay: this.state.allDay,
-      selectable: this.state.selectable
+      // label: this.state.label === null ? "others" : this.state.label,
+      // allDay: this.state.allDay,
+      // selectable: this.state.selectable
     })
     // this.setState({
     //   startDate: new Date(),
@@ -235,23 +207,22 @@ class CalendarApp extends React.Component {
     // })
   }
 
+  postschedule = e => {
+    e.preventDefault()
+    this.props.schedules(
+      this.state.userid,
+      this.state.holiday,
+      this.state.rperiod,
+      this.state.events)
+
+  }
+
   
 
 
   render() {
     const { events, views, sidebar } = this.state
-    // let formats = {
-    
-      
-    
-    //   timeRangeStartFormat: ({ start, end }, culture, localizer) =>
-    //     localizer.format(start, { date: 'short' }, culture) + ' — ' +
-    //     localizer.format(end, { date: 'short' }, culture)
-    // }
-  
-    // const sformat = "yyyy-MM-dd HH:mm"
-    // let id = events.pop()
-    // let newEventId = id + 1
+ 
     return (
       <div className="app-calendar position-relative">
         <div
@@ -285,13 +256,13 @@ class CalendarApp extends React.Component {
               }}
               onSelectSlot={({ start, end }) => {
                 this.setState({
-                  title: "테스트",
-                  label: null,
+                  // title: "테스트",
+                  // label: null,
                   startDate: new Date(start),
                   endDate: new Date(end),
-                  url: ""
+                  // url: ""
                 })
-                this.handleAddEvent(2)
+                this.handleAddEvent(1)
                 // id 를 1씩 증가하게끔 
                 // this.props.handleSidebar(true)
                 // this.props.handleSelectedEvent({
@@ -346,7 +317,7 @@ class CalendarApp extends React.Component {
                         defaultChecked={this.state.auto==="false"?true:false}
                         name="auto"
                         value="false"
-                        onChange={e => this.setState({ auto: e.target.value, rperiod: "" })}
+                        onChange={e => this.setState({ auto: e.target.value, rperiod: "1" })}
                       />
                     </div>
                   </FormGroup>
@@ -359,9 +330,9 @@ class CalendarApp extends React.Component {
                     >
                       <button
                         disabled={this.state.auto=="true"?false:true}
-                        onClick={() => this.handleRepeatPeriod("1month")}
+                        onClick={() => this.handleRepeatPeriod("4")}
                         className={`btn ${
-                          this.state.rperiod === "1month"
+                          this.state.rperiod === "4"
                             ? "btn-primary"
                             : "btn-outline-primary text-primary"
                         }`}
@@ -371,9 +342,9 @@ class CalendarApp extends React.Component {
 
                       <button
                         disabled={this.state.auto=="true"?false:true}
-                        onClick={() => this.handleRepeatPeriod("2month")}
+                        onClick={() => this.handleRepeatPeriod("8")}
                         className={`btn ${
-                          this.state.rperiod === "2month"
+                          this.state.rperiod === "8"
                             ? "btn-primary"
                             : "btn-outline-primary text-primary"
                         }`}
@@ -383,9 +354,9 @@ class CalendarApp extends React.Component {
                       
                       <button
                         disabled={this.state.auto=="true"?false:true}
-                        onClick={() => this.handleRepeatPeriod("3month")}
+                        onClick={() => this.handleRepeatPeriod("12")}
                         className={`btn ${
-                          this.state.rperiod === "3month"
+                          this.state.rperiod === "12"
                             ? "btn-primary"
                             : "btn-outline-primary text-primary"
                         }`}
@@ -398,25 +369,25 @@ class CalendarApp extends React.Component {
                     <div>3. 공휴일을 제외하시겠습니까?</div>
                     <div id="holiday" className="d-inline-block mr-1">
                       <Radio label="네" 
-                        defaultChecked={this.state.holiday==="true"?true:false}  
+                        defaultChecked={this.state.holiday==="Y"?true:false}  
                         name="holiday" 
-                        value="true"
+                        value="Y"
                         onChange={e => this.setState({ holiday: e.target.value })}
                       />
                     </div>
                     <div className="d-inline-block mr-1">
                       <Radio
                         label="아니오"
-                        defaultChecked={this.state.holiday==="false"?true:false}
+                        defaultChecked={this.state.holiday==="N"?true:false}
                         name="holiday"
-                        value="false"
+                        value="N"
                         onChange={e => this.setState({ holiday: e.target.value })}
                       />
                     </div>
                   </FormGroup>
               </ModalBody>
               <ModalFooter>
-                <Button color="primary" onClick={this.schedulemodal}>
+                <Button color="primary" onClick={this.schedulemodal, this.postschedule}>
                   저장
                 </Button>
               </ModalFooter>
@@ -440,6 +411,7 @@ class CalendarApp extends React.Component {
 
 const mapStateToProps = state => {
   return {
+    user: state.auth,
     app: state.calendar
   }
 }
@@ -451,5 +423,6 @@ export default connect(mapStateToProps, {
   handleSelectedEvent,
   updateEvent,
   updateDrag,
-  updateResize
+  updateResize,
+  schedules
 })(CalendarApp)
