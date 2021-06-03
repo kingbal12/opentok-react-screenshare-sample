@@ -1,6 +1,6 @@
 import React from "react"
-import {Form, FormGroup, Button,
-  InputGroup, InputGroupAddon,Input,
+import { 
+  Button,
   Card,
   CardHeader,
   CardTitle,
@@ -8,9 +8,7 @@ import {Form, FormGroup, Button,
   Row,
   Col
 } from "reactstrap"
-import { Check } from "react-feather"
 import { history } from "../../../../history"
-import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import "../../../../assets/scss/pages/authentication.scss"
 import {connect} from "react-redux"
 import {logoutWithJWT} from "../../../../redux/actions/auth/loginActions"
