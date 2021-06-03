@@ -24,9 +24,14 @@ class LoginSetting extends React.Component {
     this.props.logoutWithJWT()
   }
 
-  handlegopasschange = e => {
+  handleGoPassChange = e => {
     e.preventDefault()
     history.push("/pages/changepassword")
+  }
+
+  handleGoWithdrawal = e => {
+    e.preventDefault()
+    history.push("/pages/withdrawal")
   }
 
   render() {
@@ -69,7 +74,7 @@ class LoginSetting extends React.Component {
                       size="lg"
                       block
                       outline
-                      onClick={this.handlegopasschange}
+                      onClick={this.handleGoPassChange}
                       >
                         비밀번호 변경
                       </Button>
@@ -81,6 +86,7 @@ class LoginSetting extends React.Component {
                       size="lg"
                       block
                       outline
+                      onClick={this.handleGoWithdrawal}
                       >
                         회원탈퇴
                       </Button>

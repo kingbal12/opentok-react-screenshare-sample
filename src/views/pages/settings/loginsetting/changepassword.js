@@ -29,68 +29,24 @@ class ChagePassword extends React.Component {
     this.state = {
       userid: "kjh@iot4health.co.kr",
       // userid: props.user.register.values.registeruser,
-      filename: "",
-      file : "", 
-      medicalpart: "", 
-      medicalable: "", 
-      medicaldesc: "", 
-      medicalnum: "", 
-      userdesc: "",
-      previewURL : ""
+      password: "",
+      newpassword : "",
+      confirmnewpassword : "",
     }
   }
-  // 20210517 여기까지 작업함
+  
 
-  handleFileOnChange = (event) => {
-    event.preventDefault();
-    let reader = new FileReader();
-    let file = event.target.files[0];
-    let filename = event.target.files[0].name
-    reader.onloadend = () => {
-      this.setState({
-        file : file,
-        previewURL : reader.result,
-        filename: filename
-      })
-    }
-    reader.readAsDataURL(file);
-  }
-
-  handleRegister = e => {
+  handlechangepassword = e => {
     e.preventDefault()
-    this.props.register4(
-      this.state.userid,
-      this.state.filename,
-      this.state.file,
-      this.state.medicalpart,
-      this.state.medicalable,
-      this.state.medicaldesc,
-      this.state.medicalnum,
-      this.state.userdesc,    
-      this.state.previewURL
+    this.props.changepassword(
+      this.state.newpassword,
     )
   }
 
 
 
   render() {
-    let profile_preview = null;
-    if(this.state.file !== ''){
-      profile_preview = 
-      <div className="dz-thumb ">
-        <div className="dz-thumb-inner">
-          <img
-            width="150px"
-            height="150px" 
-            src={this.state.previewURL} 
-            className="dz-img" 
-            // alt={file.name} 
-            />
-        </div>
-      </div>
-    
-      // <CardImg style={{borderRadius:"100%"}} className='profile_preview'  src={this.state.previewURL} />
-    }
+  
     return (
       <Row className="m-0 justify-content-center">
       <Col
@@ -112,105 +68,63 @@ class ChagePassword extends React.Component {
                 </CardHeader>   
               <CardBody className="pt-1 pb-50">
                 
-                  <Form action="/" onSubmit={this.handleRegister}>
-                    <FormGroup className="form-label-group">
+                  <Form action="/" onSubmit={this.handlechangepassword}>
+                    <div className="form-label-group d-flex">
                       <div className="col-1 align-self-center"><b>아이디</b></div>
-                      <div>kjh@iot4health.co.kr</div>
-                      <Row className="justify-content-md-center">{profile_preview}</Row>
-                    </FormGroup> 
+                      <div>{this.state.userid}</div>
+                    </div> 
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-2 align-self-center"><b>진료과</b></div>
+                      <div className="col-2 align-self-center"><b>현재 비밀번호</b></div>
                       <InputGroup>
                         <Input
                           type="text"
-                          placeholder="TEXT를 입력해주세요"
+                          placeholder="기존 비밀번호 입력"
                           required
-                          value={this.state.medicalpart}
-                          onChange={e => this.setState({ medicalpart: e.target.value })}
+                          value={this.state.password}
+                          onChange={e => this.setState({ password: e.target.value })}
                         />   
                       </InputGroup>
                     </FormGroup>
+                    <div className="ml-1 pb-2 mt-2" style={{borderBottom:"solid silver 1px"}}>
+                      외부로부터 <span className="text-primary">{this.state.userid}</span> 님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인합니다. <br/>
+                      항상 비밀번호는 타인에게 노출되지 않도록 주의하세요
+                    </div>
                     
-                    <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-2 align-self-center"><b>진료가능분야</b></div>
+                    <FormGroup className="form-label-group d-flex justify-content-between mt-2">
+                      <div className="col-2 align-self-center"><b>새 비밀번호</b></div>
                       <InputGroup>
                         <Input
                           type="text"
-                          placeholder="TEXT를 입력해주세요"
+                          placeholder="영어, 숫자, 특수문자 포함 6자~14자 이내"
                           required
-                          value={this.state.medicalable}
-                          onChange={e => this.setState({ medicalable: e.target.value })}
+                          value={this.state.password}
+                          onChange={e => this.setState({ password: e.target.value })}
                         />   
                       </InputGroup>
                     </FormGroup>
 
                     <FormGroup className="form-label-group">
                       <div className="d-flex justify-content-between">
-                        <div className="col-2 align-self-start"><b>약력</b></div>
+                        <div className="col-2 align-self-start"><b>새 비밀번호 확인</b></div>
                         <InputGroup>
                           <Input
-                            type="textarea"
-                            placeholder="TEXT를 입력해주세요"
+                            type="text"
+                            placeholder="새 비밀번호 재입력"
                             required
-                            rows="3"
-                            value={this.state.medicaldesc}
-                            onChange={e => this.setState({ medicaldesc: e.target.value })}
+                            value={this.state.confirmnewpassword}
+                            onChange={e => this.setState({ confirmnewpassword: e.target.value })}
                           />   
                         </InputGroup>
                       </div>
-                      <small
-                        className={`counter-value float-right ${
-                          this.state.medicaldesc.length > 400 ? "bg-danger" : ""
-                        }`}
-                      >
-                        {`${this.state.medicaldesc.length}/400`}
-                      </small>
                     </FormGroup>
 
-                    <FormGroup className="form-label-group pt-1">
-                      <div className="d-flex justify-content-between">
-                        <div className="col-2 align-self-start"><b>자기소개</b></div>
-                        <InputGroup>
-                          <Input
-                            type="textarea"
-                            placeholder="TEXT를 입력해주세요"
-                            required
-                            rows="3"
-                            value={this.state.userdesc}
-                            onChange={e => this.setState({ userdesc: e.target.value })}
-                          />   
-                        </InputGroup>
-                      </div>
-                      <small
-                        className={`counter-value float-right ${
-                          this.state.userdesc.length > 400 ? "bg-danger" : ""
-                        }`}
-                      >
-                        {`${this.state.userdesc.length}/400`}
-                      </small>
-                    </FormGroup>
-
-                    <FormGroup className="form-label-group d-flex justify-content-between pt-1">
-                      <div className="col-2 align-self-center"><b>면허번호</b></div>
-                      <InputGroup>
-                        <Input
-                          type="text"
-                          placeholder="TEXT를 입력해주세요"
-                          required
-                          value={this.state.medicalnum}
-                          onChange={e => this.setState({ medicalnum: e.target.value })}
-                        />   
-                      </InputGroup>
-                    </FormGroup>
-
-                    <div className="d-flex justify-content-between">
+                    <div className="d-flex justify-content-center mt-5">
                       <Button
                       size="lg"
-                      block
                       color="primary" 
                       type="submit"
                       >
-                        진료 승인요청
+                        저장하기
                       </Button>
                     </div>
                   </Form>
