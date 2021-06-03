@@ -178,6 +178,7 @@ const callsetting = lazy(() => import("./views/pages/settings/call/CallSetting")
 const loginsetting = lazy(() => import("./views/pages/settings/loginsetting/loginsetting"))
 const changepassword = lazy(() => import("./views/pages/settings/loginsetting/changepassword"))
 const withdrawal = lazy(() => import("./views/pages/settings/loginsetting/Withdrawal"))
+const pm = lazy(() => import("./views/pages/settings/payment/PaymentManagement"))
 const forgotPassword = lazy(() =>
   import("./views/pages/authentication/ForgotPassword")
 )
@@ -396,6 +397,7 @@ class AppRouter extends React.Component {
           <AppRoute path="/pages/loginsetting" component={loginsetting} />
           <AppRoute path="/pages/changepassword" component={changepassword} />
           <AppRoute path="/pages/withdrawal" component={withdrawal} />
+          <AppRoute path="/pages/paymentmanagement" component={pm} />
           <AppRoute path="/pages/register1" component={register1} fullLayout />
           <AppRoute path="/pages/register2" component={register2} fullLayout />
           <AppRoute path="/pages/register3" component={register3} fullLayout />

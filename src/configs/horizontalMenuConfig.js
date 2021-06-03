@@ -993,7 +993,7 @@ const horizontalMenuConfig = [
         title: "결제관리",
         type: "item",
         icon: <Icon.DollarSign size={16} />,
-        // navLink: "/schedule",
+        navLink: "/pages/paymentmanagement",
         permissions: ["admin", "editor"]
       },
       {

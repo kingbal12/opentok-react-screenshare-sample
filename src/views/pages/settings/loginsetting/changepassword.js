@@ -27,8 +27,7 @@ class ChagePassword extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      userid: "kjh@iot4health.co.kr",
-      // userid: props.user.register.values.registeruser,
+      userid: props.user.login.values.loggedInUser.username,
       password: "",
       newpassword : "",
       confirmnewpassword : "",
