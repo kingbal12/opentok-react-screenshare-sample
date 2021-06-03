@@ -194,6 +194,27 @@ export const register4 = (userid, filename, file, medicalpart, medicalable, medi
   }
 }
 
+export const changepassword = (userid, password, newpassword) => {
+  return dispatch => {
+    axios
+      .put("http://203.251.135.81:9300/v1/doctor/account/password", {
+          user_id : userid, 
+          user_pwd : password,
+          new_pwd : newpassword   
+        }
+      )
+      .then(response => {
+        console.log(response);
+        if(response.data.status === "200") {
+          alert(response.data.message);
+        } else {
+          alert(response.data.message);
+        }
+
+      })
+  }
+}
+
 
 export const signupWithJWT = (email, password, name) => {
   return dispatch => {

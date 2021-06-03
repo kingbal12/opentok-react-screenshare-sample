@@ -9,17 +9,11 @@ import {InputGroup, Form, FormGroup, Input, Button,
   Col,
   CardImg 
 } from "reactstrap"
-import PerfectScrollbar from "react-perfect-scrollbar"
-// import classnames from "classnames"
-// import RegisterFirebase from "./RegisterFirebase"
-// import RegisterAuth0 from "./RegisterAuth0"
 
-// import registerImg from "../../../../assets/img/pages/register.jpg"
 import "../../../../assets/scss/pages/authentication.scss"
-import { register4 } from "../../../../redux/actions/auth/registerActions"
+import { changepassword } from "../../../../redux/actions/auth/registerActions"
 import { connect } from "react-redux"
-import { history } from "../../../../history"
-// import Avatar from "../../../ui-elements/"
+
 
 
 
@@ -33,16 +27,21 @@ class ChagePassword extends React.Component {
       confirmnewpassword : "",
     }
   }
-  
 
   handlechangepassword = e => {
     e.preventDefault()
-    this.props.changepassword(
-      this.state.newpassword,
-    )
+    if(this.state.newpassword==this.state.confirmnewpassword) {
+      this.props.changepassword(
+        this.state.userid,
+        this.state.password,
+        this.state.newpassword
+      )
+    } else {
+      alert("새 비밀번호를 다시 확인해주십시오")
+    }
+    
+    
   }
-
-
 
   render() {
   
@@ -96,8 +95,8 @@ class ChagePassword extends React.Component {
                           type="text"
                           placeholder="영어, 숫자, 특수문자 포함 6자~14자 이내"
                           required
-                          value={this.state.password}
-                          onChange={e => this.setState({ password: e.target.value })}
+                          value={this.state.newpassword}
+                          onChange={e => this.setState({ newpassword: e.target.value })}
                         />   
                       </InputGroup>
                     </FormGroup>
@@ -144,4 +143,4 @@ const mapStateToProps = state => {
     user: state.auth
   }
 }
-export default connect(mapStateToProps, {register4})(ChagePassword)
+export default connect(mapStateToProps, {changepassword})(ChagePassword)

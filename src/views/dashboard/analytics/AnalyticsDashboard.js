@@ -31,7 +31,7 @@ import axios from "axios"
 class AnalyticsDashboard extends React.Component {
 
   async componentDidMount() {
-    await this.props.getappoints(this.props.user.login.values.loggedInUser.username,"20210101")
+    await this.props.getappoints(this.props.user.login.values.loggedInUser.username,"20210101",5,1)
 
     console.log("리덕스를 이용한 데이터",this.props.ap.appoints, this.props.user.login.values.loggedInUser.username)  //제발 오타 주의좀 합시다
   } 
