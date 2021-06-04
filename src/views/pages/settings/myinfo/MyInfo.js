@@ -13,7 +13,7 @@ import PerfectScrollbar from "react-perfect-scrollbar"
 // import classnames from "classnames"
 // import RegisterFirebase from "./RegisterFirebase"
 // import RegisterAuth0 from "./RegisterAuth0"
-import RegisterJWT from "./RegisterJWT"
+
 // import registerImg from "../../../../assets/img/pages/register.jpg"
 import "../../../../assets/scss/pages/authentication.scss"
 import { register4 } from "../../../../redux/actions/auth/registerActions"
@@ -23,12 +23,11 @@ import { history } from "../../../../history"
 
 
 
-class Register extends React.Component {
+class MyInfo extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      userid: "kjh@iot4health.co.kr",
-      // userid: props.user.register.values.registeruser,
+      userid: props.user.login.values.loggedInUser.username,
       filename: "",
       file : "", 
       medicalpart: "", 
@@ -104,14 +103,12 @@ class Register extends React.Component {
         <Card className="bg-authentication rounded-0 mb-0 w-100">
           <Row className="m-0">
             <Col lg="12" md="12" className="p-0">
-              <Card className="rounded-0 mb-0 p-2">
-                <CardHeader className="pb-1 pt-50">
-                  <CardTitle>
-                    <h1>병원정보 입력하기</h1>
-                  </CardTitle>
-                </CardHeader>   
-              <CardBody className="pt-1 pb-50">
-                
+              <Card className="rounded-0 mb-0 p-2">   
+                <CardBody className="pt-1 pb-50">
+                  <div className="form-label-group d-flex">
+                    <div className="col-1 align-self-center"><b>아이디</b></div>
+                    <div>{this.state.userid}</div>
+                  </div> 
                   <Form action="/" onSubmit={this.handleRegister}>
                     <FormGroup className="form-label-group d-flex justify-content-between">
                       <div className="col-2 align-self-center"><b>프로필 사진 등록</b></div>
@@ -212,14 +209,14 @@ class Register extends React.Component {
                       </InputGroup>
                     </FormGroup>
 
-                    <div className="d-flex justify-content-between">
+                    <div className="d-flex justify-content-center">
                       <Button
                       size="lg"
-                      block
+                      
                       color="primary" 
                       type="submit"
                       >
-                        진료 승인요청
+                        저장하기
                       </Button>
                     </div>
                   </Form>
@@ -240,4 +237,4 @@ const mapStateToProps = state => {
     user: state.auth
   }
 }
-export default connect(mapStateToProps, {register4})(Register)
+export default connect(mapStateToProps, {register4})(MyInfo)

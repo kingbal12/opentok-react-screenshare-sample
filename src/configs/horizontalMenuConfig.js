@@ -969,7 +969,7 @@ const horizontalMenuConfig = [
         title: "개인정보",
         type: "item",
         icon: <Icon.User size={16} />,
-        // navLink: "/schedule",
+        navLink: "/pages/myinfo",
         permissions: ["admin", "editor"]
       },
       {

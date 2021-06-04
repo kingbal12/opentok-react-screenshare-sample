@@ -6,8 +6,35 @@ let data = {
       // title: "My Event",
       start: new Date(),
       end: new Date(),
-      // label: "business",
+      // label: "business"
       // allDay: true,
+      // selectable: true
+    },
+    {
+      id: 2,
+      // title: "My Event",
+      start: "2021-05-25 09:00:00",
+      end: "2021-05-25 10:45:00",
+      label: "others"
+      // allDay: false,
+      // selectable: true
+    },
+    {
+      id: 2,
+      // title: "My Event",
+      start: "2021-05-26 09:30:00",
+      end: "2021-05-26 12:00:00",
+      label: "others"
+      // allDay: false,
+      // selectable: true
+    },
+    {
+      id: 2,
+      // title: "My Event",
+      start: "2021-05-28 13:00:00",
+      end: "2021-05-28 14:45:00",
+      label: "others"
+      // allDay: false,
       // selectable: true
     },
     {
@@ -15,7 +42,7 @@ let data = {
       // title: "My Event",
       start: "2021-05-31 00:00:00",
       end: "2021-05-31 01:00:00",
-      // label: "business",
+      // label: "business"
       // allDay: false,
       // selectable: true
     }

@@ -37,7 +37,7 @@ class Register extends React.Component {
 
 
 handleComplete = (data) => {
-  let fullAddress = data.address;
+  let fullAddress = data.address +" ("+data.zonecode+")";
   let extraAddress = ''; 
   let zoneCodes = data.zonecode;
   
@@ -74,6 +74,11 @@ handleComplete = (data) => {
     )
   }
 
+  checkstate = e => {
+    e.preventDefault()
+    console.log(this.state)
+  }
+
   zipModal = () => {
     this.setState(prevState => ({
       modal: !prevState.modal
@@ -103,12 +108,23 @@ handleComplete = (data) => {
                 </CardHeader>   
               <CardBody className="pt-1 pb-50">
                   <Form action="/" onSubmit={this.handleRegister}>
-                    <FormGroup className="form-label-group">
-                      <div>회원인증</div>            
-                      <div><Button type="button" color="primary">휴대폰 인증</Button></div>
+                    <FormGroup className="form-label-group d-flex justify-content-between">
+                      <div className="col-2 align-self-center"><b>회원인증</b></div>            
+                      <InputGroup>
+                        <Button type="button" color="primary" outline>휴대폰 인증</Button>
+                        <Input
+                          className="ml-1"
+                          type="text"
+                          placeholder="인증번호"
+                          required
+                          value={this.state.phoeauthnum}
+                          onChange={e => this.setState({ phoeauthnum: e.target.value })}
+                        />
+                        <InputGroupAddon addonType="append"><Button color="primary" type="button">인증확인</Button></InputGroupAddon>
+                      </InputGroup>                      
                     </FormGroup>
-                    <FormGroup className="form-label-group">
-                      <div>병원명 (필수)</div>
+                    <FormGroup className="form-label-group d-flex justify-content-between">
+                      <div className="col-2 align-self-center"><b>병원명 <span className="text-primary">(필수)</span></b></div>
                       <InputGroup>
                         <Input
                           type="text"
@@ -119,8 +135,8 @@ handleComplete = (data) => {
                         />   
                       </InputGroup>
                     </FormGroup>
-                    <FormGroup className="form-label-group">
-                      <div>사업자 등록번호 (필수)</div>
+                    <FormGroup className="form-label-group d-flex justify-content-between">
+                      <div className="col-2 align-self-center"><b>사업자 등록번호 <span className="text-primary">(필수)</span></b></div>
                       <InputGroup>
                         <Input
                           type="text"
@@ -133,33 +149,34 @@ handleComplete = (data) => {
                       </InputGroup>
                     </FormGroup>
                     <FormGroup className="form-label-group">
-                      <div>병원주소 (필수)</div>
-                      <div className="row col-7 mb-1">
-                        <InputGroup onClick={this.zipModal}>
+                      <div className="d-flex justify-content-between">
+                        <div className="col-2 align-self-start"><b>병원주소 <span className="text-primary">(필수)</span></b></div>
+                        <InputGroup className="mb-1" onClick={this.zipModal}>
                           <Input
                             type="text"
                             required
                             disabled
-                            value={this.state.zipcode}
-                            onChange={e => this.setState({ zipcode: e.target.value })}
-                            
+                            value={this.state.address1}
+                            onChange={e => this.setState({ address1: e.target.value })}
                           />
                           <InputGroupAddon addonType="append">
-                            <Button color="primary" type="button" >주소 검색</Button>
+                            <Button color="primary" type="button">주소 검색</Button>
                           </InputGroupAddon>
                         </InputGroup>
                       </div>
-                      <InputGroup className="mb-1" onClick={this.zipModal}>
-                        <Input
-                          type="text"
-                          required
-                          disabled
-                          value={this.state.address1}
-                          onChange={e => this.setState({ address1: e.target.value })}
-                        /> 
-                        
-                      </InputGroup>
 
+                      <div className="d-flex justify-content-between">
+                        <div className="col-2"></div>
+                        <InputGroup>
+                          <Input
+                            type="text"
+                            required
+                            value={this.state.address2}
+                            onChange={e => this.setState({ address2: e.target.value })}
+                          />
+                        </InputGroup>
+                      </div>
+                      
                       {/* 주소찾기 Modal창 */}
                       <Modal
                         isOpen={this.state.modal}
@@ -202,18 +219,9 @@ handleComplete = (data) => {
                           </Button>
                         </ModalFooter>
                       </Modal>
-                      
-                      <InputGroup>
-                        <Input
-                          type="text"
-                          required
-                          value={this.state.address2}
-                          onChange={e => this.setState({ address2: e.target.value })}
-                        />
-                      </InputGroup>
                     </FormGroup>
-                    <FormGroup className="form-label-group">
-                      <div>전화번호 (필수)</div>
+                    <FormGroup className="form-label-group d-flex justify-content-between">
+                      <div className="col-2 align-self-center"><b>전화번호 <span className="text-primary">(필수)</span></b></div>
                       <InputGroup>
                         <Input
                           type="text"
@@ -225,33 +233,35 @@ handleComplete = (data) => {
                       </InputGroup>
                     </FormGroup>
                     <FormGroup className="form-label-group">
-                      <div>계좌정보</div>
-                      <div className="row mb-1">
-                        <div className="col-6">
-                          <InputGroup>
-                            <InputGroupAddon addonType="prepend">
-                              <InputGroupText>예금주</InputGroupText>
-                            </InputGroupAddon>  
-                            <Input
-                              type="text"
-                              required
-                              value={this.state.accountname}
-                              onChange={e => this.setState({ accountname: e.target.value })}
-                            />
-                          </InputGroup> 
-                        </div>
-                        <div className="col-6">
-                          <InputGroup>
-                            <InputGroupAddon addonType="prepend">
-                              <InputGroupText>은행명</InputGroupText>
-                            </InputGroupAddon>  
-                            <Input
-                              type="text"
-                              required
-                              value={this.state.bankname}
-                              onChange={e => this.setState({ bankname: e.target.value })}
-                            />
-                          </InputGroup> 
+                      <div className="d-flex justify-content-between">
+                        <div className="col-2 self-align-start">계좌정보</div>
+                        <div className="row col-11 mb-1 mr-6">
+                          <div className="col-6">
+                            <InputGroup>
+                              <InputGroupAddon addonType="prepend">
+                                <InputGroupText>예금주</InputGroupText>
+                              </InputGroupAddon>  
+                              <Input
+                                type="text"
+                                required
+                                value={this.state.accountname}
+                                onChange={e => this.setState({ accountname: e.target.value })}
+                              />
+                            </InputGroup> 
+                          </div>
+                          <div className="col-6">
+                            <InputGroup>
+                              <InputGroupAddon addonType="prepend">
+                                <InputGroupText>은행명</InputGroupText>
+                              </InputGroupAddon>  
+                              <Input
+                                type="text"
+                                required
+                                value={this.state.bankname}
+                                onChange={e => this.setState({ bankname: e.target.value })}
+                              />
+                            </InputGroup> 
+                          </div>
                         </div>
                       </div>
                       <InputGroup>
@@ -272,6 +282,7 @@ handleComplete = (data) => {
                       block
                       color="primary" 
                       type="submit"
+                      // onClick={this.checkstate}
                       >
                         저장하기
                       </Button>

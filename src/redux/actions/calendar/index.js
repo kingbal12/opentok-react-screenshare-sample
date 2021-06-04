@@ -19,11 +19,11 @@ export const fetchEvents = () => {
 //         params: {
 //           user_id: "kjh@iot4health.co.kr",
 //           start_date: "20210101",
-//           end_date: "20210531"
+//           end_date: "20210610"
 //         }
 //       })
 //       .then(response => {
-//         console.log(response.data.data[0]["SCHEDULE_ID"])
+//         console.log(response)
 //         // 배열안의 데이터 이름을 바꿀 수 있는 방안 연구
 //         // fake-db의 데이터 항목 참고 
 //         // react-big-calendar의 dataformat 과 api에서 오는 dataformat이 다르지만

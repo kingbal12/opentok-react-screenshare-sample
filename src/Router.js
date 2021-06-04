@@ -174,6 +174,7 @@ const userEdit = lazy(() => import("./views/apps/user/edit/Edit"))
 const userView = lazy(() => import("./views/apps/user/view/View"))
 const Login = lazy(() => import("./views/pages/authentication/login/Login"))
 const FindUser = lazy(() => import("./views/pages/authentication/login/FindUser"))
+const myinfo = lazy(() => import("./views/pages/settings/myinfo/MyInfo"))
 const callsetting = lazy(() => import("./views/pages/settings/call/CallSetting"))
 const loginsetting = lazy(() => import("./views/pages/settings/loginsetting/loginsetting"))
 const changepassword = lazy(() => import("./views/pages/settings/loginsetting/changepassword"))
@@ -393,6 +394,7 @@ class AppRouter extends React.Component {
           <AppRoute path="/misc/error/404" component={error404} fullLayout />
           <AppRoute path="/pages/login" component={Login} fullLayout />
           <AppRoute path="/pages/finduser" component={FindUser} fullLayout />
+          <AppRoute path="/pages/myinfo" component={myinfo} />
           <AppRoute path="/pages/callsetting" component={callsetting} />
           <AppRoute path="/pages/loginsetting" component={loginsetting} />
           <AppRoute path="/pages/changepassword" component={changepassword} />
@@ -404,7 +406,7 @@ class AppRouter extends React.Component {
           <AppRoute path="/pages/register4" component={register4} fullLayout />
           {/* <AppRoute path="/addEventButton" component={addEventButton}  />
           <AppRoute path="/addEventSidebar" component={addEventSidebar}  /> */}
-          <AppRoute path="/schedule" component={schedule} fullLayout/>
+          <AppRoute path="/schedule" component={schedule}/>
           
           <AppRoute
             path="/pages/forgot-password"
