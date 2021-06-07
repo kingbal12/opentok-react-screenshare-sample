@@ -159,7 +159,7 @@ export const register3 = (userid, hospitalname, businessnumber, zipcode, address
 }
 
 
-export const register4 = (userid, file, medicalpart, medicalable, medicaldesc, medicalnum, userdesc) => {
+export const register4 = (userid, filename, file, medicalpart, medicalable, medicaldesc, medicalnum, userdesc) => {
   let data = new FormData();
   data.append('user_id', userid);
   data.append('file_name', file);
