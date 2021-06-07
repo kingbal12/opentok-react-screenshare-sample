@@ -159,7 +159,7 @@ export const register3 = (userid, hospitalname, businessnumber, zipcode, address
 }
 
 
-export const register4 = (userid, filename, file, medicalpart, medicalable, medicaldesc, medicalnum, userdesc) => {
+export const register4 = (userid, file, medicalpart, medicalable, medicaldesc, medicalnum, userdesc) => {
   let data = new FormData();
   data.append('user_id', userid);
   data.append('file_name', file);
@@ -171,16 +171,7 @@ export const register4 = (userid, filename, file, medicalpart, medicalable, medi
   return dispatch => {
     axios
       .put("http://192.168.0.7:9300/v1/doctor/account/user-info", data
-      // {
-      //   user_id : userid, 
-      //   file_name : filename,
-      //   medical_part : medicalpart,
-      //   medical_able : medicalable,
-      //   medical_desc : medicaldesc,
-      //   medical_num : medicalnum,
-      //   user_desc : userdesc
-      
-      // }
+
       )
       .then(response => {
         console.log(response);

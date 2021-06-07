@@ -190,7 +190,7 @@ class CalendarApp extends React.Component {
     this.props.addEvent(
       {
       id,
-      // title: this.state.title,
+      title: this.state.title,
       start: this.state.startDate,
       end: this.state.endDate,
       // label: this.state.label === null ? "others" : this.state.label,
@@ -256,7 +256,7 @@ class CalendarApp extends React.Component {
               }}
               onSelectSlot={({ start, end }) => {
                 this.setState({
-                  // title: "테스트",
+                  title: "테스트",
                   // label: null,
                   startDate: new Date(start),
                   endDate: new Date(end),

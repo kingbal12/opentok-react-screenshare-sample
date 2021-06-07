@@ -10,84 +10,149 @@ let data = {
       // allDay: true,
       // selectable: true
     },
-    {
-      id: 2,
-      // title: "My Event",
-      start: "2021-05-25 09:30:00",
-      end: "2021-05-25 09:45:00",
-      label: "others"
-      // allDay: false,
-      // selectable: true
-    },
-    {
-      id: 2,
-      // title: "My Event",
-      start: "2021-05-25 10:15:00",
-      end: "2021-05-25 10:30:00",
-      label: "others"
-      // allDay: false,
-      // selectable: true
-    },
-    {
-      id: 2,
-      // title: "My Event",
-      start: "2021-05-26 09:45:00",
-      end: "2021-05-26 10:00:00",
-      label: "others"
-      // allDay: false,
-      // selectable: true
-    },
-    {
-      id: 2,
-      // title: "My Event",
-      start: "2021-05-26 11:00:00",
-      end: "2021-05-26 11:15:00",
-      label: "others"
-      // allDay: false,
-      // selectable: true
-    },
-    {
-      id: 2,
-      // title: "My Event",
-      start: "2021-05-26 11:45:00",
-      end: "2021-05-26 12:00:00",
-      label: "others"
-      // allDay: false,
-      // selectable: true
-    },
-    {
-      id: 2,
-      // title: "My Event",
-      start: "2021-05-28 13:00:00",
-      end: "2021-05-28 13:15:00",
-      label: "others"
-      // allDay: false,
-      // selectable: true
-    },
-    {
-      id: 2,
-      // title: "My Event",
-      start: "2021-05-28 14:15:00",
-      end: "2021-05-28 14:30:00",
-      label: "others"
-      // allDay: false,
-      // selectable: true
-    },
-    
-    {
-      id: 2,
-      // title: "My Event",
-      start: "2021-05-31 00:00:00",
-      end: "2021-05-31 01:00:00",
-      // label: "business"
-      // allDay: false,
-      // selectable: true
-    }
+    // {
+    //   id: 2,
+    //   // title: "My Event",
+    //   start: "2021-04-06 09:30:00",
+    //   end: "2021-04-06 09:45:00",
+    //   label: "others"
+    //   // allDay: false,
+    //   // selectable: true
+    // },
+    // {
+    //   id: 2,
+    //   // title: "My Event",
+    //   start: "2021-04-06 10:15:00",
+    //   end: "2021-04-06 10:30:00",
+    //   label: "others"
+    //   // allDay: false,
+    //   // selectable: true
+    // },
+    // {
+    //   id: 2,
+    //   // title: "My Event",
+    //   start: "2021-04-07 09:45:00",
+    //   end: "2021-04-07 10:00:00",
+    //   label: "others"
+    //   // allDay: false,
+    //   // selectable: true
+    // },
+    // {
+    //   id: 2,
+    //   // title: "My Event",
+    //   start: "2021-04-07 11:00:00",
+    //   end: "2021-04-07 11:15:00",
+    //   label: "others"
+    //   // allDay: false,
+    //   // selectable: true
+    // },
+    // {
+    //   id: 2,
+    //   // title: "My Event",
+    //   start: "2021-04-07 11:45:00",
+    //   end: "2021-04-07 12:00:00",
+    //   label: "others"
+    //   // allDay: false,
+    //   // selectable: true
+    // },
+    // {
+    //   id: 2,
+    //   // title: "My Event",
+    //   start: "2021-04-09 13:00:00",
+    //   end: "2021-04-09 13:15:00",
+    //   label: "others"
+    //   // allDay: false,
+    //   // selectable: true
+    // },
+    // {
+    //   id: 2,
+    //   // title: "My Event",
+    //   start: "2021-04-09 14:15:00",
+    //   end: "2021-04-09 14:30:00",
+    //   label: "others"
+    //   // allDay: false,
+    //   // selectable: true
+    // },
+
+
+    // {
+    //   id: 2,
+    //   // title: "My Event",
+    //   start: "2021-04-12 09:00:00",
+    //   end: "2021-04-12 09:15:00",
+    //   label: "others"
+    //   // allDay: false,
+    //   // selectable: true
+    // },
+    // {
+    //   id: 2,
+    //   // title: "My Event",
+    //   start: "2021-04-12 09:15:00",
+    //   end: "2021-04-12 09:30:00",
+    //   label: "others"
+    //   // allDay: false,
+    //   // selectable: true
+    // },
+    // {
+    //   id: 2,
+    //   // title: "My Event",
+    //   start: "2021-04-16 13:30:00",
+    //   end: "2021-04-16 13:45:00",
+    //   label: "others"
+    //   // allDay: false,
+    //   // selectable: true
+    // },
+    // {
+    //   id: 2,
+    //   // title: "My Event",
+    //   start: "2021-04-16 10:45:00",
+    //   end: "2021-04-16 11:00:00",
+    //   label: "others"
+    //   // allDay: false,
+    //   // selectable: true
+    // },
+
+    // {
+    //   id: 2,
+    //   // title: "My Event",
+    //   start: "2021-04-12 09:00:00",
+    //   end: "2021-04-12 15:00:00",
+    //   label: "others"
+    //   // allDay: false,
+    //   // selectable: true
+    // },
+    // {
+    //   id: 2,
+    //   // title: "My Event",
+    //   start: "2021-04-13 09:00:00",
+    //   end: "2021-04-13 12:00:00",
+    //   label: "others"
+    //   // allDay: false,
+    //   // selectable: true
+    // },
+    // {
+    //   id: 2,
+    //   // title: "My Event",
+    //   start: "2021-04-14 09:00:00",
+    //   end: "2021-04-14 12:00:00",
+    //   label: "others"
+    //   // allDay: false,
+    //   // selectable: true
+    // },
+    // {
+    //   id: 2,
+    //   // title: "My Event",
+    //   start: "2021-04-16 13:00:00",
+    //   end: "2021-04-16 18:00:00",
+    //   label: "others"
+    //   // allDay: false,
+    //   // selectable: true
+    // },
 
     // , // 테스트용
     //   {allDay: undefined,
     //   end: "Fri May 28 2021 02:45:00 GMT+0900 (대한민국 표준시)",
-    //   id: "0531-0900",
+    //   id: "0431-0900",
     //   label: "others",
     //   selectable: undefined,
     //   start: "Fri May 28 2021 01:00:00 GMT+0900 (대한민국 표준시)",
