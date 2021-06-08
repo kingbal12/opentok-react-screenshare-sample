@@ -387,6 +387,9 @@ class CalendarApp extends React.Component {
                   </FormGroup>
               </ModalBody>
               <ModalFooter>
+                <Button color="primary" outline onClick={this.schedulemodal}>
+                  취소
+                </Button>
                 <Button color="primary" onClick={this.schedulemodal, this.postschedule}>
                   저장
                 </Button>

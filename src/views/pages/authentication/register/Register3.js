@@ -232,38 +232,35 @@ handleComplete = (data) => {
                         />
                       </InputGroup>
                     </FormGroup>
-                    <FormGroup className="form-label-group">
-                      <div className="d-flex justify-content-between">
-                        <div className="col-2 self-align-start">계좌정보</div>
-                        <div className="row col-11 mb-1 mr-6">
-                          <div className="col-6">
-                            <InputGroup>
-                              <InputGroupAddon addonType="prepend">
-                                <InputGroupText>예금주</InputGroupText>
-                              </InputGroupAddon>  
-                              <Input
-                                type="text"
-                                required
-                                value={this.state.accountname}
-                                onChange={e => this.setState({ accountname: e.target.value })}
-                              />
-                            </InputGroup> 
-                          </div>
-                          <div className="col-6">
-                            <InputGroup>
-                              <InputGroupAddon addonType="prepend">
-                                <InputGroupText>은행명</InputGroupText>
-                              </InputGroupAddon>  
-                              <Input
-                                type="text"
-                                required
-                                value={this.state.bankname}
-                                onChange={e => this.setState({ bankname: e.target.value })}
-                              />
-                            </InputGroup> 
-                          </div>
-                        </div>
-                      </div>
+                    <FormGroup className="form-label-group d-flex justify-content-between">
+                      <div className="col-2 self-align-start"><b>계좌정보</b></div>
+                      <InputGroup className="mr-1">
+                        <InputGroupAddon addonType="prepend">
+                          <InputGroupText>예금주</InputGroupText>
+                        </InputGroupAddon>  
+                        <Input
+                          type="text"
+                          required
+                          value={this.state.accountname}
+                          onChange={e => this.setState({ accountname: e.target.value })}
+                        />
+                      </InputGroup> 
+                    
+                      <InputGroup className="ml-1">
+                        <InputGroupAddon addonType="prepend">
+                          <InputGroupText>은행명</InputGroupText>
+                        </InputGroupAddon>  
+                        <Input
+                          type="text"
+                          required
+                          value={this.state.bankname}
+                          onChange={e => this.setState({ bankname: e.target.value })}
+                        />
+                      </InputGroup>   
+                    </FormGroup>
+
+                    <FormGroup className="form-label-group d-flex justify-content-between">
+                      <div className="col-2"></div>
                       <InputGroup>
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>계좌번호</InputGroupText>

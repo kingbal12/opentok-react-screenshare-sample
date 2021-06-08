@@ -18,6 +18,7 @@ import RegisterJWT from "./RegisterJWT"
 import "../../../../assets/scss/pages/authentication.scss"
 import { register4 } from "../../../../redux/actions/auth/registerActions"
 import { connect } from "react-redux"
+import previmg from "../../../../assets/img/portrait/small/Sample_User_Icon.png"
 import { history } from "../../../../history"
 // import Avatar from "../../../ui-elements/"
 
@@ -88,8 +89,20 @@ class Register extends React.Component {
             />
         </div>
       </div>
-    
-      // <CardImg style={{borderRadius:"100%"}} className='profile_preview'  src={this.state.previewURL} />
+    } else {
+      profile_preview = 
+      <div className="dz-thumb ">
+        <div className="dz-thumb-inner">
+          
+          <img
+            width="150px"
+            height="150px" 
+            src={previmg}
+            className="dz-img" 
+            // alt={file.name} 
+            />
+        </div>
+      </div>
     }
     return (
       <Row className="m-0 justify-content-center">
@@ -110,14 +123,12 @@ class Register extends React.Component {
                     <h1>병원정보 입력하기</h1>
                   </CardTitle>
                 </CardHeader>   
-              <CardBody className="pt-1 pb-50">
-                
+              <CardBody className="pt-1 pb-50">              
                   <Form action="/" onSubmit={this.handleRegister}>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-2 align-self-center"><b>프로필 사진 등록</b></div>
-                      <InputGroup>
-                        <CustomInput
-                          className="col-11" 
+                      <div className="col-2 align-self-start"><b>프로필 사진 등록</b></div>
+                      <InputGroup className="col-7 mr-4">
+                        <CustomInput 
                           type="file" 
                           accept="image/gif,image/jpeg,image/png" 
                           id="exampleCustomFileBrowser" 
@@ -125,7 +136,7 @@ class Register extends React.Component {
                           label=""
                           onChange={this.handleFileOnChange}/> 
                       </InputGroup>
-                      <Row className="justify-content-md-center">{profile_preview}</Row>
+                      <Row className="col-3">{profile_preview}</Row>
                     </FormGroup> 
                     <FormGroup className="form-label-group d-flex justify-content-between">
                       <div className="col-2 align-self-center"><b>진료과</b></div>

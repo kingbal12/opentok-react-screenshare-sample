@@ -59,7 +59,7 @@ export const register2 = (name, phone, email, password) => {
   return dispatch => {
     let registeruser = email
     axios
-      .post("http://192.168.0.7:9300/signup", {
+      .post("http://203.251.135.81:9300/signup", {
         name: name, 
         phone: phone,
         user_id: email,
@@ -88,7 +88,7 @@ export const authemail = (email) => {
   return dispatch => {
    
     axios
-      .post("http://192.168.0.7:9300/signup-email", {
+      .post("http://203.251.135.81:9300/signup-email", {
         user_id: email,
       })
 
@@ -110,7 +110,7 @@ export const verifyemail = (email,idnumber) => {
   return dispatch => {
    
     axios
-      .post("http://192.168.0.7:9300/signup-verify", {
+      .post("http://203.251.135.81:9300/signup-verify", {
         user_id: email,
         auth_code: idnumber
       })
@@ -134,7 +134,7 @@ export const verifyemail = (email,idnumber) => {
 export const register3 = (userid, hospitalname, businessnumber, zipcode, address1, address2, phonenumber, accountname, bankname, accountnumber) => {
   return dispatch => {
     axios
-      .post("http://192.168.0.7:9300/v1/doctor/account/hospital-info", {
+      .post("http://203.251.135.81:9300/v1/doctor/account/hospital-info", {
         user_id : userid, 
         hospital_name : hospitalname,
         business_num : businessnumber,
@@ -170,7 +170,7 @@ export const register4 = (userid, filename, file, medicalpart, medicalable, medi
   data.append('user_desc', userdesc)
   return dispatch => {
     axios
-      .put("http://192.168.0.7:9300/v1/doctor/account/user-info", data
+      .put("http://203.251.135.81:9300/v1/doctor/account/user-info", data
 
       )
       .then(response => {
