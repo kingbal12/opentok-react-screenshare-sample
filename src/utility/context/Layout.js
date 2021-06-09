@@ -27,6 +27,7 @@ class Layout extends React.Component {
 
   handleWindowResize = () => {
     this.updateWidth()
+    
     if (this.state.activeLayout === "horizontal" && this.state.width <= 1199) {
       this.setState({
         activeLayout: "vertical",
@@ -40,6 +41,7 @@ class Layout extends React.Component {
         lastLayout: "vertical"
       })
     }
+    console.log(this.state.activeLayout, this.state.lastLayout, this.state.width);
   }
 
   componentDidMount = () => {
