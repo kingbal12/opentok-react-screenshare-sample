@@ -176,6 +176,7 @@ const Login = lazy(() => import("./views/pages/authentication/login/Login"))
 const FindUser = lazy(() => import("./views/pages/authentication/login/FindUser"))
 const myinfo = lazy(() => import("./views/pages/settings/myinfo/MyInfo"))
 const callsetting = lazy(() => import("./views/pages/settings/call/CallSetting"))
+const consultingroom = lazy(() => import("./views/pages/settings/call/ConsultingRoom"))
 const loginsetting = lazy(() => import("./views/pages/settings/loginsetting/loginsetting"))
 const changepassword = lazy(() => import("./views/pages/settings/loginsetting/changepassword"))
 const withdrawal = lazy(() => import("./views/pages/settings/loginsetting/Withdrawal"))
@@ -396,6 +397,7 @@ class AppRouter extends React.Component {
           <AppRoute path="/pages/finduser" component={FindUser} fullLayout />
           <AppRoute path="/pages/myinfo" component={myinfo} />
           <AppRoute path="/pages/callsetting" component={callsetting} />
+          <AppRoute path="/pages/consultingroom" component={consultingroom} />
           <AppRoute path="/pages/loginsetting" component={loginsetting} />
           <AppRoute path="/pages/changepassword" component={changepassword} />
           <AppRoute path="/pages/withdrawal" component={withdrawal} />

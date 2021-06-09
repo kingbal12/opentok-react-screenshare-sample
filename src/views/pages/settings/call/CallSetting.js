@@ -121,9 +121,9 @@ class CallSetting extends React.Component {
                           color="primary" 
                           type="button"
                           size="lg"
-                          // onClick={() => {
-                          //   history.push("/pages/register2")
-                          // }}
+                          onClick={() => {
+                            history.push("/pages/consultingroom")
+                          }}
                           >
                             원격의료실 입장하기
                           </Button.Ripple>

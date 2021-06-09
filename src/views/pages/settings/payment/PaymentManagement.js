@@ -1,6 +1,10 @@
 import React from "react"
-import {InputGroup, Form, FormGroup, Input, Button,
+import {InputGroup, Form, Label, FormGroup, Input, Button,
   CustomInput,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
   CardHeader,
   CardTitle,
   Card,
@@ -41,6 +45,12 @@ class PaymentManagement extends React.Component {
     this.props.changepassword(
       this.state.newpassword,
     )
+  }
+
+  pamentcheck = () => {
+    this.setState(prevState => ({
+      modal: !prevState.modal
+    }))
   }
 
 
@@ -96,6 +106,7 @@ class PaymentManagement extends React.Component {
                     <Button
                     color="primary" 
                     type="button"
+                    onClick={this.pamentcheck}
                     >
                       세금계산서 발행
                     </Button>
@@ -106,8 +117,54 @@ class PaymentManagement extends React.Component {
             </Col>
           </Row>    
         </Card>
+        {/* 주소찾기 Modal창 */}
+        <Modal
+          isOpen={this.state.modal}
+          toggle={this.toggleModal}
+          className="modal-dialog-centered"
+        >
+          <div className="d-flex justify-content-center mt-4">
+            <h2>세금계산서를 발행하시겠습니까?</h2>
+          </div>
+          <div className="d-flex justify-content-center">
+            <h5>아래의 정보들이 맞는지 확인해주세요.</h5>
+          </div>
+          <ModalBody>
+            <div className="ml-4 mr-5 mt-5" style={{fontSize:"1.2rem"}}>
+              <div className="d-flex justify-content-between ml-4 mr-5">
+                <div className="col-8"><b>과세형태</b></div>
+                <div className="text-left">면세</div>
+              </div>
+              <div className="d-flex justify-content-between ml-4 mr-5 mt-2">
+                <div className="col-8"><b>공급가액 합계</b></div>
+                <div className="text-left">0원</div>
+              </div>
+              <div className="d-flex justify-content-between ml-4 mr-5 mt-2 md-2">
+                <div className="col-8"><b>새액 합계</b></div>
+                <div className="text-left">0원</div>
+              </div>
+            </div>
+            <div className="mx-4 my-2" style={{borderBottom:"solid silver 1px"}}></div>
+            <div className="ml-4 mr-5" style={{fontSize:"1.2rem"}}>
+              <div className="d-flex justify-content-between ml-4 mr-5">
+                <div className="col-8"><b>합계금액</b></div>
+                <div className="text-left">0원</div>
+              </div>
+            </div>     
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this.pamentcheck}>
+              예
+            </Button>
+            <Button color="primary" outline onClick={this.pamentcheck}>
+              아니오
+            </Button>
+          </ModalFooter>
+        </Modal>
       </Col>
     </Row>
+
+    
     )
   }
 }
