@@ -7,19 +7,15 @@ import { loginWithJWT } from "../../../../redux/actions/auth/loginActions"
 import { connect } from "react-redux"
 import { history } from "../../../../history"
 
+
 class LoginJWT extends React.Component {
+  
   state = {
-    // 인성 api 연결
-    // email: "i4h00001",
-    // password: "1234",
-    // remember: true
-
-
-    // i4h api 연결
     email: "kjh@iot4health.co.kr",
     password: "1234",
     remember: true
   }
+  
 
   handleLogin = e => {
     e.preventDefault()
@@ -65,7 +61,7 @@ class LoginJWT extends React.Component {
               <Checkbox
                 color="primary"
                 icon={<Check className="vx-icon" size={16} />}
-                label="자동 로그인"
+                label="아이디 기억"
                 defaultChecked={false}
                 onChange={this.handleRemember}
               />
