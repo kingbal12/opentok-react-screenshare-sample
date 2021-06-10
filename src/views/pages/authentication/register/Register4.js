@@ -107,10 +107,10 @@ class Register extends React.Component {
     return (
       <Row className="m-0 justify-content-center">
       <Col
-        sm="7"
-        xl="7"
-        lg="10"
-        md="8"
+        sm="6"
+        xl="6"
+        lg="6"
+        md="6"
         className="d-flex justify-content-center"
       >
         
@@ -223,12 +223,35 @@ class Register extends React.Component {
                       </InputGroup>
                     </FormGroup>
 
-                    <div className="d-flex justify-content-between">
+                    <div className="col-12 d-flex justify-content-between mt-5">
                       <Button
-                      size="lg"
-                      block
-                      color="primary" 
-                      type="submit"
+                        outline
+                        size="lg"
+                        color="dark" 
+                        type="button"
+                      >
+                        이전단계
+                      </Button>
+                      <Button
+                        outline
+                        size="lg"
+                        color="dark" 
+                        type="button"
+                      >
+                        임시저장
+                      </Button>
+                      <Button
+                        outline
+                        size="lg"
+                        color="dark" 
+                        type="button"
+                      >
+                        미리보기
+                      </Button>
+                      <Button
+                        size="lg"
+                        color="primary" 
+                        type="submit"
                       >
                         진료 승인요청
                       </Button>

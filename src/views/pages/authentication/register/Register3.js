@@ -273,8 +273,9 @@ handleComplete = (data) => {
                         />
                       </InputGroup> 
                     </FormGroup>
-                    <div className="text-right mr-1">
+                    <div className="text-right">
                       <Button
+                        className="mr-1"
                         outline
                         color="dark" 
                         type="button"
