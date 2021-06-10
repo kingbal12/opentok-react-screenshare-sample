@@ -24,6 +24,7 @@ class Register extends React.Component {
     idnumber: "",
     password: "",
     chkpassword: "",
+    btdate:""
   }
   
 
@@ -58,10 +59,10 @@ class Register extends React.Component {
     return (
       <Row className="m-0 justify-content-center">
         <Col
-          sm="8"
-          xl="4"
-          lg="10"
-          md="8"
+          sm="6"
+          xl="6"
+          lg="6"
+          md="6"
           className="d-flex justify-content-center"
         >
           <Card className="bg-authentication rounded-0 mb-0 w-100">
@@ -77,34 +78,40 @@ class Register extends React.Component {
                   <CardBody className="pt-1 pb-50">
                       <Form onSubmit={this.handleRegister1}>
                         <FormGroup className="form-label-group">
-                          <div>아이디</div>
+                          <div className="d-flex justify-content-between"> 
+                          <div className="col-3 align-self-center"><b>아이디</b></div>
                           <InputGroup>
                             <Input
                               type="email"
-                              // placeholder="이메일"
+                              placeholder="사용 가능한 이메일 입력"
                               required
                               value={this.state.email}
                               onChange={e => this.setState({ email: e.target.value })}
                             />
                             <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.emailauth}>중복확인</Button></InputGroupAddon>
                           </InputGroup>
-                          <div>보안이메일 <span className="text-primary">(비밀번호 변경에 사용)</span></div>
+                          </div>
+                          
+                          <div className="col-12 mt-1"><b>보안이메일<span className="text-primary">(비밀번호 변경에 사용)</span></b></div>
                           <div className="d-flex flex-row-reverse">
-                            <Checkbox
-                              color="primary"
-                              icon={<Check className="vx-icon" size={16} />}
-                              label="아이디와 다른 이메일에 사용"
-                              defaultChecked={false}
-                              onChange={this.handleRemember}
-                            />
+                            <small>
+                              <Checkbox
+                                color="primary"
+                                icon={<Check className="vx-icon" size={16} />}
+                                label="아이디와 다른 이메일에 사용"
+                                defaultChecked={false}
+                                onChange={this.handleRemember}
+                              />
+                            </small>
                           </div>                
                         </FormGroup>
           
-                        <FormGroup className="form-label-group">
+                        <FormGroup className="form-label-group d-flex justify-content-between">
+                          <div className="col-3"></div>
                           <InputGroup>
                             <Input
                               type="email"
-                              placeholder="이메일"
+                              placeholder="사용 가능한 이메일 입력"
                               required
                               value={this.state.email}
                               onChange={e => this.setState({ email: e.target.value })}
@@ -113,12 +120,12 @@ class Register extends React.Component {
                           </InputGroup>
                         </FormGroup>
                         
-                        <FormGroup className="form-label-group">
-                          <div className="emailidentify">인증번호를 입력해주세요.</div>
+                        <FormGroup className="form-label-group d-flex justify-content-between">
+                          <div className="col-3"></div>
                           <InputGroup>
                             <Input
                               type="number"
-                              placeholder="인증번호"
+                              placeholder="인증번호 입력"
                               required
                               value={this.state.idnumber}
                               onChange={e => this.setState({ idnumber: e.target.value })}
@@ -127,33 +134,25 @@ class Register extends React.Component {
                           </InputGroup>
                         </FormGroup>
 
-                        <FormGroup className="form-label-group">
+                        <FormGroup className="form-label-group d-flex justify-content-between">
+                          <div className="col-3 align-self-center"><b>이름</b></div>
                           <InputGroup>
                             <Input
                               type="text"
-                              placeholder="이름"
+                              // placeholder="이름"
                               required
                               value={this.state.name}
                               onChange={e => this.setState({ name: e.target.value })}
                             />   
                           </InputGroup>
                         </FormGroup>
-                        {/* <FormGroup className="form-label-group">
+
+                        <FormGroup className="form-label-group d-flex justify-content-between">
+                         <div className="col-3 align-self-center"><b>휴대폰번호</b></div>
                           <InputGroup>
                             <Input
                               type="text"
-                              placeholder="생년월일"
-                              required
-                              value={this.state.birth}
-                              onChange={e => this.setState({ birth: e.target.value })}
-                            />   
-                          </InputGroup>
-                        </FormGroup> */}
-                        <FormGroup className="form-label-group">
-                          <InputGroup>
-                            <Input
-                              type="text"
-                              placeholder="휴대폰번호"
+                              // placeholder="휴대폰번호"
                               required
                               value={this.state.phone}
                               onChange={e => this.setState({ phone: e.target.value })}
@@ -161,54 +160,46 @@ class Register extends React.Component {
                           </InputGroup>
                         </FormGroup>
 
-                        <FormGroup className="form-label-group">
+                        <FormGroup className="form-label-group d-flex justify-content-between">
+                          <div className="col-3 align-self-center"><b>비밀번호</b></div>
                           <InputGroup>
                             <Input
                               type="password"
-                              placeholder="비밀번호"
+                              placeholder="영어, 숫자, 특수문자 포함 6자~14자 이내"
                               required
                               value={this.state.password}
                               onChange={e => this.setState({ password: e.target.value })}
                             />
                           </InputGroup>
                         </FormGroup>
-                        <FormGroup className="form-label-group">
+                        <FormGroup className="form-label-group d-flex justify-content-between">
+                          <div className="col-3"></div>
                           <InputGroup>
                             <Input
                               type="password"
-                              placeholder="비밀번호확인"
+                              placeholder="비밀번호 확인"
                               required
                               value={this.state.chkpassword}
                               onChange={e => this.setState({ chkpassword: e.target.value })}
                             />
                           </InputGroup>
                         </FormGroup>
-                        <FormGroup className="form-label-group emailagree">
-                          <Checkbox
-                            className="smallcheckbox"
-                            color="primary"
-                            icon={<Check className="vx-icon" size={16} />}
-                            label="서비스에 대한 소식을 이메일로 받겠습니다."
-                            defaultChecked={false}
-                            onChange={this.handleRemember}
-                          />
+                        <FormGroup className="form-label-group d-flex justify-content-between">
+                          <div className="col-3 align-self-center"><b>생년월일</b></div>
+                          <InputGroup>
+                            <Input
+                              type="text"
+                              placeholder="앞 6자리"
+                              required
+                              value={this.state.btdate}
+                              onChange={e => this.setState({ btdate: e.target.value })}
+                            />
+                          </InputGroup>
                         </FormGroup>
-                        <FormGroup className="form-label-group seeterm">
-                          <Checkbox
-                            className="smallcheckbox"
-                            color="primary"
-                            icon={<Check className="vx-icon" size={16} />}
-                            label="제공하는 서비스 약관에 동의합니다. 약관보기"
-                            defaultChecked={false}
-                            onChange={this.handleRemember}
-                          />
-                        </FormGroup>
-                        <div className="d-flex justify-content-center">
+                        <div className="text-right">
                           <Button
                           color="primary" 
                           type="submit"
-                          size="lg"
-                          block
                           >
                             가입하기
                           </Button>

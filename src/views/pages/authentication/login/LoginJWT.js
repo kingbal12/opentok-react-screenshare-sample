@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { CardBody, FormGroup, Form, Input, Button, Label } from "reactstrap"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
@@ -6,14 +6,34 @@ import { Mail, Lock, Check } from "react-feather"
 import { loginWithJWT } from "../../../../redux/actions/auth/loginActions"
 import { connect } from "react-redux"
 import { history } from "../../../../history"
+import { useCookies } from 'react-cookie'
 
+// const [email, setEmail] = useState("");
+// const [isRemember, setIsRemember] = useState(false);
+// const [cookies, setCookie, removeCookie] = useCookies(['rememberEmail']);
+
+// useEffect(() => {
+//   if(cookies.rememberEmail !== undefined) {
+//     setEmail(cookies.rememberEmail);
+//     setIsRemember(true);
+//   }
+// }, []);
+
+// const handleOnChange = (e) => {
+//   setIsRemember(e.target.check);
+//   if(e.target.check){
+//     setCookie('rememberEmail', email, {maxAge: 2000});
+//   } else {
+//   removeCookie('rememberEmail');
+//   }
+// }
 
 class LoginJWT extends React.Component {
   
   state = {
     email: "kjh@iot4health.co.kr",
     password: "1234",
-    remember: true
+    remember: false
   }
   
 

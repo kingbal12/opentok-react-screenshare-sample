@@ -90,10 +90,10 @@ handleComplete = (data) => {
     return (
       <Row className="m-0 justify-content-center">
         <Col
-          sm="8"
-          xl="8"
-          lg="8"
-          md="8"
+          sm="6"
+          xl="6"
+          lg="6"
+          md="6"
           className="d-flex justify-content-center"
         >
           <Card className="bg-authentication rounded-0 mb-0 w-100">
@@ -109,7 +109,7 @@ handleComplete = (data) => {
               <CardBody className="pt-1 pb-50">
                   <Form action="/" onSubmit={this.handleRegister}>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-2 align-self-center"><b>회원인증</b></div>            
+                      <div className="col-3 align-self-center"><b>회원인증</b></div>            
                       <InputGroup>
                         <Button type="button" color="primary" outline>휴대폰 인증</Button>
                         <Input
@@ -124,7 +124,7 @@ handleComplete = (data) => {
                       </InputGroup>                      
                     </FormGroup>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-2 align-self-center"><b>병원명 <span className="text-primary">(필수)</span></b></div>
+                      <div className="col-3 align-self-center"><b>병원명 <span className="text-primary">(필수)</span></b></div>
                       <InputGroup>
                         <Input
                           type="text"
@@ -136,7 +136,7 @@ handleComplete = (data) => {
                       </InputGroup>
                     </FormGroup>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-2 align-self-center"><b>사업자 등록번호 <span className="text-primary">(필수)</span></b></div>
+                      <div className="col-3 align-self-center"><b>사업자 등록번호 <span className="text-primary">(필수)</span></b></div>
                       <InputGroup>
                         <Input
                           type="text"
@@ -150,7 +150,7 @@ handleComplete = (data) => {
                     </FormGroup>
                     <FormGroup className="form-label-group">
                       <div className="d-flex justify-content-between">
-                        <div className="col-2 align-self-start"><b>병원주소 <span className="text-primary">(필수)</span></b></div>
+                        <div className="col-3 align-self-start"><b>병원주소 <span className="text-primary">(필수)</span></b></div>
                         <InputGroup className="mb-1" onClick={this.zipModal}>
                           <Input
                             type="text"
@@ -166,7 +166,7 @@ handleComplete = (data) => {
                       </div>
 
                       <div className="d-flex justify-content-between">
-                        <div className="col-2"></div>
+                        <div className="col-3"></div>
                         <InputGroup>
                           <Input
                             type="text"
@@ -221,7 +221,7 @@ handleComplete = (data) => {
                       </Modal>
                     </FormGroup>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-2 align-self-center"><b>전화번호 <span className="text-primary">(필수)</span></b></div>
+                      <div className="col-3 align-self-center"><b>전화번호 <span className="text-primary">(필수)</span></b></div>
                       <InputGroup>
                         <Input
                           type="text"
@@ -233,7 +233,7 @@ handleComplete = (data) => {
                       </InputGroup>
                     </FormGroup>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-2 self-align-start"><b>계좌정보</b></div>
+                      <div className="col-3 self-align-start"><b>계좌정보</b></div>
                       <InputGroup className="mr-1">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>예금주</InputGroupText>
@@ -260,7 +260,7 @@ handleComplete = (data) => {
                     </FormGroup>
 
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-2"></div>
+                      <div className="col-3"></div>
                       <InputGroup>
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>계좌번호</InputGroupText>
@@ -273,15 +273,21 @@ handleComplete = (data) => {
                         />
                       </InputGroup> 
                     </FormGroup>
-                    <div className="d-flex justify-content-between">
+                    <div className="text-right mr-1">
                       <Button
-                      size="lg"
-                      block
-                      color="primary" 
-                      type="submit"
-                      // onClick={this.checkstate}
+                        outline
+                        color="dark" 
+                        type="button"
+                        // onClick={this.checkstate}
                       >
-                        저장하기
+                        임시저장
+                      </Button>
+                      <Button
+                        color="primary" 
+                        type="submit"
+                        // onClick={this.checkstate}
+                      >
+                        다음단계
                       </Button>
                     </div>
                   </Form>

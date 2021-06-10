@@ -41,7 +41,6 @@ class Layout extends React.Component {
         lastLayout: "vertical"
       })
     }
-    console.log(this.state.activeLayout, this.state.lastLayout, this.state.width);
   }
 
   componentDidMount = () => {
