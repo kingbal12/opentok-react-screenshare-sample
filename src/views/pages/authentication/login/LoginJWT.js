@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
-import { CardBody, FormGroup, Form, Input, Button, Label } from "reactstrap"
+import { CardBody, FormGroup, Form, Input, Button, FormFeedback } from "reactstrap"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import { Mail, Lock, Check } from "react-feather"
 import { loginWithJWT } from "../../../../redux/actions/auth/loginActions"
@@ -31,8 +31,8 @@ import { useCookies } from 'react-cookie'
 class LoginJWT extends React.Component {
   
   state = {
-    email: "",
-    password: "",
+    email: "kingbal999@gmail.com",
+    password: "123456",
     remember: false
   }
   
@@ -58,7 +58,9 @@ class LoginJWT extends React.Component {
                 value={this.state.email}
                 onChange={e => this.setState({ email: e.target.value })}
                 required
+                invalid={this.state.email.length >= 6 ? false : true}
               />
+              <FormFeedback>{this.state.email.length >= 6 ? "" : "아이디를 6자 이상입력하십시오"}</FormFeedback>
               <div className="form-control-position">
                 <Mail size={15} />
               </div>
@@ -71,7 +73,9 @@ class LoginJWT extends React.Component {
                 value={this.state.password}
                 onChange={e => this.setState({ password: e.target.value })}
                 required
+                invalid={this.state.password.length >= 6 ? false : true}
               />
+              <FormFeedback>{this.state.password.length >= 6 ? "" : "비밀번호를 6자 이상입력하십시오"}</FormFeedback>
               <div className="form-control-position">
                 <Lock size={15} />
               </div>
