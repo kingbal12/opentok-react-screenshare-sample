@@ -42,8 +42,8 @@ class Register extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      // userid: "kingbal999@gmail.com",
-      userid: props.user.register.values.registeruser,
+      userid: "kingbal999@gmail.com",
+      // userid: props.user.register.values.registeruser,
       filename: "",
       file : "",
       medicalpart: "", 
@@ -55,11 +55,11 @@ class Register extends React.Component {
     }
   }
 
-  handleFileOnChange = (event) => {
-    event.preventDefault();
+  handleFileOnChange = e => {
+    e.preventDefault();
     let reader = new FileReader();
-    let file = event.target.files[0];
-    let filename = event.target.files[0].name
+    let file = e.target.files[0];
+    let filename = e.target.files[0].name
     reader.onloadend = () => {
       this.setState({
         file : file,
@@ -69,6 +69,8 @@ class Register extends React.Component {
     }
     reader.readAsDataURL(file);
   }
+
+  
 
   handleRegister = e => {
     e.preventDefault()
@@ -110,13 +112,13 @@ class Register extends React.Component {
     } else {
       profile_preview = 
       <div className="dz-thumb ">
-        <div className="dz-thumb-inner">
-          
+        <div className="dz-thumb-inner">  
           <img
             width="150px"
             height="150px" 
             src={previmg}
-            className="dz-img" 
+            className="dz-img"
+            style={{borderRadius:"100%"}} 
             // alt={file.name} 
             />
         </div>
@@ -143,18 +145,30 @@ class Register extends React.Component {
                 </CardHeader>   
               <CardBody className="pt-1 pb-50">              
                   <Form action="/" onSubmit={this.handleRegister}>
-                    <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-2 align-self-start"><b>프로필 사진 등록</b></div>
-                      <InputGroup className="col-7 mr-4">
-                        <CustomInput 
-                          type="file" 
-                          accept="image/gif,image/jpeg,image/png" 
-                          id="exampleCustomFileBrowser" 
-                          name="customFile" 
-                          label=""
-                          onChange={this.handleFileOnChange}/> 
-                      </InputGroup>
-                      <Row className="col-3">{profile_preview}</Row>
+                    <FormGroup className="form-label-group">
+                      <div className="d-flex justify-content-between">
+                        <div className="col-2 align-self-start"><b>프로필 사진 등록</b></div>
+                        <InputGroup>
+                          <CustomInput 
+                            type="file" 
+                            accept="image/gif,image/jpeg,image/png" 
+                            id="exampleCustomFileBrowser" 
+                            name="customFile" 
+                            label=""
+                            onChange={this.handleFileOnChange}/> 
+                        </InputGroup>
+                      </div>
+                      
+                      <div className="d-flex justify-content-between">
+                        <div className="col-2"></div>
+                        <Row className="text-left col-4 mt-2">{profile_preview}</Row>
+                        <div className="col-6 mt-2">
+                          {/* <Input type="file" accept="image/gif,image/jpeg,image/png"  id="inputFile" name="fileInpur" />  */}
+                          <Button className="col-5 mr-1" color="primary" type="button" outline>수정</Button>
+                          <Button className="col-5 ml-1" color="primary" type="button" outline>삭제</Button>
+                        </div>
+                      </div>
+                      
                     </FormGroup> 
                     <FormGroup className="form-label-group d-flex justify-content-between no-gutters">
                       <div className="col-2 align-self-center"><b className="ml-1">진료과</b></div>
