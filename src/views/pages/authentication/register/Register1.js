@@ -91,7 +91,7 @@ class Register extends React.Component {
                             );
                           })}
                         <div className="pb-3 select"><small>선택 약관은 동의하지 않아도 회원가입이 가능합니다.</small></div>
-                        <FormGroup className="row pl-1 form-label-group">
+                        {/* <FormGroup className="row pl-1 form-label-group">
                           <Checkbox
                             color="primary"
                             icon={<Check className="vx-icon" size={16} />}
@@ -107,7 +107,7 @@ class Register extends React.Component {
                             defaultChecked={false}
                             onChange={this.handleRemember}
                           />
-                        </FormGroup>
+                        </FormGroup> */}
                         <div className="d-flex justify-content-between">
                           <Button.Ripple
                             color="primary"

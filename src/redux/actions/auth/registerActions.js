@@ -56,6 +56,7 @@ export const signupWithFirebase = (email, password, name) => {
 
 // 회원가입 pages/register2 
 export const register2 = (name, phone, email, password) => {
+  
   return dispatch => {
     let registeruser = email
     axios
@@ -74,6 +75,7 @@ export const register2 = (name, phone, email, password) => {
           history.push("/pages/register3");
         } else {
           alert(response.data.message);
+         
         }
 
       })
@@ -85,6 +87,7 @@ export const register2 = (name, phone, email, password) => {
 }
 
 export const authemail = (email) => {
+  console.log(email,"email2")
   return dispatch => {
    
     axios
@@ -96,7 +99,7 @@ export const authemail = (email) => {
       .then(response => {
         console.log(response);
         if(response.data.status === "200") {
-          
+          alert(response.data.message);
         } else {
           alert(response.data.message);
         }
@@ -119,7 +122,7 @@ export const verifyemail = (email,idnumber) => {
       .then(response => {
         console.log(response);
         if(response.data.status === "200") {
-          
+          alert(response.data.message);
         } else {
           alert(response.data.message);
         }

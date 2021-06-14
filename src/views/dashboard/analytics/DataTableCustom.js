@@ -10,6 +10,8 @@ import { Star, Search } from "react-feather"
 import {
   Edit,
   Link,
+  Video,
+  Phone,
   Trash,
   ChevronDown,
   Plus,
@@ -55,7 +57,7 @@ class DataTableCustom extends React.Component {
         // selector: "date",
         // sortable: true,
         cell: row => (
-          <p className="text-bold-500 text-truncate mb-0">{}</p>
+          <p className="text-bold-500 text-truncate mb-0"></p>
         )
       },
       
@@ -144,7 +146,7 @@ class DataTableCustom extends React.Component {
         // selector: "",
         // sortable: true,
         cell: row => (
-          <Link></Link>
+          <Link stroke={row.STATE} style={{borderRadius:"5px"}}></Link>
           // 가운데로 옮길것
           
         )
@@ -212,11 +214,59 @@ class DataTableCustom extends React.Component {
         email: "alillecrop0@twitpic.com",
         GENDER: "F",
         AGE: "29",
-        BIRTH_DT:"1993.04.22",
+        BIRTH_DT:"Apr22. 1993",
         NOTE_DX:"-",
         FIRST_YN:"초진",
         SYMPTOM:"눈이 아파요",
-        ratings: "good"
+        STATE: "black"
+      },
+      {
+        APPOINT_TIME: "09:15",
+        F_NAME: "주승기",
+        email: "alillecrop0@twitpic.com",
+        GENDER: "M",
+        AGE: "45",
+        BIRTH_DT:"Sep27. 1977",
+        NOTE_DX:"HTN",
+        FIRST_YN:"재진",
+        SYMPTOM:"피곤해요",
+        STATE: "red"
+      },
+      {
+        APPOINT_TIME: "10:45",
+        F_NAME: "정혜인",
+        email: "alillecrop0@twitpic.com",
+        GENDER: "F",
+        AGE: "29",
+        BIRTH_DT:"Mar12. 1995",
+        NOTE_DX:"DM",
+        FIRST_YN:"재진",
+        SYMPTOM:"별일없이 잘 지내요",
+        STATE: "yellow"
+      },
+      {
+        APPOINT_TIME: "11:15",
+        F_NAME: "송현준",
+        email: "alillecrop0@twitpic.com",
+        GENDER: "M",
+        AGE: "37",
+        BIRTH_DT:"Jan06. 1985",
+        NOTE_DX:"-",
+        FIRST_YN:"초진",
+        SYMPTOM:"두통이 심해요",
+        STATE: "silver"
+      },
+      {
+        APPOINT_TIME: "01:00",
+        F_NAME: "홍지효",
+        email: "alillecrop0@twitpic.com",
+        GENDER: "F",
+        AGE: "22",
+        BIRTH_DT:"July18. 2000",
+        NOTE_DX:"-",
+        FIRST_YN:"초진",
+        SYMPTOM:"목이 아파요",
+        STATE: "green"
       },
       // {
       //   image: require("../../../assets/img/portrait/small/avatar-s-1.jpg"),

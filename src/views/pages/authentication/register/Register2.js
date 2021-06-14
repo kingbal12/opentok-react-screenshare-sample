@@ -5,7 +5,11 @@ import {InputGroup, InputGroupAddon, Form, FormGroup, Input, Button,
   Card,
   CardBody,
   Row,
-  Col
+  Col,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
 } from "reactstrap"
 import { Check } from "react-feather"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
@@ -20,11 +24,21 @@ class Register extends React.Component {
   state = {
     name: "",
     phone: "",
+    useemail: "",
     email: "",
     idnumber: "",
     password: "",
     chkpassword: "",
-    btdate:""
+    btdate:"",
+    otheremail: false,
+    idmodal: false,
+    vfemodal: false
+  }
+
+  idModal = () => {
+    this.setState(prevState => ({
+      idmodal: !prevState.idmodal
+    }))
   }
   
 
@@ -52,6 +66,18 @@ class Register extends React.Component {
       this.state.password,
       this.state.chkpassword
     )
+  }
+
+  handleOtheremail = e => {
+    this.setState({
+      otheremail: e.target.checked
+    })
+  }
+
+  verifyEmailModal = () => {
+    this.setState(prevState => ({
+      vfemodal: !prevState.vfemodal
+    }))
   }
 
   
@@ -85,10 +111,10 @@ class Register extends React.Component {
                               type="email"
                               placeholder="사용 가능한 이메일 입력"
                               required
-                              value={this.state.email}
-                              onChange={e => this.setState({ email: e.target.value })}
+                              value={this.state.useemail}
+                              onChange={e => this.setState({ useemail: e.target.value })}
                             />
-                            <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.emailauth}>중복확인</Button></InputGroupAddon>
+                            <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.idModal}>중복확인</Button></InputGroupAddon>
                           </InputGroup>
                           </div>
                           
@@ -98,9 +124,9 @@ class Register extends React.Component {
                               <Checkbox
                                 color="primary"
                                 icon={<Check className="vx-icon" size={16} />}
-                                label="아이디와 다른 이메일에 사용"
+                                label="아이디와 다른 이메일 사용"
                                 defaultChecked={false}
-                                onChange={this.handleRemember}
+                                onChange={this.handleOtheremail}
                               />
                             </small>
                           </div>                
@@ -110,6 +136,7 @@ class Register extends React.Component {
                           <div className="col-3"></div>
                           <InputGroup>
                             <Input
+                              disabled={this.state.otheremail===true?false:true}
                               type="email"
                               placeholder="사용 가능한 이메일 입력"
                               required
@@ -211,7 +238,47 @@ class Register extends React.Component {
             </Row>
           </Card>
         </Col>
+
+        <Modal
+          isOpen={this.state.idmodal}
+          toggle={this.idModal}
+          className="modal-dialog-centered modal-sm"
+        >
+          <ModalHeader toggle={this.idModal}>
+            
+          </ModalHeader>
+          <ModalBody>
+            사용가능한 아이디입니다.
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this.idModal}>
+              확인
+            </Button>{" "}
+          </ModalFooter>
+        </Modal>
+
+        <Modal
+          isOpen={this.state.vfemodal}
+          toggle={this.verifyEmailModal}
+          className="modal-dialog-centered modal-sm"
+        >
+          <ModalHeader toggle={this.verifyEmailModal}>
+            
+          </ModalHeader>
+          <ModalBody>
+            인증이 완료되었습니다.
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this.verifyEmailModal}>
+              확인
+            </Button>{" "}
+          </ModalFooter>
+        </Modal>
       </Row>
+
+      
+
+
     )
   }
 }

@@ -214,7 +214,7 @@ class CalendarApp extends React.Component {
       this.state.holiday,
       this.state.rperiod,
       this.state.events)
-
+      
   }
 
   
@@ -287,6 +287,7 @@ class CalendarApp extends React.Component {
                 //   history.push("/pages/login")
                 // }}
                 onClick={this.schedulemodal}
+                
               >
                 저장
               </Button>

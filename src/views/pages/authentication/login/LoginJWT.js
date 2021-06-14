@@ -31,8 +31,8 @@ import { useCookies } from 'react-cookie'
 class LoginJWT extends React.Component {
   
   state = {
-    email: "kjh@iot4health.co.kr",
-    password: "1234",
+    email: "",
+    password: "",
     remember: false
   }
   

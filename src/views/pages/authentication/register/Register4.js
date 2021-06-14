@@ -7,7 +7,11 @@ import {InputGroup, Form, FormGroup, Input, Button,
   CardBody,
   Row,
   Col,
-  CardImg 
+  CardImg,
+  ButtonDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem 
 } from "reactstrap"
 import PerfectScrollbar from "react-perfect-scrollbar"
 // import classnames from "classnames"
@@ -20,18 +24,28 @@ import { register4 } from "../../../../redux/actions/auth/registerActions"
 import { connect } from "react-redux"
 import previmg from "../../../../assets/img/portrait/small/Sample_User_Icon.png"
 import { history } from "../../../../history"
-// import Avatar from "../../../ui-elements/"
+import Select from "react-select"
 
-
+//  '01' : 가정의학과, '02' : 내과 
+//  '03' : 산부인과, '04' : 피부과 
+//  '05' : 비뇨기과, '99' : 기타
+const medicalpartOptions = [
+  { value: "01", label: "가정의학과" },
+  { value: "02", label: "내과" },
+  { value: "03", label: "산부인과" },
+  { value: "04", label: "피부과" },
+  { value: "05", label: "비뇨기과" },
+  { value: "99", label: "기타"}
+]
 
 class Register extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      userid: "kjh@iot4health.co.kr",
-      // userid: props.user.register.values.registeruser,
+      // userid: "kingbal999@gmail.com",
+      userid: props.user.register.values.registeruser,
       filename: "",
-      file : "", 
+      file : "",
       medicalpart: "", 
       medicalable: "", 
       medicaldesc: "", 
@@ -40,7 +54,6 @@ class Register extends React.Component {
       previewURL : ""
     }
   }
-  // 20210517 여기까지 작업함
 
   handleFileOnChange = (event) => {
     event.preventDefault();
@@ -70,6 +83,11 @@ class Register extends React.Component {
       this.state.userdesc,    
       this.state.previewURL
     )
+  }
+
+  viewlog = e => {
+    e.preventDefault()
+    console.log(this.state)
   }
 
 
@@ -138,17 +156,28 @@ class Register extends React.Component {
                       </InputGroup>
                       <Row className="col-3">{profile_preview}</Row>
                     </FormGroup> 
-                    <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-2 align-self-center"><b>진료과</b></div>
-                      <InputGroup>
-                        <Input
-                          type="text"
-                          placeholder="TEXT를 입력해주세요"
-                          required
-                          value={this.state.medicalpart}
-                          onChange={e => this.setState({ medicalpart: e.target.value })}
-                        />   
-                      </InputGroup>
+                    <FormGroup className="form-label-group d-flex justify-content-between no-gutters">
+                      <div className="col-2 align-self-center"><b className="ml-1">진료과</b></div>
+                      
+                      <Input type="select" name="select" value={this.state.medicalpart}  onChange={e => this.setState({ medicalpart: e.target.value })}>
+                        <option value="01">가정의학과</option>
+                        <option value="02">내과</option>
+                        <option value="03">산부인과</option>
+                        <option value="04">피부과</option>
+                        <option value="05">비뇨기과</option>
+                        <option value="99">기타</option>
+                      </Input>
+                      {/* 차후 적용시킬 select 
+                      <Col>
+                        <Select
+                          classNamePrefix="select"
+                          defaultValue={medicalpartOptions[0]}
+                          name="loading"
+                          options={medicalpartOptions}
+                          // isLoading={true}
+                        />
+                      </Col>
+                       */}
                     </FormGroup>
                     
                     <FormGroup className="form-label-group d-flex justify-content-between">
@@ -245,6 +274,7 @@ class Register extends React.Component {
                         size="lg"
                         color="dark" 
                         type="button"
+                        onClick={this.viewlog}
                       >
                         미리보기
                       </Button>
@@ -252,6 +282,7 @@ class Register extends React.Component {
                         size="lg"
                         color="primary" 
                         type="submit"
+                        
                       >
                         진료 승인요청
                       </Button>
