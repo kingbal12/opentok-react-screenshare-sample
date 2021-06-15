@@ -106,7 +106,7 @@ class Register extends React.Component {
     }))
   }
 
-  
+
   render() {
     return (
       <Row className="m-0 justify-content-center">
@@ -139,7 +139,7 @@ class Register extends React.Component {
                               required
                               value={this.state.useemail}
                               onChange={e => this.setState({ useemail: e.target.value })}
-                              invalid={this.state.useemail.length === 0 ? true : false}
+                              // invalid={this.state.useemail.length === 0 ? true : false}
                             />
                             <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.idModal}>중복확인</Button></InputGroupAddon>
                           </InputGroup>

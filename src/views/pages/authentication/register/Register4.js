@@ -7,11 +7,10 @@ import {InputGroup, Form, FormGroup, Input, Button,
   CardBody,
   Row,
   Col,
-  CardImg,
-  ButtonDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem 
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
 } from "reactstrap"
 import PerfectScrollbar from "react-perfect-scrollbar"
 // import classnames from "classnames"
@@ -51,7 +50,8 @@ class Register extends React.Component {
       medicaldesc: "", 
       medicalnum: "", 
       userdesc: "",
-      previewURL : ""
+      previewURL : "",
+      registermodal: false
     }
   }
 
@@ -95,6 +95,11 @@ class Register extends React.Component {
     console.log(this.state)
   }
 
+  registerModal = () => {
+    this.setState(prevState => ({
+      registermodal: !prevState.registermodal
+    }))
+  }
 
 
   render() {
@@ -312,6 +317,24 @@ class Register extends React.Component {
           
         </Card>
       </Col>
+
+      <Modal
+        isOpen={this.state.registermodal}
+        toggle={this.registerModal}
+        className="modal-dialog-centered modal-sm"
+      >
+        <ModalHeader toggle={this.registerModal}>
+          
+        </ModalHeader>
+        <ModalBody>
+          진료승인을 요청하였습니다.
+        </ModalBody>
+        <ModalFooter>
+          <Button color="primary" onClick={this.registerModal}>
+            확인
+          </Button>{" "}
+        </ModalFooter>
+      </Modal>
     </Row>
     )
   }
