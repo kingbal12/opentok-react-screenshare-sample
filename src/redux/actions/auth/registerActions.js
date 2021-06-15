@@ -100,6 +100,7 @@ export const authemail = (email) => {
         console.log(response);
         if(response.data.status === "200") {
           alert(response.data.message);
+          
         } else {
           alert(response.data.message);
         }
@@ -120,11 +121,27 @@ export const verifyemail = (email,idnumber) => {
 
 
       .then(response => {
+
+        let verifyemailstatus;
+
         console.log(response);
         if(response.data.status === "200") {
-          alert(response.data.message);
+          verifyemailstatus = response.data.status
+
+          dispatch({
+            type: "VERIFY_EMAIL",
+            payload: {verifyemailstatus}
+          })
+          
+          
         } else {
+          dispatch({
+            type: "VERIFY_EMAIL",
+            payload: {verifyemailstatus}
+          })
+          
           alert(response.data.message);
+          
         }
 
       })

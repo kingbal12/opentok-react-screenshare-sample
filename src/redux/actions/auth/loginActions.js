@@ -21,7 +21,7 @@ export const loginWithJWT = user => {
         
         let loggedInUser;
 
-        if (response.data) {
+        if (response.data.status==="200") {
           loggedInUser = response.data.data;
        
           console.log(loggedInUser);
@@ -29,8 +29,11 @@ export const loginWithJWT = user => {
             type: "LOGIN_WITH_JWT",
             payload: { loggedInUser, loggedInWith: "jwt" }
           })
-          // persistor.purge()
+
           history.push("/analyticsDashboard")
+        }
+        else {
+          alert(response.data.message)
         }
       })
       .catch(err => console.log(err))

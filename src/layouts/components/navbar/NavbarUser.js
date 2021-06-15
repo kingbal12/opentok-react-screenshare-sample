@@ -248,7 +248,7 @@ class NavbarUser extends React.PureComponent {
           size="sm"
           >문의
         </Button.Ripple>
-        {/* <IntlContext.Consumer>
+        <IntlContext.Consumer>
           {context => {
             let langArr = {
               "en" : "English",
@@ -314,7 +314,7 @@ class NavbarUser extends React.PureComponent {
               </Dropdown>
             )
           }}
-        </IntlContext.Consumer> */}
+        </IntlContext.Consumer>
 
         {/* <NavItem className="nav-search" onClick={this.handleNavbarSearch}>
           <NavLink className="nav-link-search">

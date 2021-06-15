@@ -21,18 +21,23 @@ import axios from "axios"
 
 
 class Register extends React.Component {
-  state = {
-    name: "",
-    phone: "",
-    useemail: "",
-    email: "",
-    idnumber: "",
-    password: "",
-    chkpassword: "",
-    btdate:"",
-    otheremail: false,
-    idmodal: false,
-    vfemodal: false
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "",
+      phone: "",
+      useemail: "",
+      email: "",
+      idnumber: "",
+      password: "",
+      chkpassword: "",
+      btdate:"",
+      otheremail: false,
+      idmodal: false,
+      verifyemailstatus: props.vfemail.verifyemailstatus,
+      vfemodal: false,
+      chkpasswordmodal: false
+    }
   }
 
   idModal = () => {
@@ -47,7 +52,11 @@ class Register extends React.Component {
     this.props.authemail(
         this.state.email
       )
+    
     }
+
+  // alert창 대신 modal창을 띄우려면 redux를 이용하여 verify 시 username이을 불러오는것처럼 response를 불러와서 
+  // if를 통해 vfemodal state를 true로 바꿈 (완)
 
   verifyauth = e => {
     e.preventDefault()
@@ -55,17 +64,28 @@ class Register extends React.Component {
       this.state.email,
       this.state.idnumber
     )
+
+    if(this.state.verifyemailstatus==="200") {
+      this.setState({vfemodal:true})
+    } else{
+      this.setState({vfemodal:false})
+    }
   }
 
   handleRegister1 = e => {
     e.preventDefault()
-    this.props.register2(
-      this.state.name,
-      this.state.phone,
-      this.state.email,
-      this.state.password,
-      this.state.chkpassword
-    )
+    if(this.state.password===this.state.chkpassword) {
+      this.props.register2(
+        this.state.name,
+        this.state.phone,
+        this.state.email,
+        this.state.password,
+        this.state.chkpassword
+      )
+    } else {
+      this.setState({chkpasswordmodal:true})
+    }
+    
   }
 
   handleOtheremail = e => {
@@ -73,10 +93,16 @@ class Register extends React.Component {
       otheremail: e.target.checked
     })
   }
-
+  
   verifyEmailModal = () => {
     this.setState(prevState => ({
       vfemodal: !prevState.vfemodal
+    }))
+  }
+
+  chkpasswordModal = () => {
+    this.setState(prevState => ({
+      chkpasswordmodal: !prevState.chkpasswordmodal
     }))
   }
 
@@ -113,11 +139,11 @@ class Register extends React.Component {
                               required
                               value={this.state.useemail}
                               onChange={e => this.setState({ useemail: e.target.value })}
+                              invalid={this.state.useemail.length === 0 ? true : false}
                             />
                             <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.idModal}>중복확인</Button></InputGroupAddon>
                           </InputGroup>
                           </div>
-                          
                           <div className="col-12 mt-1"><b>보안이메일<span className="text-primary">(비밀번호 변경에 사용)</span></b></div>
                           <div className="d-flex flex-row-reverse">
                             <small>
@@ -129,9 +155,10 @@ class Register extends React.Component {
                                 onChange={this.handleOtheremail}
                               />
                             </small>
-                          </div>                
+                          </div>
+                                     
                         </FormGroup>
-          
+
                         <FormGroup className="form-label-group d-flex justify-content-between">
                           <div className="col-3"></div>
                           <InputGroup>
@@ -274,6 +301,25 @@ class Register extends React.Component {
             </Button>{" "}
           </ModalFooter>
         </Modal>
+
+        <Modal
+          isOpen={this.state.chkpasswordmodal}
+          toggle={this.chkpasswordModal}
+          className="modal-dialog-centered modal-sm"
+        >
+          <ModalHeader toggle={this.chkpasswordModal}>
+            
+          </ModalHeader>
+          <ModalBody>
+            비밀번호가 동일하지 않습니다.
+            다시 입력하여 주십시오.
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this.chkpasswordModal}>
+              확인
+            </Button>{" "}
+          </ModalFooter>
+        </Modal>
       </Row>
 
       
@@ -285,8 +331,9 @@ class Register extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    values: state.auth.register2
+    values: state.auth.register2,
+    vfemail: state.auth.register.verify
   }
 }
-export default connect(mapStateToProps, { register2,authemail, verifyemail })(Register)
+export default connect(mapStateToProps, { register2, authemail, verifyemail })(Register)
 

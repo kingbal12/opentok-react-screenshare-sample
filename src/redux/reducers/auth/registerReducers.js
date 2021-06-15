@@ -13,6 +13,9 @@ export const register = (state = {}, action) => {
           ...state,
           values: action.payload
         }
+    case "VERIFY_EMAIL": {
+      return { ...state, verify: action.payload }
+    }
     default: {
       return state
     }
