@@ -56,6 +56,7 @@ export const signupWithFirebase = (email, password, name) => {
 
 // 회원가입 pages/register2 
 export const register2 = (name, phone, email, password) => {
+
   
   return dispatch => {
     let registeruser = email
