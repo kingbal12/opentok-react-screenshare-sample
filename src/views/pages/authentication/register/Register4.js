@@ -19,7 +19,7 @@ import PerfectScrollbar from "react-perfect-scrollbar"
 import RegisterJWT from "./RegisterJWT"
 // import registerImg from "../../../../assets/img/pages/register.jpg"
 import "../../../../assets/scss/pages/authentication.scss"
-import { register4 } from "../../../../redux/actions/auth/registerActions"
+// import { register4 } from "../../../../redux/actions/auth/registerActions"
 import { connect } from "react-redux"
 import previmg from "../../../../assets/img/portrait/small/Sample_User_Icon.png"
 import { history } from "../../../../history"
@@ -79,7 +79,7 @@ class Register extends React.Component {
 
   handleRegister = e => {
     e.preventDefault()
-    this.props.register4(
+    this.register4(
       this.state.userid,
       this.state.filename,
       this.state.file,
@@ -90,9 +90,37 @@ class Register extends React.Component {
       this.state.userdesc,    
       this.state.previewURL
     )
-
-    
   }
+
+  register4 = (userid, filename, file, medicalpart, medicalable, medicaldesc, medicalnum, userdesc) => {
+    let data = new FormData();
+    data.append('user_id', userid);
+    data.append('file_name', file);
+    data.append('medical_part', medicalpart);
+    data.append('medical_able', medicalable);
+    data.append('medical_desc', medicaldesc);
+    data.append('medical_num', medicalnum);
+    data.append('user_desc', userdesc)
+
+    axios
+      .put("http://203.251.135.81:9300/v1/doctor/account/user-info", data)
+      .then(response => {
+        let register4status;
+
+        if(response.data.status === "200") {
+          register4status = response.data.status
+          console.log(register4status)
+          this.registerModal()
+
+        } else {
+        
+    
+          alert(response.data.message);
+        }
+
+      })
+  }
+  
 
   viewlog = e => {
     e.preventDefault()
@@ -103,6 +131,11 @@ class Register extends React.Component {
     this.setState(prevState => ({
       registermodal: !prevState.registermodal
     }))
+  }
+
+  goRegisterComplete = e => {
+    e.preventDefault()
+    history.push("/pages/registtercomplete")
   }
 
 
@@ -334,7 +367,7 @@ class Register extends React.Component {
           진료승인을 요청하였습니다.
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={this.registerModal}>
+          <Button color="primary" onClick={ this.goRegisterComplete}>
             확인
           </Button>{" "}
         </ModalFooter>
@@ -349,4 +382,4 @@ const mapStateToProps = state => {
     user: state.auth
   }
 }
-export default connect(mapStateToProps, {register4})(Register)
+export default connect(mapStateToProps)(Register)
