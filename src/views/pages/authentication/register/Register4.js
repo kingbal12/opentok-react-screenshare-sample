@@ -24,6 +24,7 @@ import { connect } from "react-redux"
 import previmg from "../../../../assets/img/portrait/small/Sample_User_Icon.png"
 import { history } from "../../../../history"
 import Select from "react-select"
+import axios from "axios"
 
 //  '01' : 가정의학과, '02' : 내과 
 //  '03' : 산부인과, '04' : 피부과 
@@ -51,6 +52,7 @@ class Register extends React.Component {
       medicalnum: "", 
       userdesc: "",
       previewURL : "",
+      // register4status: props.rg4status.register4status,
       registermodal: false
     }
   }
@@ -88,6 +90,8 @@ class Register extends React.Component {
       this.state.userdesc,    
       this.state.previewURL
     )
+
+    
   }
 
   viewlog = e => {

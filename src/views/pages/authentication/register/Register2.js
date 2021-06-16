@@ -14,10 +14,9 @@ import {InputGroup, InputGroupAddon, Form, FormGroup, Input, Button,
 import { Check } from "react-feather"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import "../../../../assets/scss/pages/authentication.scss"
-import { register2,authemail,verifyemail } from "../../../../redux/actions/auth/registerActions"
+import { register2,authemail } from "../../../../redux/actions/auth/registerActions"
 import { connect } from "react-redux"
 import axios from "axios"
-
 
 
 class Register extends React.Component {
@@ -34,11 +33,13 @@ class Register extends React.Component {
       btdate:"",
       otheremail: false,
       idmodal: false,
-      verifyemailstatus: props.vfemail.verifyemailstatus,
+      // vfemailstatus: props.vfemail,
       vfemodal: false,
       chkpasswordmodal: false
     }
   }
+
+  
 
   idModal = () => {
     this.setState(prevState => ({
@@ -56,21 +57,64 @@ class Register extends React.Component {
     }
 
   // alert창 대신 modal창을 띄우려면 redux를 이용하여 verify 시 username이을 불러오는것처럼 response를 불러와서 
-  // if를 통해 vfemodal state를 true로 바꿈 (완)
+  // if를 통해 vfemodal state를 true로 바꿈 (완) (실패)
+  // 실패 이유는 redux를 이용하여 verifyemail api의 status를 불러오기 전에
+  // 아래쪽 if문이 먼저 실행되기 때문
+  // 비동기 방식의 함수 실행을 익힌 뒤 아래의 형태로 바꿀 예정
+
+  // verifyauth = e => {
+  //   e.preventDefault()
+  //   this.props.verifyemail(
+  //     this.state.email,
+  //     this.state.idnumber
+  //   )
+  //   this.setmodalstate()
+
+  //   // if(this.state.vfemailstatus.verifyemailstatus==="200") {
+
+  //   //   console.log(this.state.vfemailstatus.verifyemailstatus,"--이메일 스테이터스")
+      
+  //   //   console.log(this.state.vfemodal,"모달창 스테이터스")
+  //   // } else if(this.state.vfemailstatus.verifyemailstatus==="400"){
+
+      
+  //   //   console.log(this.state.vfemodal)
+  //   // } else{
+  //   //   console.log("도달하지 않음")
+  //   // }
+  // }
 
   verifyauth = e => {
     e.preventDefault()
-    this.props.verifyemail(
+    this.verifyemail(
       this.state.email,
       this.state.idnumber
     )
-
-    if(this.state.verifyemailstatus==="200") {
-      this.setState({vfemodal:true})
-    } else{
-      this.setState({vfemodal:false})
-    }
   }
+
+  verifyemail = (email,idnumber) => {
+    console.log("작동됨",email,idnumber)
+    
+      axios
+        .post("http://203.251.135.81:9300/signup-verify", {
+          user_id: email,
+          auth_code: idnumber
+        })
+  
+        .then(response => {
+          console.log(response.data.status);
+          if(response.data.status === "200") {
+            this.verifyEmailModal()
+          } else {
+            
+          }
+  
+        })
+        
+    
+  }
+
+ 
 
   handleRegister1 = e => {
     e.preventDefault()
@@ -332,8 +376,8 @@ class Register extends React.Component {
 const mapStateToProps = state => {
   return {
     values: state.auth.register2,
-    vfemail: state.auth.register.verify
+    // vfemail: state.auth.register.verify
   }
 }
-export default connect(mapStateToProps, { register2, authemail, verifyemail })(Register)
+export default connect(mapStateToProps, { register2, authemail })(Register)
 

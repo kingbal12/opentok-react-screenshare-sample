@@ -5,6 +5,7 @@ import "firebase/database"
 import axios from "axios"
 import { config } from "../../../authServices/firebase/firebaseConfig"
 
+
 // Init firebase if not already initialized
 if (!firebase.apps.length) {
   firebase.initializeApp(config)
@@ -111,44 +112,46 @@ export const authemail = (email) => {
   }
 }
 
-export const verifyemail = (email,idnumber) => {
-  return dispatch => {
+// 모달창을 띄우기 위해 Register2.js로 이동
+// export const verifyemail = (email,idnumber) => {
+//   return dispatch => {
    
-    axios
-      .post("http://203.251.135.81:9300/signup-verify", {
-        user_id: email,
-        auth_code: idnumber
-      })
+//     axios
+//       .post("http://203.251.135.81:9300/signup-verify", {
+//         user_id: email,
+//         auth_code: idnumber
+//       })
 
 
-      .then(response => {
+//       .then(response => {
+//         let verifyemailstatus;
 
-        let verifyemailstatus;
+//         console.log(response.data.status);
+//         if(response.data.status === "200") {
+//           verifyemailstatus = response.data.status
 
-        console.log(response);
-        if(response.data.status === "200") {
-          verifyemailstatus = response.data.status
+//           // togglemailstatus();
 
-          dispatch({
-            type: "VERIFY_EMAIL",
-            payload: {verifyemailstatus}
-          })
+//           dispatch({
+//             type: "VERIFY_EMAIL",
+//             payload: {verifyemailstatus}
+//           })
           
           
-        } else {
-          dispatch({
-            type: "VERIFY_EMAIL",
-            payload: {verifyemailstatus}
-          })
+//         } else {
+//           dispatch({
+//             type: "VERIFY_EMAIL",
+//             payload: {verifyemailstatus}
+//           })
           
-          alert(response.data.message);
+//           alert(response.data.message);
           
-        }
+//         }
 
-      })
+//       })
       
-  }
-}
+//   }
+// }
 
 
 // 회원가입 pages/register3
@@ -195,10 +198,21 @@ export const register4 = (userid, filename, file, medicalpart, medicalable, medi
 
       )
       .then(response => {
-        console.log(response);
+        let register4status;
+
         if(response.data.status === "200") {
-          history.push("/schedule");
+          register4status = response.data.status
+          console.log(register4status)
+
+          dispatch({
+            type:"REGISTER4_STATUS",
+            payload: {register4status}
+          })
         } else {
+          dispatch({
+            type:"REGISTER4_STATUS",
+            payload: {register4status}
+          })
           alert(response.data.message);
         }
 
