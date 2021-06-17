@@ -20,8 +20,8 @@ class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      userid: props.user.register.values.registeruser,
-      // userid: "kang@kang",
+      // userid: props.user.register.values.registeruser,
+      userid: "kingbal999@gmail.com",
       hospitalname: "",
       businessnumber: "",
       zipcode: "",
@@ -77,6 +77,13 @@ handleComplete = (data) => {
   checkstate = e => {
     e.preventDefault()
     console.log(this.state)
+  }
+
+  verifyBusinessNumber = e => {
+    e.preventDefault()
+    this.postBusinessNumber(
+      this.state.businessnumber
+    )
   }
 
   zipModal = () => {
@@ -145,7 +152,7 @@ handleComplete = (data) => {
                           value={this.state.businessnumber}
                           onChange={e => this.setState({ businessnumber: e.target.value })}
                         />
-                        <InputGroupAddon addonType="append"><Button color="primary" type="button">중복확인</Button></InputGroupAddon>
+                        <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.verifyBusinessNumber}>중복확인</Button></InputGroupAddon>
                       </InputGroup>
                     </FormGroup>
                     <FormGroup className="form-label-group">
