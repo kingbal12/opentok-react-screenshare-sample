@@ -15,6 +15,7 @@ import "../../../../assets/scss/pages/authentication.scss"
 import { register3 } from "../../../../redux/actions/auth/registerActions"
 import { connect } from "react-redux"
 import DaumPostcode from 'react-daum-postcode';
+import axios from "axios"
 
 class Register extends React.Component {
   constructor(props) {
@@ -31,7 +32,9 @@ class Register extends React.Component {
       accountname: "",
       bankname: "",
       accountnumber: "",
-      modal: false
+      modal: false,
+      businessmodal: false,
+      businessmodalmsg: ""
   }
 }
 
@@ -88,25 +91,43 @@ handleComplete = (data) => {
 
 
   // 여기부터 수정
-  verifyemail = (businessnumber) => {
+  postBusinessNumber = businessnumber => {
     console.log("작동됨",businessnumber)
       axios
-        .get("http://203.251.135.81:9300/signup-verify", {
-          user_id: email,
-          auth_code: idnumber
+        .get("http://203.251.135.81:9300/v1/doctor/account/hospital-verify", {
+          params: {
+            business_num: businessnumber,
+          }
         })
   
         .then(response => {
-          console.log(response.data.status);
-          if(response.data.status === "200") {
-            this.verifyEmailModal()
-          } else {
-            
+          if(response.data.status==="200"){
+            if(response.data.data.COUNT===0) {
+              this.setState({
+                businessmodal:true, 
+                businessmodalmsg:"확인 완료되었습니다."
+              })
+            }else{
+              this.setState({
+                businessmodal:true, 
+                businessmodalmsg:"이미 등록된 번호입니다."
+              })
+            }
+
+          }
+          else {
+            alert(response.data.message)
           }
   
         })
         
     
+  }
+
+  businessnumModal = () => {
+    this.setState(prevState => ({
+      businessmodal: !prevState.businessmodal
+    }))
   }
 
   zipModal = () => {
@@ -116,9 +137,28 @@ handleComplete = (data) => {
   }
 
   
+
+  
   render() {
     return (
       <Row className="m-0 justify-content-center">
+        <Modal
+          isOpen={this.state.businessmodal}
+          toggle={this.businessnumModal}
+          className="modal-dialog-centered modal-sm"
+        >
+          <ModalHeader toggle={this.verifyEmailModal}>
+            
+          </ModalHeader>
+          <ModalBody>
+            {this.state.businessmodalmsg}
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this.businessnumModal}>
+              확인
+            </Button>{" "}
+          </ModalFooter>
+        </Modal>
         <Col
           sm="6"
           xl="6"
