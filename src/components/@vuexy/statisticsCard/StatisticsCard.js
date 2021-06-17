@@ -1,6 +1,6 @@
 import React from "react"
 import { Card, CardBody } from "reactstrap"
-import Chart from "react-apexcharts"
+// import Chart from "react-apexcharts"
 
 class StatisticsCards extends React.Component {
   render() {
@@ -29,10 +29,17 @@ class StatisticsCards extends React.Component {
             </div>
           </div>
           <div className="title-section">
-            <h2 className="text-bold-600 mt-1 mb-25">{this.props.stat}</h2>
-            <p className="mb-0">{this.props.statTitle}</p>
+            <h1 className={`mb-0 mt-2 text-bold-600 ${
+              this.props.iconBg
+                ? `warning`
+                : "primary"
+            }`}>{this.props.statTitle}</h1>
           </div>
+          
         </CardBody>
+          <div>
+            <h1 className="col-12 text-bold-600 text-right mb-2">{this.props.stat}</h1>
+          </div>
         {/* {!this.props.hideChart && (
           <Chart
             options={this.props.options}

@@ -6,8 +6,11 @@ import decorLeft from "../../../assets/img/elements/decore-left.png"
 import decorRight from "../../../assets/img/elements/decore-right.png"
 import DisplayName from "./DisplayName";
 import { connect } from "react-redux";
+import moment from 'moment'
+import 'moment/locale/ko';
 
-
+moment.locale("ko")
+const today = moment().format("YYYY년 M월 DD일 dddd입니다.")
 
 class SalesCard extends React.Component {
   render() {
@@ -24,7 +27,7 @@ class SalesCard extends React.Component {
           <div className="award-info text-center w-125">
             <h1 className="mb-2 text-white">안녕하세요.<DisplayName />님</h1>
             <p className="m-auto mb-0 w-75">
-              2021년 6월 14일 월요일입니다.
+              <h1 className="text-white">{today}</h1>
             </p>
           </div>
         </CardBody>

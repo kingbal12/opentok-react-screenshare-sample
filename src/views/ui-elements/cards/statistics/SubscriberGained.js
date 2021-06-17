@@ -21,8 +21,8 @@ class SubscriberGained extends React.Component {
       <Fragment>
         <StatisticsCard
           icon={<Users className="primary" size={22} />}
-          stat={this.state.todayappoints}
           statTitle="오늘 예약 환자"
+          stat={this.state.todayappoints}  
           // options={subscribersGained}
           // series={subscribersGainedSeries}
           type="area"

@@ -104,7 +104,7 @@ const CustomHeader = props => {
           <span className="align-middle">Add New</span>
         </Button>
       </div> */}
-      <div className="actions-right d-flex flex-wrap mt-sm-0 mt-2 col-5">
+      <div className="actions-right d-flex flex-wrap mt-sm-0 mt-2 col-8">
         <UncontrolledDropdown className="data-list-rows-dropdown mr-1 d-md-block d-none">
           <DropdownToggle color="" className="sort-dropdown">
             <span className="align-middle mx-50">
@@ -127,10 +127,10 @@ const CustomHeader = props => {
             </DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown>
-        <div className="filter-section">
-          <Input type="text" onChange={e => props.handleFilter(e)} />
+        <div className="filter-section col-5">
+          <Input type="text" placeholder="Search" onChange={e => props.handleFilter(e)} />
         </div>
-        <Button className="ml-2" color='primary' outline>검색</Button>
+        {/* <Button className="ml-2" color='primary' outline>검색</Button> */}
       </div>
     </div>
   )
