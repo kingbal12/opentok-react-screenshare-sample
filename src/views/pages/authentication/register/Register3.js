@@ -86,6 +86,29 @@ handleComplete = (data) => {
     )
   }
 
+
+  // 여기부터 수정
+  verifyemail = (businessnumber) => {
+    console.log("작동됨",businessnumber)
+      axios
+        .get("http://203.251.135.81:9300/signup-verify", {
+          user_id: email,
+          auth_code: idnumber
+        })
+  
+        .then(response => {
+          console.log(response.data.status);
+          if(response.data.status === "200") {
+            this.verifyEmailModal()
+          } else {
+            
+          }
+  
+        })
+        
+    
+  }
+
   zipModal = () => {
     this.setState(prevState => ({
       modal: !prevState.modal
