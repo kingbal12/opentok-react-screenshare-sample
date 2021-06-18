@@ -16,6 +16,7 @@ import { register3 } from "../../../../redux/actions/auth/registerActions"
 import { connect } from "react-redux"
 import DaumPostcode from 'react-daum-postcode';
 import axios from "axios"
+import PerfectScrollbar from "react-perfect-scrollbar";
 
 class Register extends React.Component {
   constructor(props) {
@@ -141,6 +142,7 @@ handleComplete = (data) => {
   
   render() {
     return (
+      <PerfectScrollbar>
       <Row className="m-0 justify-content-center">
         <Modal
           isOpen={this.state.businessmodal}
@@ -369,6 +371,7 @@ handleComplete = (data) => {
           </Card>
         </Col>
       </Row>
+      </PerfectScrollbar>
     )
   }
 }

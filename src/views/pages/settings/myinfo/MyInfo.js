@@ -1,25 +1,15 @@
 import React from "react"
 import {InputGroup, Form, FormGroup, Input, Button,
   CustomInput,
-  CardHeader,
-  CardTitle,
   Card,
   CardBody,
   Row,
-  Col,
-  CardImg 
+  Col
 } from "reactstrap"
-import PerfectScrollbar from "react-perfect-scrollbar"
-// import classnames from "classnames"
-// import RegisterFirebase from "./RegisterFirebase"
-// import RegisterAuth0 from "./RegisterAuth0"
 
-// import registerImg from "../../../../assets/img/pages/register.jpg"
 import "../../../../assets/scss/pages/authentication.scss"
 import { register4 } from "../../../../redux/actions/auth/registerActions"
 import { connect } from "react-redux"
-import { history } from "../../../../history"
-// import Avatar from "../../../ui-elements/"
 
 
 
