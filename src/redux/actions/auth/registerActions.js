@@ -241,6 +241,26 @@ export const changepassword = (userid, password, newpassword) => {
   }
 }
 
+export const withdrawal = (userid) => {
+  return dispatch => {
+    axios
+      .put("http://203.251.135.81:9300/v1/doctor/user-state", {
+          user_id : userid, 
+          user_state : "9",
+        }
+      )
+      .then(response => {
+        console.log(response);
+        if(response.data.status === "200") {
+          alert(response.data.message);
+        } else {
+          alert(response.data.message);
+        }
+
+      })
+  }
+}
+
 
 export const signupWithJWT = (email, password, name) => {
   return dispatch => {

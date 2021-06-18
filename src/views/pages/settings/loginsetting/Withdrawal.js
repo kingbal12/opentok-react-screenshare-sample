@@ -1,27 +1,19 @@
 import React from "react"
-import {InputGroup, Form, FormGroup, Input, Button,
-  CustomInput,
+import {Form, FormGroup, Button,
   CardHeader,
   CardTitle,
   Card,
   CardBody,
   Row,
-  Col,
-  CardImg 
+  Col
 } from "reactstrap"
-import PerfectScrollbar from "react-perfect-scrollbar"
-// import classnames from "classnames"
-// import RegisterFirebase from "./RegisterFirebase"
-// import RegisterAuth0 from "./RegisterAuth0"
 
-// import registerImg from "../../../../assets/img/pages/register.jpg"
+
 import "../../../../assets/scss/pages/authentication.scss"
-import { register4 } from "../../../../redux/actions/auth/registerActions"
+import { withdrawal } from "../../../../redux/actions/auth/registerActions"
 import { connect } from "react-redux"
-import { history } from "../../../../history"
 import { Check } from "react-feather"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
-// import Avatar from "../../../ui-elements/"
 
 
 
@@ -30,17 +22,25 @@ class Withdrawal extends React.Component {
     super(props)
     this.state = {
       userid: props.user.login.values.loggedInUser.username,
-      checkwithdrawal: ""
+      checkwithdrawal: false
     }
   }
   
 
+  handleChkWithdrawal = e => {
+    this.setState({
+      checkwithdrawal: e.target.checked
+    })
+  }
+
   handlewithdrawal = e => {
     e.preventDefault()
-    this.props.changepassword(
-      this.state.userid,
-      this.state.checkwithdrawal
-    )
+    if(this.state.checkwithdrawal===true) {
+      this.props.withdrawal(this.state.userid)
+    } else {
+      alert("회원탈퇴 도중 오류가 발생하였습니다.")
+    }
+    
   }
 
 
@@ -50,10 +50,10 @@ class Withdrawal extends React.Component {
     return (
       <Row className="m-0 justify-content-center">
       <Col
-        sm="3"
-        xl="3"
-        lg="3"
-        md="3"
+        sm="12"
+        xl="12"
+        lg="12"
+        md="12"
         className="d-flex justify-content-center"
       >
         
@@ -62,7 +62,7 @@ class Withdrawal extends React.Component {
             <Col lg="12" md="12" className="p-0">
               <Card className="rounded-0 mb-0 p-2">
                 <CardHeader className="pb-1 pt-50">
-                  <CardTitle className="d-flex col-12 justify-content-center">
+                  <CardTitle>
                     <h1>회원탈퇴</h1>
                   </CardTitle>
                 </CardHeader>   
@@ -72,27 +72,7 @@ class Withdrawal extends React.Component {
                     <div>
                       <div><strong>내 정보 및 서비스 이용기록 삭제 안내</strong></div>
                       <div>
-                        내 정보 및 서비스 이용기록 삭제 안내<br />
-                        내 정보 및 서비스 이용기록 삭제 안내<br />
-                        내 정보 및 서비스 이용기록 삭제 안내<br />
-                        내 정보 및 서비스 이용기록 삭제 안내<br />
-                        내 정보 및 서비스 이용기록 삭제 안내<br />
-                        내 정보 및 서비스 이용기록 삭제 안내<br />
-                        내 정보 및 서비스 이용기록 삭제 안내<br />
-                        내 정보 및 서비스 이용기록 삭제 안내<br />
-                        내 정보 및 서비스 이용기록 삭제 안내<br />
-                        내 정보 및 서비스 이용기록 삭제 안내<br />
-                        내 정보 및 서비스 이용기록 삭제 안내<br />
-                        내 정보 및 서비스 이용기록 삭제 안내<br />
-                        내 정보 및 서비스 이용기록 삭제 안내<br />
-                        내 정보 및 서비스 이용기록 삭제 안내<br />
-                        내 정보 및 서비스 이용기록 삭제 안내<br />
-                        내 정보 및 서비스 이용기록 삭제 안내<br />
-                        내 정보 및 서비스 이용기록 삭제 안내<br />
-                        내 정보 및 서비스 이용기록 삭제 안내<br />
-                        내 정보 및 서비스 이용기록 삭제 안내<br />
-                        내 정보 및 서비스 이용기록 삭제 안내<br />
-                        내 정보 및 서비스 이용기록 삭제 안내<br />
+                        
 
                       </div>
                     </div>
@@ -100,9 +80,9 @@ class Withdrawal extends React.Component {
                      <Checkbox
                         color="primary"
                         icon={<Check className="vx-icon" size={16} />}
-                        label="내용을 모두 확인하였습니다."
+                        label="상기 내용을 모두 확인하였습니다."
                         defaultChecked={false}
-                        onChange={this.handleRemember}
+                        onChange={this.handleChkWithdrawal}
                       />
                     </FormGroup>
 
@@ -110,7 +90,9 @@ class Withdrawal extends React.Component {
                       <Button
                       size="lg"
                       color="primary" 
-                      type="submit"
+                      type="button"
+                      disabled={this.state.checkwithdrawal===true?false:true}
+                      onClick={this.handlewithdrawal}
                       >
                         회원 탈퇴
                       </Button>
@@ -132,4 +114,4 @@ const mapStateToProps = state => {
     user: state.auth
   }
 }
-export default connect(mapStateToProps, {register4})(Withdrawal)
+export default connect(mapStateToProps, {withdrawal})(Withdrawal)
