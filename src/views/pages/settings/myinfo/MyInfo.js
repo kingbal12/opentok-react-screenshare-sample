@@ -73,7 +73,7 @@ class MyInfo extends React.Component {
             height="150px" 
             src={this.state.previewURL} 
             className="dz-img" 
-            // alt={file.name} 
+            alt="" 
             />
         </div>
       </div>
