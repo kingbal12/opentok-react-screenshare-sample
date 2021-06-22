@@ -46,7 +46,7 @@ export const addEvent = event => {
 }
 
 const formatDate = (start)=>{
-  let formatted_date = start.getFullYear() + "-" + (start.getMonth() + 1) + "-" + start.getDate() + " " + start.getHours() + ":" + start.getMinutes()
+  let formatted_date = start.getFullYear() + ":" + (start.getMonth() + 1) + ":" + start.getDate() + " " + start.getHours() + ":" + start.getMinutes()
    return formatted_date;
   }
 
