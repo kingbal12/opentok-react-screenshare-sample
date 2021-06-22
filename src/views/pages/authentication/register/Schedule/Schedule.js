@@ -27,6 +27,7 @@ import "../../../../../assets/scss/plugins/calendars/react-big-calendar.scss"
 import { history } from "../../../../../history"
 import Radio from "../../../../../components/@vuexy/radio/RadioVuexy"
 import { ThemeConsumer } from "styled-components"
+import { FormattedDate } from "react-intl"
 const DragAndDropCalendar = withDragAndDrop(Calendar)
 const localizer = momentLocalizer(moment)
 const eventColors = {
@@ -34,6 +35,12 @@ const eventColors = {
   work: "bg-warning",
   personal: "bg-danger",
   others: "bg-primary"
+}
+
+// 여기서 쓰인 포맷 변환을 api로 보내기 전에 시행해야함
+const formatDate = (start)=>{
+let formatted_date = start.getFullYear() + "-" + (start.getMonth() + 1) + "-" + start.getDate() + " " + start.getHours() + ":" + start.getMinutes()
+ return formatted_date;
 }
 
   
@@ -73,6 +80,8 @@ class Toolbar extends React.Component {
 }
 
 class CalendarApp extends React.Component {
+
+
   schedulemodal = () => {
     this.setState(prevState => ({
       modal: !prevState.modal
@@ -183,7 +192,6 @@ class CalendarApp extends React.Component {
   }
 
   handleAddEvent = id => {
-    
     // id값을 정하는것과
     // end start date의 state값을 정하는것은 다른 함수로 하는것 같음
     this.props.handleSidebar(false)
@@ -197,6 +205,7 @@ class CalendarApp extends React.Component {
       // allDay: this.state.allDay,
       // selectable: this.state.selectable
     })
+    
     // this.setState({
     //   startDate: new Date(),
     //   endDate: new Date(),
@@ -246,6 +255,7 @@ class CalendarApp extends React.Component {
               resourceAccessor="url"
               defaultView='week'
               views={views}
+              // formats={formats}
               // 15분 간격 설정(기존은 30분)
               step={15}
               components={{ toolbar: Toolbar }}
@@ -258,9 +268,15 @@ class CalendarApp extends React.Component {
                 this.setState({
                   title: "테스트",
                   // label: null,
-                  startDate: new Date(start),
-                  endDate: new Date(end),
+
+                  // 여기서는 포맷변환을 시켜봤자 다시 원래 포맷으로 변하게 됨
+                  // startDate: new Date(start),
+                  // endDate: new Date(end)
+                  
+                  startDate: formatDate(start),
+                  endDate: formatDate(end)
                   // url: ""
+                  
                 })
                 this.handleAddEvent(1)
                 // id 를 1씩 증가하게끔 

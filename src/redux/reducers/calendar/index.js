@@ -4,13 +4,16 @@ const initialState = {
   selectedEvent: null
 }
 
+
 const calenderReducer = (state = initialState, action) => {
   switch (action.type) {
     case "FETCH_EVENTS":
       return { ...state, events: action.events }
     case "ADD_EVENT":
       state.events.push(action.event)
+      console.log(action.event)
       return { ...state }
+      
     case "UPDATE_EVENT":
       let updatedEvents = state.events.map(event => {
         if (event.id === action.event.id) {

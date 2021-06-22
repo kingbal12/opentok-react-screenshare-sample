@@ -150,7 +150,7 @@ class Register extends React.Component {
             height="150px" 
             src={this.state.previewURL} 
             className="dz-img" 
-            // alt={file.name} 
+            alt="" 
             />
         </div>
       </div>
@@ -164,7 +164,7 @@ class Register extends React.Component {
             src={previmg}
             className="dz-img"
             style={{borderRadius:"100%"}} 
-            // alt={file.name} 
+            alt="" 
             />
         </div>
       </div>
