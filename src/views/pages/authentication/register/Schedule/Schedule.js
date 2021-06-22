@@ -95,8 +95,13 @@ class CalendarApp extends React.Component {
       props.app.selectedEvent !== state.eventInfo
     ) {
       let dateToObj = props.app.events.map(event => {
+        console.log(event.start,"확인용")
+        console.log(event.end,"확인용")
+
+        // 여기서 날짜 포맷이 다시 바뀌는중
         event.start = new Date(event.start)
         event.end = new Date(event.end)
+        
         return event
       })
       return {
@@ -269,11 +274,11 @@ class CalendarApp extends React.Component {
                   // label: null,
 
                   // 여기서는 포맷변환을 시켜봤자 다시 원래 포맷으로 변하게 됨
-                  // startDate: new Date(start),
-                  // endDate: new Date(end)
+                  startDate: new Date(start),
+                  endDate: new Date(end)
                   
-                  startDate: formatDate(start),
-                  endDate: formatDate(end)
+                  // startDate: formatDate(start),
+                  // endDate: formatDate(end)
                   // url: ""
                   
                 })
@@ -287,7 +292,7 @@ class CalendarApp extends React.Component {
                 //   end: new Date(end),
                 //   url: ""
                 // })
-                console.log(start,"---------------------", this.state.startDate)
+                console.log(this.state.start,"---------------------", this.state.startDate)
                 console.log(this.state);
               }}
               

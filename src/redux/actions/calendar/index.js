@@ -45,14 +45,24 @@ export const addEvent = event => {
   }
 }
 
+const formatDate = (start)=>{
+  let formatted_date = start.getFullYear() + "-" + (start.getMonth() + 1) + "-" + start.getDate() + " " + start.getHours() + ":" + start.getMinutes()
+   return formatted_date;
+  }
+
 export const schedules = (userid, holiday, rperiod, events) => {
   return dispatch => {
+    let dateToObj = events.map(event => {
+      event.start = formatDate(event.start)
+      event.end = formatDate(event.end)
+      return event
+    })
     axios
       .post("http://203.251.135.81:9300/v1/doctor/appointment/schedules",{
           user_id: userid,
           holiday_yn: holiday,
           count: rperiod,
-          events: events
+          events: dateToObj
       })
       .then(response => {
         console.log(response)
