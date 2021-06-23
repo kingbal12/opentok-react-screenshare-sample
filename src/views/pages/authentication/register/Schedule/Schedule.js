@@ -26,8 +26,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css"
 import "../../../../../assets/scss/plugins/calendars/react-big-calendar.scss"
 import { history } from "../../../../../history"
 import Radio from "../../../../../components/@vuexy/radio/RadioVuexy"
-import { ThemeConsumer } from "styled-components"
-import { FormattedDate } from "react-intl"
+
 const DragAndDropCalendar = withDragAndDrop(Calendar)
 const localizer = momentLocalizer(moment)
 const eventColors = {
@@ -37,15 +36,6 @@ const eventColors = {
   others: "bg-primary"
 }
 
-// 여기서 쓰인 포맷 변환을 api로 보내기 전에 시행해야함
-const formatDate = (start)=>{
-let formatted_date = start.getFullYear() + "-" + (start.getMonth() + 1) + "-" + start.getDate() + " " + start.getHours() + ":" + start.getMinutes()
- return formatted_date;
-}
-
-  
-// 중요!!! Date 포맷을 변경하는것을 빠르게 연구하여 적용할것!
-// const Date = new Date('2021-06-01 09:00')
 class Toolbar extends React.Component {
   render() {
     return (
@@ -95,8 +85,7 @@ class CalendarApp extends React.Component {
       props.app.selectedEvent !== state.eventInfo
     ) {
       let dateToObj = props.app.events.map(event => {
-        console.log(event.start,"확인용")
-        console.log(event.end,"확인용")
+
 
         // 여기서 날짜 포맷이 다시 바뀌는중
         event.start = new Date(event.start)
@@ -140,7 +129,9 @@ class CalendarApp extends React.Component {
   }
 
   async componentDidMount() {
-    await this.props.fetchEvents()
+    await this.props.fetchEvents(
+      this.state.userid
+    )
   }
   
   handleRepeatPeriod = rperiod => {
@@ -203,7 +194,7 @@ class CalendarApp extends React.Component {
     this.props.addEvent(
       {
       id,
-      title: this.state.title,
+      // title: this.state.title,
       start: this.state.startDate,
       end: this.state.endDate,
       // label: this.state.label === null ? "others" : this.state.label,
@@ -270,7 +261,7 @@ class CalendarApp extends React.Component {
               }}
               onSelectSlot={({ start, end }) => {
                 this.setState({
-                  title: "테스트",
+                  // title: "테스트",
                   // label: null,
 
                   // 여기서는 포맷변환을 시켜봤자 다시 원래 포맷으로 변하게 됨
@@ -282,7 +273,7 @@ class CalendarApp extends React.Component {
                   // url: ""
                   
                 })
-                this.handleAddEvent(1)
+                this.handleAddEvent(2)
                 // id 를 1씩 증가하게끔 
                 // this.props.handleSidebar(true)
                 // this.props.handleSelectedEvent({
@@ -292,8 +283,7 @@ class CalendarApp extends React.Component {
                 //   end: new Date(end),
                 //   url: ""
                 // })
-                console.log(this.state.start,"---------------------", this.state.startDate)
-                console.log(this.state);
+                console.log("---------------------", this.state.startDate)
               }}
               
               selectable={true}
