@@ -70,8 +70,6 @@ class Toolbar extends React.Component {
 }
 
 class CalendarApp extends React.Component {
-
-
   schedulemodal = () => {
     this.setState(prevState => ({
       modal: !prevState.modal
