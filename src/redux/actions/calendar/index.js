@@ -1,6 +1,6 @@
 import axios from "axios"
 import { data } from "jquery"
-
+import { history } from "../../../history"
 // export const fetchEvents = () => {
 //   return async dispatch => {
 //     await axios
@@ -50,7 +50,7 @@ const formatDate = (start)=>{
    return formatted_date;
   }
 
-export const schedules = (userid, holiday, rperiod, events) => {
+export const postSchedules = (userid, holiday, rperiod, events) => {
   return dispatch => {
     let dateToObj = events.map(event => {
       event.start = formatDate(event.start)
@@ -67,11 +67,42 @@ export const schedules = (userid, holiday, rperiod, events) => {
       })
       .then(response => {
         console.log(response)
+        if(response.data.status==="200") {
+          history.push("/")
+        }
         // holidayyn의
       })
       .catch(err => console.log(err))
   }
 }
+
+
+
+export const schedules = (userid) => {
+  return dispatch => {
+    // let dateToObj = events.map(event => {
+    //   event.start = formatDate(event.start)
+    //   event.end = formatDate(event.end)
+    //   return event
+    // })
+    axios
+      .delete("http://203.251.135.81:9300/v1/doctor/appointment/schedules",{
+        data: {
+          user_id:userid,
+          start_date:"20210601",
+          end_date:"20210625",
+        }
+          
+      })
+      .then(response => {
+        console.log(response)
+        // holidayyn의
+      })
+      .catch(err => console.log(err))
+  }
+}
+
+
 export const updateEvent = event => {
   return dispatch => {
     dispatch({ type: "UPDATE_EVENT", event })

@@ -985,7 +985,7 @@ const horizontalMenuConfig = [
         title: "스케쥴 설정",
         type: "item",
         icon: <Icon.Calendar size={16} />,
-        navLink: "/schedule",
+        navLink: "/pages/modifyschedule",
         permissions: ["admin", "editor"]
       },
       {

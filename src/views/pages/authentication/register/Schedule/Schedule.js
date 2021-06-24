@@ -1,7 +1,7 @@
 import React from "react"
-import AddEventSidebar from "./AddEventSidebar"
-import AddEventButton from "./AddEventButton"
-import { Card, CardBody, Button, ButtonGroup, Modal, FormGroup, Input, Label,
+// import AddEventSidebar from "./AddEventSidebar"
+// import AddEventButton from "./AddEventButton"
+import { Card, CardBody, Button, ButtonGroup, Modal, FormGroup,
   ModalHeader,
   ModalBody,
   ModalFooter, } from "reactstrap"
@@ -10,21 +10,20 @@ import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop"
 import moment from "moment"
 import { connect } from "react-redux"
 import {
-  fetchEvents,
   handleSidebar,
   addEvent,
   handleSelectedEvent,
   updateEvent,
   updateDrag,
   updateResize,
-  schedules
+  postSchedules
 } from "../../../../../redux/actions/calendar/index"
 import { ChevronLeft, ChevronRight } from "react-feather"
 
 import "react-big-calendar/lib/addons/dragAndDrop/styles.scss"
 import "react-big-calendar/lib/css/react-big-calendar.css"
 import "../../../../../assets/scss/plugins/calendars/react-big-calendar.scss"
-import { history } from "../../../../../history"
+// import { history } from "../../../../../history"
 import Radio from "../../../../../components/@vuexy/radio/RadioVuexy"
 
 const DragAndDropCalendar = withDragAndDrop(Calendar)
@@ -103,7 +102,8 @@ class CalendarApp extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      userid: props.user.login.values.loggedInUser.username,
+      // userid: props.user.login.values.loggedInUser.username,
+      userid: "kingbal999@gmail.com",
       events: [],
       views: {
         month: true,
@@ -126,11 +126,6 @@ class CalendarApp extends React.Component {
     }
   }
 
-  async componentDidMount() {
-    await this.props.fetchEvents(
-      this.state.userid
-    )
-  }
   
   handleRepeatPeriod = rperiod => {
     this.setState({
@@ -178,7 +173,7 @@ class CalendarApp extends React.Component {
 
   handleSelectEvent = event => {
     let filteredState = this.state.events.filter(i => i.id === event.id)
-    this.props.handleSidebar(true)
+    // this.props.handleSidebar(true)
     this.props.handleSelectedEvent(filteredState[0])
     this.setState({
       eventInfo: filteredState[0]
@@ -188,7 +183,7 @@ class CalendarApp extends React.Component {
   handleAddEvent = id => {
     // id값을 정하는것과
     // end start date의 state값을 정하는것은 다른 함수로 하는것 같음
-    this.props.handleSidebar(false)
+    // this.props.handleSidebar(false)
     this.props.addEvent(
       {
       id,
@@ -199,20 +194,12 @@ class CalendarApp extends React.Component {
       // allDay: this.state.allDay,
       // selectable: this.state.selectable
     })
-    
-    // this.setState({
-    //   startDate: new Date(),
-    //   endDate: new Date(),
-    //   title: "",
-    //   label: null,
-    //   allDay: true,
-    //   selectable: true
-    // })
+
   }
 
   postschedule = e => {
     e.preventDefault()
-    this.props.schedules(
+    this.props.postSchedules(
       this.state.userid,
       this.state.holiday,
       this.state.rperiod,
@@ -254,33 +241,19 @@ class CalendarApp extends React.Component {
               components={{ toolbar: Toolbar }}
               eventPropGetter={this.handleEventColors}
               popup={false}
-              onSelectEvent={event => {
-                this.handleSelectEvent(event)
-              }}
+              // onSelectEvent={event => {
+              //   this.handleSelectEvent(event)
+              // }}
               onSelectSlot={({ start, end }) => {
                 this.setState({
                   // title: "테스트",
                   // label: null,
-
-                  // 여기서는 포맷변환을 시켜봤자 다시 원래 포맷으로 변하게 됨
                   startDate: new Date(start),
                   endDate: new Date(end)
-                  
-                  // startDate: formatDate(start),
-                  // endDate: formatDate(end)
                   // url: ""
-                  
                 })
                 this.handleAddEvent(2)
                 // id 를 1씩 증가하게끔 
-                // this.props.handleSidebar(true)
-                // this.props.handleSelectedEvent({
-                //   title: "",
-                //   label: null,
-                //   start: new Date(start),
-                //   end: new Date(end),
-                //   url: ""
-                // })
                 console.log("---------------------", this.state.startDate)
               }}
               
@@ -291,11 +264,7 @@ class CalendarApp extends React.Component {
                 color="primary"
                 type="button"
                 size="lg"
-                // onClick={() => {
-                //   history.push("/pages/login")
-                // }}
                 onClick={this.schedulemodal}
-                
               >
                 저장
               </Button>
@@ -406,7 +375,7 @@ class CalendarApp extends React.Component {
             </Modal>
           </CardBody>
         </Card>
-        <AddEventSidebar
+        {/* <AddEventSidebar
           sidebar={sidebar}
           handleSidebar={this.props.handleSidebar}
           addEvent={this.props.addEvent}
@@ -415,7 +384,7 @@ class CalendarApp extends React.Component {
           selectedEvent={this.props.handleSelectedEvent}
           updateEvent={this.props.updateEvent}
           resizable
-        />
+        /> */}
       </div>
     )
   }
@@ -429,12 +398,11 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, {
-  fetchEvents,
   handleSidebar,
   addEvent,
   handleSelectedEvent,
   updateEvent,
   updateDrag,
   updateResize,
-  schedules
+  postSchedules
 })(CalendarApp)

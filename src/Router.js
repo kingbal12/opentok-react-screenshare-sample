@@ -9,6 +9,19 @@ import knowledgeBaseQuestion from "./views/pages/knowledge-base/Questions"
 import { ContextLayout } from "./utility/context/Layout"
 
 // Route-based code splitting
+const addEventButton = lazy(() =>
+  import("./views/pages/authentication/register/Schedule/AddEventButton")
+)
+const addEventSidebar = lazy(() =>
+  import("./views/pages/authentication/register/Schedule/AddEventSidebar")
+)
+const schedule = lazy(() =>
+  import("./views/pages/authentication/register/Schedule/Schedule")
+)
+
+const modifyschedule = lazy(() =>
+  import("./views/pages/settings/Schedule/ModifySchedule")
+)
 const analyticsDashboard = lazy(() =>
   import("./views/dashboard/analytics/AnalyticsDashboard")
 )
@@ -204,15 +217,7 @@ import("./views/pages/authentication/register/Register4")
 const registercomplete = lazy(() =>
 import("./views/pages/authentication/register/RegisterComplete"))
 
-const addEventButton = lazy(() =>
-  import("./views/pages/authentication/register/Schedule/AddEventButton")
-)
-const addEventSidebar = lazy(() =>
-  import("./views/pages/authentication/register/Schedule/AddEventSidebar")
-)
-const schedule = lazy(() =>
-  import("./views/pages/authentication/register/Schedule/Schedule")
-)
+
 
 const accessControl = lazy(() =>
   import("./extensions/access-control/AccessControl")
@@ -259,6 +264,8 @@ class AppRouter extends React.Component {
       <Router history={history}>
         <Switch>
           <AppRoute exact path="/" component={Login} fullLayout/>
+          <AppRoute path="/schedule" component={schedule} fullLayout/>
+          <AppRoute path="/pages/modifyschedule" component={modifyschedule}/>
           <AppRoute
             path="/ecommerce-dashboard"
             component={ecommerceDashboard}
@@ -411,7 +418,7 @@ class AppRouter extends React.Component {
           <AppRoute path="/pages/registtercomplete" component={registercomplete} fullLayout />
           {/* <AppRoute path="/addEventButton" component={addEventButton}  />
           <AppRoute path="/addEventSidebar" component={addEventSidebar}  /> */}
-          <AppRoute path="/schedule" component={schedule}/>
+
           
           <AppRoute
             path="/pages/forgot-password"

@@ -5,7 +5,7 @@ import { connect } from "react-redux"
 import {
   handleSidebar,
   handleSelectedEvent
-} from "../../../../../redux/actions/calendar/index"
+} from "../../../../redux/actions/calendar/index"
 const AddEventButton = props => {
   return (
     <Button.Ripple

@@ -18,14 +18,14 @@ import {
   updateDrag,
   updateResize,
   schedules
-} from "../../../../../redux/actions/calendar/index"
+} from "../../../../redux/actions/calendar/index"
 import { ChevronLeft, ChevronRight } from "react-feather"
 
 import "react-big-calendar/lib/addons/dragAndDrop/styles.scss"
 import "react-big-calendar/lib/css/react-big-calendar.css"
-import "../../../../../assets/scss/plugins/calendars/react-big-calendar.scss"
-import { history } from "../../../../../history"
-import Radio from "../../../../../components/@vuexy/radio/RadioVuexy"
+import "../../../../assets/scss/plugins/calendars/react-big-calendar.scss"
+import { history } from "../../../../history"
+import Radio from "../../../../components/@vuexy/radio/RadioVuexy"
 
 const DragAndDropCalendar = withDragAndDrop(Calendar)
 const localizer = momentLocalizer(moment)
@@ -36,7 +36,46 @@ const eventColors = {
   others: "bg-primary"
 }
 
+var currentDay = new Date();  
+var theYear = currentDay.getFullYear();
+var theMonth = currentDay.getMonth();
+var theDate  = currentDay.getDate();
+var theDayOfWeek = currentDay.getDay();
+ 
+var thisWeek = [];
+ 
+for(var i=0; i<7; i++) {
+  var resultDay = new Date(theYear, theMonth, theDate + (i - theDayOfWeek));
+  var yyyy = resultDay.getFullYear();
+  var mm = Number(resultDay.getMonth()) + 1;
+  var dd = resultDay.getDate();
+ 
+  mm = String(mm).length === 1 ? '0' + mm : mm;
+  dd = String(dd).length === 1 ? '0' + dd : dd;
+ 
+  thisWeek[i] = yyyy + '-' + mm + '-' + dd;
+}
+ 
+console.log(thisWeek);
+
 class Toolbar extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      date:""
+    }
+  }
+
+  componentDidMount() {
+    this.setState({date:this.props.label})
+  }
+
+  handleWeekState= e => {
+    e.preventDefault()
+    this.props.onNavigate("NEXT")
+    this.setState({date: this.props.label})
+    console.log(this.state)
+  }
   render() {
     return (
       <div className="calendar-header mb-2 d-flex justify-content-between flex-wrap">
@@ -54,7 +93,7 @@ class Toolbar extends React.Component {
               className="btn-icon rounded-circle ml-1"
               size="sm"
               color="primary"
-              onClick={() => this.props.onNavigate("NEXT")}
+              onClick={ this.handleWeekState}
             >
               <ChevronRight size={15} />
             </Button.Ripple>
@@ -123,7 +162,9 @@ class CalendarApp extends React.Component {
       auto: "true",
       rperiod: "1",
       holiday: "Y",
-      modal: false
+      modal: false,
+      weekstart: "",
+      weekend: ""
       
     }
   }
@@ -201,27 +242,15 @@ class CalendarApp extends React.Component {
       // allDay: this.state.allDay,
       // selectable: this.state.selectable
     })
-    
-    // this.setState({
-    //   startDate: new Date(),
-    //   endDate: new Date(),
-    //   title: "",
-    //   label: null,
-    //   allDay: true,
-    //   selectable: true
-    // })
   }
 
   postschedule = e => {
     e.preventDefault()
-    this.props.schedules(
-      this.state.userid,
-      this.state.holiday,
-      this.state.rperiod,
-      this.state.events)
-      
+    // this.props.schedules(
+    //   this.state.userid,
+    //   this.state.events)
+    console.log(this.state)
   }
-
   
 
 
@@ -263,26 +292,17 @@ class CalendarApp extends React.Component {
                 this.setState({
                   // title: "테스트",
                   // label: null,
-
                   // 여기서는 포맷변환을 시켜봤자 다시 원래 포맷으로 변하게 됨
+                  weekstart: this.props.week,
+                  weekend: this.props.end,
                   startDate: new Date(start),
                   endDate: new Date(end)
-                  
                   // startDate: formatDate(start),
                   // endDate: formatDate(end)
                   // url: ""
-                  
                 })
                 this.handleAddEvent(2)
                 // id 를 1씩 증가하게끔 
-                // this.props.handleSidebar(true)
-                // this.props.handleSelectedEvent({
-                //   title: "",
-                //   label: null,
-                //   start: new Date(start),
-                //   end: new Date(end),
-                //   url: ""
-                // })
                 console.log("---------------------", this.state.startDate)
               }}
               

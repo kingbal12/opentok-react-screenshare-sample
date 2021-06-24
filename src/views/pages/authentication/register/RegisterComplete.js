@@ -1,6 +1,5 @@
 import React from "react"
-import {InputGroup, Form, FormGroup, Button,
-  CustomInput,
+import {Button,
   CardHeader,
   CardTitle,
   Card,
@@ -8,6 +7,9 @@ import {InputGroup, Form, FormGroup, Button,
   Row,
   Col
 } from "reactstrap"
+import { history } from "../../../../history"
+import { connect } from "react-redux"
+
 
 class RegisterComplete extends React.Component {
   constructor(props){
@@ -24,6 +26,14 @@ class RegisterComplete extends React.Component {
       previewURL : "",
       registermodal: false
     }
+  }
+
+ 
+
+
+  handleGoSchedule = e => {
+    e.preventDefault()
+    history.push("/schedule")
   }
 
 
@@ -52,7 +62,8 @@ class RegisterComplete extends React.Component {
                     <Button
                       size="lg"
                       color="primary" 
-                      type="submit"
+                      type="button"
+                      onClick={this.handleGoSchedule}
                     >
                       스케쥴 설정 시작하기
                     </Button>
@@ -69,5 +80,10 @@ class RegisterComplete extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    user: state.auth
+  }
+}
 
-export default RegisterComplete
+export default connect(mapStateToProps)(RegisterComplete)

@@ -14,8 +14,8 @@ import {
 import Flatpickr from "react-flatpickr";
 
 import "flatpickr/dist/themes/light.css";
-import "../../../../../assets/scss/plugins/forms/flatpickr/flatpickr.scss"
-import Radio from "../../../../../components/@vuexy/radio/RadioVuexy"
+import "../../../../assets/scss/plugins/forms/flatpickr/flatpickr.scss"
+import Radio from "../../../../components/@vuexy/radio/RadioVuexy"
 
 const eventColors = {
   business: "chip-success",

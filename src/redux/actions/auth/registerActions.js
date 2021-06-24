@@ -209,6 +209,7 @@ export const register4 = (userid, filename, file, medicalpart, medicalable, medi
             payload: {register4status}
           })
         } else {
+          
           dispatch({
             type:"REGISTER4_STATUS",
             payload: {register4status}
@@ -219,6 +220,7 @@ export const register4 = (userid, filename, file, medicalpart, medicalable, medi
       })
   }
 }
+
 
 export const changepassword = (userid, password, newpassword) => {
   return dispatch => {
