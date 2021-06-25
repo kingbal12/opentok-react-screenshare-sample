@@ -173,6 +173,7 @@ class CalendarApp extends React.Component {
     await this.props.fetchEvents(
       this.state.userid
     )
+    this.onNavigate(new Date(), "week");
   }
   
   handleRepeatPeriod = rperiod => {
@@ -251,6 +252,23 @@ class CalendarApp extends React.Component {
     //   this.state.events)
     console.log(this.state)
   }
+<<<<<<< HEAD
+=======
+
+  onNavigate =(date, view) => {
+    let start, end;
+  
+    if (view === 'week') {
+      start = moment(date).startOf('month').startOf('week')
+      console.log(start)
+      end = moment(date).endOf('month').endOf('week')
+    }
+    console.log(start, end);
+  
+    return console.log({ start, end });
+  }
+
+>>>>>>> 7c3c729e0970bb3d7923306a46352f7a57c8efa9
   
 
 
@@ -276,6 +294,7 @@ class CalendarApp extends React.Component {
               onEventDrop={this.moveEvent}
               onEventResize={this.resizeEvent}
               startAccessor="start"
+              onNavigate={this.onNavigate}
               endAccessor="end"
               resourceAccessor="url"
               defaultView='week'
