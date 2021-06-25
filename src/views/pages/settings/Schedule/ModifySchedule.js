@@ -17,7 +17,7 @@ import {
   updateEvent,
   updateDrag,
   updateResize,
-  schedules
+  startschedules
 } from "../../../../redux/actions/calendar/index"
 import { ChevronLeft, ChevronRight } from "react-feather"
 
@@ -36,27 +36,11 @@ const eventColors = {
   others: "bg-primary"
 }
 
-var currentDay = new Date();  
-var theYear = currentDay.getFullYear();
-var theMonth = currentDay.getMonth();
-var theDate  = currentDay.getDate();
-var theDayOfWeek = currentDay.getDay();
- 
-var thisWeek = [];
- 
-for(var i=0; i<7; i++) {
-  var resultDay = new Date(theYear, theMonth, theDate + (i - theDayOfWeek));
-  var yyyy = resultDay.getFullYear();
-  var mm = Number(resultDay.getMonth()) + 1;
-  var dd = resultDay.getDate();
- 
-  mm = String(mm).length === 1 ? '0' + mm : mm;
-  dd = String(dd).length === 1 ? '0' + dd : dd;
- 
-  thisWeek[i] = yyyy + '-' + mm + '-' + dd;
-}
- 
-console.log(thisWeek);
+const formatDate = (weekdate)=>{
+  let formatted_date = weekdate.getFullYear() + ('0' + (weekdate.getMonth() + 1)).slice(-2) + weekdate.getDate()
+   return formatted_date;
+  }
+
 
 class Toolbar extends React.Component {
   constructor(props) {
@@ -74,7 +58,7 @@ class Toolbar extends React.Component {
     e.preventDefault()
     this.props.onNavigate("NEXT")
     this.setState({date: this.props.label})
-    console.log(this.state)
+    // console.log(this.state)
   }
   render() {
     return (
@@ -170,10 +154,13 @@ class CalendarApp extends React.Component {
   }
 
   async componentDidMount() {
+    await this.onNavigate(new Date(), "week");
     await this.props.fetchEvents(
-      this.state.userid
+      this.state.userid,
+      this.state.weekstart,
+      this.state.weekend
     )
-    this.onNavigate(new Date(), "week");
+    
   }
   
   handleRepeatPeriod = rperiod => {
@@ -245,31 +232,51 @@ class CalendarApp extends React.Component {
     })
   }
 
-  postschedule = e => {
-    e.preventDefault()
-    // this.props.schedules(
+  
+  // onRemove = () => {
+  //   // filter 메소드를 사용하여 선택한 객체의 id값을 가져와 동일하지 않은 것만 가져온다.
+  //   // 즉, 1,2,3,4의 아이디 중 3번을 눌렀다면 1,2,4의 아이디만 가진 상태로 변경한다. (삭제)
+  //   this.setState(users.filter(user => user.id !== id));
+  // }
+ 
+
+   onNavigate = (date, view, action) => {
+    let start, end;
+    let scheduledata
+    if (view === 'week') {
+      start = moment(date).startOf('week')._d
+      end = moment(date).endOf('week')._d
+      this.setState({weekstart: start, weekend: end})
+      if(action === "PREV" || action === "NEXT") {
+        alert("가동됨")
+        // this.loadschedule() 오류발생중
+      }
+    } else {
+      alert('스케쥴 수정 도중 오류가 발생하였습니다. 관리자에게 문의부탁드립니다.')
+    }
+    
+  }
+
+
+  
+  loadschedule = () => {
+    this.setState(this.state.events.length = 0)
+    // this.props.fetchEvents(
     //   this.state.userid,
+    //   this.state.weekstart,
+    //   this.state.weekend
+    // )
+  }
+  
+  modifychedule = e => {
+    e.preventDefault()
+    // this.props.startschedules(
+    //   this.state.userid,
+    //   this.state.weekstart,
+    //   this.state.weekend,
     //   this.state.events)
     console.log(this.state)
   }
-<<<<<<< HEAD
-=======
-
-  onNavigate =(date, view) => {
-    let start, end;
-  
-    if (view === 'week') {
-      start = moment(date).startOf('month').startOf('week')
-      console.log(start)
-      end = moment(date).endOf('month').endOf('week')
-    }
-    console.log(start, end);
-  
-    return console.log({ start, end });
-  }
-
->>>>>>> 7c3c729e0970bb3d7923306a46352f7a57c8efa9
-  
 
 
   render() {
@@ -332,13 +339,9 @@ class CalendarApp extends React.Component {
                 color="primary"
                 type="button"
                 size="lg"
-                // onClick={() => {
-                //   history.push("/pages/login")
-                // }}
-                onClick={this.schedulemodal}
-                
+                onClick={this.modifychedule}
               >
-                저장
+                수정
               </Button>
             </div>
             <Modal
@@ -477,5 +480,5 @@ export default connect(mapStateToProps, {
   updateEvent,
   updateDrag,
   updateResize,
-  schedules
+  startschedules
 })(CalendarApp)

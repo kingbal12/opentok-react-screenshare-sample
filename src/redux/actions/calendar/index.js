@@ -12,14 +12,14 @@ import { history } from "../../../history"
 //   }
 // }
 
-export const fetchEvents = (user_id) => {
+export const fetchEvents = (user_id, weekstart, weekend) => {
   return async dispatch => {
     await axios
       .get("http://203.251.135.81:9300/v1/doctor/appointment/schedules",{
         params: {
           user_id: user_id,
-          start_date: "20210101",
-          end_date: "20230701"
+          start_date: weekstart,
+          end_date: weekend
         }
       })
       .then(response => {
@@ -45,8 +45,9 @@ export const addEvent = event => {
   }
 }
 
-const formatDate = (start)=>{
-  let formatted_date = start.getFullYear() + "-" + ('0' + (start.getMonth() + 1)).slice(-2) + "-" + start.getDate() + " " + ('0' + start.getHours()).slice(-2) + ":" + ('0' + start.getMinutes()).slice(-2)
+const formatDate = (scheduleda)=>{
+  let formatted_date = scheduleda.getFullYear() + "-" + ('0' + (scheduleda.getMonth() + 1)).slice(-2) + "-" + ('0' + scheduleda.getDate()).slice(-2) + " " 
+                       + ('0' + scheduleda.getHours()).slice(-2) + ":" + ('0' + scheduleda.getMinutes()).slice(-2)
    return formatted_date;
   }
 
@@ -78,25 +79,42 @@ export const postSchedules = (userid, holiday, rperiod, events) => {
 
 
 
-export const schedules = (userid) => {
+export const startschedules = (userid, weekstart, weekend, events) => {
   return dispatch => {
-    // let dateToObj = events.map(event => {
-    //   event.start = formatDate(event.start)
-    //   event.end = formatDate(event.end)
-    //   return event
-    // })
     axios
       .delete("http://203.251.135.81:9300/v1/doctor/appointment/schedules",{
         data: {
           user_id:userid,
-          start_date:"20210601",
-          end_date:"20210625",
-        }
-          
+          start_date:weekstart,
+          end_date:weekend,
+        }    
       })
       .then(response => {
         console.log(response)
-        // holidayyn의
+        
+      })
+      .then(endchedules(userid, weekstart, weekend, events))
+      .catch(err => console.log(err))
+  }
+}
+
+export const endchedules = (userid, weekstart, weekend, events) => {
+  return dispatch => {
+    let dateToObj = events.map(event => {
+      event.start = formatDate(event.start)
+      event.end = formatDate(event.end)
+      return event
+    })
+    axios
+      .put("http://203.251.135.81:9300/v1/doctor/appointment/schedules",{
+          user_id:userid,
+          start_date:weekstart,
+          end_date:weekend,
+          events: dateToObj 
+      })
+      .then(response => {
+        console.log(response)
+        console.log("put")
       })
       .catch(err => console.log(err))
   }
