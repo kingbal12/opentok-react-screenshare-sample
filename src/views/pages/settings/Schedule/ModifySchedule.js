@@ -145,12 +145,12 @@ class CalendarApp extends React.Component {
 
   async componentDidMount() {
     await this.onNavigate(new Date(), "week");
-    await this.props.fetchEvents(
-      this.state.userid,
-      this.state.weekstart,
-      this.state.weekend
-    )
-    
+    // await this.props.fetchEvents(
+    //   this.state.userid,
+    //   this.state.weekstart,
+    //   this.state.weekend
+    // )
+    this.loadschedule()
   }
   
   handleRepeatPeriod = rperiod => {
@@ -238,25 +238,22 @@ class CalendarApp extends React.Component {
       end = moment(date).endOf('week')._d
       this.setState({weekstart: start, weekend: end})
       if(action === "PREV" || action === "NEXT") {
+        this.componentDidMount()
         start = moment(date).startOf('week')._d
         end = moment(date).endOf('week')._d
-        this.setState({weekstart: start, weekend: end})
-        
-        
-        console.log("중간에 스테이터스가 바뀌는가? :",this.state.weekstart,this.state.weekend)
-
-        this.loadschedule()
-       
+        this.setState({events:[]})
+        this.setState({weekstart: start, weekend: end},this.loadschedule())
       }
     } else {
       alert('스케쥴 수정 도중 오류가 발생하였습니다. 관리자에게 문의부탁드립니다.')
     }
   }
 
+  
+
 
   
   loadschedule = () => {
-    // this.setState(this.state.events.length = 0)
     this.props.fetchEvents(
       this.state.userid,
       this.state.weekstart,
@@ -266,12 +263,19 @@ class CalendarApp extends React.Component {
   
   modifychedule = e => {
     e.preventDefault()
+    
+    this.props.startschedules(
+      this.state.userid,
+      this.state.weekstart,
+      this.state.weekend,
+      this.state.events)
     // this.props.startschedules(
     //   this.state.userid,
     //   this.state.weekstart,
     //   this.state.weekend,
     //   this.state.events)
     console.log(this.state)
+
   }
 
 
@@ -315,8 +319,6 @@ class CalendarApp extends React.Component {
                   // title: "테스트",
                   // label: null,
                   // 여기서는 포맷변환을 시켜봤자 다시 원래 포맷으로 변하게 됨
-                  weekstart: this.props.week,
-                  weekend: this.props.end,
                   startDate: new Date(start),
                   endDate: new Date(end)
                   // startDate: formatDate(start),

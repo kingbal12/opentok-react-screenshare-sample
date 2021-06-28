@@ -30,7 +30,6 @@ export const fetchEvents = (user_id, weekstart, weekend) => {
         // fake=db에 있는 데이터 항목대로 substring을 통해 가공해서 보낸다면 해결될것 같음
         
         dispatch({ type: "FETCH_EVENTS", events: response.data.data })
-        alert("fetch")
       })
       .catch(err => console.log(err))
   }
@@ -115,7 +114,10 @@ export const endchedules = (userid, weekstart, weekend, events) => {
       })
       .then(response => {
         console.log(response)
-        console.log("put")
+        if(response.data.status==="200") {
+          alert("스케쥴이 정상적으로 수정되었습니다.")
+        }
+        
       })
       .catch(err => console.log(err))
   }
