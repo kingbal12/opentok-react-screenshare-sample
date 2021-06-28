@@ -8,7 +8,7 @@ import {InputGroup, Form, FormGroup, Input, Button,
 } from "reactstrap"
 
 import "../../../../assets/scss/pages/authentication.scss"
-import { register4 } from "../../../../redux/actions/auth/registerActions"
+import { getMyInfo, register4 } from "../../../../redux/actions/auth/registerActions"
 import { connect } from "react-redux"
 
 
@@ -17,19 +17,27 @@ class MyInfo extends React.Component {
   constructor(props){
     super(props)
     this.state = {
+      name: "테스트의사",
+      birthday:"1991.08.28",
+      sex:"M",
       userid: props.user.login.values.loggedInUser.username,
       filename: "",
-      file : "", 
-      medicalpart: "", 
-      medicalable: "", 
-      medicaldesc: "", 
-      medicalnum: "", 
+      file : "",
+      medicalpart: "",
+      medicalable: "",
+      medicaldesc: "",
+      medicalnum: "",
       userdesc: "",
       previewURL : ""
     }
   }
-  // 20210517 여기까지 작업함
-
+  // 오류
+  // componentDidMount() {
+  //   this.props.getMyInfo(
+  //     this.state.userid
+  //   )
+  // }
+ 
   handleFileOnChange = (event) => {
     event.preventDefault();
     let reader = new FileReader();
@@ -99,6 +107,16 @@ class MyInfo extends React.Component {
                     <div className="col-1 align-self-center"><b>아이디</b></div>
                     <div>{this.state.userid}</div>
                   </div> 
+                  <div className="form-label-group d-flex">
+                    <div className="col-1 align-self-center"><b>이름</b></div>
+                    <div>{this.state.name}</div>
+                    <div className="col-2"></div>
+                    <div className="col-1 align-self-center"><b>생일</b></div>
+                    <div>{this.state.birthday}</div>
+                    <div className="col-2"></div>
+                    <div className="col-1 align-self-center"><b>성별</b></div>
+                    <div>{this.state.sex}</div>
+                  </div> 
                   <Form action="/" onSubmit={this.handleRegister}>
                     <FormGroup className="form-label-group d-flex justify-content-between">
                       <div className="col-2 align-self-center"><b>프로필 사진 등록</b></div>
@@ -116,15 +134,14 @@ class MyInfo extends React.Component {
                     </FormGroup> 
                     <FormGroup className="form-label-group d-flex justify-content-between">
                       <div className="col-2 align-self-center"><b>진료과</b></div>
-                      <InputGroup>
-                        <Input
-                          type="text"
-                          placeholder="TEXT를 입력해주세요"
-                          required
-                          value={this.state.medicalpart}
-                          onChange={e => this.setState({ medicalpart: e.target.value })}
-                        />   
-                      </InputGroup>
+                      <Input type="select" name="select" value={this.state.medicalpart}  onChange={e => this.setState({ medicalpart: e.target.value })}>
+                        <option value="01">가정의학과</option>
+                        <option value="02">내과</option>
+                        <option value="03">산부인과</option>
+                        <option value="04">피부과</option>
+                        <option value="05">비뇨기과</option>
+                        <option value="99">기타</option>
+                      </Input>
                     </FormGroup>
                     
                     <FormGroup className="form-label-group d-flex justify-content-between">
@@ -208,6 +225,7 @@ class MyInfo extends React.Component {
                       >
                         저장하기
                       </Button>
+
                     </div>
                   </Form>
               </CardBody>
@@ -224,7 +242,9 @@ class MyInfo extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.auth
+    user: state.auth,
+    // 오류
+    // myinfo: state.auth.register.myinfoval.myinfo,
   }
 }
-export default connect(mapStateToProps, {register4})(MyInfo)
+export default connect(mapStateToProps, {getMyInfo, register4})(MyInfo)

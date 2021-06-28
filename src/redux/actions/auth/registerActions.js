@@ -221,6 +221,32 @@ export const register4 = (userid, filename, file, medicalpart, medicalable, medi
   }
 }
 
+export const getMyInfo = (userid) => {
+  return dispatch => {
+    axios
+      .get("http://203.251.135.81:9300/v1/doctor/account/user-info", {
+        params: {
+          user_id: userid
+        }
+      })
+      .then(response => {
+        let myinfo;
+
+        if(response.data.status==="200") {
+          myinfo = response.data.data
+          console.log("나의 정보: ",myinfo)
+          
+          dispatch({
+            type:"MYINFO_STATUS",
+            payload: {myinfo}
+          })
+        } else {
+          alert("고객정보를 불러오지 못하였습니다.")
+        }
+      })
+  }
+}
+
 
 export const changepassword = (userid, password, newpassword) => {
   return dispatch => {

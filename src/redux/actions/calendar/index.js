@@ -116,8 +116,8 @@ export const endchedules = (userid, weekstart, weekend, events) => {
         console.log(response)
         if(response.data.status==="200") {
           alert("스케쥴이 정상적으로 수정되었습니다.")
+          
         }
-        
       })
       .catch(err => console.log(err))
   }
