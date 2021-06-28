@@ -50,16 +50,6 @@ class Toolbar extends React.Component {
     }
   }
 
-  componentDidMount() {
-    this.setState({date:this.props.label})
-  }
-
-  handleWeekState= e => {
-    e.preventDefault()
-    this.props.onNavigate("NEXT")
-    this.setState({date: this.props.label})
-    // console.log(this.state)
-  }
   render() {
     return (
       <div className="calendar-header mb-2 d-flex justify-content-between flex-wrap">
@@ -77,7 +67,7 @@ class Toolbar extends React.Component {
               className="btn-icon rounded-circle ml-1"
               size="sm"
               color="primary"
-              onClick={ this.handleWeekState}
+              onClick={() => this.props.onNavigate("NEXT")}
             >
               <ChevronRight size={15} />
             </Button.Ripple>
@@ -248,24 +238,30 @@ class CalendarApp extends React.Component {
       end = moment(date).endOf('week')._d
       this.setState({weekstart: start, weekend: end})
       if(action === "PREV" || action === "NEXT") {
-        alert("가동됨")
-        // this.loadschedule() 오류발생중
+        start = moment(date).startOf('week')._d
+        end = moment(date).endOf('week')._d
+        this.setState({weekstart: start, weekend: end})
+        
+        
+        console.log("중간에 스테이터스가 바뀌는가? :",this.state.weekstart,this.state.weekend)
+
+        this.loadschedule()
+       
       }
     } else {
       alert('스케쥴 수정 도중 오류가 발생하였습니다. 관리자에게 문의부탁드립니다.')
     }
-    
   }
 
 
   
   loadschedule = () => {
-    this.setState(this.state.events.length = 0)
-    // this.props.fetchEvents(
-    //   this.state.userid,
-    //   this.state.weekstart,
-    //   this.state.weekend
-    // )
+    // this.setState(this.state.events.length = 0)
+    this.props.fetchEvents(
+      this.state.userid,
+      this.state.weekstart,
+      this.state.weekend
+    )
   }
   
   modifychedule = e => {
