@@ -10,7 +10,7 @@ import {InputGroup, Form, FormGroup, Input, Button,
 import "../../../../assets/scss/pages/authentication.scss"
 import { getMyInfo, register4 } from "../../../../redux/actions/auth/registerActions"
 import { connect } from "react-redux"
-
+import axios from "axios"
 
 
 class MyInfo extends React.Component {
@@ -37,6 +37,36 @@ class MyInfo extends React.Component {
   //     this.state.userid
   //   )
   // }
+  componentDidMount() {
+        axios
+          .get("http://203.251.135.81:9300/v1/doctor/account/user-info", {
+            params: {
+              user_id: this.state.userid
+            }
+          })
+          .then(response => {
+            let myinfo;
+    
+            if(response.data.status==="200") {
+              myinfo = response.data.data
+              console.log("나의 정보: ",myinfo)
+              this.setState({
+                filename: myinfo.FILE_NAME,
+                file: myinfo.FILE_PATH,
+                medicalpart: myinfo.MEDICAL_PART,
+                medicalable: myinfo.MEDICAL_ABLE,
+                medicaldesc: myinfo.MEDICAL_DESC,
+                medicalnum: myinfo.MEDICAL_NUM,
+                userdesc: myinfo.USER_DESC
+              })
+            } else {
+              alert("고객정보를 불러오지 못하였습니다.")
+            }
+          })
+      }
+ 
+  
+  
  
   handleFileOnChange = (event) => {
     event.preventDefault();
