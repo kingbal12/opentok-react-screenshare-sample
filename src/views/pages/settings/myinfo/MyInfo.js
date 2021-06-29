@@ -31,12 +31,7 @@ class MyInfo extends React.Component {
       previewURL : ""
     }
   }
-  // 오류
-  // componentDidMount() {
-  //   this.props.getMyInfo(
-  //     this.state.userid
-  //   )
-  // }
+
   componentDidMount() {
         axios
           .get("http://203.251.135.81:9300/v1/doctor/account/user-info", {
