@@ -13,7 +13,8 @@ import "../../../assets/scss/pages/dashboard-analytics.scss"
 import DataTableCustom from "./DataTableCustom"
 // import { UserX } from "react-feather"
 import { connect } from "react-redux"
-import {getappoints} from "../../../redux/actions/appoint/index"
+import { getappoints } from "../../../redux/actions/appoint"
+
 import axios from "axios"
 // let $primary = "#7367F0",
 //   $danger = "#EA5455",
@@ -27,13 +28,45 @@ import axios from "axios"
 //   $label_color = "#e7eef7",
 //   $white = "#fff"
 
+
  
 class AnalyticsDashboard extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      userid: props.user.login.values.loggedInUser.username,
+      startdate: "20210101",
+      pageamount: 5,
+      pagenum: 1,
+      countday: 0,
+      countmon: 0,
+      appointlist: []
+    }
+  }
 
-  async componentDidMount() {
-    await this.props.getappoints(this.props.user.login.values.loggedInUser.username,"20210101",5,1)
-
-    console.log("리덕스를 이용한 데이터",this.props.ap.appoints, this.props.user.login.values.loggedInUser.username)  //제발 오타 주의좀 합시다
+  componentDidMount() {
+        axios
+          .get("http://203.251.135.81:9300/v1/doctor/appointment/dashboard", {
+            params: {
+              user_id: this.state.userid,
+              start_date: "20210101",
+              page_amount: 5,
+              page_num: 1
+            }
+          })
+          .then(response => {
+            let appoints;
+            if (response.data.status==="200") {
+              appoints=response.data.data
+              console.log(appoints)
+              this.setState({
+                countday: appoints.COUNT_DAY,
+                countmon: appoints.COUNT_MON,
+                appointlist: appoints.APPOINT_LIST
+              })     
+            }
+          })
+          .catch(err => console.log(err))
   } 
 
   render() {
@@ -41,29 +74,34 @@ class AnalyticsDashboard extends React.Component {
       <React.Fragment>
         <Row className="match-height row">
           <Col sm="6">
-            <SalesCard />
+            <SalesCard
+              
+            />
           </Col>
           <Col sm="3">
-            <SuberscribersGained />
+            <SuberscribersGained
+            countd={this.state.countday}  />
           </Col>
           <Col sm="3">
-            <OrdersReceived />
+            <OrdersReceived
+            countm={this.state.countmon}
+            />
           </Col>
         </Row>
         <Row>
-          
           <Col sm="12">
-            <DataTableCustom />
+            <DataTableCustom/>
           </Col>
         </Row>
       </React.Fragment>
     )
   }
 }
+
 const mapStateToProps = state => {
   return {
-    user: state.auth,
-    ap: state.appoints
+    user: state.auth
   }
 }
+
 export default connect(mapStateToProps,{getappoints})(AnalyticsDashboard)

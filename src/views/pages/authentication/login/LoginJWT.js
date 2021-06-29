@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { CardBody, FormGroup, Form, Input, Button, FormFeedback } from "reactstrap"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import { Mail, Lock, Check } from "react-feather"
-import { loginWithJWT } from "../../../../redux/actions/auth/loginActions"
+import { loginWithJWT} from "../../../../redux/actions/auth/loginActions"
 import { connect } from "react-redux"
 import { history } from "../../../../history"
 import { useCookies } from 'react-cookie'
@@ -123,7 +123,7 @@ class LoginJWT extends React.Component {
 }
 const mapStateToProps = state => {
   return {
-    values: state.auth.login
+    values: state.auth
   }
 }
 export default connect(mapStateToProps, { loginWithJWT })(LoginJWT)

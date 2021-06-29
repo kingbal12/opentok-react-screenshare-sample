@@ -23,13 +23,10 @@ export const loginWithJWT = user => {
 
         if (response.data.status==="200") {
           loggedInUser = response.data.data;
-       
-          console.log(loggedInUser);
           dispatch({
             type: "LOGIN_WITH_JWT",
             payload: { loggedInUser, loggedInWith: "jwt" }
           })
-
           history.push("/analyticsDashboard")
         }
         else {
@@ -39,6 +36,8 @@ export const loginWithJWT = user => {
       .catch(err => console.log(err))
   }
 }
+
+
 
 export const logoutWithJWT = () => {
   return dispatch => {
