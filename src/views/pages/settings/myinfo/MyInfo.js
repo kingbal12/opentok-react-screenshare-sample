@@ -104,7 +104,8 @@ class MyInfo extends React.Component {
           <img
             width="150px"
             height="150px" 
-            src={this.state.previewURL} 
+            src={this.state.file==!undefined?"http://203.251.135.81:9300"+this.state.file+this.state.filename:this.state.previewURL} 
+            // src={} 
             className="dz-img" 
             alt="" 
             />
