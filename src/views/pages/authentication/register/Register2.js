@@ -51,10 +51,12 @@ class Register extends React.Component {
     e.preventDefault()
     if(this.state.otheremail===false){
       this.props.authemail(
+        this.state.userid,
         this.state.userid
       )
     } else {
       this.props.authemail(
+        this.state.userid,
         this.state.email
       )
     }

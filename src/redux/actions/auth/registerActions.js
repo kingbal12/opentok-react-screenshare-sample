@@ -67,7 +67,7 @@ export const register2 = (userid, name, phone, password, btdate, gender, email) 
         user_pwd: password,
         f_name: name, 
         mobile_num: phone,
-        birthdate: btdate,
+        birth_dt: btdate,
         gender: gender,
         email: email
       })
@@ -89,13 +89,13 @@ export const register2 = (userid, name, phone, password, btdate, gender, email) 
   }
 }
 
-export const authemail = (email) => {
-  console.log(email,"email2")
+export const authemail = (userid, email) => {
   return dispatch => {
    
     axios
       .post("http://203.251.135.81:9300/signup-email", {
-        user_id: email,
+        user_id: userid,
+        email: email
       })
 
 

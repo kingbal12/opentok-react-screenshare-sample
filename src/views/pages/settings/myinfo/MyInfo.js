@@ -18,7 +18,7 @@ class MyInfo extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      name: "테스트의사",
+      name: "",
       birthday:"1991.08.28",
       gender:"",
       userid: props.user.login.values.loggedInUser.username,
@@ -46,14 +46,15 @@ class MyInfo extends React.Component {
             if(response.data.status==="200") {
               myinfo = response.data.data
               console.log("나의 정보: ",myinfo)
-              if(myinfo.GENDER==="1" && myinfo.GENDER==="3") {
+              if(myinfo.GENDER==='1' || myinfo.GENDER==='3') {
                 this.setState({gender: "M"})
-              } else if(myinfo.GENDER==="2" && myinfo.GENDER==="4"){
+              } else if(myinfo.GENDER==='2' || myinfo.GENDER==='4'){
                 this.setState({gender: "F"})
               } else{
                 this.setState({gender: "성별정보가 저장되어있지 않습니다."})
               }
               this.setState({
+                name: myinfo.F_NAME,
                 medicalpart: myinfo.MEDICAL_PART,
                 medicalable: myinfo.MEDICAL_ABLE,
                 medicaldesc: myinfo.MEDICAL_DESC,

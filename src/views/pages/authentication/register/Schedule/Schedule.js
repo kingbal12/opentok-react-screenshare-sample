@@ -102,8 +102,8 @@ class CalendarApp extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      // userid: props.user.login.values.loggedInUser.username,
-      userid: "kingbal999@gmail.com",
+      userid: props.user.register.values.registeruser,
+      // userid: "kingbal999@gmail.com",
       events: [],
       views: {
         month: true,
