@@ -11,6 +11,7 @@ import "../../../../assets/scss/pages/authentication.scss"
 import { getMyInfo, register4 } from "../../../../redux/actions/auth/registerActions"
 import { connect } from "react-redux"
 import axios from "axios"
+import previmg from "../../../../assets/img/portrait/small/Sample_User_Icon.png"
 
 
 class MyInfo extends React.Component {
@@ -19,7 +20,7 @@ class MyInfo extends React.Component {
     this.state = {
       name: "테스트의사",
       birthday:"1991.08.28",
-      sex:"M",
+      gender:"",
       userid: props.user.login.values.loggedInUser.username,
       filename: "",
       file : "",
@@ -45,9 +46,14 @@ class MyInfo extends React.Component {
             if(response.data.status==="200") {
               myinfo = response.data.data
               console.log("나의 정보: ",myinfo)
+              if(myinfo.GENDER==="1" && myinfo.GENDER==="3") {
+                this.setState({gender: "M"})
+              } else if(myinfo.GENDER==="2" && myinfo.GENDER==="4"){
+                this.setState({gender: "F"})
+              } else{
+                this.setState({gender: "성별정보가 저장되어있지 않습니다."})
+              }
               this.setState({
-                filename: myinfo.FILE_NAME,
-                file: myinfo.FILE_PATH,
                 medicalpart: myinfo.MEDICAL_PART,
                 medicalable: myinfo.MEDICAL_ABLE,
                 medicaldesc: myinfo.MEDICAL_DESC,
@@ -97,22 +103,48 @@ class MyInfo extends React.Component {
 
   render() {
     let profile_preview = null;
-    if(this.state.file !== ''){
+    if(this.props.user.login.values.loggedInUser.file_path !== ''&&this.state.file===""&&this.state.filename===""){
       profile_preview = 
       <div className="dz-thumb ">
         <div className="dz-thumb-inner">
           <img
             width="150px"
             height="150px" 
-            src={this.state.file==!undefined?"http://203.251.135.81:9300"+this.state.file+this.state.filename:this.state.previewURL} 
-            // src={} 
+            src={"http://203.251.135.81:9300"+this.props.user.login.values.loggedInUser.file_path
+                +this.props.user.login.values.loggedInUser.file_name } 
             className="dz-img" 
             alt="" 
             />
         </div>
       </div>
-    
-      // <CardImg style={{borderRadius:"100%"}} className='profile_preview'  src={this.state.previewURL} />
+    } else if (this.state.file !== "" && this.state.filename !== "") {
+      profile_preview = 
+      <div className="dz-thumb ">
+        <div className="dz-thumb-inner">
+          <img
+            width="150px"
+            height="150px" 
+            src={this.state.previewURL} 
+            className="dz-img" 
+            alt="" 
+            />
+        </div>
+      </div>
+
+    }else {
+      profile_preview = 
+      <div className="dz-thumb ">
+        <div className="dz-thumb-inner">  
+          <img
+            width="150px"
+            height="150px" 
+            src={previmg}
+            className="dz-img"
+            style={{borderRadius:"100%"}} 
+            alt="" 
+            />
+        </div>
+      </div>
     }
     return (
       <Row className="m-0 justify-content-center">
@@ -141,7 +173,7 @@ class MyInfo extends React.Component {
                     <div>{this.state.birthday}</div>
                     <div className="col-2"></div>
                     <div className="col-1 align-self-center"><b>성별</b></div>
-                    <div>{this.state.sex}</div>
+                    <div>{this.state.gender}</div>
                   </div> 
                   <Form action="/" onSubmit={this.handleRegister}>
                     <FormGroup className="form-label-group d-flex justify-content-between">
@@ -268,9 +300,7 @@ class MyInfo extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.auth,
-    // 오류
-    // myinfo: state.auth.register.myinfoval.myinfo,
+    user: state.auth
   }
 }
 export default connect(mapStateToProps, {getMyInfo, register4})(MyInfo)

@@ -74,9 +74,7 @@ class AnalyticsDashboard extends React.Component {
       <React.Fragment>
         <Row className="match-height row">
           <Col sm="6">
-            <SalesCard
-              
-            />
+            <SalesCard/>
           </Col>
           <Col sm="3">
             <SuberscribersGained
@@ -90,7 +88,9 @@ class AnalyticsDashboard extends React.Component {
         </Row>
         <Row>
           <Col sm="12">
-            <DataTableCustom/>
+            <DataTableCustom
+            list={this.state.appointlist}
+            />
           </Col>
         </Row>
       </React.Fragment>

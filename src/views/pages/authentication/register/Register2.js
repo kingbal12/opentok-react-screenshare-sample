@@ -23,23 +23,22 @@ class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      phone: "",
-      useemail: "",
+      userid:"",
       email: "",
       idnumber: "",
+      name: "",
+      phone: "",  
       password: "",
       chkpassword: "",
       btdate:"",
+      gender:"",
       otheremail: false,
       idmodal: false,
-      // vfemailstatus: props.vfemail,
       vfemodal: false,
+      verifyemailyn:"N",
       chkpasswordmodal: false
     }
   }
-
-  
 
   idModal = () => {
     this.setState(prevState => ({
@@ -50,46 +49,31 @@ class Register extends React.Component {
 
   emailauth = e => {
     e.preventDefault()
-    this.props.authemail(
+    if(this.state.otheremail===false){
+      this.props.authemail(
+        this.state.userid
+      )
+    } else {
+      this.props.authemail(
         this.state.email
       )
-    
     }
+  }
 
-  // alert창 대신 modal창을 띄우려면 redux를 이용하여 verify 시 username이을 불러오는것처럼 response를 불러와서 
-  // if를 통해 vfemodal state를 true로 바꿈 (완) (실패)
-  // 실패 이유는 redux를 이용하여 verifyemail api의 status를 불러오기 전에
-  // 아래쪽 if문이 먼저 실행되기 때문
-  // 비동기 방식의 함수 실행을 익힌 뒤 아래의 형태로 바꿀 예정
-
-  // verifyauth = e => {
-  //   e.preventDefault()
-  //   this.props.verifyemail(
-  //     this.state.email,
-  //     this.state.idnumber
-  //   )
-  //   this.setmodalstate()
-
-  //   // if(this.state.vfemailstatus.verifyemailstatus==="200") {
-
-  //   //   console.log(this.state.vfemailstatus.verifyemailstatus,"--이메일 스테이터스")
-      
-  //   //   console.log(this.state.vfemodal,"모달창 스테이터스")
-  //   // } else if(this.state.vfemailstatus.verifyemailstatus==="400"){
-
-      
-  //   //   console.log(this.state.vfemodal)
-  //   // } else{
-  //   //   console.log("도달하지 않음")
-  //   // }
-  // }
 
   verifyauth = e => {
     e.preventDefault()
-    this.verifyemail(
-      this.state.email,
-      this.state.idnumber
-    )
+    if(this.state.otheremail===false) {
+      this.verifyemail(
+        this.state.userid,
+        this.state.idnumber
+      )
+    } else {
+      this.verifyemail(
+        this.state.email,
+        this.state.idnumber
+      )
+    }
   }
 
   verifyemail = (email,idnumber) => {
@@ -105,6 +89,9 @@ class Register extends React.Component {
           console.log(response.data.status);
           if(response.data.status === "200") {
             this.verifyEmailModal()
+            this.setState({
+              verifyemailyn:"Y"
+            })
           } else {
             
           }
@@ -118,17 +105,36 @@ class Register extends React.Component {
 
   handleRegister1 = e => {
     e.preventDefault()
-    if(this.state.password===this.state.chkpassword) {
-      this.props.register2(
-        this.state.name,
-        this.state.phone,
-        this.state.email,
-        this.state.password,
-        this.state.chkpassword
-      )
+    if(this.state.verifyemailyn==="Y") {
+      if(this.state.password===this.state.chkpassword) {
+        if(this.state.otheremail===false) {
+          this.props.register2(
+            this.state.userid,
+            this.state.name,
+            this.state.phone,
+            this.state.password,
+            this.state.btdate,
+            this.state.gender,
+            this.state.userid
+          )
+        } else {
+          this.props.register2(
+            this.state.userid,
+            this.state.name,
+            this.state.phone,
+            this.state.password,
+            this.state.btdate,
+            this.state.gender,
+            this.state.email
+          )
+        }
+      } else {
+        this.setState({chkpasswordmodal:true})
+      }
     } else {
-      this.setState({chkpasswordmodal:true})
+      alert("이메일인증을 완료해주십시오")
     }
+    
     
   }
 
@@ -181,8 +187,8 @@ class Register extends React.Component {
                               type="email"
                               placeholder="사용 가능한 이메일 입력"
                               required
-                              value={this.state.useemail}
-                              onChange={e => this.setState({ useemail: e.target.value })}
+                              value={this.state.userid}
+                              onChange={e => this.setState({ userid: e.target.value })}
                               // invalid={this.state.useemail.length === 0 ? true : false}
                             />
                             <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.idModal}>중복확인</Button></InputGroupAddon>
@@ -283,7 +289,7 @@ class Register extends React.Component {
                           </InputGroup>
                         </FormGroup>
                         <FormGroup className="form-label-group d-flex justify-content-between">
-                          <div className="col-3 align-self-center"><b>생년월일</b></div>
+                          <div className="col-3 align-self-center"><b>생년월일/성별</b></div>
                           <InputGroup>
                             <Input
                               type="text"
@@ -292,6 +298,17 @@ class Register extends React.Component {
                               value={this.state.btdate}
                               onChange={e => this.setState({ btdate: e.target.value })}
                             />
+                            <div className="align-self-center font-weight-600"><b>&nbsp;-&nbsp;</b></div>
+                            <Input
+                              className=""
+                              type="text"
+                              placeholder="1,or2"
+                              required
+                              value={this.state.gender}
+                              onChange={e => this.setState({ gender: e.target.value })}
+                            />
+                            <div className="align-self-center"><b>&nbsp;******&nbsp;</b></div>
+                            
                           </InputGroup>
                         </FormGroup>
                         <div className="text-right">
