@@ -8,7 +8,7 @@ import {InputGroup, Form, FormGroup, Input, Button,
 } from "reactstrap"
 
 import "../../../../assets/scss/pages/authentication.scss"
-import { getMyInfo, register4 } from "../../../../redux/actions/auth/registerActions"
+import { putmyinfo } from "../../../../redux/actions/auth/registerActions"
 import { connect } from "react-redux"
 import axios from "axios"
 import previmg from "../../../../assets/img/portrait/small/Sample_User_Icon.png"
@@ -87,7 +87,7 @@ class MyInfo extends React.Component {
 
   handleRegister = e => {
     e.preventDefault()
-    this.props.register4(
+    this.props.putmyinfo(
       this.state.userid,
       this.state.filename,
       this.state.file,
@@ -304,4 +304,4 @@ const mapStateToProps = state => {
     user: state.auth
   }
 }
-export default connect(mapStateToProps, {getMyInfo, register4})(MyInfo)
+export default connect(mapStateToProps, {putmyinfo})(MyInfo)

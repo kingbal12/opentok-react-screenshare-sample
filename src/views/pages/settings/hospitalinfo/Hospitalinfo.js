@@ -15,7 +15,7 @@ import {InputGroup, Form, FormGroup, Input, Button, Label,
 } from "reactstrap"
 
 import "../../../../assets/scss/pages/authentication.scss"
-import { getMyInfo, register4 } from "../../../../redux/actions/auth/registerActions"
+import { puthsinfo } from "../../../../redux/actions/auth/registerActions"
 import { connect } from "react-redux"
 import axios from "axios"
 import previmg from "../../../../assets/img/portrait/small/Sample_User_Icon.png"
@@ -26,24 +26,24 @@ class Hospitalinfo extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      name: "",
-      birthday:"1991.08.28",
-      gender:"",
       userid: props.user.login.values.loggedInUser.username,
-      filename: "",
-      file : "",
-      medicalpart: "",
-      medicalable: "",
-      medicaldesc: "",
-      medicalnum: "",
-      userdesc: "",
-      previewURL : ""
+      hospitalname: "",
+      businessnumber:"",
+      address1:"",
+      address2:"",
+      phonenumber: "",
+      accountname: "",
+      bankname: "",
+      accountnumber: "",
+      modal: false,
+      businessmodal: false,
+      businessmodalmsg: ""
     }
   }
 
   componentDidMount() {
     axios
-      .get("http://203.251.135.81:9300/v1/doctor/account/user-info", {
+      .get("http://203.251.135.81:9300/v1/doctor/account/hospital-info", {
         params: {
           user_id: this.state.userid
         }
@@ -52,6 +52,19 @@ class Hospitalinfo extends React.Component {
         let hsinfo;
 
         if(response.data.status==="200") {
+          hsinfo=response.data.data
+          console.log("병원정보:",hsinfo)
+          this.setState({
+            hospitalname: hsinfo.HOSPITAL_NAME,
+            businessnumber: hsinfo.BUSINESS_NUM,
+            address1: hsinfo.ADDRESS_1,
+            address2: hsinfo.ADDRESS_2,
+            phonenumber: hsinfo.PHONE_NUM,
+            accountname: hsinfo.BUSINESS_NUM,
+            bankname: hsinfo.BANK_NAME,
+            accountnumber: hsinfo.ACCOUNT_NUM,
+            zipcode: hsinfo.ZIP_CODE,
+          })
           
         } else {
           alert("병원정보를  불러오지 못하였습니다.")
@@ -80,22 +93,82 @@ class Hospitalinfo extends React.Component {
     });
   
   }
-
-
-  handleRegister = e => {
-    e.preventDefault()
-    this.props.register4(
-      this.state.userid,
-      this.state.filename,
-      this.state.file,
-      this.state.medicalpart,
-      this.state.medicalable,
-      this.state.medicaldesc,
-      this.state.medicalnum,
-      this.state.userdesc,    
-      this.state.previewURL
-    )
-  }
+  
+    handleRegister = e => {
+      e.preventDefault()
+      this.props.puthsinfo(
+        this.state.userid,
+        this.state.hospitalname,
+        this.state.businessnumber,
+        this.state.zipcode,
+        this.state.address1,
+        this.state.address2,
+        this.state.phonenumber,
+        this.state.accountname,
+        this.state.bankname,
+        this.state.accountnumber
+      )
+    }
+  
+    checkstate = e => {
+      e.preventDefault()
+      console.log(this.state)
+    }
+  
+    verifyBusinessNumber = e => {
+      e.preventDefault()
+      this.postBusinessNumber(
+        this.state.businessnumber
+      )
+    }
+  
+  
+    // 여기부터 수정
+    postBusinessNumber = businessnumber => {
+      console.log("작동됨",businessnumber)
+        axios
+          .get("http://203.251.135.81:9300/v1/doctor/account/hospital-verify", {
+            params: {
+              business_num: businessnumber,
+            }
+          })
+    
+          .then(response => {
+            console.log(response)
+            if(response.data.status==="200"){
+              if(response.data.data.COUNT===0) {
+                this.setState({
+                  businessmodal:true, 
+                  businessmodalmsg:"확인 완료되었습니다."
+                })
+              }else{
+                this.setState({
+                  businessmodal:true, 
+                  businessmodalmsg:"이미 등록된 번호입니다."
+                })
+              }
+  
+            }
+            else {
+              alert(response.data.message)
+            }
+    
+          })
+          
+      
+    }
+  
+    businessnumModal = () => {
+      this.setState(prevState => ({
+        businessmodal: !prevState.businessmodal
+      }))
+    }
+  
+    zipModal = () => {
+      this.setState(prevState => ({
+        modal: !prevState.modal
+      }))
+    }
 
 
 
@@ -145,7 +218,25 @@ class Hospitalinfo extends React.Component {
       </div>
     }
     return (
+      
       <Row className="m-0 justify-content-center">
+        <Modal
+          isOpen={this.state.businessmodal}
+          toggle={this.businessnumModal}
+          className="modal-dialog-centered modal-sm"
+        >
+          <ModalHeader toggle={this.businessnumModal}>
+            
+          </ModalHeader>
+          <ModalBody>
+            {this.state.businessmodalmsg}
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this.businessnumModal}>
+              확인
+            </Button>{" "}
+          </ModalFooter>
+        </Modal>
       <Col
         sm="7"
         xl="7"
@@ -160,26 +251,11 @@ class Hospitalinfo extends React.Component {
             <Card className="rounded-0 mb-0 p-2">
                 <CardHeader className="pb-1 pt-50">
                   <CardTitle>
-                    <h1>병원정보 입력하기</h1>
+                    <h3><b>병원정보 수정하기</b></h3>
                   </CardTitle>
                 </CardHeader>   
               <CardBody className="pt-1 pb-50">
                   <Form action="/" onSubmit={this.handleRegister}>
-                    <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-3 align-self-center"><b>회원인증</b></div>            
-                      <InputGroup>
-                        <Button type="button" color="primary" outline>휴대폰 인증</Button>
-                        <Input
-                          className="ml-1"
-                          type="text"
-                          placeholder="인증번호"
-                          required
-                          value={this.state.phoeauthnum}
-                          onChange={e => this.setState({ phoeauthnum: e.target.value })}
-                        />
-                        <InputGroupAddon addonType="append"><Button color="primary" type="button">인증확인</Button></InputGroupAddon>
-                      </InputGroup>                      
-                    </FormGroup>
                     <FormGroup className="form-label-group d-flex justify-content-between">
                       <div className="col-3 align-self-center"><b>병원명 <span className="text-primary">(필수)</span></b></div>
                       <InputGroup>
@@ -336,16 +412,14 @@ class Hospitalinfo extends React.Component {
                         outline
                         color="dark" 
                         type="button"
-                        // onClick={this.checkstate}
                       >
                         임시저장
                       </Button>
                       <Button
                         color="primary" 
                         type="submit"
-                        // onClick={this.checkstate}
                       >
-                        다음단계
+                        저장하기
                       </Button>
                     </div>
                   </Form>
@@ -366,4 +440,4 @@ const mapStateToProps = state => {
     user: state.auth
   }
 }
-export default connect(mapStateToProps, {getMyInfo, register4})(Hospitalinfo)
+export default connect(mapStateToProps, {puthsinfo})(Hospitalinfo)

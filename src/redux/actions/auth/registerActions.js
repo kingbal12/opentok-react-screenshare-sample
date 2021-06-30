@@ -183,6 +183,33 @@ export const register3 = (userid, hospitalname, businessnumber, zipcode, address
   }
 }
 
+export const puthsinfo = (userid, hospitalname, businessnumber, zipcode, address1, address2, phonenumber, accountname, bankname, accountnumber) => {
+  return dispatch => {
+    axios
+      .put("http://203.251.135.81:9300/v1/doctor/account/hospital-info", {
+        user_id : userid, 
+        hospital_name : hospitalname,
+        business_num : businessnumber,
+        zip_code : zipcode,
+        address_1 : address1,
+        address_2 : address2,
+        phone_num : phonenumber,
+        account_name : accountname,
+        bank_name : bankname,
+        account_num : accountnumber
+      })
+      .then(response => {
+        console.log(response);
+        if(response.data.status === "200") {
+          alert("병원정보가 정상적으로 변경되었습니다.")
+        } else {
+          alert(response.data.message);
+        }
+
+      })
+  }
+}
+
 
 export const register4 = (userid, filename, file, medicalpart, medicalable, medicaldesc, medicalnum, userdesc) => {
   let data = new FormData();
@@ -195,7 +222,7 @@ export const register4 = (userid, filename, file, medicalpart, medicalable, medi
   data.append('user_desc', userdesc)
   return dispatch => {
     axios
-      .put("http://203.251.135.81:9300/v1/doctor/account/user-info", data
+      .post("http://203.251.135.81:9300/v1/doctor/account/user-info", data
 
       )
       .then(response => {
@@ -221,6 +248,36 @@ export const register4 = (userid, filename, file, medicalpart, medicalable, medi
       })
   }
 }
+
+export const putmyinfo = (userid, filename, file, medicalpart, medicalable, medicaldesc, medicalnum, userdesc) => {
+  let data = new FormData();
+  data.append('user_id', userid);
+  data.append('file_name', file);
+  data.append('medical_part', medicalpart);
+  data.append('medical_able', medicalable);
+  data.append('medical_desc', medicaldesc);
+  data.append('medical_num', medicalnum);
+  data.append('user_desc', userdesc)
+  return dispatch => {
+    axios
+      .put("http://203.251.135.81:9300/v1/doctor/account/user-info", data
+
+      )
+      .then(response => {
+        if(response.data.status === "200") {
+
+          alert("개인정보가 정상적으로 변경되었습니다.")
+         
+        } else {
+          alert(response.data.message);
+        }
+
+      })
+  }
+}
+
+
+
 
 export const getMyInfo = (userid) => {
   return dispatch => {
