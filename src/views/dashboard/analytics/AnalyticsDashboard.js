@@ -90,7 +90,8 @@ class AnalyticsDashboard extends React.Component {
         </Row>
         <Row>
           <Col sm="12">
-            <DataTableCustom/>
+            <DataTableCustom
+             appointslist={this.state.appointlist}/>
           </Col>
         </Row>
       </React.Fragment>
