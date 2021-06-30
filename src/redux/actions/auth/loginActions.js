@@ -28,6 +28,7 @@ export const loginWithJWT = user => {
             payload: { loggedInUser, loggedInWith: "jwt" }
           })
           history.push("/analyticsDashboard")
+          console.log("로그인시 들어오는 데이터",response)
         }
         else {
           alert(response.data.message)

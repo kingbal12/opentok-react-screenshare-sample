@@ -977,7 +977,7 @@ const horizontalMenuConfig = [
         title: "병원정보",
         type: "item",
         icon: <Icon.Trello size={16} />,
-        // navLink: "/schedule",
+        navLink: "/pages/hospitalinfo",
         permissions: ["admin", "editor"]
       },
       {

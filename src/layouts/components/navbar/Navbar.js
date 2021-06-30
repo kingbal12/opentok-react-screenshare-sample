@@ -136,9 +136,11 @@ const ThemeNavbar = props => {
                 userName={<UserName userdata={user} {...props} />}
                 userImg={
                   props.user.login.values !== undefined &&
-                  props.user.login.values.loggedInWith !== "jwt" &&
-                  props.user.login.values.photoUrl
-                    ? props.user.login.values.photoUrl 
+                  props.user.login.values.loggedInWith === "jwt" &&
+                  props.user.login.values.loggedInUser.file_path
+                    ? "http://203.251.135.81:9300"+props.user.login.values.loggedInUser.file_path
+                      +props.user.login.values.loggedInUser.file_name 
+                  // ? props.user.login.values.photoUrl 
                     : user !== undefined && user.picture ? user.picture
                     : userImg
                 }

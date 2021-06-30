@@ -207,7 +207,7 @@ class DataTableCustom extends React.Component {
         )
       },
     ],
-    data: this.props.appointslist,
+    data:this.props.list,
     // [     
     //   {
     //     APPOINT_TIME: "09:00",
@@ -315,7 +315,6 @@ class DataTableCustom extends React.Component {
     //   //   ratings: "bad"
     //   // }
     // ],
-
     filteredData: [],
     value: ""
   }

@@ -1,8 +1,11 @@
 import React from "react"
-import { CardBody, FormGroup, Form, Input, Button, Label } from "reactstrap"
-import Radio from "../../../../components/@vuexy/radio/RadioVuexy"
+import { CardBody, FormGroup, Form, Input, Button, Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter } from "reactstrap"
 import Select from "react-select"
 import { history } from "../../../../history"
+import axios from "axios"
 
 const colourOptions = [
   { value: "개인회원", label: "개인회원" },
@@ -15,13 +18,44 @@ class FindId extends React.Component {
     name: "",
     bt_date: "",
     phone:"",
-    docnum:""
+    docnum:"",
+    modal:false,
+    modalmsg:""
   }
 
   handleLogin = e => {
     e.preventDefault()
-    this.props.loginWithJWT(this.state)
+    axios
+          .get("http://203.251.135.81:9300/v1/doctor/account/user-id", {
+            params: {
+              f_name: this.state.name,
+              birth_dt: this.state.bt_date,
+              mobile_num: this.state.phone,
+              medical_num: this.state.docnum
+            }
+          })
+          .then(response => {
+            console.log(response)
+            if(response.data.status==="200") {
+              this.setState({
+                modal:true, 
+                modalmsg:"사용중인 아이디는 "+response.data.data.USER_ID+"입니다."
+              })
+            } else {
+              this.setState({
+                modal:true, 
+                modalmsg:"등록된 사용자가 없습니다. 회원으로 가입하시겠어요?"
+              })
+            }
+          })
   }
+
+  findidModal = () => {
+    this.setState(prevState => ({
+      modal: !prevState.modal
+    }))
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -84,15 +118,29 @@ class FindId extends React.Component {
               />
             </FormGroup>            
             <div className="d-flex justify-content-center py-3">
-              <Button color="primary" type="submit" size="lg" block
-              onClick={() => {
-                history.push("/pages/login")
-              }}>
+              <Button color="primary" type="submit" size="lg" block>
                 확인
               </Button>
             </div>
           </Form>
         </CardBody>
+        <Modal
+          isOpen={this.state.modal}
+          toggle={this.findidModal}
+          className="modal-dialog-centered modal-sm"
+        >
+          <ModalHeader toggle={this.findidModal}>
+            
+          </ModalHeader>
+          <ModalBody>
+            {this.state.modalmsg}
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this.findidModal}>
+              확인
+            </Button>{" "}
+          </ModalFooter>
+        </Modal>
       </React.Fragment>
     )
   }

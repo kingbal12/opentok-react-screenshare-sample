@@ -1,178 +1,163 @@
 import React from "react"
-import {InputGroup, InputGroupAddon, InputGroupText, Form, FormGroup, Input, Label, Button,
+import {InputGroup, Form, FormGroup, Input, Button, Label,
+  InputGroupAddon, InputGroupText,
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter,
+  CustomInput,
+  Card,
   CardHeader,
   CardTitle,
-  Card,
   CardBody,
   Row,
   Col
 } from "reactstrap"
+
 import "../../../../assets/scss/pages/authentication.scss"
-import { register3 } from "../../../../redux/actions/auth/registerActions"
+import { getMyInfo, register4 } from "../../../../redux/actions/auth/registerActions"
 import { connect } from "react-redux"
-import DaumPostcode from 'react-daum-postcode';
 import axios from "axios"
-import PerfectScrollbar from "react-perfect-scrollbar";
+import previmg from "../../../../assets/img/portrait/small/Sample_User_Icon.png"
+import DaumPostcode from 'react-daum-postcode';
 
-class Register extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state={
-      userid: props.user.register.values.registeruser,
-      // userid: "kingbal13@naver.com",
-      hospitalname: "",
-      businessnumber: "",
-      zipcode: "",
-      address1: "",
-      address2: "",
-      phonenumber: "",
-      accountname: "",
-      bankname: "",
-      accountnumber: "",
-      modal: false,
-      businessmodal: false,
-      businessmodalmsg: ""
+
+class Hospitalinfo extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      name: "",
+      birthday:"1991.08.28",
+      gender:"",
+      userid: props.user.login.values.loggedInUser.username,
+      filename: "",
+      file : "",
+      medicalpart: "",
+      medicalable: "",
+      medicaldesc: "",
+      medicalnum: "",
+      userdesc: "",
+      previewURL : ""
+    }
   }
-}
 
+  componentDidMount() {
+    axios
+      .get("http://203.251.135.81:9300/v1/doctor/account/user-info", {
+        params: {
+          user_id: this.state.userid
+        }
+      })
+      .then(response => {
+        let hsinfo;
 
-handleComplete = (data) => {
-  let fullAddress = data.address +" ("+data.zonecode+")";
-  let extraAddress = ''; 
-  let zoneCodes = data.zonecode;
+        if(response.data.status==="200") {
+          
+        } else {
+          alert("병원정보를  불러오지 못하였습니다.")
+        }
+      })
+  }
+ 
+  handleComplete = (data) => {
+    let fullAddress = data.address +" ("+data.zonecode+")";
+    let extraAddress = ''; 
+    let zoneCodes = data.zonecode;
+    
+    if (data.addressType === 'R') {
+      if (data.bname !== '') {
+        extraAddress += data.bname;
+      }
+      if (data.buildingName !== '') {
+        extraAddress += (extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName);
+      }
+      fullAddress += (extraAddress !== '' ? ` (${extraAddress})` : '');
+    }
   
-  if (data.addressType === 'R') {
-    if (data.bname !== '') {
-      extraAddress += data.bname;
-    }
-    if (data.buildingName !== '') {
-      extraAddress += (extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName);
-    }
-    fullAddress += (extraAddress !== '' ? ` (${extraAddress})` : '');
+    this.setState ({
+      address1: fullAddress,
+      zipcode: zoneCodes
+    });
+  
   }
 
-  this.setState ({
-    address1: fullAddress,
-    zipcode: zoneCodes
-  });
-
-}
 
   handleRegister = e => {
     e.preventDefault()
-    this.props.register3(
+    this.props.register4(
       this.state.userid,
-      this.state.hospitalname,
-      this.state.businessnumber,
-      this.state.zipcode,
-      this.state.address1,
-      this.state.address2,
-      this.state.phonenumber,
-      this.state.accountname,
-      this.state.bankname,
-      this.state.accountnumber
-    )
-  }
-
-  checkstate = e => {
-    e.preventDefault()
-    console.log(this.state)
-  }
-
-  verifyBusinessNumber = e => {
-    e.preventDefault()
-    this.postBusinessNumber(
-      this.state.businessnumber
+      this.state.filename,
+      this.state.file,
+      this.state.medicalpart,
+      this.state.medicalable,
+      this.state.medicaldesc,
+      this.state.medicalnum,
+      this.state.userdesc,    
+      this.state.previewURL
     )
   }
 
 
-  // 여기부터 수정
-  postBusinessNumber = businessnumber => {
-    console.log("작동됨",businessnumber)
-      axios
-        .get("http://203.251.135.81:9300/v1/doctor/account/hospital-verify", {
-          params: {
-            business_num: businessnumber,
-          }
-        })
-  
-        .then(response => {
-          if(response.data.status==="200"){
-            if(response.data.data.COUNT===0) {
-              this.setState({
-                businessmodal:true, 
-                businessmodalmsg:"확인 완료되었습니다."
-              })
-            }else{
-              this.setState({
-                businessmodal:true, 
-                businessmodalmsg:"이미 등록된 번호입니다."
-              })
-            }
 
-          }
-          else {
-            alert(response.data.message)
-          }
-  
-        })
-        
-    
-  }
-
-  businessnumModal = () => {
-    this.setState(prevState => ({
-      businessmodal: !prevState.businessmodal
-    }))
-  }
-
-  zipModal = () => {
-    this.setState(prevState => ({
-      modal: !prevState.modal
-    }))
-  }
-
-  
-
-  
   render() {
+    let profile_preview = null;
+    if(this.props.user.login.values.loggedInUser.file_path !== ''&&this.state.file===""&&this.state.filename===""){
+      profile_preview = 
+      <div className="dz-thumb ">
+        <div className="dz-thumb-inner">
+          <img
+            width="150px"
+            height="150px" 
+            src={"http://203.251.135.81:9300"+this.props.user.login.values.loggedInUser.file_path
+                +this.props.user.login.values.loggedInUser.file_name } 
+            className="dz-img" 
+            alt="" 
+            />
+        </div>
+      </div>
+    } else if (this.state.file !== "" && this.state.filename !== "") {
+      profile_preview = 
+      <div className="dz-thumb ">
+        <div className="dz-thumb-inner">
+          <img
+            width="150px"
+            height="150px" 
+            src={this.state.previewURL} 
+            className="dz-img" 
+            alt="" 
+            />
+        </div>
+      </div>
+
+    }else {
+      profile_preview = 
+      <div className="dz-thumb ">
+        <div className="dz-thumb-inner">  
+          <img
+            width="150px"
+            height="150px" 
+            src={previmg}
+            className="dz-img"
+            style={{borderRadius:"100%"}} 
+            alt="" 
+            />
+        </div>
+      </div>
+    }
     return (
-      <PerfectScrollbar>
       <Row className="m-0 justify-content-center">
-        <Modal
-          isOpen={this.state.businessmodal}
-          toggle={this.businessnumModal}
-          className="modal-dialog-centered modal-sm"
-        >
-          <ModalHeader toggle={this.verifyEmailModal}>
-            
-          </ModalHeader>
-          <ModalBody>
-            {this.state.businessmodalmsg}
-          </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={this.businessnumModal}>
-              확인
-            </Button>{" "}
-          </ModalFooter>
-        </Modal>
-        <Col
-          sm="6"
-          xl="6"
-          lg="6"
-          md="6"
-          className="d-flex justify-content-center"
-        >
-          <Card className="bg-authentication rounded-0 mb-0 w-100">
-            <Row className="m-0">
-              
-              <Col lg="12" md="12" className="p-0">
-              <Card className="rounded-0 mb-0 p-2">
+      <Col
+        sm="7"
+        xl="7"
+        lg="10"
+        md="8"
+        className="d-flex justify-content-center"
+      >
+        
+        <Card className="bg-authentication rounded-0 mb-0 w-100">
+          <Row className="m-0">
+            <Col lg="12" md="12" className="p-0">
+            <Card className="rounded-0 mb-0 p-2">
                 <CardHeader className="pb-1 pt-50">
                   <CardTitle>
                     <h1>병원정보 입력하기</h1>
@@ -366,20 +351,19 @@ handleComplete = (data) => {
                   </Form>
                   </CardBody>
                 </Card>
-              </Col>
-            </Row>
-          </Card>
-        </Col>
-      </Row>
-      </PerfectScrollbar>
+            </Col>
+          </Row>
+          
+        </Card>
+      </Col>
+    </Row>
     )
   }
 }
 
-const mapStateToProps = state =>{
+const mapStateToProps = state => {
   return {
     user: state.auth
   }
 }
-
-export default connect(mapStateToProps, {register3})(Register)
+export default connect(mapStateToProps, {getMyInfo, register4})(Hospitalinfo)
