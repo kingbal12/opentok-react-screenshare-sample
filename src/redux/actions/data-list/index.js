@@ -1,5 +1,18 @@
 import axios from "axios"
 
+// export const getData = params => {
+//   return async dispatch => {
+//     await axios.get("/api/datalist/data", params).then(response => {
+//       dispatch({
+//         type: "GET_DATA",
+//         data: response.data.data,
+//         totalPages: response.data.totalPages,
+//         params
+//       })
+//     })
+//   }
+// }
+
 export const getData = params => {
   return async dispatch => {
     await axios.get("/api/datalist/data", params).then(response => {
@@ -12,6 +25,7 @@ export const getData = params => {
     })
   }
 }
+
 
 export const getInitialData = () => {
   return async dispatch => {

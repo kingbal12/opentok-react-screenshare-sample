@@ -158,6 +158,7 @@ class DataListConfig extends Component {
   }
 
   state = {
+    user: this.props.user.login.values.loggedInUser.username,
     data: [],
     totalPages: 0,
     currentPage: 0,
@@ -623,6 +624,7 @@ class DataListConfig extends Component {
 
 const mapStateToProps = state => {
   return {
+    user: state.auth,
     dataList: state.dataList
   }
 }

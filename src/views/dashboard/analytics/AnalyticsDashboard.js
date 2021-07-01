@@ -14,19 +14,8 @@ import DataTableCustom from "./DataTableCustom"
 // import { UserX } from "react-feather"
 import { connect } from "react-redux"
 import { getappoints } from "../../../redux/actions/appoint"
-
 import axios from "axios"
-// let $primary = "#7367F0",
-//   $danger = "#EA5455",
-//   $warning = "#FF9F43",
-//   $info = "#00cfe8",
-//   $primary_light = "#9c8cfc",
-//   $warning_light = "#FFC085",
-//   $danger_light = "#f29292",
-//   $info_light = "#1edec5",
-//   $stroke_color = "#e8e8e8",
-//   $label_color = "#e7eef7",
-//   $white = "#fff"
+
 
 
  
@@ -39,8 +28,7 @@ class AnalyticsDashboard extends React.Component {
       pageamount: 5,
       pagenum: 1,
       countday: 0,
-      countmon: 0,
-      appointlist: []
+      countmon: 0
     }
   }
 
@@ -49,7 +37,7 @@ class AnalyticsDashboard extends React.Component {
           .get("http://203.251.135.81:9300/v1/doctor/appointment/dashboard", {
             params: {
               user_id: this.state.userid,
-              start_date: "20210101",
+              start_date: "20210701",
               page_amount: 5,
               page_num: 1
             }
@@ -58,11 +46,10 @@ class AnalyticsDashboard extends React.Component {
             let appoints;
             if (response.data.status==="200") {
               appoints=response.data.data
-              console.log(appoints)
+              console.log("대시보드 데이터",appoints)
               this.setState({
                 countday: appoints.COUNT_DAY,
-                countmon: appoints.COUNT_MON,
-                appointlist: appoints.APPOINT_LIST
+                countmon: appoints.COUNT_MON
               })     
             }
           })
@@ -88,9 +75,7 @@ class AnalyticsDashboard extends React.Component {
         </Row>
         <Row>
           <Col sm="12">
-            <DataTableCustom
-            list={this.state.appointlist}
-            />
+            <DataTableCustom/>
           </Col>
         </Row>
       </React.Fragment>

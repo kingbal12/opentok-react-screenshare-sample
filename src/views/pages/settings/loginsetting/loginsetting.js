@@ -16,20 +16,8 @@ import {logoutWithJWT} from "../../../../redux/actions/auth/loginActions"
 
 
 class LoginSetting extends React.Component {
-    
-  handlelogout = e => {
-    e.preventDefault()
+  componentDidMount() {
     this.props.logoutWithJWT()
-  }
-
-  handleGoPassChange = e => {
-    e.preventDefault()
-    history.push("/pages/changepassword")
-  }
-
-  handleGoWithdrawal = e => {
-    e.preventDefault()
-    history.push("/pages/withdrawal")
   }
 
   render() {
@@ -59,37 +47,10 @@ class LoginSetting extends React.Component {
                       size="lg"
                       block
                       outline
-                      onClick={this.handlelogout}
                       >
-                        로그아웃
-                        
+                      로그아웃중입니다.
                       </Button>
                     </div>
-                    <div className="d-flex mt-2 justify-content-center">
-                      <Button
-                      color="primary"
-                      type="button"
-                      size="lg"
-                      block
-                      outline
-                      onClick={this.handleGoPassChange}
-                      >
-                        비밀번호 변경
-                      </Button>
-                    </div>
-                    <div className="d-flex mt-2 justify-content-center">
-                      <Button
-                      color="primary"
-                      type="button"
-                      size="lg"
-                      block
-                      outline
-                      onClick={this.handleGoWithdrawal}
-                      >
-                        회원탈퇴
-                      </Button>
-                    </div>
-
                   </CardBody>
                 </Card>
               </Col>

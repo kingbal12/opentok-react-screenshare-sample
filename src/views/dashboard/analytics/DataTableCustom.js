@@ -19,6 +19,7 @@ import {
   ChevronLeft,
   ChevronRight
 } from "react-feather"
+import { connect } from "react-redux"
 
 const ActionsComponent = props => {
   return (
@@ -42,6 +43,29 @@ const ActionsComponent = props => {
 }
 
 class DataTableCustom extends React.Component {
+  componentDidMount() {
+    axios
+      .get("http://203.251.135.81:9300/v1/doctor/appointment/dashboard", {
+        params: {
+          user_id: this.props.user.login.values.loggedInUser.username,
+          start_date: "20210701",
+          page_amount: "000",
+          page_num: 1
+        }
+      })
+      .then(response => {
+        let appoints;
+        if (response.data.status==="200") {
+          appoints=response.data.data
+          console.log("대시보드 리스트 데이터",appoints)
+          this.setState({
+            data: appoints.APPOINT_LIST
+          })     
+        }
+      })
+      .catch(err => console.log(err))
+  } 
+  
   state = {
     columns: [
       {
@@ -207,114 +231,115 @@ class DataTableCustom extends React.Component {
         )
       },
     ],
-    data:this.props.list,
-    // [     
-    //   {
-    //     APPOINT_TIME: "09:00",
-    //     F_NAME: "김지선",
-    //     email: "alillecrop0@twitpic.com",
-    //     GENDER: "F",
-    //     AGE: "29",
-    //     BIRTH_DT:"Apr22. 1993",
-    //     NOTE_DX:"-",
-    //     FIRST_YN:"초진",
-    //     SYMPTOM:"눈이 아파요",
-    //     STATE: "black"
-    //   },
-    //   {
-    //     APPOINT_TIME: "09:15",
-    //     F_NAME: "주승기",
-    //     email: "alillecrop0@twitpic.com",
-    //     GENDER: "M",
-    //     AGE: "45",
-    //     BIRTH_DT:"Sep27. 1977",
-    //     NOTE_DX:"HTN",
-    //     FIRST_YN:"재진",
-    //     SYMPTOM:"피곤해요",
-    //     STATE: "red"
-    //   },
-    //   {
-    //     APPOINT_TIME: "10:45",
-    //     F_NAME: "정혜인",
-    //     email: "alillecrop0@twitpic.com",
-    //     GENDER: "F",
-    //     AGE: "29",
-    //     BIRTH_DT:"Mar12. 1995",
-    //     NOTE_DX:"DM",
-    //     FIRST_YN:"재진",
-    //     SYMPTOM:"별일없이 잘 지내요",
-    //     STATE: "yellow"
-    //   },
-    //   {
-    //     APPOINT_TIME: "11:15",
-    //     F_NAME: "송현준",
-    //     email: "alillecrop0@twitpic.com",
-    //     GENDER: "M",
-    //     AGE: "37",
-    //     BIRTH_DT:"Jan06. 1985",
-    //     NOTE_DX:"-",
-    //     FIRST_YN:"초진",
-    //     SYMPTOM:"두통이 심해요",
-    //     STATE: "silver"
-    //   },
-    //   {
-    //     APPOINT_TIME: "01:00",
-    //     F_NAME: "홍지효",
-    //     email: "alillecrop0@twitpic.com",
-    //     GENDER: "F",
-    //     AGE: "22",
-    //     BIRTH_DT:"July18. 2000",
-    //     NOTE_DX:"-",
-    //     FIRST_YN:"초진",
-    //     SYMPTOM:"목이 아파요",
-    //     STATE: "green"
-    //   },
-    //   // {
-    //   //   image: require("../../../assets/img/portrait/small/avatar-s-1.jpg"),
-    //   //   name: "Shep Pentlow",
-    //   //   email: "spentlow1@home.pl",
-    //   //   date: "June 5, 2019",
-    //   //   status: "active",
-    //   //   revenue: "$50,000",
-    //   //   ratings: "good"
-    //   // },
-    //   // {
-    //   //   image: require("../../../assets/img/portrait/small/avatar-s-3.jpg"),
-    //   //   name: "Gasper Morley",
-    //   //   email: "gmorley2@chronoengine.com",
-    //   //   date: "December 24, 2019",
-    //   //   status: "active",
-    //   //   revenue: "$78,000",
-    //   //   ratings: "average"
-    //   // },
-    //   // {
-    //   //   image: require("../../../assets/img/portrait/small/avatar-s-4.jpg"),
-    //   //   name: "Phaedra Jerrard",
-    //   //   email: "pjerrard3@blogs.com",
-    //   //   date: "November 30, 2018",
-    //   //   status: "inactive",
-    //   //   revenue: "$10,000",
-    //   //   ratings: "bad"
-    //   // },
-    //   // {
-    //   //   image: require("../../../assets/img/portrait/small/avatar-s-5.jpg"),
-    //   //   name: "Conn Plose",
-    //   //   email: "cplose4@geocities.com",
-    //   //   date: "April 8, 2017",
-    //   //   status: "active",
-    //   //   revenue: "$22,000",
-    //   //   ratings: "average"
-    //   // },
-    //   // {
-    //   //   image: require("../../../assets/img/portrait/small/avatar-s-6.jpg"),
-    //   //   name: "Tootsie Brandsma",
-    //   //   email: "tbrandsma5@theatlantic.com",
-    //   //   date: "August 12, 2019",
-    //   //   status: "inactive",
-    //   //   revenue: "$49,000",
-    //   //   ratings: "bad"
-    //   // }
-    // ],
+    data:
+    // this.props.list,
+    [     
+      {
+        APPOINT_TIME: "09:00",
+        F_NAME: "김지선",
+        email: "alillecrop0@twitpic.com",
+        GENDER: "F",
+        AGE: "29",
+        BIRTH_DT:"Apr22. 1993",
+        NOTE_DX:"-",
+        FIRST_YN:"초진",
+        SYMPTOM:"눈이 아파요",
+        STATE: "black"
+      },
+      {
+        APPOINT_TIME: "09:15",
+        F_NAME: "주승기",
+        email: "alillecrop0@twitpic.com",
+        GENDER: "M",
+        AGE: "45",
+        BIRTH_DT:"Sep27. 1977",
+        NOTE_DX:"HTN",
+        FIRST_YN:"재진",
+        SYMPTOM:"피곤해요",
+        STATE: "red"
+      },
+      {
+        APPOINT_TIME: "10:45",
+        F_NAME: "정혜인",
+        email: "alillecrop0@twitpic.com",
+        GENDER: "F",
+        AGE: "29",
+        BIRTH_DT:"Mar12. 1995",
+        NOTE_DX:"DM",
+        FIRST_YN:"재진",
+        SYMPTOM:"별일없이 잘 지내요",
+        STATE: "yellow"
+      },
+      {
+        APPOINT_TIME: "11:15",
+        F_NAME: "송현준",
+        email: "alillecrop0@twitpic.com",
+        GENDER: "M",
+        AGE: "37",
+        BIRTH_DT:"Jan06. 1985",
+        NOTE_DX:"-",
+        FIRST_YN:"초진",
+        SYMPTOM:"두통이 심해요",
+        STATE: "silver"
+      },
+      {
+        APPOINT_TIME: "01:00",
+        F_NAME: "홍지효",
+        email: "alillecrop0@twitpic.com",
+        GENDER: "F",
+        AGE: "22",
+        BIRTH_DT:"July18. 2000",
+        NOTE_DX:"-",
+        FIRST_YN:"초진",
+        SYMPTOM:"목이 아파요",
+        STATE: "green"
+      },
+      // {
+      //   image: require("../../../assets/img/portrait/small/avatar-s-1.jpg"),
+      //   name: "Shep Pentlow",
+      //   email: "spentlow1@home.pl",
+      //   date: "June 5, 2019",
+      //   status: "active",
+      //   revenue: "$50,000",
+      //   ratings: "good"
+      // },
+      // {
+      //   image: require("../../../assets/img/portrait/small/avatar-s-3.jpg"),
+      //   name: "Gasper Morley",
+      //   email: "gmorley2@chronoengine.com",
+      //   date: "December 24, 2019",
+      //   status: "active",
+      //   revenue: "$78,000",
+      //   ratings: "average"
+      // },
+      // {
+      //   image: require("../../../assets/img/portrait/small/avatar-s-4.jpg"),
+      //   name: "Phaedra Jerrard",
+      //   email: "pjerrard3@blogs.com",
+      //   date: "November 30, 2018",
+      //   status: "inactive",
+      //   revenue: "$10,000",
+      //   ratings: "bad"
+      // },
+      // {
+      //   image: require("../../../assets/img/portrait/small/avatar-s-5.jpg"),
+      //   name: "Conn Plose",
+      //   email: "cplose4@geocities.com",
+      //   date: "April 8, 2017",
+      //   status: "active",
+      //   revenue: "$22,000",
+      //   ratings: "average"
+      // },
+      // {
+      //   image: require("../../../assets/img/portrait/small/avatar-s-6.jpg"),
+      //   name: "Tootsie Brandsma",
+      //   email: "tbrandsma5@theatlantic.com",
+      //   date: "August 12, 2019",
+      //   status: "inactive",
+      //   revenue: "$49,000",
+      //   ratings: "bad"
+      // }
+    ],
     filteredData: [],
     value: ""
   }
@@ -367,6 +392,11 @@ class DataTableCustom extends React.Component {
     )
   }
 }
+const mapStateToProps = state => {
+  return {
+    user: state.auth
+  }
+}
 
-export default DataTableCustom
+export default connect(mapStateToProps)(DataTableCustom)
 

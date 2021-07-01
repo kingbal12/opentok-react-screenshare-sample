@@ -1,5 +1,6 @@
 import React from "react"
 import * as Icon from "react-feather"
+import {logoutWithJWT} from "../redux/actions/auth/loginActions"
 
 const horizontalMenuConfig = [
   {
@@ -1017,8 +1018,33 @@ const horizontalMenuConfig = [
         title: "로그인 설정",
         type: "item",
         icon: <Icon.Tool size={16} />,
-        navLink: "/pages/loginsetting",
-        permissions: ["admin", "editor"]
+        permissions: ["admin", "editor"],
+        children: [
+          {
+            id: "logout",
+            title: "로그아웃",
+            type: "item",
+            icon: <Icon.Circle size={10} />,
+            navLink: "/pages/loginsetting",
+            permissions: ["admin", "editor"]
+          },
+          {
+            id: "changepassword",
+            title: "비밀번호 변경",
+            type: "item",
+            icon: <Icon.Circle size={10} />,
+            navLink: "/pages/changepassword",
+            permissions: ["admin", "editor"]
+          },
+          {
+            id: "withdrawal",
+            title: "회원탈퇴",
+            type: "item",
+            icon: <Icon.Circle size={10} />,
+            navLink: "/pages/withdrawal",
+            permissions: ["admin", "editor"]
+          }
+        ]
       }
     ]
   },
