@@ -399,7 +399,7 @@ class DataListConfig extends Component {
 
   componentDidMount() {
     this.props.getData(this.props.parsedFilter)
-    this.props.getInitialData()
+    // this.props.getInitialData()
   }
 
   componentDidUpdate(prevProps, prevState) {
