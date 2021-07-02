@@ -48,8 +48,8 @@ class DataTableCustom extends React.Component {
       .get("http://203.251.135.81:9300/v1/doctor/appointment/dashboard", {
         params: {
           user_id: this.props.user.login.values.loggedInUser.username,
-          start_date: "20210701",
-          page_amount: "000",
+          start_date: new Date(),
+          page_amount: 5,
           page_num: 1
         }
       })

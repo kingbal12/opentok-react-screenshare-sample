@@ -33,9 +33,9 @@ class Toolbar extends React.Component {
   render() {
     return (
       <div className="calendar-header mb-2 d-flex justify-content-between flex-wrap">
-        <div>
+        {/* <div>
           <AddEventButton />
-        </div>
+        </div> */}
         <div className="text-center view-options mt-1 mt-sm-0 ml-lg-5 ml-0">
           <ButtonGroup>
             <button
@@ -223,11 +223,18 @@ class CalendarApp extends React.Component {
         this.setState({monthstart: start, monthend: end}, () => {
           this.props.calendarfetchEvents(this.state.userid, this.state.monthstart, this.state.monthend)
         })
-        
-        
       }
-    } else {
-      alert('스케쥴 수정 도중 오류가 발생하였습니다. 관리자에게 문의부탁드립니다.')
+    }else{
+      start = moment(date).startOf('month')._d
+      end = moment(date).endOf('month')._d
+      this.setState({monthstart: start, monthend: end})
+      if(action === "PREV" || action === "NEXT") {
+        start = moment(date).startOf('month')._d
+        end = moment(date).endOf('month')._d
+        this.setState({monthstart: start, monthend: end}, () => {
+          this.props.calendarfetchEvents(this.state.userid, this.state.monthstart, this.state.monthend)
+        })
+      }
     }
   }
 

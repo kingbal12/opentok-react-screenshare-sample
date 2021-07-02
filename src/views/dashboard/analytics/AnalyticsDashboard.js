@@ -37,7 +37,7 @@ class AnalyticsDashboard extends React.Component {
           .get("http://203.251.135.81:9300/v1/doctor/appointment/dashboard", {
             params: {
               user_id: this.state.userid,
-              start_date: "20210701",
+              start_date: new Date(),
               page_amount: 5,
               page_num: 1
             }
