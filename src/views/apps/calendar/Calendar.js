@@ -20,6 +20,7 @@ import { ChevronLeft, ChevronRight } from "react-feather"
 import "react-big-calendar/lib/addons/dragAndDrop/styles.scss"
 import "react-big-calendar/lib/css/react-big-calendar.css"
 import "../../../assets/scss/plugins/calendars/react-big-calendar.scss"
+import { Fragment } from "react"
 const DragAndDropCalendar = withDragAndDrop(Calendar)
 const localizer = momentLocalizer(moment)
 const eventColors = {
@@ -32,92 +33,96 @@ const eventColors = {
 class Toolbar extends React.Component {
   render() {
     return (
-      <div className="calendar-header mb-2 d-flex justify-content-between flex-wrap">
-        {/* <div>
-          <AddEventButton />
-        </div> */}
-        <div className="text-center view-options mt-1 mt-sm-0 ml-lg-5 ml-0">
-          <ButtonGroup>
-            <button
-              className={`btn ${
-                this.props.view === "month"
-                  ? "btn-primary"
-                  : "btn-outline-primary text-primary"
-              }`}
-              onClick={() => {
-                this.props.onView("month")
-              }}
-            >
-              Month
-            </button>
-            <button
-              className={`btn ${
-                this.props.view === "week"
-                  ? "btn-primary"
-                  : "btn-outline-primary text-primary"
-              }`}
-              onClick={() => {
-                this.props.onView("week")
-              }}
-            >
-              Week
-            </button>
-            <button
-              className={`btn ${
-                this.props.view === "day"
-                  ? "btn-primary"
-                  : "btn-outline-primary text-primary"
-              }`}
-              onClick={() => {
-                this.props.onView("day")
-              }}
-            >
-              Day
-            </button>
-          </ButtonGroup>
-        </div>
-        <div className="month-label d-flex flex-column text-center text-md-right mt-1 mt-md-0">
-          <div className="calendar-navigation">
-            <Button.Ripple
-              className="btn-icon rounded-circle"
-              size="sm"
-              color="primary"
-              onClick={() => this.props.onNavigate("PREV")}
-            >
-              <ChevronLeft size={15} />
-            </Button.Ripple>
-            <div className="month d-inline-block mx-75 text-bold-500 font-medium-2 align-middle">
-              {this.props.label}
-            </div>
-            <Button.Ripple
-              className="btn-icon rounded-circle"
-              size="sm"
-              color="primary"
-              onClick={() => this.props.onNavigate("NEXT")}
-            >
-              <ChevronRight size={15} />
-            </Button.Ripple>
-          </div>
-          <div className="event-tags d-none d-sm-flex justify-content-end mt-1">
-            <div className="tag mr-1">
-              <span className="bullet bullet-success bullet-sm mr-50"></span>
-              <span>Business</span>
-            </div>
-            <div className="tag mr-1">
-              <span className="bullet bullet-warning bullet-sm mr-50"></span>
-              <span>Work</span>
-            </div>
-            <div className="tag mr-1">
-              <span className="bullet bullet-danger bullet-sm mr-50"></span>
-              <span>Personal</span>
-            </div>
-            <div className="tag">
-              <span className="bullet bullet-primary bullet-sm mr-50"></span>
-              <span>Others</span>
-            </div>
+      <Fragment>
+        <div className="calendar-header mb-2 d-flex justify-content-between flex-wrap">
+          {/* <div>
+            <AddEventButton />
+          </div> */}
+          <div className="text-center view-options mt-1 mt-sm-0 ml-lg-5 ml-0">
+            <ButtonGroup>
+              <button
+                className={`btn ${
+                  this.props.view === "month"
+                    ? "btn-primary"
+                    : "btn-outline-primary text-primary"
+                }`}
+                onClick={() => {
+                  this.props.onView("month")
+                }}
+              >
+                Month
+              </button>
+              <button
+                className={`btn ${
+                  this.props.view === "week"
+                    ? "btn-primary"
+                    : "btn-outline-primary text-primary"
+                }`}
+                onClick={() => {
+                  this.props.onView("week")
+                }}
+              >
+                Week
+              </button>
+              <button
+                className={`btn ${
+                  this.props.view === "day"
+                    ? "btn-primary"
+                    : "btn-outline-primary text-primary"
+                }`}
+                onClick={() => {
+                  this.props.onView("day")
+                }}
+              >
+                Day
+              </button>
+            </ButtonGroup>
           </div>
         </div>
-      </div>
+        <div className="calendar-header mb-2 d-flex justify-content-center flex-wrap">
+          <div className="month-label d-flex flex-column text-center text-md-right mt-1 mt-md-0">
+            <div className="calendar-navigation">
+              <Button.Ripple
+                className="btn-icon rounded-circle"
+                size="sm"
+                color="primary"
+                onClick={() => this.props.onNavigate("PREV")}
+              >
+                <ChevronLeft size={15} />
+              </Button.Ripple>
+              <div className="month d-inline-block mx-75 text-bold-500 font-medium-2 align-middle">
+                {this.props.label}
+              </div>
+              <Button.Ripple
+                className="btn-icon rounded-circle"
+                size="sm"
+                color="primary"
+                onClick={() => this.props.onNavigate("NEXT")}
+              >
+                <ChevronRight size={15} />
+              </Button.Ripple>
+            </div>
+            {/* <div className="event-tags d-none d-sm-flex justify-content-end mt-1">
+              <div className="tag mr-1">
+                <span className="bullet bullet-success bullet-sm mr-50"></span>
+                <span>Business</span>
+              </div>
+              <div className="tag mr-1">
+                <span className="bullet bullet-warning bullet-sm mr-50"></span>
+                <span>Work</span>
+              </div>
+              <div className="tag mr-1">
+                <span className="bullet bullet-danger bullet-sm mr-50"></span>
+                <span>Personal</span>
+              </div>
+              <div className="tag">
+                <span className="bullet bullet-primary bullet-sm mr-50"></span>
+                <span>Others</span>
+              </div>
+            </div> */}
+          </div>
+        </div>
+      </Fragment>
     )
   }
 }
