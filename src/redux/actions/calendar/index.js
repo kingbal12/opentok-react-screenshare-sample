@@ -1,16 +1,49 @@
 import axios from "axios"
 import { data } from "jquery"
 import { history } from "../../../history"
-// export const fetchEvents = () => {
-//   return async dispatch => {
-//     await axios
-//       .get("/api/apps/calendar/events")
-//       .then(response => {
-//         dispatch({ type: "FETCH_EVENTS", events: response.data })
-//       })
-//       .catch(err => console.log(err))
-//   }
-// }
+
+const formatDate = (scheduleda)=>{
+  let formatted_date = scheduleda.getFullYear() + "-" + ('0' + (scheduleda.getMonth() + 1)).slice(-2) + "-" + ('0' + scheduleda.getDate()).slice(-2) + " " 
+                       + ('0' + scheduleda.getHours()).slice(-2) + ":" + ('0' + scheduleda.getMinutes()).slice(-2)
+   return formatted_date;
+  }
+
+
+
+export const calendarfetchEvents = (userid, monthstart, monthend) => {
+  return async dispatch => {
+    await axios
+      .get("http://203.251.135.81:9300/v1/doctor/appointment/appointments", {
+        params: {
+          user_id: userid,
+          start_date: monthstart,
+          end_date: monthend
+        }
+      })
+      .then(response => {
+        if(response.data.status==="200"){
+          let length = response.data.data.length
+          console.log(length)
+          let appointmentsdata 	= new Array();
+          for (let i=0; i<length; i++) {
+            let jsonObj		= new Object();         
+            jsonObj.id		= (i+1);
+            jsonObj.title = response.data.data[i].F_NAME
+            jsonObj.start	= response.data.data[i].APPOINT_TIME
+            jsonObj.end = response.data.data[i].APPOINT_TIME
+            jsonObj.label = "others"
+            jsonObj.selectable = false  
+            jsonObj = JSON.stringify(jsonObj);
+            //String 형태로 파싱한 객체를 다시 json으로 변환
+            appointmentsdata.push(JSON.parse(jsonObj));
+          }
+          console.log(appointmentsdata)
+          dispatch({ type: "CALENDAR_FETCH_EVENTS", events: appointmentsdata })
+        }
+      })
+      .catch(err => console.log(err))
+  }
+}
 
 export const fetchEvents = (user_id, weekstart, weekend) => {
   return async dispatch => {
@@ -45,11 +78,6 @@ export const addEvent = event => {
   }
 }
 
-const formatDate = (scheduleda)=>{
-  let formatted_date = scheduleda.getFullYear() + "-" + ('0' + (scheduleda.getMonth() + 1)).slice(-2) + "-" + ('0' + scheduleda.getDate()).slice(-2) + " " 
-                       + ('0' + scheduleda.getHours()).slice(-2) + ":" + ('0' + scheduleda.getMinutes()).slice(-2)
-   return formatted_date;
-  }
 
 export const postSchedules = (userid, holiday, rperiod, events) => {
   return dispatch => {

@@ -7,6 +7,8 @@ const initialState = {
 
 const calenderReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "CALENDAR_FETCH_EVENTS":
+      return { ...state, events: action.events }
     case "FETCH_EVENTS":
       return { ...state, events: action.events }
     case "ADD_EVENT":

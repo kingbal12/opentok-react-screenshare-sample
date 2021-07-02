@@ -7,7 +7,7 @@ import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop"
 import moment from "moment"
 import { connect } from "react-redux"
 import {
-  fetchEvents,
+  calendarfetchEvents,
   handleSidebar,
   addEvent,
   handleSelectedEvent,
@@ -146,6 +146,9 @@ class CalendarApp extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      userid: props.user.login.values.loggedInUser.username,
+      monthstart: "",
+      monthend: "",
       events: [],
       views: {
         month: true,
@@ -157,8 +160,10 @@ class CalendarApp extends React.Component {
   }
 
   async componentDidMount() {
-    await this.props.fetchEvents()
+    await this.onNavigate(new Date(), "month")
+    await this.props.calendarfetchEvents(this.state.userid, this.state.monthstart, this.state.monthend)
   }
+
 
   handleEventColors = event => {
     return { className: eventColors[event.label] }
@@ -206,6 +211,30 @@ class CalendarApp extends React.Component {
     })
   }
 
+  onNavigate = (date, view, action) => {
+    let start, end
+    if (view === 'month') {
+      start = moment(date).startOf('month')._d
+      end = moment(date).endOf('month')._d
+      this.setState({monthstart: start, monthend: end})
+      if(action === "PREV" || action === "NEXT") {
+        start = moment(date).startOf('month')._d
+        end = moment(date).endOf('month')._d
+        this.setState({monthstart: start, monthend: end}, () => {
+          this.props.calendarfetchEvents(this.state.userid, this.state.monthstart, this.state.monthend)
+        })
+        
+        
+      }
+    } else {
+      alert('스케쥴 수정 도중 오류가 발생하였습니다. 관리자에게 문의부탁드립니다.')
+    }
+  }
+
+  async componentDidUpdate() {
+
+  }
+
   render() {
     const { events, views, sidebar } = this.state
     return (
@@ -224,6 +253,7 @@ class CalendarApp extends React.Component {
               events={events}
               onEventDrop={this.moveEvent}
               onEventResize={this.resizeEvent}
+              onNavigate={this.onNavigate}
               startAccessor="start"
               endAccessor="end"
               resourceAccessor="url"
@@ -244,7 +274,7 @@ class CalendarApp extends React.Component {
                   url: ""
                 })
               }}
-              selectable={true}
+              selectable={false}
             />
           </CardBody>
         </Card>
@@ -265,12 +295,13 @@ class CalendarApp extends React.Component {
 
 const mapStateToProps = state => {
   return {
+    user: state.auth,
     app: state.calendar
   }
 }
 
 export default connect(mapStateToProps, {
-  fetchEvents,
+  calendarfetchEvents,
   handleSidebar,
   addEvent,
   handleSelectedEvent,

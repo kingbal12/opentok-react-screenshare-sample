@@ -36,10 +36,6 @@ const eventColors = {
   others: "bg-primary"
 }
 
-const formatDate = (weekdate)=>{
-  let formatted_date = weekdate.getFullYear() + ('0' + (weekdate.getMonth() + 1)).slice(-2) + weekdate.getDate()
-   return formatted_date;
-  }
 
 
 class Toolbar extends React.Component {
@@ -238,11 +234,11 @@ class CalendarApp extends React.Component {
       end = moment(date).endOf('week')._d
       this.setState({weekstart: start, weekend: end})
       if(action === "PREV" || action === "NEXT") {
-        this.componentDidMount()
         start = moment(date).startOf('week')._d
         end = moment(date).endOf('week')._d
-        this.setState({events:[]})
-        this.setState({weekstart: start, weekend: end},this.loadschedule())
+        this.setState({events:[]}, () => {
+          this.setState({weekstart: start, weekend: end},() => this.loadschedule())
+        })
       }
     } else {
       alert('스케쥴 수정 도중 오류가 발생하였습니다. 관리자에게 문의부탁드립니다.')
