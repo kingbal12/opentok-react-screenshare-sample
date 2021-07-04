@@ -24,10 +24,11 @@ export const getData = (userid, pageamount, pagenum) => {
         }
   })
     .then(response => {
+      let totalPage = Math.ceil(response.data.data.COUNT / 5)
       dispatch({
         type: "GET_DATA",
         data: response.data.data.PATIENT_LIST,
-        totalPages: response.data.totalPages,
+        totalPages: totalPage,
         // params
       })
     })
