@@ -13,16 +13,25 @@ import axios from "axios"
 //   }
 // }
 
-export const getData = params => {
+export const getData = (userid, pageamount, pagenum) => {
   return async dispatch => {
-    await axios.get("/api/datalist/data", params).then(response => {
+    await axios
+      .get("http://203.251.135.81:9300/v1/doctor/patient/patients", {
+        params: {
+          user_id: userid,
+          page_amount: pageamount,
+          page_num: pagenum
+        }
+  })
+    .then(response => {
       dispatch({
         type: "GET_DATA",
-        data: response.data.data,
+        data: response.data.data.PATIENT_LIST,
         totalPages: response.data.totalPages,
-        params
+        // params
       })
     })
+    .catch(err => console.log(err))
   }
 }
 

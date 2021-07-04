@@ -398,7 +398,8 @@ class DataListConfig extends Component {
   thumbView = this.props.thumbView
 
   componentDidMount() {
-    this.props.getData(this.props.parsedFilter)
+    // this.props.getData(this.props.parsedFilter)
+    this.props.getData(this.state.user,5,1)
     // this.props.getInitialData()
   }
 
@@ -486,7 +487,8 @@ class DataListConfig extends Component {
     let page = parsedFilter.page !== undefined ? parsedFilter.page : 1
     history.push(`/patients-list?page=${page}&perPage=${value}`)
     this.setState({ rowsPerPage: value })
-    getData({ page: parsedFilter.page, perPage: value })
+    // getData({ page: parsedFilter.page, perPage: value })
+    getData({ user_id: this.state.user, page_num: parsedFilter.page, page_amount: value })
   }
 
   handleSidebar = (boolean, addNew = false) => {
