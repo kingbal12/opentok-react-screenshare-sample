@@ -36,7 +36,7 @@ import {
   deleteData,
   updateData,
   addData,
-  filterData
+  // filterData
 } from "../../../redux/actions/data-list/"
 import Sidebar from "./DataListSidebar"
 import Chip from "../../../components/@vuexy/chips/ChipComponent"
@@ -632,5 +632,5 @@ export default connect(mapStateToProps, {
   updateData,
   addData,
   getInitialData,
-  filterData
+  // filterData
 })(DataListConfig)
