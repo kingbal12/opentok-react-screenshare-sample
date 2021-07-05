@@ -31,15 +31,20 @@ import { useCookies } from 'react-cookie'
 class LoginJWT extends React.Component {
   
   state = {
-    email: "kingbal999@gmail.com",
-    password: "123456",
+    email: "",
+    password: "",
     remember: false
   }
   
 
   handleLogin = e => {
     e.preventDefault()
-    this.props.loginWithJWT(this.state)
+    if(this.state.email.length >=6) {
+      this.props.loginWithJWT(this.state)
+    } else {
+      alert("아이디는 최소 6자 이상입니다.")
+    }
+    
   }
 
   handleRemember = e => {
@@ -58,7 +63,7 @@ class LoginJWT extends React.Component {
                 value={this.state.email}
                 onChange={e => this.setState({ email: e.target.value })}
                 required
-                invalid={this.state.email.length >= 6 ? false : true}
+                invalid={this.state.email.length >= 6 || this.state.email.length === 0 ? false : true}
               />
               <FormFeedback>{this.state.email.length >= 6 ? "" : "아이디를 6자 이상입력하십시오"}</FormFeedback>
               <div className="form-control-position">
@@ -73,9 +78,9 @@ class LoginJWT extends React.Component {
                 value={this.state.password}
                 onChange={e => this.setState({ password: e.target.value })}
                 required
-                invalid={this.state.password.length >= 6 ? false : true}
+                invalid={this.state.password.length >= 4 ||this.state.password.length === 0 ? false : true}
               />
-              <FormFeedback>{this.state.password.length >= 6 ? "" : "비밀번호를 6자 이상입력하십시오"}</FormFeedback>
+              <FormFeedback>{this.state.password.length >= 4 ? "" : "비밀번호를 4자 이상입력하십시오"}</FormFeedback>
               <div className="form-control-position">
                 <Lock size={15} />
               </div>

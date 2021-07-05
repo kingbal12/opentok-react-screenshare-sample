@@ -65,17 +65,17 @@ class Register extends React.Component {
 
   verifyauth = e => {
     e.preventDefault()
-    if(this.state.otheremail===false) {
+    // if(this.state.otheremail===false) {
       this.verifyemail(
         this.state.userid,
         this.state.idnumber
       )
-    } else {
-      this.verifyemail(
-        this.state.email,
-        this.state.idnumber
-      )
-    }
+    // } else {
+    //   this.verifyemail(
+    //     this.state.email,
+    //     this.state.idnumber
+    //   )
+    // }
   }
 
   verifyemail = (email,idnumber) => {
@@ -95,7 +95,7 @@ class Register extends React.Component {
               verifyemailyn:"Y"
             })
           } else {
-            
+            alert(response.data.message)
           }
   
         })
@@ -270,6 +270,7 @@ class Register extends React.Component {
                           <div className="col-3 align-self-center"><b>비밀번호</b></div>
                           <InputGroup>
                             <Input
+                              maxLength="14"
                               type="password"
                               placeholder="영어, 숫자, 특수문자 포함 6자~14자 이내"
                               required
@@ -282,6 +283,7 @@ class Register extends React.Component {
                           <div className="col-3"></div>
                           <InputGroup>
                             <Input
+                              maxLength="14"
                               type="password"
                               placeholder="비밀번호 확인"
                               required
@@ -294,15 +296,17 @@ class Register extends React.Component {
                           <div className="col-3 align-self-center"><b>생년월일/성별</b></div>
                           <InputGroup>
                             <Input
+                              maxLength="6"
                               type="text"
                               placeholder="앞 6자리"
                               required
                               value={this.state.btdate}
                               onChange={e => this.setState({ btdate: e.target.value })}
                             />
-                            <div className="align-self-center font-weight-600"><b>&nbsp;-&nbsp;</b></div>
+                            <div className="align-self-center"><b>&nbsp;-&nbsp;</b></div>
                             <Input
-                              className=""
+                              maxLength="1"
+                              className="col-1"
                               type="text"
                               placeholder="1,or2"
                               required

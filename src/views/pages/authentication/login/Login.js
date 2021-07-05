@@ -29,10 +29,10 @@ class Login extends React.Component {
     return (
       <Row className="m-0 justify-content-center">
         <Col
-          sm="8"
-          xl="3"
-          lg="10"
-          md="8"
+          sm="4"
+          xl="4"
+          lg="4"
+          md="4"
           className="d-flex justify-content-center"
         >
           <Card className="bg-authentication login-card rounded-0 mb-0 w-100">

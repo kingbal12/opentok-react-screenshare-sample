@@ -47,8 +47,10 @@ export const logoutWithJWT = () => {
     // 로그아웃 api
     
     dispatch({ type: "LOGOUT_WITH_JWT", payload: {} })
-    history.push("/pages/login")
     persistor.purge();
+    localStorage.clear();
+    history.push("/pages/login")
+   
   }
 }
 

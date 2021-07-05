@@ -150,6 +150,7 @@ const ThemeNavbar = props => {
                     ? props.user.login.values.loggedInWith
                     : null
                 }
+                // status={props.user.login.values.}
                 logoutWithJWT={props.logoutWithJWT}
                 logoutWithFirebase={props.logoutWithFirebase}
               />

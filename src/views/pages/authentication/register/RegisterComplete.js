@@ -15,7 +15,7 @@ class RegisterComplete extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      userid: "kingbal999@gmail.com",
+      userid: "",
       filename: "",
       file : "",
       medicalpart: "", 

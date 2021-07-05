@@ -15,16 +15,23 @@ import { history } from "../../../history"
 import {
   Edit,
   Trash,
+  Droplet,
+  Activity,
+  Thermometer,
+  Compass,
+  Inbox,
   ChevronDown,
   Plus,
   Check,
   Link,
+  
   ChevronLeft,
   ChevronRight
 } from "react-feather"
 import { connect } from "react-redux"
 import {
   getData,
+  getNameData,
   getInitialData,
   deleteData,
   updateData,
@@ -37,6 +44,7 @@ import Checkbox from "../../../components/@vuexy/checkbox/CheckboxesVuexy"
 
 import "../../../assets/scss/plugins/extensions/react-paginate.scss"
 import "../../../assets/scss/pages/data-list.scss"
+import { Fragment } from "react"
 
 const chipColors = {
   "on hold": "warning",
@@ -130,7 +138,7 @@ const CustomHeader = props => {
         <div className="filter-section col-5">
           <Input type="text" placeholder="Search" onChange={e => props.handleFilter(e)} />
         </div>
-        {/* <Button className="ml-2" color='primary' outline>검색</Button> */}
+        <Button className="ml-2" color='primary' outline onClick={e => props.search(e)}>검색</Button>
       </div>
     </div>
   )
@@ -221,24 +229,7 @@ class DataListConfig extends Component {
       //       deleteRow={this.handleDelete}
       //     />
       //   )
-      // }
-      {
-        name: "예약시간",
-        selector: "date",
-        sortable: true,
-        cell: row => (
-          <p className="text-bold-500 text-truncate mb-0">{row.APPOINT_TIME}</p>
-        )
-      },
-      {
-        name: "진료수단",
-        // selector: "date",
-        // sortable: true,
-        cell: row => (
-          <p className="text-bold-500 text-truncate mb-0">{}</p>
-        )
-      },
-      
+      // }   
       {
         name: "이름",
         selector: "name",
@@ -271,14 +262,7 @@ class DataListConfig extends Component {
         name: "성별",
         selector: "gender",
         sortable: true,
-        cell: row => <p className="text-bold-500 mb-0">{row.GENDER}</p>
-        // (
-        //   <Badge
-        //     color={row.GENDER === "inactive" ? "light-danger" : "light-success"}
-        //     pill>
-        //     {row.GENDER}
-        //   </Badge>
-        // )
+        cell: row => <p className="text-bold-500 mb-0">{row.GENDER==="1"||row.GENDER==="3"?"M":"F"}</p>
       },
       {
         name: "나이",
@@ -311,19 +295,19 @@ class DataListConfig extends Component {
         )
       },
       {
-        name: "주된 증상",
-        // selector: "date",
-        // sortable: true,
-        cell: row => (
-          <p className="text-bold-500 text-truncate mb-0">{row.SYMPTOM}</p>
-        )
-      },
-      {
         name: "VitalData",
         // selector: "",
         // sortable: true,
         cell: row => (
-          <Link></Link>
+          <Fragment>
+            <Droplet stroke={row.BP==="00"?"silver":row.BP==="01"?"white":row.BP==="02"?"green":row.BP==="03"?"yellow":row.BP==="04"?"red":""}></Droplet>
+            <Activity stroke={row.PULSE==="00"?"silver":row.PULSE==="01"?"white":row.PULSE==="02"?"green":row.PULSE==="03"?"yellow":row.PULSE==="04"?"red":""}></Activity>
+            <Thermometer stroke={row.TEMPERATURE==="00"?"silver":row.TEMPERATURE==="01"?"white":row.TEMPERATURE==="02"?"green":row.TEMPERATURE==="03"?"yellow":row.TEMPERATURE==="04"?"red":""}></Thermometer>
+            <Droplet stroke={row.BS==="00"?"silver":row.BS==="01"?"white":row.BS==="02"?"green":row.BS==="03"?"yellow":row.BS==="04"?"red":""}></Droplet>
+            <Compass stroke={row.SPO2==="00"?"silver":row.SPO2==="01"?"white":row.SPO2==="02"?"green":row.SPO2==="03"?"yellow":row.SPO2==="04"?"red":""}></Compass>
+            <Inbox stroke={row.BW==="00"?"silver":row.BW==="01"?"white":row.BW==="02"?"green":row.BW==="03"?"yellow":row.BW==="04"?"red":""}></Inbox>
+          </Fragment>
+
           // 가운데로 옮길것
           
         )
@@ -477,10 +461,17 @@ class DataListConfig extends Component {
     }
   }
 
+  
   handleFilter = e => {
     this.setState({ value: e.target.value })
-    this.props.filterData(e.target.value)
+    // this.props.filterData(e.target.value)
   }
+
+  search = e => {
+    e.preventDefault()
+    this.props.getNameData(this.state.user,5,1,this.state.value)
+  }
+
 
   handleRowsPerPage = value => {
     let { parsedFilter, getData } = this.props
@@ -522,14 +513,15 @@ class DataListConfig extends Component {
 
   handlePagination = page => {
     let { parsedFilter, getData } = this.props
-    let perPage = parsedFilter.perPage !== undefined ? parsedFilter.perPage : 4
+    let perPage = parsedFilter.perPage !== undefined ? parsedFilter.perPage : 5
     let urlPrefix = this.props.thumbView
       ? "/data-list/thumb-view/"
       : "/patients-list/"
     history.push(
       `${urlPrefix}?page=${page.selected + 1}&perPage=${perPage}`
     )
-    getData({ page: page.selected + 1, perPage: perPage })
+    // getData({ page: page.selected + 1, perPage: perPage })
+    this.props.getData(this.state.user, page.selected + 1, perPage )
     this.setState({ currentPage: page.selected })
   }
 
@@ -551,6 +543,7 @@ class DataListConfig extends Component {
         className={`data-list ${
           this.props.thumbView ? "thumb-view" : "list-view"
         }`}>
+          {/* <Button className="ml-2" color='primary' outline onClick={this.seeState}>검색</Button> */}
         <DataTable
           columns={columns}
           data={value.length ? allData : data}
@@ -585,6 +578,7 @@ class DataListConfig extends Component {
           customStyles={selectedStyle}
           subHeaderComponent={
             <CustomHeader
+              search={this.search}
               handleSidebar={this.handleSidebar}
               handleFilter={this.handleFilter}
               handleRowsPerPage={this.handleRowsPerPage}
@@ -633,6 +627,7 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
   getData,
+  getNameData,
   deleteData,
   updateData,
   addData,
