@@ -330,7 +330,7 @@ export const changepassword = (userid, password, newpassword) => {
 export const withdrawal = (userid) => {
   return dispatch => {
     axios
-      .put("http://203.251.135.81:9300/v1/doctor/user-state", {
+      .put("http://203.251.135.81:9300/v1/doctor/account/user-state", {
           user_id : userid, 
           user_state : "9",
         }
