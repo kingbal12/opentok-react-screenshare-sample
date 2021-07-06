@@ -21,7 +21,7 @@ class Register extends React.Component {
       certifications: [
         {id: 1, value: "서비스 이용약관(필수)", isChecked: false},
         {id: 2, value: "개인정보 수집 및 이용동의(필수)", isChecked: false},
-        {id: 3, value: "개인정보 제3자 제공", isChecked: false},
+        {id: 3, value: "개인정보 제3자 제공(필수)", isChecked: false},
         {id: 4, value: "마케팅 정보 수신(선택)", isChecked: false},
       ],
       push: false,
@@ -52,10 +52,10 @@ class Register extends React.Component {
     return (
       <Row className="m-0 justify-content-center">
         <Col
-          sm="8"
-          xl="4"
-          lg="10"
-          md="8"
+          sm="6"
+          xl="6"
+          lg="6"
+          md="6"
           className="d-flex justify-content-center"
         >
           <Card className="bg-authentication rounded-0 mb-0 w-100">

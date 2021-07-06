@@ -238,10 +238,10 @@ class Hospitalinfo extends React.Component {
           </ModalFooter>
         </Modal>
       <Col
-        sm="7"
-        xl="7"
+        sm="10"
+        xl="10"
         lg="10"
-        md="8"
+        md="10"
         className="d-flex justify-content-center"
       >
         

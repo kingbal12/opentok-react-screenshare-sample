@@ -36,7 +36,7 @@ import {
   deleteData,
   updateData,
   addData,
-  // filterData
+  // eData
 } from "../../../redux/actions/data-list/"
 import Sidebar from "./DataListSidebar"
 import Chip from "../../../components/@vuexy/chips/ChipComponent"
@@ -466,6 +466,7 @@ class DataListConfig extends Component {
     this.setState({ value: e.target.value })
     // this.props.filterData(e.target.value)
   }
+
 
   search = e => {
     e.preventDefault()

@@ -46,13 +46,12 @@ class Register extends React.Component {
       userid: props.user.register.values.registeruser,
       filename: "",
       file : "",
-      medicalpart: "", 
+      medicalpart: "01", 
       medicalable: "", 
       medicaldesc: "", 
       medicalnum: "", 
       userdesc: "",
       previewURL : "",
-      // register4status: props.rg4status.register4status,
       registermodal: false
     }
   }
@@ -172,10 +171,10 @@ class Register extends React.Component {
     return (
       <Row className="m-0 justify-content-center">
       <Col
-        sm="6"
-        xl="6"
-        lg="6"
-        md="6"
+        sm="8"
+        xl="8"
+        lg="8"
+        md="8"
         className="d-flex justify-content-center"
       >
         

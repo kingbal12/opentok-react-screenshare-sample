@@ -7,6 +7,7 @@ import { loginWithJWT } from "../../../../redux/actions/auth/loginActions"
 import Select from "react-select"
 import { history } from "../../../../history"
 import axios from "axios"
+import Radio from "../../../../components/@vuexy/radio/RadioVuexy"
 
 const colourOptions = [
   { value: "개인회원", label: "개인회원" },
@@ -24,6 +25,9 @@ class FindPw extends React.Component {
     phone:"",
     docnum:"",
     modal:false,
+    verifymodal: false,
+    useridchecked: false,
+    emailchecked: true,
     email: "",
     modalmsg:"",
   }
@@ -44,10 +48,9 @@ class FindPw extends React.Component {
             console.log(response)
             if(response.data.status==="200") {
               this.setState({
-                modal:true,
                 email: response.data.data.EMAIL
               })
-              if(response.data.data.USER_ID===response.data.data.EMAIL){
+              if(response.data.data.USER_ID==response.data.data.EMAIL){
                 axios.post("http://203.251.135.81:9300/v1/doctor/account/password", {
                     user_id: this.state.userid,
                     email: this.state.email,
@@ -57,14 +60,30 @@ class FindPw extends React.Component {
                     medical_num: this.state.docnum
                 })
                 .then(response =>{
-                  console.log(response)
+                  if(response.data.status==="200"){
+                    this.setState({
+                      modal:true,
+                      modalmsg: "임시 비밀번호 전송에 성공했습니다."
+                    })
+                  } else {
+                    this.setState({
+                      modal:true,
+                      modalmsg: "임시 비밀번호 전송에 실패했습니다."
+                    })
+                  }
+                })
+              } else{
+                this.setState({
+                  userid: response.data.data.USER_ID,
+                  email: response.data.data.EMAIL,
+                  verifymodal:true
                 })
               }
               
             } else {
               this.setState({
                 modal:true,
-                modalmsg:""
+                modalmsg: response.data.message
               })
             }
           })
@@ -74,6 +93,25 @@ class FindPw extends React.Component {
     this.setState(prevState => ({
       modal: !prevState.modal
     }))
+  }
+
+  verifyModal = () => {
+    this.setState(prevState => ({
+      verifymodal: !prevState.modal
+    }))
+    console.log(this.state)
+  }
+
+  onSiteChanged = e => {
+    this.setState({
+      site: e.currentTarget.value
+      });
+  }
+
+  onAddressChanged = e => {
+    this.setState({
+      address: e.currentTarget.value
+      });
   }
   
   render() {
@@ -88,10 +126,45 @@ class FindPw extends React.Component {
             
           </ModalHeader>
           <ModalBody>
-            {this.state.businessmodalmsg}
+            {this.state.modalmsg}
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.findEmailModal}>
+              확인
+            </Button>{" "}
+          </ModalFooter>
+        </Modal>
+
+        <Modal
+          isOpen={this.state.verifymodal}
+          toggle={this.verifyModal}
+          className="modal-dialog-centered modal-sm"
+        >
+          <ModalHeader toggle={this.verifyModal}>
+            
+          </ModalHeader>
+          <ModalBody>
+            {/* <Radio
+              label={this.state.userid}
+              defaultChecked={this.state.userid===""||this.state.userid?true:false}  
+              name="exampleRadioSizes" 
+              value={this.state.userid}
+              onChange={e => this.setState({ auto: e.target.value })}
+              color="primary"
+              defaultChecked={this.state.useridchecked}
+              className="py-50"
+            />
+            <Radio
+              label={this.state.email}
+              color="primary"
+              value={this.state.email}
+              defaultChecked={this.state.emailchecked}
+              name="exampleRadioSizes"
+              className="py-50"
+            />           */}
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this.verifyModal}>
               확인
             </Button>{" "}
           </ModalFooter>

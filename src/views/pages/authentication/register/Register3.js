@@ -162,10 +162,10 @@ handleComplete = (data) => {
           </ModalFooter>
         </Modal>
         <Col
-          sm="6"
-          xl="6"
-          lg="6"
-          md="6"
+          sm="8"
+          xl="8"
+          lg="8"
+          md="8"
           className="d-flex justify-content-center"
         >
           <Card className="bg-authentication rounded-0 mb-0 w-100">
@@ -312,7 +312,6 @@ handleComplete = (data) => {
                         </InputGroupAddon>  
                         <Input
                           type="text"
-                          required
                           value={this.state.accountname}
                           onChange={e => this.setState({ accountname: e.target.value })}
                         />
@@ -324,7 +323,6 @@ handleComplete = (data) => {
                         </InputGroupAddon>  
                         <Input
                           type="text"
-                          required
                           value={this.state.bankname}
                           onChange={e => this.setState({ bankname: e.target.value })}
                         />
@@ -339,7 +337,6 @@ handleComplete = (data) => {
                         </InputGroupAddon>  
                         <Input
                           type="text"
-                          required
                           value={this.state.accountnumber}
                           onChange={e => this.setState({ accountnumber: e.target.value })}
                         />

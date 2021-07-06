@@ -60,7 +60,7 @@ export const register2 = (userid, name, phone, password, btdate, gender, email) 
 
   
   return dispatch => {
-    let registeruser = email
+    let registeruser = userid
     axios
       .post("http://203.251.135.81:9300/signup", {
         user_id: userid,

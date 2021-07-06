@@ -49,16 +49,20 @@ class Register extends React.Component {
 
   emailauth = e => {
     e.preventDefault()
-    if(this.state.otheremail===false){
-      this.props.authemail(
-        this.state.userid,
-        this.state.userid
-      )
+    if(this.state.userid===this.state.email){
+      alert("아이디용 이메일과 보안이메일은 다른 이메일로 입력해주시기 바랍니다.")
     } else {
-      this.props.authemail(
-        this.state.userid,
-        this.state.email
-      )
+      if(this.state.otheremail===false){
+        this.props.authemail(
+          this.state.userid,
+          this.state.userid
+        )
+      } else {
+        this.props.authemail(
+          this.state.userid,
+          this.state.email
+        )
+      }
     }
   }
 
@@ -79,7 +83,6 @@ class Register extends React.Component {
   }
 
   verifyemail = (email,idnumber) => {
-    console.log("작동됨",email,idnumber)
     
       axios
         .post("http://203.251.135.81:9300/signup-verify", {
@@ -163,10 +166,10 @@ class Register extends React.Component {
     return (
       <Row className="m-0 justify-content-center">
         <Col
-          sm="6"
-          xl="6"
-          lg="6"
-          md="6"
+          sm="8"
+          xl="8"
+          lg="8"
+          md="8"
           className="d-flex justify-content-center"
         >
           <Card className="bg-authentication rounded-0 mb-0 w-100">
@@ -193,7 +196,7 @@ class Register extends React.Component {
                               onChange={e => this.setState({ userid: e.target.value })}
                               // invalid={this.state.useemail.length === 0 ? true : false}
                             />
-                            <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.idModal}>중복확인</Button></InputGroupAddon>
+                            {/* <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.idModal}>중복확인</Button></InputGroupAddon> */}
                           </InputGroup>
                           </div>
                           <div className="col-12 mt-1"><b>보안이메일<span className="text-primary">(비밀번호 변경에 사용)</span></b></div>
@@ -222,7 +225,7 @@ class Register extends React.Component {
                               value={this.state.email}
                               onChange={e => this.setState({ email: e.target.value })}
                             />
-                            <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.emailauth}>이메일 인증</Button></InputGroupAddon>
+                            <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.emailauth}>이메일 인증(중복확인)</Button></InputGroupAddon>
                           </InputGroup>
                         </FormGroup>
                         
@@ -298,7 +301,7 @@ class Register extends React.Component {
                             <Input
                               maxLength="6"
                               type="text"
-                              placeholder="앞 6자리"
+                              placeholder="주민번호 앞 6자리"
                               required
                               value={this.state.btdate}
                               onChange={e => this.setState({ btdate: e.target.value })}
