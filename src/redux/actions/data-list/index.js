@@ -1,5 +1,5 @@
 import axios from "axios"
-
+import { history } from "../../../history"
 // export const getData = params => {
 //   return async dispatch => {
 //     await axios.get("/api/datalist/data", params).then(response => {
@@ -14,13 +14,15 @@ import axios from "axios"
 // }
 
 export const getData = (userid, pageamount, pagenum) => {
+  let npagemount = Number(pageamount);
+  let npagenum = Number(pagenum);
   return async dispatch => {
     await axios
       .get("http://203.251.135.81:9300/v1/doctor/patient/patients", {
         params: {
           user_id: userid,
-          page_amount: pageamount,
-          page_num: pagenum
+          page_amount: npagemount,
+          page_num: npagenum
         }
   })
     .then(response => {
@@ -74,10 +76,11 @@ export const getNameData = (userid, pageamount, pagenum, fname) => {
         }
   })
     .then(response => {
-      let totalPage = Math.ceil(response.data.data.COUNT / 5)
+      let length = response.data.data.PATIENT_LIST.length
+      let totalPage = Math.ceil(length / 5)
       console.log(totalPage, response)
 
-      let length = response.data.data.PATIENT_LIST.length
+      
       console.log("length :" + length)
       let patientlist 	= new Array();
       for (let i=0; i<length; i++) {
@@ -102,11 +105,64 @@ export const getNameData = (userid, pageamount, pagenum, fname) => {
       }
           
       dispatch({
-        type: "GET_DATA",
+        type: "GET_NAME_DATA",
         data: patientlist,
         totalPages: totalPage,
         // params
       })
+    })
+    .catch(err => console.log(err))
+  }
+}
+
+export const getPatientInfo = (userid,patientid) => {
+  return async dispatch => {
+    await axios
+      .get("http://203.251.135.81:9300/v1/doctor/patient/patient-info", {
+        params: {
+          user_id: userid,
+          patient_id: patientid
+        }
+  })
+    .then(response => {
+      console.log("환자정보: ",response)
+      if(response.data.status==="200") {
+        history.push("/patientinfo")
+      }
+      // let length = response.data.data.PATIENT_LIST.length
+      // let totalPage = Math.ceil(length / 5)
+      // console.log(totalPage, response)
+
+      
+      // console.log("length :" + length)
+      // let patientlist 	= new Array();
+      // for (let i=0; i<length; i++) {
+      //   let jsonObj		= new Object();         
+      //   jsonObj.PATIENT_ID		= response.data.data.PATIENT_LIST[i].PATIENT_ID
+      //   jsonObj.F_NAME = response.data.data.PATIENT_LIST[i].F_NAME
+      //   jsonObj.GENDER	= response.data.data.PATIENT_LIST[i].GENDER
+      //   jsonObj.AGE = response.data.data.PATIENT_LIST[i].AGE
+      //   jsonObj.BIRTH_DT = response.data.data.PATIENT_LIST[i].BIRTH_DT
+      //   jsonObj.NOTE_DX = response.data.data.PATIENT_LIST[i].NOTE_DX
+      //   jsonObj.FIRST_YN = response.data.data.PATIENT_LIST[i].FIRST_YN
+      //   jsonObj.BP = response.data.data.PATIENT_LIST[i]["1_STATE"]
+      //   jsonObj.PULSE = response.data.data.PATIENT_LIST[i]["2_STATE"]
+      //   jsonObj.TEMPERATURE = response.data.data.PATIENT_LIST[i]["3_STATE"]
+      //   jsonObj.BS = response.data.data.PATIENT_LIST[i]["4_STATE"]
+      //   jsonObj.SPO2 = response.data.data.PATIENT_LIST[i]["5_STATE"]
+      //   jsonObj.BW = response.data.data.PATIENT_LIST[i]["6_STATE"]
+
+      //   jsonObj = JSON.stringify(jsonObj);
+      //   //String 형태로 파싱한 객체를 다시 json으로 변환
+      //   patientlist.push(JSON.parse(jsonObj));
+      // }
+          
+      // dispatch({
+      //   type: "GET_NAME_DATA",
+      //   data: patientlist,
+      //   totalPages: totalPage,
+      //   // params
+      // })
     })
     .catch(err => console.log(err))
   }

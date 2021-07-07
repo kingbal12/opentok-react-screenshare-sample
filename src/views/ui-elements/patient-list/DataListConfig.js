@@ -36,6 +36,8 @@ import {
   deleteData,
   updateData,
   addData,
+  filterData,
+  getPatientInfo
   // eData
 } from "../../../redux/actions/data-list/"
 import Sidebar from "./DataListSidebar"
@@ -113,7 +115,7 @@ const CustomHeader = props => {
         </Button>
       </div> */}
       <div className="actions-right d-flex flex-wrap mt-sm-0 mt-2 col-8">
-        <UncontrolledDropdown className="data-list-rows-dropdown mr-1 d-md-block d-none">
+        {/* <UncontrolledDropdown className="data-list-rows-dropdown mr-1 d-md-block d-none">
           <DropdownToggle color="" className="sort-dropdown">
             <span className="align-middle mx-50">
               {`${props.index[0]} - ${props.index[1]} of ${props.total}`}
@@ -134,9 +136,9 @@ const CustomHeader = props => {
               20
             </DropdownItem>
           </DropdownMenu>
-        </UncontrolledDropdown>
+        </UncontrolledDropdown> */}
         <div className="filter-section col-5">
-          <Input type="text" placeholder="Search" onChange={e => props.handleFilter(e)} />
+            <Input type="text" placeholder="Search" onChange={e => props.handleFilter(e)} />
         </div>
         <Button className="ml-2" color='primary' outline onClick={e => props.search(e)}>검색</Button>
       </div>
@@ -167,6 +169,7 @@ class DataListConfig extends Component {
 
   state = {
     user: this.props.user.login.values.loggedInUser.username,
+    name: "",
     data: [],
     totalPages: 0,
     currentPage: 0,
@@ -357,7 +360,8 @@ class DataListConfig extends Component {
         // selector: "date",
         // sortable: true,
         cell: row => (
-          <Edit></Edit>
+          <Edit onClick={() => this.goPatientList(row.PATIENT_ID)}></Edit>
+          // <Edit onClick={this.goPatientList(row.PATIENT_ID)}></Edit>
           // 가운데로 옮길것
           // <ActionsComponent
           //   row={row}
@@ -461,16 +465,30 @@ class DataListConfig extends Component {
     }
   }
 
+  goPatientList(id) {
+    // id.preventDefault()
+    alert(`/read-board/${id}`);
+    this.props.getPatientInfo(this.state.user,id)
+  }
+
+  // goPatientList= e => {
+  //   e.preventDefault()
+  //   alert(e);
+  //   // this.props.getPatientInfo(this.state.user,)
+  // }
   
   handleFilter = e => {
-    this.setState({ value: e.target.value })
+    this.setState({ name: e.target.value })
     // this.props.filterData(e.target.value)
   }
 
 
   search = e => {
     e.preventDefault()
-    this.props.getNameData(this.state.user,5,1,this.state.value)
+    if(this.state.name!==""){
+      this.props.getNameData(this.state.user,5,1,this.state.name)
+    }
+    
   }
 
 
@@ -522,9 +540,10 @@ class DataListConfig extends Component {
       `${urlPrefix}?page=${page.selected + 1}&perPage=${perPage}`
     )
     // getData({ page: page.selected + 1, perPage: perPage })
-    this.props.getData(this.state.user, page.selected + 1, perPage )
+    this.props.getData(this.state.user, perPage, page.selected + 1 )
     this.setState({ currentPage: page.selected })
   }
+
 
   render() {
     let {
@@ -571,7 +590,7 @@ class DataListConfig extends Component {
           subHeader
           // selectableRows
           responsive
-          pointerOnHover
+          // pointerOnHover
           selectableRowsHighlight
           onSelectedRowsChange={data =>
             this.setState({ selected: data.selectedRows })
@@ -633,5 +652,6 @@ export default connect(mapStateToProps, {
   updateData,
   addData,
   getInitialData,
-  // filterData
+  filterData,
+  getPatientInfo
 })(DataListConfig)
