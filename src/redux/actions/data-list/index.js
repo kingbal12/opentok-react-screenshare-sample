@@ -128,7 +128,16 @@ export const getPatientInfo = (userid,patientid) => {
       console.log("환자정보: ",response)
       if(response.data.status==="200") {
         history.push("/patientinfo")
+        let consultlist = response.data.data.CONSULT_LIST
+        let personalinfo = response.data.data.PERSONAL_INFO;
+
+        dispatch({
+          type: "GET_PATIENT_INFO",
+          list: consultlist,
+          info: personalinfo
+        })
       }
+
       // let length = response.data.data.PATIENT_LIST.length
       // let totalPage = Math.ceil(length / 5)
       // console.log(totalPage, response)

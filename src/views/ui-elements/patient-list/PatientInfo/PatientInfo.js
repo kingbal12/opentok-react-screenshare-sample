@@ -34,41 +34,13 @@ class PatientInfo extends React.Component {
     return (
       <Fragment>
         {/* 환자정보, 버튼 모음 Row */}
-        <Row className="d-flex justify-content-between mb-0">
-          <Col className="col-6">
-            <Card className="d-flex justify-content-between" style={{border:"solid #7367ef 1px", backgroundColor: "#efefff", width:"80%", height:"50px"}}>
-              
+        <Row>
+          <Col className="col-12">
+            <Card style={{backgroundColor: "#efefff", height:"60px"}}>
+              {this.props.dataList.csdata[0].APPOINT_TIME}
             </Card>
           </Col>
-          <Col className="col-6 text-right">
-            <Button
-              className="mr-1"
-              color="primary"
-              outline
-              type="button">
-              남은시간
-            </Button>
-            <Button
-              className="mr-1"
-              color="primary"
-              outline
-              type="button">
-              화면공유
-            </Button>
-            <Button
-              className="mr-1"
-              color="primary"
-              outline
-              type="button">
-              화면녹화
-            </Button>
-            <Button
-              color="primary"
-              outline
-              type="button">
-              설정
-            </Button>
-          </Col>
+          
         </Row>
 
         {/* 화상통화, 생체데이터, 등등 */}
@@ -181,7 +153,8 @@ class PatientInfo extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.auth
+    user: state.auth,
+    dataList: state.dataList
   }
 }
 

@@ -360,7 +360,7 @@ class DataListConfig extends Component {
         // selector: "date",
         // sortable: true,
         cell: row => (
-          <Edit onClick={() => this.goPatientList(row.PATIENT_ID)}></Edit>
+          <Edit onClick={() => this.goPatientList(row.PATIENT_ID)} style={{cursor:"pointer"}}></Edit>
           // <Edit onClick={this.goPatientList(row.PATIENT_ID)}></Edit>
           // 가운데로 옮길것
           // <ActionsComponent

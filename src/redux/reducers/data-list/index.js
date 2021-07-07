@@ -5,7 +5,9 @@ const initialState = {
   totalPages: 0,
   filteredData: [],
   totalRecords: 0,
-  sortIndex: []
+  sortIndex: [],
+  csdata: [],
+  patient: ""
 }
 
 const determinePopularity = val => {
@@ -49,7 +51,7 @@ const DataListReducer = (state = initialState, action) => {
           action.params
         )
       }
-      case "GET_NAME_DATA":
+    case "GET_NAME_DATA":
       return {
         ...state,
         data: action.data,
@@ -62,6 +64,12 @@ const DataListReducer = (state = initialState, action) => {
           action.params
         )
       }
+      case "GET_PATIENT_INFO":
+        return {
+          ...state,
+          csdata: action.list,
+          patient: action.info
+        }
     case "GET_ALL_DATA":
       return {
         ...state,
