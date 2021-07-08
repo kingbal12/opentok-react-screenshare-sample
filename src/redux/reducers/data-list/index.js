@@ -7,7 +7,8 @@ const initialState = {
   totalRecords: 0,
   sortIndex: [],
   csdata: [],
-  patient: ""
+  patient: "",
+  appointment: ""
 }
 
 const determinePopularity = val => {
@@ -68,7 +69,8 @@ const DataListReducer = (state = initialState, action) => {
         return {
           ...state,
           csdata: action.list,
-          patient: action.info
+          patient: action.info,
+          appointment: action.appointment
         }
     case "GET_ALL_DATA":
       return {

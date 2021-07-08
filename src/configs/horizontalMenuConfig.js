@@ -1048,130 +1048,130 @@ const horizontalMenuConfig = [
       }
     ]
   },
-  // {
-  //   id: "charts-maps",
-  //   title: "Charts & Maps",
-  //   type: "dropdown",
-  //   icon: <Icon.BarChart2 size={16} />,
-  //   children: [
-  //     {
-  //       id: "charts",
-  //       title: "Charts",
-  //       type: "dropdown",
-  //       badge: "success",
-  //       badgeText: "3",
-  //       icon: <Icon.PieChart size={16} />,
-  //       children: [
-  //         {
-  //           id: "apex",
-  //           title: "Apex",
-  //           type: "item",
-  //           icon: <Icon.Circle size={10} />,
-  //           navLink: "/charts/apex",
-  //           permissions: ["admin", "editor"]
-  //         },
-  //         {
-  //           id: "chartJs",
-  //           title: "ChartJS",
-  //           type: "item",
-  //           icon: <Icon.Circle size={10} />,
-  //           navLink: "/charts/chartjs",
-  //           permissions: ["admin", "editor"]
-  //         },
-  //         {
-  //           id: "recharts",
-  //           title: "Recharts",
-  //           type: "item",
-  //           icon: <Icon.Circle size={10} />,
-  //           navLink: "/charts/recharts",
-  //           permissions: ["admin", "editor"]
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       id: "leafletMaps",
-  //       title: "Leaflet Maps",
-  //       icon: <Icon.Map size={16} />,
-  //       type: "item",
-  //       navLink: "/maps/leaflet",
-  //       permissions: ["admin", "editor"]
-  //     }
-  //   ]
-  // },
-  // {
-  //   id: "others",
-  //   title: "Others",
-  //   type: "dropdown",
-  //   icon: <Icon.MoreHorizontal size={16} />,
-  //   children: [
-  //     {
-  //       id: "menuLevels",
-  //       title: "Menu Levels",
-  //       icon: <Icon.Menu size={16} />,
-  //       type: "dropdown",
-  //       children: [
-  //         {
-  //           id: "secondLevel",
-  //           title: "Second Level",
-  //           icon: <Icon.Circle size={10} />,
-  //           type: "item",
-  //           navlink: "",
-  //           permissions: ["admin", "editor"]
-  //         },
-  //         {
-  //           id: "secondLevel1",
-  //           title: "Second Level",
-  //           icon: <Icon.Circle size={10} />,
-  //           type: "dropdown",
-  //           children: [
-  //             {
-  //               id: "ThirdLevel",
-  //               title: "Third Level",
-  //               icon: <Icon.Circle size={10} />,
-  //               type: "item",
-  //               navLink: "",
-  //               permissions: ["admin", "editor"]
-  //             },
-  //             {
-  //               id: "ThirdLevel1",
-  //               title: "Third Level",
-  //               icon: <Icon.Circle size={10} />,
-  //               type: "item",
-  //               navLink: "",
-  //               permissions: ["admin", "editor"]
-  //             }
-  //           ]
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       id: "disabledMenu",
-  //       title: "Disabled Menu",
-  //       icon: <Icon.EyeOff size={16} />,
-  //       type: "item",
-  //       navLink: "#",
-  //       permissions: ["admin", "editor"],
-  //       disabled: true
-  //     },
-  //     {
-  //       id: "documentation",
-  //       title: "Documentation",
-  //       icon: <Icon.Folder size={16} />,
-  //       type: "external-link",
-  //       navLink: "google.com",
-  //       permissions: ["admin", "editor"]
-  //     },
-  //     {
-  //       id: "raiseSupport",
-  //       title: "Raise Support",
-  //       icon: <Icon.LifeBuoy size={16} />,
-  //       type: "external-link",
-  //       newTab: true,
-  //       navLink: "https://pixinvent.ticksy.com/",
-  //       permissions: ["admin", "editor"]
-  //     }
-  //   ]
-  // }
+  {
+    id: "charts-maps",
+    title: "Charts & Maps",
+    type: "dropdown",
+    icon: <Icon.BarChart2 size={16} />,
+    children: [
+      {
+        id: "charts",
+        title: "Charts",
+        type: "dropdown",
+        badge: "success",
+        badgeText: "3",
+        icon: <Icon.PieChart size={16} />,
+        children: [
+          {
+            id: "apex",
+            title: "Apex",
+            type: "item",
+            icon: <Icon.Circle size={10} />,
+            navLink: "/charts/apex",
+            permissions: ["admin", "editor"]
+          },
+          {
+            id: "chartJs",
+            title: "ChartJS",
+            type: "item",
+            icon: <Icon.Circle size={10} />,
+            navLink: "/charts/chartjs",
+            permissions: ["admin", "editor"]
+          },
+          {
+            id: "recharts",
+            title: "Recharts",
+            type: "item",
+            icon: <Icon.Circle size={10} />,
+            navLink: "/charts/recharts",
+            permissions: ["admin", "editor"]
+          }
+        ]
+      },
+      {
+        id: "leafletMaps",
+        title: "Leaflet Maps",
+        icon: <Icon.Map size={16} />,
+        type: "item",
+        navLink: "/maps/leaflet",
+        permissions: ["admin", "editor"]
+      }
+    ]
+  },
+  {
+    id: "others",
+    title: "Others",
+    type: "dropdown",
+    icon: <Icon.MoreHorizontal size={16} />,
+    children: [
+      {
+        id: "menuLevels",
+        title: "Menu Levels",
+        icon: <Icon.Menu size={16} />,
+        type: "dropdown",
+        children: [
+          {
+            id: "secondLevel",
+            title: "Second Level",
+            icon: <Icon.Circle size={10} />,
+            type: "item",
+            navlink: "",
+            permissions: ["admin", "editor"]
+          },
+          {
+            id: "secondLevel1",
+            title: "Second Level",
+            icon: <Icon.Circle size={10} />,
+            type: "dropdown",
+            children: [
+              {
+                id: "ThirdLevel",
+                title: "Third Level",
+                icon: <Icon.Circle size={10} />,
+                type: "item",
+                navLink: "",
+                permissions: ["admin", "editor"]
+              },
+              {
+                id: "ThirdLevel1",
+                title: "Third Level",
+                icon: <Icon.Circle size={10} />,
+                type: "item",
+                navLink: "",
+                permissions: ["admin", "editor"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: "disabledMenu",
+        title: "Disabled Menu",
+        icon: <Icon.EyeOff size={16} />,
+        type: "item",
+        navLink: "#",
+        permissions: ["admin", "editor"],
+        disabled: true
+      },
+      {
+        id: "documentation",
+        title: "Documentation",
+        icon: <Icon.Folder size={16} />,
+        type: "external-link",
+        navLink: "google.com",
+        permissions: ["admin", "editor"]
+      },
+      {
+        id: "raiseSupport",
+        title: "Raise Support",
+        icon: <Icon.LifeBuoy size={16} />,
+        type: "external-link",
+        newTab: true,
+        navLink: "https://pixinvent.ticksy.com/",
+        permissions: ["admin", "editor"]
+      }
+    ]
+  }
   
 ]
 

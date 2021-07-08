@@ -128,50 +128,18 @@ export const getPatientInfo = (userid,patientid) => {
       console.log("환자정보: ",response)
       if(response.data.status==="200") {
         history.push("/patientinfo")
+        console.log("환자데이터: ", response.data.data)
+        let appoint = response.data.data.APPOINT_INFO
         let consultlist = response.data.data.CONSULT_LIST
         let personalinfo = response.data.data.PERSONAL_INFO;
 
         dispatch({
           type: "GET_PATIENT_INFO",
           list: consultlist,
-          info: personalinfo
+          info: personalinfo,
+          appointment: appoint
         })
       }
-
-      // let length = response.data.data.PATIENT_LIST.length
-      // let totalPage = Math.ceil(length / 5)
-      // console.log(totalPage, response)
-
-      
-      // console.log("length :" + length)
-      // let patientlist 	= new Array();
-      // for (let i=0; i<length; i++) {
-      //   let jsonObj		= new Object();         
-      //   jsonObj.PATIENT_ID		= response.data.data.PATIENT_LIST[i].PATIENT_ID
-      //   jsonObj.F_NAME = response.data.data.PATIENT_LIST[i].F_NAME
-      //   jsonObj.GENDER	= response.data.data.PATIENT_LIST[i].GENDER
-      //   jsonObj.AGE = response.data.data.PATIENT_LIST[i].AGE
-      //   jsonObj.BIRTH_DT = response.data.data.PATIENT_LIST[i].BIRTH_DT
-      //   jsonObj.NOTE_DX = response.data.data.PATIENT_LIST[i].NOTE_DX
-      //   jsonObj.FIRST_YN = response.data.data.PATIENT_LIST[i].FIRST_YN
-      //   jsonObj.BP = response.data.data.PATIENT_LIST[i]["1_STATE"]
-      //   jsonObj.PULSE = response.data.data.PATIENT_LIST[i]["2_STATE"]
-      //   jsonObj.TEMPERATURE = response.data.data.PATIENT_LIST[i]["3_STATE"]
-      //   jsonObj.BS = response.data.data.PATIENT_LIST[i]["4_STATE"]
-      //   jsonObj.SPO2 = response.data.data.PATIENT_LIST[i]["5_STATE"]
-      //   jsonObj.BW = response.data.data.PATIENT_LIST[i]["6_STATE"]
-
-      //   jsonObj = JSON.stringify(jsonObj);
-      //   //String 형태로 파싱한 객체를 다시 json으로 변환
-      //   patientlist.push(JSON.parse(jsonObj));
-      // }
-          
-      // dispatch({
-      //   type: "GET_NAME_DATA",
-      //   data: patientlist,
-      //   totalPages: totalPage,
-      //   // params
-      // })
     })
     .catch(err => console.log(err))
   }
