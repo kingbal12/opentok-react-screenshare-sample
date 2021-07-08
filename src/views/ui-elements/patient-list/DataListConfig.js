@@ -469,6 +469,7 @@ class DataListConfig extends Component {
     // id.preventDefault()
     alert(`/read-board/${id}`);
     this.props.getPatientInfo(this.state.user,id)
+    // this.props.getVitalData(id)
   }
 
   // goPatientList= e => {
