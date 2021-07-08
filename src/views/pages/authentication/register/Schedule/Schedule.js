@@ -10,6 +10,7 @@ import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop"
 import moment from "moment"
 import { connect } from "react-redux"
 import {
+  clearSchedule,
   handleSidebar,
   addEvent,
   handleSelectedEvent,
@@ -75,6 +76,8 @@ class CalendarApp extends React.Component {
     }))
   }
 
+  
+
   static getDerivedStateFromProps(props, state) {
     if (
       props.app.events.length !== state.events ||
@@ -102,15 +105,15 @@ class CalendarApp extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      userid: props.user.register.values.registeruser,
-      // userid: "kingbal999@gmail.com",
+      // userid: props.user.register.values.registeruser,
+      userid: "kingbal999@gmail.com",
       events: [],
       views: {
         month: true,
         week: true,
         day: true
       },
-      // id: null,
+      id: 1,
       // eventInfo: null,
       // startDate: new Date(),
       // endDate: new Date(),
@@ -126,6 +129,10 @@ class CalendarApp extends React.Component {
     }
   }
 
+  clearschedule = e => {
+    e.preventDefault()
+    this.props.clearSchedule()
+  }
   
   handleRepeatPeriod = rperiod => {
     this.setState({
@@ -181,9 +188,7 @@ class CalendarApp extends React.Component {
   }
 
   handleAddEvent = id => {
-    // id값을 정하는것과
-    // end start date의 state값을 정하는것은 다른 함수로 하는것 같음
-    // this.props.handleSidebar(false)
+    this.setState({id: this.state.id+1})
     this.props.addEvent(
       {
       id,
@@ -212,6 +217,7 @@ class CalendarApp extends React.Component {
 
   render() {
     const { events, views, sidebar } = this.state
+
  
     return (
       <div className="app-calendar position-relative">
@@ -252,14 +258,23 @@ class CalendarApp extends React.Component {
                   endDate: new Date(end)
                   // url: ""
                 })
-                this.handleAddEvent(2)
-                // id 를 1씩 증가하게끔 
+                this.handleAddEvent(this.state.id)
                 console.log("---------------------", this.state.startDate)
               }}
               
               selectable={true}
             />
             <div className="pt-1 text-right">
+              <Button
+                className="mr-2"
+                color="primary"
+                outline
+                type="button"
+                size="lg"
+                onClick={this.clearschedule}
+              >
+                초기화
+              </Button>
               <Button
                 color="primary"
                 type="button"
@@ -398,6 +413,7 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, {
+  clearSchedule,
   handleSidebar,
   addEvent,
   handleSelectedEvent,

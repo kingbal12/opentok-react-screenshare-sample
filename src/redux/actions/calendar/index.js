@@ -8,7 +8,22 @@ const formatDate = (scheduleda)=>{
    return formatted_date;
   }
 
+export const fisrtFetchEvents = () => {
+  return async dispatch => {
+    await axios
+      .get("/api/apps/calendar/events")
+      .then(response => {
+        dispatch({ type: "FETCH_EVENTS", events: response.data })
+      })
+      .catch(err => console.log(err))
+  }
+}
 
+export const clearSchedule = () => {
+  return dispatch => {
+    dispatch({ type: "CLEAR_EVENTS", events: [] })
+  }
+}
 
 export const calendarfetchEvents = (userid, monthstart, monthend) => {
   return async dispatch => {

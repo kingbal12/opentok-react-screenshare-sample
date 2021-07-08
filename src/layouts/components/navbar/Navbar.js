@@ -144,6 +144,7 @@ const ThemeNavbar = props => {
                     : user !== undefined && user.picture ? user.picture
                     : userImg
                 }
+                medicalpartnm={props.user.login.values.loggedInUser.medical_part_nm}
                 loggedInWith={
                   props.user !== undefined &&
                   props.user.login.values !== undefined

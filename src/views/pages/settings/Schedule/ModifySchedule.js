@@ -121,7 +121,7 @@ class CalendarApp extends React.Component {
         week: true,
         day: true
       },
-      // id: null,
+      id: 1,
       // eventInfo: null,
       // startDate: new Date(),
       // endDate: new Date(),
@@ -203,8 +203,7 @@ class CalendarApp extends React.Component {
   }
 
   handleAddEvent = id => {
-    // id값을 정하는것과
-    // end start date의 state값을 정하는것은 다른 함수로 하는것 같음
+    this.setState({id: this.state.id+1})
     this.props.handleSidebar(false)
     this.props.addEvent(
       {
@@ -314,15 +313,11 @@ class CalendarApp extends React.Component {
                 this.setState({
                   // title: "테스트",
                   // label: null,
-                  // 여기서는 포맷변환을 시켜봤자 다시 원래 포맷으로 변하게 됨
                   startDate: new Date(start),
                   endDate: new Date(end)
-                  // startDate: formatDate(start),
-                  // endDate: formatDate(end)
                   // url: ""
                 })
-                this.handleAddEvent(2)
-                // id 를 1씩 증가하게끔 
+                this.handleAddEvent(this.state.id)
                 console.log("---------------------", this.state.startDate)
               }}
               

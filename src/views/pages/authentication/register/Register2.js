@@ -186,7 +186,9 @@ class Register extends React.Component {
                       <Form onSubmit={this.handleRegister1}>
                         <FormGroup className="form-label-group">
                           <div className="d-flex justify-content-between"> 
-                          <div className="col-3 align-self-center"><b>아이디</b></div>
+                          <div className="col-3 align-self-center">
+                            <h5 className="text-bold-600">아이디</h5>
+                          </div>
                           <InputGroup>
                             <Input
                               type="email"
@@ -199,7 +201,11 @@ class Register extends React.Component {
                             {/* <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.idModal}>중복확인</Button></InputGroupAddon> */}
                           </InputGroup>
                           </div>
-                          <div className="col-12 mt-1"><b>보안이메일<span className="text-primary">(비밀번호 변경에 사용)</span></b></div>
+                          <div className="col-12 mt-1">
+                            <h5 className="text-bold-600">
+                              보안이메일&nbsp;<span className="text-primary">(비밀번호 변경에 사용)</span>
+                            </h5>
+                          </div>
                           <div className="d-flex flex-row-reverse">
                             <small>
                               <Checkbox
@@ -210,10 +216,8 @@ class Register extends React.Component {
                                 onChange={this.handleOtheremail}
                               />
                             </small>
-                          </div>
-                                     
+                          </div>  
                         </FormGroup>
-
                         <FormGroup className="form-label-group d-flex justify-content-between">
                           <div className="col-3"></div>
                           <InputGroup>
@@ -244,7 +248,9 @@ class Register extends React.Component {
                         </FormGroup>
 
                         <FormGroup className="form-label-group d-flex justify-content-between">
-                          <div className="col-3 align-self-center"><b>이름</b></div>
+                          <div className="col-3 align-self-center">
+                            <h5 className="text-bold-600">이름</h5>
+                          </div>
                           <InputGroup>
                             <Input
                               type="text"
@@ -257,7 +263,9 @@ class Register extends React.Component {
                         </FormGroup>
 
                         <FormGroup className="form-label-group d-flex justify-content-between">
-                         <div className="col-3 align-self-center"><b>휴대폰번호</b></div>
+                          <div className="col-3 align-self-center">
+                           <h5 className="text-bold-600">휴대폰번호</h5>
+                          </div>
                           <InputGroup>
                             <Input
                               type="text"
@@ -270,7 +278,9 @@ class Register extends React.Component {
                         </FormGroup>
 
                         <FormGroup className="form-label-group d-flex justify-content-between">
-                          <div className="col-3 align-self-center"><b>비밀번호</b></div>
+                          <div className="col-3 align-self-center">
+                            <h5 className="text-bold-600">비밀번호</h5>
+                          </div>
                           <InputGroup>
                             <Input
                               maxLength="14"
@@ -296,7 +306,9 @@ class Register extends React.Component {
                           </InputGroup>
                         </FormGroup>
                         <FormGroup className="form-label-group d-flex justify-content-between">
-                          <div className="col-3 align-self-center"><b>생년월일/성별</b></div>
+                          <div className="col-3 align-self-center">
+                            <h5 className="text-bold-600">생년월일/성별</h5>
+                          </div>
                           <InputGroup>
                             <Input
                               maxLength="6"

@@ -670,7 +670,7 @@ class NavbarUser extends React.PureComponent {
               <span className="user-name text-bold-600">
                 {this.props.userName}
               </span>
-              <span className="user-status">내과</span>
+              <span className="user-status text-bold-500">{this.props.medicalpartnm}</span>
             </div>
             <span data-tour="user">
               <img
