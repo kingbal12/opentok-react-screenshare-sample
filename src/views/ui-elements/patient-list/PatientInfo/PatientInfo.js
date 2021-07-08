@@ -184,7 +184,7 @@ class PatientInfo extends React.Component {
                   </CardTitle>
                   <CardBody className="d-flex pl-0">
                     <div className="col-12">
-                      <h5>{this.props.appo.SYMPTOM}</h5>
+                      <h5>{this.props.appo===null?"":this.props.appo.SYMPTOM}</h5>
                     </div>
                   </CardBody>
 
