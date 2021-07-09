@@ -24,7 +24,6 @@ import {
   Plus,
   Check,
   Link,
-  
   ChevronLeft,
   ChevronRight
 } from "react-feather"
@@ -37,7 +36,8 @@ import {
   updateData,
   addData,
   filterData,
-  getPatientInfo
+  getPatientInfo,
+  getVitalData
   // eData
 } from "../../../redux/actions/data-list/"
 import Sidebar from "./DataListSidebar"
@@ -469,7 +469,7 @@ class DataListConfig extends Component {
     // id.preventDefault()
     alert(`/read-board/${id}`);
     this.props.getPatientInfo(this.state.user,id)
-    // this.props.getVitalData(id)
+    this.props.getVitalData(id)
   }
 
   // goPatientList= e => {
@@ -654,5 +654,6 @@ export default connect(mapStateToProps, {
   addData,
   getInitialData,
   filterData,
-  getPatientInfo
+  getPatientInfo,
+  getVitalData
 })(DataListConfig)

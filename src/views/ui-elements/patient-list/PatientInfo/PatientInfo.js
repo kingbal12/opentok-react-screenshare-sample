@@ -27,51 +27,40 @@ import userImg from "../../../../assets/img/portrait/small/avatar-s-11.jpg"
 import { ContextLayout } from "../../../../utility/context/Layout"
 import { Fragment } from "react"
 import appoints from "../../../../redux/reducers/appoint/appoints"
+import previmg from "../../../../assets/img/portrait/small/Sample_User_Icon.png"
 
-const data = [
-  {
-    name: "Page A",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400
-  },
-  {
-    name: "Page B",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210
-  },
-  {
-    name: "Page C",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290
-  },
-  {
-    name: "Page D",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000
-  },
-  {
-    name: "Page E",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181
-  },
-  {
-    name: "Page F",
-    uv: 2390,
-    pv: 3800,
-    amt: 2500
-  },
-  {
-    name: "Page G",
-    uv: 3490,
-    pv: 4300,
-    amt: 2100
-  }
-]
+
+
+class CunsultName extends React.Component { 
+  render() { 
+    return( 
+    <h5>
+      {this.props.row.PART_NAME}/{this.props.row.F_NAME}
+    </h5>
+    ); 
+  } 
+}
+
+class NoteCC extends React.Component { 
+  render() { 
+    return( 
+    <h5>
+      {this.props.row.NOTE_CC}
+    </h5>
+    ); 
+  } 
+}
+
+class AppointTime extends React.Component { 
+  render() { 
+    return( 
+    <h5>
+      {this.props.row.APPOINT_TIME.substring(0,10)}
+    </h5>
+    ); 
+  } 
+}
+
 
 class PatientInfo extends React.Component {
   state = {
@@ -91,6 +80,22 @@ class PatientInfo extends React.Component {
   }
  
   render() {
+    let profile_preview = null;
+
+    profile_preview = 
+      <div className="dz-thumb ">
+        <div className="dz-thumb-inner">  
+          <img
+            width="100px"
+            height="100px" 
+            src={previmg}
+            className="dz-img"
+            style={{borderRadius:"100%"}} 
+            alt="" 
+            />
+        </div>
+      </div>
+
     return (
       <Fragment>
         {/* 환자정보, 버튼 모음 Row */}
@@ -134,15 +139,33 @@ class PatientInfo extends React.Component {
               <CardBody className="d-flex pl-0">
                 <div className="col-4 text-center">
                   <h5><span className="text-bold-600">진료과/진료의</span></h5>
-
+                  <h5>
+                    {
+                      this.props.cslist.map(row =>
+                        (<CunsultName key={row.APPOINT_TIME} row={row}/>)
+                      )
+                    }
+                  </h5>
                 </div>
                 <div className="col-4 text-center">
                   <h5><span className="text-bold-600">진단명</span></h5>
-
+                  <h5>
+                    {
+                      this.props.cslist.map(row =>
+                        (<NoteCC key={row.APPOINT_TIME} row={row}/>)
+                      )
+                    }
+                  </h5>
                 </div>
                 <div className="col-4 text-center">
                   <h5><span className="text-bold-600">진료일자</span></h5>
-
+                  <h5>
+                    {
+                      this.props.cslist.map(row =>
+                        (<AppointTime key={row.APPOINT_TIME} row={row}/>)
+                      )
+                    }
+                  </h5>
                 </div>
               </CardBody>
             </Card>
@@ -193,6 +216,9 @@ class PatientInfo extends React.Component {
                   <CardTitle className="pl-1" style={{paddingTop:"5px"}}>
                     <b>Files</b>
                   </CardTitle>
+                  <CardBody>
+                    {profile_preview}
+                  </CardBody>
                 </Card>
               </div>
             </div>
@@ -202,176 +228,177 @@ class PatientInfo extends React.Component {
                 <b>Vital Data</b>
               </CardTitle>
               <CardBody className="d-flex pl-0">
-                <div className="d-flex col-12">
-                  <LineChart
-                    width={200}
-                    height={280}
-                    data={data}
-                    margin={{
-                      top: 5,
-                      right: 30,
-                      left: 20,
-                      bottom: 5
-                    }}
-                  >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Line
-                      type="monotone"
-                      dataKey="pv"
-                      stroke={this.props.primary}
-                      activeDot={{ r: 8 }}
-                    />
-                    <Line
-                      type="monotone"
-                      dataKey="uv"
-                      stroke={this.props.success}
-                    />
-                  </LineChart>
-                  <LineChart
-                    width={200}
-                    height={280}
-                    data={data}
-                    margin={{
-                      top: 5,
-                      right: 30,
-                      left: 20,
-                      bottom: 5
-                    }}
-                  >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Line
-                      type="monotone"
-                      dataKey="pv"
-                      stroke={this.props.primary}
-                      activeDot={{ r: 8 }}
-                    />
-                    <Line
-                      type="monotone"
-                      dataKey="uv"
-                      stroke={this.props.success}
-                    />
-                  </LineChart>
-                  <LineChart
-                    width={200}
-                    height={280}
-                    data={data}
-                    margin={{
-                      top: 5,
-                      right: 30,
-                      left: 20,
-                      bottom: 5
-                    }}
-                  >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Line
-                      type="monotone"
-                      dataKey="pv"
-                      stroke={this.props.primary}
-                      activeDot={{ r: 8 }}
-                    />
-                    <Line
-                      type="monotone"
-                      dataKey="uv"
-                      stroke={this.props.success}
-                    />
-                  </LineChart>
-                  <LineChart
-                    width={200}
-                    height={280}
-                    data={data}
-                    margin={{
-                      top: 5,
-                      right: 30,
-                      left: 20,
-                      bottom: 5
-                    }}
-                  >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Line
-                      type="monotone"
-                      dataKey="pv"
-                      stroke={this.props.primary}
-                      activeDot={{ r: 8 }}
-                    />
-                    <Line
-                      type="monotone"
-                      dataKey="uv"
-                      stroke={this.props.success}
-                    />
-                  </LineChart>
-                  <LineChart
-                    width={200}
-                    height={280}
-                    data={data}
-                    margin={{
-                      top: 5,
-                      right: 30,
-                      left: 20,
-                      bottom: 5
-                    }}
-                  >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Line
-                      type="monotone"
-                      dataKey="pv"
-                      stroke={this.props.primary}
-                      activeDot={{ r: 8 }}
-                    />
-                    <Line
-                      type="monotone"
-                      dataKey="uv"
-                      stroke={this.props.success}
-                    />
-                  </LineChart>
-                  <LineChart
-                    width={200}
-                    height={280}
-                    data={data}
-                    margin={{
-                      top: 5,
-                      right: 30,
-                      left: 20,
-                      bottom: 5
-                    }}
-                  >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Line
-                      type="monotone"
-                      dataKey="pv"
-                      stroke={this.props.primary}
-                      activeDot={{ r: 8 }}
-                    />
-                    <Line
-                      type="monotone"
-                      dataKey="uv"
-                      stroke={this.props.success}
-                    />
-                  </LineChart>
-                  
+                <div className="d-flex col-12 pl-0">
+                  {this.props.bpdata.length===0?null:
+                    <div className="col-2 pl-0">
+                      <ResponsiveContainer>
+                        <LineChart
+                          className="col-2"
+                          width={500}
+                          height={300}
+                          data={this.props.bpdata}
+                        >
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis tick={{fontSize: 10}} dataKey="CREATE_TIME" />
+                          <YAxis />
+                          <Tooltip />
+                          <Legend />
+                          <Line
+                            name="수축기"
+                            type="monotone"
+                            dataKey="SYS_VAL"
+                            stroke="#EA5455"
+                          />
+                          <Line
+                            name="이완기"
+                            type="monotone"
+                            dataKey="DIA_VAL"
+                            stroke="#7367F0"
+                            activeDot={{ r: 8 }}
+                          /> 
+                        </LineChart>
+                      </ResponsiveContainer>
+                    </div>
+                  }
+
+                  {this.props.pulstdata.length===0?null:
+                    <div className="col-2 pl-0">
+                      <ResponsiveContainer>
+                        <LineChart
+                          className="col-2"
+                          width={500}
+                          height={300}
+                          data={this.props.pulstdata}
+                        >
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis tick={{fontSize: 10}} dataKey="CREATE_TIME"/>
+                          <YAxis />
+                          <Tooltip />
+                          <Legend/>
+                          <Line
+                            name="맥박"
+                            type="monotone"
+                            dataKey="PULSE_VAL"
+                            stroke="#EA5455"
+                            activeDot={{ r: 8 }}
+                          />
+                        </LineChart>
+                      </ResponsiveContainer>
+                    </div>
+                  }
+
+                  {this.props.tempdata.length===0?null:
+                    <div className="col-2 pl-0">
+                      <ResponsiveContainer>
+                        <LineChart
+                          className="col-2"
+                          width={500}
+                          height={300}
+                          data={this.props.tempdata}
+                        >
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis tick={{fontSize: 10}} dataKey="CREATE_TIME"/>
+                          <YAxis />
+                          <Tooltip />
+                          <Legend/>
+                          <Line
+                            name="체온"
+                            type="monotone"
+                            dataKey="TEMP_VAL"
+                            stroke="#EA5455"
+                            activeDot={{ r: 8 }}
+                          />
+                        </LineChart>
+                      </ResponsiveContainer>
+                    </div>
+                  }
+
+                  {this.props.bsdata.length===0?null:
+                    <div className="col-2 pl-0">
+                      <ResponsiveContainer>
+                        <LineChart
+                          className="col-2"
+                          width={500}
+                          height={300}
+                          data={this.props.bsdata}
+                        >
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis tick={{fontSize: 10}} dataKey="CREATE_TIME"/>
+                          <YAxis />
+                          <Tooltip />
+                          <Legend/>
+                          <Line
+                            name="혈당"
+                            type="monotone"
+                            dataKey="GLUCOSE_VAL"
+                            stroke="#EA5455"
+                            activeDot={{ r: 8 }}
+                          />
+                        </LineChart>
+                      </ResponsiveContainer>
+                    </div>
+                  }
+
+                  {this.props.wedata.length===0?null:
+                    <div className="col-2 pl-0">
+                      <ResponsiveContainer>
+                        <LineChart
+                          className="col-2"
+                          width={500}
+                          height={300}
+                          data={this.props.wedata}
+                        >
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis tick={{fontSize: 10}} dataKey="CREATE_TIME"/>
+                          <YAxis />
+                          <Tooltip />
+                          <Legend/>
+                          <Line
+                            name="몸무게"
+                            type="monotone"
+                            dataKey="WEIGHT_VAL"
+                            stroke="#EA5455"
+                            activeDot={{ r: 8 }}
+                          />
+                          <Line
+                            name="BMI"
+                            type="monotone"
+                            dataKey="BMI_VAL"
+                            stroke="#7367F0"
+                            activeDot={{ r: 8 }}
+                          />
+                        </LineChart>
+                      </ResponsiveContainer>
+                    </div>
+                  }
+
+                  {this.props.spo2data.length===0?null:
+                    <div className="col-2 pl-0">
+                      <ResponsiveContainer>
+                        <LineChart
+                          className="col-2"
+                          width={500}
+                          height={300}
+                          data={this.props.spo2data}
+                        >
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis tick={{fontSize: 10}} dataKey="CREATE_TIME"/>
+                          <YAxis />
+                          <Tooltip />
+                          <Legend/>
+                          <Line
+                            name="SPO2"
+                            type="monotone"
+                            dataKey="SPO2_VAL"
+                            stroke="#EA5455"
+                            activeDot={{ r: 8 }}
+                          />
+                        </LineChart>
+                      </ResponsiveContainer>
+                    </div>
+                  }
+                 
+
                 </div>
               
 
@@ -390,7 +417,14 @@ const mapStateToProps = state => {
     dataList: state.dataList,
     appo: state.dataList.appointment,
     pinfo: state.dataList.patient,
-    cslist: state.dataList.csdata
+    cslist: state.dataList.csdata,
+    bpdata: state.dataList.BP,
+    pulstdata: state.dataList.PULSE,
+    tempdata: state.dataList.TEMP,
+    bsdata : state.dataList.BS,
+    wedata : state.dataList.WE,
+    spo2data : state.dataList.SPO2
+
   }
 }
 
