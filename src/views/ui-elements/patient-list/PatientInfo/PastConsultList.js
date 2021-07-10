@@ -31,38 +31,9 @@ import previmg from "../../../../assets/img/portrait/small/Sample_User_Icon.png"
 
 
 
-class CunsultName extends React.Component { 
-  render() { 
-    return( 
-    <h5>
-      {this.props.row.PART_NAME}/{this.props.row.F_NAME}
-    </h5>
-    ); 
-  } 
-}
-
-class NoteCC extends React.Component { 
-  render() { 
-    return( 
-    <h5>
-      {this.props.row.NOTE_CC}
-    </h5>
-    ); 
-  } 
-}
-
-class AppointTime extends React.Component { 
-  render() { 
-    return( 
-    <h5>
-      {this.props.row.APPOINT_TIME.substring(0,10)}
-    </h5>
-    ); 
-  } 
-}
 
 
-class PatientInfo extends React.Component {
+class PastConsultList extends React.Component {
   state = {
     value: 20
   }
@@ -129,43 +100,6 @@ class PatientInfo extends React.Component {
                   <h5>{this.props.pinfo.GENDER==="1"||this.props.pinfo.GENDER==="3"?"M":"F"}</h5>
                   <h5>{this.props.pinfo.BIRTH_DT}</h5>
                   <h5>{this.props.pinfo.MOBILE_NUM}</h5>
-                </div>
-              </CardBody>
-            </Card>
-            <Card className="mb-1" style={{height:"350px", border:"solid silver 1px"}}>
-              <CardTitle className="pl-1" style={{paddingTop:"5px"}}>
-                <b>Past Consulting List</b>
-              </CardTitle>
-              <CardBody className="d-flex pl-0">
-                <div className="col-4 text-center">
-                  <h5><span className="text-bold-600">진료과/진료의</span></h5>
-
-                    {
-                      this.props.cslist.map(row =>
-                        (<CunsultName key={row.APPOINT_TIME} row={row}/>)
-                      )
-                    }
-
-                </div>
-                <div className="col-4 text-center">
-                  <h5><span className="text-bold-600">진단명</span></h5>
-
-                    {
-                      this.props.cslist.map(row =>
-                        (<NoteCC key={row.APPOINT_TIME} row={row}/>)
-                      )
-                    }
-
-                </div>
-                <div className="col-4 text-center">
-                  <h5><span className="text-bold-600">진료일자</span></h5>
-
-                    {
-                      this.props.cslist.map(row =>
-                        (<AppointTime key={row.APPOINT_TIME} row={row}/>)
-                      )
-                    }
-
                 </div>
               </CardBody>
             </Card>
@@ -428,4 +362,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps) (PatientInfo)
+export default connect(mapStateToProps) (PastConsultList)
