@@ -9,6 +9,8 @@ import {Form, FormGroup, Button,
   Col,
   Collapse
 } from "reactstrap"
+import ReactPaginate from "react-paginate"
+import "../../../../assets/scss/plugins/extensions/react-paginate.scss"
 import {
   LineChart,
   Line,
@@ -31,7 +33,8 @@ import appoints from "../../../../redux/reducers/appoint/appoints"
 import previmg from "../../../../assets/img/portrait/small/Sample_User_Icon.png"
 import {Menu} from "react-feather"
 import { starTask } from "../../../../redux/actions/todo"
-import { ChevronDown,ChevronUp } from "react-feather"
+import { ChevronDown,ChevronUp,ChevronLeft,
+  ChevronRight } from "react-feather"
 
 
 
@@ -43,7 +46,22 @@ class PastConsultList extends React.Component {
     this.toggle = this.toggle.bind(this);
     this.state = { 
       collapse: 0, 
-      cards: props.cousultlist };
+      cards: props.cousultlist,
+      user: this.props.user.login.values.loggedInUser.username,
+    name: "",
+    data: [],
+    totalPages: 0,
+    currentPage: 0,
+    allData: [],
+    value: "",
+    rowsPerPage: 5,
+    sidebar: false,
+    currentData: null,
+    selected: [],
+    totalRecords: 0,
+    sortIndex: [],
+    addNew: ""
+    };
   }
   state = {
     value: 20
@@ -53,8 +71,28 @@ class PastConsultList extends React.Component {
     let event = e.target.dataset.event;
     this.setState({ collapse: this.state.collapse === event ? 0 : event });
   }
+
+  handlePagination = page => {
+    let { parsedFilter, getData } = this.props
+    let perPage = parsedFilter.perPage !== undefined ? parsedFilter.perPage : 5
+
+    this.props.getData(this.state.user, perPage, page.selected + 1 )
+    this.setState({ currentPage: page.selected })
+  }
  
   render() {
+    let {
+      columns,
+      data,
+      allData,
+      totalPages,
+      value,
+      rowsPerPage,
+      currentData,
+      sidebar,
+      totalRecords,
+      sortIndex
+    } = this.state
     const {cards, collapse} = this.state;
     return (
       
@@ -147,7 +185,23 @@ class PastConsultList extends React.Component {
               </Collapse>
             </Card>
           )
-        })}     
+        })}
+
+        <ReactPaginate
+              previousLabel={<ChevronLeft size={15} />}
+              nextLabel={<ChevronRight size={15} />}
+              breakLabel="..."
+              breakClassName="break-me"
+              pageCount={totalPages}
+              containerClassName="vx-pagination separated-pagination pagination-end pagination-sm mb-0 mt-2"
+              activeClassName="active"
+              forcePage={
+                this.props.parsedFilter.page
+                  ? parseInt(this.props.parsedFilter.page - 1)
+                  : 0
+              }
+              onPageChange={page => this.handlePagination(page)}
+            />     
       </div>
     )
   }
