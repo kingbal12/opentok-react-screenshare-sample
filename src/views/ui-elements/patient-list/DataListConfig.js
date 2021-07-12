@@ -149,6 +149,7 @@ const CustomHeader = props => {
 class DataListConfig extends Component {
   constructor(props) {
     super(props);
+    
     this.props.getData(this.state.user,5,1)
     
 }
@@ -391,9 +392,9 @@ class DataListConfig extends Component {
 
   thumbView = this.props.thumbView
 
-  componentDidUpdate() {
+  componentDidMount() {
     // this.props.getData(this.props.parsedFilter)
-    this.props.getData(this.state.user,this.state.page_amount,this.state.page_num)
+    this.props.getData(this.state.user,this.state.currentPage,this.state.rowsPerPage)
     // this.props.getInitialData()
   }
 
@@ -503,7 +504,7 @@ class DataListConfig extends Component {
     let { parsedFilter, getData } = this.props
     let page = parsedFilter.page !== undefined ? parsedFilter.page : 1
     history.push(`/patients-list?page=${page}&perPage=${value}`)
-    this.setState({ rowsPerPage: value })
+    this.setState({currentPage: page, rowsPerPage: value })
     // getData({ page: parsedFilter.page, perPage: value })
     getData({ user_id: this.state.user, page_num: parsedFilter.page, page_amount: value })
   }
