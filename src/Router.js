@@ -9,6 +9,7 @@ import knowledgeBaseQuestion from "./views/pages/knowledge-base/Questions"
 import { ContextLayout } from "./utility/context/Layout"
 
 // Route-based code splitting
+
 const addEventButton = lazy(() =>
   import("./views/pages/authentication/register/Schedule/AddEventButton")
 )

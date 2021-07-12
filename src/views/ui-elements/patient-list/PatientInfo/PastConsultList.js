@@ -31,6 +31,7 @@ import appoints from "../../../../redux/reducers/appoint/appoints"
 import previmg from "../../../../assets/img/portrait/small/Sample_User_Icon.png"
 import {Menu} from "react-feather"
 import { starTask } from "../../../../redux/actions/todo"
+import { ChevronDown,ChevronUp } from "react-feather"
 
 
 
@@ -38,9 +39,11 @@ import { starTask } from "../../../../redux/actions/todo"
 
 class PastConsultList extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.toggle = this.toggle.bind(this);
-    this.state = { collapse: 0, cards: this.props.cousultlist };
+    this.state = { 
+      collapse: 0, 
+      cards: props.cousultlist };
   }
   state = {
     value: 20
@@ -79,16 +82,68 @@ class PastConsultList extends React.Component {
         </Card>
         {cards.map(index => {
           return (
-            <Card style={{ marginBottom: '0rem', }} key={index.APPOINT_TIME}>
-              <CardHeader onClick={this.toggle} data-event={index.APPOINT_TIME}>
-                <div className="d-flex col-12">
+            <Card className="p-0 m-0" style={{ marginBottom: '0rem', }} key={index.APPOINT_TIME}>
+              <div onClick={this.toggle} data-event={index.APPOINT_TIME}>
+                <div className="d-flex col-12"  onClick={this.toggle} data-event={index.APPOINT_TIME}>
                   <div className="col-2 align-self-center"><h5>{index.PART_NAME}/{index.F_NAME}</h5></div>
                   <div className="col-2 align-self-center"><h5>{index.NOTE_CC}</h5></div>
                   <div className="col-2 align-self-center"><h5>{index.APPOINT_TIME}</h5></div>
+                  <div className="col-2">
+                    {this.state.collapse===index.APPOINT_TIME?<ChevronUp/> : <ChevronDown/>}
+                  </div>
+                  
                 </div>
-              </CardHeader>
-              <Collapse onClick={this.toggle} isOpen={collapse === index.APPOINT_TIME}>
-              <CardBody>Example</CardBody>
+              </div>
+              <Collapse   style={{background:"#d3d3d3"}} isOpen={collapse === index.APPOINT_TIME}>
+              <CardBody className="m-0">
+                <Row className="m-0">
+                  <Col className="col-4 m-0">
+                    <Card className="m-0" style={{height:"23rem"}} >
+                      <CardHeader>MD Note</CardHeader>
+                      <CardBody>
+                        <div>C.C {index.NOTE_CC}</div>
+                        <div>Diagnosis {index.NOTE_DX}</div>
+                        <div>Tx Rx {index.NOTE_RX}</div>
+                        <div>Recommendation</div>
+                      </CardBody>
+                    </Card>
+                  </Col>
+                  <Col className="col-4 m-0">
+                    <Card style={{height:"10.5rem"}}>
+                      <CardHeader>Present Condition</CardHeader>
+                      <CardBody>
+                        {index.SYMPTOM}
+                      </CardBody>
+                    </Card>
+                    <Card style={{height:"10.5rem"}}>
+                      <CardHeader>Files</CardHeader>
+                      <CardBody>
+                      <div className="dz-thumb ">
+                        <div className="dz-thumb-inner">
+                          <img
+                            width="75px"
+                            height="75px" 
+                            src={"http://203.251.135.81:9300"+index.FILE_PATH
+                                +index.FILE_NAME} 
+                            className="dz-img" 
+                            alt="" 
+                            />
+                        </div>
+                      </div>
+                      </CardBody>
+                    </Card>
+                  </Col> 
+                  <Col className="col-4 m-0">
+                    <Card style={{height:"23rem"}}>
+                      <CardHeader>Prescriotion</CardHeader>
+                      <CardBody>
+                        {index.SYMPTOM}
+                      </CardBody>
+                    </Card>
+                  </Col>
+                </Row> 
+              </CardBody>
+                
               </Collapse>
             </Card>
           )

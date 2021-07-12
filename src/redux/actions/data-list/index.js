@@ -265,31 +265,15 @@ export const getPastConulstList = (patientid) => {
       
       if(response.data.status==="200") {
         console.log("과거진료리스트: ",response)
-        history.push("/past-consult-list" )
-
-        // let pulselength = response.data.data.PRESSURE_LIST.length
-        // let bp = response.data.data.PRESSURE_LIST
-        // let pulse = new Array()
-        // for (let i=0; i<pulselength; i++) {
-        //   let jsonObj		= new Object();         
-        //   jsonObj.CREATE_TIME	= response.data.data.PRESSURE_LIST[i].CREATE_TIME
-        //   jsonObj.PULSE_VAL	= response.data.data.PRESSURE_LIST[i].PULSE_VAL
-
-        //   jsonObj = JSON.stringify(jsonObj);
-        //   //String 형태로 파싱한 객체를 다시 json으로 변환
-        //   pulse.push(JSON.parse(jsonObj));
-        // }
-
-        // let temp = response.data.data.TEMP_LIST
-        // let bs = response.data.data.GLUCOSE_LIST
-        // let we = response.data.data.WEIGHT_LIST
-        // let spo2 = response.data.data.SPO2_LIST
+        
 
         dispatch({
           type: "GET_PAST_CONSULT_LIST",
           data: response.data.data.COUSULT_LIST,
           totalpage: totalPage
         })
+
+        history.push("/past-consult-list" )
       }
     })
     .catch(err => console.log(err))

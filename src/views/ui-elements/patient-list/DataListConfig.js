@@ -147,7 +147,13 @@ const CustomHeader = props => {
 }
 
 class DataListConfig extends Component {
+  constructor(props) {
+    super(props);
+    this.props.getData(this.state.user,5,1)
+    
+}
   static getDerivedStateFromProps(props, state) {
+    
     if (
       props.dataList.data.length !== state.data.length ||
       state.currentPage !== props.parsedFilter.page
@@ -385,9 +391,9 @@ class DataListConfig extends Component {
 
   thumbView = this.props.thumbView
 
-  componentDidMount() {
+  componentDidUpdate() {
     // this.props.getData(this.props.parsedFilter)
-    this.props.getData(this.state.user,5,1)
+    this.props.getData(this.state.user,this.state.page_amount,this.state.page_num)
     // this.props.getInitialData()
   }
 
