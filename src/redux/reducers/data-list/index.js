@@ -14,7 +14,9 @@ const initialState = {
   TEMP:[],
   BS:[],
   WE:[],
-  SPO2:[]
+  SPO2:[],
+  pastconsulttotal:0,
+  pastconsultlist:[]
 }
 
 const determinePopularity = val => {
@@ -191,6 +193,12 @@ const DataListReducer = (state = initialState, action) => {
           state.sortIndex,
           state.params
         )
+      }
+    case "GET_PAST_CONSULT_LIST":
+      return {
+        ...state,
+        pastconsultlist: action.data,
+        pastconsulttotal: action.totalpage
       }
     default:
       return state

@@ -18,6 +18,9 @@ import {
   Legend,
   ResponsiveContainer
 } from "recharts"
+import {
+  getPastConulstList
+} from "../../../../redux/actions/data-list/"
 import { Check } from "react-feather"
 import { history } from "../../../../history"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
@@ -28,6 +31,7 @@ import { ContextLayout } from "../../../../utility/context/Layout"
 import { Fragment } from "react"
 import appoints from "../../../../redux/reducers/appoint/appoints"
 import previmg from "../../../../assets/img/portrait/small/Sample_User_Icon.png"
+import { Menu } from "react-feather"
 
 
 
@@ -77,6 +81,10 @@ class PatientInfo extends React.Component {
 
   resetSlider = () => {
     this.setState({ value: null })
+  }
+
+  goPastConsultList(pid) {
+    this.props.getPastConulstList(pid)
   }
  
   render() {
@@ -133,8 +141,8 @@ class PatientInfo extends React.Component {
               </CardBody>
             </Card>
             <Card className="mb-1" style={{height:"350px", border:"solid silver 1px"}}>
-              <CardTitle className="pl-1" style={{paddingTop:"5px"}}>
-                <b>Past Consulting List</b>
+              <CardTitle className="px-1 d-flex justify-content-between" style={{paddingTop:"5px"}}>
+                <b>Past Consulting List</b><Menu onClick={() => this.goPastConsultList(this.props.pinfo.PATIENT_ID)} style={{cursor:"pointer"}}/>
               </CardTitle>
               <CardBody className="d-flex pl-0">
                 <div className="col-4 text-center">
@@ -224,8 +232,8 @@ class PatientInfo extends React.Component {
             </div>
             
             <Card className="mb-1" style={{height:"350px", border:"solid silver 1px"}}>
-              <CardTitle className="pl-1" style={{paddingTop:"5px"}}>
-                <b>Vital Data</b>
+              <CardTitle className="px-1 d-flex justify-content-between" style={{paddingTop:"5px"}}>
+                <b>Vital Data</b> <Menu style={{cursor:"pointer"}}/>
               </CardTitle>
               <CardBody className="d-flex pl-0">
                 <div className="d-flex col-12 pl-0">
@@ -428,4 +436,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps) (PatientInfo)
+export default connect(mapStateToProps, {getPastConulstList}) (PatientInfo)
