@@ -114,6 +114,7 @@ const thumbView = lazy(() => import("./views/ui-elements/data-list/ThumbView"))
 const patientlsit = lazy(() => import("./views/ui-elements/patient-list/PatientListView"))
 const patientInfo = lazy(() => import("./views/ui-elements/patient-list/PatientInfo/PatientInfo"))
 const pastconsultlist = lazy(() => import("./views/ui-elements/patient-list/PatientInfo/PastConsultList"))
+const vitaldata = lazy(() => import("./views/ui-elements/patient-list/PatientInfo/VitalData"))
 const select = lazy(() => import("./views/forms/form-elements/select/Select"))
 const switchComponent = lazy(() =>
   import("./views/forms/form-elements/switch/Switch")
@@ -317,6 +318,7 @@ class AppRouter extends React.Component {
           <AppRoute path="/patients-list" component = {patientlsit} />
           <AppRoute path="/patientinfo" component = {patientInfo} />
           <AppRoute path="/past-consult-list" component = {pastconsultlist} />
+          <AppRoute path="/vitaldata" component = {vitaldata} />
           <AppRoute path="/ui-element/grid" component={grid} />
           <AppRoute path="/ui-element/typography" component={typography} />
           <AppRoute

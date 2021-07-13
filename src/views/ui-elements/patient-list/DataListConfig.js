@@ -543,7 +543,7 @@ class DataListConfig extends Component {
     let perPage = parsedFilter.perPage !== undefined ? parsedFilter.perPage : 5
     let urlPrefix = this.props.thumbView
       ? "/data-list/thumb-view/"
-      : "/patients-list/"
+      : "/patients-list"
     history.push(
       `${urlPrefix}?page=${page.selected + 1}&perPage=${perPage}`
     )

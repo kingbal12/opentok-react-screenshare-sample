@@ -7,6 +7,40 @@ import { loginWithJWT} from "../../../../redux/actions/auth/loginActions"
 import { connect } from "react-redux"
 import { history } from "../../../../history"
 import { useCookies } from 'react-cookie'
+import firebase from 'firebase'; 
+
+const config =  { 
+  apiKey: "AIzaSyAMiyzuGLBHAk4K18Q4Bla4ljA4cfUf-oM"
+	, authDomain: "i4h-hicare.firebaseapp.com"
+	, databaseURL: "https://i4h-hicare.firebaseapp.com"
+	, projectId: "i4h-hicare"
+	, storageBucket: "i4h-hicare.appspot.com"
+	, messagingSenderId: "575076484827"
+	, appId: "1:575076484827:web:b15851500503c4c2432efe" 
+	, measurementId: "G-5H09HRTQQT"  
+}; 
+// firebase.initializeApp(config);  
+// const messaging = firebase.messaging();
+
+// messaging.usePublicVapidKey("BL0eTL3wIbAxmATwORsjQ-pNPCQBYrFNofCAr1xnArzbBjkRDreJLmiXYd-ySpazU-GTEAhtThWIhCLxYLvTGvY");
+
+// //허가를 요청합니다!
+// Notification.requestPermission()
+// .then(function() {
+// 	console.log('허가!');
+//   return messaging.getToken();
+// })
+
+// .then(function(token) {
+// 	console.log(token); //토큰을 출력!
+  
+// })
+// .then(function(token) {
+//   tokendata = token
+// })
+// .catch(function(err) {
+// 	console.log('fcm에러 : ', err);
+// })
 
 // const [email, setEmail] = useState("");
 // const [isRemember, setIsRemember] = useState(false);
@@ -29,12 +63,52 @@ import { useCookies } from 'react-cookie'
 // }
 
 class LoginJWT extends React.Component {
-  
-  state = {
-    email: "",
-    password: "",
-    remember: false
+  constructor(props){
+    super(props)
+    this.state = {
+      email: "",
+      password: "",
+      tokendata: "",
+      devicekind: "W",
+      remember: false
+    }
   }
+  // config = { 
+  //   apiKey: "AIzaSyAMiyzuGLBHAk4K18Q4Bla4ljA4cfUf-oM"
+  //   , authDomain: "i4h-hicare.firebaseapp.com"
+  //   , databaseURL: "https://i4h-hicare.firebaseapp.com"
+  //   , projectId: "i4h-hicare"
+  //   , storageBucket: "i4h-hicare.appspot.com"
+  //   , messagingSenderId: "575076484827"
+  //   , appId: "1:575076484827:web:b15851500503c4c2432efe" 
+  //   , measurementId: "G-5H09HRTQQT"  
+  // }
+
+  componentDidMount() {
+    firebase.initializeApp(config);  
+    const messaging = firebase.messaging();
+
+    messaging.usePublicVapidKey("BL0eTL3wIbAxmATwORsjQ-pNPCQBYrFNofCAr1xnArzbBjkRDreJLmiXYd-ySpazU-GTEAhtThWIhCLxYLvTGvY");
+
+    //허가를 요청합니다!
+    Notification.requestPermission()
+    .then(function() {
+      console.log('허가!');
+      return messaging.getToken();
+    })
+
+    .then(token => {
+      console.log(token); //토큰을 출력!
+      this.setState({tokendata:token})
+    })
+
+    .catch(function(err) {
+      console.log('fcm에러 : ', err);
+    })
+
+  }
+  
+  
   
 
   handleLogin = e => {

@@ -91,6 +91,16 @@ const DataListReducer = (state = initialState, action) => {
         WE: action.WE,
         SPO2: action.SPO2
       }
+      case "GET_VITAL_DATA_ALL":
+        return {
+          ...state,
+          BP: action.BP,
+          PULSE: action.PULSE,
+          TEMP: action.TEMP,
+          BS: action.BS,
+          WE: action.WE,
+          SPO2: action.SPO2
+        }
     case "GET_ALL_DATA":
       return {
         ...state,

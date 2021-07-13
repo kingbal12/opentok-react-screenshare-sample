@@ -20,7 +20,7 @@ import {
 } from "recharts"
 import {
   getPastConulstList
-} from "../../../../redux/actions/data-list/"
+} from "../../../../redux/actions/data-list"
 import { Check } from "react-feather"
 import { history } from "../../../../history"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
@@ -85,11 +85,6 @@ class PatientInfo extends React.Component {
 
   goPastConsultList(pid) {
     this.props.getPastConulstList(pid)
-  }
-
-  goVitalData = e => {
-    e.preventDefault()
-    history.push("/vitaldata")
   }
  
   render() {
@@ -238,7 +233,7 @@ class PatientInfo extends React.Component {
             
             <Card className="mb-1" style={{height:"350px", border:"solid silver 1px"}}>
               <CardTitle className="px-1 d-flex justify-content-between" style={{paddingTop:"5px"}}>
-                <b>Vital Data</b> <Menu onClick={this.goVitalData} style={{cursor:"pointer"}}/>
+                <b>Vital Data</b> <Menu style={{cursor:"pointer"}}/>
               </CardTitle>
               <CardBody className="d-flex pl-0">
                 <div className="d-flex col-12 pl-0">
@@ -410,7 +405,11 @@ class PatientInfo extends React.Component {
                       </ResponsiveContainer>
                     </div>
                   }
+                 
+
                 </div>
+              
+
               </CardBody>
             </Card>
           </Col>

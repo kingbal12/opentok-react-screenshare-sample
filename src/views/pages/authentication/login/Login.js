@@ -10,9 +10,10 @@ import {
 } from "reactstrap"
 import "../../../../assets/scss/pages/authentication.scss"
 import LoginAuth0 from "./LoginAuth0"
-import LoginFirebase from "./LoginFirebase"
 import LoginJWT from "./LoginJWT"
 import HicareLogo from "../../../../assets/img/logo/user_register_logo.png"
+
+
 
 class Login extends React.Component {
   state = {
@@ -51,7 +52,6 @@ class Login extends React.Component {
                       <LoginJWT />
                     </TabPane>
                     <TabPane tabId="2">
-                      <LoginFirebase />
                     </TabPane>
                     <TabPane tabId="3">
                       <LoginAuth0 />
