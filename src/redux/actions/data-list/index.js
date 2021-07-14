@@ -148,6 +148,9 @@ export const getPatientInfo = (userid,patientid) => {
   }
 }
 
+
+
+
 export const getVitalData = (patientid) => {
   return async dispatch => {
     await axios
@@ -195,20 +198,35 @@ export const getVitalData = (patientid) => {
   }
 }
 
-export const getVitalDataAll = (patientid, startdate, enddate) => {
+export const resetVitalData = () => {
+  return dispatch => {
+    dispatch({
+      type: "RESET_VITAL_DATA",
+      BP: [],
+      PULSE: [],
+      TEMP: [],
+      BS: [],
+      WE: [],
+      SPO2: [],
+    })
+  }
+}
+
+
+export const getVitalDataAll = (patientid, startdate) => {
   return async dispatch => {
     await axios
       .get("http://203.251.135.81:9300/v1/doctor/patient/patient-vital", {
         params: {
           patient_id: patientid,
           start_date: startdate,
-          end_date: enddate
+          end_date: moment().format("YYYYMMDD")
         }
   })
     .then(response => {
       
       if(response.data.status==="200") {
-
+        console.log("단위데이터",response.data.data)
         let pulselength = response.data.data.PRESSURE_LIST.length
         let bp = response.data.data.PRESSURE_LIST
         let pulse = new Array()
@@ -228,7 +246,7 @@ export const getVitalDataAll = (patientid, startdate, enddate) => {
         let spo2 = response.data.data.SPO2_LIST
 
         dispatch({
-          type: "GET_VITAL_DATA_All",
+          type: "GET_VITAL_DATA_ALL",
           BP: bp,
           PULSE: pulse,
           TEMP: temp,
@@ -242,6 +260,54 @@ export const getVitalDataAll = (patientid, startdate, enddate) => {
   }
 }
 
+
+export const serachVitalData = (patientid, startdate, enddate) => {
+  return async dispatch => {
+    await axios
+      .get("http://203.251.135.81:9300/v1/doctor/patient/patient-vital", {
+        params: {
+          patient_id: patientid,
+          start_date: moment(startdate[0]).format("YYYYMMDD"),
+          end_date: moment(enddate[0]).format("YYYYMMDD")
+        }
+  })
+
+    .then(response => {
+      
+      if(response.data.status==="200") {
+        console.log("단위데이터",response)
+        let pulselength = response.data.data.PRESSURE_LIST.length
+        let bp = response.data.data.PRESSURE_LIST
+        let pulse = new Array()
+        for (let i=0; i<pulselength; i++) {
+          let jsonObj		= new Object();         
+          jsonObj.CREATE_TIME	= response.data.data.PRESSURE_LIST[i].CREATE_TIME
+          jsonObj.PULSE_VAL	= response.data.data.PRESSURE_LIST[i].PULSE_VAL
+
+          jsonObj = JSON.stringify(jsonObj);
+          //String 형태로 파싱한 객체를 다시 json으로 변환
+          pulse.push(JSON.parse(jsonObj));
+        }
+
+        let temp = response.data.data.TEMP_LIST
+        let bs = response.data.data.GLUCOSE_LIST
+        let we = response.data.data.WEIGHT_LIST
+        let spo2 = response.data.data.SPO2_LIST
+
+        dispatch({
+          type: "SEARCH_VITAL_DATA",
+          BP: bp,
+          PULSE: pulse,
+          TEMP: temp,
+          BS: bs,
+          WE: we,
+          SPO2: spo2
+        })
+      }
+    })
+    .catch(err => console.log(err))
+  }
+}
 
 export const getInitialData = () => {
   return async dispatch => {

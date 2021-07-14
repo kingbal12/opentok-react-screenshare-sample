@@ -6,414 +6,110 @@ import {Form, FormGroup, Button,
   CardTitle,
   CardBody,
   Row,
-  Col
+  Col,
+  ButtonGroup,
+  TabContent,
+  TabPane,
+  Table
 } from "reactstrap"
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer
-} from "recharts"
-import {
-  getPastConulstList
-} from "../../../../redux/actions/data-list"
-import { Check } from "react-feather"
+import {getPastConulstList} from "../../../../redux/actions/data-list"
 import { history } from "../../../../history"
-import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import "../../../../assets/scss/pages/authentication.scss"
 import {connect} from "react-redux"
-import userImg from "../../../../assets/img/portrait/small/avatar-s-11.jpg"
-import { ContextLayout } from "../../../../utility/context/Layout"
 import { Fragment } from "react"
-import appoints from "../../../../redux/reducers/appoint/appoints"
-import previmg from "../../../../assets/img/portrait/small/Sample_User_Icon.png"
-import { Menu } from "react-feather"
+import classnames from "classnames"
+import BPSetting from "./BPSetting"
 
 
 
-class CunsultName extends React.Component { 
-  render() { 
-    return( 
-    <h5>
-      {this.props.row.PART_NAME}/{this.props.row.F_NAME}
-    </h5>
-    ); 
-  } 
-}
-
-class NoteCC extends React.Component { 
-  render() { 
-    return( 
-    <h5>
-      {this.props.row.NOTE_CC}
-    </h5>
-    ); 
-  } 
-}
-
-class AppointTime extends React.Component { 
-  render() { 
-    return( 
-    <h5>
-      {this.props.row.APPOINT_TIME.substring(0,10)}
-    </h5>
-    ); 
-  } 
-}
-
-
-class PatientInfo extends React.Component {
-  state = {
-    value: 20
+class VitalDataSetting extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state={
+      activeTab: "1",
+      bpbutton: false,
+      pulsebutton: false,
+      webutton: false,
+      glbutton: false,
+      tempbutton: false,
+      spo2button: false,
+      periodname: "",
+      startdate: "",
+      enddate: "",
+      startpicker : new Date(),
+      endpicker : new Date()   
+    }
   }
+
+  toggle = tab => {
+    if (this.state.activeTab !== tab) {
+      this.setState({
+        activeTab: tab
+      })
+    }
+  }
+
   componentDidMount() {
     console.log(this.props.user)
     console.log(this.props.dataList)
   }
-
-  onSliderChange = value => {
-    this.setState({ value })
-  }
-
-  resetSlider = () => {
-    this.setState({ value: null })
-  }
-
-  goPastConsultList(pid) {
-    this.props.getPastConulstList(pid)
-  }
  
   render() {
-    let profile_preview = null;
-
-    profile_preview = 
-      <div className="dz-thumb ">
-        <div className="dz-thumb-inner">  
-          <img
-            width="100px"
-            height="100px" 
-            src={previmg}
-            className="dz-img"
-            style={{borderRadius:"100%"}} 
-            alt="" 
-            />
-        </div>
-      </div>
-
     return (
       <Fragment>
         {/* 환자정보, 버튼 모음 Row */}
         {this.props.appo===null?null:
           <Row>
             <Col className="col-12">
-              <Card style={{backgroundColor: "#efefff", height:"60px"}}>
-                {this.props.appo.APPOINT_TIME}
-                {this.props.pinfo.F_NAME}
-                {this.props.pinfo.GENDER==="1"||this.props.pinfo.GENDER==="3"?"M":"F"}
-                {this.props.pinfo.BIRTH_DT}
-              </Card>
+              <Table responsive>
+                <thead>
+                  <tr className="table-primary">
+                    <th>{this.props.appo.APPOINT_TIME}</th>
+                    <th>{this.props.pinfo.F_NAME}</th>
+                    <th>{this.props.pinfo.GENDER==="1"||this.props.pinfo.GENDER==="3"?"M":"F"}</th>
+                    <th>27</th>
+                    <th>{this.props.pinfo.BIRTH_DT}</th>
+                    <th>DM</th>
+                    <th>재진</th>
+                    <th>재진</th>
+                    <th>재진</th>
+                  </tr>
+                </thead>
+              </Table>
+
             </Col>   
           </Row>
         }
-        <Row className="mt-0">
-          <Col className="col-4"> 
-            <Card className="mb-1" style={{height:"350px", border:"solid silver 1px"}}>
-              <CardTitle className="pl-1" style={{paddingTop:"5px"}}>
-                <b>Personal Information</b>
-              </CardTitle>
-              <CardBody className="d-flex pl-0">
-                <div className="col-4">
-                  <h5><span className="text-bold-600">이름</span></h5>
-                  <h5><span className="text-bold-600">성별</span></h5>
-                  <h5><span className="text-bold-600">생년월일</span></h5>
-                  <h5><span className="text-bold-600">연락처</span></h5>
-                </div>
-                <div className="col-8">
-                  <h5>{this.props.pinfo.F_NAME}</h5>
-                  <h5>{this.props.pinfo.GENDER==="1"||this.props.pinfo.GENDER==="3"?"M":"F"}</h5>
-                  <h5>{this.props.pinfo.BIRTH_DT}</h5>
-                  <h5>{this.props.pinfo.MOBILE_NUM}</h5>
-                </div>
-              </CardBody>
-            </Card>
-            <Card className="mb-1" style={{height:"350px", border:"solid silver 1px"}}>
-              <CardTitle className="px-1 d-flex justify-content-between" style={{paddingTop:"5px"}}>
-                <b>Past Consulting List</b><Menu onClick={() => this.goPastConsultList(this.props.pinfo.PATIENT_ID)} style={{cursor:"pointer"}}/>
-              </CardTitle>
-              <CardBody className="d-flex pl-0">
-                <div className="col-4 text-center">
-                  <h5><span className="text-bold-600">진료과/진료의</span></h5>
-
-                    {
-                      this.props.cslist.map(row =>
-                        (<CunsultName key={row.APPOINT_TIME} row={row}/>)
-                      )
-                    }
-
-                </div>
-                <div className="col-4 text-center">
-                  <h5><span className="text-bold-600">진단명</span></h5>
-
-                    {
-                      this.props.cslist.map(row =>
-                        (<NoteCC key={row.APPOINT_TIME} row={row}/>)
-                      )
-                    }
-
-                </div>
-                <div className="col-4 text-center">
-                  <h5><span className="text-bold-600">진료일자</span></h5>
-
-                    {
-                      this.props.cslist.map(row =>
-                        (<AppointTime key={row.APPOINT_TIME} row={row}/>)
-                      )
-                    }
-
-                </div>
-              </CardBody>
-            </Card>
-          </Col>
-          <Col className="col-8">
-            <div className="d-flex justify-content-between">
-              <div className="mr-1" style={{width:"50%"}}>
-                <Card className="mb-1"  style={{height:"350px", border:"solid silver 1px"}}>
-                  <CardTitle className="pl-1" style={{paddingTop:"5px"}}>
-                    <b>Physical Data</b>
-                  </CardTitle>
-                  <CardBody className="d-flex pl-0">
-                    <div className="col-4">
-                      <h5><span className="text-bold-600">신장/체중</span></h5>
-                      <h5><span className="text-bold-600">흡연여부</span></h5>
-                      <h5><span className="text-bold-600">음주여부</span></h5>
-                      <h5><span className="text-bold-600">본인병력</span></h5>
-                      <h5><span className="text-bold-600">가족병력</span></h5>
-                      <h5><span className="text-bold-600">복용중인 약</span></h5>
-                      <h5><span className="text-bold-600">알러지 유무</span></h5>
-                    </div>
-                    <div className="col-8">
-                      <h5>{this.props.pinfo.HEIGHT_VAL}cm&nbsp;/&nbsp;{this.props.pinfo.WEIGHT_VAL}kg</h5>
-                      <h5>{this.props.pinfo.SMOKE_YN==="Y"?"흡연":"비흡연"}</h5>
-                      <h5>{this.props.pinfo.DRINK_YN==="Y"?"음주":"금주"}</h5>
-                      <h5>{this.props.pinfo.DISEASE_DESC}</h5>
-                      <h5>{this.props.pinfo.FAMILY_DESC}</h5>
-                      <h5>{this.props.pinfo.USE_MED}</h5>
-                      <h5>{this.props.pinfo.ALLERGY_YN==="Y"?"있음":"없음"}&nbsp;{this.props.pinfo.ALLERGY_DESC}</h5>
-                    </div>
-                  </CardBody>
-                </Card>
-              </div>
-
-              <div style={{width:"50%"}}>
-                <Card className="mb-1" style={{height:"169px", border:"solid silver 1px"}}>
-                  <CardTitle className="pl-1" style={{paddingTop:"5px"}}>
-                    <b>Present Condition</b>
-                  </CardTitle>
-                  <CardBody className="d-flex pl-0">
-                    <div className="col-12">
-                      <h5>{this.props.appo===null?"":this.props.appo.SYMPTOM}</h5>
-                    </div>
-                  </CardBody>
-
-                </Card>
-                <Card className="mb-1" style={{height:"169px", border:"solid silver 1px"}}>
-                  <CardTitle className="pl-1" style={{paddingTop:"5px"}}>
-                    <b>Files</b>
-                  </CardTitle>
-                  <CardBody>
-                    {profile_preview}
-                  </CardBody>
-                </Card>
-              </div>
-            </div>
-            
-            <Card className="mb-1" style={{height:"350px", border:"solid silver 1px"}}>
-              <CardTitle className="px-1 d-flex justify-content-between" style={{paddingTop:"5px"}}>
-                <b>Vital Data</b> <Menu style={{cursor:"pointer"}}/>
-              </CardTitle>
-              <CardBody className="d-flex pl-0">
-                <div className="d-flex col-12 pl-0">
-                  {this.props.bpdata.length===0?null:
-                    <div className="col-2 pl-0">
-                      <ResponsiveContainer>
-                        <LineChart
-                          className="col-2"
-                          width={500}
-                          height={300}
-                          data={this.props.bpdata}
-                        >
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis tick={{fontSize: 10}} dataKey="CREATE_TIME" />
-                          <YAxis />
-                          <Tooltip />
-                          <Legend />
-                          <Line
-                            name="수축기"
-                            type="monotone"
-                            dataKey="SYS_VAL"
-                            stroke="#EA5455"
-                          />
-                          <Line
-                            name="이완기"
-                            type="monotone"
-                            dataKey="DIA_VAL"
-                            stroke="#7367F0"
-                            activeDot={{ r: 8 }}
-                          /> 
-                        </LineChart>
-                      </ResponsiveContainer>
-                    </div>
-                  }
-
-                  {this.props.pulstdata.length===0?null:
-                    <div className="col-2 pl-0">
-                      <ResponsiveContainer>
-                        <LineChart
-                          className="col-2"
-                          width={500}
-                          height={300}
-                          data={this.props.pulstdata}
-                        >
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis tick={{fontSize: 10}} dataKey="CREATE_TIME"/>
-                          <YAxis />
-                          <Tooltip />
-                          <Legend/>
-                          <Line
-                            name="맥박"
-                            type="monotone"
-                            dataKey="PULSE_VAL"
-                            stroke="#EA5455"
-                            activeDot={{ r: 8 }}
-                          />
-                        </LineChart>
-                      </ResponsiveContainer>
-                    </div>
-                  }
-
-                  {this.props.tempdata.length===0?null:
-                    <div className="col-2 pl-0">
-                      <ResponsiveContainer>
-                        <LineChart
-                          className="col-2"
-                          width={500}
-                          height={300}
-                          data={this.props.tempdata}
-                        >
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis tick={{fontSize: 10}} dataKey="CREATE_TIME"/>
-                          <YAxis />
-                          <Tooltip />
-                          <Legend/>
-                          <Line
-                            name="체온"
-                            type="monotone"
-                            dataKey="TEMP_VAL"
-                            stroke="#EA5455"
-                            activeDot={{ r: 8 }}
-                          />
-                        </LineChart>
-                      </ResponsiveContainer>
-                    </div>
-                  }
-
-                  {this.props.bsdata.length===0?null:
-                    <div className="col-2 pl-0">
-                      <ResponsiveContainer>
-                        <LineChart
-                          className="col-2"
-                          width={500}
-                          height={300}
-                          data={this.props.bsdata}
-                        >
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis tick={{fontSize: 10}} dataKey="CREATE_TIME"/>
-                          <YAxis />
-                          <Tooltip />
-                          <Legend/>
-                          <Line
-                            name="혈당"
-                            type="monotone"
-                            dataKey="GLUCOSE_VAL"
-                            stroke="#EA5455"
-                            activeDot={{ r: 8 }}
-                          />
-                        </LineChart>
-                      </ResponsiveContainer>
-                    </div>
-                  }
-
-                  {this.props.wedata.length===0?null:
-                    <div className="col-2 pl-0">
-                      <ResponsiveContainer>
-                        <LineChart
-                          className="col-2"
-                          width={500}
-                          height={300}
-                          data={this.props.wedata}
-                        >
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis tick={{fontSize: 10}} dataKey="CREATE_TIME"/>
-                          <YAxis />
-                          <Tooltip />
-                          <Legend/>
-                          <Line
-                            name="몸무게"
-                            type="monotone"
-                            dataKey="WEIGHT_VAL"
-                            stroke="#EA5455"
-                            activeDot={{ r: 8 }}
-                          />
-                          <Line
-                            name="BMI"
-                            type="monotone"
-                            dataKey="BMI_VAL"
-                            stroke="#7367F0"
-                            activeDot={{ r: 8 }}
-                          />
-                        </LineChart>
-                      </ResponsiveContainer>
-                    </div>
-                  }
-
-                  {this.props.spo2data.length===0?null:
-                    <div className="col-2 pl-0">
-                      <ResponsiveContainer>
-                        <LineChart
-                          className="col-2"
-                          width={500}
-                          height={300}
-                          data={this.props.spo2data}
-                        >
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis tick={{fontSize: 10}} dataKey="CREATE_TIME"/>
-                          <YAxis />
-                          <Tooltip />
-                          <Legend/>
-                          <Line
-                            name="SPO2"
-                            type="monotone"
-                            dataKey="SPO2_VAL"
-                            stroke="#EA5455"
-                            activeDot={{ r: 8 }}
-                          />
-                        </LineChart>
-                      </ResponsiveContainer>
-                    </div>
-                  }
-                 
-
-                </div>
-              
-
-              </CardBody>
-            </Card>
+        <Row className="mt-2 flex-wrap">
+          <Col className="col-6 d-flex">
+            <h4 className="text-bold-600 align-self-center">선택항목</h4>
+            <ButtonGroup className="ml-1">
+              <Button.Ripple 
+                outline={this.state.bpbutton===true?false:true} 
+                color="primary" 
+                className={classnames({
+                          active: this.state.activeTab === "1"
+                        })}
+                        onClick={() => {
+                          this.toggle("1")
+                        }}
+              >
+                혈압
+              </Button.Ripple>
+              <Button.Ripple outline={this.state.pulsebutton===true?false:true} color="primary" onClick={this.handlepulse}>맥박</Button.Ripple>{" "}
+              <Button.Ripple outline={this.state.webutton===true?false:true} color="primary" onClick={this.handlewe}>체중</Button.Ripple>{" "}
+              <Button.Ripple outline={this.state.glbutton===true?false:true} color="primary" onClick={this.handlegl}>혈당</Button.Ripple>{" "}
+              <Button.Ripple outline={this.state.tempbutton===true?false:true} color="primary" onClick={this.handletemp}>체온</Button.Ripple>{" "}
+              <Button.Ripple outline={this.state.spo2button===true?false:true} color="primary" onClick={this.handlespo2}>산소포화도</Button.Ripple>{" "}
+              {/* <Button.Ripple color="primary" onClick={this.check}>산소포화도</Button.Ripple>{" "} */}
+            </ButtonGroup>
           </Col>
         </Row>
+        <TabContent className="mt-5" activeTab={this.state.activeTab}>
+          <TabPane tabId="1">
+            <BPSetting />
+          </TabPane>
+        </TabContent>
       </Fragment>
     )
   }
@@ -436,4 +132,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {getPastConulstList}) (PatientInfo)
+export default connect(mapStateToProps, {getPastConulstList}) (VitalDataSetting)

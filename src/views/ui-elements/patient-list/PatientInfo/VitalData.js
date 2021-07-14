@@ -7,7 +7,8 @@ import {Form, FormGroup, Button,
   CardBody,
   Row,
   Col,
-  ButtonGroup
+  ButtonGroup,
+  Table
 } from "reactstrap"
 import {
   LineChart,
@@ -22,7 +23,7 @@ import {
 // import {
 //   getPastConulstList
 // } from "../../../../redux/actions/data-list"
-import { Check } from "react-feather"
+import { Search, Settings } from "react-feather"
 import { history } from "../../../../history"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import "../../../../assets/scss/pages/authentication.scss"
@@ -33,8 +34,16 @@ import { Fragment } from "react"
 import previmg from "../../../../assets/img/portrait/small/Sample_User_Icon.png"
 import moment from "moment"
 import {
-  getVitalDataAll
+  getVitalDataAll,
+  resetVitalData,
+  serachVitalData
 } from "../../../../redux/actions/data-list/"
+import Flatpickr from "react-flatpickr"
+import "flatpickr/dist/themes/light.css";
+import "../../../../assets/scss/plugins/forms/flatpickr/flatpickr.scss"
+import { formatHTMLMessage } from "intl-messageformat"
+import "../../../../assets/scss/plugins/extensions/recharts.scss"
+
 class VitalData extends React.Component {
   constructor(props) {
     super(props);
@@ -47,9 +56,12 @@ class VitalData extends React.Component {
       spo2button: false,
       periodname: "",
       startdate: "",
-      enddate: ""
+      enddate: "",
+      startpicker : new Date(),
+      endpicker : new Date()   
     }
   }
+
 
   componentDidMount() {
     console.log(this.props.user)
@@ -91,25 +103,60 @@ class VitalData extends React.Component {
       spo2button: !prevState.spo2button
     }))
   }
+
+  handleStartPicker = () => {
+    this.setState(prevState =>({
+      startpickerbtn: !prevState.startpickerbtn
+    }))
+  }
+
+  handleEndPicker = () => {
+    this.setState(prevState =>({
+      endpickerbtn: !prevState.endpickerbtn
+    }))
+  }
   
 
   handlePeriod = periodname => {
-    this.setState({periodname}, () => {
+    this.setState({periodname, startpicker: new Date(), endpicker: new Date()}, () => {
       if(this.state.periodname==="today") {
-        this.setState({startdate: moment().format("YYYYMMDD")},()=>{this.props.getVitalDataAll()})--여기서부터 시작
+        this.setState({startdate: moment().format("YYYYMMDD")},()=>{this.props.getVitalDataAll(this.props.pinfo.PATIENT_ID,this.state.startdate)})
       } else if(this.state.periodname==="week") {
-        this.setState({startdate: moment().add(-6,'days').format("YYYYMMDD")})
+        this.setState({startdate: moment().add(-6,'days').format("YYYYMMDD")},()=>{this.props.getVitalDataAll(this.props.pinfo.PATIENT_ID,this.state.startdate)})
       } else if(this.state.periodname==="month") {
-        this.setState({startdate: moment().add(-29,'days').format("YYYYMMDD")})
-      } else if(this.state.periodname==="year") {
-        this.setState({startdate: moment().add(-364,'days').format("YYYYMMDD")})
+        this.setState({startdate: moment().add(-29,'days').format("YYYYMMDD")},()=>{this.props.getVitalDataAll(this.props.pinfo.PATIENT_ID,this.state.startdate)})
+      } else if(this.state.periodname==="months") {
+        this.setState({startdate: moment().add(-89,'days').format("YYYYMMDD")},()=>{this.props.getVitalDataAll(this.props.pinfo.PATIENT_ID,this.state.startdate)})
       }
     })
   }
+
+  serachVitalData = e => {
+    e.preventDefault()
+    this.props.resetVitalData()
+    this.setState({periodname: ""})
+    this.props.serachVitalData(this.props.pinfo.PATIENT_ID, this.state.startpicker, this.state.endpicker)
+  }
+
+  goVitatDataSetting = e => {
+    e.preventDefault() 
+    history.push("/vitaldatasetting")
+  }
+
+  // check = e => {
+  //   e.preventDefault()
+  //   console.log(this.state)
+  // }
   
   
  
   render() {
+    let { 
+      startpicker,
+      endpicker 
+     
+    } = this.state
+  
     let profile_preview = null;
 
     profile_preview = 
@@ -132,16 +179,21 @@ class VitalData extends React.Component {
         {this.props.appo===null?null:
           <Row>
             <Col className="col-12">
-              <Card style={{backgroundColor: "#efefff", height:"60px"}}>
-                {this.props.appo.APPOINT_TIME}
-                {this.props.pinfo.F_NAME}
-                {this.props.pinfo.GENDER==="1"||this.props.pinfo.GENDER==="3"?"M":"F"}
-                {this.props.pinfo.BIRTH_DT}
+              <Card className="d-flex flex-wrap  col-12 m-0" style={{backgroundColor: "#efefff", height:"60px"}}>
+                <div className="2">{this.props.appo.APPOINT_TIME}</div>
+                <div className="1">{this.props.pinfo.F_NAME}</div>
+                <div className="1">{this.props.pinfo.GENDER==="1"||this.props.pinfo.GENDER==="3"?"M":"F"}</div>
+                <div className="1"></div>
+                <div className="2">{this.props.pinfo.BIRTH_DT}</div>
+                <div className="1"></div>
+                <div className="1"></div>
+                <div className=""></div>
+                <Settings onClick={this.goVitatDataSetting}></Settings>
               </Card>
             </Col>   
           </Row>
         }
-        <Row>
+        <Row className="mt-2 flex-wrap">
           <Col className="col-6 d-flex">
             <h4 className="text-bold-600 align-self-center">선택항목</h4>
             <ButtonGroup className="ml-1">
@@ -151,15 +203,17 @@ class VitalData extends React.Component {
               <Button.Ripple outline={this.state.glbutton===true?false:true} color="primary" onClick={this.handlegl}>혈당</Button.Ripple>{" "}
               <Button.Ripple outline={this.state.tempbutton===true?false:true} color="primary" onClick={this.handletemp}>체온</Button.Ripple>{" "}
               <Button.Ripple outline={this.state.spo2button===true?false:true} color="primary" onClick={this.handlespo2}>산소포화도</Button.Ripple>{" "}
+              {/* <Button.Ripple color="primary" onClick={this.check}>산소포화도</Button.Ripple>{" "} */}
             </ButtonGroup>
           </Col>
 
           <Col className="col-4 d-flex ml-auto">
             <h4 className="text-bold-600 align-self-center">기간</h4>
-            <ButtonGroup className="ml-1" >
+
+            <ButtonGroup className="ml-4" >
 
               <button
-                // disabled={this.state.auto=="true"?false:true}
+                // disabled={this.state.startpickerbtn===true || this.state.endpickerbtn===true?true:false}
                 onClick={() => this.handlePeriod("today")}
                 className={`btn ${
                   this.state.periodname === "today"
@@ -170,7 +224,7 @@ class VitalData extends React.Component {
                 오늘
               </button>
               <button
-                // disabled={this.state.auto=="true"?false:true}
+                // disabled={this.state.startpickerbtn===true || this.state.endpickerbtn===true?true:false}
                 onClick={() => this.handlePeriod("week")}
                 className={`btn ${
                   this.state.periodname === "week"
@@ -182,7 +236,7 @@ class VitalData extends React.Component {
               </button>
 
               <button
-                // disabled={this.state.auto=="true"?false:true}
+                // disabled={this.state.startpickerbtn===true || this.state.endpickerbtn===true?true:false}
                 onClick={() => this.handlePeriod("month")}
                 className={`btn ${
                   this.state.periodname === "month"
@@ -194,159 +248,243 @@ class VitalData extends React.Component {
               </button>
               
               <button
-                // disabled={this.state.auto=="true"?false:true}
-                onClick={() => this.handlePeriod("year")}
+                // disabled={this.state.startpickerbtn===true || this.state.endpickerbtn===true?true:false}
+                onClick={() => this.handlePeriod("months")}
                 className={`btn ${
-                  this.state.periodname === "year"
+                  this.state.periodname === "months"
                     ? "btn-primary"
                     : "btn-outline-primary text-primary"
                 }`}
               >
-                1년
+                3개월
               </button>
             </ButtonGroup>
           </Col>
         </Row>
-        <Row className="mt-1">
+        <Row className="mt-2">
           <Col className="col-6">
           </Col>
 
-          <Col className="col-4 d-flex ml-auto">
+          <Col className="col-4 d-flex ml-auto align-self-center">
             <h4 className="text-bold-600 align-self-center">직접입력</h4>
-            <div>{this.state.token}</div>
+            <Flatpickr
+              className="form-control col-3 align-self-center ml-1"
+              value={startpicker}
+              onChange={date => {
+                this.setState({ startpicker : date  });
+                this.handleStartPicker()
+              }}
+            />
+            <h4 className="text-bold-600 align-self-center">-</h4>
+            <Flatpickr
+              className="form-control col-3 align-self-center"
+              value={endpicker}
+              onChange={date => {
+                this.setState({ endpicker : date });
+                this.handleEndPicker()
+              }}
+            />
+            <Button.Ripple className="ml-1 align-self-center" color="primary" onClick={this.serachVitalData}>
+              <Search size={16} />
+            </Button.Ripple>
           </Col>
         </Row>
 
         
-        <div className="d-flex flex-wrap mt-1">
-
+        <Row>
           {this.props.bpdata.length===0?null:this.state.bpbutton===false?null:
-              <div className="col-6 d-flex justify-content-center ">
-                <LineChart
-                  width={600}
-                  height={400}
-                  data={this.props.bpdata}
-                >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis tick={{fontSize: 10}} dataKey="CREATE_TIME" />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend />
-                  <Line
-                    name="수축기"
-                    type="monotone"
-                    dataKey="SYS_VAL"
-                    stroke="#EA5455"
-                  />
-                  <Line
-                    name="이완기"
-                    type="monotone"
-                    dataKey="DIA_VAL"
-                    stroke="#7367F0"
-                    activeDot={{ r: 8 }}
-                  /> 
-                </LineChart>
-                </div>
+            <Col lg="6" md="12">
+              <Card>
+                <CardHeader>
+                  <CardTitle>혈압</CardTitle>
+                </CardHeader>
+                <CardBody>
+                  <div className="recharts-wrapper">
+                    <ResponsiveContainer>
+                      <LineChart
+                        width={500}
+                        height={300}
+                        data={this.props.bpdata}
+                        margin={{
+                          top: 5,
+                          right: 30,
+                          left: 20,
+                          bottom: 5
+                        }}
+                      >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis tick={{fontSize: 10}} dataKey="CREATE_TIME" />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend/>
+                        <Line
+                          name="수축기"
+                          type="monotone"
+                          dataKey="SYS_VAL"
+                          stroke="#EA5455"
+                        />
+                        <Line
+                          name="이완기"
+                          type="monotone"
+                          dataKey="DIA_VAL"
+                          stroke="#7367F0"
+                          activeDot={{ r: 8 }}
+                        /> 
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </div>
+                </CardBody>
+              </Card>
+            </Col>
           }
 
           {this.props.pulstdata.length===0?null:this.state.pulsebutton===false?null:
-            <div className="col-6 d-flex justify-content-center">
-                <LineChart
-                  width={600}
-                  height={400}
-                  data={this.props.pulstdata}
-                >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis tick={{fontSize: 10}} dataKey="CREATE_TIME"/>
-                  <YAxis />
-                  <Tooltip />
-                  <Legend/>
-                  <Line
-                    name="맥박"
-                    type="monotone"
-                    dataKey="PULSE_VAL"
-                    stroke="#EA5455"
-                    activeDot={{ r: 8 }}
-                  />
-                </LineChart>
-            </div>
-
+            <Col lg="6" md="12">
+              <Card>
+                <CardHeader>
+                  <CardTitle>맥박</CardTitle>
+                </CardHeader>
+                <CardBody>
+                  <div className="recharts-wrapper">
+                    <ResponsiveContainer>
+                      <LineChart
+                        width={500}
+                        height={300}
+                        data={this.props.pulstdata}
+                        margin={{
+                          top: 5,
+                          right: 30,
+                          left: 20,
+                          bottom: 5
+                        }}
+                      >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis tick={{fontSize: 10}} dataKey="CREATE_TIME"/>
+                        <YAxis />
+                        <Tooltip />
+                        <Legend/>
+                        <Line
+                          name="맥박"
+                          type="monotone"
+                          dataKey="PULSE_VAL"
+                          stroke="#EA5455"
+                          activeDot={{ r: 8 }}
+                        />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </div>
+                </CardBody>
+              </Card>
+            </Col>
           }
 
           {this.props.wedata.length===0?null:this.state.webutton===false?null:
-            <div className="col-6 d-flex justify-content-center ">
-                <LineChart
-                  width={600}
-                  height={400}
-                  data={this.props.wedata}
-                >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis tick={{fontSize: 10}} dataKey="CREATE_TIME"/>
-                  <YAxis />
-                  <Tooltip />
-                  <Legend/>
-                  <Line
-                    name="몸무게"
-                    type="monotone"
-                    dataKey="WEIGHT_VAL"
-                    stroke="#EA5455"
-                    activeDot={{ r: 8 }}
-                  />
-                  <Line
-                    name="BMI"
-                    type="monotone"
-                    dataKey="BMI_VAL"
-                    stroke="#7367F0"
-                    activeDot={{ r: 8 }}
-                  />
-                </LineChart>
-            </div>
+            <Col lg="6" md="12">
+              <Card>
+                <CardHeader>
+                  <CardTitle>몸무게</CardTitle>
+                </CardHeader>
+                <CardBody>
+                  <div className="recharts-wrapper">
+                    <ResponsiveContainer>
+                      <LineChart
+                        width={500}
+                        height={300}
+                        data={this.props.wedata}
+                      >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis tick={{fontSize: 10}} dataKey="CREATE_TIME"/>
+                        <YAxis />
+                        <Tooltip />
+                        <Legend/>
+                        <Line
+                          name="몸무게"
+                          type="monotone"
+                          dataKey="WEIGHT_VAL"
+                          stroke="#EA5455"
+                          activeDot={{ r: 8 }}
+                        />
+                        <Line
+                          name="BMI"
+                          type="monotone"
+                          dataKey="BMI_VAL"
+                          stroke="#7367F0"
+                          activeDot={{ r: 8 }}
+                        />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </div>
+                </CardBody>
+              </Card>
+            </Col>
           }
 
           {this.props.bsdata.length===0?null:this.state.glbutton===false?null:
-            <div className="col-6 d-flex justify-content-center ">
-                <LineChart
-                  width={600}
-                  height={400}
-                  data={this.props.bsdata}
-                >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis tick={{fontSize: 10}} dataKey="CREATE_TIME"/>
-                  <YAxis />
-                  <Tooltip />
-                  <Legend/>
-                  <Line
-                    name="혈당"
-                    type="monotone"
-                    dataKey="GLUCOSE_VAL"
-                    stroke="#EA5455"
-                    activeDot={{ r: 8 }}
-                  />
-                </LineChart>
-            </div>
+            <Col lg="6" md="12">
+              <Card>
+                <CardHeader>
+                  <CardTitle>혈당</CardTitle>
+                </CardHeader>
+                <CardBody>
+                  <div className="recharts-wrapper">
+                    <ResponsiveContainer>
+                      <LineChart
+                        width={500}
+                        height={300}
+                        data={this.props.bsdata}
+                      >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis tick={{fontSize: 10}} dataKey="CREATE_TIME"/>
+                        <YAxis />
+                        <Tooltip />
+                        <Legend/>
+                        <Line
+                          name="혈당"
+                          type="monotone"
+                          dataKey="GLUCOSE_VAL"
+                          stroke="#EA5455"
+                          activeDot={{ r: 8 }}
+                        />
+                      </LineChart>
+                      </ResponsiveContainer>
+                  </div>
+                </CardBody>
+              </Card>
+            </Col>
           }
 
           {this.props.tempdata.length===0?null:this.state.tempbutton===false?null:
-            <div className="col-6 d-flex justify-content-center ">
-                <LineChart
-                  width={600}
-                  height={400}
-                  data={this.props.tempdata}
-                >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis tick={{fontSize: 10}} dataKey="CREATE_TIME"/>
-                  <YAxis />
-                  <Tooltip />
-                  <Legend/>
-                  <Line
-                    name="체온"
-                    type="monotone"
-                    dataKey="TEMP_VAL"
-                    stroke="#EA5455"
-                    activeDot={{ r: 8 }}
-                  />
-                </LineChart>
-            </div>
+            <Col lg="6" md="12">
+              <Card>
+                <CardHeader>
+                  <CardTitle>혈당</CardTitle>
+                </CardHeader>
+                <CardBody>
+                  <div className="recharts-wrapper">
+                    <ResponsiveContainer>
+                      <LineChart
+                        width={500}
+                        height={300}
+                        data={this.props.tempdata}
+                      >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis tick={{fontSize: 10}} dataKey="CREATE_TIME"/>
+                        <YAxis />
+                        <Tooltip />
+                        <Legend/>
+                        <Line
+                          name="체온"
+                          type="monotone"
+                          dataKey="TEMP_VAL"
+                          stroke="#EA5455"
+                          activeDot={{ r: 8 }}
+                        />
+                      </LineChart>
+                      </ResponsiveContainer>
+                    </div>
+                  </CardBody>
+              </Card>
+            </Col>
           }
 
           
@@ -354,29 +492,40 @@ class VitalData extends React.Component {
           
 
           {this.props.spo2data.length===0?null:this.state.spo2button===false?null:
-            <div className="col-6 d-flex justify-content-center ">
-                <LineChart
-                  width={600}
-                  height={400}
-                  data={this.props.spo2data}
-                >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis tick={{fontSize: 10}} dataKey="CREATE_TIME"/>
-                  <YAxis />
-                  <Tooltip />
-                  <Legend/>
-                  <Line
-                    name="SPO2"
-                    type="monotone"
-                    dataKey="SPO2_VAL"
-                    stroke="#EA5455"
-                    activeDot={{ r: 8 }}
-                  />
-                </LineChart>
-            </div>
+            <Col lg="6" md="12">
+              <Card>
+                <CardHeader>
+                  <CardTitle>산소포화도</CardTitle>
+                </CardHeader>
+                <CardBody>
+                  <div className="recharts-wrapper">
+                    <ResponsiveContainer>
+                      <LineChart
+                        width={500}
+                        height={300}
+                        data={this.props.spo2data}
+                      >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis tick={{fontSize: 10}} dataKey="CREATE_TIME"/>
+                        <YAxis />
+                        <Tooltip />
+                        <Legend/>
+                        <Line
+                          name="SPO2"
+                          type="monotone"
+                          dataKey="SPO2_VAL"
+                          stroke="#EA5455"
+                          activeDot={{ r: 8 }}
+                        />
+                      </LineChart>
+                      </ResponsiveContainer>
+                    </div>
+                  </CardBody>
+              </Card>
+            </Col>
           }
 
-        </div>
+        </Row>
       </Fragment>
     )
   }
@@ -399,4 +548,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps,{getVitalDataAll}) (VitalData)
+export default connect(mapStateToProps,{getVitalDataAll,serachVitalData, resetVitalData}) (VitalData)

@@ -19,7 +19,8 @@ import {
   ResponsiveContainer
 } from "recharts"
 import {
-  getPastConulstList
+  getPastConulstList,
+  resetVitalData
 } from "../../../../redux/actions/data-list/"
 import { Check } from "react-feather"
 import { history } from "../../../../history"
@@ -89,6 +90,7 @@ class PatientInfo extends React.Component {
 
   goVitalData = e => {
     e.preventDefault()
+    this.props.resetVitalData()
     history.push("/vitaldata")
   }
  
@@ -437,4 +439,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {getPastConulstList}) (PatientInfo)
+export default connect(mapStateToProps, {getPastConulstList, resetVitalData}) (PatientInfo)
