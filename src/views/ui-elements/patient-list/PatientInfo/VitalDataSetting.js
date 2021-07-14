@@ -81,7 +81,7 @@ class VitalDataSetting extends React.Component {
           </Row>
         }
         <Row className="mt-2 flex-wrap">
-          <Col className="col-6 d-flex">
+          <Col className="col-12 d-flex">
             <h4 className="text-bold-600 align-self-center">선택항목</h4>
             <ButtonGroup className="ml-1">
               <Button.Ripple 
