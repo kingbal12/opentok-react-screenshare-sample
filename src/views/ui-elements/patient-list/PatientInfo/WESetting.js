@@ -23,18 +23,12 @@ class VitalDataSetting extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      normalsys: "",
-      normaldia: "",
-      lowalertsys: "",
-      topalertsys: "",
-      lowalertdia: "",
-      topalertdia: "",
-      lowdangersys: "",
-      topdangersys: "",
-      lowdangerdia: "",
-      topdangerdia: "",
-      dangersys: "",
-      dangerdia: ""   
+      lownormalBMI: "",
+      topnormalBMI: "",
+      lowalertBMI: "",
+      topalertBMI: "",
+      alertBMI: "",
+      dangerBMI: "" 
     }
   }
 
@@ -51,34 +45,28 @@ class VitalDataSetting extends React.Component {
             <thead className="table-primary">
               <tr>
                 <th></th>
-                <th><h3>Systolic</h3></th>
-                <th></th>
-                <th><h3>Diastolic</h3></th>
+                <th><h3>BMI&nbsp;(%)</h3></th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <th scope="row" className="text-center"><h3>정상</h3></th>
                 <td className="d-flex align-self-center">
-                  <h3 className= "align-self-center">	&lsaquo;</h3>
                   <FormGroup className="pt-1 ml-2">
                     <Input 
                       type="text" 
                       bsSize="lg" 
-                      value={this.state.normalsys}
+                      value={this.state.lownormalBMI}
                       onChange={e => this.setState({ name: e.target.value })} 
                     />
                   </FormGroup>
-                </td>
-                <td>and</td>
-                <td className="d-flex align-self-center">
-                  <h3 className= "align-self-center">	&lsaquo;</h3>
+                  <h3 className="align-self-center ml-2">&mdash;</h3>
                   <FormGroup className="pt-1 ml-2">
                     <Input 
                       type="text" 
                       bsSize="lg" 
-                      value={this.state.normaldia}
-                      onChange={e => this.setState({ name: e.target.value })} 
+                      value={this.state.topnormalBMI}
+                      onChange={e => this.setState({ name: e.target.value })}
                     />
                   </FormGroup>
                 </td>
@@ -90,7 +78,7 @@ class VitalDataSetting extends React.Component {
                     <Input 
                       type="text" 
                       bsSize="lg" 
-                      value={this.state.lowalertsys}
+                      value={this.state.lowalertBMI}
                       onChange={e => this.setState({ name: e.target.value })} 
                     />
                   </FormGroup>
@@ -99,71 +87,9 @@ class VitalDataSetting extends React.Component {
                     <Input 
                       type="text" 
                       bsSize="lg" 
-                      value={this.state.topalertsys}
+                      value={this.state.topalertBMI}
                       onChange={e => this.setState({ name: e.target.value })}
                     />
-                  </FormGroup>
-                </td>
-                <td>or</td>
-                <td className="d-flex align-self-center">
-                  <FormGroup className="pt-1 ml-2">
-                    <Input 
-                      type="text" 
-                      bsSize="lg" 
-                      value={this.state.lowalertdia}
-                      onChange={e => this.setState({ name: e.target.value })}
-                    />
-                  </FormGroup>
-                  <h3 className="align-self-center ml-2">&mdash;</h3>
-                  <FormGroup className="pt-1 ml-2">
-                    <Input 
-                      type="text" 
-                      bsSize="lg" 
-                      value={this.state.topalertdia}
-                      onChange={e => this.setState({ name: e.target.value })}
-                    />
-                  </FormGroup>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row" className="text-center"><h3>위험</h3></th>
-                <td className="d-flex align-self-center">
-                  <FormGroup className="pt-1 ml-2">
-                    <Input 
-                      type="text" 
-                      bsSize="lg" 
-                      value={this.state.lowdangersys}
-                      onChange={e => this.setState({ name: e.target.value })}
-                    />
-                  </FormGroup>
-                  <h3 className="align-self-center ml-2">&mdash;</h3>
-                  <FormGroup className="pt-1 ml-2">
-                    <Input 
-                      type="text" 
-                      bsSize="lg" 
-                      value={this.state.topdangersys}
-                      onChange={e => this.setState({ name: e.target.value })}
-                    />
-                  </FormGroup>
-                </td>
-                <td>or</td>
-                <td className="d-flex align-self-center">
-                  <FormGroup className="pt-1 ml-2">
-                    <Input 
-                      type="text" 
-                      bsSize="lg" 
-                      value={this.state.lowdangerdia}
-                      onChange={e => this.setState({ name: e.target.value })}
-                    />  
-                  </FormGroup>
-                  <h3 className="align-self-center ml-2">&mdash;</h3>
-                  <FormGroup className="pt-1 ml-2">
-                    <Input 
-                      type="text" 
-                      bsSize="lg" 
-                      value={this.state.topdangerdia}
-                      onChange={e => this.setState({ name: e.target.value })}
-                    />  
                   </FormGroup>
                 </td>
               </tr>
@@ -175,22 +101,24 @@ class VitalDataSetting extends React.Component {
                     <Input 
                       type="text" 
                       bsSize="lg" 
-                      value={this.state.dangersys}
+                      value={this.state.alertBMI}
                       onChange={e => this.setState({ name: e.target.value })}
                     />  
                   </FormGroup>
                 </td>
-                <td>or</td>
+              </tr>
+              <tr>
+                <th scope="row" className="text-center"><h3>위험</h3></th>
                 <td className="d-flex align-self-center">
-                  <h3 className= "align-self-center">	&lsaquo;</h3>
-                  <FormGroup className="pt-1 ml-2">
-                   <Input 
+                  <FormGroup className="pt-1">
+                    <Input 
                       type="text" 
                       bsSize="lg" 
-                      value={this.state.dangerdia}
+                      value={this.state.dangerBMI}
                       onChange={e => this.setState({ name: e.target.value })}
                     />  
                   </FormGroup>
+                  <h3 className= "align-self-center ml-2">	&lsaquo;</h3>
                 </td>
               </tr>
             </tbody>

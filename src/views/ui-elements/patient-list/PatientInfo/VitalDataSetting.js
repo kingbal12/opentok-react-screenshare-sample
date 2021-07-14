@@ -19,6 +19,9 @@ import {connect} from "react-redux"
 import { Fragment } from "react"
 import classnames from "classnames"
 import BPSetting from "./BPSetting"
+import PulseSetting from "./PulseSetting"
+import WESetting from "./WESetting"
+import BSSetting from "./BSSetting"
 
 
 
@@ -96,9 +99,42 @@ class VitalDataSetting extends React.Component {
               >
                 혈압
               </Button.Ripple>
-              <Button.Ripple outline={this.state.pulsebutton===true?false:true} color="primary" onClick={this.handlepulse}>맥박</Button.Ripple>{" "}
-              <Button.Ripple outline={this.state.webutton===true?false:true} color="primary" onClick={this.handlewe}>체중</Button.Ripple>{" "}
-              <Button.Ripple outline={this.state.glbutton===true?false:true} color="primary" onClick={this.handlegl}>혈당</Button.Ripple>{" "}
+              <Button.Ripple 
+                outline={this.state.pulsebutton===true?false:true} 
+                color="primary"
+                className={classnames({
+                          active: this.state.activeTab === "2"
+                        })}
+                        onClick={() => {
+                          this.toggle("2")
+                        }}
+              >
+                맥박
+              </Button.Ripple>
+              <Button.Ripple 
+              outline={this.state.webutton===true?false:true} 
+              color="primary" 
+              className={classnames({
+                active: this.state.activeTab === "3"
+              })}
+              onClick={() => {
+                this.toggle("3")
+              }}
+              >
+                체중
+              </Button.Ripple>
+              <Button.Ripple 
+              outline={this.state.glbutton===true?false:true} 
+              color="primary" 
+              className={classnames({
+                active: this.state.activeTab === "4"
+              })}
+              onClick={() => {
+                this.toggle("4")
+              }}
+              >
+                혈당
+              </Button.Ripple>
               <Button.Ripple outline={this.state.tempbutton===true?false:true} color="primary" onClick={this.handletemp}>체온</Button.Ripple>{" "}
               <Button.Ripple outline={this.state.spo2button===true?false:true} color="primary" onClick={this.handlespo2}>산소포화도</Button.Ripple>{" "}
               {/* <Button.Ripple color="primary" onClick={this.check}>산소포화도</Button.Ripple>{" "} */}
@@ -109,7 +145,22 @@ class VitalDataSetting extends React.Component {
           <TabPane tabId="1">
             <BPSetting />
           </TabPane>
+          <TabPane tabId="2">
+            <PulseSetting />
+          </TabPane>
+          <TabPane tabId="3">
+            <WESetting />
+          </TabPane>
+          <TabPane tabId="4">
+            <BSSetting />
+          </TabPane>
         </TabContent>
+        <Row>
+          <Col md="12" className="d-flex text-right">
+            <Button.Ripple outline color="primary" className="mr-2">Edit</Button.Ripple>
+            <Button.Ripple color="primary">Save</Button.Ripple>
+          </Col>
+        </Row>
       </Fragment>
     )
   }
