@@ -432,23 +432,3 @@ export const getVitalSettingData = (userid, patientid) => {
   }
 }
 
-export const putWeight = (userid, bmival1, bmival2, bmival3) => {
-  return dispatch => {
-    axios
-      .put("http://203.251.135.81:9300/v1/doctor/vital/base-weight", {
-        patient_id : userid, 
-        bmi_val1 : bmival1,
-        bmi_val2 : bmival2,
-        bmi_val3 : bmival3
-      })
-      .then(response => {
-        if(response.data.status === "200") {
-          alert("체중데이터 세팅이 저장되었습니다.")
-        } else {
-          alert(response.data.message);
-        }
-
-      })
-  }
-}
-

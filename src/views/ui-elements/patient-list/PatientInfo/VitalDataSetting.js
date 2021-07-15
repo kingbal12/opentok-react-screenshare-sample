@@ -1,10 +1,6 @@
 import React from "react"
-import {Form, FormGroup, Button,
-  InputGroup, InputGroupAddon,Input,
-  Card,
-  CardHeader,
-  CardTitle,
-  CardBody,
+import {
+  Button,
   Row,
   Col,
   ButtonGroup,
@@ -13,7 +9,6 @@ import {Form, FormGroup, Button,
   Table
 } from "reactstrap"
 import {getPastConulstList} from "../../../../redux/actions/data-list"
-import { history } from "../../../../history"
 import "../../../../assets/scss/pages/authentication.scss"
 import {connect} from "react-redux"
 import { Fragment } from "react"
@@ -24,6 +19,7 @@ import WESetting from "./WESetting"
 import BSSetting from "./BSSetting"
 import TempSetting from "./TempSetting"
 import SPO2Setting from "./SPO2Setting"
+import { Settings } from "react-feather"
 
 
 
@@ -61,18 +57,27 @@ class VitalDataSetting extends React.Component {
         {this.props.appo===null?null:
           <Row>
             <Col className="col-12">
-              <Table responsive>
+            <Table responsive>
                 <thead>
-                  <tr className="table-primary">
-                    <th>{this.props.appo.APPOINT_TIME}</th>
-                    <th>{this.props.pinfo.F_NAME}</th>
-                    <th>{this.props.pinfo.GENDER==="1"||this.props.pinfo.GENDER==="3"?"M":"F"}</th>
-                    <th>27</th>
-                    <th>{this.props.pinfo.BIRTH_DT}</th>
-                    <th>DM</th>
-                    <th>재진</th>
-                    <th>재진</th>
-                    <th>재진</th>
+                  <tr className="table-primary align=self-center" style={{verticalAlign:"middle"}}>
+                    <th><h6>{this.props.appo.APPOINT_TIME}</h6></th>
+                    <th><h6>{this.props.pinfo.F_NAME}</h6></th>
+                    <th><h6>{this.props.pinfo.GENDER==="1"||this.props.pinfo.GENDER==="3"?"M":"F"}</h6></th>
+                    <th><h6>{this.props.pinfo.AGE}</h6></th>
+                    <th><h6>{this.props.pinfo.BIRTH_DT}</h6></th>
+                    <th><h6>{this.props.pinfo.NOTE_DX}</h6></th>
+                    <th><h6>{this.props.pinfo.FIRST_YN==="N"?"재진":"초진"}</h6></th>
+                    <th>
+                      <h6>
+                        {this.props.pinfo.BP}
+                        {this.props.pinfo.PULSE}
+                        {this.props.pinfo.BW}
+                        {this.props.pinfo.BS}
+                        {this.props.pinfo.TEMPERATURE}
+                        {this.props.pinfo.SPO2}
+                      </h6>
+                    </th>
+                    <th><Settings stroke="B"></Settings></th>
                   </tr>
                 </thead>
               </Table>
@@ -153,7 +158,7 @@ class VitalDataSetting extends React.Component {
                               this.toggle("6")
                           }}
               >
-                산소포화도
+                SPO2
               </Button.Ripple>
               {/* <Button.Ripple color="primary" onClick={this.check}>산소포화도</Button.Ripple>{" "} */}
             </ButtonGroup>

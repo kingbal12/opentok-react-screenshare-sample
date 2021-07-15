@@ -182,6 +182,7 @@ class VitalDataSetting extends React.Component {
           <Col md="12" className="pr-3 d-flex flex-row-reverse">
             <Button.Ripple 
               color="primary"
+              type="submit"
             >
               Save
             </Button.Ripple>

@@ -52,17 +52,13 @@ class VitalDataSetting extends React.Component {
     })
   }
 
-  // check = e => {
-  //   e.preventDefault()
-  //   console.log(this.state)
-  // }
 
  
   render() {
     return (
       <Fragment>
+        <Form className="col-12 m-0 p-0" onSubmit={this.putPulse}>      
         <Row className="col-12">
-          <Form action="/" className="col-12 m-0 p-0" onSubmit={this.handleLogin}>      
             <Table className="m-0 col-12">
               <thead className="table-primary">
                 <tr>
@@ -115,20 +111,13 @@ class VitalDataSetting extends React.Component {
                   </td>
                 </tr>
               </tbody>
-            </Table>
-          </Form>
+            </Table>   
         </Row>
         <Row>
           <Col md="12" className="pr-3 d-flex flex-row-reverse">
-            {/* <Button.Ripple 
-              color="primary"
-              onClick={this.check}
-            >
-              check
-            </Button.Ripple> */}
             <Button.Ripple 
               color="primary"
-              onClick={this.putPulse}
+              type="submit"
             >
               Save
             </Button.Ripple>
@@ -142,6 +131,7 @@ class VitalDataSetting extends React.Component {
             </Button.Ripple>
           </Col>
         </Row>
+        </Form>
       </Fragment>
 
 

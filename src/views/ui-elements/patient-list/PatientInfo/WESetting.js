@@ -1,22 +1,17 @@
 import React from "react"
-import {Form, FormGroup, Button,
-  InputGroup, InputGroupAddon,Input,
-  Card,
-  CardHeader,
-  CardTitle,
-  CardBody,
+import {
+  Form, 
+  FormGroup, 
+  Button,
+  Input,
   Row,
   Col,
-  ButtonGroup,
   Table
 } from "reactstrap"
-import {putWeight} from "../../../../redux/actions/data-list"
-import { history } from "../../../../history"
 import "../../../../assets/scss/pages/authentication.scss"
 import {connect} from "react-redux"
 import { Fragment } from "react"
-import classnames from "classnames"
-
+import axios from "axios"
 
 
 class VitalDataSetting extends React.Component {
@@ -40,14 +35,28 @@ class VitalDataSetting extends React.Component {
 
   putWE = e => {
     e.preventDefault()
-    this.props.putWeight(this.props.vitaldata.USER_ID, this.state.normalBMI, this.state.alertBMI, this.state.dangerBMI)
+    
+    axios
+    .put("http://203.251.135.81:9300/v1/doctor/vital/base-weight", {
+        patient_id: this.props.vitaldata.USER_ID,
+        bmi_val1 : Number(this.state.normalBMI),
+        bmi_val2 : Number(this.state.alertBMI),
+        bmi_val3 : Number(this.state.dangerBMI)
+    })
+    .then(response => {
+      if(response.data.status==="200") {
+        alert("체중데이터 세팅이 저장되었습니다.")
+      } else {
+        alert("저장도중 문제가 발생하였습니다.")
+      }
+    })
   }
  
   render() {
     return (
       <Fragment>
+        <Form action="/" className="col-12 m-0 p-0" onSubmit={this.putWE}>
         <Row className="col-12">
-          <Form action="/" className="col-12 m-0 p-0" onSubmit={this.handleLogin}>      
             <Table className="m-0 col-12">
               <thead className="table-primary">
                 <tr>
@@ -140,13 +149,13 @@ class VitalDataSetting extends React.Component {
                 </tr>
               </tbody>
             </Table>
-          </Form>
+          
         </Row>
         <Row>
           <Col md="12" className="pr-3 d-flex flex-row-reverse">
             <Button.Ripple 
               color="primary"
-              onClick={this.putWE}
+              type="submit"
             >
               Save
             </Button.Ripple>
@@ -159,7 +168,9 @@ class VitalDataSetting extends React.Component {
               Edit
             </Button.Ripple>
           </Col>
+          
         </Row>
+        </Form>
       </Fragment>
     )
   }
@@ -175,4 +186,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {putWeight}) (VitalDataSetting)
+export default connect(mapStateToProps) (VitalDataSetting)

@@ -1,21 +1,19 @@
 import React from "react"
-import {Form, FormGroup, Button,
-  InputGroup, InputGroupAddon,Input,
-  Card,
-  CardHeader,
-  CardTitle,
-  CardBody,
+import {
+  Form, 
+  FormGroup, 
+  Button,
+  Input,
   Row,
   Col,
-  ButtonGroup,
   Table
 } from "reactstrap"
 import {getPastConulstList} from "../../../../redux/actions/data-list"
-import { history } from "../../../../history"
 import "../../../../assets/scss/pages/authentication.scss"
 import {connect} from "react-redux"
 import { Fragment } from "react"
-import classnames from "classnames"
+import axios from "axios"
+
 
 
 
@@ -39,12 +37,33 @@ class VitalDataSetting extends React.Component {
       edit: !prevState.edit
     }))
   }
+
+  putBS = e => {
+    e.preventDefault()
+    
+    axios
+    .put("http://203.251.135.81:9300/v1/doctor/vital/base-glucose", {
+        patient_id: this.props.vitaldata.USER_ID,
+        fast_val1 : Number(this.state.normalfasting),
+        fast_val2 : Number(this.state.alertfasting),
+        fast_val3 : Number(this.state.dangerfasting),
+        pp2_val1 : Number(this.state.normalpp2),
+        pp2_val2 : Number(this.state.dagnerpp2)
+    })
+    .then(response => {
+      if(response.data.status==="200") {
+        alert("혈당데이터 세팅이 저장되었습니다.")
+      } else {
+        alert("저장도중 문제가 발생하였습니다.")
+      }
+    })
+  }
  
   render() {
     return (
       <Fragment>
-        <Row className="col-12">
-          <Form action="/" className="col-12 m-0 p-0" onSubmit={this.handleLogin}>      
+        <Form action="/" className="col-12 m-0 p-0" onSubmit={this.putBS}> 
+        <Row className="col-12">    
             <Table className="m-0 col-12">
               <thead className="table-primary">
                 <tr>
@@ -184,12 +203,12 @@ class VitalDataSetting extends React.Component {
                 </tr>
               </tbody>
             </Table>
-          </Form>
         </Row>
         <Row>
           <Col md="12" className="pr-3 d-flex flex-row-reverse">
             <Button.Ripple 
               color="primary"
+              type="submit"
             >
               Save
             </Button.Ripple>
@@ -203,6 +222,7 @@ class VitalDataSetting extends React.Component {
             </Button.Ripple>
           </Col>
         </Row>
+        </Form>
       </Fragment>
     )
   }

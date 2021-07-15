@@ -173,7 +173,7 @@ class VitalData extends React.Component {
         {this.props.appo===null?null:
           <Row>
             <Col className="col-12">
-            <Table responsive>
+              <Table responsive>
                 <thead>
                   <tr className="table-primary align=self-center" style={{verticalAlign:"middle"}}>
                     <th><h6>{this.props.appo.APPOINT_TIME}</h6></th>
