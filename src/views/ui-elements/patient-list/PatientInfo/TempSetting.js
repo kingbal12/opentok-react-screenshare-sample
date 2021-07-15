@@ -10,7 +10,7 @@ import {Form, FormGroup, Button,
   ButtonGroup,
   Table
 } from "reactstrap"
-import {putWeight} from "../../../../redux/actions/data-list"
+import {getPastConulstList} from "../../../../redux/actions/data-list"
 import { history } from "../../../../history"
 import "../../../../assets/scss/pages/authentication.scss"
 import {connect} from "react-redux"
@@ -23,12 +23,13 @@ class VitalDataSetting extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      normalBMI: props.vitaldata.BMI_VAL1,
-      alertBMI: props.vitaldata.BMI_VAL2,
-      dangerBMI: props.vitaldata.BMI_VAL3,
-      edit: false 
+      normaltemp: props.vitaldata.TEMP_VAL1,
+      alerttemp: props.vitaldata.TEMP_VAL2,
+      dangertemp: props.vitaldata.TEMP_VAL3,
+      edit: false
     }
   }
+
 
 
   edit = e => {
@@ -36,11 +37,6 @@ class VitalDataSetting extends React.Component {
     this.setState(prevState =>({
       edit: !prevState.edit
     }))
-  }
-
-  putWE = e => {
-    e.preventDefault()
-    this.props.putWeight(this.props.vitaldata.USER_ID, this.state.normalBMI, this.state.alertBMI, this.state.dangerBMI)
   }
  
   render() {
@@ -51,21 +47,23 @@ class VitalDataSetting extends React.Component {
             <Table className="m-0 col-12">
               <thead className="table-primary">
                 <tr>
-                  <th width={'30%'} ></th>
-                  <th><h3 className="pl-1">BMI&nbsp;(%)</h3></th>
+                  <th width={'30%'}></th>
+                  <th><h3 className="pl-2">&#8451;</h3></th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <th scope="row"><h3 className="pl-4">정상</h3></th>
+                  <th scope="row">
+                    <h3 className="pl-4">정상</h3>
+                  </th>
                   <td className="d-flex align-self-center">
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
                         bsSize="lg" 
                         disabled={this.state.edit===true?false:true} 
-                        value={this.state.normalBMI}
-                        onChange={e => this.setState({ normalBMI: e.target.value })} 
+                        value={this.state.normaltemp}
+                        onChange={e => this.setState({ normaltemp: e.target.value })} 
                       />
                     </FormGroup>
                     <h3 className="align-self-center ml-2">&#8764;</h3>
@@ -74,8 +72,8 @@ class VitalDataSetting extends React.Component {
                         type="number" 
                         bsSize="lg" 
                         disabled={this.state.edit===true?false:true} 
-                        value={this.state.alertBMI}
-                        onChange={e => this.setState({ alertBMI: e.target.value })}
+                        value={this.state.alerttemp}
+                        onChange={e => this.setState({ alerttemp: e.target.value })}
                       />
                     </FormGroup>
                   </td>
@@ -90,8 +88,8 @@ class VitalDataSetting extends React.Component {
                         type="number" 
                         bsSize="lg" 
                         disabled={this.state.edit===true?false:true} 
-                        value={this.state.alertBMI}
-                        onChange={e => this.setState({ alertBMI: e.target.value })} 
+                        value={this.state.alerttemp}
+                        onChange={e => this.setState({ alerttemp: e.target.value })} 
                       />
                     </FormGroup>
                     <h3 className="align-self-center ml-2">&#8764;</h3>
@@ -100,30 +98,15 @@ class VitalDataSetting extends React.Component {
                         type="number" 
                         bsSize="lg" 
                         disabled={this.state.edit===true?false:true} 
-                        value={this.state.dangerBMI}
-                        onChange={e => this.setState({ dangerBMI: e.target.value })}
+                        value={this.state.dangertemp}
+                        onChange={e => this.setState({ dangertemp: e.target.value })}
                       />
                     </FormGroup>
                   </td>
                 </tr>
                 <tr>
-                  <th scope="row"></th>
-                  <td className="d-flex align-self-center">
-                    <h3 className= "align-self-center pl-2">	&lsaquo;</h3>
-                    <FormGroup className="pt-1 ml-2">
-                      <Input 
-                        type="number" 
-                        bsSize="lg" 
-                        disabled={this.state.edit===true?false:true} 
-                        value={this.state.normalBMI}
-                        onChange={e => this.setState({ normalBMI: e.target.value })}
-                      />  
-                    </FormGroup>
-                  </td>
-                </tr>
-                <tr>
                   <th scope="row">
-                    <h3 className="pl-4">위험</h3>
+                  <h3 className="pl-4">위험</h3>
                   </th>
                   <td className="d-flex align-self-center">
                     <FormGroup className="pt-1 pl-2">
@@ -131,11 +114,11 @@ class VitalDataSetting extends React.Component {
                         type="number" 
                         bsSize="lg" 
                         disabled={this.state.edit===true?false:true} 
-                        value={this.state.dangerBMI}
-                        onChange={e => this.setState({ dangerBMI: e.target.value })}
+                        value={this.state.dangertemp}
+                        onChange={e => this.setState({ dangertemp: e.target.value })}
                       />  
                     </FormGroup>
-                    <h1 className= "align-self-center ml-2">&#8804;</h1>
+                    <h3 className= "align-self-center ml-2">&lsaquo;</h3>
                   </td>
                 </tr>
               </tbody>
@@ -146,7 +129,6 @@ class VitalDataSetting extends React.Component {
           <Col md="12" className="pr-3 d-flex flex-row-reverse">
             <Button.Ripple 
               color="primary"
-              onClick={this.putWE}
             >
               Save
             </Button.Ripple>
@@ -175,4 +157,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {putWeight}) (VitalDataSetting)
+export default connect(mapStateToProps, {getPastConulstList}) (VitalDataSetting)

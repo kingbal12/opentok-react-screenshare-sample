@@ -22,6 +22,8 @@ import BPSetting from "./BPSetting"
 import PulseSetting from "./PulseSetting"
 import WESetting from "./WESetting"
 import BSSetting from "./BSSetting"
+import TempSetting from "./TempSetting"
+import SPO2Setting from "./SPO2Setting"
 
 
 
@@ -51,11 +53,6 @@ class VitalDataSetting extends React.Component {
       })
     }
   }
-
-  componentDidMount() {
-    console.log(this.props.user)
-    console.log(this.props.dataList)
-  }
  
   render() {
     return (
@@ -79,7 +76,6 @@ class VitalDataSetting extends React.Component {
                   </tr>
                 </thead>
               </Table>
-
             </Col>   
           </Row>
         }
@@ -91,11 +87,11 @@ class VitalDataSetting extends React.Component {
                 outline={this.state.bpbutton===true?false:true} 
                 color="primary" 
                 className={classnames({
-                          active: this.state.activeTab === "1"
-                        })}
-                        onClick={() => {
-                          this.toggle("1")
-                        }}
+                              active: this.state.activeTab === "1"
+                            })}
+                            onClick={() => {
+                              this.toggle("1")
+                          }}
               >
                 혈압
               </Button.Ripple>
@@ -103,40 +99,62 @@ class VitalDataSetting extends React.Component {
                 outline={this.state.pulsebutton===true?false:true} 
                 color="primary"
                 className={classnames({
-                          active: this.state.activeTab === "2"
-                        })}
-                        onClick={() => {
-                          this.toggle("2")
-                        }}
+                              active: this.state.activeTab === "2"
+                            })}
+                            onClick={() => {
+                              this.toggle("2")
+                          }}
               >
                 맥박
               </Button.Ripple>
               <Button.Ripple 
-              outline={this.state.webutton===true?false:true} 
-              color="primary" 
-              className={classnames({
-                active: this.state.activeTab === "3"
-              })}
-              onClick={() => {
-                this.toggle("3")
-              }}
+                outline={this.state.webutton===true?false:true} 
+                color="primary" 
+                className={classnames({
+                              active: this.state.activeTab === "3"
+                            })}
+                            onClick={() => {
+                              this.toggle("3")
+                          }}
               >
                 체중
               </Button.Ripple>
               <Button.Ripple 
-              outline={this.state.glbutton===true?false:true} 
-              color="primary" 
-              className={classnames({
-                active: this.state.activeTab === "4"
-              })}
-              onClick={() => {
-                this.toggle("4")
-              }}
+                outline={this.state.glbutton===true?false:true} 
+                color="primary" 
+                className={classnames({
+                              active: this.state.activeTab === "4"
+                            })}
+                            onClick={() => {
+                              this.toggle("4")
+                          }}
               >
                 혈당
               </Button.Ripple>
-              <Button.Ripple outline={this.state.tempbutton===true?false:true} color="primary" onClick={this.handletemp}>체온</Button.Ripple>{" "}
-              <Button.Ripple outline={this.state.spo2button===true?false:true} color="primary" onClick={this.handlespo2}>산소포화도</Button.Ripple>{" "}
+              <Button.Ripple 
+                outline={this.state.tempbutton===true?false:true} 
+                color="primary" 
+                className={classnames({
+                              active: this.state.activeTab === "5"
+                            })}
+                            onClick={() => {
+                              this.toggle("5")
+                          }}
+              >
+                체온
+              </Button.Ripple>
+              <Button.Ripple 
+                outline={this.state.spo2button===true?false:true} 
+                color="primary" 
+                className={classnames({
+                              active: this.state.activeTab === "6"
+                            })}
+                            onClick={() => {
+                              this.toggle("6")
+                          }}
+              >
+                산소포화도
+              </Button.Ripple>
               {/* <Button.Ripple color="primary" onClick={this.check}>산소포화도</Button.Ripple>{" "} */}
             </ButtonGroup>
           </Col>
@@ -154,13 +172,14 @@ class VitalDataSetting extends React.Component {
           <TabPane tabId="4">
             <BSSetting />
           </TabPane>
+          <TabPane tabId="5">
+            <TempSetting />
+          </TabPane>
+          <TabPane tabId="6">
+            <SPO2Setting />
+          </TabPane>
         </TabContent>
-        <Row>
-          <Col md="12" className="d-flex text-right">
-            <Button.Ripple outline color="primary" className="mr-2">Edit</Button.Ripple>
-            <Button.Ripple color="primary">Save</Button.Ripple>
-          </Col>
-        </Row>
+        
       </Fragment>
     )
   }

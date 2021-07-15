@@ -1,6 +1,6 @@
 import React from "react"
-import {Form, FormGroup, Button,
-  InputGroup, InputGroupAddon,Input,
+import {
+  Button,
   Card,
   CardHeader,
   CardTitle,
@@ -20,28 +20,22 @@ import {
   Legend,
   ResponsiveContainer
 } from "recharts"
-// import {
-//   getPastConulstList
-// } from "../../../../redux/actions/data-list"
 import { Search, Settings } from "react-feather"
 import { history } from "../../../../history"
-import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import "../../../../assets/scss/pages/authentication.scss"
 import {connect} from "react-redux"
-import userImg from "../../../../assets/img/portrait/small/avatar-s-11.jpg"
-import { ContextLayout } from "../../../../utility/context/Layout"
 import { Fragment } from "react"
 import previmg from "../../../../assets/img/portrait/small/Sample_User_Icon.png"
 import moment from "moment"
 import {
   getVitalDataAll,
   resetVitalData,
-  serachVitalData
+  serachVitalData,
+  getVitalSettingData
 } from "../../../../redux/actions/data-list/"
 import Flatpickr from "react-flatpickr"
 import "flatpickr/dist/themes/light.css";
 import "../../../../assets/scss/plugins/forms/flatpickr/flatpickr.scss"
-import { formatHTMLMessage } from "intl-messageformat"
 import "../../../../assets/scss/plugins/extensions/recharts.scss"
 
 class VitalData extends React.Component {
@@ -140,7 +134,7 @@ class VitalData extends React.Component {
 
   goVitatDataSetting = e => {
     e.preventDefault() 
-    history.push("/vitaldatasetting")
+    this.props.getVitalSettingData(this.props.user.login.values.loggedInUser.username, this.props.pinfo.PATIENT_ID)
   }
 
   // check = e => {
@@ -179,18 +173,31 @@ class VitalData extends React.Component {
         {this.props.appo===null?null:
           <Row>
             <Col className="col-12">
-              <Card className="d-flex flex-wrap  col-12 m-0" style={{backgroundColor: "#efefff", height:"60px"}}>
-                <div className="2">{this.props.appo.APPOINT_TIME}</div>
-                <div className="1">{this.props.pinfo.F_NAME}</div>
-                <div className="1">{this.props.pinfo.GENDER==="1"||this.props.pinfo.GENDER==="3"?"M":"F"}</div>
-                <div className="1"></div>
-                <div className="2">{this.props.pinfo.BIRTH_DT}</div>
-                <div className="1"></div>
-                <div className="1"></div>
-                <div className=""></div>
-                <Settings onClick={this.goVitatDataSetting}></Settings>
-              </Card>
-            </Col>   
+            <Table responsive>
+                <thead>
+                  <tr className="table-primary align=self-center" style={{verticalAlign:"middle"}}>
+                    <th><h6>{this.props.appo.APPOINT_TIME}</h6></th>
+                    <th><h6>{this.props.pinfo.F_NAME}</h6></th>
+                    <th><h6>{this.props.pinfo.GENDER==="1"||this.props.pinfo.GENDER==="3"?"M":"F"}</h6></th>
+                    <th><h6>{this.props.pinfo.AGE}</h6></th>
+                    <th><h6>{this.props.pinfo.BIRTH_DT}</h6></th>
+                    <th><h6>{this.props.pinfo.NOTE_DX}</h6></th>
+                    <th><h6>{this.props.pinfo.FIRST_YN==="N"?"재진":"초진"}</h6></th>
+                    <th>
+                      <h6>
+                        {this.props.pinfo.BP}
+                        {this.props.pinfo.PULSE}
+                        {this.props.pinfo.BW}
+                        {this.props.pinfo.BS}
+                        {this.props.pinfo.TEMPERATURE}
+                        {this.props.pinfo.SPO2}
+                      </h6>
+                    </th>
+                    <th><Settings onClick={this.goVitatDataSetting}></Settings></th>
+                  </tr>
+                </thead>
+              </Table>
+            </Col>    
           </Row>
         }
         <Row className="mt-2 flex-wrap">
@@ -548,4 +555,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps,{getVitalDataAll,serachVitalData, resetVitalData}) (VitalData)
+export default connect(mapStateToProps,{getVitalDataAll,serachVitalData, resetVitalData, getVitalSettingData}) (VitalData)

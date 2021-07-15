@@ -116,6 +116,8 @@ export const getNameData = (userid, pageamount, pagenum, fname) => {
   }
 }
 
+
+
 export const getPatientInfo = (userid,patientid) => {
   return async dispatch => {
     await axios
@@ -133,6 +135,14 @@ export const getPatientInfo = (userid,patientid) => {
         let appoint = response.data.data.APPOINT_INFO
         let consultlist = response.data.data.CONSULT_LIST
         let personalinfo = response.data.data.PERSONAL_INFO;
+        personalinfo.BP = response.data.data.PERSONAL_INFO["1_STATE"]
+        personalinfo.PULSE = response.data.data.PERSONAL_INFO["2_STATE"]
+        personalinfo.TEMPERATURE = response.data.data.PERSONAL_INFO["3_STATE"]
+        personalinfo.BS = response.data.data.PERSONAL_INFO["4_STATE"]
+        personalinfo.SPO2 = response.data.data.PERSONAL_INFO["5_STATE"]
+        personalinfo.BW = response.data.data.PERSONAL_INFO["6_STATE"]
+        if(appoint !== null){appoint.APPOINT_TIME = moment(appoint.APPOINT_TIME).format("hh:mm A")}
+        personalinfo.BIRTH_DT = moment(personalinfo.BIRTH_DT).format("MMMM DD, YYYY")
 
         dispatch({
           type: "GET_PATIENT_INFO",
@@ -390,6 +400,55 @@ export const getPastConulstList = (patientid) => {
       }
     })
     .catch(err => console.log(err))
+  }
+}
+
+
+export const getVitalSettingData = (userid, patientid) => {
+  return async dispatch => {
+    await axios
+      .get("http://203.251.135.81:9300/v1/doctor/vital/base-patient", {
+        params: {
+          user_id: userid,
+          patient_id: patientid
+        }
+  })
+    .then(response => {  
+      if(response.data.status==="200") {
+        console.log("생체데이터: ",response)
+        
+        dispatch({
+          type: "GET_VITALDATA_SETTING",
+          data: response.data.data,
+        })
+
+        history.push("/vitaldatasetting" )
+      } else {
+        alert("생체정보를 불러오지 못하였습니다.")
+      }
+    })
+    
+    .catch(err => console.log(err))
+  }
+}
+
+export const putWeight = (userid, bmival1, bmival2, bmival3) => {
+  return dispatch => {
+    axios
+      .put("http://203.251.135.81:9300/v1/doctor/vital/base-weight", {
+        patient_id : userid, 
+        bmi_val1 : bmival1,
+        bmi_val2 : bmival2,
+        bmi_val3 : bmival3
+      })
+      .then(response => {
+        if(response.data.status === "200") {
+          alert("체중데이터 세팅이 저장되었습니다.")
+        } else {
+          alert(response.data.message);
+        }
+
+      })
   }
 }
 

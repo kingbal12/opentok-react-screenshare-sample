@@ -36,6 +36,7 @@ import {
   updateData,
   addData,
   filterData,
+  resetVitalData,
   getPatientInfo,
   getVitalData
   // eData
@@ -475,6 +476,7 @@ class DataListConfig extends Component {
   goPatientList(id) {
     // id.preventDefault()
     alert(`/read-board/${id}`);
+    this.props.resetVitalData()
     this.props.getPatientInfo(this.state.user,id)
     this.props.getVitalData(id)
   }
@@ -661,6 +663,7 @@ export default connect(mapStateToProps, {
   addData,
   getInitialData,
   filterData,
+  resetVitalData,
   getPatientInfo,
   getVitalData
 })(DataListConfig)

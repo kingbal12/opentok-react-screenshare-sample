@@ -23,308 +23,187 @@ class VitalDataSetting extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      normalsys: "",
-      normaldia: "",
-      lowalertsys: "",
-      topalertsys: "",
-      lowalertdia: "",
-      topalertdia: "",
-      lowdangersys: "",
-      topdangersys: "",
-      lowdangerdia: "",
-      topdangerdia: "",
-      dangersys: "",
-      dangerdia: ""   
+      normalfasting: props.vitaldata.FAST_VAL1,
+      normalpp2: props.vitaldata.PP2_VAL1,
+      alertfasting: props.vitaldata.FAST_VAL2,
+      dangerfasting: props.vitaldata.FAST_VAL3,
+      dagnerpp2: props.vitaldata.PP2_VAL2,
+      edit: false
     }
   }
 
-  componentDidMount() {
-    console.log(this.props.user)
-    console.log(this.props.dataList)
+
+  edit = e => {
+    e.preventDefault()
+    this.setState(prevState =>({
+      edit: !prevState.edit
+    }))
   }
  
   render() {
     return (
-      <Row className="col-12">
-        <Form action="/" className="col-12 m-0 p-0" onSubmit={this.handleLogin}>      
-          <Table className="m-0 col-12">
-            <thead className="table-primary">
-              <tr>
-                <th></th>
-                <th><h3>분류</h3></th>
-                <th><h3>mg/dl</h3></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row" className="text-center"><h3>정상</h3></th>
-                <td className="d-flex align-self-center">
-                  <h3 className= "align-self-center">	&lsaquo;</h3>
-                  <FormGroup className="pt-1 ml-2">
-                    <Input 
-                      type="text" 
-                      bsSize="lg" 
-                      value={this.state.normalsys}
-                      onChange={e => this.setState({ name: e.target.value })} 
-                    />
-                  </FormGroup>
-                </td>
-                <td>and</td>
-                <td className="d-flex align-self-center">
-                  <h3 className= "align-self-center">	&lsaquo;</h3>
-                  <FormGroup className="pt-1 ml-2">
-                    <Input 
-                      type="text" 
-                      bsSize="lg" 
-                      value={this.state.normaldia}
-                      onChange={e => this.setState({ name: e.target.value })} 
-                    />
-                  </FormGroup>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row" className="text-center"><h3>주의</h3></th>
-                <td className="d-flex align-self-center">
-                  <FormGroup className="pt-1 ml-2">
-                    <Input 
-                      type="text" 
-                      bsSize="lg" 
-                      value={this.state.lowalertsys}
-                      onChange={e => this.setState({ name: e.target.value })} 
-                    />
-                  </FormGroup>
-                  <h3 className="align-self-center ml-2">&mdash;</h3>
-                  <FormGroup className="pt-1 ml-2">
-                    <Input 
-                      type="text" 
-                      bsSize="lg" 
-                      value={this.state.topalertsys}
-                      onChange={e => this.setState({ name: e.target.value })}
-                    />
-                  </FormGroup>
-                </td>
-                <td>or</td>
-                <td className="d-flex align-self-center">
-                  <FormGroup className="pt-1 ml-2">
-                    <Input 
-                      type="text" 
-                      bsSize="lg" 
-                      value={this.state.lowalertdia}
-                      onChange={e => this.setState({ name: e.target.value })}
-                    />
-                  </FormGroup>
-                  <h3 className="align-self-center ml-2">&mdash;</h3>
-                  <FormGroup className="pt-1 ml-2">
-                    <Input 
-                      type="text" 
-                      bsSize="lg" 
-                      value={this.state.topalertdia}
-                      onChange={e => this.setState({ name: e.target.value })}
-                    />
-                  </FormGroup>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row" className="text-center"><h3>위험</h3></th>
-                <td className="d-flex align-self-center">
-                  <FormGroup className="pt-1 ml-2">
-                    <Input 
-                      type="text" 
-                      bsSize="lg" 
-                      value={this.state.lowdangersys}
-                      onChange={e => this.setState({ name: e.target.value })}
-                    />
-                  </FormGroup>
-                  <h3 className="align-self-center ml-2">&mdash;</h3>
-                  <FormGroup className="pt-1 ml-2">
-                    <Input 
-                      type="text" 
-                      bsSize="lg" 
-                      value={this.state.topdangersys}
-                      onChange={e => this.setState({ name: e.target.value })}
-                    />
-                  </FormGroup>
-                </td>
-                <td>or</td>
-                <td className="d-flex align-self-center">
-                  <FormGroup className="pt-1 ml-2">
-                    <Input 
-                      type="text" 
-                      bsSize="lg" 
-                      value={this.state.lowdangerdia}
-                      onChange={e => this.setState({ name: e.target.value })}
-                    />  
-                  </FormGroup>
-                  <h3 className="align-self-center ml-2">&mdash;</h3>
-                  <FormGroup className="pt-1 ml-2">
-                    <Input 
-                      type="text" 
-                      bsSize="lg" 
-                      value={this.state.topdangerdia}
-                      onChange={e => this.setState({ name: e.target.value })}
-                    />  
-                  </FormGroup>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row"></th>
-                <td className="d-flex align-self-center">
-                  <h3 className= "align-self-center">	&lsaquo;</h3>
-                  <FormGroup className="pt-1 ml-2">
-                    <Input 
-                      type="text" 
-                      bsSize="lg" 
-                      value={this.state.dangersys}
-                      onChange={e => this.setState({ name: e.target.value })}
-                    />  
-                  </FormGroup>
-                </td>
-                <td>or</td>
-                <td className="d-flex align-self-center">
-                  <h3 className= "align-self-center">	&lsaquo;</h3>
-                  <FormGroup className="pt-1 ml-2">
-                   <Input 
-                      type="text" 
-                      bsSize="lg" 
-                      value={this.state.dangerdia}
-                      onChange={e => this.setState({ name: e.target.value })}
-                    />  
-                  </FormGroup>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row" className="text-center"><h3>위험</h3></th>
-                <td className="d-flex align-self-center">
-                  <FormGroup className="pt-1 ml-2">
-                    <Input 
-                      type="text" 
-                      bsSize="lg" 
-                      value={this.state.lowdangersys}
-                      onChange={e => this.setState({ name: e.target.value })}
-                    />
-                  </FormGroup>
-                  <h3 className="align-self-center ml-2">&mdash;</h3>
-                  <FormGroup className="pt-1 ml-2">
-                    <Input 
-                      type="text" 
-                      bsSize="lg" 
-                      value={this.state.topdangersys}
-                      onChange={e => this.setState({ name: e.target.value })}
-                    />
-                  </FormGroup>
-                </td>
-                <td>or</td>
-                <td className="d-flex align-self-center">
-                  <FormGroup className="pt-1 ml-2">
-                    <Input 
-                      type="text" 
-                      bsSize="lg" 
-                      value={this.state.lowdangerdia}
-                      onChange={e => this.setState({ name: e.target.value })}
-                    />  
-                  </FormGroup>
-                  <h3 className="align-self-center ml-2">&mdash;</h3>
-                  <FormGroup className="pt-1 ml-2">
-                    <Input 
-                      type="text" 
-                      bsSize="lg" 
-                      value={this.state.topdangerdia}
-                      onChange={e => this.setState({ name: e.target.value })}
-                    />  
-                  </FormGroup>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row" className="text-center"><h3>위험</h3></th>
-                <td className="d-flex align-self-center">
-                  <FormGroup className="pt-1 ml-2">
-                    <Input 
-                      type="text" 
-                      bsSize="lg" 
-                      value={this.state.lowdangersys}
-                      onChange={e => this.setState({ name: e.target.value })}
-                    />
-                  </FormGroup>
-                  <h3 className="align-self-center ml-2">&mdash;</h3>
-                  <FormGroup className="pt-1 ml-2">
-                    <Input 
-                      type="text" 
-                      bsSize="lg" 
-                      value={this.state.topdangersys}
-                      onChange={e => this.setState({ name: e.target.value })}
-                    />
-                  </FormGroup>
-                </td>
-                <td>or</td>
-                <td className="d-flex align-self-center">
-                  <FormGroup className="pt-1 ml-2">
-                    <Input 
-                      type="text" 
-                      bsSize="lg" 
-                      value={this.state.lowdangerdia}
-                      onChange={e => this.setState({ name: e.target.value })}
-                    />  
-                  </FormGroup>
-                  <h3 className="align-self-center ml-2">&mdash;</h3>
-                  <FormGroup className="pt-1 ml-2">
-                    <Input 
-                      type="text" 
-                      bsSize="lg" 
-                      value={this.state.topdangerdia}
-                      onChange={e => this.setState({ name: e.target.value })}
-                    />  
-                  </FormGroup>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row" className="text-center"><h3>위험</h3></th>
-                <td className="d-flex align-self-center">
-                  <FormGroup className="pt-1 ml-2">
-                    <Input 
-                      type="text" 
-                      bsSize="lg" 
-                      value={this.state.lowdangersys}
-                      onChange={e => this.setState({ name: e.target.value })}
-                    />
-                  </FormGroup>
-                  <h3 className="align-self-center ml-2">&mdash;</h3>
-                  <FormGroup className="pt-1 ml-2">
-                    <Input 
-                      type="text" 
-                      bsSize="lg" 
-                      value={this.state.topdangersys}
-                      onChange={e => this.setState({ name: e.target.value })}
-                    />
-                  </FormGroup>
-                </td>
-                <td>or</td>
-                <td className="d-flex align-self-center">
-                  <FormGroup className="pt-1 ml-2">
-                    <Input 
-                      type="text" 
-                      bsSize="lg" 
-                      value={this.state.lowdangerdia}
-                      onChange={e => this.setState({ name: e.target.value })}
-                    />  
-                  </FormGroup>
-                  <h3 className="align-self-center ml-2">&mdash;</h3>
-                  <FormGroup className="pt-1 ml-2">
-                    <Input 
-                      type="text" 
-                      bsSize="lg" 
-                      value={this.state.topdangerdia}
-                      onChange={e => this.setState({ name: e.target.value })}
-                    />  
-                  </FormGroup>
-                </td>
-              </tr>
-            </tbody>
-          </Table>
-        </Form>
-      </Row>
-
-
+      <Fragment>
+        <Row className="col-12">
+          <Form action="/" className="col-12 m-0 p-0" onSubmit={this.handleLogin}>      
+            <Table className="m-0 col-12">
+              <thead className="table-primary">
+                <tr>
+                  <th width={'15%'}></th>
+                  <th width={'15%'}><h3>분류</h3></th>
+                  <th><h3 className="pl-2">mg/dl</h3></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row" className="text-center">
+                    <h3>정상</h3>
+                  </th>
+                  <td className="align-self-center">
+                    <h3 className= "align-self-center">Fasting</h3>
+                  </td>
+                  <td className="d-flex align-self-center">
+                    <FormGroup className="pt-1 ml-2">
+                      <Input 
+                        type="number" 
+                        bsSize="lg" 
+                        disabled={this.state.edit===true?false:true} 
+                        value={this.state.normalfasting}
+                        onChange={e => this.setState({ normalfasting: e.target.value })}
+                      />  
+                    </FormGroup>
+                    <h3 className="align-self-center ml-2">&#8764;</h3>
+                    <FormGroup className="pt-1 ml-2">
+                      <Input 
+                        type="number" 
+                        bsSize="lg" 
+                        disabled={this.state.edit===true?false:true} 
+                        value={this.state.alertfasting}
+                        onChange={e => this.setState({ alertfasting: e.target.value })}
+                      />  
+                    </FormGroup>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row" className="text-center"></th>
+                  <td className="align-self-center">
+                    <h3 className= "align-self-center">PP2</h3>
+                  </td>
+                  <td className="d-flex align-self-center">
+                    <FormGroup className="pt-1 ml-2">
+                      <Input 
+                        type="number" 
+                        bsSize="lg" 
+                        disabled={this.state.edit===true?false:true} 
+                        value={this.state.normalpp2}
+                        onChange={e => this.setState({ normalpp2: e.target.value })}
+                      />
+                    </FormGroup>
+                    <h3 className="align-self-center ml-2">&#8764;</h3>
+                    <FormGroup className="pt-1 ml-2">
+                      <Input 
+                        type="number" 
+                        bsSize="lg" 
+                        disabled={this.state.edit===true?false:true} 
+                        value={this.state.dagnerpp2}
+                        onChange={e => this.setState({ dagnerpp2: e.target.value })}
+                      />
+                    </FormGroup>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row" className="text-center"><h3>주의</h3></th>
+                  <td className="align-self-center">
+                    <h3 className= "align-self-center">Fasting</h3>
+                  </td>
+                  <td className="d-flex align-self-center">
+                    <FormGroup className="pt-1 ml-2">
+                      <Input 
+                        type="number" 
+                        bsSize="lg" 
+                        disabled={this.state.edit===true?false:true} 
+                        value={this.state.alertfasting}
+                        onChange={e => this.setState({ r: e.target.value })}
+                      />  
+                    </FormGroup>
+                    <h3 className="align-self-center ml-2">&#8764;</h3>
+                    <FormGroup className="pt-1 ml-2">
+                      <Input 
+                        type="number" 
+                        bsSize="lg" 
+                        disabled={this.state.edit===true?false:true} 
+                        value={this.state.dangerfasting}
+                        onChange={e => this.setState({ dangerfasting: e.target.value })}
+                      />  
+                    </FormGroup>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"></th>
+                  <td className="align-self-center">
+                    <h3 className= "align-self-center">PP2</h3>
+                  </td>
+                  <td className="d-flex align-self-center">
+                    <h3 className= "align-self-center pl-2">&mdash;</h3>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row" className="text-center"><h3>위험</h3></th>
+                  <td className="align-self-center">
+                    <h3 className= "align-self-center">Fasting</h3>
+                  </td>
+                  <td className="d-flex align-self-center">
+                    <FormGroup className="pt-1 ml-2">
+                      <Input 
+                        type="number" 
+                        bsSize="lg" 
+                        disabled={this.state.edit===true?false:true} 
+                        value={this.state.dangerfasting}
+                        onChange={e => this.setState({ dangerfasting: e.target.value })}
+                      />  
+                    </FormGroup>
+                    <h1 className="align-self-center ml-2">&#8804;</h1>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"></th>
+                  <td className="align-self-center">
+                    <h3 className= "align-self-center">PP2</h3>
+                  </td>
+                  <td className="d-flex align-self-center">
+                    <FormGroup className="pt-1 ml-2">
+                      <Input 
+                        type="number" 
+                        bsSize="lg" 
+                        disabled={this.state.edit===true?false:true} 
+                        value={this.state.dagnerpp2}
+                        onChange={e => this.setState({ dagnerpp2: e.target.value })}
+                      />  
+                    </FormGroup>
+                    <h1 className="align-self-center ml-2">&#8804;</h1>
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
+          </Form>
+        </Row>
+        <Row>
+          <Col md="12" className="pr-3 d-flex flex-row-reverse">
+            <Button.Ripple 
+              color="primary"
+            >
+              Save
+            </Button.Ripple>
+            <Button.Ripple
+              outline={this.state.edit===true?false:true} 
+              color="primary"
+              className="mr-1"
+              onClick={this.edit}
+            >
+              Edit
+            </Button.Ripple>
+          </Col>
+        </Row>
+      </Fragment>
     )
   }
 }
@@ -335,14 +214,7 @@ const mapStateToProps = state => {
     dataList: state.dataList,
     appo: state.dataList.appointment,
     pinfo: state.dataList.patient,
-    cslist: state.dataList.csdata,
-    bpdata: state.dataList.BP,
-    pulstdata: state.dataList.PULSE,
-    tempdata: state.dataList.TEMP,
-    bsdata : state.dataList.BS,
-    wedata : state.dataList.WE,
-    spo2data : state.dataList.SPO2
-
+    vitaldata: state.dataList.vitaldata
   }
 }
 

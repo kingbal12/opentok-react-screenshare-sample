@@ -1,9 +1,8 @@
 import React from "react"
-import {Form, FormGroup, Button,
-  InputGroup, InputGroupAddon,Input,
+import {Table,
+  Button,
   Card,
   CardHeader,
-  CardTitle,
   CardBody,
   Row,
   Col,
@@ -11,32 +10,20 @@ import {Form, FormGroup, Button,
 } from "reactstrap"
 import ReactPaginate from "react-paginate"
 import "../../../../assets/scss/plugins/extensions/react-paginate.scss"
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer
-} from "recharts"
-import { Check } from "react-feather"
-import { history } from "../../../../history"
-import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import "../../../../assets/scss/pages/authentication.scss"
 import {connect} from "react-redux"
 import userImg from "../../../../assets/img/portrait/small/avatar-s-11.jpg"
-import { ContextLayout } from "../../../../utility/context/Layout"
 import { Fragment } from "react"
 import appoints from "../../../../redux/reducers/appoint/appoints"
 import previmg from "../../../../assets/img/portrait/small/Sample_User_Icon.png"
-import {Menu} from "react-feather"
-import { starTask } from "../../../../redux/actions/todo"
-import { ChevronDown,ChevronUp,ChevronLeft,
-  ChevronRight } from "react-feather"
-
-
+import { 
+  ChevronDown,
+  ChevronUp,
+  ChevronLeft,
+  ChevronRight, 
+  Phone, 
+  Video 
+} from "react-feather"
 
 
 
@@ -101,12 +88,48 @@ class PastConsultList extends React.Component {
         {this.props.appo===null?null:
           <Row>
             <Col className="col-12 mb-2">
-              <Card style={{backgroundColor: "#efefff", height:"60px"}}>
-                {this.props.appo.APPOINT_TIME}
-                {this.props.pinfo.F_NAME}
-                {this.props.pinfo.GENDER==="1"||this.props.pinfo.GENDER==="3"?"M":"F"}
-                {this.props.pinfo.BIRTH_DT}
-              </Card>
+            <Table responsive>
+                <thead>
+                  <tr className="table-primary align=self-center">
+                    <th><h6 className="pt-1">{this.props.appo.APPOINT_TIME}</h6></th>
+                    <th><h6 className="pt-1">{this.props.pinfo.F_NAME}</h6></th>
+                    <th><h6 className="pt-1">{this.props.pinfo.GENDER==="1"||this.props.pinfo.GENDER==="3"?"M":"F"}</h6></th>
+                    <th><h6 className="pt-1">{this.props.pinfo.AGE}</h6></th>
+                    <th><h6 className="pt-1">{this.props.pinfo.BIRTH_DT}</h6></th>
+                    <th><h6 className="pt-1">{this.props.pinfo.NOTE_DX}</h6></th>
+                    <th><h6 className="pt-1">{this.props.pinfo.FIRST_YN==="N"?"재진":"초진"}</h6></th>
+                    <th>
+                      <h6 className="pt-1">
+                        {this.props.pinfo.BP}
+                        {this.props.pinfo.PULSE}
+                        {this.props.pinfo.BW}
+                        {this.props.pinfo.BS}
+                        {this.props.pinfo.TEMPERATURE}
+                        {this.props.pinfo.SPO2}
+                      </h6>
+                    </th>
+                    {this.props.appo.APPOINT_KIND==="1"?
+                      <th>
+                        <Button.Ripple className= "btn-icon btn" color="primary">
+                          <Phone size={14} />
+                        </Button.Ripple>
+                        <Button.Ripple outline className="ml-1 btn-icon btn"  color="primary">
+                          <Video size={14} />
+                        </Button.Ripple>
+                      </th>
+                      :
+                      <th>
+                        <Button.Ripple outline className= "btn-icon btn"  color="primary">
+                          <Phone size={14} />
+                        </Button.Ripple>
+                        <Button.Ripple className="ml-1 btn-icon btn"  color="primary">
+                          <Video size={14} />
+                        </Button.Ripple>
+                      </th>
+                    }
+                  </tr>
+                </thead>
+              </Table>
             </Col>   
           </Row>
         }
@@ -187,7 +210,7 @@ class PastConsultList extends React.Component {
           )
         })}
 
-        <ReactPaginate
+        {/* <ReactPaginate
               previousLabel={<ChevronLeft size={15} />}
               nextLabel={<ChevronRight size={15} />}
               breakLabel="..."
@@ -201,7 +224,7 @@ class PastConsultList extends React.Component {
                   : 0
               }
               onPageChange={page => this.handlePagination(page)}
-            />     
+            />      */}
       </div>
     )
   }
@@ -212,6 +235,7 @@ const mapStateToProps = state => {
     user: state.auth,
     dataList: state.dataList,
     appo: state.dataList.appointment,
+    pinfo: state.dataList.patient,
     cousultlist: state.dataList.pastconsultlist,
     totalpage: state.dataList.totalPages
 

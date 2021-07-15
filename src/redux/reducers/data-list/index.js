@@ -16,7 +16,8 @@ const initialState = {
   WE:[],
   SPO2:[],
   pastconsulttotal:0,
-  pastconsultlist:[]
+  pastconsultlist:[],
+  vitaldata:""
 }
 
 const determinePopularity = val => {
@@ -121,6 +122,11 @@ const DataListReducer = (state = initialState, action) => {
         BS: action.BS,
         WE: action.WE,
         SPO2: action.SPO2
+      }
+    case "GET_VITALDATA_SETTING":
+      return {
+        ...state,
+        vitaldata: action.data
       }
     case "GET_ALL_DATA":
       return {
