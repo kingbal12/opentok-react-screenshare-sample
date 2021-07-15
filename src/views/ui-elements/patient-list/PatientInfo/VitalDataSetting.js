@@ -77,7 +77,7 @@ class VitalDataSetting extends React.Component {
                         {this.props.pinfo.SPO2}
                       </h6>
                     </th>
-                    <th><Settings stroke="B"></Settings></th>
+                    <th><Settings color="purple"></Settings></th>
                   </tr>
                 </thead>
               </Table>
