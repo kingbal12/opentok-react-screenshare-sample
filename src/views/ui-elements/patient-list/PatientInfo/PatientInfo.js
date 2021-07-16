@@ -29,6 +29,8 @@ import {connect} from "react-redux"
 import { Fragment } from "react"
 import previmg from "../../../../assets/img/portrait/small/Sample_User_Icon.png"
 import { Menu } from "react-feather"
+import "../../../../assets/scss/plugins/forms/flatpickr/flatpickr.scss"
+import "../../../../assets/scss/plugins/extensions/recharts.scss"
 
 
 
@@ -70,14 +72,12 @@ class PatientInfo extends React.Component {
   componentDidMount() {
     console.log(this.props.user)
     console.log(this.props.dataList)
+    console.log("환자 개인정보:", this.props.pinfo)
   }
 
-  onSliderChange = value => {
-    this.setState({ value })
-  }
-
-  resetSlider = () => {
-    this.setState({ value: null })
+  goCallSetting = e => {
+    e.preventDefault() 
+    history.push("/pages/callsetting")
   }
 
   goPastConsultList(pid) {
@@ -147,7 +147,7 @@ class PatientInfo extends React.Component {
                         <Button.Ripple outline className= "btn-icon btn"  color="primary">
                           <Phone size={14} />
                         </Button.Ripple>
-                        <Button.Ripple className="ml-1 btn-icon btn"  color="primary">
+                        <Button.Ripple onClick={this.goCallSetting} className="ml-1 btn-icon btn"  color="primary">
                           <Video size={14} />
                         </Button.Ripple>
                       </th>

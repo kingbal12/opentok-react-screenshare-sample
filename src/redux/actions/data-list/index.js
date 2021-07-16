@@ -432,3 +432,24 @@ export const getVitalSettingData = (userid, patientid) => {
   }
 }
 
+
+
+
+export const postMDNoteData = (userid, apponum, cc, dx, rx, notevital) => {
+  return dispatch => {
+    axios
+      .post("http://203.251.135.81:9300/v1/doctor/treatment/md-note", {
+        user_id : userid,
+        appoint_num : apponum,
+        note_cc : cc,
+        note_dx : dx,
+        note_rx : rx,
+        note_vital : notevital,
+      })
+      .then(response => {
+        if(response.data.status==="200") {
+          alert("진료노트 저장이 완료되었습니다.")
+        }
+      })
+  }
+}

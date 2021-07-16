@@ -18,16 +18,9 @@ import SliderBasic from "./SliderBasic"
 import { ContextLayout } from "../../../../utility/context/Layout"
 
 class CallSetting extends React.Component {
-  state = {
-    value: 20
-  }
-
-  onSliderChange = value => {
-    this.setState({ value })
-  }
-
-  resetSlider = () => {
-    this.setState({ value: null })
+ 
+  componentDidMount() {
+    console.log(this.props.pinfo)
   }
  
   render() {
@@ -143,7 +136,17 @@ class CallSetting extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.auth
+    user: state.auth,
+    dataList: state.dataList,
+    appo: state.dataList.appointment,
+    pinfo: state.dataList.patient,
+    cslist: state.dataList.csdata,
+    bpdata: state.dataList.BP,
+    pulstdata: state.dataList.PULSE,
+    tempdata: state.dataList.TEMP,
+    bsdata : state.dataList.BS,
+    wedata : state.dataList.WE,
+    spo2data : state.dataList.SPO2
   }
 }
 
