@@ -90,10 +90,10 @@ class ConsultingRoom extends React.Component {
       telnum: "", 
       faxnum: "",
       mdnotemodal: false,
-      presmodal: false
-    
+      presmodal: false,
+      pharmacy: false,
+      App: false
     }
-    
   }
 
 
@@ -159,6 +159,23 @@ class ConsultingRoom extends React.Component {
     this.setState(prevState => ({
       presmodal: !prevState.presmodal
     }))
+  }
+
+  setpharmacy = () => {
+    this.setState(prevState => ({
+      pharmacy: !prevState.pharmacy
+    }))
+  }
+
+  setApp = () => {
+    this.setState(prevState => ({
+      App: !prevState.App
+    }))
+  }
+
+  Check = e => {
+    e.preventDefault()
+    console.log(this.state)
   }
  
 
@@ -380,8 +397,22 @@ class ConsultingRoom extends React.Component {
                   <Col lg="3" md="12" className="align-self-center pt-0">
                     <h5 className="text-bold-600">처방전 보내기</h5>
                   </Col>
-                  <Col lg="9" md="12" className="d-flex" >
-
+                  <Col lg="9" md="12" className="d-flex align-self-center">
+                    <Checkbox
+                      color="primary"
+                      icon={<Check className="vx-icon" size={16} />}
+                      label="약국"
+                      defaultChecked={false}
+                      onChange={this.setpharmacy}
+                    />
+                      <Checkbox
+                      className="ml-2"
+                      color="primary"
+                      icon={<Check className="vx-icon" size={16} />}
+                      label="원격진료실 &amp; App"
+                      defaultChecked={false}
+                      onChange={this.setApp}
+                    />
                   </Col>
                 </Row>
                 <Row className="mt-1">
@@ -391,6 +422,7 @@ class ConsultingRoom extends React.Component {
                     color="black"
                     outline
                     type="button"
+                    onClick={this.Check}
                   >
                     처방전 업로드
                   </Button>
