@@ -84,7 +84,13 @@ class ConsultingRoom extends React.Component {
       diagnosis: "",
       txrx: "",
       recommendation: "",
-      mdnotemodal: false
+      pcode: "",
+      pname: "",
+      paddress: "",
+      telnum: "", 
+      faxnum: "",
+      mdnotemodal: false,
+      presmodal: false
     
     }
     
@@ -94,35 +100,27 @@ class ConsultingRoom extends React.Component {
   componentDidMount() {
     console.log(this.props.pinfo)
     axios
-      .get("http://203.251.135.81:9300/v1/doctor/treatment/patient-pharmacy", {
+      .get("http://203.251.135.81:9300/v1/doctor/treatment/pharmacy", {
         params: {
           patient_id: this.props.pinfo.PATIENT_ID
         }
       })
       .then(response => {
-
+        let pharmacy
 
         if(response.data.status==="200") {
           console.log(response.data.data)
-          // myinfo = response.data.data
-          // console.log("나의 정보: ",myinfo)
-          // if(myinfo.GENDER==='1' || myinfo.GENDER==='3') {
-          //   this.setState({gender: "M"})
-          // } else if(myinfo.GENDER==='2' || myinfo.GENDER==='4'){
-          //   this.setState({gender: "F"})
-          // } else{
-          //   this.setState({gender: "성별정보가 저장되어있지 않습니다."})
-          // }
-          // this.setState({
-          //   name: myinfo.F_NAME,
-          //   medicalpart: myinfo.MEDICAL_PART,
-          //   medicalable: myinfo.MEDICAL_ABLE,
-          //   medicaldesc: myinfo.MEDICAL_DESC,
-          //   medicalnum: myinfo.MEDICAL_NUM,
-          //   userdesc: myinfo.USER_DESC
-          // })
+          pharmacy = response.data.data
+ 
+          this.setState({
+            pcode: pharmacy.P_CODE,
+            pname: pharmacy.P_NAME,
+            paddress: pharmacy.P_ADDRESS,
+            telnum: pharmacy.TEL_NUM, 
+            faxnum: pharmacy.FAX_NUM,
+          })
         } else {
-          alert("고객정보를 불러오지 못하였습니다.")
+          alert("약국정보가 없습니다.")
         }
       })
   }
@@ -154,6 +152,12 @@ class ConsultingRoom extends React.Component {
       )
     this.setState(prevState => ({
       mdnotemodal: !prevState.mdnotemodal
+    }))
+  }
+
+  presModal = () => {
+    this.setState(prevState => ({
+      presmodal: !prevState.presmodal
     }))
   }
  
@@ -326,6 +330,75 @@ class ConsultingRoom extends React.Component {
               </ModalBody>
               <ModalFooter>
                 <Button color="primary" onClick={this.postMdNote}>
+                  저장
+                </Button>
+              </ModalFooter>
+            </Modal>
+
+            <Modal
+              isOpen={this.state.presmodal}
+              toggle={this.presModal}
+              className="modal-dialog-centered modal-lg"
+            >
+              <ModalHeader toggle={this.presModal}>
+                Prescription
+              </ModalHeader>
+              <ModalBody>
+                <Row>
+                  <Col lg="3" md="12" className="align-self-center pt-0">
+                    <h5 className="text-bold-600">환자명</h5>
+                  </Col>
+                  <Col lg="9" md="12" >
+                    <h5>{this.props.pinfo.F_NAME}</h5>
+                  </Col>
+                </Row>
+                <Row className="mt-1">
+                  <Col lg="3" md="12" className="align-self-center pt-0">
+                    <h5 className="text-bold-600">약국명</h5>
+                  </Col>
+                  <Col lg="9" md="12" >
+                      <h5>{this.state.pname}</h5>
+                  </Col>
+                </Row>
+                <Row className="mt-1">
+                  <Col lg="3" md="12" className="align-self-center pt-0">
+                    <h5 className="text-bold-600">약국 주소</h5>
+                  </Col>
+                  <Col lg="9" md="12" >
+                      <h5>{this.state.paddress}</h5>
+                  </Col>
+                </Row>
+                <Row className="mt-1">
+                  <Col lg="3" md="12" className="align-self-center pt-0">
+                    <h5 className="text-bold-600">Fax</h5>
+                  </Col>
+                  <Col lg="9" md="12" >
+                      <h5>{this.state.faxnum}</h5>
+                  </Col>
+                </Row>
+                <Row className="mt-1">
+                  <Col lg="3" md="12" className="align-self-center pt-0">
+                    <h5 className="text-bold-600">처방전 보내기</h5>
+                  </Col>
+                  <Col lg="9" md="12" className="d-flex" >
+
+                  </Col>
+                </Row>
+                <Row className="mt-1">
+                  <Col lg="12" md="12" className="align-self-center d-flex justify-content-center">
+                  <Button
+                    className="mr-1"
+                    color="black"
+                    outline
+                    type="button"
+                  >
+                    처방전 업로드
+                  </Button>
+                  </Col>
+                </Row>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="primary" onClick={this.postPrescription}>
                   저장
                 </Button>
               </ModalFooter>
@@ -634,6 +707,7 @@ class ConsultingRoom extends React.Component {
                 color="primary"
                 outline
                 type="button"
+                onClick={this.presModal}
               >
                 Prescription
               </Button>
