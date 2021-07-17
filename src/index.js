@@ -14,6 +14,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 
 
+
 const LazyApp = lazy(() => import("./App"))
 
 // configureDatabase()
@@ -36,6 +37,8 @@ ReactDOM.render(
       </PersistGate>
     </Provider>
   </Auth0Provider>,
+  
+
   document.getElementById("root")
 )
 

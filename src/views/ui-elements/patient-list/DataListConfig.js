@@ -92,52 +92,8 @@ const ActionsComponent = props => {
 
 const CustomHeader = props => {
   return (
-    <div className="data-list-header d-flex justify-content-between flex-wrap">
-      {/* <div className="actions-left d-flex flex-wrap">
-        <UncontrolledDropdown className="data-list-dropdown mr-1">
-          <DropdownToggle className="p-1" color="primary">
-            <span className="align-middle mr-1">Actions</span>
-            <ChevronDown size={15} />
-          </DropdownToggle>
-          <DropdownMenu tag="div" right>
-            <DropdownItem tag="a">Delete</DropdownItem>
-            <DropdownItem tag="a">Archive</DropdownItem>
-            <DropdownItem tag="a">Print</DropdownItem>
-            <DropdownItem tag="a">Export</DropdownItem>
-          </DropdownMenu>
-        </UncontrolledDropdown>
-        <Button
-          className="add-new-btn"
-          color="primary"
-          onClick={() => props.handleSidebar(true, true)}
-          outline>
-          <Plus size={15} />
-          <span className="align-middle">Add New</span>
-        </Button>
-      </div> */}
+    <div className="data-list-header d-flex justify-content-between flex-wrap">    
       <div className="actions-right d-flex flex-wrap mt-sm-0 mt-2 col-8">
-        {/* <UncontrolledDropdown className="data-list-rows-dropdown mr-1 d-md-block d-none">
-          <DropdownToggle color="" className="sort-dropdown">
-            <span className="align-middle mx-50">
-              {`${props.index[0]} - ${props.index[1]} of ${props.total}`}
-            </span>
-            <ChevronDown size={15} />
-          </DropdownToggle>
-          <DropdownMenu tag="div" right>
-            <DropdownItem tag="a" onClick={() => props.handleRowsPerPage(5)}>
-              5
-            </DropdownItem>
-            <DropdownItem tag="a" onClick={() => props.handleRowsPerPage(10)}>
-              10
-            </DropdownItem>
-            <DropdownItem tag="a" onClick={() => props.handleRowsPerPage(15)}>
-              15
-            </DropdownItem>
-            <DropdownItem tag="a" onClick={() => props.handleRowsPerPage(20)}>
-              20
-            </DropdownItem>
-          </DropdownMenu>
-        </UncontrolledDropdown> */}
         <div className="filter-section col-5">
             <Input type="text" placeholder="Search" onChange={e => props.handleFilter(e)} />
         </div>
@@ -151,11 +107,10 @@ class DataListConfig extends Component {
   constructor(props) {
     super(props);
     
-    this.props.getData(this.state.user,5,1)
+    this.props.getData(this.state.user, this.state.rowsPerPage, this.state.currentPage)
     
 }
   static getDerivedStateFromProps(props, state) {
-    
     if (
       props.dataList.data.length !== state.data.length ||
       state.currentPage !== props.parsedFilter.page
@@ -168,7 +123,9 @@ class DataListConfig extends Component {
         rowsPerPage: parseInt(props.parsedFilter.perPage),
         totalRecords: props.dataList.totalRecords,
         sortIndex: props.dataList.sortIndex
+        
       }
+      
     }
 
     // Return null if the state hasn't changed
@@ -180,67 +137,8 @@ class DataListConfig extends Component {
     name: "",
     data: [],
     totalPages: 0,
-    currentPage: 0,
-    columns: [
-      // {
-      //   name: "Name",
-      //   selector: "name",
-      //   sortable: true,
-      //   minWidth: "300px",
-      //   cell: row => (
-      //     <p title={row.name} className="text-truncate text-bold-500 mb-0">
-      //       {row.name}
-      //     </p>
-      //   )
-      // },
-      // {
-      //   name: "Category",
-      //   selector: "category",
-      //   sortable: true
-      // },
-      // {
-      //   name: "Popularity",
-      //   selector: "popularity",
-      //   sortable: true,
-      //   cell: row => (
-      //     <Progress
-      //       className="w-100 mb-0"
-      //       color={row.popularity.color}
-      //       value={row.popularity.popValue}
-      //     />
-      //   )
-      // },
-      // {
-      //   name: "Order Status",
-      //   selector: "order_status",
-      //   sortable: true,
-      //   cell: row => (
-      //     <Chip
-      //       className="m-0"
-      //       color={chipColors[row.order_status]}
-      //       text={row.order_status}
-      //     />
-      //   )
-      // },
-      // {
-      //   name: "Price",
-      //   selector: "price",
-      //   sortable: true,
-      //   cell: row => `$${row.price}`
-      // },
-      // {
-      //   name: "Actions",
-      //   sortable: true,
-      //   cell: row => (
-      //     <ActionsComponent
-      //       row={row}
-      //       getData={this.props.getData}
-      //       parsedFilter={this.props.parsedFilter}
-      //       currentData={this.handleCurrentData}
-      //       deleteRow={this.handleDelete}
-      //     />
-      //   )
-      // }   
+    currentPage: 1,
+    columns: [  
       {
         name: "이름",
         selector: "name",
@@ -248,22 +146,12 @@ class DataListConfig extends Component {
         minWidth: "200px",
         cell: row => (
           <div className="d-flex flex-xl-row flex-column align-items-xl-center align-items-start py-xl-0 py-1">
-            {/* <div className="user-img ml-xl-0 ml-2">
-              <img
-                className="img-fluid rounded-circle"
-                height="36"
-                width="36"
-                src={row.image}
-                alt={row.name}
-              />
-            </div> */}
             <div className="user-info text-truncate ml-xl-50 ml-0">
               <span
                 title={row.F_NAME}
                 className="d-block text-bold-500 text-truncate mb-0">
                 {row.F_NAME}
               </span>
-              {/* <small title={row.email}>{row.email}</small> */}
             </div>
           </div>
         )
@@ -291,24 +179,18 @@ class DataListConfig extends Component {
       },
       {
         name: "진단명",
-        // selector: "date",
-        // sortable: true,
         cell: row => (
           <p className="text-bold-500 text-truncate mb-0">{row.NOTE_DX}</p>
         )
       },
       {
         name: "초진/재진",
-        // selector: "date",
-        // sortable: true,
         cell: row => (
           <p className="text-bold-500 text-truncate mb-0">{row.FIRST_YN}</p>
         )
       },
       {
         name: "VitalData",
-        // selector: "",
-        // sortable: true,
         cell: row => (
           <Fragment>
             <Droplet stroke={row.BP==="00"?"silver":row.BP==="01"?"white":row.BP==="02"?"green":row.BP==="03"?"yellow":row.BP==="04"?"red":""}></Droplet>
@@ -322,61 +204,11 @@ class DataListConfig extends Component {
           // 가운데로 옮길것
           
         )
-        // cell: row => {
-        //   return (
-        //     <div className="d-flex flex-column align-items-center">
-        //       <ul className="list-inline mb-0">
-        //         <li className="list-inline-item">
-        //           <Star size="20" className="text-warning" />
-        //         </li>
-        //         <li className="list-inline-item">
-        //           <Star size="20" className="text-warning" />
-        //         </li>
-        //         <li className="list-inline-item">
-        //           <Star
-        //             size="20"
-        //             className={
-        //               row.ratings === "good" || row.ratings === "average"
-        //                 ? "text-warning"
-        //                 : "text-muted"
-        //             }
-        //           />
-        //         </li>
-        //         <li className="list-inline-item">
-        //           <Star
-        //             size="20"
-        //             className={
-        //               row.ratings === "good" ? "text-warning" : "text-muted"
-        //             }
-        //           />
-        //         </li>
-        //         <li className="list-inline-item">
-        //           <Star
-        //             size="20"
-        //             className={
-        //               row.ratings === "good" ? "text-warning" : "text-muted"
-        //             }
-        //           />
-        //         </li>
-        //       </ul>
-        //     </div>
-        //   )
-        // }
       },
       {
         name: "차트보기",
-        // selector: "date",
-        // sortable: true,
         cell: row => (
           <Edit onClick={() => this.goPatientList(row.PATIENT_ID)} style={{cursor:"pointer"}}></Edit>
-          // <Edit onClick={this.goPatientList(row.PATIENT_ID)}></Edit>
-          // 가운데로 옮길것
-          // <ActionsComponent
-          //   row={row}
-          //   getData={this.props.getData}
-          //   parsedFilter={this.props.parsedFilter}
-          //   currentData={this.handleCurrentData}
-          // />
         )
       }
     ],
@@ -395,8 +227,9 @@ class DataListConfig extends Component {
 
   componentDidMount() {
     // this.props.getData(this.props.parsedFilter)
-    this.props.getData(this.state.user,this.state.currentPage,this.state.rowsPerPage)
+    // this.props.getData(this.state.user,this.state.currentPage,this.state.rowsPerPage)
     // this.props.getInitialData()
+    this.props.getData(this.state.user,this.props.parsedFilter.perPage, this.props.parsedFilter.page)
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -475,21 +308,14 @@ class DataListConfig extends Component {
 
   goPatientList(id) {
     // id.preventDefault()
-    alert(`/read-board/${id}`);
     this.props.resetVitalData()
     this.props.getPatientInfo(this.state.user,id)
     this.props.getVitalData(id)
   }
 
-  // goPatientList= e => {
-  //   e.preventDefault()
-  //   alert(e);
-  //   // this.props.getPatientInfo(this.state.user,)
-  // }
   
   handleFilter = e => {
     this.setState({ name: e.target.value })
-    // this.props.filterData(e.target.value)
   }
 
 
@@ -507,8 +333,8 @@ class DataListConfig extends Component {
     let page = parsedFilter.page !== undefined ? parsedFilter.page : 1
     history.push(`/patients-list?page=${page}&perPage=${value}`)
     this.setState({currentPage: page, rowsPerPage: value })
-    // getData({ page: parsedFilter.page, perPage: value })
-    getData({ user_id: this.state.user, page_num: parsedFilter.page, page_amount: value })
+    getData({ user_id: this.state.user, page: parsedFilter.page, perPage: value })
+    // getData({ user_id: this.state.user, page_num: parsedFilter.page, page_amount: value })
   }
 
   handleSidebar = (boolean, addNew = false) => {
@@ -516,24 +342,24 @@ class DataListConfig extends Component {
     if (addNew === true) this.setState({ currentData: null, addNew: true })
   }
 
-  handleDelete = row => {
-    this.props.deleteData(row)
-    this.props.getData(this.props.parsedFilter)
-    if (this.state.data.length - 1 === 0) {
-      let urlPrefix = this.props.thumbView
-        ? "/data-list/thumb-view/"
-        : "/patients-list"
-      history.push(
-        `${urlPrefix}list-view?page=${parseInt(
-          this.props.parsedFilter.page - 1
-        )}&perPage=${this.props.parsedFilter.perPage}`
-      )
-      this.props.getData({
-        page: this.props.parsedFilter.page - 1,
-        perPage: this.props.parsedFilter.perPage
-      })
-    }
-  }
+  // handleDelete = row => {
+  //   this.props.deleteData(row)
+  //   this.props.getData(this.props.parsedFilter)
+  //   if (this.state.data.length - 1 === 0) {
+  //     let urlPrefix = this.props.thumbView
+  //       ? "/data-list/thumb-view/"
+  //       : "/patients-list"
+  //     history.push(
+  //       `${urlPrefix}list-view?page=${parseInt(
+  //         this.props.parsedFilter.page - 1
+  //       )}&perPage=${this.props.parsedFilter.perPage}`
+  //     )
+  //     this.props.getData({
+  //       page: this.props.parsedFilter.page - 1,
+  //       perPage: this.props.parsedFilter.perPage
+  //     })
+  //   }
+  // }
 
   handleCurrentData = obj => {
     this.setState({ currentData: obj })
@@ -550,7 +376,7 @@ class DataListConfig extends Component {
       `${urlPrefix}?page=${page.selected + 1}&perPage=${perPage}`
     )
     // getData({ page: page.selected + 1, perPage: perPage })
-    this.props.getData(this.state.user, perPage, page.selected + 1 )
+    getData(this.state.user, perPage, page.selected + 1 )
     this.setState({ currentPage: page.selected })
   }
 

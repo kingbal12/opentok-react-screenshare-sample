@@ -17,6 +17,8 @@ import "../../../../assets/scss/pages/authentication.scss"
 import { register2,authemail } from "../../../../redux/actions/auth/registerActions"
 import { connect } from "react-redux"
 import axios from "axios"
+import 'react-perfect-scrollbar/dist/css/styles.css'
+import PerfectScrollbar from 'react-perfect-scrollbar'
 
 
 class Register extends React.Component {
@@ -164,6 +166,7 @@ class Register extends React.Component {
 
   render() {
     return (
+      
       <Row className="m-0 justify-content-center">
         <Col
           sm="8"
@@ -177,6 +180,7 @@ class Register extends React.Component {
               
               <Col lg="12" md="12" className="p-0">
                 <Card className="rounded-0 mb-0 p-2">
+                <PerfectScrollbar>
                   <CardHeader className="pb-1 pt-50">
                     <CardTitle>
                       <h1>회원가입</h1>
@@ -342,6 +346,7 @@ class Register extends React.Component {
                         </div>
                       </Form>
                   </CardBody>
+                  </PerfectScrollbar>
                 </Card>
               </Col>
             </Row>
@@ -403,6 +408,7 @@ class Register extends React.Component {
           </ModalFooter>
         </Modal>
       </Row>
+      
 
       
 
