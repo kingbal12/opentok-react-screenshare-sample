@@ -13,6 +13,7 @@ import {InputGroup, InputGroupAddon, InputGroupText, Form, FormGroup, Input, Lab
 } from "reactstrap"
 import "../../../../assets/scss/pages/authentication.scss"
 import { register3 } from "../../../../redux/actions/auth/registerActions"
+import { saveRegister3 } from "../../../../redux/actions/cookies"
 import { connect } from "react-redux"
 import DaumPostcode from 'react-daum-postcode';
 import axios from "axios"
@@ -25,15 +26,15 @@ class Register extends React.Component {
     this.state={
       // userid: props.user.register.values.registeruser,
       userid: "kingbal13@naver.com",
-      hospitalname: "",
-      businessnumber: "",
-      zipcode: "",
-      address1: "",
-      address2: "",
-      phonenumber: "",
-      accountname: "",
-      bankname: "",
-      accountnumber: "",
+      hospitalname: props.cookiere3.hospitalname,
+      businessnumber: props.cookiere3.businessnumber,
+      zipcode: props.cookiere3.zipcode,
+      address1: props.cookiere3.address1,
+      address2: props.cookiere3.address2,
+      phonenumber: props.cookiere3.phonenumber,
+      accountname: props.cookiere3.accountname,
+      bankname: props.cookiere3.bankname,
+      accountnumber: props.cookiere3.accountnumber,
       modal: false,
       businessmodal: false,
       businessmodalmsg: ""
@@ -89,6 +90,22 @@ handleComplete = (data) => {
     this.postBusinessNumber(
       this.state.businessnumber
     )
+  }
+
+  saveRe3 = e => {
+    e.preventDefault()
+    this.props.saveRegister3(
+      this.state.hospitalname,
+      this.state.businessnumber,
+      this.state.zipcode,
+      this.state.address1,
+      this.state.address2,
+      this.state.phonenumber,
+      this.state.accountname,
+      this.state.bankname,
+      this.state.accountnumber
+    )
+    alert("병원정보가 저장되었습니다.")
   }
 
 
@@ -349,14 +366,13 @@ handleComplete = (data) => {
                         outline
                         color="dark" 
                         type="button"
-                        // onClick={this.checkstate}
+                        onClick={this.saveRe3}
                       >
                         임시저장
                       </Button>
                       <Button
                         color="primary" 
                         type="submit"
-                        // onClick={this.checkstate}
                       >
                         다음단계
                       </Button>
@@ -376,8 +392,9 @@ handleComplete = (data) => {
 
 const mapStateToProps = state =>{
   return {
-    user: state.auth
+    user: state.auth,
+    cookiere3: state.cookies.register3
   }
 }
 
-export default connect(mapStateToProps, {register3})(Register)
+export default connect(mapStateToProps, {register3, saveRegister3})(Register)

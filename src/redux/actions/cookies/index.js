@@ -13,5 +13,30 @@ export const delemail = () => {
   }
 }
 
-
+export const saveRegister3 = (
+  hospitalname,
+  businessnumber,
+  zipcode,
+  address1,
+  address2,
+  phonenumber,
+  accountname,
+  bankname,
+  accountnumber 
+  ) => {
+  return dispatch => {
+    dispatch({ 
+      type: "SAVE_REGISTER3", 
+      payload: {
+      hospitalname,
+      businessnumber,
+      zipcode,
+      address1,
+      address2,
+      phonenumber,
+      accountname,
+      bankname,
+      accountnumber} })
+  }
+}
 
