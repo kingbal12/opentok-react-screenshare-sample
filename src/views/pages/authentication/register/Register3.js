@@ -16,14 +16,15 @@ import { register3 } from "../../../../redux/actions/auth/registerActions"
 import { connect } from "react-redux"
 import DaumPostcode from 'react-daum-postcode';
 import axios from "axios"
+import 'react-perfect-scrollbar/dist/css/styles.css'
 import PerfectScrollbar from "react-perfect-scrollbar";
 
 class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      userid: props.user.register.values.registeruser,
-      // userid: "kingbal13@naver.com",
+      // userid: props.user.register.values.registeruser,
+      userid: "kingbal13@naver.com",
       hospitalname: "",
       businessnumber: "",
       zipcode: "",
@@ -142,8 +143,8 @@ handleComplete = (data) => {
   
   render() {
     return (
-      <PerfectScrollbar>
-      <Row className="m-0 justify-content-center">
+      <PerfectScrollbar style={{display:"flex",height:"100vh", alignItems:"center"}}>
+      <Row className="m-0 w-100 justify-content-center">
         <Modal
           isOpen={this.state.businessmodal}
           toggle={this.businessnumModal}

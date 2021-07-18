@@ -12,12 +12,7 @@ import {InputGroup, Form, FormGroup, Input, Button,
   ModalBody,
   ModalFooter,
 } from "reactstrap"
-import PerfectScrollbar from "react-perfect-scrollbar"
-// import classnames from "classnames"
-// import RegisterFirebase from "./RegisterFirebase"
-// import RegisterAuth0 from "./RegisterAuth0"
 import RegisterJWT from "./RegisterJWT"
-// import registerImg from "../../../../assets/img/pages/register.jpg"
 import "../../../../assets/scss/pages/authentication.scss"
 // import { register4 } from "../../../../redux/actions/auth/registerActions"
 import { connect } from "react-redux"
@@ -25,6 +20,8 @@ import previmg from "../../../../assets/img/portrait/small/Sample_User_Icon.png"
 import { history } from "../../../../history"
 import Select from "react-select"
 import axios from "axios"
+import 'react-perfect-scrollbar/dist/css/styles.css'
+import PerfectScrollbar from "react-perfect-scrollbar";
 
 //  '01' : 가정의학과, '02' : 내과 
 //  '03' : 산부인과, '04' : 피부과 
@@ -169,7 +166,8 @@ class Register extends React.Component {
       </div>
     }
     return (
-      <Row className="m-0 justify-content-center">
+      <PerfectScrollbar style={{display:"flex",height:"100vh", alignItems:"center"}}>
+      <Row className="m-0 w-100 justify-content-center">
       <Col
         sm="8"
         xl="8"
@@ -179,7 +177,7 @@ class Register extends React.Component {
       >
         
         <Card className="bg-authentication rounded-0 mb-0 w-100">
-          <Row className="m-0">
+          <Row className="m-0 ">
             <Col lg="12" md="12" className="p-0">
               <Card className="rounded-0 mb-0 p-2">
                 <CardHeader className="pb-1 pt-50">
@@ -190,28 +188,22 @@ class Register extends React.Component {
               <CardBody className="pt-1 pb-50">              
                   <Form action="/" onSubmit={this.handleRegister}>
                     <FormGroup className="form-label-group">
-                      <div className="d-flex justify-content-between">
-                        <div className="col-2 align-self-start"><b>프로필 사진 등록</b></div>
-                        <InputGroup>
-                          <CustomInput 
-                            type="file" 
-                            accept="image/gif,image/jpeg,image/png" 
-                            id="exampleCustomFileBrowser" 
-                            name="customFile" 
-                            label=""
-                            onChange={this.handleFileOnChange}/> 
-                        </InputGroup>
-                      </div>
-                      
-                      <div className="d-flex justify-content-between">
-                        <div className="col-2"></div>
-                        <Row className="text-left col-4 mt-2">{profile_preview}</Row>
-                        <div className="col-6 mt-2">
-                          {/* <Input type="file" accept="image/gif,image/jpeg,image/png"  id="inputFile" name="fileInpur" />  */}
-                          <Button className="col-5 mr-1" color="primary" type="button" outline>수정</Button>
-                          <Button className="col-5 ml-1" color="primary" type="button" outline>삭제</Button>
-                        </div>
-                      </div>
+                      <Row>
+                        
+                          <Col lg="2" md="12" className="align-self-start"><b>프로필 사진 등록</b></Col>
+                          <Col lg="6" md="12">
+                          <InputGroup>
+                            <CustomInput 
+                              type="file" 
+                              accept="image/gif,image/jpeg,image/png" 
+                              id="exampleCustomFileBrowser" 
+                              name="customFile" 
+                              label=""
+                              onChange={this.handleFileOnChange}/> 
+                          </InputGroup>
+                          </Col>
+                          <Col lg="4" md="12" className="text-left">{profile_preview}</Col>
+                      </Row>
                       
                     </FormGroup> 
                     <FormGroup className="form-label-group d-flex justify-content-between no-gutters">
@@ -372,6 +364,7 @@ class Register extends React.Component {
         </ModalFooter>
       </Modal>
     </Row>
+    </PerfectScrollbar>
     )
   }
 }

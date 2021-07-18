@@ -1,4 +1,4 @@
-export const login = (state = { userRole: "admin" }, action) => {
+export const login = (state = { userRole: "admin", email: "" }, action) => {
   switch (action.type) {
     // 로그인 리듀서 부분
     case "LOGIN_WITH_JWT": {

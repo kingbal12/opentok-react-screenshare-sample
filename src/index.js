@@ -27,13 +27,13 @@ ReactDOM.render(
     redirect_uri={window.location.origin + process.env.REACT_APP_PUBLIC_PATH}>
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <Suspense fallback={<Spinner />}>
-          <Layout>
-            <IntlProviderWrapper>
-              <LazyApp />
-            </IntlProviderWrapper>
-          </Layout>
-        </Suspense>
+          <Suspense fallback={<Spinner />}>
+            <Layout>
+              <IntlProviderWrapper>
+                <LazyApp />
+              </IntlProviderWrapper>
+            </Layout>
+          </Suspense>
       </PersistGate>
     </Provider>
   </Auth0Provider>,

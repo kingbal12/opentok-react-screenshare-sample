@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import { Link } from "react-router-dom"
 import { CardBody, FormGroup, Form, Input, Button, FormFeedback } from "reactstrap"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import { Mail, Lock, Check } from "react-feather"
 import { loginWithJWT} from "../../../../redux/actions/auth/loginActions"
+import { saveemail, delemail} from "../../../../redux/actions/cookies"
 import { connect } from "react-redux"
 import { history } from "../../../../history"
-import { useCookies } from 'react-cookie'
 import firebase from 'firebase'; 
+
 
 const config =  { 
   apiKey: "AIzaSyAMiyzuGLBHAk4K18Q4Bla4ljA4cfUf-oM"
@@ -19,93 +20,53 @@ const config =  {
 	, appId: "1:575076484827:web:b15851500503c4c2432efe" 
 	, measurementId: "G-5H09HRTQQT"  
 }; 
-// firebase.initializeApp(config);  
-// const messaging = firebase.messaging();
 
-// messaging.usePublicVapidKey("BL0eTL3wIbAxmATwORsjQ-pNPCQBYrFNofCAr1xnArzbBjkRDreJLmiXYd-ySpazU-GTEAhtThWIhCLxYLvTGvY");
-
-// //허가를 요청합니다!
-// Notification.requestPermission()
-// .then(function() {
-// 	console.log('허가!');
-//   return messaging.getToken();
-// })
-
-// .then(function(token) {
-// 	console.log(token); //토큰을 출력!
-  
-// })
-// .then(function(token) {
-//   tokendata = token
-// })
-// .catch(function(err) {
-// 	console.log('fcm에러 : ', err);
-// })
-
-// const [email, setEmail] = useState("");
-// const [isRemember, setIsRemember] = useState(false);
-// const [cookies, setCookie, removeCookie] = useCookies(['rememberEmail']);
-
-// useEffect(() => {
-//   if(cookies.rememberEmail !== undefined) {
-//     setEmail(cookies.rememberEmail);
-//     setIsRemember(true);
-//   }
-// }, []);
-
-// const handleOnChange = (e) => {
-//   setIsRemember(e.target.check);
-//   if(e.target.check){
-//     setCookie('rememberEmail', email, {maxAge: 2000});
-//   } else {
-//   removeCookie('rememberEmail');
-//   }
-// }
 
 class LoginJWT extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      email: "",
+      email: props.values.email,
       password: "",
       tokendata: "",
       devicekind: "W",
       remember: false
     }
   }
-  // config = { 
-  //   apiKey: "AIzaSyAMiyzuGLBHAk4K18Q4Bla4ljA4cfUf-oM"
-  //   , authDomain: "i4h-hicare.firebaseapp.com"
-  //   , databaseURL: "https://i4h-hicare.firebaseapp.com"
-  //   , projectId: "i4h-hicare"
-  //   , storageBucket: "i4h-hicare.appspot.com"
-  //   , messagingSenderId: "575076484827"
-  //   , appId: "1:575076484827:web:b15851500503c4c2432efe" 
-  //   , measurementId: "G-5H09HRTQQT"  
-  // }
+
+
 
   componentDidMount() {
-    firebase.initializeApp(config);  
-    const messaging = firebase.messaging();
+    if (!firebase.apps.length) {
 
-    messaging.usePublicVapidKey("BL0eTL3wIbAxmATwORsjQ-pNPCQBYrFNofCAr1xnArzbBjkRDreJLmiXYd-ySpazU-GTEAhtThWIhCLxYLvTGvY");
+      firebase.initializeApp(config);  
+      const messaging = firebase.messaging();
 
-    //허가를 요청합니다!
-    Notification.requestPermission()
-    .then(function() {
-      console.log('허가!');
-      return messaging.getToken();
-    })
+      messaging.usePublicVapidKey("BL0eTL3wIbAxmATwORsjQ-pNPCQBYrFNofCAr1xnArzbBjkRDreJLmiXYd-ySpazU-GTEAhtThWIhCLxYLvTGvY");
 
-    .then(token => {
-      console.log(token); //토큰을 출력!
-      this.setState({tokendata:token})
-    })
+      //허가를 요청합니다!
+      Notification.requestPermission()
+      .then(function() {
+        console.log('허가!');
+        return messaging.getToken();
+      })
 
-    .catch(function(err) {
-      console.log('fcm에러 : ', err);
-    })
+      .then(token => {
+        console.log(token); //토큰을 출력!
+        this.setState({tokendata:token})
+      })
 
+      .catch(function(err) {
+        console.log('fcm에러 : ', err);
+      })
+    
+    } else {
+    
+      firebase.app();
+    
+    }
+
+    
   }
   
   
@@ -124,8 +85,15 @@ class LoginJWT extends React.Component {
   handleRemember = e => {
     this.setState({
       remember: e.target.checked
-    })
+    },() => {
+      if(this.state.remember===true){
+        this.props.saveemail(this.state.email)
+      } else {
+       this.props.delemail()
+      }
+      })
   }
+
   render() {
     return (
       <React.Fragment>
@@ -165,7 +133,7 @@ class LoginJWT extends React.Component {
                 color="primary"
                 icon={<Check className="vx-icon" size={16} />}
                 label="아이디 기억"
-                defaultChecked={false}
+                defaultChecked={this.state.email===""?false:true}
                 onChange={this.handleRemember}
               />
               
@@ -202,7 +170,7 @@ class LoginJWT extends React.Component {
 }
 const mapStateToProps = state => {
   return {
-    values: state.auth
+    values: state.cookies
   }
 }
-export default connect(mapStateToProps, { loginWithJWT })(LoginJWT)
+export default connect(mapStateToProps, { loginWithJWT, saveemail, delemail })(LoginJWT)

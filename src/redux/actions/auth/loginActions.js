@@ -39,73 +39,16 @@ export const loginWithJWT = user => {
 }
 
 
-
 export const logoutWithJWT = () => {
   return dispatch => {
-    // axios
-    //   .post()
-    // 로그아웃 api
-    
+
     dispatch({ type: "LOGOUT_WITH_JWT", payload: {} })
-    persistor.purge();
+    persistor.purge("auth","dataList")
     localStorage.clear();
     history.push("/pages/login")
    
   }
 }
-
-
-
-
-
-// const initAuth0 = new auth0.WebAuth(configAuth)
-
-
-
-
-
-
-
-
-
-
-
-// 로그인 액션 부분(인성 api)
-// export const loginWithJWT = user => {
-//   return dispatch => {
-//     axios
-//       .post("https://test-api.hicare.net:7000/api/healthcareworker/login", {
-//         login_id: user.email,
-//         password: user.password
-//       })
-//       .then(response => {
-//         var loggedInUser;
-
-//         if (response.data.data) {
-//           loggedInUser = response.data.data
-//           let fName = loggedInUser.f_name;
-// 					let mName = loggedInUser.m_name;
-// 					let lName = loggedInUser.l_name;
-          
-//           loggedInUser.displayName = (fName ==  null?"":fName)
-// 													+ " " + (mName ==  null?"":mName) 
-// 													+ " " + (lName ==  null?"":lName);
-//           console.log(loggedInUser);
-//           dispatch({
-//             type: "LOGIN_WITH_JWT",
-//             payload: { loggedInUser, loggedInWith: "jwt" }
-//           })
-
-//           history.push("/analyticsDashboard")
-//         }
-//       })
-//       .catch(err => console.log(err))
-//   }
-// }
-
-
-
-
 
 
 export const changeRole = role => {
