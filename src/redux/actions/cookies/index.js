@@ -41,8 +41,6 @@ export const saveRegister3 = (
 }
 
 export const saveRegister4 = (
-  filename,
-  file,
   medicalpart,
   medicalable,
   medicaldesc,
