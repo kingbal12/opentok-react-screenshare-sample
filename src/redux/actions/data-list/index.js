@@ -453,3 +453,19 @@ export const postMDNoteData = (userid, apponum, cc, dx, rx, notevital) => {
       })
   }
 }
+
+export const postPrescriptionData = (userid, apponum, file, filename) => {
+  let data = new FormData();
+    data.append('user_id', userid);
+    data.append('appoint_num', apponum);
+    data.append('file_name', file);
+  return dispatch => {
+    axios
+      .post("http://203.251.135.81:9300/v1/doctor/treatment/prescription", data)
+      .then(response => {
+        if(response.data.status==="200") {
+          alert("처방전 업로드가 완료되엇습니다.")
+        }
+      })
+  }
+}

@@ -34,6 +34,8 @@ import "../../../../assets/scss/plugins/extensions/recharts.scss"
 
 
 
+
+
 class CunsultName extends React.Component { 
   render() { 
     return( 
@@ -115,8 +117,8 @@ class PatientInfo extends React.Component {
             <Col className="col-12">
               <Table responsive>
                 <thead>
-                  <tr className="table-primary" style={{verticalAlign:"middle"}}>
-                    <th><h6>{this.props.appo.APPOINT_TIME}</h6></th>
+                  <tr className="table-primary">
+                    <th style={{alignItems: "center"}}><h6>{this.props.appo.APPOINT_TIME}</h6></th>
                     <th><h6>{this.props.pinfo.F_NAME}</h6></th>
                     <th><h6>{this.props.pinfo.GENDER==="1"||this.props.pinfo.GENDER==="3"?"M":"F"}</h6></th>
                     <th><h6>{this.props.pinfo.AGE}</h6></th>

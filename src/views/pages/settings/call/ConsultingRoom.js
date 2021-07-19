@@ -1,14 +1,13 @@
 import React from "react"
-import {Form, FormGroup, Button,
-  InputGroup, InputGroupAddon,Input,
+import {FormGroup, Button,
+  InputGroup,Input,
+  CustomInput,
   Card,
-  CardHeader,
   CardTitle,
   CardBody,
   Row,
   Col,
   Table,
-  Label,
   Modal,
   ModalHeader,
   ModalBody,
@@ -27,7 +26,8 @@ import {
 import {
   getPastConulstList,
   resetVitalData,
-  postMDNoteData
+  postMDNoteData,
+  postPrescriptionData
 } from "../../../../redux/actions/data-list/"
 import { Check } from "react-feather"
 import { history } from "../../../../history"
@@ -89,10 +89,14 @@ class ConsultingRoom extends React.Component {
       paddress: "",
       telnum: "", 
       faxnum: "",
+      filename: "",
+      file : "",
       mdnotemodal: false,
       presmodal: false,
+      paymodal: false,
       pharmacy: false,
       App: false
+
     }
   }
 
@@ -161,6 +165,42 @@ class ConsultingRoom extends React.Component {
     }))
   }
 
+  handleFileOnChange = e => {
+    
+    e.preventDefault();
+    
+    let reader = new FileReader();
+    let file = e.target.files[0];
+    let filename = e.target.files[0].name
+    reader.onloadend = () => {
+      this.setState({
+        file : file,
+        previewURL : reader.result,
+        filename: filename
+      })
+    }
+    reader.readAsDataURL(file);
+    e.target.value = null;
+  }
+
+  postPrescription = () => {
+    if(this.props.appo===undefined){
+      alert("예약정보가 없기때문에 처방전 저장이 불가능합니다.")
+    } else{
+      this.props.postPrescriptionData(
+      this.props.user.login.values.loggedInUser.username,
+      this.props.appo.APPOINT_NUM,
+      this.state.file,
+      this.state.filename
+      )
+    }
+    this.setState(prevState => ({
+      presmodal: !prevState.presmodal
+    }))
+  }
+
+  
+
   setpharmacy = () => {
     this.setState(prevState => ({
       pharmacy: !prevState.pharmacy
@@ -170,6 +210,12 @@ class ConsultingRoom extends React.Component {
   setApp = () => {
     this.setState(prevState => ({
       App: !prevState.App
+    }))
+  }
+
+  payModal = () => {
+    this.setState(prevState => ({
+      paymodal: !prevState.paymodal
     }))
   }
 
@@ -416,22 +462,172 @@ class ConsultingRoom extends React.Component {
                   </Col>
                 </Row>
                 <Row className="mt-1">
-                  <Col lg="12" md="12" className="align-self-center d-flex justify-content-center">
-                  <Button
-                    className="mr-1"
-                    color="black"
-                    outline
-                    type="button"
-                    onClick={this.Check}
-                  >
-                    처방전 업로드
-                  </Button>
+                  <Col lg="3" md="12" className="align-self-center">
+                    <h5 className="text-bold-600">처방전 업로드</h5>
+                  </Col>
+                  
+                  <Col lg="9" md="12" className="pt-1 align-self-center">
+                    <FormGroup>
+                      <CustomInput 
+                        type="file" 
+                        // accept="image/gif,image/jpeg,image/png" 
+                        id="exampleCustomFileBrowser" 
+                        name="customFile" 
+                        label=""
+                        onChange={this.handleFileOnChange}/> 
+                    </FormGroup>
                   </Col>
                 </Row>
               </ModalBody>
               <ModalFooter>
                 <Button color="primary" onClick={this.postPrescription}>
-                  저장
+                  전송
+                </Button>
+              </ModalFooter>
+            </Modal>
+            <Modal
+              isOpen={this.state.paymodal}
+              toggle={this.payModal}
+              className="modal-dialog-centered modal-lg"
+            >
+              <ModalHeader toggle={this.payModal}>
+                Payment
+              </ModalHeader>
+              <ModalBody>
+                <Row>
+                  <Col lg="7" md="12" className="align-self-center pt-0">
+                    <Row>
+                      <Col lg="5" md="12" className="align-self-center pt-0">
+                        <h5 className="text-bold-600">급여총액</h5>
+                      </Col>
+                      <Col lg="5" md="11" className="align-self-center pt-0">
+                        <FormGroup className="align-self-center pt-1">
+                          <Input
+                            type="text"
+                            placeholder="C.C"
+                            value={this.state.cc}
+                            onChange={e => this.setState({ cc: e.target.value })}
+                            disabled
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col  lg="1" md="1" className="align-self-center">
+                        <h5>원</h5>
+                      </Col>
+                    </Row>
+                  </Col>
+                  <Col lg="5" md="12" >
+                    <Row>
+                      <Col lg="4" md="12" className="align-self-center pt-0">
+                        <h5 className="text-bold-600">비급여</h5>
+                      </Col>
+                      <Col lg="6" md="11" className="align-self-center pt-0">
+                        <FormGroup className="align-self-center pt-1">
+                          <Input
+                            type="text"
+                            placeholder="C.C"
+                            value={this.state.cc}
+                            onChange={e => this.setState({ cc: e.target.value })}
+                            disabled
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col lg="2" md="1" className="align-self-center">
+                        <h5>원</h5>
+                      </Col>
+                    </Row>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col lg="7" md="12" className="align-self-center pt-0">
+                    <Row>
+                      <Col lg="5" md="12" className="align-self-center pt-0">
+                        <h5 className="text-bold-600">청구액(공단부담)</h5>
+                      </Col>
+                      <Col lg="5" md="11" className="align-self-center pt-0">
+                        <FormGroup className="align-self-center pt-1">
+                          <Input
+                            type="text"
+                            placeholder="C.C"
+                            value={this.state.cc}
+                            onChange={e => this.setState({ cc: e.target.value })}
+                            disabled
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col  lg="1" md="1" className="align-self-center">
+                        <h5>원</h5>
+                      </Col>
+                    </Row>
+                  </Col>
+                  <Col lg="5" md="12" >
+                    <Row>
+                      <Col lg="4" md="12" className="align-self-center pt-0">
+                        <h5 className="text-bold-600">감액</h5>
+                      </Col>
+                      <Col lg="6" md="11" className="align-self-center pt-0">
+                        <FormGroup className="align-self-center pt-1">
+                          <Input
+                            type="text"
+                            placeholder="C.C"
+                            value={this.state.cc}
+                            onChange={e => this.setState({ cc: e.target.value })}
+                            disabled
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col lg="2" md="1" className="align-self-center">
+                        <h5>원</h5>
+                      </Col>
+                    </Row>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col lg="7" md="12" className="align-self-center pt-0">
+                    <Row>
+                      <Col lg="5" md="12" className="align-self-center pt-0">
+                        <h5 className="text-bold-600">환자 본인부담금</h5>
+                      </Col>
+                      <Col lg="5" md="11" className="align-self-center pt-0">
+                        <FormGroup className="align-self-center pt-1">
+                          <Input
+                            type="text"
+                            placeholder="C.C"
+                            value={this.state.cc}
+                            onChange={e => this.setState({ cc: e.target.value })}
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col  lg="1" md="1" className="align-self-center">
+                        <h5>원</h5>
+                      </Col>
+                    </Row>
+                  </Col>
+                  <Col lg="5" md="12" >
+                    <Row>
+                      <Col lg="4" md="12" className="align-self-center pt-0">
+                        <h5 className="text-bold-600">최종 청구액</h5>
+                      </Col>
+                      <Col lg="6" md="11" className="align-self-center pt-0">
+                        <FormGroup className="align-self-center pt-1">
+                          <Input
+                            type="text"
+                            placeholder="C.C"
+                            value={this.state.cc}
+                            onChange={e => this.setState({ cc: e.target.value })}
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col lg="2" md="1" className="align-self-center">
+                        <h5>원</h5>
+                      </Col>
+                    </Row>
+                  </Col>
+                </Row>
+              </ModalBody>
+              <ModalFooter className="text-right">
+                <Button color="primary" onClick={this.payModal}>
+                  전송
                 </Button>
               </ModalFooter>
             </Modal>
@@ -748,6 +944,7 @@ class ConsultingRoom extends React.Component {
                 color="primary"
                 outline
                 type="button"
+                onClick={this.payModal}
               >
                 Payment
               </Button>
@@ -795,4 +992,5 @@ export default connect(
   mapStateToProps, {
     getPastConulstList, 
     resetVitalData,
-    postMDNoteData}) (ConsultingRoom)
+    postMDNoteData,
+    postPrescriptionData}) (ConsultingRoom)
