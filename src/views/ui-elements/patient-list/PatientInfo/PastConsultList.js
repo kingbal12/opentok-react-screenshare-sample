@@ -91,15 +91,15 @@ class PastConsultList extends React.Component {
             <Table responsive>
                 <thead>
                   <tr className="table-primary align=self-center">
-                    <th><h6 className="pt-1">{this.props.appo.APPOINT_TIME}</h6></th>
-                    <th><h6 className="pt-1">{this.props.pinfo.F_NAME}</h6></th>
-                    <th><h6 className="pt-1">{this.props.pinfo.GENDER==="1"||this.props.pinfo.GENDER==="3"?"M":"F"}</h6></th>
-                    <th><h6 className="pt-1">{this.props.pinfo.AGE}</h6></th>
-                    <th><h6 className="pt-1">{this.props.pinfo.BIRTH_DT}</h6></th>
-                    <th><h6 className="pt-1">{this.props.pinfo.NOTE_DX}</h6></th>
-                    <th><h6 className="pt-1">{this.props.pinfo.FIRST_YN==="N"?"재진":"초진"}</h6></th>
+                    <th><h6 style={{paddingTop:"0.5rem"}}>{this.props.appo.APPOINT_TIME}</h6></th>
+                    <th><h6 style={{paddingTop:"0.5rem"}}>{this.props.pinfo.F_NAME}</h6></th>
+                    <th><h6 style={{paddingTop:"0.5rem"}}>{this.props.pinfo.GENDER==="1"||this.props.pinfo.GENDER==="3"?"M":"F"}</h6></th>
+                    <th><h6 style={{paddingTop:"0.5rem"}}>{this.props.pinfo.AGE}</h6></th>
+                    <th><h6 style={{paddingTop:"0.5rem"}}>{this.props.pinfo.BIRTH_DT}</h6></th>
+                    <th><h6 style={{paddingTop:"0.5rem"}}>{this.props.pinfo.NOTE_DX}</h6></th>
+                    <th><h6 style={{paddingTop:"0.5rem"}}>{this.props.pinfo.FIRST_YN==="N"?"재진":"초진"}</h6></th>
                     <th>
-                      <h6 className="pt-1">
+                      <h6 style={{paddingTop:"0.5rem"}}>
                         {this.props.pinfo.BP}
                         {this.props.pinfo.PULSE}
                         {this.props.pinfo.BW}

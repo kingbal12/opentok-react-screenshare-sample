@@ -40,3 +40,27 @@ export const saveRegister3 = (
   }
 }
 
+export const saveRegister4 = (
+  filename,
+  file,
+  medicalpart,
+  medicalable,
+  medicaldesc,
+  medicalnum,
+  userdesc,
+  previewURL
+  ) => {
+  return dispatch => {
+    dispatch({ 
+      type: "SAVE_REGISTER4", 
+      payload: {
+      medicalpart,
+      medicalable,
+      medicaldesc,
+      medicalnum,
+      userdesc,
+      previewURL
+    } })
+  }
+}
+

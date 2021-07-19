@@ -14,7 +14,7 @@ import {InputGroup, Form, FormGroup, Input, Button,
 } from "reactstrap"
 import RegisterJWT from "./RegisterJWT"
 import "../../../../assets/scss/pages/authentication.scss"
-// import { register4 } from "../../../../redux/actions/auth/registerActions"
+import { saveRegister4 } from "../../../../redux/actions/cookies"
 import { connect } from "react-redux"
 import previmg from "../../../../assets/img/portrait/small/Sample_User_Icon.png"
 import { history } from "../../../../history"
@@ -39,16 +39,16 @@ class Register extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      // userid: "kingbal999@kakao.com",
-      userid: props.user.register.values.registeruser,
+      userid: "kingbal999@kakao.com",
+      // userid: props.user.register.values.registeruser,
       filename: "",
       file : "",
-      medicalpart: "01", 
-      medicalable: "", 
-      medicaldesc: "", 
-      medicalnum: "", 
-      userdesc: "",
-      previewURL : "",
+      medicalpart: props.cookiere4.medicalpart,
+      medicalable:  props.cookiere4.medicalable, 
+      medicaldesc:  props.cookiere4.medicaldesc, 
+      medicalnum:  props.cookiere4.medicalnum, 
+      userdesc:  props.cookiere4.userdesc,
+      previewURL :  props.cookiere4.previewURL,
       registermodal: false
     }
   }
@@ -86,6 +86,19 @@ class Register extends React.Component {
       this.state.userdesc,    
       this.state.previewURL
     )
+  }
+
+  saveRe4 = e => {
+    e.preventDefault()
+    this.props.saveRegister4(
+      this.state.medicalpart,
+      this.state.medicalable,
+      this.state.medicaldesc,
+      this.state.medicalnum,
+      this.state.userdesc,
+      this.state.previewURL,
+    )
+    alert("의사정보가 저장되었습니다.")
   }
 
   register4 = (userid, filename, file, medicalpart, medicalable, medicaldesc, medicalnum, userdesc) => {
@@ -257,13 +270,13 @@ class Register extends React.Component {
                           />   
                         </InputGroup>
                       </div>
-                      <small
+                      {/* <small
                         className={`counter-value float-right ${
                           this.state.medicaldesc.length > 400 ? "bg-danger" : ""
                         }`}
                       >
                         {`${this.state.medicaldesc.length}/400`}
-                      </small>
+                      </small> */}
                     </FormGroup>
 
                     <FormGroup className="form-label-group pt-1">
@@ -280,13 +293,13 @@ class Register extends React.Component {
                           />   
                         </InputGroup>
                       </div>
-                      <small
+                      {/* <small
                         className={`counter-value float-right ${
                           this.state.userdesc.length > 400 ? "bg-danger" : ""
                         }`}
                       >
                         {`${this.state.userdesc.length}/400`}
-                      </small>
+                      </small> */}
                     </FormGroup>
 
                     <FormGroup className="form-label-group d-flex justify-content-between pt-1">
@@ -316,6 +329,7 @@ class Register extends React.Component {
                         size="lg"
                         color="dark" 
                         type="button"
+                        onClick={this.saveRe4}
                       >
                         임시저장
                       </Button>
@@ -371,7 +385,8 @@ class Register extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.auth
+    user: state.auth,
+    cookiere4: state.cookies.register4
   }
 }
-export default connect(mapStateToProps)(Register)
+export default connect(mapStateToProps,{saveRegister4})(Register)
