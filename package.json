@@ -79,6 +79,7 @@
     "react-toastify": "^5.5.0",
     "react-toggle": "~4.1.1",
     "react-treebeard": "~3.2.3",
+    "react-webcam": "^5.2.4",
     "reactstrap": "^8.4.1",
     "recharts": "^2.0.10",
     "redux": "^4.0.5",

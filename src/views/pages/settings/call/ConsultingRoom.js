@@ -44,6 +44,7 @@ import { Menu } from "react-feather"
 import axios from "axios"
 import "../../../../assets/scss/plugins/forms/flatpickr/flatpickr.scss"
 import "../../../../assets/scss/plugins/extensions/recharts.scss"
+import Opentok from "./opentok"
 
 class CunsultName extends React.Component { 
   render() { 
@@ -299,21 +300,8 @@ class ConsultingRoom extends React.Component {
           <Col lg="6" md="12"> 
             <Card className="mb-0" style={{height:"650px", border:"solid #7367ef 1px", backgroundColor:"#efefff"}}>
               <Row className="justify-content-md-center h-400">
-              {/* <OTSession apiKey="47274054" sessionId="2_MX40NzI3NDA1NH5-MTYyNjA2NzI0ODM1Mn56aTZQdnVxVnNaNS82a2Q3YWZndmplc3V-UH4" token= "T1==cGFydG5lcl9pZD00NzI3NDA1NCZzaWc9M2E4ZDA3ODFiMjk4ZTg5M2M4NGY3ZjU2YWIwNDQ2ZmJlZTIzM2JjMDpzZXNzaW9uX2lkPTJfTVg0ME56STNOREExTkg1LU1UWXlOakEyTnpJME9ETTFNbjU2YVRaUWRuVnhWbk5hTlM4MmEyUTNZV1puZG1wbGMzVi1VSDQmY3JlYXRlX3RpbWU9MTYyNjA2NzI0NiZub25jZT0xMTI5ODg0NDUwJnJvbGU9cHVibGlzaGVyJmV4cGlyZV90aW1lPTE2MjYxNTM2NDY=">
-                <OTPublisher />
-                <OTStreams>
-                  <OTSubscriber />
-                </OTStreams>
-              </OTSession> */}
-                {/* <div className="dz-thumb ">
-                  <div className="dz-thumb-inner">
-                    <img 
-                      src={userImg}
-                      className="dz-img" 
-                      // alt={file.name} 
-                      />
-                  </div>
-                </div> */}
+              <Opentok />
+               
               </Row>
             </Card>
           </Col>

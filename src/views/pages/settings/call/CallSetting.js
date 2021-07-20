@@ -17,6 +17,8 @@ import SliderBasic from "./SliderBasic"
 import { ContextLayout } from "../../../../utility/context/Layout"
 import { Fragment } from "react"
 import Select from "react-select"
+import Webcam from "react-webcam";
+import "../../../../assets/scss/pages/table.scss"
 
 
 
@@ -39,8 +41,8 @@ class CallSetting extends React.Component {
   componentDidMount() {
 
     (async () => {   
-      await navigator.mediaDevices.getUserMedia({audio: true, video: true});   
-      let devices = await navigator.mediaDevices.enumerateDevices();
+      await navigator.mediaDevices.getUserMedia({audio: true, video:true});   
+      let devices = await navigator.mediaDevices.enumerateDevices().catch();
       console.log(devices)
       let camera = await devices.filter(devices => devices.kind ==="videoinput")
       let mic = await devices.filter(devices =>devices.kind ==="audioinput")
@@ -70,48 +72,109 @@ class CallSetting extends React.Component {
       await this.setState({speaker:modifiedspeaker})
       
     })();
+
+
+
+    
   }
 
-  setCamera= e => {
+  // setCamera= e => {
     
     
-    e.preventDefault()
-    let audioList = this.state.micset;
-    let videoList = this.state.cameraset;
+  //   // e.preventDefault()
+  //   // let audioList = this.state.micset;
+  //   // let videoList = this.state.cameraset;
     
-    navigator.mediaDevices.enumerateDevices()
-    .then(function(devices) {
+  //   // navigator.mediaDevices.enumerateDevices()
+  //   // .then(function(devices) {
   
-      devices.forEach(function(device) {
-        let elem = document.createElement("li");
-        let [kind, type, direction] = device.kind.match(/(\w+)(input|output)/i);
+  //   //   devices.forEach(function(device) {
+  //   //     let elem = document.createElement("li");
+  //   //     let [kind, type, direction] = device.kind.match(/(\w+)(input|output)/i);
   
-        elem.innerHTML = "<strong>" + device.label + "</strong> (" + direction + ")";
-        if (type === "audio") {
-          audioList.appendChild(elem);
-        } else if (type === "video") {
-          videoList.appendChild(elem);
-        }
-      });
-    });
+  //   //     elem.innerHTML = "<strong>" + device.label + "</strong> (" + direction + ")";
+  //   //     if (type === "audio") {
+  //   //       audioList.appendChild(elem);
+  //   //     } else if (type === "video") {
+  //   //       videoList.appendChild(elem);
+  //   //     }
+  //   //   });
+  //   // });
     
 
+  //   navigator.mediaDevices.getUserMedia({video:true, audio:true})
+  //   .then(function(stream) {
+  //     this.ref.video.srcObject = stream;
+  //     this.started = true;
+  //   })
+  //   .catch(function(err) {
+  //     console.log(err)
+  //   });
+  // }
 
-    // navigator.mediaDevices.getUserMedia({video:this.state.cameraset, audio:this.state.micset})
-    // .then(function(stream) {
-    //   alert(stream)
-    // })
-    // .catch(function(err) {
-    //   console.log(err)
-    // });
-  }
+  // attachSinkId(element, sinkId) {
+  //   if (typeof element.sinkId !== 'undefined') {
+  //     element.setSinkId(sinkId)
+  //         .then(() => {
+  //           console.log(`Success, audio output device attached: ${sinkId}`);
+  //         })
+  //         .catch(error => {
+  //           let errorMessage = error;
+  //           if (error.name === 'SecurityError') {
+  //             errorMessage = `You need to use HTTPS for selecting audio output device: ${error}`;
+  //           }
+  //           console.error(errorMessage);
+  //           // Jump back to first output device in the list as it's the default.
+  //           audioOutputSelect.selectedIndex = 0;
+  //         });
+  //   } else {
+  //     console.warn('Browser does not support output device selection.');
+  //   }
+  // }
 
 
+  // const [playing, setPlaying] = React.useState(undefined);
 
+  // const videoRef = React.useRef(null);
 
+  // React.useEffect(() => {
+  //   getWebcam((stream => {
+  //     setPlaying(true);
+  //     videoRef.current.srcObject = stream;
+  //   }));
+  // }, []);
+
+  // const startOrStop = () => {
+  //   if (playing) {
+  //     const s = videoRef.current.srcObject;
+  //     s.getTracks().forEach((track) => {
+  //       track.stop();
+  //     });
+  //   } else {
+  //     getWebcam((stream => {
+  //       setPlaying(true);
+  //       videoRef.current.srcObject = stream;
+  //     }));
+  //   }
+  //   setPlaying(!playing);
+  // }
+  
   Check = e => {
+    // const audio = document.createElement('audio');
+    // audio.setSinkId(this.state.speakerset.deviceId);
+    // console.log('Audio is being played on ' + audio.sinkId);
+
+    
+  }
+
+   setSpeaker = e => {
     e.preventDefault()
-    console.log(this.state)
+    const audioEl = new Audio()
+    audioEl.setSinkId(this.state.speakerset.deviceId).then(function() {
+      console.log('Set deviceId('+audioEl.sinkId+') in the selected audio element');
+   }).catch(error => console.log(error));
+    console.log('Audio is being played on ' + audioEl.sinkId);
+    
   }
  
   render() {
@@ -121,7 +184,7 @@ class CallSetting extends React.Component {
           <Col lg="6" md="12">
             {this.props.appo===null?null:
               <Table responsive>
-                <thead>
+                <thead >
                   <tr className="table-primary" style={{verticalAlign:"middle"}}>
                     <th><h6>{this.props.appo.APPOINT_TIME}</h6></th>
                     <th><h6>{this.props.pinfo.F_NAME}</h6></th>
@@ -165,7 +228,7 @@ class CallSetting extends React.Component {
             </Button>
           </Col>
         </Row>
-      <Row className="pt-3 justify-content-center">
+      <Row className="pt-1 justify-content-center">
         <Col
           sm="6"
           xl="6"
@@ -177,26 +240,18 @@ class CallSetting extends React.Component {
             <Row className="m-0">
               
               <Col lg="12" md="12" className="p-0">
-                <Card className="rounded-0 mb-0 p-2">
-                  <Row className="justify-content-md-center">
-                    <div className="dz-thumb ">
-                      <div className="dz-thumb-inner">
-                        <img 
-                          src={
-                            this.props.user.login.values.loggedInUser.file_name!==""
-                              ? "http://203.251.135.81:9300"+this.props.user.login.values.loggedInUser.file_path
-                                +this.props.user.login.values.loggedInUser.file_name 
-                              : userImg
-                          }
-                          className="dz-img"
-                          width="160px"
-                          height="160px" 
-                          />
-                      </div>
-                    </div>
+                <Card className="rounded-0 mb-0 px-2">
+                  <Row className="justify-content-md-center pt-0">
+                    <Webcam
+                      id="webcam" 
+                      height="250px" 
+                      width="250px"
+                      videoConstraints={{ deviceId: this.state.cameraset.deviceId }}
+                      audioConstraints={{ deviceId: this.state.micset.deviceId}}
+                    />
                   </Row>
                 
-                  <h3 className="ml-1 mt-1"><strong>영상 및 진료 카메라 마이크 설정</strong></h3>
+                  <h3 className="ml-1"><strong>영상 및 진료 카메라 마이크 설정</strong></h3>
                   <p className="ml-1">* 원격진료실 안에서도 설정 및 장비 테스트가 가능합니다.</p>
                   <CardBody className="pt-1 pb-50">
                     <Row className="mt-1">
@@ -254,22 +309,22 @@ class CallSetting extends React.Component {
                         />
                       </Col>
                       <Col lg="3" md="12">
-                        <Button.Ripple outline color="primary" size="md">
+                        <Button.Ripple outline color="primary" size="md" onClick={this.setSpeaker}>
                           적용
                         </Button.Ripple>
                       </Col>
                     </Row>       
                      
-                    <Row className="mt-1">
+                    <Row className="mt-5">
                       <Col lg="12" md="12" className="d-flex justify-content-center">
                         <Button.Ripple 
                         color="primary" 
                         type="button"
                         size="lg"
-                        // onClick={() => {
-                        //   history.push("/pages/consultingroom")
-                        // }}
-                        onClick={this.Check}
+                        onClick={() => {
+                          history.push("/pages/consultingroom")
+                        }}
+                        // onClick={this.Check}
                         >
                           원격의료실 입장하기
                         </Button.Ripple>
