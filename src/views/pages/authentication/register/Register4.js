@@ -49,7 +49,8 @@ class Register extends React.Component {
       medicalnum:  props.cookiere4.medicalnum, 
       userdesc:  props.cookiere4.userdesc,
       previewURL :  props.cookiere4.previewURL,
-      registermodal: false
+      registermodal: false,
+      viewmodal: false
     }
   }
 
@@ -145,6 +146,12 @@ class Register extends React.Component {
   goRegisterComplete = e => {
     e.preventDefault()
     history.push("/pages/registtercomplete")
+  }
+
+  viewModal = e => {
+    this.setState(prevState => ({
+      viewmodal: !prevState.viewmodal
+    }))
   }
 
 
