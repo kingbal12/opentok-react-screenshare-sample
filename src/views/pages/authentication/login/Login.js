@@ -11,7 +11,7 @@ import {
 import "../../../../assets/scss/pages/authentication.scss"
 import LoginAuth0 from "./LoginAuth0"
 import LoginJWT from "./LoginJWT"
-import HicareLogo from "../../../../assets/img/logo/user_register_logo.png"
+import HicareLogo from "../../../../assets/img/logo/logo1.png"
 
 
 
@@ -40,12 +40,8 @@ class Login extends React.Component {
             <Row className="m-0">
               <Col md="12" className="p-0">
                 <Card className="rounded-0 mb-0 px-2 login-tabs-container">
-                  <CardHeader className="pb-4">
-                    <CardTitle>
-                      <div>
-                        <img className="col" src={HicareLogo} alt="HicareLogo"/>
-                      </div>
-                    </CardTitle>
+                  <CardHeader className="pb-4 d-flex justify-content-center">      
+                      <img className="col" src={HicareLogo} alt="HicareLogo"/>
                   </CardHeader>
                   <TabContent activeTab={this.state.activeTab}>
                     <TabPane tabId="1">

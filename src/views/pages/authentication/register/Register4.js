@@ -26,21 +26,21 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 //  '01' : 가정의학과, '02' : 내과 
 //  '03' : 산부인과, '04' : 피부과 
 //  '05' : 비뇨기과, '99' : 기타
-const medicalpartOptions = [
-  { value: "01", label: "가정의학과" },
-  { value: "02", label: "내과" },
-  { value: "03", label: "산부인과" },
-  { value: "04", label: "피부과" },
-  { value: "05", label: "비뇨기과" },
-  { value: "99", label: "기타"}
-]
+// const medicalpartOptions = [
+//   { value: "01", label: "가정의학과" },
+//   { value: "02", label: "내과" },
+//   { value: "03", label: "산부인과" },
+//   { value: "04", label: "피부과" },
+//   { value: "05", label: "비뇨기과" },
+//   { value: "99", label: "기타"}
+// ]
 
 class Register extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      // userid: "kingbal999@kakao.com",
-      userid: props.user.register.values.registeruser,
+      userid: "kingbal999@kakao.com",
+      // userid: props.user.register.values.registeruser,
       filename: "",
       file : "",
       medicalpart: props.cookiere4.medicalpart,
@@ -50,7 +50,8 @@ class Register extends React.Component {
       userdesc:  props.cookiere4.userdesc,
       previewURL :  props.cookiere4.previewURL,
       registermodal: false,
-      viewmodal: false
+      previewmodal: false
+
     }
   }
 
@@ -148,9 +149,9 @@ class Register extends React.Component {
     history.push("/pages/registtercomplete")
   }
 
-  viewModal = e => {
+  previewModal = e => {
     this.setState(prevState => ({
-      viewmodal: !prevState.viewmodal
+      previewmodal: !prevState.previewmodal
     }))
   }
 
@@ -345,7 +346,7 @@ class Register extends React.Component {
                         size="lg"
                         color="dark" 
                         type="button"
-                        onClick={this.viewlog}
+                        onClick={this.previewModal}
                       >
                         미리보기
                       </Button>
@@ -382,6 +383,70 @@ class Register extends React.Component {
           <Button color="primary" onClick={ this.goRegisterComplete}>
             확인
           </Button>{" "}
+        </ModalFooter>
+      </Modal>
+
+      <Modal
+        isOpen={this.state.previewmodal}
+        toggle={this.previewModal}
+        className="modal-dialog-centered modal-sm"
+      >
+        <ModalBody className="mx-1">
+          <Row className="d-flex justify-content-center">
+            {profile_preview}
+          </Row>
+          <Row className="d-flex justify-content-center">
+            <h5 className="text-bold-600">{this.state.userid}</h5>
+          </Row>
+          <Row className="d-flex justify-content-center">
+            {this.state.medicalpart==="01"?"가정의학과":
+             this.state.medicalpart==="02"?"내과":
+             this.state.medicalpart==="03"?"산부인과":
+             this.state.medicalpart==="04"?"피부과":
+             this.state.medicalpart==="05"?"비뇨기과":
+             this.state.medicalpart==="99"?"기타": null}
+          </Row>
+          <Card className="mt-1">
+            <CardBody className="pt-1">
+              <Row>
+                <h5 className="text-bold-400 ">진료분야</h5>
+              </Row>
+              <Row>
+                {this.state.medicalable}
+              </Row>
+            </CardBody>
+          </Card>
+          <Card className="mt-1">
+            <CardBody className="pt-1">
+              <Row>
+                <h5 className="text-bold-400 ">약력</h5>
+              </Row>
+              <Row>
+                <pre>
+                  {this.state.medicaldesc}
+                </pre>
+              </Row>
+            </CardBody>
+          </Card>
+          <Card className="mt-1">
+            <CardBody className="pt-1">
+              <Row>
+                <h5 className="text-bold-400 ">자기소개</h5>
+              </Row>
+              <Row>
+                <pre>
+                  {this.state.userdesc}
+                </pre>
+              </Row>
+            </CardBody>
+          </Card>
+          
+          
+        </ModalBody>
+        <ModalFooter>
+          <Button color="primary" onClick={this.previewModal}>
+            확인
+          </Button>
         </ModalFooter>
       </Modal>
     </Row>

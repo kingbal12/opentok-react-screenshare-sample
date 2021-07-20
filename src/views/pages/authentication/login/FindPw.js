@@ -1,11 +1,11 @@
 import React from "react"
-import { CardBody, FormGroup, Form, Input, Button, Label,Modal,
+import { CardBody, FormGroup, Form, Input, Button, Modal, Row,
   ModalHeader,
   ModalBody,
   ModalFooter, } from "reactstrap"
-import { loginWithJWT } from "../../../../redux/actions/auth/loginActions"
+
 import Select from "react-select"
-import { history } from "../../../../history"
+
 import axios from "axios"
 import Radio from "../../../../components/@vuexy/radio/RadioVuexy"
 
@@ -29,6 +29,7 @@ class FindPw extends React.Component {
     useridchecked: false,
     emailchecked: true,
     email: "",
+    emaillabel: "",
     modalmsg:"",
   }
 
@@ -48,9 +49,10 @@ class FindPw extends React.Component {
             console.log(response)
             if(response.data.status==="200") {
               this.setState({
-                email: response.data.data.EMAIL
+                email: response.data.data.EMAIL,
+                emaillabel: response.data.data.EMAIL
               })
-              if(response.data.data.USER_ID==response.data.data.EMAIL){
+              if(response.data.data.USER_ID===response.data.data.EMAIL){
                 axios.post("http://203.251.135.81:9300/v1/doctor/account/password", {
                     user_id: this.state.userid,
                     email: this.state.email,
@@ -76,6 +78,7 @@ class FindPw extends React.Component {
                 this.setState({
                   userid: response.data.data.USER_ID,
                   email: response.data.data.EMAIL,
+                  emaillabel: response.data.data.EMAIL,
                   verifymodal:true
                 })
               }
@@ -97,7 +100,7 @@ class FindPw extends React.Component {
 
   verifyModal = () => {
     this.setState(prevState => ({
-      verifymodal: !prevState.modal
+      verifymodal: !prevState.verifymodal
     }))
     console.log(this.state)
   }
@@ -112,6 +115,37 @@ class FindPw extends React.Component {
     this.setState({
       address: e.currentTarget.value
       });
+  }
+
+  changePassword = () => {
+    axios
+    .post("http://203.251.135.81:9300/v1/doctor/account/password", {
+        user_id: this.state.userid,
+        email: this.state.email,
+        f_name: this.state.name,
+        birth_dt: this.state.bt_date,
+        mobile_num: this.state.phone,
+        medical_num: this.state.docnum
+    })
+    .then(response => {
+      console.log(response)
+      if(response.data.status==="200"){
+        this.setState({
+          modal:true,
+          modalmsg: "선택하신 이메일로 임시비밀번호를 보냈습니다. 로그인 후 비밀번호를 변경하세요"
+        })
+      } else {
+        this.setState({
+          modal:true,
+          modalmsg: "임시 비밀번호 전송에 실패했습니다."
+        })
+      }
+    })
+
+    this.setState(prevState => ({
+      verifymodal: !prevState.verifymodal
+    }))
+    
   }
   
   render() {
@@ -141,30 +175,38 @@ class FindPw extends React.Component {
           className="modal-dialog-centered modal-sm"
         >
           <ModalHeader toggle={this.verifyModal}>
-            
+            새로운 비밀번호를 보낼 이메일을 선택하세요
           </ModalHeader>
           <ModalBody>
-            {/* <Radio
-              label={this.state.userid}
-              defaultChecked={this.state.userid===""||this.state.userid?true:false}  
-              name="exampleRadioSizes" 
-              value={this.state.userid}
-              onChange={e => this.setState({ auto: e.target.value })}
-              color="primary"
-              defaultChecked={this.state.useridchecked}
-              className="py-50"
-            />
-            <Radio
-              label={this.state.email}
-              color="primary"
-              value={this.state.email}
-              defaultChecked={this.state.emailchecked}
-              name="exampleRadioSizes"
-              className="py-50"
-            />           */}
+            <Row className="d-flex">
+              <h6 className="align-self-center ml-1">아이디: </h6>
+              <Radio
+                label={this.state.userid}
+                defaultChecked={this.state.userid===""||this.state.userid?true:false}  
+                name="exampleRadioSizes" 
+                value={this.state.userid}
+                onChange={e => this.setState({ email: e.target.value })}
+                color="primary"
+                defaultChecked={this.state.useridchecked}
+                className="ml-1"
+              />
+            </Row>
+
+            <Row className="d-flex">
+              <h6 className="align-self-center ml-1">보안이메일: </h6>
+              <Radio
+                label={this.state.emaillabel}
+                color="primary"
+                value={this.state.email}
+                defaultChecked={this.state.emailchecked}
+                onChange={e => this.setState({ email: e.target.value })}
+                name="exampleRadioSizes"
+                className="ml-1"
+              /> 
+            </Row>         
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.verifyModal}>
+            <Button color="primary" onClick={this.changePassword}>
               확인
             </Button>{" "}
           </ModalFooter>

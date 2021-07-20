@@ -86,18 +86,34 @@ class MyInfo extends React.Component {
   }
 
   handleRegister = e => {
+    
     e.preventDefault()
-    this.props.putmyinfo(
-      this.state.userid,
-      this.state.filename,
-      this.state.file,
-      this.state.medicalpart,
-      this.state.medicalable,
-      this.state.medicaldesc,
-      this.state.medicalnum,
-      this.state.userdesc,    
-      this.state.previewURL
-    )
+    if(this.state.filename===""){
+      this.props.putmyinfo(
+        this.state.userid,
+        this.props.user.login.values.loggedInUser.file_path,
+        this.props.user.login.values.loggedInUser.file_name,
+        this.state.medicalpart,
+        this.state.medicalable,
+        this.state.medicaldesc,
+        this.state.medicalnum,
+        this.state.userdesc,    
+        this.state.previewURL
+      )
+    } else{
+      this.props.putmyinfo(
+        this.state.userid,
+        this.state.filename,
+        this.state.file,
+        this.state.medicalpart,
+        this.state.medicalable,
+        this.state.medicaldesc,
+        this.state.medicalnum,
+        this.state.userdesc,    
+        this.state.previewURL
+      )
+    }
+    
   }
 
 
