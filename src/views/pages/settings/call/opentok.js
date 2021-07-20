@@ -80,7 +80,7 @@ class ConsultingRoom extends React.Component {
       <OTSession apiKey="47274054" sessionId="2_MX40NzI3NDA1NH5-MTYyNjMzNzUwMTUxMX5iR2UyYUt3b2UvREtLRnBUOXhKTTlwUDF-UH4" token= "T1==cGFydG5lcl9pZD00NzI3NDA1NCZzaWc9MTQ3Mjc2N2UxOGJhYWFiOTAwNmNiYzBiZjNmMGVhYWE0MTNkMDVmMjpzZXNzaW9uX2lkPTJfTVg0ME56STNOREExTkg1LU1UWXlOak16TnpVd01UVXhNWDVpUjJVeVlVdDNiMlV2UkV0TFJuQlVPWGhLVFRsd1VERi1VSDQmY3JlYXRlX3RpbWU9MTYyNjMzNzUwMSZub25jZT0tMTQwMjczNDgxMyZyb2xlPXB1Ymxpc2hlciZleHBpcmVfdGltZT0xNjI2NDIzOTAx">
         <OTPublisher />
         <OTStreams>
-          <OTSubscriber />
+          <OTSubscriber  />
         </OTStreams>
       </OTSession>
     )
