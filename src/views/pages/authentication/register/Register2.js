@@ -14,7 +14,7 @@ import {InputGroup, InputGroupAddon, Form, FormGroup, Input, Button,
 import { Check } from "react-feather"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import "../../../../assets/scss/pages/authentication.scss"
-import { register2,authemail } from "../../../../redux/actions/auth/registerActions"
+import { register2, authemail, postTerms } from "../../../../redux/actions/auth/registerActions"
 import { connect } from "react-redux"
 import axios from "axios"
 import 'react-perfect-scrollbar/dist/css/styles.css'
@@ -124,6 +124,17 @@ class Register extends React.Component {
             this.state.gender,
             this.state.userid
           )
+          this.props.postTerms(
+            this.state.userid,
+            this.props.terms.national_id,
+            this.props.terms.term1,
+            this.props.terms.term2,
+            "Y","Y","Y","Y",
+            this.props.terms.six,
+            "Y",
+            this.props.terms.eight,
+            "Y","Y","Y","Y"
+          )
         } else {
           this.props.register2(
             this.state.userid,
@@ -134,6 +145,17 @@ class Register extends React.Component {
             this.state.gender,
             this.state.email
           )
+          this.props.postTerms(
+            this.state.userid,
+            this.props.terms.national_id,
+            this.props.terms.term1,
+            this.props.terms.term2,
+            "Y","Y","Y","Y",
+            this.props.terms.six,
+            "Y",
+            this.props.terms.eight,
+            "Y","Y","Y","Y" 
+            )
         }
       } else {
         this.setState({chkpasswordmodal:true})
@@ -417,9 +439,9 @@ class Register extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    values: state.auth.register2,
+    terms: state.auth.register.terms
     // vfemail: state.auth.register.verify
   }
 }
-export default connect(mapStateToProps, { register2, authemail })(Register)
+export default connect(mapStateToProps, { register2, authemail, postTerms })(Register)
 

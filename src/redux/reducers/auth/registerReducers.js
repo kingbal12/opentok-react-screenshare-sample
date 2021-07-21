@@ -1,5 +1,8 @@
 export const register = (state = {}, action) => {
   switch (action.type) {
+    case "SET_TERMS": {
+      return { ...state, terms: action.payload }
+    }
     case "SIGNUP_WITH_EMAIL": {
       return { ...state, values: action.payload }
     }

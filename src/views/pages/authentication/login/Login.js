@@ -30,18 +30,18 @@ class Login extends React.Component {
     return (
       <Row className="m-0 justify-content-center">
         <Col
-          sm="5"
-          xl="5"
-          lg="5"
-          md="5"
+          sm="4"
+          xl="4"
+          lg="4"
+          md="4"
           className="d-flex justify-content-center"
         >
           <Card className="bg-authentication login-card rounded-0 mb-0 w-100">
             <Row className="m-0">
               <Col md="12" className="p-0">
                 <Card className="rounded-0 mb-0 px-2 login-tabs-container">
-                  <CardHeader className="pb-4 d-flex justify-content-center">      
-                      <img className="col" src={HicareLogo} alt="HicareLogo"/>
+                  <CardHeader className="pb-3 d-flex justify-content-center">      
+                      <img className="px-5" src={HicareLogo} alt="HicareLogo" style={{width:"100%"}}/>
                   </CardHeader>
                   <TabContent activeTab={this.state.activeTab}>
                     <TabPane tabId="1">

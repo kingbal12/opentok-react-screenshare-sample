@@ -9,9 +9,11 @@ import {
 import NavbarBookmarks from "./NavbarBookmarks"
 import NavbarUser from "./NavbarUser"
 import userImg from "../../../assets/img/portrait/small/avatar-s-11.jpg"
-import HicareLogo from "../../../assets/img/logo/user_register_logo.png"
 import { history } from "../../../history"
 import Clock from 'react-live-clock';
+import HicareLogo from "../../../assets/img/logo/logo2.png"
+
+
 
 // 원본
 //  const UserName = props => {
@@ -106,8 +108,7 @@ const ThemeNavbar = props => {
               </div>
               {props.horizontal ? (
                 <div className="logo d-flex align-items-center">
-                  <div className="brand-logo mr-50"></div>
-                  <h2 className="text-primary brand-text mb-0">Vuexy</h2>
+                   <img className="px-5" src={HicareLogo} alt="HicareLogo" style={{width:"100%"}}/>
                 </div>
               ) : null}
         {/* <div className="navbar-wrapper">
@@ -129,6 +130,7 @@ const ThemeNavbar = props => {
                   <h2 className="text-primary brand-text mb-0"><img className="col-3" src={HicareLogo} alt="HicareLogo"/></h2>
                 </div>
               ) : null} */}
+              
               <NavbarUser
                 handleAppOverlay={props.handleAppOverlay}
                 changeCurrentLang={props.changeCurrentLang}

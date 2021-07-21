@@ -21,6 +21,8 @@ import { useAuth0 } from "../../../authServices/auth0/auth0Service"
 import { history } from "../../../history"
 import { IntlContext } from "../../../utility/context/Internationalization"
 // import { Button } from "bootstrap"
+import Question from "../../../assets/img/logo/question.png"
+
 
 const handleNavigation = (e, path) => {
   e.preventDefault()
@@ -242,12 +244,7 @@ class NavbarUser extends React.PureComponent {
 
     return (
       <ul className="nav navbar-nav navbar-nav-user float-right">
-        <Button.Ripple className="mb-1 mt-1"
-          color="primary"
-          outline
-          size="sm"
-          >문의
-        </Button.Ripple>
+        <img className="pt-1" style={{width:"2rem", height:"3rem"}}  src={Question} alt="question"/>
         <IntlContext.Consumer>
           {context => {
             let langArr = {

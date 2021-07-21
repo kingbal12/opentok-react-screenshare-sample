@@ -10,7 +10,7 @@ import {InputGroup, Form, FormGroup, Input, Button,
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter,
+  ModalFooter
 } from "reactstrap"
 import RegisterJWT from "./RegisterJWT"
 import "../../../../assets/scss/pages/authentication.scss"

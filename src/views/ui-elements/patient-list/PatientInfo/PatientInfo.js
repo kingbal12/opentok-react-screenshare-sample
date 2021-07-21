@@ -93,21 +93,30 @@ class PatientInfo extends React.Component {
   }
  
   render() {
-    let profile_preview = null;
+    let file_preview = null;
 
-    profile_preview = 
-      <div className="dz-thumb ">
-        <div className="dz-thumb-inner">  
-          <img
-            width="100px"
-            height="100px" 
-            src={previmg}
-            className="dz-img"
-            style={{borderRadius:"100%"}} 
-            alt="" 
-            />
-        </div>
-      </div>
+    {this.props.appo===null||this.props.appo.FILE_NAME===""?
+      file_preview = 
+        <img
+          width="100px"
+          height="100px" 
+          src={previmg}
+          className="dz-img"
+          style={{borderRadius:"100%"}} 
+          alt="" 
+          />
+      :file_preview = 
+        <img
+          width="100px"
+          height="100px" 
+          src={"http://203.251.135.81:9300"+this.props.appo.FILE_PATH
+          +this.props.appo.FILE_NAME}
+          className="dz-img"
+          style={{borderRadius:"100%"}} 
+          alt="" 
+        />
+    }
+       
 
     return (
       <Fragment>
@@ -266,7 +275,7 @@ class PatientInfo extends React.Component {
                     <b>Files</b>
                   </CardTitle>
                   <CardBody>
-                    {profile_preview}
+                    {file_preview}
                   </CardBody>
                 </Card>
               </div>

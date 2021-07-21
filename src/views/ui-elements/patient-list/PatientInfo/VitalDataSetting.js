@@ -40,6 +40,8 @@ class VitalDataSetting extends React.Component {
       startpicker : new Date(),
       endpicker : new Date()   
     }
+
+
   }
 
   toggle = tab => {

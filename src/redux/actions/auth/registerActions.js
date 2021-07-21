@@ -5,13 +5,77 @@ import axios from "axios"
 
 
 
+export const setTerm = (national_id, term1, term2, six, eight) => {
+  return dispatch => {
+      dispatch({
+        type: "SET_TERMS",
+        payload: {national_id, term1, term2, six, eight}
+      })
+      history.push("/pages/register2")
+    }
+    
+  }
+
+
+export const postTerms = (
+  user_id, 
+  national_id, 
+  term_1, 
+  term_2, 
+  term_3, 
+  term_4,
+  term_5,
+  term_6,
+  term_7,
+  term_8,
+  term_9,
+  term_10,
+  term_11,
+  term_12,
+  term_13
+  ) => { return dispatch => 
+    {axios
+      .post("http://203.251.135.81:9300/terms", {
+        user_id : user_id ,
+        national_id : national_id ,
+        term_11 : term_1,
+        term_12 : term_2,
+        term_21 : term_3,
+        term_22 : term_4,
+        term_31 : term_5,
+        term_41 : term_6,
+        term_42 : term_7,
+        term_51 : term_8,
+        term_52 : term_9,
+        term_61 : term_10,
+        term_71 : term_11,
+        term_81 : term_12,
+        term_91 : term_13
+      })
+      .then(response => {
+        console.log(response);
+        if(response.data.status === "200") {
+          history.push("/pages/register3");
+        } else {
+          alert(response.data.message);
+         
+        }
+
+      })
+      dispatch({
+        type: "POST_TERMS",
+        payload: {}
+      })
+  }
+}
+
+
 
 
 
 // 회원가입 pages/register2 
 export const register2 = (userid, name, phone, password, btdate, gender, email) => {
 
-  
   return dispatch => {
     let registeruser = userid
     let registername = name

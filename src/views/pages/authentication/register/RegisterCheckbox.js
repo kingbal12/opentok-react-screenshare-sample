@@ -5,6 +5,8 @@ import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import "../../../../assets/scss/pages/authentication.scss"
 
 export const RegisterCheckbox = props => {
+
+  
   return (
 
     <FormGroup className="form-label-group d-flex justify-content-between">
@@ -13,13 +15,11 @@ export const RegisterCheckbox = props => {
         onChange={props.handleCheckChieldElement}
         color="primary"
         icon={<Check className="vx-icon" size={16} />}
-        label={props.value}
+        label={props.label}
         checked={props.isChecked}
         value={props.value}
       />
-      <div className="col-3">
-        보기
-      </div>
+      
     </FormGroup>
 
   );
