@@ -40,7 +40,9 @@ class Register extends React.Component {
     super(props)
     this.state = {
       userid: "kingbal999@kakao.com",
+      name: "아이오티포헬스",
       // userid: props.user.register.values.registeruser,
+      // name: props.user.register.values.registername,
       filename: "",
       file : "",
       medicalpart: props.cookiere4.medicalpart,
@@ -160,8 +162,7 @@ class Register extends React.Component {
     let profile_preview = null;
     if(this.state.file !== ''){
       profile_preview = 
-      <div className="dz-thumb ">
-        <div className="dz-thumb-inner">
+      
           <img
             width="150px"
             height="150px" 
@@ -169,12 +170,10 @@ class Register extends React.Component {
             className="dz-img" 
             alt="" 
             />
-        </div>
-      </div>
+      
     } else {
       profile_preview = 
-      <div className="dz-thumb ">
-        <div className="dz-thumb-inner">  
+     
           <img
             width="150px"
             height="150px" 
@@ -183,8 +182,7 @@ class Register extends React.Component {
             style={{borderRadius:"100%"}} 
             alt="" 
             />
-        </div>
-      </div>
+       
     }
     return (
       <PerfectScrollbar style={{display:"flex",height:"100vh", alignItems:"center"}}>
@@ -212,9 +210,10 @@ class Register extends React.Component {
                       <Row>
                         
                           <Col lg="2" md="12" className="align-self-start"><b>프로필 사진 등록</b></Col>
-                          <Col lg="6" md="12">
+                          <Col lg="8" md="12">
                           <InputGroup>
-                            <CustomInput 
+                            <CustomInput
+                              required 
                               type="file" 
                               accept="image/gif,image/jpeg,image/png" 
                               id="exampleCustomFileBrowser" 
@@ -223,7 +222,7 @@ class Register extends React.Component {
                               onChange={this.handleFileOnChange}/> 
                           </InputGroup>
                           </Col>
-                          <Col lg="4" md="12" className="text-left">{profile_preview}</Col>
+                          <Col lg="2" md="12" className="text-left">{profile_preview}</Col>
                       </Row>
                       
                     </FormGroup> 
@@ -396,7 +395,7 @@ class Register extends React.Component {
             {profile_preview}
           </Row>
           <Row className="d-flex justify-content-center">
-            <h5 className="text-bold-600">{this.state.userid}</h5>
+            <h5 className="text-bold-600">{this.state.name}</h5>
           </Row>
           <Row className="d-flex justify-content-center">
             {this.state.medicalpart==="01"?"가정의학과":

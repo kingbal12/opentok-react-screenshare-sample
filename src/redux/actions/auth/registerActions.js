@@ -14,6 +14,7 @@ export const register2 = (userid, name, phone, password, btdate, gender, email) 
   
   return dispatch => {
     let registeruser = userid
+    let registername = name
     axios
       .post("http://203.251.135.81:9300/signup", {
         user_id: userid,
@@ -37,7 +38,7 @@ export const register2 = (userid, name, phone, password, btdate, gender, email) 
       })
       dispatch({
         type: "REGISTER_USER",
-        payload: {registeruser}
+        payload: {registeruser, registername}
       })
   }
 }
@@ -206,6 +207,32 @@ export const putmyinfo = (userid, filename, file, medicalpart, medicalable, medi
   let data = new FormData();
   data.append('user_id', userid);
   data.append('file_name', file);
+  data.append('medical_part', medicalpart);
+  data.append('medical_able', medicalable);
+  data.append('medical_desc', medicaldesc);
+  data.append('medical_num', medicalnum);
+  data.append('user_desc', userdesc)
+  return dispatch => {
+    axios
+      .put("http://203.251.135.81:9300/v1/doctor/account/user-info", data
+
+      )
+      .then(response => {
+        if(response.data.status === "200") {
+
+          alert("개인정보가 정상적으로 변경되었습니다.")
+         
+        } else {
+          alert(response.data.message);
+        }
+
+      })
+  }
+}
+
+export const putmyinfonfile = (userid, medicalpart, medicalable, medicaldesc, medicalnum, userdesc) => {
+  let data = new FormData();
+  data.append('user_id', userid);
   data.append('medical_part', medicalpart);
   data.append('medical_able', medicalable);
   data.append('medical_desc', medicaldesc);

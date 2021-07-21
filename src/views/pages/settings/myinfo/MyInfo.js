@@ -1,5 +1,9 @@
 import React from "react"
-import {InputGroup, Form, FormGroup, Input, Button,
+import {InputGroup, 
+  Form, 
+  FormGroup, 
+  Input, 
+  Button,
   CustomInput,
   Card,
   CardBody,
@@ -8,7 +12,7 @@ import {InputGroup, Form, FormGroup, Input, Button,
 } from "reactstrap"
 
 import "../../../../assets/scss/pages/authentication.scss"
-import { putmyinfo } from "../../../../redux/actions/auth/registerActions"
+import { putmyinfo, putmyinfonfile } from "../../../../redux/actions/auth/registerActions"
 import { connect } from "react-redux"
 import axios from "axios"
 import previmg from "../../../../assets/img/portrait/small/Sample_User_Icon.png"
@@ -45,7 +49,6 @@ class MyInfo extends React.Component {
     
             if(response.data.status==="200") {
               myinfo = response.data.data
-              console.log("나의 정보: ",myinfo)
               if(myinfo.GENDER==='1' || myinfo.GENDER==='3') {
                 this.setState({gender: "M"})
               } else if(myinfo.GENDER==='2' || myinfo.GENDER==='4'){
@@ -89,10 +92,8 @@ class MyInfo extends React.Component {
     
     e.preventDefault()
     if(this.state.filename===""){
-      this.props.putmyinfo(
+      this.props.putmyinfonfile(
         this.state.userid,
-        this.props.user.login.values.loggedInUser.file_path,
-        this.props.user.login.values.loggedInUser.file_name,
         this.state.medicalpart,
         this.state.medicalable,
         this.state.medicaldesc,
@@ -320,4 +321,4 @@ const mapStateToProps = state => {
     user: state.auth
   }
 }
-export default connect(mapStateToProps, {putmyinfo})(MyInfo)
+export default connect(mapStateToProps, {putmyinfo, putmyinfonfile})(MyInfo)
