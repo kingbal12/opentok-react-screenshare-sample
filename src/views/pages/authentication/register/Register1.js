@@ -134,8 +134,8 @@ class Register extends React.Component {
  
   render() {
     return (
-      <PerfectScrollbar style={{height:"100vh", alignItems:"center"}}>
-      <Row className="m-0 justify-content-center">
+      <PerfectScrollbar style={{display:"flex", height:"100vh", alignItems:"center"}}>
+      <Row className="m-0 w-100 justify-content-center">
         <Modal
           isOpen={this.state.termmodal}
           toggle={this.termModal}

@@ -12,7 +12,7 @@ import {InputGroup, InputGroupAddon, InputGroupText, Form, FormGroup, Input, Lab
   Col
 } from "reactstrap"
 import "../../../../assets/scss/pages/authentication.scss"
-import { register3 } from "../../../../redux/actions/auth/registerActions"
+import { register3, postPhonenumber, phoneAuth} from "../../../../redux/actions/auth/registerActions"
 import { saveRegister3 } from "../../../../redux/actions/cookies"
 import { connect } from "react-redux"
 import DaumPostcode from 'react-daum-postcode';
@@ -26,6 +26,8 @@ class Register extends React.Component {
     this.state={
       // userid: props.user.register.values.registeruser,
       userid: "kingbal13@naver.com",
+      phonenum: "",
+      phonauthnum: "",
       hospitalname: props.cookiere3.hospitalname,
       businessnumber: props.cookiere3.businessnumber,
       zipcode: props.cookiere3.zipcode,
@@ -39,6 +41,16 @@ class Register extends React.Component {
       businessmodal: false,
       businessmodalmsg: ""
   }
+}
+
+postPhone = e => {
+  e.preventDefault()
+  this.props.postPhonenumber(this.state.phonenum)
+}
+
+auth = e => {
+  e.preventDefault()
+  this.props.phoneAuth(this.state.phonauthnum)
 }
 
 
@@ -84,6 +96,7 @@ handleComplete = (data) => {
     e.preventDefault()
     console.log(this.state)
   }
+
 
   verifyBusinessNumber = e => {
     e.preventDefault()
@@ -199,22 +212,33 @@ handleComplete = (data) => {
               <CardBody className="pt-1 pb-50">
                   <Form action="/" onSubmit={this.handleRegister}>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-3 align-self-center"><b>회원인증</b></div>            
+                      <div className="col-3 align-self-center"><b>휴대폰번호</b></div>            
                       <InputGroup>
-                        <Button type="button" color="primary" outline>휴대폰 인증</Button>
                         <Input
-                          className="ml-1"
                           type="text"
-                          placeholder="인증번호"
+                          placeholder="휴대폰번호를 - 없이 입력해주세요"
                           required
-                          value={this.state.phoeauthnum}
-                          onChange={e => this.setState({ phoeauthnum: e.target.value })}
+                          value={this.state.phonenum}
+                          onChange={e => this.setState({ phonenum: e.target.value })}
                         />
-                        <InputGroupAddon addonType="append"><Button color="primary" type="button">인증확인</Button></InputGroupAddon>
+                        <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.postPhone}>인증요청</Button></InputGroupAddon>
                       </InputGroup>                      
                     </FormGroup>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-3 align-self-center"><b>병원명 <span className="text-primary">(필수)</span></b></div>
+                      <div className="col-3 align-self-center"><b>인증번호</b></div>            
+                      <InputGroup>
+                        <Input
+                          type="text"
+                          placeholder="인증번호"
+                          required
+                          value={this.state.phonauthnum}
+                          onChange={e => this.setState({ phonauthnum: e.target.value })}
+                        />
+                        <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.auth}>인증확인</Button></InputGroupAddon>
+                      </InputGroup>                      
+                    </FormGroup>
+                    <FormGroup className="form-label-group d-flex justify-content-between">
+                      <div className="col-3 align-self-center"><b>병원명 <span className="text-danger">(필수)</span></b></div>
                       <InputGroup>
                         <Input
                           type="text"
@@ -226,7 +250,7 @@ handleComplete = (data) => {
                       </InputGroup>
                     </FormGroup>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-3 align-self-center"><b>사업자 등록번호 <span className="text-primary">(필수)</span></b></div>
+                      <div className="col-3 align-self-center"><b>사업자 등록번호 <span className="text-danger">(필수)</span></b></div>
                       <InputGroup>
                         <Input
                           type="text"
@@ -240,7 +264,7 @@ handleComplete = (data) => {
                     </FormGroup>
                     <FormGroup className="form-label-group">
                       <div className="d-flex justify-content-between">
-                        <div className="col-3 align-self-start"><b>병원주소 <span className="text-primary">(필수)</span></b></div>
+                        <div className="col-3 align-self-start"><b>병원주소 <span className="text-danger">(필수)</span></b></div>
                         <InputGroup className="mb-1" onClick={this.zipModal}>
                           <Input
                             type="text"
@@ -311,7 +335,7 @@ handleComplete = (data) => {
                       </Modal>
                     </FormGroup>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-3 align-self-center"><b>전화번호 <span className="text-primary">(필수)</span></b></div>
+                      <div className="col-3 align-self-center"><b>전화번호 <span className="text-danger">(필수)</span></b></div>
                       <InputGroup>
                         <Input
                           type="text"
@@ -397,4 +421,4 @@ const mapStateToProps = state =>{
   }
 }
 
-export default connect(mapStateToProps, {register3, saveRegister3})(Register)
+export default connect(mapStateToProps, {register3, postPhonenumber, phoneAuth, saveRegister3})(Register)

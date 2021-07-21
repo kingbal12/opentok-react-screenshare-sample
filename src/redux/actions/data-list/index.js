@@ -14,6 +14,51 @@ import moment from "moment"
 //   }
 // }
 
+export const getAppData = (userid, pageamount, pagenum) => {
+  let npagemount = Number(pageamount);
+  let npagenum = Number(pagenum);
+  return async dispatch => {
+    await axios
+    .get("http://203.251.135.81:9300/v1/doctor/appointment/dashboard", {
+      params: {
+        user_id: userid,
+        start_date: new Date(),
+        page_amount: npagemount,
+        page_num: npagenum
+      }
+    })
+    .then(response => {
+      let totalPage = Math.ceil(response.data.data.COUNT_DAY / 5)
+      console.log(totalPage, response)
+      let length = response.data.data.APPOINT_LIST.length
+      let appointlist 	= new Array();
+        for (let i=0; i<length; i++) {
+          let jsonObj		= new Object();         
+          jsonObj.APPOINT_KIND		= response.data.data.APPOINT_LIST[i].APPOINT_KIND
+          jsonObj.APPOINT_NUM = response.data.data.APPOINT_LIST[i].APPOINT_NUM
+          jsonObj.APPOINT_TIME	= response.data.data.APPOINT_LIST[i].APPOINT_TIME
+          jsonObj.BIRTH_DT = response.data.data.APPOINT_LIST[i].BIRTH_DT
+          jsonObj.FIRST_YN = response.data.data.APPOINT_LIST[i].FIRST_YN
+          jsonObj.F_NAME = response.data.data.APPOINT_LIST[i].F_NAME
+          jsonObj.NOTE_DX = response.data.data.APPOINT_LIST[i].NOTE_DX
+          jsonObj.PATIENT_ID = response.data.data.APPOINT_LIST[i].PATIENT_ID
+          jsonObj.SYMPTOM = response.data.data.APPOINT_LIST[i].SYMPTOM
+          jsonObj.VITAL_STATE = response.data.data.APPOINT_LIST[i].VITAL_STATE
+  
+          jsonObj = JSON.stringify(jsonObj);
+          //String 형태로 파싱한 객체를 다시 json으로 변환
+          appointlist.push(JSON.parse(jsonObj));
+            }
+      dispatch({
+        type: "GET_APPOINT_DATA",
+        data: appointlist,
+        totalPages: totalPage,
+      })
+    })
+    .catch(err => console.log(err))
+  }
+}
+
 export const getData = (userid, pageamount, pagenum) => {
   let npagemount = Number(pageamount);
   let npagenum = Number(pagenum);

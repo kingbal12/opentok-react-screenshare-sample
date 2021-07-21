@@ -59,6 +59,7 @@ const statisticsCards = lazy(() =>
 const analyticsCards = lazy(() =>
   import("./views/ui-elements/cards/analytics/Analytics")
 )
+const appointlist = lazy(() => import("./views/dashboard/analytics/PatientListView"))
 const actionCards = lazy(() =>
   import("./views/ui-elements/cards/actions/CardActions")
 )
@@ -280,6 +281,10 @@ class AppRouter extends React.Component {
           <AppRoute
             path="/analyticsDashboard"
             component={analyticsDashboard}
+          />
+          <AppRoute
+            path="/patients-list"
+            component={appointlist}
           />
           <AppRoute
             path="/displayName"

@@ -15,7 +15,8 @@ import DataTableCustom from "./DataTableCustom"
 import { connect } from "react-redux"
 import { getappoints } from "../../../redux/actions/appoint"
 import axios from "axios"
-
+import ListViewConfig from "./DataListConfig"
+import queryString from "query-string"
 
 
  
@@ -46,7 +47,6 @@ class AnalyticsDashboard extends React.Component {
             let appoints;
             if (response.data.status==="200") {
               appoints=response.data.data
-              console.log("대시보드 데이터",appoints)
               this.setState({
                 countday: appoints.COUNT_DAY,
                 countmon: appoints.COUNT_MON
@@ -75,7 +75,13 @@ class AnalyticsDashboard extends React.Component {
         </Row>
         <Row>
           <Col sm="12">
-            <DataTableCustom/>
+            <ListViewConfig parsedFilter={queryString.parse(this.props.location.search)}/>
+          </Col>
+        </Row>
+        <Row>
+          <Col sm="12">
+            {/* <DataTableCustom/> */}
+            {/* <ListViewConfig parsedFilter={queryString.parse(this.props.location.search)}/> */}
           </Col>
         </Row>
       </React.Fragment>

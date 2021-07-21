@@ -1,6 +1,4 @@
-
 import { history } from "../../../history"
-
 import axios from "axios"
 
 
@@ -200,6 +198,44 @@ export const register3 = (userid, hospitalname, businessnumber, zipcode, address
       })
   }
 }
+
+export const postPhonenumber = (phonenumber) => {
+  return dispatch => {
+    axios
+      .post("http://203.251.135.81:9300/v1/doctor/account/hospital-info", {
+        phone_num: phonenumber
+      })
+      .then(response => {
+        console.log(response);
+        if(response.data.status === "200") {
+          alert(response.data.message);
+        } else{
+          alert(response.data.message);
+        }
+
+      })
+  }
+}
+
+export const phoneAuth = (authnumber) => {
+  return dispatch => {
+    axios
+      .post("http://203.251.135.81:9300/v1/doctor/account/hospital-infosd", {
+        auth_num: authnumber
+      })
+      .then(response => {
+        console.log(response);
+        if(response.data.status === "200") {
+          alert(response.data.message);
+        } else{
+          alert(response.data.message);
+        }
+
+      })
+  }
+}
+
+
 
 export const puthsinfo = (userid, hospitalname, businessnumber, zipcode, address1, address2, phonenumber, accountname, bankname, accountnumber) => {
   return dispatch => {

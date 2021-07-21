@@ -1,8 +1,8 @@
 import React from "react"
 import StatisticsCard from "../../../../components/@vuexy/statisticsCard/StatisticsCard"
-import { Users } from "react-feather"
-// import { subscribersGained, subscribersGainedSeries } from "./StatisticsData"
 import { Fragment } from "react"
+import CountToday from "../../../../assets/img/dashboard/ID9_07_btn_count_today.png"
+
 
 
 class SubscriberGained extends React.Component {
@@ -10,11 +10,9 @@ class SubscriberGained extends React.Component {
     return (
       <Fragment>
         <StatisticsCard
-          icon={<Users className="primary" size={22} />}
+          icon={<img src={CountToday} alt="CountToday" />}
           statTitle="오늘 예약 환자"
           stat={this.props.countd}  
-          // options={subscribersGained}
-          // series={subscribersGainedSeries}
           type="area"
         />
       </Fragment>
