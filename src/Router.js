@@ -283,7 +283,7 @@ class AppRouter extends React.Component {
             component={analyticsDashboard}
           />
           <AppRoute
-            path="/patients-list"
+            path="/appoint-list"
             component={appointlist}
           />
           <AppRoute
