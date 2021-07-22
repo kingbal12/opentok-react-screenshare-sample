@@ -49,6 +49,8 @@
     color: $body-color;
     padding: 0 1rem;
     margin-top: 1rem;
+    margin-bottom: 1rem;
+    
 
     .rdt_TableCol:first-child 
 
@@ -60,8 +62,8 @@
 
     .rdt_TableHead {
       .rdt_TableHeadRow {
-        background-color: transparent;
-        border: 0;
+        background-color: #E1E1E1;
+        border: 1px solid #E1E1E1;
         min-height: 61px;
         .rdt_TableCol {
           font-size: 0.85rem;
@@ -82,9 +84,10 @@
     }
     .rdt_TableBody {
       .rdt_TableRow {
+
         min-height: 50px;
         // margin-bottom: 20px;
-        border: 0;
+        border: 1px solid #E1E1E1;
         border-radius: 0.5rem;
         transition: all 0.3s ease;
         box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.05);

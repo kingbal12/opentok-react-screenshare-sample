@@ -22,7 +22,8 @@ const initialState = {
   SPO2:[],
   pastconsulttotal:0,
   pastconsultlist:[],
-  vitaldata:""
+  vitaldata:"",
+  pid:""
 }
 
 const determinePopularity = val => {
@@ -53,6 +54,11 @@ const getIndex = (arr, arr2, arr3, params = {}) => {
 
 const DataListReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "SAVE_PATIENTID":
+      return {
+        ...state,
+        pid: action.data
+      }
     case "GET_PAYMENT_DATA":
       return {
         ...state,

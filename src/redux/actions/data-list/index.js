@@ -444,14 +444,24 @@ export const addData = obj => {
   }
 }
 
-export const getPastConulstList = (patientid) => {
+export const goPCL = (patientid) => {
+  return dispatch => {
+    dispatch({
+      type: "SAVE_PATIENTID",
+      data: patientid,
+    })
+    history.push("/past-consult-list" )
+  }
+}
+
+export const getPastConulstList = (patientid, pageamount, pagenum,) => {
   return async dispatch => {
     await axios
       .get("http://203.251.135.81:9300/v1/doctor/patient/consults", {
         params: {
           patient_id: patientid,
-          page_amount: 5,
-          page_num: 1
+          page_amount: pageamount,
+          page_num: pagenum
         }
   })
     .then(response => {
@@ -471,7 +481,7 @@ export const getPastConulstList = (patientid) => {
           totalpage: totalPage
         })
 
-        history.push("/past-consult-list" )
+        
       }
     })
     .catch(err => console.log(err))

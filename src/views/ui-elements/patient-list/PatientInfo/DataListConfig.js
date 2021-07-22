@@ -2,16 +2,17 @@ import React, { Component } from "react"
 import {
   Button,
   Progress,
-  UncontrolledDropdown,
-  DropdownMenu,
-  DropdownToggle,
-  DropdownItem,
-  Input
+  Card,
+  CardHeader,
+  CardBody,
+  Input,
+  Row,
+  Col
 } from "reactstrap"
 import DataTable from "react-data-table-component"
 import classnames from "classnames"
 import ReactPaginate from "react-paginate"
-import { history } from "../../../history"
+import { history } from "../../../../history"
 import {
   Edit,
   Trash,
@@ -29,7 +30,7 @@ import {
 } from "react-feather"
 import { connect } from "react-redux"
 import {
-  getData,
+  getPastConulstList,
   getNameData,
   getInitialData,
   deleteData,
@@ -40,14 +41,15 @@ import {
   getPatientInfo,
   getVitalData
   // eData
-} from "../../../redux/actions/data-list"
+} from "../../../../redux/actions/data-list/"
 import Sidebar from "./DataListSidebar"
-import Chip from "../../../components/@vuexy/chips/ChipComponent"
-import Checkbox from "../../../components/@vuexy/checkbox/CheckboxesVuexy"
+import Chip from "../../../../components/@vuexy/chips/ChipComponent"
+import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 
-import "../../../assets/scss/plugins/extensions/react-paginate.scss"
-import "../../../assets/scss/pages/data-list.scss"
+import "../../../../assets/scss/plugins/extensions/react-paginate.scss"
+import "../../../../assets/scss/pages/data-list.scss"
 import { Fragment } from "react"
+import moment from "moment"
 
 const chipColors = {
   "on hold": "warning",
@@ -67,6 +69,74 @@ const selectedStyle = {
       }
     }
   }
+}
+
+const ExpandedComponent = props => {
+  return(
+    <Card style={{background:"#d3d3d3"}}>
+      <Card className="p-0 m-0" style={{ marginBottom: '0rem', }}>
+        <CardBody className="m-0">
+          <Row className="m-0">
+            <Col className="col-4 m-0">
+              <Card className="m-0" style={{height:"23rem"}} >
+                <CardHeader>MD Note</CardHeader>
+                <CardBody>
+                  <div>C.C {props.data.NOTE_CC}</div>
+                  <div className="mt-1">Diagnosis {props.data.NOTE_DX}</div>
+                  <div className="mt-1">Tx Rx {props.data.NOTE_RX}</div>
+                  <div className="mt-1">Recommendation</div>
+                </CardBody>
+              </Card>
+            </Col>
+            <Col className="col-4 m-0">
+              <Card style={{height:"10.5rem"}}>
+                <CardHeader>Present Condition</CardHeader>
+                <CardBody>
+                  {props.data.SYMPTOM}
+                </CardBody>
+              </Card>
+              <Card style={{height:"10.5rem"}}>
+                <CardHeader>Files</CardHeader>
+                <CardBody>
+                  {props.data.FILE_NAME===""?
+                    null
+                    :
+                    <img
+                    width="75px"
+                    height="75px" 
+                    src={"http://203.251.135.81:9300"+props.data.FILE_PATH
+                        +props.data.FILE_NAME} 
+                    className="dz-img" 
+                    alt="" 
+                    />
+                  }
+                </CardBody>
+              </Card>
+            </Col> 
+            <Col className="col-4 m-0">
+              <Card style={{height:"23rem"}}>
+                <CardHeader>Prescription</CardHeader>
+                <CardBody>
+                  {props.data.RX_NAME===""?
+                    null
+                    :
+                    <img
+                    width="75px"
+                    height="75px" 
+                    src={"http://203.251.135.81:9300"+props.data.RX_PATH
+                        +props.data.RX_NAME} 
+                    className="dz-img" 
+                    alt="" 
+                    />
+                  }
+                </CardBody>
+              </Card>
+            </Col>
+          </Row> 
+        </CardBody>
+      </Card>
+    </Card>
+  )
 }
 
 const ActionsComponent = props => {
@@ -90,15 +160,13 @@ const ActionsComponent = props => {
   )
 }
 
+
+
+
 const CustomHeader = props => {
   return (
-    <div className="data-list-header d-flex justify-content-between flex-wrap">    
-      <div className="actions-right d-flex flex-wrap mt-sm-0 mt-2 col-8">
-        <div className="filter-section col-5">
-            <Input type="text" placeholder="Search" onChange={e => props.handleFilter(e)} />
-        </div>
-        <Button className="ml-2" color='primary' outline onClick={e => props.search(e)}>검색</Button>
-      </div>
+    <div>    
+    
     </div>
   )
 }
@@ -107,7 +175,7 @@ class DataListConfig extends Component {
   constructor(props) {
     super(props);
     if(this.props.parsedFilter.perPage===undefined) {
-      this.props.getData(this.state.user, this.state.rowsPerPage, this.state.currentPage)
+      this.props.getPastConulstList(this.props.dataList.pid, this.state.rowsPerPage, this.state.currentPage)
     }
     
     
@@ -118,9 +186,9 @@ class DataListConfig extends Component {
       state.currentPage !== props.parsedFilter.page
     ) {
       return {
-        data: props.dataList.data,
+        data: props.dataList.pastconsultlist,
         allData: props.dataList.filteredData,
-        totalPages: props.dataList.totalPages,
+        totalPages: props.dataList.pastconsulttotal,
         currentPage: parseInt(props.parsedFilter.page) - 1,
         rowsPerPage: parseInt(props.parsedFilter.perPage),
         totalRecords: props.dataList.totalRecords,
@@ -142,7 +210,7 @@ class DataListConfig extends Component {
     currentPage: 1,
     columns: [  
       {
-        name: "이름",
+        name: "진료과/진료의",
         selector: "name",
         sortable: false,
         minWidth: "200px",
@@ -153,74 +221,29 @@ class DataListConfig extends Component {
               <span
                 title={row.F_NAME}
                 className="d-block text-bold-500 text-truncate mb-0">
-                {row.F_NAME}
+                {row.PART_NAME} &nbsp; {row.F_NAME}
               </span>
             </div>
           </div>
+          
         )
       },
       
       {
-        name: "성별",
+        name: "진단명",
         selector: "gender",
         sortable: false,
         center:true,
-        cell: row => <p className="text-bold-500 mb-0">{row.GENDER==="1"||row.GENDER==="3"?"M":"F"}</p>
+        cell: row => <p className="text-bold-500 mb-0">{row.NOTE_CC}</p>
       },
       {
-        name: "나이",
+        name: "진료일자",
         selector: "age",
         sortable: false,
         center:true,
-        cell: row => <p className="text-bold-500 mb-0">{row.AGE}</p>
-      },
-      {
-        name: "생년월일",
-        selector: "birthday",
-        sortable: false,
-        center:true,
-        cell: row => (
-          <p className="text-bold-500 text-truncate mb-0">{row.BIRTH_DT}</p>
-        )
-      },
-      {
-        name: "진단명",
-        center:true,
-        cell: row => (
-          <p className="text-bold-500 text-truncate mb-0">{row.NOTE_DX}</p>
-        )
-      },
-      {
-        name: "초진/재진",
-        center:true,
-        cell: row => (
-          <p className="text-bold-500 text-truncate mb-0">{row.FIRST_YN}</p>
-        )
-      },
-      {
-        name: "VitalData",
-        center:true,
-        cell: row => (
-          <Fragment>
-            <Droplet stroke={row.BP==="00"?"silver":row.BP==="01"?"white":row.BP==="02"?"green":row.BP==="03"?"yellow":row.BP==="04"?"red":""}></Droplet>
-            <Activity stroke={row.PULSE==="00"?"silver":row.PULSE==="01"?"white":row.PULSE==="02"?"green":row.PULSE==="03"?"yellow":row.PULSE==="04"?"red":""}></Activity>
-            <Thermometer stroke={row.TEMPERATURE==="00"?"silver":row.TEMPERATURE==="01"?"white":row.TEMPERATURE==="02"?"green":row.TEMPERATURE==="03"?"yellow":row.TEMPERATURE==="04"?"red":""}></Thermometer>
-            <Droplet stroke={row.BS==="00"?"silver":row.BS==="01"?"white":row.BS==="02"?"green":row.BS==="03"?"yellow":row.BS==="04"?"red":""}></Droplet>
-            <Compass stroke={row.SPO2==="00"?"silver":row.SPO2==="01"?"white":row.SPO2==="02"?"green":row.SPO2==="03"?"yellow":row.SPO2==="04"?"red":""}></Compass>
-            <Inbox stroke={row.BW==="00"?"silver":row.BW==="01"?"white":row.BW==="02"?"green":row.BW==="03"?"yellow":row.BW==="04"?"red":""}></Inbox>
-          </Fragment>
-
-          // 가운데로 옮길것
-          
-        )
-      },
-      {
-        name: "차트보기",
-        center:true,
-        cell: row => (
-          <Edit onClick={() => this.goPatientList(row.PATIENT_ID)} style={{cursor:"pointer"}}></Edit>
-        )
+        cell: row => <p className="text-bold-500 mb-0">{moment(row.APPOINT_TIME).format("MMMM DD, YYYY")}</p>
       }
+      
     ],
     allData: [],
     value: "",
@@ -237,7 +260,7 @@ class DataListConfig extends Component {
 
   componentDidMount() {
     if(this.props.parsedFilter.perPage!==undefined){
-      this.props.getData(this.state.user,this.props.parsedFilter.perPage, this.props.parsedFilter.page)
+      this.props.getPastConulstList(this.props.dataList.pid,this.props.parsedFilter.perPage, this.props.parsedFilter.page)
     }
   }
 
@@ -303,7 +326,7 @@ class DataListConfig extends Component {
           cell: row => (
             <ActionsComponent
               row={row}
-              getData={this.props.getData}
+              getPastConulstList={this.props.getPastConulstList}
               parsedFilter={this.props.parsedFilter}
               currentData={this.handleCurrentData}
               deleteRow={this.handleDelete}
@@ -338,12 +361,12 @@ class DataListConfig extends Component {
 
 
   handleRowsPerPage = value => {
-    let { parsedFilter, getData } = this.props
+    let { parsedFilter, getPastConulstList } = this.props
     let page = parsedFilter.page !== undefined ? parsedFilter.page : 1
-    history.push(`/patients-list?page=${page}&perPage=${value}`)
+    history.push(`/past-consult-list?page=${page}&perPage=${value}`)
     this.setState({currentPage: page, rowsPerPage: value })
-    getData({ user_id: this.state.user, page: parsedFilter.page, perPage: value })
-    // getData({ user_id: this.state.user, page_num: parsedFilter.page, page_amount: value })
+    getPastConulstList({ user_id: this.props.dataList.pid, page: parsedFilter.page, perPage: value })
+    // getPastConulstList({ user_id: this.state.user, page_num: parsedFilter.page, page_amount: value })
   }
 
   handleSidebar = (boolean, addNew = false) => {
@@ -353,7 +376,7 @@ class DataListConfig extends Component {
 
   // handleDelete = row => {
   //   this.props.deleteData(row)
-  //   this.props.getData(this.props.parsedFilter)
+  //   this.props.getPastConulstList(this.props.parsedFilter)
   //   if (this.state.data.length - 1 === 0) {
   //     let urlPrefix = this.props.thumbView
   //       ? "/data-list/thumb-view/"
@@ -363,7 +386,7 @@ class DataListConfig extends Component {
   //         this.props.parsedFilter.page - 1
   //       )}&perPage=${this.props.parsedFilter.perPage}`
   //     )
-  //     this.props.getData({
+  //     this.props.getPastConulstList({
   //       page: this.props.parsedFilter.page - 1,
   //       perPage: this.props.parsedFilter.perPage
   //     })
@@ -376,20 +399,41 @@ class DataListConfig extends Component {
   }
 
   handlePagination = page => {
-    let { parsedFilter, getData } = this.props
+    let { parsedFilter, getPastConulstList } = this.props
     let perPage = parsedFilter.perPage !== undefined ? parsedFilter.perPage : 5
     let urlPrefix = this.props.thumbView
       ? "/data-list/thumb-view/"
-      : "/patients-list"
+      : "/past-consult-list"
     history.push(
       `${urlPrefix}?page=${page.selected + 1}&perPage=${perPage}`
     )
-    // getData({ page: page.selected + 1, perPage: perPage })
-    getData(this.state.user, perPage, page.selected + 1 )
+    // getPastConulstList({ page: page.selected + 1, perPage: perPage })
+    getPastConulstList(this.props.dataList.pid, perPage, page.selected + 1 )
     this.setState({ currentPage: page.selected })
   }
 
+  
 
+  // .... const data = 
+  // [
+  //   { 
+  //     id: 1, title: 'Conan the Barbarian', 
+  //     summary: 'Orphaned boy Conan is enslaved after his village is destroyed...',  
+  //     year: '1982' } ...];
+  //   const columns = 
+  //   [  
+  //     {
+  //       name: 'Title',    
+  //       sortable: true,    
+  //       cell: row => <div data-tag="allowRowEvents">
+  //                       <div style={{ fontWeight: bold }}>{row.title}</div>
+  //                       {row.summary}
+  //                     </div>,  },  
+  //     { 
+  //       name: 'Year',    
+  //       selector: 'year',    
+  //       sortable: true,    
+  //       right: true,  },]; ... class MyComponent extends Component {  render() {    return (      <DataTable        title="Arnold Movies"        columns={columns}        data={data}        selectableRows        selectableRowsComponent={Checkbox}        selectableRowsComponentProps={{ inkDisabled: true }}        sortIcon={<FontIcon>arrow_downward</FontIcon>}        onSelectedRowsChange={handleChange}      />    )  }};
   render() {
     let {
       columns,
@@ -412,6 +456,10 @@ class DataListConfig extends Component {
         <DataTable
           columns={columns}
           data={value.length ? allData : data}
+          expandableRows
+          expandableRowDisabled={row => row.disabled}
+          expandOnRowClicked
+          expandableRowsComponent={<ExpandedComponent />}
           pagination
           paginationServer
           paginationComponent={() => (
@@ -435,7 +483,7 @@ class DataListConfig extends Component {
           subHeader
           // selectableRows
           responsive
-          // pointerOnHover
+          pointerOnHover
           selectableRowsHighlight
           onSelectedRowsChange={data =>
             this.setState({ selected: data.selectedRows })
@@ -468,7 +516,7 @@ class DataListConfig extends Component {
           addData={this.props.addData}
           handleSidebar={this.handleSidebar}
           thumbView={this.props.thumbView}
-          getData={this.props.getData}
+          getPastConulstList={this.props.getPastConulstList}
           dataParams={this.props.parsedFilter}
           addNew={this.state.addNew}
         />
@@ -491,7 +539,7 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, {
-  getData,
+  getPastConulstList,
   getNameData,
   deleteData,
   updateData,

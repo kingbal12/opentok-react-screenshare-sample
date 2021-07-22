@@ -2,11 +2,9 @@ import React, { Component } from "react"
 import {
   Button,
   Progress,
-  UncontrolledDropdown,
-  DropdownMenu,
-  DropdownToggle,
-  DropdownItem,
-  Input
+  Card,
+  Input,
+  Row
 } from "reactstrap"
 import DataTable from "react-data-table-component"
 import classnames from "classnames"
@@ -92,15 +90,25 @@ const ActionsComponent = props => {
 
 const CustomHeader = props => {
   return (
-    <div className="data-list-headerjustify-content-between">
-      <h2>FAQ</h2>    
-      <div className="actions-right d-flex flex-wrap mt-sm-0 mt-2 col-8">
-        <div className="filter-section col-9">
-            <Input className="col-12" type="text" placeholder="Search" onChange={e => props.handleFilter(e)} />
-        </div>
-        <Button className="ml-2" color='primary' outline onClick={e => props.search(e)}>검색</Button>
+    
+      <div className="data-list-headerjustify-content-between">
+        <h3 className="text-bold-600">FAQ</h3>    
+        <Card className="mt-1" style={{ backgroundColor:"#E1E1E1", height:"11rem"}}>
+          <Row className="px-3 pt-1">
+            <h4 className="text-bold-600">자주 묻는 질문들입니다.</h4>
+          </Row>
+          <Row className="px-3">
+            <h4 className="text-bold-600">궁금한 사항은 먼저 검색해보세요</h4>
+          </Row>
+          <Row className=" d-flex  justify-content-between  mt-2  px-3">
+            
+              <Input className="col-11" type="text" placeholder="Search" onChange={e => props.handleFilter(e)} />
+            
+            <Button color='primary' outline onClick={e => props.search(e)}>검색</Button>
+          </Row>
+        </Card>
       </div>
-    </div>
+    
   )
 }
 
@@ -353,24 +361,7 @@ class DataListConfig extends Component {
     if (addNew === true) this.setState({ currentData: null, addNew: true })
   }
 
-  // handleDelete = row => {
-  //   this.props.deleteData(row)
-  //   this.props.getData(this.props.parsedFilter)
-  //   if (this.state.data.length - 1 === 0) {
-  //     let urlPrefix = this.props.thumbView
-  //       ? "/data-list/thumb-view/"
-  //       : "/patients-list"
-  //     history.push(
-  //       `${urlPrefix}list-view?page=${parseInt(
-  //         this.props.parsedFilter.page - 1
-  //       )}&perPage=${this.props.parsedFilter.perPage}`
-  //     )
-  //     this.props.getData({
-  //       page: this.props.parsedFilter.page - 1,
-  //       perPage: this.props.parsedFilter.perPage
-  //     })
-  //   }
-  // }
+ 
 
   handleCurrentData = obj => {
     this.setState({ currentData: obj })
@@ -386,7 +377,6 @@ class DataListConfig extends Component {
     history.push(
       `${urlPrefix}?page=${page.selected + 1}&perPage=${perPage}`
     )
-    // getData({ page: page.selected + 1, perPage: perPage })
     getData(this.state.user, perPage, page.selected + 1 )
     this.setState({ currentPage: page.selected })
   }

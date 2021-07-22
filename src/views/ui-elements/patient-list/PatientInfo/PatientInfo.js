@@ -19,8 +19,8 @@ import {
   ResponsiveContainer
 } from "recharts"
 import {
-  getPastConulstList,
-  resetVitalData
+  resetVitalData,
+  goPCL
 } from "../../../../redux/actions/data-list/"
 import { Phone, Video } from "react-feather"
 import { history } from "../../../../history"
@@ -88,7 +88,7 @@ class PatientInfo extends React.Component {
   }
 
   goPastConsultList(pid) {
-    this.props.getPastConulstList(pid)
+    this.props.goPCL(pid)
   }
 
   goVitalData = e => {
@@ -487,4 +487,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {getPastConulstList, resetVitalData}) (PatientInfo)
+export default connect(mapStateToProps, {goPCL, resetVitalData}) (PatientInfo)
