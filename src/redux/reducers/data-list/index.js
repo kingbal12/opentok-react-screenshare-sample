@@ -1,4 +1,6 @@
 const initialState = {
+  faqdata:[],
+  faqtotalPages: 0,
   paydata:[],
   paytotalPages: 0,
   totalpay:0,
@@ -59,6 +61,20 @@ const DataListReducer = (state = initialState, action) => {
         ...state,
         pid: action.data
       }
+    case "GET_FAQ":
+      return {
+        ...state,
+        faqdata: action.data,
+        faqtotalPages: action.totalPages,
+        totalpay: action.totalPay,
+        params: action.params,
+        sortIndex: getIndex(
+          state.allData,
+          action.data,
+          state.sortIndex,
+          action.params
+        )
+      }   
     case "GET_PAYMENT_DATA":
       return {
         ...state,

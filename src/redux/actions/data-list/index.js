@@ -489,6 +489,34 @@ export const getPastConulstList = (patientid, pageamount, pagenum,) => {
 }
 
 
+export const getFaq = (userid, pageamount, pagenum,) => {
+  return async dispatch => {
+    await axios
+      .get("http://203.251.135.81:9300/v1/doctor/setting/faq", {
+        params: {
+          search_text: "",
+          page_amount: pageamount,
+          page_num: pagenum
+        }
+  })
+    .then(response => {
+        console.log("faq:", response)
+        let totalPage = Math.ceil(response.data.data.COUNT / 5)
+      if(response.data.status==="200") {
+        dispatch({
+          type: "GET_FAQ",
+          data: response.data.data.FAQ_LIST,
+          totalpage: totalPage
+        } )
+        
+      } else {
+        alert("FAQ를 불러오지 못하였습니다.")
+      }
+    })
+    .catch(err => console.log(err))
+  }
+}
+
 export const getVitalSettingData = (userid, patientid) => {
   return async dispatch => {
     await axios

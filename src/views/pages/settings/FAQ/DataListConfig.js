@@ -27,7 +27,7 @@ import {
 } from "react-feather"
 import { connect } from "react-redux"
 import {
-  getData,
+  getFaq,
   getNameData,
   getInitialData,
   deleteData,
@@ -116,7 +116,7 @@ class DataListConfig extends Component {
   constructor(props) {
     super(props);
     if(this.props.parsedFilter.perPage===undefined) {
-      this.props.getData(this.state.user, this.state.rowsPerPage, this.state.currentPage)
+      this.props.getFaq(this.state.user, this.state.rowsPerPage, this.state.currentPage)
     }
     
     
@@ -127,9 +127,9 @@ class DataListConfig extends Component {
       state.currentPage !== props.parsedFilter.page
     ) {
       return {
-        data: props.dataList.data,
+        data: props.dataList.faqdata,
         allData: props.dataList.filteredData,
-        totalPages: props.dataList.totalPages,
+        totalPages: props.dataList.faqtotalPages,
         currentPage: parseInt(props.parsedFilter.page) - 1,
         rowsPerPage: parseInt(props.parsedFilter.perPage),
         totalRecords: props.dataList.totalRecords,
@@ -151,7 +151,7 @@ class DataListConfig extends Component {
     currentPage: 1,
     columns: [  
       {
-        name: "이름",
+        name: "No.",
         selector: "name",
         sortable: false,
         minWidth: "200px",
@@ -162,7 +162,7 @@ class DataListConfig extends Component {
               <span
                 title={row.F_NAME}
                 className="d-block text-bold-500 text-truncate mb-0">
-                {row.F_NAME}
+                {row.SEQ}
               </span>
             </div>
           </div>
@@ -170,64 +170,26 @@ class DataListConfig extends Component {
       },
       
       {
-        name: "성별",
+        name: "제목",
         selector: "gender",
         sortable: false,
         center:true,
-        cell: row => <p className="text-bold-500 mb-0">{row.GENDER==="1"||row.GENDER==="3"?"M":"F"}</p>
+        cell: row => <p className="text-bold-500 mb-0">{row.TITLE}</p>
       },
       {
-        name: "나이",
+        name: "작성자",
         selector: "age",
         sortable: false,
         center:true,
-        cell: row => <p className="text-bold-500 mb-0">{row.AGE}</p>
+        cell: row => <p className="text-bold-500 mb-0">{row.CONTENTS}</p>
       },
       {
-        name: "생년월일",
+        name: "작성일",
         selector: "birthday",
         sortable: false,
         center:true,
         cell: row => (
-          <p className="text-bold-500 text-truncate mb-0">{row.BIRTH_DT}</p>
-        )
-      },
-      {
-        name: "진단명",
-        center:true,
-        cell: row => (
-          <p className="text-bold-500 text-truncate mb-0">{row.NOTE_DX}</p>
-        )
-      },
-      {
-        name: "초진/재진",
-        center:true,
-        cell: row => (
-          <p className="text-bold-500 text-truncate mb-0">{row.FIRST_YN}</p>
-        )
-      },
-      {
-        name: "VitalData",
-        center:true,
-        cell: row => (
-          <Fragment>
-            <Droplet stroke={row.BP==="00"?"silver":row.BP==="01"?"white":row.BP==="02"?"green":row.BP==="03"?"yellow":row.BP==="04"?"red":""}></Droplet>
-            <Activity stroke={row.PULSE==="00"?"silver":row.PULSE==="01"?"white":row.PULSE==="02"?"green":row.PULSE==="03"?"yellow":row.PULSE==="04"?"red":""}></Activity>
-            <Thermometer stroke={row.TEMPERATURE==="00"?"silver":row.TEMPERATURE==="01"?"white":row.TEMPERATURE==="02"?"green":row.TEMPERATURE==="03"?"yellow":row.TEMPERATURE==="04"?"red":""}></Thermometer>
-            <Droplet stroke={row.BS==="00"?"silver":row.BS==="01"?"white":row.BS==="02"?"green":row.BS==="03"?"yellow":row.BS==="04"?"red":""}></Droplet>
-            <Compass stroke={row.SPO2==="00"?"silver":row.SPO2==="01"?"white":row.SPO2==="02"?"green":row.SPO2==="03"?"yellow":row.SPO2==="04"?"red":""}></Compass>
-            <Inbox stroke={row.BW==="00"?"silver":row.BW==="01"?"white":row.BW==="02"?"green":row.BW==="03"?"yellow":row.BW==="04"?"red":""}></Inbox>
-          </Fragment>
-
-          // 가운데로 옮길것
-          
-        )
-      },
-      {
-        name: "차트보기",
-        center:true,
-        cell: row => (
-          <Edit onClick={() => this.goPatientList(row.PATIENT_ID)} style={{cursor:"pointer"}}></Edit>
+          <p className="text-bold-500 text-truncate mb-0">{row.CREATE_TIME}</p>
         )
       }
     ],
@@ -246,7 +208,7 @@ class DataListConfig extends Component {
 
   componentDidMount() {
     if(this.props.parsedFilter.perPage!==undefined){
-      this.props.getData(this.state.user,this.props.parsedFilter.perPage, this.props.parsedFilter.page)
+      this.props.getFaq(this.state.user,this.props.parsedFilter.perPage, this.props.parsedFilter.page)
     }
   }
 
@@ -312,7 +274,7 @@ class DataListConfig extends Component {
           cell: row => (
             <ActionsComponent
               row={row}
-              getData={this.props.getData}
+              getFaq={this.props.getFaq}
               parsedFilter={this.props.parsedFilter}
               currentData={this.handleCurrentData}
               deleteRow={this.handleDelete}
@@ -348,12 +310,12 @@ class DataListConfig extends Component {
 
 
   handleRowsPerPage = value => {
-    let { parsedFilter, getData } = this.props
+    let { parsedFilter, getFaq } = this.props
     let page = parsedFilter.page !== undefined ? parsedFilter.page : 1
     history.push(`/patients-list?page=${page}&perPage=${value}`)
     this.setState({currentPage: page, rowsPerPage: value })
-    getData({ user_id: this.state.user, page: parsedFilter.page, perPage: value })
-    // getData({ user_id: this.state.user, page_num: parsedFilter.page, page_amount: value })
+    getFaq({ user_id: this.state.user, page: parsedFilter.page, perPage: value })
+    // getFaq({ user_id: this.state.user, page_num: parsedFilter.page, page_amount: value })
   }
 
   handleSidebar = (boolean, addNew = false) => {
@@ -369,7 +331,7 @@ class DataListConfig extends Component {
   }
 
   handlePagination = page => {
-    let { parsedFilter, getData } = this.props
+    let { parsedFilter, getFaq } = this.props
     let perPage = parsedFilter.perPage !== undefined ? parsedFilter.perPage : 5
     let urlPrefix = this.props.thumbView
       ? "/data-list/thumb-view/"
@@ -377,7 +339,7 @@ class DataListConfig extends Component {
     history.push(
       `${urlPrefix}?page=${page.selected + 1}&perPage=${perPage}`
     )
-    getData(this.state.user, perPage, page.selected + 1 )
+    getFaq(this.state.user, perPage, page.selected + 1 )
     this.setState({ currentPage: page.selected })
   }
 
@@ -460,7 +422,7 @@ class DataListConfig extends Component {
           addData={this.props.addData}
           handleSidebar={this.handleSidebar}
           thumbView={this.props.thumbView}
-          getData={this.props.getData}
+          getFaq={this.props.getFaq}
           dataParams={this.props.parsedFilter}
           addNew={this.state.addNew}
         />
@@ -483,7 +445,7 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, {
-  getData,
+  getFaq,
   getNameData,
   deleteData,
   updateData,
