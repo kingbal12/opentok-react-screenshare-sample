@@ -494,7 +494,7 @@ export const getFaq = (userid, pageamount, pagenum,) => {
     await axios
       .get("http://203.251.135.81:9300/v1/doctor/setting/faq", {
         params: {
-          search_text: "",
+          search_text: "강주형",
           page_amount: pageamount,
           page_num: pagenum
         }
