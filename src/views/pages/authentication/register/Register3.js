@@ -25,7 +25,7 @@ class Register extends React.Component {
     super(props);
     this.state={
       // userid: props.user.register.values.registeruser,
-      userid: "kingbal13@naver.com",
+      userid: "kingbal999@kakao.com",
       phonenum: "",
       phonauthnum: "",
       hospitalname: props.cookiere3.hospitalname,
@@ -39,19 +39,49 @@ class Register extends React.Component {
       accountnumber: props.cookiere3.accountnumber,
       modal: false,
       businessmodal: false,
-      businessmodalmsg: ""
+      businessmodalmsg: "",
+      phoneauthveryfied:"N"
   }
 }
 
 postPhone = e => {
   e.preventDefault()
-  this.props.postPhonenumber(this.state.phonenum)
+  axios
+      .post("http://203.251.135.81:9300/signup-sms", {
+        mobile_num: this.state.phonenum
+      })
+      .then(response => {
+        console.log(response);
+        if(response.data.status === "200") {
+          alert(response.data.message);
+        } else{
+          alert(response.data.message);
+        }
+
+      })
 }
 
 auth = e => {
   e.preventDefault()
-  this.props.phoneAuth(this.state.phonauthnum)
+  axios
+      .get("http://203.251.135.81:9300/signup-sms", {
+        params:{
+          mobile_num: this.state.phonenum,
+          auth_code: Number(this.state.phonauthnum)
+        }
+      })
+      .then(response => {
+        console.log(response);
+        if(response.data.status === "200") {
+          alert(response.data.message);
+          this.setState({phoneauthveryfied:"Y"})
+        } else{
+          alert(response.data.message);
+        }
+
+      })
 }
+
 
 
 handleComplete = (data) => {
@@ -78,18 +108,24 @@ handleComplete = (data) => {
 
   handleRegister = e => {
     e.preventDefault()
-    this.props.register3(
-      this.state.userid,
-      this.state.hospitalname,
-      this.state.businessnumber,
-      this.state.zipcode,
-      this.state.address1,
-      this.state.address2,
-      this.state.phonenumber,
-      this.state.accountname,
-      this.state.bankname,
-      this.state.accountnumber
-    )
+    if(this.state.phoneauthveryfied==="Y"){
+      this.props.register3(
+        this.state.userid,
+        this.state.hospitalname,
+        this.state.businessnumber,
+        this.state.zipcode,
+        this.state.address1,
+        this.state.address2,
+        this.state.phonenumber,
+        this.state.accountname,
+        this.state.bankname,
+        this.state.accountnumber
+      )
+    } else {
+      alert("휴대폰 인증을 진행해주시기 바랍니다.")
+    }
+    
+    
   }
 
   checkstate = e => {

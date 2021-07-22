@@ -198,10 +198,13 @@ const myinfo = lazy(() => import("./views/pages/settings/myinfo/MyInfo"))
 const hospitalinfo = lazy(() => import("./views/pages/settings/hospitalinfo/Hospitalinfo"))
 const callsetting = lazy(() => import("./views/pages/settings/call/CallSetting"))
 const consultingroom = lazy(() => import("./views/pages/settings/call/ConsultingRoom"))
+const consultingroomphone = lazy(() => import("./views/pages/settings/phone/ConsultingRoomPhone"))
 const loginsetting = lazy(() => import("./views/pages/settings/loginsetting/loginsetting"))
 const changepassword = lazy(() => import("./views/pages/settings/loginsetting/changepassword"))
 const withdrawal = lazy(() => import("./views/pages/settings/loginsetting/Withdrawal"))
 const pm = lazy(() => import("./views/pages/settings/payment/PaymentManagement"))
+const term = lazy(() => import("./views/pages/settings/terms/Term"))
+const notice = lazy(() => import("./views/pages/settings/notice/Notice"))
 const forgotPassword = lazy(() =>
   import("./views/pages/authentication/ForgotPassword")
 )
@@ -424,10 +427,13 @@ class AppRouter extends React.Component {
           <AppRoute path="/pages/hospitalinfo" component={hospitalinfo} />
           <AppRoute path="/pages/callsetting" component={callsetting} />
           <AppRoute path="/pages/consultingroom" component={consultingroom} />
+          <AppRoute path="/pages/phoneconsulting" component={consultingroomphone} />
           <AppRoute path="/pages/loginsetting" component={loginsetting} />
           <AppRoute path="/pages/changepassword" component={changepassword} />
           <AppRoute path="/pages/withdrawal" component={withdrawal} />
           <AppRoute path="/pages/paymentmanagement" component={pm} />
+          <AppRoute path="/pages/terms" component={term} />
+          <AppRoute path="/pages/notice" component={notice} />
           <AppRoute path="/pages/register1" component={register1} fullLayout />
           <AppRoute path="/pages/register2" component={register2} fullLayout />
           <AppRoute path="/pages/register3" component={register3} fullLayout />

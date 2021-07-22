@@ -82,6 +82,11 @@ class PatientInfo extends React.Component {
     history.push("/pages/callsetting")
   }
 
+  goPhoneConsult= e => {
+    e.preventDefault() 
+    history.push("/pages/phoneconsulting")
+  }
+
   goPastConsultList(pid) {
     this.props.getPastConulstList(pid)
   }
@@ -146,7 +151,7 @@ class PatientInfo extends React.Component {
                     </th>
                     {this.props.appo.APPOINT_KIND==="1"?
                       <th>
-                        <Button.Ripple className= "btn-icon btn" color="primary">
+                        <Button.Ripple onClick={this.goPhoneConsult} className= "btn-icon btn" color="primary">
                           <Phone size={14} />
                         </Button.Ripple>
                         <Button.Ripple outline className="ml-1 btn-icon btn"  color="primary">
@@ -155,7 +160,7 @@ class PatientInfo extends React.Component {
                       </th>
                       :
                       <th>
-                        <Button.Ripple outline className= "btn-icon btn"  color="primary">
+                        <Button.Ripple  outline className= "btn-icon btn"  color="primary"  >
                           <Phone size={14} />
                         </Button.Ripple>
                         <Button.Ripple onClick={this.goCallSetting} className="ml-1 btn-icon btn"  color="primary">

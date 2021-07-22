@@ -14,6 +14,36 @@ import moment from "moment"
 //   }
 // }
 
+export const getPaymentData = (userid, startdate, enddate, pageamount, pagenum) => {
+  return async dispatch => {
+    await axios
+    .get("http://203.251.135.81:9300/v1/doctor/treatment/payments", {
+      params: {
+        user_id: userid,
+        start_date: startdate,
+        end_date: enddate,
+        page_amount: pageamount,
+        page_num: pagenum
+      }
+    })
+    .then(response => {
+      let totalPage = Math.ceil(response.data.data.COUNT / 5)
+      console.log(totalPage, response)
+      let totalPay = 0
+      //  for (let i=0; i<response.data.data.COUNT; i++) {
+      //    totalPay = totalPay + Number(response.data.data.PAY_TOTAL[i])
+      //  }
+      dispatch({
+        type: "GET_PAYMENT_DATA",
+        data: response.data.data.PAY_LIST,
+        totalPages: totalPage,
+        totalPay: totalPay
+      })
+    })
+    .catch(err => console.log(err))
+  }
+}
+
 export const getAppData = (userid, pageamount, pagenum) => {
   let npagemount = Number(pageamount);
   let npagenum = Number(pagenum);
@@ -44,11 +74,11 @@ export const getAppData = (userid, pageamount, pagenum) => {
           jsonObj.PATIENT_ID = response.data.data.APPOINT_LIST[i].PATIENT_ID
           jsonObj.SYMPTOM = response.data.data.APPOINT_LIST[i].SYMPTOM
           jsonObj.VITAL_STATE = response.data.data.APPOINT_LIST[i].VITAL_STATE
-  
           jsonObj = JSON.stringify(jsonObj);
           //String 형태로 파싱한 객체를 다시 json으로 변환
           appointlist.push(JSON.parse(jsonObj));
             }
+
       dispatch({
         type: "GET_APPOINT_DATA",
         data: appointlist,

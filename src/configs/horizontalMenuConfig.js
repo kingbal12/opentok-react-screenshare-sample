@@ -1002,7 +1002,7 @@ const horizontalMenuConfig = [
         title: "이용약관",
         type: "item",
         icon: <Icon.Info size={16} />,
-        // navLink: "/schedule",
+        navLink: "/pages/terms",
         permissions: ["admin", "editor"]
       },
       {
@@ -1011,7 +1011,33 @@ const horizontalMenuConfig = [
         type: "item",
         icon: <Icon.Users size={16} />,
         // navLink: "/schedule",
-        permissions: ["admin", "editor"]
+        permissions: ["admin", "editor"],
+        children: [
+          {
+            id: "notice",
+            title: "공지사항",
+            type: "item",
+            icon: <Icon.Circle size={10} />,
+            navLink: "/pages/notice",
+            permissions: ["admin", "editor"]
+          },
+          {
+            id: "faq",
+            title: "FAQ",
+            type: "item",
+            icon: <Icon.Circle size={10} />,
+            navLink: "/pages/loginsetting",
+            permissions: ["admin", "editor"]
+          },
+          {
+            id: "1:1",
+            title: "1:1 문의",
+            type: "item",
+            icon: <Icon.Circle size={10} />,
+            navLink: "/pages/loginsetting",
+            permissions: ["admin", "editor"]
+          },
+        ]
       },
       {
         id: "loginsetting",

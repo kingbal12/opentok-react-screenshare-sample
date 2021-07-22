@@ -103,7 +103,7 @@ const ThemeNavbar = props => {
                 ticking={true}  />
                 <p></p>
                 <Clock 
-                format={'hh:mm:ss A'} 
+                format={'hh:mm A'} 
                 ticking={true}  />
               </div>
               {props.horizontal ? (

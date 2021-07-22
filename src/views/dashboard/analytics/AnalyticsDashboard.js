@@ -78,12 +78,6 @@ class AnalyticsDashboard extends React.Component {
             <ListViewConfig parsedFilter={queryString.parse(this.props.location.search)}/>
           </Col>
         </Row>
-        <Row>
-          <Col sm="12">
-            {/* <DataTableCustom/> */}
-            {/* <ListViewConfig parsedFilter={queryString.parse(this.props.location.search)}/> */}
-          </Col>
-        </Row>
       </React.Fragment>
     )
   }

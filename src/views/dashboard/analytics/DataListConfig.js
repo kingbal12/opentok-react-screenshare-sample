@@ -1,12 +1,6 @@
 import React, { Component } from "react"
 import {
-  Button,
-  Progress,
-  UncontrolledDropdown,
-  DropdownMenu,
-  DropdownToggle,
-  DropdownItem,
-  Input
+  Progress
 } from "reactstrap"
 import DataTable from "react-data-table-component"
 import classnames from "classnames"
@@ -15,15 +9,8 @@ import { history } from "../../../history"
 import {
   Edit,
   Trash,
-  Droplet,
-  Activity,
-  Thermometer,
-  Compass,
-  Inbox,
   ChevronDown,
-  Plus,
   Check,
-  Link,
   ChevronLeft,
   ChevronRight
 } from "react-feather"
@@ -44,10 +31,12 @@ import {
 import Sidebar from "./DataListSidebar"
 import Chip from "../../../components/@vuexy/chips/ChipComponent"
 import Checkbox from "../../../components/@vuexy/checkbox/CheckboxesVuexy"
-
 import "../../../assets/scss/plugins/extensions/react-paginate.scss"
 import "../../../assets/scss/pages/data-list.scss"
-import { Fragment } from "react"
+import Call from "../../../assets/img/dashboard/ID9_07_table_method_call.png"
+import Video from "../../../assets/img/dashboard/ID9_07_table_method_video.png"
+import moment from "moment"
+
 
 const chipColors = {
   "on hold": "warning",
@@ -101,8 +90,9 @@ const CustomHeader = props => {
 class DataListConfig extends Component {
   constructor(props) {
     super(props);
-    
-    this.props.getAppData(this.state.user, this.state.rowsPerPage, this.state.currentPage)
+    if(this.props.parsedFilter.perPage===undefined) {
+      this.props.getAppData(this.state.user, this.state.rowsPerPage, this.state.currentPage)
+    }
     
 }
   static getDerivedStateFromProps(props, state) {
@@ -137,20 +127,25 @@ class DataListConfig extends Component {
       {
         name: "예약시간",
         selector: "gender",
-        sortable: true,
+        sortable: false,
+        minWidth: "150px",
+        center: true,
         cell: row => <p className="text-bold-500 mb-0">{row.APPOINT_TIME}</p>
       },
       {
         name: "진료수단",
         selector: "gender",
-        sortable: true,
-        cell: row => <p className="text-bold-500 mb-0">{row.APPOINT_KIND}</p>
+        sortable: false,
+        center: true,
+        cell: row => <p className="text-bold-500 mb-0">{row.APPOINT_KIND==="1"?<img src={Call} alt="Call" />:
+        <img src={Video} alt="Video" />}</p>
       },
       {
         name: "이름",
         selector: "name",
-        sortable: true,
+        sortable: false,
         minWidth: "200px",
+        center: true,
         cell: row => (
           <div className="d-flex flex-xl-row flex-column align-items-xl-center align-items-start py-xl-0 py-1">
             <div className="user-info text-truncate ml-xl-50 ml-0">
@@ -167,52 +162,59 @@ class DataListConfig extends Component {
       {
         name: "성별",
         selector: "gender",
-        sortable: true,
+        sortable: false,
+        center: true,
         cell: row => <p className="text-bold-500 mb-0">{row.GENDER==="1"||row.GENDER==="3"?"M":"F"}</p>
       },
       {
         name: "나이",
         selector: "age",
-        sortable: true,
+        sortable: false,
+        center: true,
         cell: row => <p className="text-bold-500 mb-0"></p>
       },
       {
         name: "생년월일",
         selector: "birthday",
-        sortable: true,
+        sortable: false,
+        center: true,
         cell: row => (
-          <p className="text-bold-500 text-truncate mb-0">{row.BIRTH_DT}</p>
+          <p className="text-bold-500 text-truncate mb-0">{moment(row.BIRTH_DT).format("MMMM DD, YYYY")}</p>
         )
       },
       {
         name: "진단명",
+        center: true,
         cell: row => (
           <p className="text-bold-500 text-truncate mb-0">{row.NOTE_DX}</p>
         )
       },
       {
         name: "초진/재진",
+        center: true,
         cell: row => (
           <p className="text-bold-500 text-truncate mb-0">{row.FIRST_YN}</p>
         )
       },
       {
         name: "주된증상",
+        center: true,
         cell: row => (
           <p className="text-bold-500 text-truncate mb-0">{row.SYMPTOM}</p>
         )
       },
       {
         name: "VitalData",
+        center: true,
         cell: row => (
           <p className="text-bold-500 text-truncate mb-0">{row.VITAL_STATE}</p>
 
-          // 가운데로 옮길것
           
         )
       },
       {
         name: "차트보기",
+        center: true,
         cell: row => (
           <Edit onClick={() => this.goPatientList(row.PATIENT_ID)} style={{cursor:"pointer"}}></Edit>
         )
@@ -232,10 +234,10 @@ class DataListConfig extends Component {
   thumbView = this.props.thumbView
 
   componentDidMount() {
-    // this.props.getData(this.props.parsedFilter)
-    // this.props.getData(this.state.user,this.state.currentPage,this.state.rowsPerPage)
-    // this.props.getInitialData()
-    this.props.getAppData(this.state.user,this.props.parsedFilter.perPage, this.props.parsedFilter.page)
+    if(this.props.parsedFilter.perPage!==undefined) {
+
+      this.props.getAppData(this.state.user,this.props.parsedFilter.perPage, this.props.parsedFilter.page)
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -251,7 +253,7 @@ class DataListConfig extends Component {
         {
           name: "Name",
           selector: "name",
-          sortable: true,
+          sortable: false,
           minWidth: "250px",
           cell: row => (
             <p title={row.name} className="text-truncate text-bold-500 mb-0">
@@ -262,12 +264,12 @@ class DataListConfig extends Component {
         {
           name: "Category",
           selector: "category",
-          sortable: true
+          sortable: false
         },
         {
           name: "Popularity",
           selector: "popularity",
-          sortable: true,
+          sortable: false,
           cell: row => (
             <Progress
               className="w-100 mb-0"
@@ -279,7 +281,7 @@ class DataListConfig extends Component {
         {
           name: "Order Status",
           selector: "order_status",
-          sortable: true,
+          sortable: false,
           cell: row => (
             <Chip
               className="m-0"
@@ -291,12 +293,12 @@ class DataListConfig extends Component {
         {
           name: "Price",
           selector: "price",
-          sortable: true,
+          sortable: false,
           cell: row => `$${row.price}`
         },
         {
           name: "Actions",
-          sortable: true,
+          sortable: false,
           cell: row => (
             <ActionsComponent
               row={row}
@@ -348,24 +350,6 @@ class DataListConfig extends Component {
     if (addNew === true) this.setState({ currentData: null, addNew: true })
   }
 
-  // handleDelete = row => {
-  //   this.props.deleteData(row)
-  //   this.props.getData(this.props.parsedFilter)
-  //   if (this.state.data.length - 1 === 0) {
-  //     let urlPrefix = this.props.thumbView
-  //       ? "/data-list/thumb-view/"
-  //       : "/patients-list"
-  //     history.push(
-  //       `${urlPrefix}list-view?page=${parseInt(
-  //         this.props.parsedFilter.page - 1
-  //       )}&perPage=${this.props.parsedFilter.perPage}`
-  //     )
-  //     this.props.getData({
-  //       page: this.props.parsedFilter.page - 1,
-  //       perPage: this.props.parsedFilter.perPage
-  //     })
-  //   }
-  // }
 
   handleCurrentData = obj => {
     this.setState({ currentData: obj })

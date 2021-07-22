@@ -5,16 +5,14 @@ import {
   Card,
   CardBody,
   Row,
-  Col,
-
+  Col
 } from "reactstrap"
 import "../../../../assets/scss/pages/authentication.scss"
 import DataListConfig from "./DataListConfig"
 import queryString from "query-string"
 
 
-
-class PaymentManagement extends React.Component {
+class Notice extends React.Component {
   render() {
     return (
       <Row className="m-0 justify-content-center">
@@ -25,14 +23,12 @@ class PaymentManagement extends React.Component {
         md="12"
         className="d-flex justify-content-center m-0 p-0"
       >
-        
         <Card className="bg-authentication rounded-0 mb-0 w-100">
           <Row className="m-0">
             <Col lg="12" md="12" className="p-0">
               <Card className="rounded-0 mb-0 p-2">
-                <CardHeader className="pt-50">
+                <CardHeader className="pb-1 pt-50">
                   <CardTitle>
-                      <h1>결제 관리</h1>
                   </CardTitle>
                 </CardHeader>   
               <CardBody className="px-6 pb-50">
@@ -40,7 +36,7 @@ class PaymentManagement extends React.Component {
                   <Col lg="2" md="12">
                   </Col>
                   <Col lg="8" md="12">
-                    <div className="col-12">
+                    <div className="col-12 mt-3">
                       <DataListConfig parsedFilter={queryString.parse(this.props.location.search)}/>
                     </div>              
                   </Col>
@@ -65,4 +61,4 @@ const mapStateToProps = state => {
     user: state.auth
   }
 }
-export default (PaymentManagement)
+export default (Notice)
