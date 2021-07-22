@@ -1026,7 +1026,7 @@ const horizontalMenuConfig = [
             title: "FAQ",
             type: "item",
             icon: <Icon.Circle size={10} />,
-            navLink: "/pages/loginsetting",
+            navLink: "/pages/newfaq",
             permissions: ["admin", "editor"]
           },
           {

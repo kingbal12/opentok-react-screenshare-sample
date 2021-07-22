@@ -205,6 +205,7 @@ const withdrawal = lazy(() => import("./views/pages/settings/loginsetting/Withdr
 const pm = lazy(() => import("./views/pages/settings/payment/PaymentManagement"))
 const term = lazy(() => import("./views/pages/settings/terms/Term"))
 const notice = lazy(() => import("./views/pages/settings/notice/Notice"))
+const newfaq = lazy(() => import("./views/pages/settings/FAQ/FAQ"))
 const forgotPassword = lazy(() =>
   import("./views/pages/authentication/ForgotPassword")
 )
@@ -434,6 +435,7 @@ class AppRouter extends React.Component {
           <AppRoute path="/pages/paymentmanagement" component={pm} />
           <AppRoute path="/pages/terms" component={term} />
           <AppRoute path="/pages/notice" component={notice} />
+          <AppRoute path="/pages/newfaq" component={newfaq} />
           <AppRoute path="/pages/register1" component={register1} fullLayout />
           <AppRoute path="/pages/register2" component={register2} fullLayout />
           <AppRoute path="/pages/register3" component={register3} fullLayout />
