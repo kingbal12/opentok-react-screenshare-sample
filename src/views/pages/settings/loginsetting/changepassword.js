@@ -75,7 +75,7 @@ class ChagePassword extends React.Component {
                       <div className="col-2 align-self-center"><b>현재 비밀번호</b></div>
                       <InputGroup>
                         <Input
-                          type="text"
+                          type="password"
                           placeholder="기존 비밀번호 입력"
                           required
                           value={this.state.password}
@@ -92,7 +92,7 @@ class ChagePassword extends React.Component {
                       <div className="col-2 align-self-center"><b>새 비밀번호</b></div>
                       <InputGroup>
                         <Input
-                          type="text"
+                          type="password"
                           placeholder="영어, 숫자, 특수문자 포함 6자~14자 이내"
                           required
                           value={this.state.newpassword}
@@ -106,7 +106,7 @@ class ChagePassword extends React.Component {
                         <div className="col-2 align-self-start"><b>새 비밀번호 확인</b></div>
                         <InputGroup>
                           <Input
-                            type="text"
+                            type="password"
                             placeholder="새 비밀번호 재입력"
                             required
                             value={this.state.confirmnewpassword}

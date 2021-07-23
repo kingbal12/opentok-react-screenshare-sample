@@ -4,29 +4,38 @@ import {logoutWithJWT} from "../redux/actions/auth/loginActions"
 
 const horizontalMenuConfig = [
   {
-    id: "dashboard",
+    id: "analyticsDash",
     title: "Home",
-    type: "dropdown",
+    type: "item",
     icon: <Icon.Home size={16} />,
-    children: [
-      {
-        id: "analyticsDash",
-        title: "Home",
-        type: "item",
-        icon: <Icon.Circle size={10} />,
-        navLink: "/analyticsDashboard",
-        permissions: ["admin", "editor"]
-      },
-      {
-        id: "eCommerceDash",
-        title: "eCommerce",
-        type: "item",
-        icon: <Icon.Circle size={10} />,
-        navLink: "/ecommerce-dashboard",
-        permissions: ["admin"]
-      }
-    ]
+    navLink: "/analyticsDashboard",
+    permissions: ["admin", "editor"]
   },
+  {
+    id: "calendar",
+    title: "Calendar",
+    type: "item",
+    icon: <Icon.Calendar size={16} />,
+    navLink: "/calendar",
+    permissions: ["admin", "editor"]
+  },
+  // {
+  //   id: "dashboard",
+  //   title: "Home",
+  //   type: "dropdown",
+  //   icon: <Icon.Home size={16} />,
+  //   children: [
+     
+  //     {
+  //       id: "eCommerceDash",
+  //       title: "eCommerce",
+  //       type: "item",
+  //       icon: <Icon.Circle size={10} />,
+  //       navLink: "/ecommerce-dashboard",
+  //       permissions: ["admin"]
+  //     }
+  //   ]
+  // },
   {
     id: "apps",
     title: "Apps",
@@ -59,14 +68,7 @@ const horizontalMenuConfig = [
         filterBase: "/todo/all",
         permissions: ["admin", "editor"]
       },
-      {
-        id: "calendar",
-        title: "Calendar",
-        type: "item",
-        icon: <Icon.Calendar size={16} />,
-        navLink: "/calendar",
-        permissions: ["admin", "editor"]
-      },
+     
       {
         id: "eCommerce",
         title: "Ecommerce",
@@ -144,17 +146,18 @@ const horizontalMenuConfig = [
   {
     id: "PatientList",
     title: "PatientList",
+    icon: <Icon.List size={16} />,
     type: "item",
     permissions: ["admin", "editor"],
     navLink: "/patients-list"
   },
-  // {
-  //   id: "Call Setting",
-  //   title: "Call Setting",
-  //   type: "item",
-  //   permissions: ["admin", "editor"],
-  //   navLink: "/pages/callsetting"
-  // },
+  {
+    id: "Call Setting",
+    title: "Call Setting",
+    type: "item",
+    permissions: ["admin", "editor"],
+    navLink: "/pages/callsetting"
+  },
   {
     id: "uiElements",
     title: "UI Elements",
@@ -1034,7 +1037,7 @@ const horizontalMenuConfig = [
             title: "1:1 문의",
             type: "item",
             icon: <Icon.Circle size={10} />,
-            navLink: "/pages/loginsetting",
+            navLink: "/pages/question",
             permissions: ["admin", "editor"]
           },
         ]

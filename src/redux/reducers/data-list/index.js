@@ -1,4 +1,5 @@
 const initialState = {
+  tokbox:{APPOINT_NUM:0, TOK_KEY:"", TOK_SESSION:"", TOK_TOKEN:""},
   faqdata:[],
   faqtotalPages: 0,
   paydata:[],
@@ -56,6 +57,11 @@ const getIndex = (arr, arr2, arr3, params = {}) => {
 
 const DataListReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "GET_TOKBOX":
+      return {
+        ...state,
+        tokbox: action.data
+      }
     case "SAVE_PATIENTID":
       return {
         ...state,

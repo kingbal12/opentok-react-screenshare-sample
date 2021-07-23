@@ -31,6 +31,7 @@ import previmg from "../../../../assets/img/portrait/small/Sample_User_Icon.png"
 import { Menu } from "react-feather"
 import "../../../../assets/scss/plugins/forms/flatpickr/flatpickr.scss"
 import "../../../../assets/scss/plugins/extensions/recharts.scss"
+import {gettokbox} from "../../../../redux/actions/data-list/"
 
 
 
@@ -80,6 +81,7 @@ class PatientInfo extends React.Component {
   goCallSetting = e => {
     e.preventDefault() 
     history.push("/pages/callsetting")
+    this.props.gettokbox(this.props.user.login.values.loggedInUser.username, this.props.appo.APPOINT_NUM)
   }
 
   goPhoneConsult= e => {
@@ -487,4 +489,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {goPCL, resetVitalData}) (PatientInfo)
+export default connect(mapStateToProps, {goPCL, resetVitalData, gettokbox}) (PatientInfo)

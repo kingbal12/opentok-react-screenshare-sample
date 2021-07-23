@@ -23,6 +23,7 @@ import RegisterCheckbox from "./RegisterCheckbox"
 import { connect } from "react-redux"
 import classnames from "classnames"
 import PerfectScrollbar from 'react-perfect-scrollbar'
+import HicareLogo from "../../../../assets/img/logo/logo1.png"
 
 
 
@@ -154,21 +155,23 @@ class Register extends React.Component {
           </ModalFooter>
         </Modal>
           <Col
-          sm="6"
-          xl="6"
-          lg="6"
-          md="6"
-          className="d-flex justify-content-center"
+          sm="12"
+          xl="12"
+          lg="12"
+          md="12"
+          className="d-flex justify-content-center p-0 m-0"
         >
-          <Card className="bg-authentication rounded-0 mb-0 w-100">
+          <Card className=" rounded-0 mb-0  w-100">
             
-            <Row className="m-0">
-              
-              <Col lg="12" md="12" className="p-0">
-                <Card className="rounded-0 mb-0 p-2">
-                  <CardHeader className="pb-1 pt-50">
+            <Row className="m-0 d-flex justify-content-center">
+              <Col lg="3" md="12">
+                <h3 className="mt-5 pl-2">회원가입</h3>
+              </Col>
+              <Col lg="6" md="12">
+                <Card className="rounded-0 pt-5 mb-0 p-2">
+                  <CardHeader className="pb-1 pt-5">
                     <CardTitle>
-                      <h1>약관동의</h1>
+                      <h4>약관동의</h4>
                     </CardTitle>
                   </CardHeader>
                   <p className="ml-2">하이케어넷 사용을 위해 아래의 약관에 동의해 주세요!</p>
@@ -201,11 +204,11 @@ class Register extends React.Component {
                       </NavLink>
                     </NavItem>
                   </Nav>
-                  <CardBody className="pt-1 pb-50">
+                  <CardBody>
                       <Form action="/" onSubmit={this.handleRegister}>  
                         <FormGroup className="form-label-group allagree">
                           <Checkbox
-                            className="pb-1"
+                            
                             color="primary"
                             icon={<Check className="vx-icon" size={16} />}
                             label="모든 약관에 동의"
@@ -242,18 +245,9 @@ class Register extends React.Component {
                           </Col>
                         </Row> 
                         
-                        <div className="pb-3 select"><small>선택 약관은 동의하지 않아도 회원가입이 가능합니다.</small></div>
+                        <div className="pb-1 select"><small>선택 약관은 동의하지 않아도 회원가입이 가능합니다.</small></div>
                        
-                        <div className="d-flex justify-content-between">
-                          <Button.Ripple
-                            color="primary"
-                            outline
-                            onClick={() => {
-                              history.push("/pages/login")
-                            }}
-                          >
-                            Login
-                          </Button.Ripple>
+                        <Row className="d-flex justify-content-right">
                           <Button.Ripple 
                           disabled={
                             this.state.certifications[0].isChecked===true&&
@@ -273,11 +267,13 @@ class Register extends React.Component {
                           >
                             다음단계
                           </Button.Ripple>
-                        </div>
+                        </Row>
                       </Form>
                      
                   </CardBody>
                 </Card>
+              </Col>
+              <Col lg="3" md="12">
               </Col>
             </Row>
           </Card>

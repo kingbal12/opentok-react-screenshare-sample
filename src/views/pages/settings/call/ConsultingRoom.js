@@ -24,7 +24,7 @@ import {
   ResponsiveContainer
 } from "recharts"
 import {
-  getPastConulstList,
+  goPCL,
   resetVitalData,
   postMDNoteData,
   postPrescriptionData
@@ -300,7 +300,14 @@ class ConsultingRoom extends React.Component {
           <Col lg="6" md="12"> 
             <Card className="mb-0" style={{height:"650px", border:"solid #7367ef 1px", backgroundColor:"#efefff"}}>
               <Row className="justify-content-md-center h-400">
-              <Opentok />
+                {this.props.dataList.tokbox.TOK_KEY===""?null:
+                <Opentok 
+                  key={this.props.dataList.tokbox.TOK_KEY}
+                  session={this.props.dataList.tokbox.TOK_SESSION}
+                  token={this.props.dataList.tokbox.TOK_TOKEN} 
+                />
+                }
+              
                
               </Row>
             </Card>
@@ -684,7 +691,7 @@ class ConsultingRoom extends React.Component {
                 </Card>
                 <Card className="mb-1" style={{height:"120px"}}>
                   <CardTitle className="px-1 d-flex justify-content-between" style={{paddingTop:"5px"}}>
-                    <b>Past Consulting List</b><Menu onClick={() => this.goPastConsultList(this.props.pinfo.PATIENT_ID)} style={{cursor:"pointer"}}/>
+                    <b>Past Consulting List</b><Menu onClick={() => this.goPCL(this.props.pinfo.PATIENT_ID)} style={{cursor:"pointer"}}/>
                   </CardTitle>
                   <CardBody className="d-flex pl-0 pt-0">
                     <div className="col-4 text-center pt-0">
@@ -978,7 +985,7 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps, {
-    getPastConulstList, 
+    goPCL, 
     resetVitalData,
     postMDNoteData,
     postPrescriptionData}) (ConsultingRoom)

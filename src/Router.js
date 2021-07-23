@@ -206,6 +206,7 @@ const pm = lazy(() => import("./views/pages/settings/payment/PaymentManagement")
 const term = lazy(() => import("./views/pages/settings/terms/Term"))
 const notice = lazy(() => import("./views/pages/settings/notice/Notice"))
 const newfaq = lazy(() => import("./views/pages/settings/FAQ/FAQ"))
+const question = lazy(() => import("./views/pages/settings/question/question"))
 const forgotPassword = lazy(() =>
   import("./views/pages/authentication/ForgotPassword")
 )
@@ -396,6 +397,7 @@ class AppRouter extends React.Component {
           <AppRoute path="/tables/data-tables" component={DataTable} />
           <AppRoute path="/pages/profile" component={profile} />
           <AppRoute path="/pages/faq" component={faq} />
+          <AppRoute path="/pages/question" component={question} />
           <AppRoute
             path="/pages/knowledge-base"
             component={knowledgeBase}

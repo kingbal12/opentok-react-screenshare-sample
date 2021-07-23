@@ -99,33 +99,33 @@ class LoginJWT extends React.Component {
       <React.Fragment>
         <CardBody className="pt-1">
           <Form action="/" onSubmit={this.handleLogin}>
-            <FormGroup className="form-label-group position-relative has-icon-left">
+            <FormGroup className="form-label-group position-relative">
               <Input
-                placeholder="아이디"
+                placeholder="이메일 아이디"
                 value={this.state.email}
                 onChange={e => this.setState({ email: e.target.value })}
                 required
                 invalid={this.state.email.length >= 6 || this.state.email.length === 0 ? false : true}
               />
               <FormFeedback>{this.state.email.length >= 6 ? "" : "아이디를 6자 이상입력하십시오"}</FormFeedback>
-              <div className="form-control-position">
+              {/* <div className="form-control-position">
                 <Mail size={15} />
-              </div>
+              </div> */}
               {/* <Label>아이디</Label> */}
             </FormGroup>
-            <FormGroup className="form-label-group position-relative has-icon-left">
+            <FormGroup className="form-label-group position-relative ==">
               <Input
                 type="password"
-                placeholder="Password"
+                placeholder="비밀번호"
                 value={this.state.password}
                 onChange={e => this.setState({ password: e.target.value })}
                 required
                 invalid={this.state.password.length >= 4 ||this.state.password.length === 0 ? false : true}
               />
               <FormFeedback>{this.state.password.length >= 4 ? "" : "비밀번호를 4자 이상입력하십시오"}</FormFeedback>
-              <div className="form-control-position">
+              {/* <div className="form-control-position">
                 <Lock size={15} />
-              </div>
+              </div> */}
               {/* <Label>비밀번호</Label> */}
             </FormGroup>
             <FormGroup className="d-flex justify-content-between align-items-center">
@@ -146,13 +146,14 @@ class LoginJWT extends React.Component {
             
             
             <div className="d-flex justify-content-center pb-1">
-              <Link to="/pages/finduser">아이디 / 비밀번호 찾기</Link>
+              <Link to="/pages/finduser" style={{color:"#615e6f"}}>
+                아이디찾기 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 비밀번호 찾기
+                </Link>
             </div>
             
             <div className="d-flex justify-content-center">
               <Button
-                  color="primary"
-                  outline
+                  color="light"
                   size="lg" 
                   block
                   onClick={() => {

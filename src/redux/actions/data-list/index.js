@@ -14,6 +14,34 @@ import moment from "moment"
 //   }
 // }
 
+export const gettokbox = (userid, appointnum) => {
+  return dispatch => {
+    axios
+      .get("http://203.251.135.81:9300/v1/doctor/treatment/video-call", {
+        params: {
+          user_id : userid,
+          appoint_num : appointnum
+        }
+      })
+      
+      .then(response => {
+        console.log(response)
+
+        if (response.data.status==="200") {
+          
+          dispatch({
+            type: "GET_TOKBOX",
+            data: response.data.data
+          })
+        }
+        else {
+          alert(response.data.message)
+        }
+      })
+      .catch(err => console.log(err))
+  }
+}
+
 export const getPaymentData = (userid, startdate, enddate, pageamount, pagenum) => {
   return async dispatch => {
     await axios
@@ -59,7 +87,7 @@ export const getAppData = (userid, pageamount, pagenum) => {
     })
     .then(response => {
       let totalPage = Math.ceil(response.data.data.COUNT_DAY / 5)
-      console.log(totalPage, response)
+      console.log(totalPage,"예약페이지:", response)
       let length = response.data.data.APPOINT_LIST.length
       let appointlist 	= new Array();
         for (let i=0; i<length; i++) {
@@ -74,6 +102,8 @@ export const getAppData = (userid, pageamount, pagenum) => {
           jsonObj.PATIENT_ID = response.data.data.APPOINT_LIST[i].PATIENT_ID
           jsonObj.SYMPTOM = response.data.data.APPOINT_LIST[i].SYMPTOM
           jsonObj.VITAL_STATE = response.data.data.APPOINT_LIST[i].VITAL_STATE
+          jsonObj.GENDER = response.data.data.APPOINT_LIST[i].GENDER
+          jsonObj.AGE = response.data.data.APPOINT_LIST[i].AGE
           jsonObj = JSON.stringify(jsonObj);
           //String 형태로 파싱한 객체를 다시 json으로 변환
           appointlist.push(JSON.parse(jsonObj));

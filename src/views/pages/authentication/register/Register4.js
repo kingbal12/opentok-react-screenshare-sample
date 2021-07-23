@@ -213,7 +213,7 @@ class Register extends React.Component {
                           <Col lg="8" md="12">
                           <InputGroup>
                             <CustomInput
-                              required 
+
                               type="file" 
                               accept="image/gif,image/jpeg,image/png" 
                               id="exampleCustomFileBrowser" 
