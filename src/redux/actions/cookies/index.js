@@ -62,3 +62,15 @@ export const saveRegister4 = (
   }
 }
 
+export const cookieSchedules = (
+  events
+  ) => {
+  return dispatch => {
+    dispatch({ 
+      type: "SAVE_SCHDULES", 
+      payload: {
+        events
+    } })
+  }
+}
+

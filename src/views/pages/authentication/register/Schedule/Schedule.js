@@ -26,6 +26,10 @@ import "react-big-calendar/lib/css/react-big-calendar.css"
 import "../../../../../assets/scss/plugins/calendars/react-big-calendar.scss"
 // import { history } from "../../../../../history"
 import Radio from "../../../../../components/@vuexy/radio/RadioVuexy"
+import { cookieSchedules } from "../../../../../redux/actions/cookies"
+import HicareLogo from "../../../../../assets/img/logo/logo1.png"
+import { FormattedMessage } from "react-intl"
+
 
 const DragAndDropCalendar = withDragAndDrop(Calendar)
 const localizer = momentLocalizer(moment)
@@ -103,11 +107,18 @@ class CalendarApp extends React.Component {
     return null
   }
   constructor(props) {
+    let cookie 
+    if(props.cookiesche.events===undefined) {
+      cookie = props.cookiesche
+    } else {
+      cookie = props.cookiesche.events
+    }
     super(props)
     this.state = {
       // userid: props.user.register.values.registeruser,
       userid: "kingbal999@gmail.com",
-      events: [],
+      // 이벤트가 왜 저장이 안되는지 모르겠음
+      events: cookie,
       views: {
         month: true,
         week: true,
@@ -202,6 +213,20 @@ class CalendarApp extends React.Component {
 
   }
 
+  saveSchedule = e => {
+    e.preventDefault()
+    this.props.cookieSchedules(
+      this.state.events
+    )
+    alert("스케줄 임시저장이 완료되었습니다.")
+  }
+
+  check = e => {
+    e.preventDefault()
+    console.log(this.state)
+  }
+
+
   postschedule = e => {
     e.preventDefault()
     this.props.postSchedules(
@@ -271,9 +296,19 @@ class CalendarApp extends React.Component {
                 outline
                 type="button"
                 size="lg"
+                onClick={this.saveSchedule}
+              >
+                <FormattedMessage id="Drafts"/>
+              </Button>
+              <Button
+                className="mr-2"
+                color="primary"
+                outline
+                type="button"
+                size="lg"
                 onClick={this.clearschedule}
               >
-                초기화
+                <FormattedMessage id="Reset"/>
               </Button>
               <Button
                 color="primary"
@@ -281,7 +316,7 @@ class CalendarApp extends React.Component {
                 size="lg"
                 onClick={this.schedulemodal}
               >
-                저장
+                <FormattedMessage id="Save"/>
               </Button>
             </div>
             <Modal
@@ -408,7 +443,8 @@ class CalendarApp extends React.Component {
 const mapStateToProps = state => {
   return {
     user: state.auth,
-    app: state.calendar
+    app: state.calendar,
+    cookiesche: state.cookies.events
   }
 }
 
@@ -420,5 +456,6 @@ export default connect(mapStateToProps, {
   updateEvent,
   updateDrag,
   updateResize,
-  postSchedules
+  postSchedules,
+  cookieSchedules
 })(CalendarApp)

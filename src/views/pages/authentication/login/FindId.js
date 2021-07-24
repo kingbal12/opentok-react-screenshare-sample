@@ -6,6 +6,7 @@ import { CardBody, FormGroup, Form, Input, Button, Modal,
 import Select from "react-select"
 import { history } from "../../../../history"
 import axios from "axios"
+import { FormattedMessage } from "react-intl"
 
 const colourOptions = [
   { value: "개인회원", label: "개인회원" },
@@ -20,7 +21,8 @@ class FindId extends React.Component {
     phone:"",
     docnum:"",
     modal:false,
-    modalmsg:""
+    modalmsg:"",
+    nomodal:false
   }
 
   handleLogin = e => {
@@ -43,8 +45,7 @@ class FindId extends React.Component {
               })
             } else {
               this.setState({
-                modal:true, 
-                modalmsg:"등록된 사용자가 없습니다. 회원으로 가입하시겠어요?"
+                nomodal:true
               })
             }
           })
@@ -54,6 +55,18 @@ class FindId extends React.Component {
     this.setState(prevState => ({
       modal: !prevState.modal
     }))
+  }
+
+  noModal = () => {
+    this.setState(prevState => ({
+      nomodal: !prevState.nomodal
+    }))
+  }
+
+  go = e => {
+    e.preventDefault()
+    this.noModal()
+    history.push("/pages/register1")
   }
 
   render() {
@@ -119,7 +132,7 @@ class FindId extends React.Component {
             </FormGroup>            
             <div className="d-flex justify-content-center py-3">
               <Button color="primary" type="submit" size="lg" block>
-                확인
+                <FormattedMessage id="Send"/>
               </Button>
             </div>
           </Form>
@@ -138,7 +151,24 @@ class FindId extends React.Component {
           <ModalFooter>
             <Button color="primary" onClick={this.findidModal}>
               확인
-            </Button>{" "}
+            </Button>
+          </ModalFooter>
+        </Modal>
+        <Modal
+          isOpen={this.state.nomodal}
+          toggle={this.noModal}
+          className="modal-dialog-centered"
+        >
+          <ModalHeader toggle={this.noModal}>
+          </ModalHeader>
+          <ModalBody>
+            등록된 사용자가 없습니다.<br/>
+            회원으로 가입하시겠어요?
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this.go}>
+              회원가입 시작
+            </Button>
           </ModalFooter>
         </Modal>
       </React.Fragment>

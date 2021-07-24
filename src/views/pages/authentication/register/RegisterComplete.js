@@ -9,7 +9,8 @@ import {Button,
 } from "reactstrap"
 import { history } from "../../../../history"
 import { connect } from "react-redux"
-
+import HicareLogo from "../../../../assets/img/logo/logo1.png"
+import { FormattedMessage } from "react-intl"
 
 class RegisterComplete extends React.Component {
   constructor(props){
@@ -39,22 +40,32 @@ class RegisterComplete extends React.Component {
 
   render() {
     return (
-      <Col className="m-0 p-0" style={{background:"linear-gradient(#7367f0, #dff8fc)", width:"1980px",height:"1050px"}}>
-        <Row className="justify-content-center">
+      <Col className="m-0 p-0" style={{background:"linear-gradient(#7367f0, #dff8fc)", width:"100%",height:"100vh"}}>
+        <Row className="w-100  justify-content-center" style={{paddingTop:"15%"}}>
+          <h5 style={{color:"white"}}>제이슨 선생님.</h5>
+        </Row>
+        <Row className="w-100  justify-content-center">
+          <h5 style={{color:"white"}}>가입을 축하드립니다!</h5>
+        </Row>
+        <Row className="w-100  justify-content-center">
+          <h5 style={{color:"white"}}>진료 스케쥴을 설정해주세요.</h5>
+        </Row>
+        <Row className=" m-0  justify-content-center">
         <Col
-          sm="4"
-          xl="4"
-          lg="4"
-          md="4"
-          className="d-flex justify-content-center"
+          sm="12"
+          xl="12"
+          lg="12"
+          md="12" 
+          className="d-flex justify-content-center  p-0 m-0"
         >
-          <Card className="bg-authentication rounded-0 mb-0 w-100" style={{marginTop:"70%"}}>
-            <Row className="m-0">
-              <Col lg="12" md="12" className="p-0">
-                <Card className="rounded-0 mb-0 p-2">
+          
+          
+                <Card className="rounded-0 mb-0 p-2" style={{marginTop:"100px"}}>
                   <CardHeader className="pb-1 pt-50">
-                    <CardTitle>
-                      <h1>병원정보 입력하기</h1>
+                    <CardTitle className="justify-content-center">
+   
+                      <img className="justify-content-center" src={HicareLogo} alt="HicareLogo" style={{width:"300px"}}/>
+            
                     </CardTitle>
                   </CardHeader>   
                 <CardBody className="pt-1 pb-50">              
@@ -65,14 +76,11 @@ class RegisterComplete extends React.Component {
                       type="button"
                       onClick={this.handleGoSchedule}
                     >
-                      스케쥴 설정 시작하기
+                      <FormattedMessage id="ScheduleS"/>
                     </Button>
                   </div>
                 </CardBody>
               </Card>
-              </Col>
-            </Row> 
-          </Card>
         </Col>
       </Row>
     </Col>

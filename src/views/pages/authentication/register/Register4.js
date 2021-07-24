@@ -12,16 +12,16 @@ import {InputGroup, Form, FormGroup, Input, Button,
   ModalBody,
   ModalFooter
 } from "reactstrap"
-import RegisterJWT from "./RegisterJWT"
 import "../../../../assets/scss/pages/authentication.scss"
 import { saveRegister4 } from "../../../../redux/actions/cookies"
 import { connect } from "react-redux"
 import previmg from "../../../../assets/img/portrait/small/Sample_User_Icon.png"
 import { history } from "../../../../history"
-import Select from "react-select"
 import axios from "axios"
 import 'react-perfect-scrollbar/dist/css/styles.css'
 import PerfectScrollbar from "react-perfect-scrollbar";
+import HicareLogo from "../../../../assets/img/logo/logo1.png"
+import { FormattedMessage } from "react-intl"
 
 //  '01' : 가정의학과, '02' : 내과 
 //  '03' : 산부인과, '04' : 피부과 
@@ -39,10 +39,10 @@ class Register extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      // userid: "kingbal999@kakao.com",
-      // name: "아이오티포헬스",
-      userid: props.user.register.values.registeruser,
-      name: props.user.register.values.registername,
+      userid: "kingbal999@kakao.com",
+      name: "아이오티포헬스",
+      // userid: props.user.register.values.registeruser,
+      // name: props.user.register.values.registername,
       filename: "",
       file : "",
       medicalpart: props.cookiere4.medicalpart,
@@ -188,37 +188,43 @@ class Register extends React.Component {
       <PerfectScrollbar style={{display:"flex",height:"100vh", alignItems:"center"}}>
       <Row className="m-0 w-100 justify-content-center">
       <Col
-        sm="8"
-        xl="8"
-        lg="8"
-        md="8"
-        className="d-flex justify-content-center"
+        sm="12"
+        xl="12"
+        lg="12"
+        md="12"
+        className="d-flex justify-content-center p-0 m-0"
       >
         
-        <Card className="bg-authentication rounded-0 mb-0 w-100">
+        <Card className="shadow-none rounded-0 mb-0 w-100">
+          <Row className="m-0 d-flex">
+            <Col lg="3" md="12">
+              <h3 className="mt-5 pl-2 text-bold-600">
+                <img className="px-2" src={HicareLogo} alt="HicareLogo" style={{width:"150px", paddingBottom:"0.7rem"}}/><FormattedMessage id="Sign In"/>
+              </h3>
+            </Col>
+          </Row>
           <Row className="m-0 ">
-            <Col lg="12" md="12" className="p-0">
+            <Col lg="3" md="12"></Col>
+            <Col lg="6" md="12">
               <Card className="rounded-0 mb-0 p-2">
                 <CardHeader className="pb-1 pt-50">
                   <CardTitle>
-                    <h1>병원정보 입력하기</h1>
+                    <h4 className="text-bold-600"><FormattedMessage id="PI"/></h4>
                   </CardTitle>
                 </CardHeader>   
               <CardBody className="pt-1 pb-50">              
                   <Form action="/" onSubmit={this.handleRegister}>
                     <FormGroup className="form-label-group">
-                      <Row>
+                      <Row className="pl-1">
                         
-                          <Col lg="2" md="12" className="align-self-start"><b>프로필 사진 등록</b></Col>
-                          <Col lg="8" md="12">
+                          <Col lg="2" md="12" className="align-self-start"><b><FormattedMessage id="Add Image"/><span className="text-danger">(필수)</span></b></Col>
+                          <Col lg="8" md="12" className="p-0 m-0">
                           <InputGroup>
                             <CustomInput
-
                               type="file" 
                               accept="image/gif,image/jpeg,image/png" 
                               id="exampleCustomFileBrowser" 
                               name="customFile" 
-                              label=""
                               onChange={this.handleFileOnChange}/> 
                           </InputGroup>
                           </Col>
@@ -227,7 +233,7 @@ class Register extends React.Component {
                       
                     </FormGroup> 
                     <FormGroup className="form-label-group d-flex justify-content-between no-gutters">
-                      <div className="col-2 align-self-center"><b className="ml-1">진료과</b></div>
+                      <div className="col-2 align-self-center"><b className="ml-1"><FormattedMessage id="Department"/><span className="text-danger">(필수)</span></b></div>
                       
                       <Input type="select" name="select" value={this.state.medicalpart}  onChange={e => this.setState({ medicalpart: e.target.value })}>
                         <option value="01">가정의학과</option>
@@ -251,7 +257,7 @@ class Register extends React.Component {
                     </FormGroup>
                     
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-2 align-self-center"><b>진료가능분야</b></div>
+                      <div className="col-2 align-self-center"><b><FormattedMessage id="Specialty"/><span className="text-danger">(필수)</span></b></div>
                       <InputGroup>
                         <Input
                           type="text"
@@ -265,11 +271,11 @@ class Register extends React.Component {
 
                     <FormGroup className="form-label-group">
                       <div className="d-flex justify-content-between">
-                        <div className="col-2 align-self-start"><b>약력</b></div>
+                        <div className="col-2 align-self-start"><b><FormattedMessage id="EMPE"/><span className="text-danger">(필수)</span></b></div>
                         <InputGroup>
                           <Input
                             type="textarea"
-                            placeholder="TEXT를 입력해주세요"
+                            placeholder="진료분야 입력. 예)당뇨, 고혈압, 수면장애 등"
                             required
                             rows="3"
                             value={this.state.medicaldesc}
@@ -288,11 +294,11 @@ class Register extends React.Component {
 
                     <FormGroup className="form-label-group pt-1">
                       <div className="d-flex justify-content-between">
-                        <div className="col-2 align-self-start"><b>자기소개</b></div>
+                        <div className="col-2 align-self-start"><b><FormattedMessage id="Introduction"/></b></div>
                         <InputGroup>
                           <Input
                             type="textarea"
-                            placeholder="TEXT를 입력해주세요"
+                            placeholder="약력 입력"
                             required
                             rows="3"
                             value={this.state.userdesc}
@@ -310,11 +316,11 @@ class Register extends React.Component {
                     </FormGroup>
 
                     <FormGroup className="form-label-group d-flex justify-content-between pt-1">
-                      <div className="col-2 align-self-center"><b>면허번호</b></div>
+                      <div className="col-2 align-self-center"><b><FormattedMessage id="License"/><span className="text-danger">(필수)</span></b></div>
                       <InputGroup>
                         <Input
                           type="text"
-                          placeholder="TEXT를 입력해주세요"
+                          placeholder="의사 면허번호 입력"
                           required
                           value={this.state.medicalnum}
                           onChange={e => this.setState({ medicalnum: e.target.value })}
@@ -322,46 +328,46 @@ class Register extends React.Component {
                       </InputGroup>
                     </FormGroup>
 
-                    <div className="col-12 d-flex justify-content-between mt-5">
+                    <div className="col-12 d-flex justify-content-between mt-5  pr-0">
                       <Button
                         outline
-                        size="lg"
                         color="dark" 
                         type="button"
+                        onClick={() => {
+                          history.push("/pages/register3")
+                        }}
                       >
-                        이전단계
+                        <FormattedMessage id="Previous"/>
                       </Button>
                       <Button
                         outline
-                        size="lg"
                         color="dark" 
                         type="button"
                         onClick={this.saveRe4}
                       >
-                        임시저장
+                        <FormattedMessage id="Drafts"/>
                       </Button>
                       <Button
                         outline
-                        size="lg"
                         color="dark" 
                         type="button"
                         onClick={this.previewModal}
                       >
-                        미리보기
+                        <FormattedMessage id="Preview"/>
                       </Button>
                       <Button
-                        size="lg"
                         color="primary" 
                         type="submit"
                         
                       >
-                        진료 승인요청
+                        <FormattedMessage id="AtA"/>
                       </Button>
                     </div>
                   </Form>
               </CardBody>
             </Card>
             </Col>
+            <Col lg="3" md="12"></Col>
           </Row>
           
         </Card>
