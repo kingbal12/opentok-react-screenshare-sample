@@ -37,6 +37,7 @@ import Call from "../../../assets/img/dashboard/ID9_07_table_method_call.png"
 import Video from "../../../assets/img/dashboard/ID9_07_table_method_video.png"
 import Vital_5 from "../../../assets/img/dashboard/ID9_07_table_vital5.png"
 import Vital_4 from "../../../assets/img/dashboard/ID9_07_table_vital4.png"
+import chartimage from "../../../assets/img/dashboard/ID09_07_chart.png"
 import moment from "moment"
 
 
@@ -83,7 +84,7 @@ const ActionsComponent = props => {
 
 const CustomHeader = props => {
   return (
-    <div className="data-list-header d-flex justify-content-between flex-wrap">    
+    <div className="data-list-header d-flex justify-content-between flex-wrap m-0 p-0">    
       
     </div>
   )
@@ -132,7 +133,7 @@ class DataListConfig extends Component {
         sortable: false,
         minWidth: "150px",
         center: true,
-        cell: row => <p className="text-bold-500 mb-0">{moment(row.APPOINT_TIME).format("MMMM, DD YYYY")}</p>
+        cell: row => <p className="text-bold-500 mb-0">{moment(row.APPOINT_TIME).format("hh:mm A")}</p>
       },
       {
         name: "진료수단",
@@ -188,7 +189,7 @@ class DataListConfig extends Component {
         name: "진단명",
         center: true,
         cell: row => (
-          <p className="text-bold-500 text-truncate mb-0">{row.NOTE_DX}</p>
+          <p className="text-bold-500 text-truncate mb-0">{row.NOTE_DX===""?"-":row.NOTE_DX}</p>
         )
       },
       {
@@ -216,7 +217,8 @@ class DataListConfig extends Component {
         name: "차트보기",
         center: true,
         cell: row => (
-          <Edit onClick={() => this.goPatientList(row.PATIENT_ID)} style={{cursor:"pointer"}}></Edit>
+          <img src={chartimage} alt="chartimage"   onClick={() => this.goPatientList(row.PATIENT_ID)} style={{cursor:"pointer", width:"25px"}}/>
+
         )
       }
     ],
@@ -391,6 +393,7 @@ class DataListConfig extends Component {
         }`}>
           {/* <Button className="ml-2" color='primary' outline onClick={this.seeState}>검색</Button> */}
         <DataTable
+          className="p-0 m-0" 
           columns={columns}
           data={value.length ? allData : data}
           pagination

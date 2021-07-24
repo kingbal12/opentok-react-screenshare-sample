@@ -661,7 +661,7 @@ class NavbarUser extends React.PureComponent {
             </li>
           </DropdownMenu>
         </UncontrolledDropdown> */}
-        <UncontrolledDropdown tag="li" className="dropdown-user nav-item">
+        <UncontrolledDropdown tag="li" className="dropdown-user nav-item mr-1">
           <DropdownToggle tag="a" className="nav-link dropdown-user-link">
             <div className="user-nav d-sm-flex d-none">
               <span className="user-name text-bold-600">

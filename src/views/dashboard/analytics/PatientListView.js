@@ -14,7 +14,7 @@ class PatientListView extends React.Component {
         /> */}
         <Row>
           <Col sm="12">
-            <ListViewConfig parsedFilter={queryString.parse(this.props.location.search)}/>
+            <ListViewConfig className="p-0 m-0"  parsedFilter={queryString.parse(this.props.location.search)}/>
           </Col>
         </Row>
       </React.Fragment>

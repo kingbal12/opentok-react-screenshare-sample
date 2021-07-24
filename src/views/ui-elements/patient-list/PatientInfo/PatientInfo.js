@@ -32,6 +32,10 @@ import { Menu } from "react-feather"
 import "../../../../assets/scss/plugins/forms/flatpickr/flatpickr.scss"
 import "../../../../assets/scss/plugins/extensions/recharts.scss"
 import {gettokbox} from "../../../../redux/actions/data-list/"
+import ncall from "../../../../assets/img/dashboard/ID13_11_method_call1.png"
+import call from "../../../../assets/img/dashboard/ID13_11_method_call2.png"
+import nvideo from "../../../../assets/img/dashboard/ID13_11_method_video1.png"
+import video from "../../../../assets/img/dashboard/ID13_11_method_video2.png"
 
 
 
@@ -69,6 +73,7 @@ class AppointTime extends React.Component {
 
 
 class PatientInfo extends React.Component {
+  
   state = {
     value: 20
   }
@@ -126,13 +131,14 @@ class PatientInfo extends React.Component {
        
 
     return (
+      
       <Fragment>
         {/* 환자정보, 버튼 모음 Row */}
         {this.props.appo===null?null:
           <Row>
             <Col className="col-12">
               <Table responsive>
-                <thead>
+                <thead >
                   <tr className="table-primary align-self-center">
                     <th><h6 style={{paddingTop:"0.5rem"}}>{this.props.appo.APPOINT_TIME}</h6></th>
                     <th><h6 style={{paddingTop:"0.5rem"}}>{this.props.pinfo.F_NAME}</h6></th>
@@ -153,21 +159,13 @@ class PatientInfo extends React.Component {
                     </th>
                     {this.props.appo.APPOINT_KIND==="1"?
                       <th>
-                        <Button.Ripple onClick={this.goPhoneConsult} className= "btn-icon btn" color="primary">
-                          <Phone size={14} />
-                        </Button.Ripple>
-                        <Button.Ripple outline className="ml-1 btn-icon btn"  color="primary">
-                          <Video size={14} />
-                        </Button.Ripple>
+                        <img onClick={this.goPhoneConsult}  src={call} alt="call" style={{cursor:"pointer"}}/>
+                        <img src={nvideo} alt="nvideo" />
                       </th>
                       :
-                      <th>
-                        <Button.Ripple  outline className= "btn-icon btn"  color="primary"  >
-                          <Phone size={14} />
-                        </Button.Ripple>
-                        <Button.Ripple onClick={this.goCallSetting} className="ml-1 btn-icon btn"  color="primary">
-                          <Video size={14} />
-                        </Button.Ripple>
+                      <th className="text-right">
+                        <img src={ncall} alt="call" className="mr-1"/>
+                        <img onClick={this.goCallSetting} src={video} alt="video" style={{cursor:"pointer"}} />
                       </th>
                     }
                   </tr>

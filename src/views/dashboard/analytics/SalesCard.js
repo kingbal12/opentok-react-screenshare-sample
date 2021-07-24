@@ -7,10 +7,8 @@ import decorRight from "../../../assets/img/elements/decore-right.png"
 import DisplayName from "./DisplayName";
 import { connect } from "react-redux";
 import moment from 'moment'
-import 'moment/locale/ko';
 
-moment.locale("ko")
-const today = moment().format("YYYY년 M월 DD일 dddd입니다.")
+const today = moment().format("YYYY년 M월 DD일 입니다.")
 
 class SalesCard extends React.Component {
   render() {

@@ -7,7 +7,7 @@ const DisplayName  = (props) => {
     return (
         <Fragment>
               {props.user.login.values != null 
-                ?props.user.login.values.loggedInUser.username
+                ?props.user.login.values.loggedInUser.f_name
                 :history.push("/")}
         </Fragment>
     )

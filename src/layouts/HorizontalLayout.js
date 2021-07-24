@@ -179,6 +179,7 @@ class HorizontalLayout extends PureComponent {
     ]
     return (
       <div
+       style={{backgroundColor:"#ffffff"}}
         className={classnames(
           `wrapper horizontal-layout theme-${customizerProps.menuTheme}`,
           {
@@ -191,7 +192,7 @@ class HorizontalLayout extends PureComponent {
               customizerProps.navbarType === "floating" ||
               !navbarTypeArr.includes(customizerProps.navbarType),
             "navbar-hidden": customizerProps.navbarType === "hidden",
-            "theme-primary": !menuThemeArr.includes(customizerProps.menuTheme)
+            // "theme-primary": !menuThemeArr.includes(customizerProps.menuTheme)
           }
         )}>
         <Sidebar
