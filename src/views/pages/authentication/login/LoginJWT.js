@@ -8,6 +8,7 @@ import { saveemail, delemail} from "../../../../redux/actions/cookies"
 import { connect } from "react-redux"
 import { history } from "../../../../history"
 import firebase from 'firebase'; 
+import { FormattedMessage } from "react-intl"
 
 
 const config =  { 
@@ -76,6 +77,7 @@ class LoginJWT extends React.Component {
     e.preventDefault()
     if(this.state.email.length >=6) {
       this.props.loginWithJWT(this.state)
+      this.props.saveemail(this.state.email)
     } else {
       alert("아이디는 최소 6자 이상입니다.")
     }
@@ -140,15 +142,15 @@ class LoginJWT extends React.Component {
             </FormGroup>
             <div className="d-flex justify-content-center pb-1">
               <Button color="primary" type="submit" size="lg" block>
-                로그인
+               <FormattedMessage id="Login"/>
               </Button>
             </div>
             
             
             <div className="d-flex justify-content-center pb-1">
               <Link to="/pages/finduser" style={{color:"#615e6f"}}>
-                아이디찾기 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 비밀번호 찾기
-                </Link>
+                <FormattedMessage id="Find ID"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <FormattedMessage id="Find Password"/>
+              </Link>
             </div>
             
             <div className="d-flex justify-content-center">
@@ -160,7 +162,7 @@ class LoginJWT extends React.Component {
                     history.push("/pages/register1")
                   }}
                 >
-                  회원가입
+                  <FormattedMessage id="Sign In"/>
               </Button>
             </div>
           </Form>

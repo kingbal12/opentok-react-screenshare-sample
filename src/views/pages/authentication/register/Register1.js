@@ -135,8 +135,9 @@ class Register extends React.Component {
  
   render() {
     return (
-      <PerfectScrollbar style={{display:"flex", height:"100vh", alignItems:"center"}}>
+      
       <Row className="m-0 w-100 justify-content-center">
+        <PerfectScrollbar style={{display:"flex", height:"100vh", alignItems:"center"}}>
         <Modal
           isOpen={this.state.termmodal}
           toggle={this.termModal}
@@ -161,7 +162,7 @@ class Register extends React.Component {
           md="12"
           className="d-flex justify-content-center p-0 m-0"
         >
-          <Card className=" rounded-0 mb-0  w-100">
+          <Card className="rounded-0 mb-0  w-100">
             
             <Row className="m-0 d-flex justify-content-center">
               <Col lg="3" md="12">
@@ -278,8 +279,9 @@ class Register extends React.Component {
             </Row>
           </Card>
         </Col>
+        </PerfectScrollbar>
       </Row>
-      </PerfectScrollbar>
+      
     )
   }
 }

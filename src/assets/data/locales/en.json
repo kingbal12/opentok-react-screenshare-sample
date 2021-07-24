@@ -1,4 +1,9 @@
 {
+  "Login": "Login",
+  "Find ID": "Find ID",
+  "Find Password": "Find Password",
+  "Sign In": "Create an Account",
+
   "Home": "Home",
   "PatientList": "PatientList",
   "Call Setting": "Call Setting",
@@ -108,7 +113,7 @@
   "Form Validation": "Form Validation",
   "Pages": "Pages",
   "Authentication": "Authentication",
-  "Login": "Login",
+  
   "Register": "Register",
   "Forgot Password": "Forgot Password",
   "Reset Password": "Reset Password",
