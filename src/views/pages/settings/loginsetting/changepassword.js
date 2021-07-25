@@ -48,11 +48,11 @@ class ChagePassword extends React.Component {
     return (
       <Row className="m-0 justify-content-center">
       <Col
-        sm="10"
-        xl="10"
-        lg="10"
-        md="10"
-        className="d-flex justify-content-center"
+        sm="12"
+        xl="12"
+        lg="12"
+        md="12"
+        className="d-flex justify-content-center  m-0 p-0"
       >
         
         <Card className="bg-authentication rounded-0 mb-0 w-100">
@@ -61,15 +61,18 @@ class ChagePassword extends React.Component {
               <Card className="rounded-0 mb-0 p-2">
                 <CardHeader className="pb-1 pt-50">
                   <CardTitle>
-                    <h1>비밀번호 변경</h1>
+                    <h3 className="text-bold-600">비밀번호 변경</h3>
                   </CardTitle>
                 </CardHeader>   
               <CardBody className="pt-1 pb-50">
-                
+                <Row>
+                  <Col lg="2" md="12">
+                  </Col>
+                  <Col lg="8" md="12">
                   <Form action="/" onSubmit={this.handlechangepassword}>
                     <div className="form-label-group d-flex">
                       <div className="col-1 align-self-center"><b>아이디</b></div>
-                      <div>{this.state.userid}</div>
+                      <div className="text-primary">{this.state.userid}</div>
                     </div> 
                     <FormGroup className="form-label-group d-flex justify-content-between">
                       <div className="col-2 align-self-center"><b>현재 비밀번호</b></div>
@@ -116,7 +119,7 @@ class ChagePassword extends React.Component {
                       </div>
                     </FormGroup>
 
-                    <div className="d-flex justify-content-center mt-5">
+                    <div className="text-right">
                       <Button
                       size="lg"
                       color="primary" 
@@ -126,6 +129,10 @@ class ChagePassword extends React.Component {
                       </Button>
                     </div>
                   </Form>
+                  </Col>
+                  <Col lg="2" md="12">
+                  </Col>
+                </Row>
               </CardBody>
             </Card>
             </Col>

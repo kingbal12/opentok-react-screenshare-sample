@@ -1,7 +1,6 @@
 import React from "react"
 import AddEventSidebar from "./AddEventSidebar"
-import AddEventButton from "./AddEventButton"
-import { Card, CardBody, Button, ButtonGroup, Modal, FormGroup, Input, Label,
+import { Card, CardBody, Button, ButtonGroup, Modal, FormGroup,
   ModalHeader,
   ModalBody,
   ModalFooter, } from "reactstrap"
@@ -17,15 +16,16 @@ import {
   updateEvent,
   updateDrag,
   updateResize,
-  startschedules
+  startschedules,
+  clearSchedule,
 } from "../../../../redux/actions/calendar/index"
 import { ChevronLeft, ChevronRight } from "react-feather"
 
 import "react-big-calendar/lib/addons/dragAndDrop/styles.scss"
 import "react-big-calendar/lib/css/react-big-calendar.css"
-import "../../../../assets/scss/plugins/calendars/react-big-calendar.scss"
-import { history } from "../../../../history"
+import "../../../../assets/scss/plugins/calendars/react-big-calendar.scss" 
 import Radio from "../../../../components/@vuexy/radio/RadioVuexy"
+import { FormattedMessage } from "react-intl"
 
 const DragAndDropCalendar = withDragAndDrop(Calendar)
 const localizer = momentLocalizer(moment)
@@ -59,6 +59,9 @@ class Toolbar extends React.Component {
             >
               <ChevronLeft size={15} />
             </Button.Ripple>
+            <div className="ml=2 month d-inline-block mx-75 text-bold-500 font-medium-2 align-middle">
+              {this.props.label}
+            </div>
             <Button.Ripple
               className="btn-icon rounded-circle ml-1"
               size="sm"
@@ -67,10 +70,6 @@ class Toolbar extends React.Component {
             >
               <ChevronRight size={15} />
             </Button.Ripple>
-            <div className="month d-inline-block mx-75 text-bold-500 font-medium-2 align-middle">
-              {this.props.label}
-            </div>
-           
           </div>
         </div>
       </div>
@@ -80,6 +79,11 @@ class Toolbar extends React.Component {
 
 class CalendarApp extends React.Component {
 
+
+  clearschedule = e => {
+    e.preventDefault()
+    this.props.clearSchedule()
+  }
 
   schedulemodal = () => {
     this.setState(prevState => ({
@@ -306,9 +310,9 @@ class CalendarApp extends React.Component {
               components={{ toolbar: Toolbar }}
               eventPropGetter={this.handleEventColors}
               popup={false}
-              onSelectEvent={event => {
-                this.handleSelectEvent(event)
-              }}
+              // onSelectEvent={event => {
+              //   this.handleSelectEvent(event)
+              // }}
               onSelectSlot={({ start, end }) => {
                 this.setState({
                   // title: "테스트",
@@ -325,12 +329,32 @@ class CalendarApp extends React.Component {
             />
             <div className="pt-1 text-right">
               <Button
+                className="mr-2"
+                color="primary"
+                outline
+                type="button"
+                size="lg"
+                onClick={this.saveSchedule}
+              >
+                <FormattedMessage id="Drafts"/>
+              </Button>
+              <Button
+                className="mr-2"
+                color="primary"
+                outline
+                type="button"
+                size="lg"
+                onClick={this.clearschedule}
+              >
+                <FormattedMessage id="Reset"/>
+              </Button>
+              <Button
                 color="primary"
                 type="button"
                 size="lg"
                 onClick={this.modifychedule}
               >
-                수정
+                저장
               </Button>
             </div>
             <Modal
@@ -469,5 +493,6 @@ export default connect(mapStateToProps, {
   updateEvent,
   updateDrag,
   updateResize,
-  startschedules
+  startschedules,
+  clearSchedule,
 })(CalendarApp)

@@ -20,6 +20,8 @@ import { connect } from "react-redux"
 import axios from "axios"
 import previmg from "../../../../assets/img/portrait/small/Sample_User_Icon.png"
 import DaumPostcode from 'react-daum-postcode';
+import { FormattedMessage } from "react-intl"
+import { saveRegister3 } from "../../../../redux/actions/cookies"
 
 
 class Hospitalinfo extends React.Component {
@@ -27,14 +29,15 @@ class Hospitalinfo extends React.Component {
     super(props)
     this.state = {
       userid: props.user.login.values.loggedInUser.username,
-      hospitalname: "",
-      businessnumber:"",
-      address1:"",
-      address2:"",
-      phonenumber: "",
-      accountname: "",
-      bankname: "",
-      accountnumber: "",
+      hospitalname: props.cookiere3.hospitalname,
+      businessnumber: props.cookiere3.businessnumber,
+      zipcode: props.cookiere3.zipcode,
+      address1: props.cookiere3.address1,
+      address2: props.cookiere3.address2,
+      phonenumber: props.cookiere3.phonenumber,
+      accountname: props.cookiere3.accountname,
+      bankname: props.cookiere3.bankname,
+      accountnumber: props.cookiere3.accountnumber,
       modal: false,
       businessmodal: false,
       businessmodalmsg: ""
@@ -42,7 +45,8 @@ class Hospitalinfo extends React.Component {
   }
 
   componentDidMount() {
-    axios
+    if(this.props.cookiere3.hospitalname===""){
+      axios
       .get("http://203.251.135.81:9300/v1/doctor/account/hospital-info", {
         params: {
           user_id: this.state.userid
@@ -70,6 +74,7 @@ class Hospitalinfo extends React.Component {
           alert("병원정보를  불러오지 못하였습니다.")
         }
       })
+    }
   }
  
   handleComplete = (data) => {
@@ -170,53 +175,25 @@ class Hospitalinfo extends React.Component {
       }))
     }
 
+    saveRe3 = e => {
+      e.preventDefault()
+      this.props.saveRegister3(
+        this.state.hospitalname,
+        this.state.businessnumber,
+        this.state.zipcode,
+        this.state.address1,
+        this.state.address2,
+        this.state.phonenumber,
+        this.state.accountname,
+        this.state.bankname,
+        this.state.accountnumber
+      )
+      alert("병원정보가 저장되었습니다.")
+    }
 
 
   render() {
-    let profile_preview = null;
-    if(this.props.user.login.values.loggedInUser.file_path !== ''&&this.state.file===""&&this.state.filename===""){
-      profile_preview = 
-      <div className="dz-thumb ">
-        <div className="dz-thumb-inner">
-          <img
-            width="150px"
-            height="150px" 
-            src={"http://203.251.135.81:9300"+this.props.user.login.values.loggedInUser.file_path
-                +this.props.user.login.values.loggedInUser.file_name } 
-            className="dz-img" 
-            alt="" 
-            />
-        </div>
-      </div>
-    } else if (this.state.file !== "" && this.state.filename !== "") {
-      profile_preview = 
-      <div className="dz-thumb ">
-        <div className="dz-thumb-inner">
-          <img
-            width="150px"
-            height="150px" 
-            src={this.state.previewURL} 
-            className="dz-img" 
-            alt="" 
-            />
-        </div>
-      </div>
-
-    }else {
-      profile_preview = 
-      <div className="dz-thumb ">
-        <div className="dz-thumb-inner">  
-          <img
-            width="150px"
-            height="150px" 
-            src={previmg}
-            className="dz-img"
-            style={{borderRadius:"100%"}} 
-            alt="" 
-            />
-        </div>
-      </div>
-    }
+   
     return (
       
       <Row className="m-0 justify-content-center">
@@ -238,11 +215,11 @@ class Hospitalinfo extends React.Component {
           </ModalFooter>
         </Modal>
       <Col
-        sm="10"
-        xl="10"
-        lg="10"
-        md="10"
-        className="d-flex justify-content-center"
+        sm="12"
+        xl="12"
+        lg="12"
+        md="12"
+        className="d-flex justify-content-center m-0 p-0"
       >
         
         <Card className="bg-authentication rounded-0 mb-0 w-100">
@@ -255,9 +232,13 @@ class Hospitalinfo extends React.Component {
                   </CardTitle>
                 </CardHeader>   
               <CardBody className="pt-1 pb-50">
+                <Row>
+                  <Col lg="2" md="12">
+                  </Col>
+                  <Col lg="8" md="12">
                   <Form action="/" onSubmit={this.handleRegister}>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-3 align-self-center"><b>병원명 <span className="text-primary">(필수)</span></b></div>
+                      <div className="col-3 align-self-center"><b>병원명 <span className="text-danger">(필수)</span></b></div>
                       <InputGroup>
                         <Input
                           type="text"
@@ -269,7 +250,7 @@ class Hospitalinfo extends React.Component {
                       </InputGroup>
                     </FormGroup>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-3 align-self-center"><b>사업자 등록번호 <span className="text-primary">(필수)</span></b></div>
+                      <div className="col-3 align-self-center"><b>사업자 등록번호 <span className="text-danger">(필수)</span></b></div>
                       <InputGroup>
                         <Input
                           type="text"
@@ -283,7 +264,7 @@ class Hospitalinfo extends React.Component {
                     </FormGroup>
                     <FormGroup className="form-label-group">
                       <div className="d-flex justify-content-between">
-                        <div className="col-3 align-self-start"><b>병원주소 <span className="text-primary">(필수)</span></b></div>
+                        <div className="col-3 align-self-start"><b>병원 주소 <span className="text-danger">(필수)</span></b></div>
                         <InputGroup className="mb-1" onClick={this.zipModal}>
                           <Input
                             type="text"
@@ -293,7 +274,7 @@ class Hospitalinfo extends React.Component {
                             onChange={e => this.setState({ address1: e.target.value })}
                           />
                           <InputGroupAddon addonType="append">
-                            <Button color="primary" type="button">주소 검색</Button>
+                            <Button color="primary" type="button">우편번호 검색</Button>
                           </InputGroupAddon>
                         </InputGroup>
                       </div>
@@ -354,7 +335,7 @@ class Hospitalinfo extends React.Component {
                       </Modal>
                     </FormGroup>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-3 align-self-center"><b>전화번호 <span className="text-primary">(필수)</span></b></div>
+                      <div className="col-3 align-self-center"><b>병원 전화번호 <span className="text-danger">(필수)</span></b></div>
                       <InputGroup>
                         <Input
                           type="text"
@@ -366,7 +347,7 @@ class Hospitalinfo extends React.Component {
                       </InputGroup>
                     </FormGroup>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-3 self-align-start"><b>계좌정보</b></div>
+                      <div className="col-3 self-align-start"><b>병원 계좌정보 <span className="text-danger">(필수)</span></b></div>
                       <InputGroup className="mr-1">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>예금주</InputGroupText>
@@ -408,12 +389,13 @@ class Hospitalinfo extends React.Component {
                     </FormGroup>
                     <div className="text-right">
                       <Button
-                        className="mr-1"
+                        className='mr-1'
                         outline
-                        color="dark" 
+                        color="primary" 
                         type="button"
+                        onClick={this.saveRe3}
                       >
-                        임시저장
+                        <FormattedMessage id="Drafts"/>
                       </Button>
                       <Button
                         color="primary" 
@@ -422,7 +404,11 @@ class Hospitalinfo extends React.Component {
                         저장하기
                       </Button>
                     </div>
-                  </Form>
+                      </Form>
+                      </Col>
+                      <Col lg="2" md="12">
+                      </Col>
+                    </Row>
                   </CardBody>
                 </Card>
             </Col>
@@ -437,7 +423,8 @@ class Hospitalinfo extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.auth
+    user: state.auth,
+    cookiere3: state.cookies.register3
   }
 }
 export default connect(mapStateToProps, {puthsinfo})(Hospitalinfo)

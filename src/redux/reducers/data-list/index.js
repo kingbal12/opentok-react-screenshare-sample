@@ -1,5 +1,7 @@
 const initialState = {
   tokbox:{APPOINT_NUM:0, TOK_KEY:"", TOK_SESSION:"", TOK_TOKEN:""},
+  noticedata:[],
+  noticetotalPages: 0,
   faqdata:[],
   faqtotalPages: 0,
   paydata:[],
@@ -73,6 +75,19 @@ const DataListReducer = (state = initialState, action) => {
         faqdata: action.data,
         faqtotalPages: action.totalPages,
         totalpay: action.totalPay,
+        params: action.params,
+        sortIndex: getIndex(
+          state.allData,
+          action.data,
+          state.sortIndex,
+          action.params
+        )
+      }
+    case "GET_NOTICE":
+      return {
+        ...state,
+        noticedata: action.data,
+        noticetotalPages: action.totalpage,
         params: action.params,
         sortIndex: getIndex(
           state.allData,

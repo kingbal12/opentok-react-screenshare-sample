@@ -297,7 +297,7 @@ class DataListConfig extends Component {
   search = e => {
     e.preventDefault()
     if(this.state.name!==""){
-      this.props.getNameData(this.state.user,5,1,this.state.name)
+      this.props.getNameData(5,1,this.state.name)
     }
     
   }
@@ -371,11 +371,11 @@ class DataListConfig extends Component {
           this.props.thumbView ? "thumb-view" : "list-view"
         }`}>
         <Row>
-          <h2>진료비 청구내역</h2>
+          <h4 className="text-bold-600">진료비 청구내역</h4>
         </Row>
         <Row className="mt-2">
           <Col lg="6" md="12" className="p-0 d-flex">
-            <h4 className="col-2 align-self-center">기간</h4> 
+            <h4 className="col-2 align-self-center text-bold-600">기간</h4> 
             <Input 
               type="select" 
               name="select"
@@ -388,7 +388,7 @@ class DataListConfig extends Component {
               <option value="2025">2025</option>
               <option value="2026">2026</option>
             </Input>
-            <h5 className="align-self-center ml-1">년</h5> 
+            <h5 className="align-self-center ml-1 text-bold-600">년</h5> 
             <Input
               style={{marginBottom:"0.5rem"}} 
               type="select" 
@@ -408,7 +408,7 @@ class DataListConfig extends Component {
               <option value="11">11</option>
               <option value="12">12</option>                 
             </Input>
-            <h5 className="align-self-center  ml-1">월</h5> 
+            <h5 className="align-self-center  ml-1 text-bold-600">월</h5> 
           </Col>
           
         </Row>

@@ -58,9 +58,7 @@ export const getPaymentData = (userid, startdate, enddate, pageamount, pagenum) 
       let totalPage = Math.ceil(response.data.data.COUNT / 5)
       console.log(totalPage, response)
       let totalPay = 0
-      //  for (let i=0; i<response.data.data.COUNT; i++) {
-      //    totalPay = totalPay + Number(response.data.data.PAY_TOTAL[i])
-      //  }
+      totalPay= response.data.data.PAY_TOTAL.reduce((a,b)=>(a+b));
       dispatch({
         type: "GET_PAYMENT_DATA",
         data: response.data.data.PAY_LIST,
@@ -519,12 +517,12 @@ export const getPastConulstList = (patientid, pageamount, pagenum,) => {
 }
 
 
-export const getFaq = (userid, pageamount, pagenum,) => {
+export const getFaq = ( pageamount, pagenum) => {
   return async dispatch => {
     await axios
       .get("http://203.251.135.81:9300/v1/doctor/setting/faq", {
         params: {
-          search_text: "강주형",
+          search_text: "",
           page_amount: pageamount,
           page_num: pagenum
         }
@@ -536,6 +534,61 @@ export const getFaq = (userid, pageamount, pagenum,) => {
         dispatch({
           type: "GET_FAQ",
           data: response.data.data.FAQ_LIST,
+          totalpage: totalPage
+        } )
+        
+      } else {
+        alert("FAQ를 불러오지 못하였습니다.")
+      }
+    })
+    .catch(err => console.log(err))
+  }
+}
+
+export const getNameFaqData = (pageamount, pagenum, fname) => {
+  return async dispatch => {
+    await axios
+      .get("http://203.251.135.81:9300/v1/doctor/setting/faq", {
+        params: {
+          search_text: fname,
+          page_amount: pageamount,
+          page_num: pagenum
+        }
+  })
+    .then(response => {
+        console.log("faq:", response)
+        let totalPage = Math.ceil(response.data.data.COUNT / 5)
+      if(response.data.status==="200") {
+        dispatch({
+          type: "GET_FAQ",
+          data: response.data.data.FAQ_LIST,
+          totalpage: totalPage
+        } )
+        
+      } else {
+        alert("FAQ를 불러오지 못하였습니다.")
+      }
+    })
+    .catch(err => console.log(err))
+  }
+}
+
+export const getNotice = ( pageamount, pagenum) => {
+  return async dispatch => {
+    await axios
+      .get("http://203.251.135.81:9300/v1/doctor/setting/notices", {
+        params: {
+          page_amount: pageamount,
+          page_num: pagenum
+        }
+  })
+    .then(response => {
+        console.log("notice:", response)
+        let totalPage = Math.ceil(response.data.data.COUNT / 5)
+      if(response.data.status==="200") {
+        dispatch({
+          type: "GET_NOTICE",
+          data: response.data.data.NOTICE_LIST,
           totalpage: totalPage
         } )
         

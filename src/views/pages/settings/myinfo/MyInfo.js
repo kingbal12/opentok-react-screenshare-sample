@@ -6,9 +6,14 @@ import {InputGroup,
   Button,
   CustomInput,
   Card,
+  CardHeader,
+  CardTitle,
   CardBody,
   Row,
-  Col
+  Col,
+  Modal,
+  ModalBody,
+  ModalFooter
 } from "reactstrap"
 
 import "../../../../assets/scss/pages/authentication.scss"
@@ -16,7 +21,8 @@ import { putmyinfo, putmyinfonfile } from "../../../../redux/actions/auth/regist
 import { connect } from "react-redux"
 import axios from "axios"
 import previmg from "../../../../assets/img/portrait/small/Sample_User_Icon.png"
-
+import { saveRegister4 } from "../../../../redux/actions/cookies"
+import { FormattedMessage } from "react-intl"
 
 class MyInfo extends React.Component {
   constructor(props){
@@ -28,17 +34,38 @@ class MyInfo extends React.Component {
       userid: props.user.login.values.loggedInUser.username,
       filename: "",
       file : "",
-      medicalpart: "",
-      medicalable: "",
-      medicaldesc: "",
-      medicalnum: "",
-      userdesc: "",
-      previewURL : ""
+      medicalpart: props.cookiere4.medicalpart,
+      medicalable: props.cookiere4.medicalable,
+      medicaldesc: props.cookiere4.medicaldesc,
+      medicalnum: props.cookiere4.userdesc,
+      userdesc: props.cookiere4.previewURL,
+      previewURL : "",
+      previewmodal: false
     }
   }
 
+  saveRe4 = e => {
+    e.preventDefault()
+    this.props.saveRegister4(
+      this.state.medicalpart,
+      this.state.medicalable,
+      this.state.medicaldesc,
+      this.state.medicalnum,
+      this.state.userdesc,
+      this.state.previewURL,
+    )
+    alert("의사정보가 저장되었습니다.")
+  }
+
+  previewModal = e => {
+    this.setState(prevState => ({
+      previewmodal: !prevState.previewmodal
+    }))
+  }
+
   componentDidMount() {
-        axios
+    if(this.props.cookiere4.medicalpart===""){
+      axios
           .get("http://203.251.135.81:9300/v1/doctor/account/user-info", {
             params: {
               user_id: this.state.userid
@@ -69,6 +96,7 @@ class MyInfo extends React.Component {
             }
           })
       }
+    }
  
   
   
@@ -167,18 +195,27 @@ class MyInfo extends React.Component {
     return (
       <Row className="m-0 justify-content-center">
       <Col
-        sm="10"
-        xl="10"
-        lg="10"
-        md="10"
-        className="d-flex justify-content-center"
+        sm="12"
+        xl="12"
+        lg="12"
+        md="12"
+        className="d-flex justify-content-center  m-0 p-0"
       >
         
         <Card className="bg-authentication rounded-0 mb-0 w-100">
           <Row className="m-0">
             <Col lg="12" md="12" className="p-0">
-              <Card className="rounded-0 mb-0 p-2">   
+              <Card className="rounded-0 mb-0 p-2">
+                <CardHeader className="pt-50">
+                  <CardTitle>
+                    <h3 className="text-bold-600">개인정보 수정하기</h3>
+                  </CardTitle>
+                </CardHeader>     
                 <CardBody className="pt-1 pb-50">
+                  <Row>
+                  <Col lg="2" md="12">
+                  </Col>
+                  <Col lg="8" md="12">
                   <div className="form-label-group d-flex">
                     <div className="col-1 align-self-center"><b>아이디</b></div>
                     <div>{this.state.userid}</div>
@@ -195,7 +232,7 @@ class MyInfo extends React.Component {
                   </div> 
                   <Form action="/" onSubmit={this.handleRegister}>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-2 align-self-center"><b>프로필 사진 등록</b></div>
+                      <div className="col-2 align-self-center"><b>프로필 사진 등록<span className="text-danger">(필수)</span></b></div>
                       <InputGroup>
                         <CustomInput
                           className="col-11" 
@@ -203,13 +240,13 @@ class MyInfo extends React.Component {
                           accept="image/gif,image/jpeg,image/png" 
                           id="exampleCustomFileBrowser" 
                           name="customFile" 
-                          label=""
+                          label="  "
                           onChange={this.handleFileOnChange}/> 
                       </InputGroup>
                       <Row className="justify-content-md-center">{profile_preview}</Row>
                     </FormGroup> 
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-2 align-self-center"><b>진료과</b></div>
+                      <div className="col-2 align-self-center"><b>진료과<span className="text-danger">(필수)</span></b></div>
                       <Input type="select" name="select" value={this.state.medicalpart}  onChange={e => this.setState({ medicalpart: e.target.value })}>
                         <option value="01">가정의학과</option>
                         <option value="02">내과</option>
@@ -221,7 +258,7 @@ class MyInfo extends React.Component {
                     </FormGroup>
                     
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-2 align-self-center"><b>진료가능분야</b></div>
+                      <div className="col-2 align-self-center"><b>진료가능분야<span className="text-danger">(필수)</span></b></div>
                       <InputGroup>
                         <Input
                           type="text"
@@ -235,7 +272,7 @@ class MyInfo extends React.Component {
 
                     <FormGroup className="form-label-group">
                       <div className="d-flex justify-content-between">
-                        <div className="col-2 align-self-start"><b>약력</b></div>
+                        <div className="col-2 align-self-start"><b>약력<span className="text-danger">(필수)</span></b></div>
                         <InputGroup>
                           <Input
                             type="textarea"
@@ -292,9 +329,26 @@ class MyInfo extends React.Component {
                       </InputGroup>
                     </FormGroup>
 
-                    <div className="d-flex justify-content-center">
+                    <div className="text-right">
                       <Button
-                      size="lg"
+                        className='mr-1'
+                        outline
+                        color="primary" 
+                        type="button"
+                        onClick={this.saveRe4}
+                      >
+                        <FormattedMessage id="Drafts"/>
+                      </Button>
+                      <Button
+                        className="mr-1"
+                        outline
+                        color="primary" 
+                        type="button"
+                        onClick={this.previewModal}
+                      >
+                        <FormattedMessage id="Preview"/>
+                      </Button>
+                      <Button
                       
                       color="primary" 
                       type="submit"
@@ -303,7 +357,12 @@ class MyInfo extends React.Component {
                       </Button>
 
                     </div>
+                    
                   </Form>
+                  </Col>
+                  <Col lg="2" md="12">
+                  </Col>
+                </Row>
               </CardBody>
             </Card>
             </Col>
@@ -311,6 +370,69 @@ class MyInfo extends React.Component {
           
         </Card>
       </Col>
+      <Modal
+        isOpen={this.state.previewmodal}
+        toggle={this.previewModal}
+        className="modal-dialog-centered modal-sm"
+      >
+        <ModalBody className="mx-1">
+          <Row className="d-flex justify-content-center">
+            {profile_preview}
+          </Row>
+          <Row className="d-flex justify-content-center">
+            <h5 className="text-bold-600">{this.state.name}</h5>
+          </Row>
+          <Row className="d-flex justify-content-center">
+            {this.state.medicalpart==="01"?"가정의학과":
+             this.state.medicalpart==="02"?"내과":
+             this.state.medicalpart==="03"?"산부인과":
+             this.state.medicalpart==="04"?"피부과":
+             this.state.medicalpart==="05"?"비뇨기과":
+             this.state.medicalpart==="99"?"기타": null}
+          </Row>
+          <Card className="mt-1">
+            <CardBody className="pt-1">
+              <Row>
+                <h5 className="text-bold-400 ">진료분야</h5>
+              </Row>
+              <Row>
+                {this.state.medicalable}
+              </Row>
+            </CardBody>
+          </Card>
+          <Card className="mt-1">
+            <CardBody className="pt-1">
+              <Row>
+                <h5 className="text-bold-400 ">약력</h5>
+              </Row>
+              <Row>
+                <pre>
+                  {this.state.medicaldesc}
+                </pre>
+              </Row>
+            </CardBody>
+          </Card>
+          <Card className="mt-1">
+            <CardBody className="pt-1">
+              <Row>
+                <h5 className="text-bold-400 ">자기소개</h5>
+              </Row>
+              <Row>
+                <pre>
+                  {this.state.userdesc}
+                </pre>
+              </Row>
+            </CardBody>
+          </Card>
+          
+          
+        </ModalBody>
+        <ModalFooter>
+          <Button color="primary" onClick={this.previewModal}>
+            확인
+          </Button>
+        </ModalFooter>
+      </Modal>
     </Row>
     )
   }
@@ -318,7 +440,8 @@ class MyInfo extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.auth
+    user: state.auth,
+    cookiere4: state.cookies.register4
   }
 }
-export default connect(mapStateToProps, {putmyinfo, putmyinfonfile})(MyInfo)
+export default connect(mapStateToProps, {putmyinfo, putmyinfonfile, saveRegister4})(MyInfo)
