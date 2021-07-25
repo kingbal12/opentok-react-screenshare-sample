@@ -21,7 +21,6 @@ import {
   ResponsiveContainer
 } from "recharts"
 import { Search, Settings } from "react-feather"
-import { history } from "../../../../history"
 import "../../../../assets/scss/pages/authentication.scss"
 import {connect} from "react-redux"
 import { Fragment } from "react"
@@ -202,7 +201,7 @@ class VitalData extends React.Component {
         }
         <Row className="mt-2 flex-wrap">
           <Col className="col-6 d-flex">
-            <h4 className="text-bold-600 align-self-center">선택항목</h4>
+            <h5 className="text-bold-600 align-self-center">선택항목</h5>
             <ButtonGroup className="ml-1">
               <Button.Ripple outline={this.state.bpbutton===true?false:true} color="primary" onClick={this.handlebp}>혈압</Button.Ripple>
               <Button.Ripple outline={this.state.pulsebutton===true?false:true} color="primary" onClick={this.handlepulse}>맥박</Button.Ripple>{" "}
@@ -215,7 +214,7 @@ class VitalData extends React.Component {
           </Col>
 
           <Col className="col-4 d-flex ml-auto">
-            <h4 className="text-bold-600 align-self-center">기간</h4>
+            <h5 className="text-bold-600 align-self-center">기간</h5>
 
             <ButtonGroup className="ml-4" >
 
@@ -273,7 +272,7 @@ class VitalData extends React.Component {
           </Col>
 
           <Col className="col-4 d-flex ml-auto align-self-center">
-            <h4 className="text-bold-600 align-self-center">직접입력</h4>
+            <h5 className="text-bold-600 align-self-center">직접입력</h5>
             <Flatpickr
               className="form-control col-3 align-self-center ml-1"
               value={startpicker}
@@ -282,7 +281,7 @@ class VitalData extends React.Component {
                 this.handleStartPicker()
               }}
             />
-            <h4 className="text-bold-600 align-self-center">-</h4>
+            <h5 className="text-bold-600 align-self-center">-</h5>
             <Flatpickr
               className="form-control col-3 align-self-center"
               value={endpicker}
@@ -292,7 +291,7 @@ class VitalData extends React.Component {
               }}
             />
             <Button.Ripple className="ml-1 align-self-center" color="primary" onClick={this.serachVitalData}>
-              <Search size={16} />
+              <Search size={14} />
             </Button.Ripple>
           </Col>
         </Row>
@@ -302,10 +301,20 @@ class VitalData extends React.Component {
           {this.props.bpdata.length===0?null:this.state.bpbutton===false?null:
             <Col lg="6" md="12">
               <Card>
-                <CardHeader>
-                  <CardTitle>혈압</CardTitle>
+                <CardHeader className="justify-content-center">
+                    <Row>
+                      <Col lg="12" >
+                        혈압
+                      </Col>
+                    </Row>
+                    
                 </CardHeader>
                 <CardBody>
+                  <Row>
+                    <Col lg="12" >
+                      {moment(this.state.startpicker).format("YYYY-MM-DD")}
+                    </Col>
+                  </Row>
                   <div className="recharts-wrapper">
                     <ResponsiveContainer>
                       <LineChart
