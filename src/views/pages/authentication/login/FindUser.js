@@ -17,6 +17,7 @@ import FindId from "./FindId"
 import FindPw from "./FindPw"
 import { ChevronLeft } from "react-feather"
 import { history } from "../../../../history"
+import { FormattedMessage } from "react-intl"
 
 
 class Login extends React.Component {
@@ -34,10 +35,10 @@ class Login extends React.Component {
     return (
       <Row className="m-0 justify-content-center">
         <Col
-          sm="6"
-          xl="6"
-          lg="6"
-          md="6"
+          sm="3"
+          xl="3"
+          lg="3"
+          md="3"
           className="d-flex justify-content-center"
         >
           <Card className="bg-authentication login-card rounded-0 mb-0 w-100">
@@ -51,7 +52,7 @@ class Login extends React.Component {
                   </Row>
                   <CardHeader className="pb-2 pt-3 justify-content-center">
                     <CardTitle>
-                      <h4><b>아이디/비밀번호 찾기</b></h4>
+                      <h4><b><FormattedMessage id="FP"/></b></h4>
                     </CardTitle>
                   </CardHeader>
                   <Nav tabs className="px-3 justify-content-center">
@@ -64,7 +65,7 @@ class Login extends React.Component {
                           this.toggle("1")
                         }}
                       >
-                        <h5>아이디 찾기</h5>
+                        <h5><FormattedMessage id="Find ID"/></h5>
                       </NavLink>
                     </NavItem>
                     <NavItem className="pt-1">
@@ -79,7 +80,7 @@ class Login extends React.Component {
                           this.toggle("2")
                         }}
                       >
-                        <h5>비밀번호 찾기</h5>
+                        <h5><FormattedMessage id="Find Password"/></h5>
                       </NavLink>
                     </NavItem>
                   </Nav>

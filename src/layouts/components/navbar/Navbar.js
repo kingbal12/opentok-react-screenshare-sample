@@ -99,7 +99,7 @@ const ThemeNavbar = props => {
                   handleAppOverlay={props.handleAppOverlay}
                 /> */}
                 <Clock 
-                format={'YYYY, MM, DD, dddd'} 
+                format={'YYYY-MM-DD'} 
                 ticking={true}  />
                 <p></p>
                 <Clock 

@@ -15,7 +15,6 @@ import {Form, FormGroup, Button,
   NavLink,
 } from "reactstrap"
 import { Check, ChevronRight } from "react-feather"
-import { history } from "../../../../history"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import { setTerm } from "../../../../redux/actions/auth/registerActions"
 import "../../../../assets/scss/pages/authentication.scss"
@@ -24,6 +23,7 @@ import { connect } from "react-redux"
 import classnames from "classnames"
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import HicareLogo from "../../../../assets/img/logo/logo1.png"
+import { FormattedMessage } from "react-intl"
 
 
 
@@ -161,20 +161,22 @@ class Register extends React.Component {
           md="12"
           className="d-flex justify-content-center p-0 m-0"
         >
-          <Card className=" rounded-0 mb-0  w-100">
+          <Card className="rounded-0 mb-0  w-100 shadow-none">
             
-            <Row className="m-0 d-flex justify-content-center">
+            <Row className="m-0 d-flex justify-content-center ">
               <Col lg="3" md="12">
-                <h3 className="mt-5 pl-2">회원가입</h3>
+                <h3 className="mt-5 pl-2 text-bold-600">
+                  <img className="px-2" src={HicareLogo} alt="HicareLogo" style={{width:"150px", paddingBottom:"0.7rem"}}/><FormattedMessage id="Sign In"/>
+                </h3>
               </Col>
               <Col lg="6" md="12">
                 <Card className="rounded-0 pt-5 mb-0 p-2">
                   <CardHeader className="pb-1 pt-5">
-                    <CardTitle>
-                      <h4>약관동의</h4>
+                    <CardTitle >
+                      <h4 className="text-bold-600"><FormattedMessage id="TOS"/></h4>
                     </CardTitle>
                   </CardHeader>
-                  <p className="ml-2">하이케어넷 사용을 위해 아래의 약관에 동의해 주세요!</p>
+                  <p className="ml-2"><img src={HicareLogo} alt="HicareLogo" style={{width:"90px", paddingBottom:"0.6rem"}}/> 사용을 위해 아래의 약관에 동의해 주세요!</p>
                   <Nav tabs className="px-3 justify-content-center">
                     <NavItem>
                       <NavLink
@@ -206,19 +208,25 @@ class Register extends React.Component {
                   </Nav>
                   <CardBody>
                       <Form action="/" onSubmit={this.handleRegister}>  
-                        <FormGroup className="form-label-group allagree">
-                          <Checkbox
-                            
-                            color="primary"
-                            icon={<Check className="vx-icon" size={16} />}
-                            label="모든 약관에 동의"
-                            value="checkedall"
-                            onChange={this.handleAllChecked}
-                            
-                          />
-                        </FormGroup>
+                        <Row className="mb-1">
+                          <Col lg="1" md="1" sm="1" xl="1"></Col>
+                          <Col lg="8" md="8" sm="8" xl="8">
+                            <FormGroup className="form-label-group allagree">
+                              <Checkbox
+                                
+                                color="primary"
+                                icon={<Check className="vx-icon" size={16} />}
+                                label="모든 약관에 동의"
+                                value="checkedall"
+                                onChange={this.handleAllChecked}
+                                
+                              />
+                            </FormGroup>
+                          </Col>
+                        </Row>
                         <Row>
-                          <Col lg="9" md="9">
+                          <Col lg="1" md="1" sm="1" xl="1"></Col>
+                          <Col lg="8" md="8" sm="8" xl="8">
                             {/* id값 오류 수정해야함 기능에는 문제가 없음 */}
                               {this.state.certifications.map(certification => {
                                 return(
@@ -228,8 +236,9 @@ class Register extends React.Component {
                                   />
                                 );
                               })}
+                              <small>선택 약관은 동의하지 않아도 회원가입이 가능합니다.</small>
                           </Col>
-                          <Col lg="3" md="3">
+                          <Col lg="3" md="3" sm="3" xl="3">
                             <ChevronRight style={{marginTop: "0.2rem", cursor:"pointer"}} onClick={this.termModal}/><br/>
                             <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal}/><br/>
                             <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal}/><br/>
@@ -243,33 +252,32 @@ class Register extends React.Component {
                             <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal}/><br/>
                             <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal}/><br/>
                           </Col>
-                        </Row> 
-                        
-                        <div className="pb-1 select"><small>선택 약관은 동의하지 않아도 회원가입이 가능합니다.</small></div>
-                       
-                        <Row className="d-flex justify-content-right">
-                          <Button.Ripple 
-                          disabled={
-                            this.state.certifications[0].isChecked===true&&
-                            this.state.certifications[1].isChecked===true&& 
-                            this.state.certifications[2].isChecked===true&&
-                            this.state.certifications[3].isChecked===true&&
-                            this.state.certifications[4].isChecked===true&&
-                            this.state.certifications[6].isChecked===true&&
-                            this.state.certifications[8].isChecked===true&&
-                            this.state.certifications[9].isChecked===true&&
-                            this.state.certifications[10].isChecked===true&& 
-                            this.state.certifications[11].isChecked===true
-                            ?false:true}
-                          color="primary" 
-                          type="button"
-                          onClick={this.setTerms}
-                          >
-                            다음단계
-                          </Button.Ripple>
+                        </Row>                      
+                        <Row >
+                          <Col lg="10" md="10" sm="10" xl="10" className="text-right">
+                            <Button.Ripple
+                              className="mr-2" 
+                            disabled={
+                              this.state.certifications[0].isChecked===true&&
+                              this.state.certifications[1].isChecked===true&& 
+                              this.state.certifications[2].isChecked===true&&
+                              this.state.certifications[3].isChecked===true&&
+                              this.state.certifications[4].isChecked===true&&
+                              this.state.certifications[6].isChecked===true&&
+                              this.state.certifications[8].isChecked===true&&
+                              this.state.certifications[9].isChecked===true&&
+                              this.state.certifications[10].isChecked===true&& 
+                              this.state.certifications[11].isChecked===true
+                              ?false:true}
+                            color="primary" 
+                            type="button"
+                            onClick={this.setTerms}
+                            >
+                              <FormattedMessage id="Next"/>
+                            </Button.Ripple>
+                          </Col>
                         </Row>
                       </Form>
-                     
                   </CardBody>
                 </Card>
               </Col>
@@ -278,8 +286,10 @@ class Register extends React.Component {
             </Row>
           </Card>
         </Col>
+        
       </Row>
       </PerfectScrollbar>
+      
     )
   }
 }

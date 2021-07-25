@@ -32,7 +32,7 @@ class PaymentManagement extends React.Component {
               <Card className="rounded-0 mb-0 p-2">
                 <CardHeader className="pt-50">
                   <CardTitle>
-                      <h1>결제 관리</h1>
+                    <h3 className="text-bold-600">결제 관리</h3>
                   </CardTitle>
                 </CardHeader>   
               <CardBody className="px-6 pb-50">

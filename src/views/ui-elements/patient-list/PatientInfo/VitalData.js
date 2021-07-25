@@ -21,7 +21,6 @@ import {
   ResponsiveContainer
 } from "recharts"
 import { Search, Settings } from "react-feather"
-import { history } from "../../../../history"
 import "../../../../assets/scss/pages/authentication.scss"
 import {connect} from "react-redux"
 import { Fragment } from "react"
@@ -114,13 +113,17 @@ class VitalData extends React.Component {
   handlePeriod = periodname => {
     this.setState({periodname, startpicker: new Date(), endpicker: new Date()}, () => {
       if(this.state.periodname==="today") {
-        this.setState({startdate: moment().format("YYYYMMDD")},()=>{this.props.getVitalDataAll(this.props.pinfo.PATIENT_ID,this.state.startdate)})
+        this.props.resetVitalData()
+        this.setState({startdate: moment().format("YYYYMMDD"), enddate: moment().format("YYYY-MM-DD"), startpicker:"", endpicker:""},()=>{this.props.getVitalDataAll(this.props.pinfo.PATIENT_ID,this.state.startdate)})
       } else if(this.state.periodname==="week") {
-        this.setState({startdate: moment().add(-6,'days').format("YYYYMMDD")},()=>{this.props.getVitalDataAll(this.props.pinfo.PATIENT_ID,this.state.startdate)})
+        this.props.resetVitalData()
+        this.setState({startdate: moment().add(-6,'days').format("YYYYMMDD"), enddate: moment().format("YYYY-MM-DD"), startpicker:"", endpicker:""},()=>{this.props.getVitalDataAll(this.props.pinfo.PATIENT_ID,this.state.startdate)})
       } else if(this.state.periodname==="month") {
-        this.setState({startdate: moment().add(-29,'days').format("YYYYMMDD")},()=>{this.props.getVitalDataAll(this.props.pinfo.PATIENT_ID,this.state.startdate)})
+        this.props.resetVitalData()
+        this.setState({startdate: moment().add(-29,'days').format("YYYYMMDD"), enddate: moment().format("YYYY-MM-DD"), startpicker:"", endpicker:""},()=>{this.props.getVitalDataAll(this.props.pinfo.PATIENT_ID,this.state.startdate)})
       } else if(this.state.periodname==="months") {
-        this.setState({startdate: moment().add(-89,'days').format("YYYYMMDD")},()=>{this.props.getVitalDataAll(this.props.pinfo.PATIENT_ID,this.state.startdate)})
+        this.props.resetVitalData()
+        this.setState({startdate: moment().add(-89,'days').format("YYYYMMDD"), enddate: moment().format("YYYY-MM-DD"), startpicker:"", endpicker:""},()=>{this.props.getVitalDataAll(this.props.pinfo.PATIENT_ID,this.state.startdate)})
       }
     })
   }
@@ -128,7 +131,7 @@ class VitalData extends React.Component {
   serachVitalData = e => {
     e.preventDefault()
     this.props.resetVitalData()
-    this.setState({periodname: ""})
+    this.setState({periodname: "", startdate:"", enddate:"",})
     this.props.serachVitalData(this.props.pinfo.PATIENT_ID, this.state.startpicker, this.state.endpicker)
   }
 
@@ -202,7 +205,7 @@ class VitalData extends React.Component {
         }
         <Row className="mt-2 flex-wrap">
           <Col className="col-6 d-flex">
-            <h4 className="text-bold-600 align-self-center">선택항목</h4>
+            <h5 className="text-bold-600 align-self-center">선택 항목</h5>
             <ButtonGroup className="ml-1">
               <Button.Ripple outline={this.state.bpbutton===true?false:true} color="primary" onClick={this.handlebp}>혈압</Button.Ripple>
               <Button.Ripple outline={this.state.pulsebutton===true?false:true} color="primary" onClick={this.handlepulse}>맥박</Button.Ripple>{" "}
@@ -215,7 +218,7 @@ class VitalData extends React.Component {
           </Col>
 
           <Col className="col-4 d-flex ml-auto">
-            <h4 className="text-bold-600 align-self-center">기간</h4>
+            <h5 className="text-bold-600 align-self-center">기간</h5>
 
             <ButtonGroup className="ml-4" >
 
@@ -273,7 +276,7 @@ class VitalData extends React.Component {
           </Col>
 
           <Col className="col-4 d-flex ml-auto align-self-center">
-            <h4 className="text-bold-600 align-self-center">직접입력</h4>
+            <h5 className="text-bold-600 align-self-center">직접입력</h5>
             <Flatpickr
               className="form-control col-3 align-self-center ml-1"
               value={startpicker}
@@ -282,7 +285,7 @@ class VitalData extends React.Component {
                 this.handleStartPicker()
               }}
             />
-            <h4 className="text-bold-600 align-self-center">-</h4>
+            <h5 className="text-bold-600 align-self-center">-</h5>
             <Flatpickr
               className="form-control col-3 align-self-center"
               value={endpicker}
@@ -292,7 +295,7 @@ class VitalData extends React.Component {
               }}
             />
             <Button.Ripple className="ml-1 align-self-center" color="primary" onClick={this.serachVitalData}>
-              <Search size={16} />
+              <Search size={14} />
             </Button.Ripple>
           </Col>
         </Row>
@@ -302,10 +305,19 @@ class VitalData extends React.Component {
           {this.props.bpdata.length===0?null:this.state.bpbutton===false?null:
             <Col lg="6" md="12">
               <Card>
-                <CardHeader>
-                  <CardTitle>혈압</CardTitle>
+                <CardHeader className="justify-content-center">
+                    <Row>
+                      <Col lg="12" >
+                        <h5 className="text-bold-600">혈압</h5>
+                      </Col>
+                    </Row>
                 </CardHeader>
                 <CardBody>
+                  <Row>
+                    <Col lg="12" className="justify-content-center" >
+                      {/* <h6 className="text-bold-600">{this.state.startdate===""?this.state.startpicker: this.state.startdate}</h6> ~ <h6 className="text-bold-600">{this.startdate===""?this.state.endpicker:this.state.enddate}</h6> */}
+                    </Col>
+                  </Row>
                   <div className="recharts-wrapper">
                     <ResponsiveContainer>
                       <LineChart
@@ -348,8 +360,12 @@ class VitalData extends React.Component {
           {this.props.pulstdata.length===0?null:this.state.pulsebutton===false?null:
             <Col lg="6" md="12">
               <Card>
-                <CardHeader>
-                  <CardTitle>맥박</CardTitle>
+                <CardHeader className="justify-content-center"> 
+                  <Row>
+                    <Col lg="12" >
+                      <h5 className="text-bold-600">맥박</h5>
+                    </Col>
+                  </Row>
                 </CardHeader>
                 <CardBody>
                   <div className="recharts-wrapper">
@@ -388,8 +404,12 @@ class VitalData extends React.Component {
           {this.props.wedata.length===0?null:this.state.webutton===false?null:
             <Col lg="6" md="12">
               <Card>
-                <CardHeader>
-                  <CardTitle>몸무게</CardTitle>
+                <CardHeader className="justify-content-center">
+                  <Row>
+                    <Col lg="12" >
+                      <h5 className="text-bold-600">체중</h5>
+                    </Col>
+                  </Row>
                 </CardHeader>
                 <CardBody>
                   <div className="recharts-wrapper">
@@ -429,8 +449,12 @@ class VitalData extends React.Component {
           {this.props.bsdata.length===0?null:this.state.glbutton===false?null:
             <Col lg="6" md="12">
               <Card>
-                <CardHeader>
-                  <CardTitle>혈당</CardTitle>
+                <CardHeader className="justify-content-center">
+                  <Row>
+                    <Col lg="12" >
+                      <h5 className="text-bold-600">혈당</h5>
+                    </Col>
+                  </Row>
                 </CardHeader>
                 <CardBody>
                   <div className="recharts-wrapper">
@@ -460,11 +484,16 @@ class VitalData extends React.Component {
             </Col>
           }
 
+
           {this.props.tempdata.length===0?null:this.state.tempbutton===false?null:
             <Col lg="6" md="12">
               <Card>
-                <CardHeader>
-                  <CardTitle>혈당</CardTitle>
+                <CardHeader className="justify-content-center">
+                  <Row>
+                    <Col lg="12" >
+                      <h5 className="text-bold-600">체온</h5>
+                    </Col>
+                  </Row>
                 </CardHeader>
                 <CardBody>
                   <div className="recharts-wrapper">
@@ -494,6 +523,12 @@ class VitalData extends React.Component {
             </Col>
           }
 
+         
+
+          
+
+          
+
           
 
           
@@ -501,8 +536,12 @@ class VitalData extends React.Component {
           {this.props.spo2data.length===0?null:this.state.spo2button===false?null:
             <Col lg="6" md="12">
               <Card>
-                <CardHeader>
-                  <CardTitle>산소포화도</CardTitle>
+                <CardHeader className="justify-content-center">
+                  <Row>
+                    <Col lg="12" >
+                      <h5 className="text-bold-600">산소포화도</h5>
+                    </Col>
+                  </Row>
                 </CardHeader>
                 <CardBody>
                   <div className="recharts-wrapper">

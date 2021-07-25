@@ -19,13 +19,15 @@ import DaumPostcode from 'react-daum-postcode';
 import axios from "axios"
 import 'react-perfect-scrollbar/dist/css/styles.css'
 import PerfectScrollbar from "react-perfect-scrollbar";
+import HicareLogo from "../../../../assets/img/logo/logo1.png"
+import { FormattedMessage } from "react-intl"
 
 class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      userid: props.user.register.values.registeruser,
-      // userid: "kingbal999@kakao.com",
+      // userid: props.user.register.values.registeruser,
+      userid: "kingbal999@kakao.com",
       phonenum: "",
       phonauthnum: "",
       hospitalname: props.cookiere3.hospitalname,
@@ -229,26 +231,34 @@ handleComplete = (data) => {
           </ModalFooter>
         </Modal>
         <Col
-          sm="8"
-          xl="8"
-          lg="8"
-          md="8"
-          className="d-flex justify-content-center"
+          sm="12"
+          xl="12"
+          lg="12"
+          md="12"
+          className="d-flex justify-content-center p-0 m-0"
         >
-          <Card className="bg-authentication rounded-0 mb-0 w-100">
+          <Card className="shadow-none rounded-0 mb-0 w-100">
+            <Row className="m-0 d-flex">
+              <Col lg="3" md="12">
+                <h3 className="mt-5 pl-2 text-bold-600">
+                  <img className="px-2" src={HicareLogo} alt="HicareLogo" style={{width:"150px", paddingBottom:"0.7rem"}}/><FormattedMessage id="Sign In"/>
+                </h3>
+              </Col>
+            </Row>
             <Row className="m-0">
               
-              <Col lg="12" md="12" className="p-0">
+              <Col lg="3" md="12"></Col>
+              <Col lg="6" md="12">
               <Card className="rounded-0 mb-0 p-2">
                 <CardHeader className="pb-1 pt-50">
                   <CardTitle>
-                    <h1>병원정보 입력하기</h1>
+                    <h4 className="text-bold-600"><FormattedMessage id="CI"/></h4>
                   </CardTitle>
                 </CardHeader>   
               <CardBody className="pt-1 pb-50">
                   <Form action="/" onSubmit={this.handleRegister}>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-3 align-self-center"><b>휴대폰번호</b></div>            
+                      <div className="col-3 align-self-center"><b>휴대폰인증</b></div>            
                       <InputGroup>
                         <Input
                           type="text"
@@ -261,11 +271,11 @@ handleComplete = (data) => {
                       </InputGroup>                      
                     </FormGroup>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-3 align-self-center"><b>인증번호</b></div>            
+                      <div className="col-3 align-self-center"></div>            
                       <InputGroup>
                         <Input
                           type="text"
-                          placeholder="인증번호"
+                          placeholder="인정번호 입력"
                           required
                           value={this.state.phonauthnum}
                           onChange={e => this.setState({ phonauthnum: e.target.value })}
@@ -274,11 +284,11 @@ handleComplete = (data) => {
                       </InputGroup>                      
                     </FormGroup>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-3 align-self-center"><b>병원명 <span className="text-danger">(필수)</span></b></div>
+                      <div className="col-3 align-self-center"><b><FormattedMessage id="CN"/> <span className="text-danger">(필수)</span></b></div>
                       <InputGroup>
                         <Input
                           type="text"
-                          placeholder="상호명을 입력해주세요"
+                          placeholder="병원명 입력"
                           required
                           value={this.state.hospitalname}
                           onChange={e => this.setState({ hospitalname: e.target.value })}
@@ -286,11 +296,11 @@ handleComplete = (data) => {
                       </InputGroup>
                     </FormGroup>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-3 align-self-center"><b>사업자 등록번호 <span className="text-danger">(필수)</span></b></div>
+                      <div className="col-3 align-self-center"><b><FormattedMessage id="CRN"/> <span className="text-danger">(필수)</span></b></div>
                       <InputGroup>
                         <Input
                           type="text"
-                          placeholder="하이픈(-)을 생략하고 입력해주세요"
+                          placeholder="하이픈(-)을 생략, 숫자만 입력"
                           required
                           value={this.state.businessnumber}
                           onChange={e => this.setState({ businessnumber: e.target.value })}
@@ -300,7 +310,7 @@ handleComplete = (data) => {
                     </FormGroup>
                     <FormGroup className="form-label-group">
                       <div className="d-flex justify-content-between">
-                        <div className="col-3 align-self-start"><b>병원주소 <span className="text-danger">(필수)</span></b></div>
+                        <div className="col-3 align-self-start"><b><FormattedMessage id="Address"/> <span className="text-danger">(필수)</span></b></div>
                         <InputGroup className="mb-1" onClick={this.zipModal}>
                           <Input
                             type="text"
@@ -330,10 +340,10 @@ handleComplete = (data) => {
                       {/* 주소찾기 Modal창 */}
                       <Modal
                         isOpen={this.state.modal}
-                        toggle={this.toggleModal}
+                        toggle={this.zipModal}
                         className="modal-dialog-centered"
                       >
-                        <ModalHeader toggle={this.toggleModal}>
+                        <ModalHeader toggle={this.zipModal}>
                           주소 찾기
                         </ModalHeader>
                         <ModalBody>
@@ -371,11 +381,11 @@ handleComplete = (data) => {
                       </Modal>
                     </FormGroup>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-3 align-self-center"><b>전화번호 <span className="text-danger">(필수)</span></b></div>
+                      <div className="col-3 align-self-center"><b><FormattedMessage id="CNumber"/> <span className="text-danger">(필수)</span></b></div>
                       <InputGroup>
                         <Input
                           type="text"
-                          placeholder="하이픈(-)을 생략하고 입력해주세요"
+                          placeholder="하이픈(-)을 생략, 숫자만 입력"
                           required
                           value={this.state.phonenumber}
                           onChange={e => this.setState({ phonenumber: e.target.value })}
@@ -383,7 +393,7 @@ handleComplete = (data) => {
                       </InputGroup>
                     </FormGroup>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-3 self-align-start"><b>계좌정보</b></div>
+                      <div className="col-3 self-align-start"><b><FormattedMessage id="CAI"/></b></div>
                       <InputGroup className="mr-1">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>예금주</InputGroupText>
@@ -422,25 +432,26 @@ handleComplete = (data) => {
                     </FormGroup>
                     <div className="text-right">
                       <Button
-                        className="mr-1"
+                        className="mr-1 text-bold-600"
                         outline
-                        color="dark" 
+                        color="light" 
                         type="button"
                         onClick={this.saveRe3}
                       >
-                        임시저장
+                        <FormattedMessage id="Drafts"/>
                       </Button>
                       <Button
                         color="primary" 
                         type="submit"
                       >
-                        다음단계
+                        <FormattedMessage id="Next"/>
                       </Button>
                     </div>
                   </Form>
                   </CardBody>
                 </Card>
               </Col>
+              <Col lg="3" md="12"></Col>
             </Row>
           </Card>
         </Col>

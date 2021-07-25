@@ -61,27 +61,27 @@ class VitalDataSetting extends React.Component {
               <thead className="table-primary">
                 <tr>
                   <th width={'30%'} ></th>
-                  <th><h3 className="pl-1">BMI&nbsp;(%)</h3></th>
+                  <th><h5 className="pl-1">BMI&nbsp;(%)</h5></th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <th scope="row"><h3 className="pl-4">정상</h3></th>
+                  <th scope="row"><h5 className="pl-4">정상</h5></th>
                   <td className="d-flex align-self-center">
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                        bsSize="lg" 
+                         
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.normalBMI}
                         onChange={e => this.setState({ normalBMI: e.target.value })} 
                       />
                     </FormGroup>
-                    <h3 className="align-self-center ml-2">&#8764;</h3>
+                    <h5 className="align-self-center ml-2">&#8764;</h5>
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                        bsSize="lg" 
+                         
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.alertBMI}
                         onChange={e => this.setState({ alertBMI: e.target.value })}
@@ -91,23 +91,23 @@ class VitalDataSetting extends React.Component {
                 </tr>
                 <tr>
                   <th scope="row">
-                    <h3 className="pl-4">주의</h3>
+                    <h5 className="pl-4">주의</h5>
                   </th>
                   <td className="d-flex align-self-center">
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                        bsSize="lg" 
+                         
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.alertBMI}
                         onChange={e => this.setState({ alertBMI: e.target.value })} 
                       />
                     </FormGroup>
-                    <h3 className="align-self-center ml-2">&#8764;</h3>
+                    <h5 className="align-self-center ml-2">&#8764;</h5>
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                        bsSize="lg" 
+                         
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.dangerBMI}
                         onChange={e => this.setState({ dangerBMI: e.target.value })}
@@ -118,11 +118,11 @@ class VitalDataSetting extends React.Component {
                 <tr>
                   <th scope="row"></th>
                   <td className="d-flex align-self-center">
-                    <h3 className= "align-self-center pl-2">	&lsaquo;</h3>
+                    <h5 className= "align-self-center pl-2">	&lsaquo;</h5>
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                        bsSize="lg" 
+                         
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.normalBMI}
                         onChange={e => this.setState({ normalBMI: e.target.value })}
@@ -132,13 +132,13 @@ class VitalDataSetting extends React.Component {
                 </tr>
                 <tr>
                   <th scope="row">
-                    <h3 className="pl-4">위험</h3>
+                    <h5 className="pl-4">위험</h5>
                   </th>
                   <td className="d-flex align-self-center">
                     <FormGroup className="pt-1 pl-2">
                       <Input 
                         type="number" 
-                        bsSize="lg" 
+                         
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.dangerBMI}
                         onChange={e => this.setState({ dangerBMI: e.target.value })}

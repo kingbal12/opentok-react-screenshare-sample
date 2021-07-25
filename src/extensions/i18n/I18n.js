@@ -32,6 +32,17 @@ class I18nExtension extends React.Component {
                     </CardHeader>
                     <CardBody>
                       <div className="language-options">
+                      <Radio
+                          name="i18n-lang-radio"
+                          onClick={() => {
+                            context.switchLanguage("kr")
+                          }}
+                          label="Korean"
+                          className="mb-1"
+                          defaultChecked={
+                            context.state.locale === "ko" ? true : false
+                          }
+                        />
                         <Radio
                           name="i18n-lang-radio"
                           onClick={() => {

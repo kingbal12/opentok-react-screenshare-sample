@@ -20,7 +20,7 @@ import {
 } from "react-feather"
 import { connect } from "react-redux"
 import {
-  getPaymentData,
+  getNotice,
   getNameData,
   getInitialData,
   deleteData,
@@ -90,25 +90,21 @@ const CustomHeader = props => {
 class DataListConfig extends Component {
  constructor(props) {
     super(props);
-    let lastday = String(new Date(this.state.year, this.state.month, 0).getDate())
     if(this.props.parsedFilter.perPage===undefined) {
-      this.props.getPaymentData(
-        this.state.user,
-        this.state.year+this.state.month+"01",
-        this.state.year+this.state.month+ lastday,
+      this.props.getNotice(
         this.state.rowsPerPage, this.state.currentPage)
     }
  }
 
   static getDerivedStateFromProps(props, state) {
     if (
-      props.dataList.paydata.length !== state.data.length ||
+      props.dataList.noticedata.length !== state.data.length ||
       state.currentPage !== props.parsedFilter.page
     ) {
       return {
-        data: props.dataList.paydata,
+        data: props.dataList.noticedata,
         allData: props.dataList.filteredData,
-        totalPages: props.dataList.paytotalPages,
+        totalPages: props.dataList.noticetotalPages,
         currentPage: parseInt(props.parsedFilter.page) - 1,
         rowsPerPage: parseInt(props.parsedFilter.perPage),
         totalRecords: props.dataList.totalRecords,
@@ -138,17 +134,17 @@ class DataListConfig extends Component {
         sortable: false,
         minWidth: "150px",
         center: true,
-        cell: row => <p className="text-bold-500 mb-0">{row.APPOINT_NUM}</p>
+        cell: row => <p className="text-bold-500 mb-0">{row.SEQ}</p>
       },
       {
-        name: "진료날짜",
+        name: "제목",
         selector: "gender",
         sortable: false,
         center: true,
-        cell: row => <p className="text-bold-500 mb-0">{moment(row.APPOINT_TIME).format("MMMM DD, YYYY")}</p>
+        cell: row => <p className="text-bold-500 mb-0">{row.TITLE}</p>
       },
       {
-        name: "환자명",
+        name: "1:1 문의",
         selector: "name",
         sortable: false,
         minWidth: "200px",
@@ -157,9 +153,9 @@ class DataListConfig extends Component {
           <div className="d-flex flex-xl-row flex-column align-items-xl-center align-items-start py-xl-0 py-1">
             <div className="user-info text-truncate ml-xl-50 ml-0">
               <span
-                title={row.F_NAME}
+                title={row.CONTENTS}
                 className="d-block text-bold-500 text-truncate mb-0">
-                {row.F_NAME}
+                {row.CONTENTS}
               </span>
             </div>
           </div>
@@ -167,18 +163,18 @@ class DataListConfig extends Component {
       },
       
       {
-        name: "진료수단",
+        name: "작성자",
         selector: "gender",
         sortable: false,
         center: true,
-        cell: row => <p className="text-bold-500 mb-0">{row.APPOINT_KIND==="1"?"전화":"화상"}</p>
+        cell: row => <p className="text-bold-500 mb-0">{row.AUTH_NM==="1"?"전화":"화상"}</p>
       },
       {
-        name: "금액",
+        name: "작성일",
         selector: "age",
         sortable: false,
         center: true,
-        cell: row => <p className="text-bold-500 mb-0">{row.PAY_TOTAL}</p>
+        cell: row => <p className="text-bold-500 mb-0">{moment(row.CREATE_TIME).format("MMMM, DD")}</p>
       },
     ],
     allData: [],
@@ -196,12 +192,8 @@ class DataListConfig extends Component {
 
   componentDidMount() {
     if(this.props.parsedFilter.perPage!==undefined) {
-      this.setState({lastday: String(new Date(this.state.year, this.state.month, 0).getDate())})
 
-      this.props.getPaymentData(
-        this.state.user,
-        this.state.year+this.state.month+"01",
-        this.state.year+this.state.month+this.state.lastday,
+      this.props.getNotice(
         this.props.parsedFilter.perPage, 
         this.props.parsedFilter.page)
     }
@@ -269,7 +261,7 @@ class DataListConfig extends Component {
           cell: row => (
             <ActionsComponent
               row={row}
-              getPaymentData={this.props.getPaymentData}
+              getNotice={this.props.getNotice}
               parsedFilter={this.props.parsedFilter}
               currentData={this.handleCurrentData}
               deleteRow={this.handleDelete}
@@ -304,11 +296,11 @@ class DataListConfig extends Component {
 
 
   handleRowsPerPage = value => {
-    let { parsedFilter, getPaymentData } = this.props
+    let { parsedFilter, getNotice } = this.props
     let page = parsedFilter.page !== undefined ? parsedFilter.page : 1
     history.push(`/pages/notice?page=${page}&perPage=${value}`)
     this.setState({currentPage: page, rowsPerPage: value })
-    getPaymentData({ user_id: this.state.user, page: parsedFilter.page, perPage: value })
+    getNotice({ page: parsedFilter.page, perPage: value })
     // getData({ user_id: this.state.user, page_num: parsedFilter.page, page_amount: value })
   }
 
@@ -324,7 +316,7 @@ class DataListConfig extends Component {
   }
 
   handlePagination = page => {
-    let { parsedFilter, getPaymentData } = this.props
+    let { parsedFilter, getNotice } = this.props
     let perPage = parsedFilter.perPage !== undefined ? parsedFilter.perPage : 5
     let urlPrefix = this.props.thumbView
       ? "/data-list/thumb-view/"
@@ -333,7 +325,7 @@ class DataListConfig extends Component {
       `${urlPrefix}?page=${page.selected + 1}&perPage=${perPage}`
     )
     // getData({ page: page.selected + 1, perPage: perPage })
-    getPaymentData(this.state.user, perPage, page.selected + 1 )
+    getNotice(perPage, page.selected + 1 )
     this.setState({ currentPage: page.selected })
   }
 
@@ -361,7 +353,7 @@ class DataListConfig extends Component {
           this.props.thumbView ? "thumb-view" : "list-view"
         }`}>
         <Row>
-          <h2>공지사항</h2>
+          <h3 className="text-bold-600 pl-1">공지사항</h3>
         </Row>
           {/* <Button className="ml-2" color='primary' outline onClick={this.seeState}>검색</Button> */}
         <DataTable
@@ -415,7 +407,7 @@ class DataListConfig extends Component {
           addData={this.props.addData}
           handleSidebar={this.handleSidebar}
           thumbView={this.props.thumbView}
-          getPaymentData={this.props.getPaymentData}
+          getNotice={this.props.getNotice}
           dataParams={this.props.parsedFilter}
           addNew={this.state.addNew}
         />
@@ -425,18 +417,6 @@ class DataListConfig extends Component {
           })}
           onClick={() => this.handleSidebar(false, true)}
         />
-        <Row className="d-flex mt-5">
-          <Col lg="9" md="12"></Col>
-          <Col lg="3" md="12">
-            <Button 
-            color="primary" 
-            type="button"
-            onClick={this.check}
-            >
-              내역서 다운로드
-            </Button>
-          </Col>
-        </Row>
       </div>
     )
   }
@@ -450,7 +430,7 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, {
-  getPaymentData,
+  getNotice,
   getNameData,
   deleteData,
   updateData,

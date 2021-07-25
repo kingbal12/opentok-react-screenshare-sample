@@ -66,33 +66,33 @@ class VitalDataSetting extends React.Component {
               <thead className="table-primary">
                 <tr>
                   <th width={'15%'}></th>
-                  <th><h3 className="pl-2">Systolic</h3></th>
+                  <th><h4 className="pl-2">Systolic</h4></th>
                   <th width={'15%'}></th>
-                  <th><h3 className="pl-2">Diastolic</h3></th>
+                  <th><h4 className="pl-2">Diastolic</h4></th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <th scope="row" className="text-center"><h3>정상</h3></th>
+                  <th scope="row" className="text-center"><h4>정상</h4></th>
                   <td className="d-flex align-self-center">
-                    <h3 className= "align-self-center pl-2">	&lsaquo;</h3>
+                    <h4 className= "align-self-center pl-2">	&lsaquo;</h4>
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                        bsSize="lg"
+                        
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.normalsys_val}
                         onChange={e => this.setState({ normalsys_val: e.target.value })} 
                       />
                     </FormGroup>
                   </td>
-                  <td className="text-center"><h4>and</h4></td>
+                  <td className="text-center"><h5>and</h5></td>
                   <td className="d-flex align-self-center">
-                    <h3 className= "align-self-center pl-2">	&lsaquo;</h3>
+                    <h4 className= "align-self-center pl-2">	&lsaquo;</h4>
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                        bsSize="lg"
+                        
                         disabled={this.state.edit===true?false:true}  
                         value={this.state.normaldia_val}
                         onChange={e => this.setState({ normaldia_val: e.target.value })} 
@@ -101,44 +101,44 @@ class VitalDataSetting extends React.Component {
                   </td>
                 </tr>
                 <tr>
-                  <th scope="row" className="text-center"><h3>주의</h3></th>
+                  <th scope="row" className="text-center"><h4>주의</h4></th>
                   <td className="d-flex align-self-center">
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                        bsSize="lg" 
+                         
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.normalsys_val}
                         onChange={e => this.setState({ normalsys_val: e.target.value })} 
                       />
                     </FormGroup>
-                    <h3 className="align-self-center ml-2">&#8764;</h3>
+                    <h4 className="align-self-center ml-2">&#8764;</h4>
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                        bsSize="lg" 
+                         
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.dangersys_val}
                         onChange={e => this.setState({ dangersys_val: e.target.value })}
                       />
                     </FormGroup>
                   </td>
-                  <td className="text-center"><h4>or</h4></td>
+                  <td className="text-center"><h5>or</h5></td>
                   <td className="d-flex align-self-center">
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                        bsSize="lg" 
+                         
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.normaldia_val}
                         onChange={e => this.setState({ normaldia_val: e.target.value })}
                       />
                     </FormGroup>
-                    <h3 className="align-self-center ml-2">&#8764;</h3>
+                    <h4 className="align-self-center ml-2">&#8764;</h4>
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                        bsSize="lg" 
+                         
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.dangerdia_val}
                         onChange={e => this.setState({ dangerdia_val: e.target.value })}
@@ -147,12 +147,12 @@ class VitalDataSetting extends React.Component {
                   </td>
                 </tr>
                 <tr>
-                  <th scope="row" className="text-center"><h3>위험</h3></th>
+                  <th scope="row" className="text-center"><h4>위험</h4></th>
                   <td className="d-flex align-self-center">
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                        bsSize="lg" 
+                         
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.dangersys_val}
                         onChange={e => this.setState({ dangersys_val: e.target.value })}
@@ -160,12 +160,12 @@ class VitalDataSetting extends React.Component {
                     </FormGroup>
                     <h1 className="align-self-center ml-2">&#8804;</h1>
                   </td>
-                  <td className="text-center"><h4>or</h4></td>
+                  <td className="text-center"><h5>or</h5></td>
                   <td className="d-flex align-self-center">
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                        bsSize="lg" 
+                         
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.dangerdia_val}
                         onChange={e => this.setState({ dangerdia_val: e.target.value })}

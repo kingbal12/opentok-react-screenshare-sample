@@ -245,7 +245,7 @@ class NavbarUser extends React.PureComponent {
     return (
       <ul className="nav navbar-nav navbar-nav-user float-right">
         <img className="pt-1" style={{width:"2rem", height:"3rem"}}  src={Question} alt="question"/>
-        {/* <IntlContext.Consumer>
+        <IntlContext.Consumer>
           {context => {
             let langArr = {
               "en" : "English",
@@ -311,7 +311,7 @@ class NavbarUser extends React.PureComponent {
               </Dropdown>
             )
           }}
-        </IntlContext.Consumer> */}
+        </IntlContext.Consumer> 
 
         {/* <NavItem className="nav-search" onClick={this.handleNavbarSearch}>
           <NavLink className="nav-link-search">
@@ -661,7 +661,7 @@ class NavbarUser extends React.PureComponent {
             </li>
           </DropdownMenu>
         </UncontrolledDropdown> */}
-        <UncontrolledDropdown tag="li" className="dropdown-user nav-item">
+        <UncontrolledDropdown tag="li" className="dropdown-user nav-item mr-1">
           <DropdownToggle tag="a" className="nav-link dropdown-user-link">
             <div className="user-nav d-sm-flex d-none">
               <span className="user-name text-bold-600">

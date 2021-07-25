@@ -19,6 +19,8 @@ import { connect } from "react-redux"
 import axios from "axios"
 import 'react-perfect-scrollbar/dist/css/styles.css'
 import PerfectScrollbar from 'react-perfect-scrollbar'
+import HicareLogo from "../../../../assets/img/logo/logo1.png"
+import { FormattedMessage } from "react-intl"
 
 
 class Register extends React.Component {
@@ -189,188 +191,201 @@ class Register extends React.Component {
   render() {
     return (
       <PerfectScrollbar style={{display:"flex",height:"100vh", alignItems:"center"}}>
-      <Row className="main m-0 w-100 justify-content-center">
+      <Row className="m-0 w-100 justify-content-center">
         <Col
-          sm="8"
-          xl="8"
-          lg="8"
-          md="8"
-          className="d-flex justify-content-center"
+          sm="12"
+          xl="12"
+          lg="12"
+          md="12"
+          className="d-flex justify-content-center p-0 m-0"
         >
-          <Card className="bg-authentication rounded-0 mb-0 w-100">
-            <Row className="m-0">
-              <Col lg="12" md="12" className="p-0">
-                <Card className="rounded-0 mb-0 p-2">
+          <Card className="rounded-0 mb-0 w-100 shadow-none">
+            
+              <Row className="m-0 d-flex">
+                <Col lg="3" md="12">
+                  <h3 className="mt-5 pl-2 text-bold-600">
+                    <img className="px-2" src={HicareLogo} alt="HicareLogo" style={{width:"150px", paddingBottom:"0.7rem"}}/><FormattedMessage id="Sign In"/>
+                  </h3>
+                </Col>
+              </Row>
+              <Row>
+                <Col lg="3" md="12"></Col>
+                <Col lg="6" md="12">
                 
-                  <CardHeader className="pb-1 pt-50">
-                    <CardTitle>
-                      <h1>회원가입</h1>
-                    </CardTitle>
-                  </CardHeader>   
-                  <CardBody className="pt-1 pb-50">
-                      <Form onSubmit={this.handleRegister1}>
-                        <FormGroup className="form-label-group">
-                          <div className="d-flex justify-content-between"> 
-                          <div className="col-3 align-self-center">
-                            <h5 className="text-bold-600">아이디</h5>
-                          </div>
-                          <InputGroup>
-                            <Input
-                              type="email"
-                              placeholder="사용 가능한 이메일 입력"
-                              required
-                              value={this.state.userid}
-                              onChange={e => this.setState({ userid: e.target.value })}
-                              // invalid={this.state.useemail.length === 0 ? true : false}
-                            />
-                            <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.emailauth}>이메일 인증(중복확인)</Button></InputGroupAddon>
-                          </InputGroup>
-                          </div>
-                          <div className="col-12 mt-1">
-                            <h5 className="text-bold-600">
-                              보안이메일&nbsp;<span className="text-primary">(비밀번호 변경에 사용)</span>
-                            </h5>
-                          </div>
-                          <div className="d-flex flex-row-reverse">
-                            <small>
-                              <Checkbox
-                                color="primary"
-                                icon={<Check className="vx-icon" size={16} />}
-                                label="아이디와 다른 이메일 사용"
-                                defaultChecked={false}
-                                onChange={this.handleOtheremail}
+                  <Card className="rounded-0 mb-0 p-2">
+                  
+                    <CardHeader className="pb-1 pt-50">
+                      <CardTitle>
+                        <h4 className="text-bold-600"><FormattedMessage id="Sign In"/></h4>
+                      </CardTitle>
+                    </CardHeader>   
+                    <CardBody className="pt-1 pb-50">
+                        <Form onSubmit={this.handleRegister1}>
+                          <FormGroup className="form-label-group">
+                            <div className="d-flex justify-content-between"> 
+                            <div className="col-3 align-self-center">
+                              <h5 className="text-bold-600"><FormattedMessage id="ID"/></h5>
+                            </div>
+                            <InputGroup>
+                              <Input
+                                type="email"
+                                placeholder="사용 가능한 이메일 입력"
+                                required
+                                value={this.state.userid}
+                                onChange={e => this.setState({ userid: e.target.value })}
+                                // invalid={this.state.useemail.length === 0 ? true : false}
                               />
-                            </small>
-                          </div>  
-                        </FormGroup>
-                        <FormGroup className="form-label-group d-flex justify-content-between">
-                          <div className="col-3"></div>
-                          <InputGroup>
-                            <Input
-                              disabled={this.state.otheremail===true?false:true}
-                              type="email"
-                              placeholder="사용 가능한 이메일 입력"
-                              required
-                              value={this.state.email}
-                              onChange={e => this.setState({ email: e.target.value })}
-                            />
-                            <InputGroupAddon addonType="append"><Button disabled={this.state.otheremail===true?false:true} color="primary" type="button" onClick={this.emailauth}>이메일 인증(중복확인)</Button></InputGroupAddon>
-                          </InputGroup>
-                        </FormGroup>
-                        
-                        <FormGroup className="form-label-group d-flex justify-content-between">
-                          <div className="col-3"></div>
-                          <InputGroup>
-                            <Input
-                              type="number"
-                              placeholder="인증번호 입력"
-                              required
-                              value={this.state.idnumber}
-                              onChange={e => this.setState({ idnumber: e.target.value })}
-                            />
-                            <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.verifyauth}>인증 확인</Button></InputGroupAddon>
-                          </InputGroup>
-                        </FormGroup>
+                              <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.emailauth}><FormattedMessage id="Sign In"/></Button>
+                              </InputGroupAddon>
+                            </InputGroup>
+                            </div>
+                            <div className="col-12 mt-1">
+                              <h5 className="text-bold-600">
+                                보안이메일&nbsp;<span className="text-primary">(비밀번호 변경에 사용)</span>
+                              </h5>
+                            </div>
+                            <div className="d-flex flex-row-reverse">
+                              <small>
+                                <Checkbox
+                                  color="primary"
+                                  icon={<Check className="vx-icon" size={16} />}
+                                  label="사용 가능한 이메일 입력"
+                                  defaultChecked={false}
+                                  onChange={this.handleOtheremail}
+                                />
+                              </small>
+                            </div>  
+                          </FormGroup>
+                          <FormGroup className="form-label-group d-flex justify-content-between">
+                            <div className="col-3"></div>
+                            <InputGroup>
+                              <Input
+                                disabled={this.state.otheremail===true?false:true}
+                                type="email"
+                                placeholder="사용 가능한 이메일 입력"
+                                required
+                                value={this.state.email}
+                                onChange={e => this.setState({ email: e.target.value })}
+                              />
+                              <InputGroupAddon addonType="append"><Button disabled={this.state.otheremail===true?false:true} color="primary" type="button" onClick={this.emailauth}>이메일 인증</Button></InputGroupAddon>
+                            </InputGroup>
+                          </FormGroup>
+                          
+                          <FormGroup className="form-label-group d-flex justify-content-between">
+                            <div className="col-3"></div>
+                            <InputGroup>
+                              <Input
+                                type="number"
+                                placeholder="인증번호 입력"
+                                required
+                                value={this.state.idnumber}
+                                onChange={e => this.setState({ idnumber: e.target.value })}
+                              />
+                              <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.verifyauth}>인증 확인</Button></InputGroupAddon>
+                            </InputGroup>
+                          </FormGroup>
 
-                        <FormGroup className="form-label-group d-flex justify-content-between">
-                          <div className="col-3 align-self-center">
-                            <h5 className="text-bold-600">이름</h5>
-                          </div>
-                          <InputGroup>
-                            <Input
-                              type="text"
-                              // placeholder="이름"
-                              required
-                              value={this.state.name}
-                              onChange={e => this.setState({ name: e.target.value })}
-                            />   
-                          </InputGroup>
-                        </FormGroup>
+                          <FormGroup className="form-label-group d-flex justify-content-between">
+                            <div className="col-3 align-self-center">
+                              <h5 className="text-bold-600"><FormattedMessage id="Name"/></h5>
+                            </div>
+                            <InputGroup>
+                              <Input
+                                type="text"
+                                // placeholder="이름"
+                                required
+                                value={this.state.name}
+                                onChange={e => this.setState({ name: e.target.value })}
+                              />   
+                            </InputGroup>
+                          </FormGroup>
 
-                        <FormGroup className="form-label-group d-flex justify-content-between">
-                          <div className="col-3 align-self-center">
-                           <h5 className="text-bold-600">휴대폰번호</h5>
-                          </div>
-                          <InputGroup>
-                            <Input
-                              type="text"
-                              // placeholder="휴대폰번호"
-                              required
-                              value={this.state.phone}
-                              onChange={e => this.setState({ phone: e.target.value })}
-                            />   
-                          </InputGroup>
-                        </FormGroup>
+                          <FormGroup className="form-label-group d-flex justify-content-between">
+                            <div className="col-3 align-self-center">
+                            <h5 className="text-bold-600"><FormattedMessage id="PH"/></h5>
+                            </div>
+                            <InputGroup>
+                              <Input
+                                type="text"
+                                // placeholder="휴대폰번호"
+                                required
+                                value={this.state.phone}
+                                onChange={e => this.setState({ phone: e.target.value })}
+                              />   
+                            </InputGroup>
+                          </FormGroup>
 
-                        <FormGroup className="form-label-group d-flex justify-content-between">
-                          <div className="col-3 align-self-center">
-                            <h5 className="text-bold-600">비밀번호</h5>
+                          <FormGroup className="form-label-group d-flex justify-content-between">
+                            <div className="col-3 align-self-center">
+                              <h5 className="text-bold-600"><FormattedMessage id="Password"/></h5>
+                            </div>
+                            <InputGroup>
+                              <Input
+                                maxLength="14"
+                                type="password"
+                                placeholder="영어, 숫자, 특수문자 포함 6자~14자 이내"
+                                required
+                                value={this.state.password}
+                                onChange={e => this.setState({ password: e.target.value })}
+                              />
+                            </InputGroup>
+                          </FormGroup>
+                          <FormGroup className="form-label-group d-flex justify-content-between">
+                            <div className="col-3"></div>
+                            <InputGroup>
+                              <Input
+                                maxLength="14"
+                                type="password"
+                                placeholder="비밀번호 확인"
+                                required
+                                value={this.state.chkpassword}
+                                onChange={e => this.setState({ chkpassword: e.target.value })}
+                              />
+                            </InputGroup>
+                          </FormGroup>
+                          <FormGroup className="form-label-group d-flex justify-content-between">
+                            <div className="col-3 align-self-center">
+                              <h5 className="text-bold-600"><FormattedMessage id="DOB"/></h5>
+                            </div>
+                            <InputGroup>
+                              <Input
+                                maxLength="6"
+                                type="text"
+                                placeholder="주민번호 앞 6자리"
+                                required
+                                value={this.state.btdate}
+                                onChange={e => this.setState({ btdate: e.target.value })}
+                              />
+                              <div className="align-self-center"><b>&nbsp;-&nbsp;</b></div>
+                              <Input
+                                maxLength="1"
+                                className="col-1"
+                                type="text"
+                                placeholder="1,or2"
+                                required
+                                value={this.state.gender}
+                                onChange={e => this.setState({ gender: e.target.value })}
+                              />
+                              <div className="align-self-center"><h2>&nbsp;&nbsp;&nbsp;&#42;&nbsp;&nbsp;&#42;&nbsp;&nbsp;&#42;&nbsp;&nbsp;&#42;&nbsp;&nbsp;&#42;&nbsp;&nbsp;&#42;&nbsp;&nbsp;&nbsp;</h2></div>
+                              
+                            </InputGroup>
+                          </FormGroup>
+                          <div className="text-right">
+                            <Button
+                            color="primary" 
+                            type="submit"
+                            >
+                              <FormattedMessage id="Next"/>
+                            </Button>
                           </div>
-                          <InputGroup>
-                            <Input
-                              maxLength="14"
-                              type="password"
-                              placeholder="영어, 숫자, 특수문자 포함 6자~14자 이내"
-                              required
-                              value={this.state.password}
-                              onChange={e => this.setState({ password: e.target.value })}
-                            />
-                          </InputGroup>
-                        </FormGroup>
-                        <FormGroup className="form-label-group d-flex justify-content-between">
-                          <div className="col-3"></div>
-                          <InputGroup>
-                            <Input
-                              maxLength="14"
-                              type="password"
-                              placeholder="비밀번호 확인"
-                              required
-                              value={this.state.chkpassword}
-                              onChange={e => this.setState({ chkpassword: e.target.value })}
-                            />
-                          </InputGroup>
-                        </FormGroup>
-                        <FormGroup className="form-label-group d-flex justify-content-between">
-                          <div className="col-3 align-self-center">
-                            <h5 className="text-bold-600">생년월일/성별</h5>
-                          </div>
-                          <InputGroup>
-                            <Input
-                              maxLength="6"
-                              type="text"
-                              placeholder="주민번호 앞 6자리"
-                              required
-                              value={this.state.btdate}
-                              onChange={e => this.setState({ btdate: e.target.value })}
-                            />
-                            <div className="align-self-center"><b>&nbsp;-&nbsp;</b></div>
-                            <Input
-                              maxLength="1"
-                              className="col-1"
-                              type="text"
-                              placeholder="1,or2"
-                              required
-                              value={this.state.gender}
-                              onChange={e => this.setState({ gender: e.target.value })}
-                            />
-                            <div className="align-self-center"><b>&nbsp;******&nbsp;</b></div>
-                            
-                          </InputGroup>
-                        </FormGroup>
-                        <div className="text-right">
-                          <Button
-                          color="primary" 
-                          type="submit"
-                          >
-                            가입하기
-                          </Button>
-                        </div>
-                      </Form>
-                  </CardBody>
-                </Card>
-              </Col>
-            </Row>
+                        </Form>
+                    </CardBody>
+                  </Card>
+                </Col>
+                <Col lg="3" md="12"></Col>
+              </Row>
           </Card>
+
         </Col>
 
         <Modal

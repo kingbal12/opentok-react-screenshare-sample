@@ -27,10 +27,11 @@ import {
   ResponsiveContainer
 } from "recharts"
 import {
-  getPastConulstList,
+  goPCL,
   resetVitalData,
   postMDNoteData,
-  postPrescriptionData
+  postPrescriptionData,
+  postPayData
 } from "../../../../redux/actions/data-list"
 import { Check } from "react-feather"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
@@ -38,10 +39,11 @@ import { history } from "../../../../history"
 import "../../../../assets/scss/pages/authentication.scss"
 import {connect} from "react-redux"
 import { Fragment } from "react"
-import previmg from "../../../../assets/img/portrait/small/Sample_User_Icon.png"
+import previmg from "../../../../assets/img/dashboard/ID13_11_file.png"
 import { Menu } from "react-feather"
 import "../../../../assets/scss/plugins/forms/flatpickr/flatpickr.scss"
 import "../../../../assets/scss/plugins/extensions/recharts.scss"
+import moment from "moment"
 
 
 
@@ -93,17 +95,74 @@ class PatientInfo extends React.Component {
       faxnum: "",
       filename: "",
       file : "",
+      paypatient:"",
+      paytotal:"",
       mdnotemodal: false,
       presmodal: false,
       paymodal: false,
       pharmacy: false,
-      App: false
+      App: false,
+      viewfilemodal: false
+      
     }
+    this.state = { time: {},   seconds: 900 };
+    this.timer = 0;
+    this.startTimer = this.startTimer.bind(this);
+    this.countDown = this.countDown.bind(this);
+  }
+
+  secondsToTime(secs){
+    let hours = Math.floor(secs / (60 * 60));
+
+    let divisor_for_minutes = secs % (60 * 60);
+    let minutes = Math.floor(divisor_for_minutes / 60);
+
+    let divisor_for_seconds = divisor_for_minutes % 60;
+    let seconds = Math.ceil(divisor_for_seconds);
+
+    let obj = {
+      "h": hours,
+      "m": minutes,
+      "s": seconds
+    };
+    return obj;
+  }
+
+  componentDidMount() {
+    let timeLeftVar = this.secondsToTime(this.state.seconds);
+    this.setState({ time: timeLeftVar });
+
+  }
+
+  startTimer() {
+    if (this.timer == 0 && this.state.seconds > 0) {
+      this.timer = setInterval(this.countDown, 1000);
+    }
+  }
+
+  countDown() {
+    // Remove one second, set state so a re-render happens.
+    let seconds = this.state.seconds - 1;
+    this.setState({
+      time: this.secondsToTime(seconds),
+      seconds: seconds,
+    });
+    
+    // Check if we're at zero.
+    if (seconds == 0) { 
+      clearInterval(this.timer);
+    }
+  }
+
+  viewFileModal = () => {
+    this.setState(prevState => ({
+      viewfilemodal: !prevState.viewfilemodal
+    }))
   }
 
 
   goPastConsultList(pid) {
-    this.props.getPastConulstList(pid)
+    this.props.goPCL(pid)
   }
 
   goVitalData = e => {
@@ -196,6 +255,22 @@ class PatientInfo extends React.Component {
       paymodal: !prevState.paymodal
     }))
   }
+
+  postPayment = () => {
+    if(this.props.appo===undefined){
+      alert("예약정보가 없기때문에 결제금액 입력이 불가합니다.")
+    } else{
+      this.props.postPayData(
+      this.props.user.login.values.loggedInUser.username,
+      this.props.appo.APPOINT_NUM,
+      this.state.paypatient,
+      this.state.paytotal
+      )
+    }
+    this.setState(prevState => ({
+      paymodal: !prevState.paymodal
+    }))
+  }
  
   render() {
     let file_preview = null;
@@ -203,13 +278,10 @@ class PatientInfo extends React.Component {
     {this.props.appo===null||this.props.appo.FILE_NAME===""?
       file_preview = 
         <img
-          width="70px"
-          height="70px" 
           src={previmg}
           className="dz-img"
-          style={{borderRadius:"100%"}} 
-          alt="" 
-          />
+          alt=""
+        />
       :file_preview = 
         <img
           width="70px"
@@ -217,8 +289,9 @@ class PatientInfo extends React.Component {
           src={"http://203.251.135.81:9300"+this.props.appo.FILE_PATH
           +this.props.appo.FILE_NAME}
           className="dz-img"
-          style={{borderRadius:"100%"}} 
-          alt="" 
+          alt=""
+          style={{cursor:"pointer"}} 
+          onClick={this.viewFileModal}
         />
     }
        
@@ -226,12 +299,41 @@ class PatientInfo extends React.Component {
     return (
       <Fragment>
         <Modal
+          isOpen={this.state.viewfilemodal}
+          toggle={this.viewFileModal}
+          className="modal-dialog-centered modal-lg"
+        >
+          <ModalHeader toggle={this.viewFileModal}>
+            
+          </ModalHeader>
+          <ModalBody>
+            <Row className="justify-content-center">
+              {this.props.appo===null||this.props.appo.FILE_NAME===""?null:
+              <img
+                maxwidth="500px"
+                src={"http://203.251.135.81:9300"+this.props.appo.FILE_PATH
+                +this.props.appo.FILE_NAME}
+                className="dz-img"
+                alt=""
+                style={{cursor:"pointer"}} 
+                onClick={this.viewFileModal}
+              />
+              }
+            </Row>
+          </ModalBody>
+          <ModalFooter className="justify-content-center">
+            <Button color="primary" onClick={this.viewFileModal}>
+              확인
+            </Button>{" "}
+          </ModalFooter>
+        </Modal>
+        <Modal
           isOpen={this.state.mdnotemodal}
           toggle={this.mdNoteModal}
           className="modal-dialog-centered modal-lg"
         >
           <ModalHeader toggle={this.mdNoteModal}>
-            MD Note
+            <b>MD Note</b>
           </ModalHeader>
           <ModalBody>
             <Row>
@@ -311,7 +413,7 @@ class PatientInfo extends React.Component {
           className="modal-dialog-centered modal-lg"
         >
           <ModalHeader toggle={this.presModal}>
-            Prescription
+            <b>Prescription</b>
           </ModalHeader>
           <ModalBody>
             <Row>
@@ -398,7 +500,7 @@ class PatientInfo extends React.Component {
           className="modal-dialog-centered modal-lg"
         >
           <ModalHeader toggle={this.payModal}>
-            Payment
+            <b>Payment</b>
           </ModalHeader>
           <ModalBody>
             <Row>
@@ -411,7 +513,6 @@ class PatientInfo extends React.Component {
                     <FormGroup className="align-self-center pt-1">
                       <Input
                         type="text"
-                        placeholder="C.C"
                         value={this.state.cc}
                         onChange={e => this.setState({ cc: e.target.value })}
                         disabled
@@ -432,7 +533,6 @@ class PatientInfo extends React.Component {
                     <FormGroup className="align-self-center pt-1">
                       <Input
                         type="text"
-                        placeholder="C.C"
                         value={this.state.cc}
                         onChange={e => this.setState({ cc: e.target.value })}
                         disabled
@@ -449,13 +549,12 @@ class PatientInfo extends React.Component {
               <Col lg="7" md="12" className="align-self-center pt-0">
                 <Row>
                   <Col lg="5" md="12" className="align-self-center pt-0">
-                    <h5 className="text-bold-600">청구액(공단부담)</h5>
+                    <h5 className="text-bold-600">청구액 (공단부담금)</h5>
                   </Col>
                   <Col lg="5" md="11" className="align-self-center pt-0">
                     <FormGroup className="align-self-center pt-1">
                       <Input
                         type="text"
-                        placeholder="C.C"
                         value={this.state.cc}
                         onChange={e => this.setState({ cc: e.target.value })}
                         disabled
@@ -476,7 +575,6 @@ class PatientInfo extends React.Component {
                     <FormGroup className="align-self-center pt-1">
                       <Input
                         type="text"
-                        placeholder="C.C"
                         value={this.state.cc}
                         onChange={e => this.setState({ cc: e.target.value })}
                         disabled
@@ -499,9 +597,8 @@ class PatientInfo extends React.Component {
                     <FormGroup className="align-self-center pt-1">
                       <Input
                         type="text"
-                        placeholder="C.C"
-                        value={this.state.cc}
-                        onChange={e => this.setState({ cc: e.target.value })}
+                        value={this.state.paypatient}
+                        onChange={e => this.setState({ paypatient: e.target.value })}
                       />
                     </FormGroup>
                   </Col>
@@ -519,9 +616,8 @@ class PatientInfo extends React.Component {
                     <FormGroup className="align-self-center pt-1">
                       <Input
                         type="text"
-                        placeholder="C.C"
-                        value={this.state.cc}
-                        onChange={e => this.setState({ cc: e.target.value })}
+                        value={this.state.paytotal}
+                        onChange={e => this.setState({ paytotal: e.target.value })}
                       />
                     </FormGroup>
                   </Col>
@@ -533,7 +629,7 @@ class PatientInfo extends React.Component {
             </Row>
           </ModalBody>
           <ModalFooter className="text-right">
-            <Button color="primary" onClick={this.payModal}>
+            <Button color="primary" onClick={this.postPayment}>
               전송
             </Button>
           </ModalFooter>
@@ -556,20 +652,33 @@ class PatientInfo extends React.Component {
               </Table>
             } 
           </Col>
-          <Col lg="6" md="12" className="text-right">
+          <Col lg="6" md="12" className="d-flex text-right">
+          
+            <Col className="mx-5 text-left" style={{border:"1px solid #B8B8C2", borderRadius: "5px"}}>
+            {this.props.appo===null
+              ?null:moment.duration(this.props.appo.APPOINT_TIME.diff(moment())).minutes()<16 && moment.duration(this.props.appo.APPOINT_TIME.diff(moment())).minutes()>0?
+                <h4 className="text-primary" style={{marginTop:"0.5rem"}}>
+                  진료 시작까지&nbsp; 
+                    {moment.duration(this.props.appo.APPOINT_TIME.diff(moment())).minutes()}
+                  분 남았습니다.
+                </h4>
+              : null}
+            </Col>
+            
             <Button
               className="mr-1"
-              color="primary"
+              color="black"
               outline
               type="button"
-              onClick={this.startconsult}>
+              onClick={this.startTimer}>
               진료시작
             </Button>
+
             <Button
-              color="primary"
+              color="black"
               outline
               type="button">
-              설정
+              {this.state.time.m} : {this.state.time.s}
             </Button>
           </Col>
         </Row>
@@ -600,7 +709,7 @@ class PatientInfo extends React.Component {
               </CardTitle>
               <CardBody className="d-flex pl-0">
                 <div className="col-4 text-center">
-                  <h5><span className="text-bold-600">진료과/진료의</span></h5>
+                  <h5><span className="text-bold-600">진료과 / 진료의</span></h5>
 
                     {
                       this.props.cslist.map(row =>
@@ -670,6 +779,7 @@ class PatientInfo extends React.Component {
                   <CardBody className="d-flex pl-0">
                     <div className="col-12">
                       <h5>{this.props.appo===null?"":this.props.appo.SYMPTOM}</h5>
+                      
                     </div>
                   </CardBody>
 
@@ -868,15 +978,6 @@ class PatientInfo extends React.Component {
                 color="primary"
                 outline
                 type="button"
-                onClick={this.call}
-              >
-                test call
-              </Button>
-              <Button
-                className="mr-1"
-                color="primary"
-                outline
-                type="button"
                 onClick={this.mdNoteModal}
               >
                 MD Note
@@ -939,5 +1040,5 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {getPastConulstList, resetVitalData,  postMDNoteData,
+export default connect(mapStateToProps, {goPCL, resetVitalData,  postMDNoteData, postPayData,
   postPrescriptionData}) (PatientInfo)

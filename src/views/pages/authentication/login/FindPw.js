@@ -8,6 +8,7 @@ import Select from "react-select"
 
 import axios from "axios"
 import Radio from "../../../../components/@vuexy/radio/RadioVuexy"
+import { FormattedMessage } from "react-intl"
 
 const colourOptions = [
   { value: "개인회원", label: "개인회원" },
@@ -154,7 +155,7 @@ class FindPw extends React.Component {
         <Modal
           isOpen={this.state.modal}
           toggle={this.findEmailModal}
-          className="modal-dialog-centered modal-sm"
+          className="modal-dialog-centered"
         >
           <ModalHeader toggle={this.findEmailModal}>
             
@@ -172,7 +173,7 @@ class FindPw extends React.Component {
         <Modal
           isOpen={this.state.verifymodal}
           toggle={this.verifyModal}
-          className="modal-dialog-centered modal-sm"
+          className="modal-dialog-centered"
         >
           <ModalHeader toggle={this.verifyModal}>
             새로운 비밀번호를 보낼 이메일을 선택하세요
@@ -267,7 +268,7 @@ class FindPw extends React.Component {
             </FormGroup>           
             <div className="d-flex justify-content-center py-3">
               <Button color="primary" type="submit" size="lg" block>
-                확인
+                <FormattedMessage id="Send"/>
               </Button>
             </div>
           </Form>

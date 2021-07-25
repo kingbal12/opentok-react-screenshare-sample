@@ -13,22 +13,15 @@ import { history } from "../../../../history"
 import {
   Edit,
   Trash,
-  Droplet,
-  Activity,
-  Thermometer,
-  Compass,
-  Inbox,
   ChevronDown,
-  Plus,
   Check,
-  Link,
   ChevronLeft,
   ChevronRight
 } from "react-feather"
 import { connect } from "react-redux"
 import {
   getFaq,
-  getNameData,
+  getNameFaqData,
   getInitialData,
   deleteData,
   updateData,
@@ -45,7 +38,6 @@ import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 
 import "../../../../assets/scss/plugins/extensions/react-paginate.scss"
 import "../../../../assets/scss/pages/data-list.scss"
-import { Fragment } from "react"
 
 const chipColors = {
   "on hold": "warning",
@@ -93,7 +85,7 @@ const CustomHeader = props => {
     
       <div className="data-list-headerjustify-content-between">
         <h3 className="text-bold-600">FAQ</h3>    
-        <Card className="mt-1" style={{ backgroundColor:"#E1E1E1", height:"11rem"}}>
+        <Card className="mt-1" style={{ backgroundColor:"#F8F8F8", height:"11rem"}}>
           <Row className="px-3 pt-1">
             <h4 className="text-bold-600">자주 묻는 질문들입니다.</h4>
           </Row>
@@ -116,7 +108,7 @@ class DataListConfig extends Component {
   constructor(props) {
     super(props);
     if(this.props.parsedFilter.perPage===undefined) {
-      this.props.getFaq(this.state.user, this.state.rowsPerPage, this.state.currentPage)
+      this.props.getFaq(this.state.rowsPerPage, this.state.currentPage)
     }
     
     
@@ -208,7 +200,7 @@ class DataListConfig extends Component {
 
   componentDidMount() {
     if(this.props.parsedFilter.perPage!==undefined){
-      this.props.getFaq(this.state.user,this.props.parsedFilter.perPage, this.props.parsedFilter.page)
+      this.props.getFaq(this.props.parsedFilter.perPage, this.props.parsedFilter.page)
     }
   }
 
@@ -303,7 +295,7 @@ class DataListConfig extends Component {
   search = e => {
     e.preventDefault()
     if(this.state.name!==""){
-      this.props.getNameData(this.state.user,5,1,this.state.name)
+      this.props.getNameFaqData(this.state.user,5,1,this.state.name)
     }
     
   }
@@ -314,7 +306,7 @@ class DataListConfig extends Component {
     let page = parsedFilter.page !== undefined ? parsedFilter.page : 1
     history.push(`/patients-list?page=${page}&perPage=${value}`)
     this.setState({currentPage: page, rowsPerPage: value })
-    getFaq({ user_id: this.state.user, page: parsedFilter.page, perPage: value })
+    getFaq({ page: parsedFilter.page, perPage: value })
     // getFaq({ user_id: this.state.user, page_num: parsedFilter.page, page_amount: value })
   }
 
@@ -339,7 +331,7 @@ class DataListConfig extends Component {
     history.push(
       `${urlPrefix}?page=${page.selected + 1}&perPage=${perPage}`
     )
-    getFaq(this.state.user, perPage, page.selected + 1 )
+    getFaq(perPage, page.selected + 1 )
     this.setState({ currentPage: page.selected })
   }
 
@@ -446,7 +438,7 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
   getFaq,
-  getNameData,
+  getNameFaqData,
   deleteData,
   updateData,
   addData,

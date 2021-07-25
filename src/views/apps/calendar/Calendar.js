@@ -21,6 +21,7 @@ import "react-big-calendar/lib/addons/dragAndDrop/styles.scss"
 import "react-big-calendar/lib/css/react-big-calendar.css"
 import "../../../assets/scss/plugins/calendars/react-big-calendar.scss"
 import { Fragment } from "react"
+import { history } from "../../../history"
 const DragAndDropCalendar = withDragAndDrop(Calendar)
 const localizer = momentLocalizer(moment)
 const eventColors = {
@@ -42,6 +43,20 @@ class Toolbar extends React.Component {
             <ButtonGroup>
               <button
                 className={`btn ${
+                  this.props.view === "day"
+                    ? "btn-primary"
+                    : "btn-outline-primary text-primary"
+                }`}
+                onClick={() => {
+                  this.props.onNavigate("TODAY")
+                 
+                }}
+              >
+                Today
+              </button>
+              {this.props.view === "month"?null:
+              <button
+                className={`btn ${
                   this.props.view === "month"
                     ? "btn-primary"
                     : "btn-outline-primary text-primary"
@@ -52,6 +67,8 @@ class Toolbar extends React.Component {
               >
                 Month
               </button>
+              }
+              {this.props.view === "week"?null:
               <button
                 className={`btn ${
                   this.props.view === "week"
@@ -64,18 +81,7 @@ class Toolbar extends React.Component {
               >
                 Week
               </button>
-              <button
-                className={`btn ${
-                  this.props.view === "day"
-                    ? "btn-primary"
-                    : "btn-outline-primary text-primary"
-                }`}
-                onClick={() => {
-                  this.props.onView("day")
-                }}
-              >
-                Day
-              </button>
+              }
             </ButtonGroup>
           </div>
         </div>
@@ -128,6 +134,8 @@ class Toolbar extends React.Component {
 }
 
 class CalendarApp extends React.Component {
+  
+  
   static getDerivedStateFromProps(props, state) {
     if (
       props.app.events.length !== state.events ||
@@ -168,6 +176,7 @@ class CalendarApp extends React.Component {
     await this.onNavigate(new Date(), "month")
     await this.props.calendarfetchEvents(this.state.userid, this.state.monthstart, this.state.monthend)
   }
+
 
 
   handleEventColors = event => {
@@ -243,12 +252,29 @@ class CalendarApp extends React.Component {
     }
   }
 
-  async componentDidUpdate() {
 
-  }
 
   render() {
     const { events, views, sidebar } = this.state
+
+    // let formats = {
+    //   timeGutterFormat: 'HH:mm',
+    //   eventTimeRangeFormat: ({
+    //       start,
+    //       end
+    //     }, culture, local) =>
+    //     local.format(start, 'HH:mm', culture) + '-' +
+    //     local.format(end, 'HH:mm', culture),
+    //   dayFormat: 'MM-DD' + ' ' + '星期' + 'dd',
+    //   agendaTimeRangeFormat: ({
+    //       start,
+    //       end
+    //     }, culture, local) =>
+    //     local.format(start, 'HH:mm', culture) + '-' +
+    //     local.format(end, 'HH:mm', culture),
+    //   agendaDateFormat: 'MM-DD' + ' ' + '星期' + 'dd',
+  
+    // }
     return (
       <div className="app-calendar position-relative">
         <div
@@ -261,6 +287,7 @@ class CalendarApp extends React.Component {
         <Card>
           <CardBody>
             <DragAndDropCalendar
+              // formats={formats}
               localizer={localizer}
               events={events}
               onEventDrop={this.moveEvent}
@@ -270,7 +297,12 @@ class CalendarApp extends React.Component {
               endAccessor="end"
               resourceAccessor="url"
               views={views}
-              components={{ toolbar: Toolbar }}
+              components={{ 
+                toolbar: Toolbar 
+              //   ,week: {
+              //   header: ({ date, localizer }) => localizer.format(date, 'dddd')
+              // } 
+            }}
               eventPropGetter={this.handleEventColors}
               popup={true}
               onSelectEvent={event => {

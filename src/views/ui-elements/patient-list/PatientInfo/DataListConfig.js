@@ -1,11 +1,9 @@
 import React, { Component } from "react"
 import {
-  Button,
   Progress,
   Card,
   CardHeader,
   CardBody,
-  Input,
   Row,
   Col
 } from "reactstrap"
@@ -16,15 +14,8 @@ import { history } from "../../../../history"
 import {
   Edit,
   Trash,
-  Droplet,
-  Activity,
-  Thermometer,
-  Compass,
-  Inbox,
   ChevronDown,
-  Plus,
   Check,
-  Link,
   ChevronLeft,
   ChevronRight
 } from "react-feather"
@@ -48,8 +39,9 @@ import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 
 import "../../../../assets/scss/plugins/extensions/react-paginate.scss"
 import "../../../../assets/scss/pages/data-list.scss"
-import { Fragment } from "react"
 import moment from "moment"
+import previmg from "../../../../assets/img/dashboard/ID13_11_file.png"
+import prescription from "../../../../assets/img/dashboard/ID14_12_prescription.png"
 
 const chipColors = {
   "on hold": "warning",
@@ -72,8 +64,52 @@ const selectedStyle = {
 }
 
 const ExpandedComponent = props => {
+  let file_preview = null;
+
+    {this.props.cousultlist===null||this.props.cousultlist.FILE_NAME===""?
+      file_preview = 
+        <img
+          src={previmg}
+          className="dz-img"
+          alt=""
+        />
+      :file_preview = 
+        <img
+          width="70px"
+          height="80px" 
+          src={"http://203.251.135.81:9300"+this.props.cousultlist.FILE_PATH
+          +this.props.cousultlist.FILE_NAME}
+          className="dz-img"
+          alt=""
+          style={{cursor:"pointer"}} 
+          onClick={this.viewFileModal}
+        />
+    }
+
+    let pres_preview = null;
+
+    {this.props.cousultlist===null||this.props.cousultlist.FILE_NAME===""?
+      file_preview = 
+        <img
+          src={prescription}
+          className="dz-img"
+          alt=""
+        />
+      :file_preview = 
+        <img
+          width="70px"
+          height="80px" 
+          src={"http://203.251.135.81:9300"+this.props.cousultlist.RX_PATH
+          +this.props.cousultlist.RX_NAME}
+          className="dz-img"
+          alt=""
+          style={{cursor:"pointer"}} 
+          onClick={this.viewFileModal}
+        />
+    }
   return(
-    <Card style={{background:"#d3d3d3"}}>
+
+    <Card style={{background:"#efefef"}}>
       <Card className="p-0 m-0" style={{ marginBottom: '0rem', }}>
         <CardBody className="m-0">
           <Row className="m-0">
@@ -83,7 +119,7 @@ const ExpandedComponent = props => {
                 <CardBody>
                   <div>C.C {props.data.NOTE_CC}</div>
                   <div className="mt-1">Diagnosis {props.data.NOTE_DX}</div>
-                  <div className="mt-1">Tx Rx {props.data.NOTE_RX}</div>
+                  <div className="mt-1">Tx &#38; Rx {props.data.NOTE_RX}</div>
                   <div className="mt-1">Recommendation</div>
                 </CardBody>
               </Card>
@@ -98,18 +134,7 @@ const ExpandedComponent = props => {
               <Card style={{height:"10.5rem"}}>
                 <CardHeader>Files</CardHeader>
                 <CardBody>
-                  {props.data.FILE_NAME===""?
-                    null
-                    :
-                    <img
-                    width="75px"
-                    height="75px" 
-                    src={"http://203.251.135.81:9300"+props.data.FILE_PATH
-                        +props.data.FILE_NAME} 
-                    className="dz-img" 
-                    alt="" 
-                    />
-                  }
+                  {file_preview}
                 </CardBody>
               </Card>
             </Col> 
@@ -117,18 +142,7 @@ const ExpandedComponent = props => {
               <Card style={{height:"23rem"}}>
                 <CardHeader>Prescription</CardHeader>
                 <CardBody>
-                  {props.data.RX_NAME===""?
-                    null
-                    :
-                    <img
-                    width="75px"
-                    height="75px" 
-                    src={"http://203.251.135.81:9300"+props.data.RX_PATH
-                        +props.data.RX_NAME} 
-                    className="dz-img" 
-                    alt="" 
-                    />
-                  }
+                  {pres_preview}
                 </CardBody>
               </Card>
             </Col>
@@ -214,7 +228,6 @@ class DataListConfig extends Component {
         selector: "name",
         sortable: false,
         minWidth: "200px",
-        center:true,
         cell: row => (
           <div className="d-flex flex-xl-row flex-column align-items-xl-center align-items-start py-xl-0 py-1">
             <div className="user-info text-truncate ml-xl-50 ml-0">
@@ -233,14 +246,12 @@ class DataListConfig extends Component {
         name: "진단명",
         selector: "gender",
         sortable: false,
-        center:true,
         cell: row => <p className="text-bold-500 mb-0">{row.NOTE_CC}</p>
       },
       {
         name: "진료일자",
         selector: "age",
         sortable: false,
-        center:true,
         cell: row => <p className="text-bold-500 mb-0">{moment(row.APPOINT_TIME).format("MMMM DD, YYYY")}</p>
       }
       
@@ -366,7 +377,6 @@ class DataListConfig extends Component {
     history.push(`/past-consult-list?page=${page}&perPage=${value}`)
     this.setState({currentPage: page, rowsPerPage: value })
     getPastConulstList({ user_id: this.props.dataList.pid, page: parsedFilter.page, perPage: value })
-    // getPastConulstList({ user_id: this.state.user, page_num: parsedFilter.page, page_amount: value })
   }
 
   handleSidebar = (boolean, addNew = false) => {
@@ -374,24 +384,7 @@ class DataListConfig extends Component {
     if (addNew === true) this.setState({ currentData: null, addNew: true })
   }
 
-  // handleDelete = row => {
-  //   this.props.deleteData(row)
-  //   this.props.getPastConulstList(this.props.parsedFilter)
-  //   if (this.state.data.length - 1 === 0) {
-  //     let urlPrefix = this.props.thumbView
-  //       ? "/data-list/thumb-view/"
-  //       : "/patients-list"
-  //     history.push(
-  //       `${urlPrefix}list-view?page=${parseInt(
-  //         this.props.parsedFilter.page - 1
-  //       )}&perPage=${this.props.parsedFilter.perPage}`
-  //     )
-  //     this.props.getPastConulstList({
-  //       page: this.props.parsedFilter.page - 1,
-  //       perPage: this.props.parsedFilter.perPage
-  //     })
-  //   }
-  // }
+ 
 
   handleCurrentData = obj => {
     this.setState({ currentData: obj })
@@ -412,28 +405,7 @@ class DataListConfig extends Component {
     this.setState({ currentPage: page.selected })
   }
 
-  
 
-  // .... const data = 
-  // [
-  //   { 
-  //     id: 1, title: 'Conan the Barbarian', 
-  //     summary: 'Orphaned boy Conan is enslaved after his village is destroyed...',  
-  //     year: '1982' } ...];
-  //   const columns = 
-  //   [  
-  //     {
-  //       name: 'Title',    
-  //       sortable: true,    
-  //       cell: row => <div data-tag="allowRowEvents">
-  //                       <div style={{ fontWeight: bold }}>{row.title}</div>
-  //                       {row.summary}
-  //                     </div>,  },  
-  //     { 
-  //       name: 'Year',    
-  //       selector: 'year',    
-  //       sortable: true,    
-  //       right: true,  },]; ... class MyComponent extends Component {  render() {    return (      <DataTable        title="Arnold Movies"        columns={columns}        data={data}        selectableRows        selectableRowsComponent={Checkbox}        selectableRowsComponentProps={{ inkDisabled: true }}        sortIcon={<FontIcon>arrow_downward</FontIcon>}        onSelectedRowsChange={handleChange}      />    )  }};
   render() {
     let {
       columns,
@@ -534,7 +506,8 @@ class DataListConfig extends Component {
 const mapStateToProps = state => {
   return {
     user: state.auth,
-    dataList: state.dataList
+    dataList: state.dataList,
+    cousultlist: state.dataList.pastconsultlist,
   }
 }
 

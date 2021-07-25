@@ -19,7 +19,10 @@ export const cookiesReducer = (
     medicalnum: "", 
     userdesc: "",
     previewURL : "",
-  }
+  },
+ 
+  events:[]
+ 
  }, action) => {
   switch (action.type) {
     case "SAVE_EMAIL": {
@@ -33,6 +36,9 @@ export const cookiesReducer = (
     }
     case "SAVE_REGISTER4": {
       return { ...state, register4: action.payload }
+    }
+    case "SAVE_SCHDULES": {
+      return { ...state, events: action.payload }
     }
     default: {
       return state
