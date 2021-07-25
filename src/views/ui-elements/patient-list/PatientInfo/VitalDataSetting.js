@@ -86,9 +86,9 @@ class VitalDataSetting extends React.Component {
             </Col>   
           </Row>
         }
-        <Row className="mt-2 flex-wrap">
+        <Row className="mt-5 flex-wrap">
           <Col className="col-12 d-flex">
-            <h4 className="text-bold-600 align-self-center">선택항목</h4>
+            <h4 className="text-bold-600 align-self-center">선택 항목</h4>
             <ButtonGroup className="ml-1">
               <Button.Ripple 
                 outline={this.state.bpbutton===true?false:true} 
@@ -160,7 +160,7 @@ class VitalDataSetting extends React.Component {
                               this.toggle("6")
                           }}
               >
-                SPO2
+                산소포화도
               </Button.Ripple>
               {/* <Button.Ripple color="primary" onClick={this.check}>산소포화도</Button.Ripple>{" "} */}
             </ButtonGroup>

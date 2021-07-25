@@ -27,24 +27,24 @@ import {
   goPCL,
   resetVitalData,
   postMDNoteData,
-  postPrescriptionData
+  postPrescriptionData,
+  postPayData
 } from "../../../../redux/actions/data-list/"
 import { Check } from "react-feather"
 import { history } from "../../../../history"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import "../../../../assets/scss/pages/authentication.scss"
 import {connect} from "react-redux"
-import userImg from "../../../../assets/img/portrait/small/avatar-s-11.jpg"
-import SliderBasic from "./SliderBasic"
-import { ContextLayout } from "../../../../utility/context/Layout"
 import { Fragment } from "react"
-import { OTSession, OTPublisher, OTStreams, OTSubscriber, preloadScript } from 'opentok-react';
+// import { OTSession, OTPublisher, OTStreams, OTSubscriber, preloadScript } from 'opentok-react';
 import {Helmet} from "react-helmet";
 import { Menu } from "react-feather"
 import axios from "axios"
 import "../../../../assets/scss/plugins/forms/flatpickr/flatpickr.scss"
 import "../../../../assets/scss/plugins/extensions/recharts.scss"
 import Opentok from "./opentok"
+import previmg from "../../../../assets/img/dashboard/ID13_11_file.png"
+import moment from "moment"
 
 class CunsultName extends React.Component { 
   render() { 
@@ -96,9 +96,30 @@ class ConsultingRoom extends React.Component {
       presmodal: false,
       paymodal: false,
       pharmacy: false,
-      App: false
-
+      App: false,
+      viewfilemodal: false
     }
+    this.state = { time: {},   seconds: 900 };
+    this.timer = 0;
+    this.startTimer = this.startTimer.bind(this);
+    this.countDown = this.countDown.bind(this);
+  }
+
+  secondsToTime(secs){
+    let hours = Math.floor(secs / (60 * 60));
+
+    let divisor_for_minutes = secs % (60 * 60);
+    let minutes = Math.floor(divisor_for_minutes / 60);
+
+    let divisor_for_seconds = divisor_for_minutes % 60;
+    let seconds = Math.ceil(divisor_for_seconds);
+
+    let obj = {
+      "h": hours,
+      "m": minutes,
+      "s": seconds
+    };
+    return obj;
   }
 
 
@@ -128,6 +149,41 @@ class ConsultingRoom extends React.Component {
           alert("약국정보가 없습니다.")
         }
       })
+    let timeLeftVar = this.secondsToTime(this.state.seconds);
+    this.setState({ time: timeLeftVar });
+    if(this.props.appo==!undefined) {
+      if((moment.duration(this.props.appo.APPOINT_TIME.diff(moment())).minutes()<16 && 
+      moment.duration(this.props.appo.APPOINT_TIME.diff(moment())).minutes()>0)) {
+        this.startTimer()
+      }
+    }
+       
+  }
+
+  startTimer() {
+    if (this.timer == 0 && this.state.seconds > 0) {
+      this.timer = setInterval(this.countDown, 1000);
+    }
+  }
+
+  countDown() {
+    // Remove one second, set state so a re-render happens.
+    let seconds = this.state.seconds - 1;
+    this.setState({
+      time: this.secondsToTime(seconds),
+      seconds: seconds,
+    });
+    
+    // Check if we're at zero.
+    if (seconds == 0) { 
+      clearInterval(this.timer);
+    }
+  }
+
+  viewFileModal = () => {
+    this.setState(prevState => ({
+      viewfilemodal: !prevState.viewfilemodal
+    }))
   }
 
   goPastConsultList(pid) {
@@ -200,6 +256,9 @@ class ConsultingRoom extends React.Component {
     }))
   }
 
+  goPastConsultList(pid) {
+    this.props.goPCL(pid)
+  }
   
 
   setpharmacy = () => {
@@ -224,6 +283,22 @@ class ConsultingRoom extends React.Component {
     e.preventDefault()
     console.log(this.state)
   }
+
+  postPayment = () => {
+    if(this.props.appo===undefined){
+      alert("예약정보가 없기때문에 결제금액 입력이 불가합니다.")
+    } else{
+      this.props.postPayData(
+      this.props.user.login.values.loggedInUser.username,
+      this.props.appo.APPOINT_NUM,
+      this.state.paypatient,
+      this.state.paytotal
+      )
+    }
+    this.setState(prevState => ({
+      paymodal: !prevState.paymodal
+    }))
+  }
  
 
   // call = e => {
@@ -238,6 +313,27 @@ class ConsultingRoom extends React.Component {
   // }
  
   render() {
+    let file_preview = null;
+
+    {this.props.appo===null||this.props.appo.FILE_NAME===""?
+      file_preview = 
+        <img
+          src={previmg}
+          className="dz-img"
+          alt=""
+        />
+      :file_preview = 
+        <img
+          width="70px"
+          height="70px" 
+          src={"http://203.251.135.81:9300"+this.props.appo.FILE_PATH
+          +this.props.appo.FILE_NAME}
+          className="dz-img"
+          alt=""
+          style={{cursor:"pointer"}} 
+          onClick={this.viewFileModal}
+        />
+    }
     return (
       <Fragment>
         {/* 주소찾기 Modal창 */}
@@ -267,27 +363,27 @@ class ConsultingRoom extends React.Component {
           <Col lg="6" md="12" className="text-right">
             <Button
               className="mr-1"
-              color="primary"
+              color="black"
               outline
               type="button">
-              남은시간
+              {this.state.time.m} : {this.state.time.s}
             </Button>
             <Button
               className="mr-1"
-              color="primary"
+              color="black"
               outline
               type="button">
               화면공유
             </Button>
             <Button
               className="mr-1"
-              color="primary"
+              color="black"
               outline
               type="button">
               화면녹화
             </Button>
             <Button
-              color="primary"
+              color="black"
               outline
               type="button">
               설정
@@ -319,7 +415,7 @@ class ConsultingRoom extends React.Component {
               className="modal-dialog-centered modal-lg"
             >
               <ModalHeader toggle={this.mdNoteModal}>
-                MD Note
+                <b>MD Note</b>
               </ModalHeader>
               <ModalBody>
                 <Row>
@@ -399,7 +495,7 @@ class ConsultingRoom extends React.Component {
               className="modal-dialog-centered modal-lg"
             >
               <ModalHeader toggle={this.presModal}>
-                Prescription
+                <b>Prescription</b>
               </ModalHeader>
               <ModalBody>
                 <Row>
@@ -481,154 +577,148 @@ class ConsultingRoom extends React.Component {
               </ModalFooter>
             </Modal>
             <Modal
-              isOpen={this.state.paymodal}
-              toggle={this.payModal}
-              className="modal-dialog-centered modal-lg"
-            >
-              <ModalHeader toggle={this.payModal}>
-                Payment
-              </ModalHeader>
-              <ModalBody>
+          isOpen={this.state.paymodal}
+          toggle={this.payModal}
+          className="modal-dialog-centered modal-lg"
+        >
+          <ModalHeader toggle={this.payModal}>
+            <b>Payment</b>
+          </ModalHeader>
+          <ModalBody>
+            <Row>
+              <Col lg="7" md="12" className="align-self-center pt-0">
                 <Row>
-                  <Col lg="7" md="12" className="align-self-center pt-0">
-                    <Row>
-                      <Col lg="5" md="12" className="align-self-center pt-0">
-                        <h5 className="text-bold-600">급여총액</h5>
-                      </Col>
-                      <Col lg="5" md="11" className="align-self-center pt-0">
-                        <FormGroup className="align-self-center pt-1">
-                          <Input
-                            type="text"
-                            placeholder="C.C"
-                            value={this.state.cc}
-                            onChange={e => this.setState({ cc: e.target.value })}
-                            disabled
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col  lg="1" md="1" className="align-self-center">
-                        <h5>원</h5>
-                      </Col>
-                    </Row>
+                  <Col lg="5" md="12" className="align-self-center pt-0">
+                    <h5 className="text-bold-600">급여총액</h5>
                   </Col>
-                  <Col lg="5" md="12" >
-                    <Row>
-                      <Col lg="4" md="12" className="align-self-center pt-0">
-                        <h5 className="text-bold-600">비급여</h5>
-                      </Col>
-                      <Col lg="6" md="11" className="align-self-center pt-0">
-                        <FormGroup className="align-self-center pt-1">
-                          <Input
-                            type="text"
-                            placeholder="C.C"
-                            value={this.state.cc}
-                            onChange={e => this.setState({ cc: e.target.value })}
-                            disabled
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="2" md="1" className="align-self-center">
-                        <h5>원</h5>
-                      </Col>
-                    </Row>
+                  <Col lg="5" md="11" className="align-self-center pt-0">
+                    <FormGroup className="align-self-center pt-1">
+                      <Input
+                        type="text"
+                        value={this.state.cc}
+                        onChange={e => this.setState({ cc: e.target.value })}
+                        disabled
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col  lg="1" md="1" className="align-self-center">
+                    <h5>원</h5>
                   </Col>
                 </Row>
+              </Col>
+              <Col lg="5" md="12" >
                 <Row>
-                  <Col lg="7" md="12" className="align-self-center pt-0">
-                    <Row>
-                      <Col lg="5" md="12" className="align-self-center pt-0">
-                        <h5 className="text-bold-600">청구액(공단부담)</h5>
-                      </Col>
-                      <Col lg="5" md="11" className="align-self-center pt-0">
-                        <FormGroup className="align-self-center pt-1">
-                          <Input
-                            type="text"
-                            placeholder="C.C"
-                            value={this.state.cc}
-                            onChange={e => this.setState({ cc: e.target.value })}
-                            disabled
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col  lg="1" md="1" className="align-self-center">
-                        <h5>원</h5>
-                      </Col>
-                    </Row>
+                  <Col lg="4" md="12" className="align-self-center pt-0">
+                    <h5 className="text-bold-600">비급여</h5>
                   </Col>
-                  <Col lg="5" md="12" >
-                    <Row>
-                      <Col lg="4" md="12" className="align-self-center pt-0">
-                        <h5 className="text-bold-600">감액</h5>
-                      </Col>
-                      <Col lg="6" md="11" className="align-self-center pt-0">
-                        <FormGroup className="align-self-center pt-1">
-                          <Input
-                            type="text"
-                            placeholder="C.C"
-                            value={this.state.cc}
-                            onChange={e => this.setState({ cc: e.target.value })}
-                            disabled
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="2" md="1" className="align-self-center">
-                        <h5>원</h5>
-                      </Col>
-                    </Row>
+                  <Col lg="6" md="11" className="align-self-center pt-0">
+                    <FormGroup className="align-self-center pt-1">
+                      <Input
+                        type="text"
+                        value={this.state.cc}
+                        onChange={e => this.setState({ cc: e.target.value })}
+                        disabled
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col lg="2" md="1" className="align-self-center">
+                    <h5>원</h5>
                   </Col>
                 </Row>
+              </Col>
+            </Row>
+            <Row>
+              <Col lg="7" md="12" className="align-self-center pt-0">
                 <Row>
-                  <Col lg="7" md="12" className="align-self-center pt-0">
-                    <Row>
-                      <Col lg="5" md="12" className="align-self-center pt-0">
-                        <h5 className="text-bold-600">환자 본인부담금</h5>
-                      </Col>
-                      <Col lg="5" md="11" className="align-self-center pt-0">
-                        <FormGroup className="align-self-center pt-1">
-                          <Input
-                            type="text"
-                            placeholder="C.C"
-                            value={this.state.cc}
-                            onChange={e => this.setState({ cc: e.target.value })}
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col  lg="1" md="1" className="align-self-center">
-                        <h5>원</h5>
-                      </Col>
-                    </Row>
+                  <Col lg="5" md="12" className="align-self-center pt-0">
+                    <h5 className="text-bold-600">청구액 (공단부담금)</h5>
                   </Col>
-                  <Col lg="5" md="12" >
-                    <Row>
-                      <Col lg="4" md="12" className="align-self-center pt-0">
-                        <h5 className="text-bold-600">최종 청구액</h5>
-                      </Col>
-                      <Col lg="6" md="11" className="align-self-center pt-0">
-                        <FormGroup className="align-self-center pt-1">
-                          <Input
-                            type="text"
-                            placeholder="C.C"
-                            value={this.state.cc}
-                            onChange={e => this.setState({ cc: e.target.value })}
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="2" md="1" className="align-self-center">
-                        <h5>원</h5>
-                      </Col>
-                    </Row>
+                  <Col lg="5" md="11" className="align-self-center pt-0">
+                    <FormGroup className="align-self-center pt-1">
+                      <Input
+                        type="text"
+                        value={this.state.cc}
+                        onChange={e => this.setState({ cc: e.target.value })}
+                        disabled
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col  lg="1" md="1" className="align-self-center">
+                    <h5>원</h5>
                   </Col>
                 </Row>
-              </ModalBody>
-              <ModalFooter className="text-right">
-                <Button color="primary" onClick={this.payModal}>
-                  전송
-                </Button>
-              </ModalFooter>
-            </Modal>
+              </Col>
+              <Col lg="5" md="12" >
+                <Row>
+                  <Col lg="4" md="12" className="align-self-center pt-0">
+                    <h5 className="text-bold-600">감액</h5>
+                  </Col>
+                  <Col lg="6" md="11" className="align-self-center pt-0">
+                    <FormGroup className="align-self-center pt-1">
+                      <Input
+                        type="text"
+                        value={this.state.cc}
+                        onChange={e => this.setState({ cc: e.target.value })}
+                        disabled
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col lg="2" md="1" className="align-self-center">
+                    <h5>원</h5>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+            <Row>
+              <Col lg="7" md="12" className="align-self-center pt-0">
+                <Row>
+                  <Col lg="5" md="12" className="align-self-center pt-0">
+                    <h5 className="text-bold-600">환자 본인부담금</h5>
+                  </Col>
+                  <Col lg="5" md="11" className="align-self-center pt-0">
+                    <FormGroup className="align-self-center pt-1">
+                      <Input
+                        type="text"
+                        value={this.state.paypatient}
+                        onChange={e => this.setState({ paypatient: e.target.value })}
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col  lg="1" md="1" className="align-self-center">
+                    <h5>원</h5>
+                  </Col>
+                </Row>
+              </Col>
+              <Col lg="5" md="12" >
+                <Row>
+                  <Col lg="4" md="12" className="align-self-center pt-0">
+                    <h5 className="text-bold-600">최종 청구액</h5>
+                  </Col>
+                  <Col lg="6" md="11" className="align-self-center pt-0">
+                    <FormGroup className="align-self-center pt-1">
+                      <Input
+                        type="text"
+                        value={this.state.paytotal}
+                        onChange={e => this.setState({ paytotal: e.target.value })}
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col lg="2" md="1" className="align-self-center">
+                    <h5>원</h5>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+          </ModalBody>
+          <ModalFooter className="text-right">
+            <Button color="primary" onClick={this.postPayment}>
+              전송
+            </Button>
+          </ModalFooter>
+        </Modal>
             <div className="d-flex justify-content-between">
-              <div className="mr-1" style={{width:"50%"}}>
-                <Card className="mb-1" style={{height:"125px"}}>
+              <div className="mr-1" style={{width:"40%"}}>
+                <Card className="mb-1" style={{height:"140px"}}>
                   <CardTitle className="pl-1" style={{paddingTop:"5px"}}>
                     <b>Personal Information</b>
                   </CardTitle>
@@ -647,7 +737,7 @@ class ConsultingRoom extends React.Component {
                     </div>
                   </CardBody>
                 </Card>
-                <Card className="mb-1" style={{height:"225px"}}>
+                <Card className="mb-1" style={{height:"210px"}}>
                   <CardTitle className="pl-1" style={{paddingTop:"5px"}}>
                     <b>Physical Data</b>
                   </CardTitle>
@@ -674,7 +764,7 @@ class ConsultingRoom extends React.Component {
                 </Card>
               </div>
 
-              <div style={{width:"50%"}}>
+              <div style={{width:"60%"}}>
                 <Card className="mb-1" style={{height:"125px"}}>
                   <CardTitle className="pl-1" style={{paddingTop:"5px"}}>
                     <b>Present Condition</b>
@@ -691,7 +781,7 @@ class ConsultingRoom extends React.Component {
                 </Card>
                 <Card className="mb-1" style={{height:"120px"}}>
                   <CardTitle className="px-1 d-flex justify-content-between" style={{paddingTop:"5px"}}>
-                    <b>Past Consulting List</b><Menu onClick={() => this.goPCL(this.props.pinfo.PATIENT_ID)} style={{cursor:"pointer"}}/>
+                    <b>Past Consulting List</b><Menu onClick={() => this.goPastConsultList(this.props.pinfo.PATIENT_ID)} style={{cursor:"pointer"}}/>
                   </CardTitle>
                   <CardBody className="d-flex pl-0 pt-0">
                     <div className="col-4 text-center pt-0">
@@ -912,15 +1002,6 @@ class ConsultingRoom extends React.Component {
                 color="primary"
                 outline
                 type="button"
-                onClick={this.call}
-              >
-                test call
-              </Button>
-              <Button
-                className="mr-1"
-                color="primary"
-                outline
-                type="button"
                 onClick={this.mdNoteModal}
               >
                 MD Note
@@ -988,4 +1069,5 @@ export default connect(
     goPCL, 
     resetVitalData,
     postMDNoteData,
-    postPrescriptionData}) (ConsultingRoom)
+    postPrescriptionData,
+    postPayData}) (ConsultingRoom)

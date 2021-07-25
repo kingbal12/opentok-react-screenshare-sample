@@ -592,6 +592,8 @@ export const postMDNoteData = (userid, apponum, cc, dx, rx, notevital) => {
       .then(response => {
         if(response.data.status==="200") {
           alert("진료노트 저장이 완료되었습니다.")
+        }else {
+          alert("진료노트 저장에 문제가 발생했습니다.")
         }
       })
   }
@@ -608,6 +610,29 @@ export const postPrescriptionData = (userid, apponum, file, filename) => {
       .then(response => {
         if(response.data.status==="200") {
           alert("처방전 업로드가 완료되엇습니다.")
+        }else {
+          alert("처방전 업로드에 문제가 발생했습니다.")
+        }
+      })
+  }
+}
+
+
+
+export const postPayData = (userid, apponum, paypatient, paytotal) => {
+  return dispatch => {
+    axios
+      .post("http://203.251.135.81:9300/v1/doctor/treatment/prescription", {
+        user_id : userid,
+        appoint_num : apponum,
+        pay_patient : paypatient,
+        pay_total : paytotal
+      })
+      .then(response => {
+        if(response.data.status==="200") {
+          alert("결제정보가 저장되었습니다.")
+        } else {
+          alert("결제정보 저장에 문제가 발생했습니다.")
         }
       })
   }

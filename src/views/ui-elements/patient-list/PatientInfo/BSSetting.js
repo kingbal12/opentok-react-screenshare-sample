@@ -68,33 +68,33 @@ class VitalDataSetting extends React.Component {
               <thead className="table-primary">
                 <tr>
                   <th width={'15%'}></th>
-                  <th width={'15%'}><h3>분류</h3></th>
-                  <th><h3 className="pl-2">mg/dl</h3></th>
+                  <th width={'15%'}><h5>분류</h5></th>
+                  <th><h5 className="pl-2">mg/dl</h5></th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <th scope="row" className="text-center">
-                    <h3>정상</h3>
+                    <h5>정상</h5>
                   </th>
                   <td className="align-self-center">
-                    <h3 className= "align-self-center">Fasting</h3>
+                    <h5 className= "align-self-center">Fasting</h5>
                   </td>
                   <td className="d-flex align-self-center">
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                        bsSize="lg" 
+                         
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.normalfasting}
                         onChange={e => this.setState({ normalfasting: e.target.value })}
                       />  
                     </FormGroup>
-                    <h3 className="align-self-center ml-2">&#8764;</h3>
+                    <h5 className="align-self-center ml-2">&#8764;</h5>
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                        bsSize="lg" 
+                         
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.alertfasting}
                         onChange={e => this.setState({ alertfasting: e.target.value })}
@@ -105,23 +105,23 @@ class VitalDataSetting extends React.Component {
                 <tr>
                   <th scope="row" className="text-center"></th>
                   <td className="align-self-center">
-                    <h3 className= "align-self-center">PP2</h3>
+                    <h5 className= "align-self-center">PP2</h5>
                   </td>
                   <td className="d-flex align-self-center">
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                        bsSize="lg" 
+                         
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.normalpp2}
                         onChange={e => this.setState({ normalpp2: e.target.value })}
                       />
                     </FormGroup>
-                    <h3 className="align-self-center ml-2">&#8764;</h3>
+                    <h5 className="align-self-center ml-2">&#8764;</h5>
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                        bsSize="lg" 
+                         
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.dagnerpp2}
                         onChange={e => this.setState({ dagnerpp2: e.target.value })}
@@ -130,25 +130,25 @@ class VitalDataSetting extends React.Component {
                   </td>
                 </tr>
                 <tr>
-                  <th scope="row" className="text-center"><h3>주의</h3></th>
+                  <th scope="row" className="text-center"><h5>주의</h5></th>
                   <td className="align-self-center">
-                    <h3 className= "align-self-center">Fasting</h3>
+                    <h5 className= "align-self-center">Fasting</h5>
                   </td>
                   <td className="d-flex align-self-center">
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                        bsSize="lg" 
+                         
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.alertfasting}
                         onChange={e => this.setState({ r: e.target.value })}
                       />  
                     </FormGroup>
-                    <h3 className="align-self-center ml-2">&#8764;</h3>
+                    <h5 className="align-self-center ml-2">&#8764;</h5>
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                        bsSize="lg" 
+                         
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.dangerfasting}
                         onChange={e => this.setState({ dangerfasting: e.target.value })}
@@ -159,22 +159,22 @@ class VitalDataSetting extends React.Component {
                 <tr>
                   <th scope="row"></th>
                   <td className="align-self-center">
-                    <h3 className= "align-self-center">PP2</h3>
+                    <h5 className= "align-self-center">PP2</h5>
                   </td>
                   <td className="d-flex align-self-center">
-                    <h3 className= "align-self-center pl-2">&mdash;</h3>
+                    <h5 className= "align-self-center pl-2">&mdash;</h5>
                   </td>
                 </tr>
                 <tr>
-                  <th scope="row" className="text-center"><h3>위험</h3></th>
+                  <th scope="row" className="text-center"><h5>위험</h5></th>
                   <td className="align-self-center">
-                    <h3 className= "align-self-center">Fasting</h3>
+                    <h5 className= "align-self-center">Fasting</h5>
                   </td>
                   <td className="d-flex align-self-center">
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                        bsSize="lg" 
+                         
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.dangerfasting}
                         onChange={e => this.setState({ dangerfasting: e.target.value })}
@@ -186,13 +186,13 @@ class VitalDataSetting extends React.Component {
                 <tr>
                   <th scope="row"></th>
                   <td className="align-self-center">
-                    <h3 className= "align-self-center">PP2</h3>
+                    <h5 className= "align-self-center">PP2</h5>
                   </td>
                   <td className="d-flex align-self-center">
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                        bsSize="lg" 
+                         
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.dagnerpp2}
                         onChange={e => this.setState({ dagnerpp2: e.target.value })}
