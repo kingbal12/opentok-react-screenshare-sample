@@ -203,6 +203,11 @@ class ConsultingRoom extends React.Component {
     }))
   }
 
+  goHome = e => {
+    e.preventDefault()
+    history.push("/analyticsDashboard")
+  }
+
   postMdNote = () => {
     this.props.postMDNoteData(
       this.props.user.login.values.loggedInUser.username,
@@ -796,7 +801,10 @@ class ConsultingRoom extends React.Component {
                     <b>Past Consulting List</b><Menu onClick={() => this.goPastConsultList(this.props.pinfo.PATIENT_ID)} style={{cursor:"pointer"}}/>
                   </CardTitle>
                   <CardBody className="d-flex pl-0 pt-0">
-                    <div className="col-4 text-center pt-0">
+                    <table>
+                      <th>진료과 / 진료의</th>
+                    </table>
+                    {/* <div className="col-4 text-center pt-0">
                       <h6><span className="text-bold-600">진료과/진료의</span></h6>
 
                         {
@@ -825,7 +833,7 @@ class ConsultingRoom extends React.Component {
                           )
                         }
 
-                    </div>
+                    </div> */}
                   </CardBody>
                 </Card>
               </div>
@@ -1048,6 +1056,7 @@ class ConsultingRoom extends React.Component {
                 color="primary"
                 outline
                 type="button"
+                onClick={this.goHome}
               >
                 End
               </Button>
