@@ -30,8 +30,10 @@ class Subscriber extends React.Component {
     return (
       <div className="subscriber">
         Subscriber
+        <div className="testsubscriber"></div>
         {this.state.error ? <div id="error">{this.state.error}</div> : null}
         <OTSubscriber
+          className="otsubscriber"
           properties={{
             subscribeToAudio: this.state.audio,
             subscribeToVideo: this.state.video

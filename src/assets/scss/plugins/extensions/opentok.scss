@@ -1,5 +1,6 @@
 /***** ReCharts *****/
 .buttons{
+  z-index: 2;
   position: absolute;
   bottom: 3%;
   right: 3%;
@@ -10,17 +11,22 @@
   font-size: 1.5em;
 }
 .subscriber {
+  
   position:absolute;
   width: 100%;
   height: 100%;
-  background-color: black;
- 
+}
+.otsubscriber {
+  position:absolute;
+  width: 100%;
+  height: 100%;
 }
 .publisher {
   margin-top: 3%;
   margin-right: 3%;
 }
 .OTPublisherContainer {
+  z-index: 2;
   position:absolute;
   float: right;
   width: 200px !important;
