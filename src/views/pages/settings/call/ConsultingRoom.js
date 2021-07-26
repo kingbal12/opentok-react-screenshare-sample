@@ -47,12 +47,15 @@ import Opentok from "./opentok"
 import previmg from "../../../../assets/img/dashboard/ID13_11_file.png"
 import moment from "moment"
 
-class CunsultName extends React.Component { 
+class Cslist extends React.Component { 
   render() { 
-    return( 
-    <h6>
-      {this.props.row.PART_NAME}/{this.props.row.F_NAME}
-    </h6>
+    return(
+      <tr>
+        <th className="text-center">{this.props.row.PART_NAME} / {this.props.row.F_NAME}</th>
+        <th className="text-center">{this.props.row.NOTE_CC}</th>
+        <th className="text-center">{this.props.row.APPOINT_TIME.substring(0,10)}</th>  
+      </tr> 
+ 
     ); 
   } 
 }
@@ -800,9 +803,18 @@ class ConsultingRoom extends React.Component {
                   <CardTitle className="px-1 d-flex justify-content-between" style={{paddingTop:"5px"}}>
                     <b>Past Consulting List</b><Menu onClick={() => this.goPastConsultList(this.props.pinfo.PATIENT_ID)} style={{cursor:"pointer"}}/>
                   </CardTitle>
-                  <CardBody className="d-flex pl-0 pt-0">
-                    <table>
-                      <th>진료과 / 진료의</th>
+                  <CardBody className="pl-0 pt-0">
+                    <table className="col-12 pt-0 mt-0">
+                      <tr>
+                        <th className="text-center">진료과 / 진료의</th>
+                        <th className="text-center">진단명</th>
+                        <th className="text-center">진료일자</th>  
+                      </tr>
+                      {
+                        this.props.cslist.map(row =>
+                        ( <Cslist key={row.APPOINT_TIME} row={row}/> )
+                        )
+                      }
                     </table>
                     {/* <div className="col-4 text-center pt-0">
                       <h6><span className="text-bold-600">진료과/진료의</span></h6>

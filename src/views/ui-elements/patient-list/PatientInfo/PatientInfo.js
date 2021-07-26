@@ -69,16 +69,24 @@ import spo2_2 from "../../../../assets/img/dashboard/ID12_08_vital_spo2 2.png"
 import spo2_3 from "../../../../assets/img/dashboard/ID12_08_vital_spo2 3.png"
 import spo2_4 from "../../../../assets/img/dashboard/ID12_08_vital_spo2 4.png"
 import spo2_5 from "../../../../assets/img/dashboard/ID12_08_vital_spo2 5.png"
+import dot from "../../../../assets/img/dashboard/ID13_11_icon.png"
 
 
 
 
 
-
-
-
-
-
+class Cslist extends React.Component { 
+  render() { 
+    return(
+      <tr>
+        <th className="text-center">{this.props.row.PART_NAME} / {this.props.row.F_NAME}</th>
+        <th className="text-center">{this.props.row.NOTE_CC}</th>
+        <th className="text-center">{this.props.row.APPOINT_TIME.substring(0,10)}</th>  
+      </tr> 
+ 
+    ); 
+  } 
+}
 
 class CunsultName extends React.Component { 
   render() { 
@@ -313,10 +321,24 @@ class PatientInfo extends React.Component {
             </Card>
             <Card className="mb-1" style={{height:"350px", border:"solid silver 1px"}}>
               <CardTitle className="px-1 d-flex justify-content-between" style={{paddingTop:"5px"}}>
-                <h5><b>Past Consulting List</b></h5><Menu onClick={() => this.goPastConsultList(this.props.pinfo.PATIENT_ID)} style={{cursor:"pointer"}}/>
+                <h5><b>Past Consulting List</b></h5>
+                {/* <Menu onClick={() => this.goPastConsultList(this.props.pinfo.PATIENT_ID)} style={{cursor:"pointer"}}/> */}
+                <img src={dot} onClick={() => this.goPastConsultList(this.props.pinfo.PATIENT_ID)} style={{cursor:"pointer"}} />
               </CardTitle>
-              <CardBody className="d-flex pl-0">
-                <div className="col-4 text-center">
+              <CardBody className="p-0 m-0">
+                <table className="col-12  pt-0 mt-0">
+                  <tr>
+                    <th className="text-center">진료과 / 진료의</th>
+                    <th className="text-center">진단명</th>
+                    <th className="text-center">진료일자</th>  
+                  </tr>
+                  {
+                    this.props.cslist.map(row =>
+                    ( <Cslist key={row.APPOINT_TIME} row={row}/> )
+                    )
+                  }
+                </table>
+                {/* <div className="col-4 text-center">
                   <h6><span className="text-bold-600">진료과/진료의</span></h6>
 
                     {
@@ -345,7 +367,7 @@ class PatientInfo extends React.Component {
                       )
                     }
 
-                </div>
+                </div> */}
               </CardBody>
             </Card>
           </Col>
@@ -404,7 +426,9 @@ class PatientInfo extends React.Component {
             
             <Card className="mb-1" style={{height:"350px", border:"solid silver 1px"}}>
               <CardTitle className="px-1 d-flex justify-content-between" style={{paddingTop:"5px"}}>
-                <h5><b>Vital Data</b></h5> <Menu onClick={this.goVitalData} style={{cursor:"pointer"}}/>
+                <h5><b>Vital Data</b></h5>
+                 {/* <Menu onClick={this.goVitalData} style={{cursor:"pointer"}}/> */}
+                 <img src={dot} onClick={this.goVitalData} style={{cursor:"pointer"}} />
               </CardTitle>
               <CardBody className="d-flex pl-0">
                 <div className="d-flex col-12 pl-0">

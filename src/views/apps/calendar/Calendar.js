@@ -18,8 +18,9 @@ import {
 import { ChevronLeft, ChevronRight } from "react-feather"
 
 import "react-big-calendar/lib/addons/dragAndDrop/styles.scss"
-import "react-big-calendar/lib/css/react-big-calendar.css"
+// import "react-big-calendar/lib/css/react-big-calendar.css"
 import "../../../assets/scss/plugins/calendars/react-big-calendar.scss"
+import "../../../assets/scss/plugins/calendars/react-big-calendar.css"
 import { Fragment } from "react"
 import { history } from "../../../history"
 const DragAndDropCalendar = withDragAndDrop(Calendar)
@@ -253,10 +254,11 @@ class CalendarApp extends React.Component {
   }
 
 
+  
 
   render() {
     const { events, views, sidebar } = this.state
-
+   
     // let formats = {
     //   timeGutterFormat: 'HH:mm',
     //   eventTimeRangeFormat: ({
@@ -292,10 +294,11 @@ class CalendarApp extends React.Component {
               events={events}
               onEventDrop={this.moveEvent}
               onEventResize={this.resizeEvent}
-              onNavigate={this.onNavigate}
+              // onNavigate={this.onNavigate}
               startAccessor="start"
               endAccessor="end"
               resourceAccessor="url"
+              startAccessor={this.getEventDate}
               views={views}
               components={{ 
                 toolbar: Toolbar 
@@ -303,11 +306,12 @@ class CalendarApp extends React.Component {
               //   header: ({ date, localizer }) => localizer.format(date, 'dddd')
               // } 
             }}
+            
               eventPropGetter={this.handleEventColors}
               popup={true}
-              onSelectEvent={event => {
-                this.handleSelectEvent(event)
-              }}
+              // onSelectEvent={event => {
+              //   this.handleSelectEvent(event)
+              // }}
               onSelectSlot={({ start, end }) => {
                 this.props.handleSidebar(true)
                 this.props.handleSelectedEvent({

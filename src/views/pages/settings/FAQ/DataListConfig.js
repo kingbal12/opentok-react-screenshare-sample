@@ -304,7 +304,7 @@ class DataListConfig extends Component {
   handleRowsPerPage = value => {
     let { parsedFilter, getFaq } = this.props
     let page = parsedFilter.page !== undefined ? parsedFilter.page : 1
-    history.push(`/patients-list?page=${page}&perPage=${value}`)
+    history.push(`/pages/notice?page=${page}&perPage=${value}`)
     this.setState({currentPage: page, rowsPerPage: value })
     getFaq({ page: parsedFilter.page, perPage: value })
     // getFaq({ user_id: this.state.user, page_num: parsedFilter.page, page_amount: value })
@@ -327,7 +327,7 @@ class DataListConfig extends Component {
     let perPage = parsedFilter.perPage !== undefined ? parsedFilter.perPage : 5
     let urlPrefix = this.props.thumbView
       ? "/data-list/thumb-view/"
-      : "/patients-list"
+      : "/pages/notice"
     history.push(
       `${urlPrefix}?page=${page.selected + 1}&perPage=${perPage}`
     )

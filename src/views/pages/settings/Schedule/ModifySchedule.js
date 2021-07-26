@@ -277,6 +277,19 @@ class CalendarApp extends React.Component {
 
   }
 
+  onSelectEvent(pEvent) {
+    const r = window.confirm("이 스케줄을 삭제 하시겠습니까?")
+    if(r === true){
+      
+      this.setState((prevState, props) => {
+        const events = [...prevState.events]
+        const idx = events.indexOf(pEvent)
+        events.splice(idx, 1);
+        return { events };
+      });
+    }
+  }
+
 
   render() {
     const { events, views, sidebar } = this.state
@@ -313,6 +326,7 @@ class CalendarApp extends React.Component {
               // onSelectEvent={event => {
               //   this.handleSelectEvent(event)
               // }}
+              // onSelectEvent = {event => this.onSelectEvent(event)}
               onSelectSlot={({ start, end }) => {
                 this.setState({
                   // title: "테스트",
