@@ -1,6 +1,7 @@
 import axios from "axios"
 import { data } from "jquery"
 import { history } from "../../../history"
+import moment from "moment"
 
 const formatDate = (scheduleda)=>{
   let formatted_date = scheduleda.getFullYear() + "-" + ('0' + (scheduleda.getMonth() + 1)).slice(-2) + "-" + ('0' + scheduleda.getDate()).slice(-2) + " " 
@@ -43,7 +44,7 @@ export const calendarfetchEvents = (userid, monthstart, monthend) => {
           for (let i=0; i<length; i++) {
             let jsonObj		= new Object();         
             jsonObj.id		= (i+1);
-            jsonObj.title = response.data.data[i].F_NAME
+            jsonObj.title = response.data.data[i].F_NAME +" " +  moment(response.data.data[i].APPOINT_TIME).format("hh:mm A")
             jsonObj.start	= response.data.data[i].APPOINT_TIME
             jsonObj.end = response.data.data[i].APPOINT_TIME
             jsonObj.label = "others"

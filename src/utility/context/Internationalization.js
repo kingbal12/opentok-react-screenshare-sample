@@ -21,8 +21,8 @@ const Context = React.createContext()
 
 class IntlProviderWrapper extends React.Component {
   state = {
-    locale: "en",
-    messages: menu_messages["en"]
+    locale: "ko",
+    messages: menu_messages["ko"]
   }
 
   render() {
@@ -44,7 +44,7 @@ class IntlProviderWrapper extends React.Component {
           key={locale}
           locale={locale}
           messages={messages}
-          defaultLocale="en"
+          defaultLocale="ko"
         >
           {children}
         </IntlProvider>

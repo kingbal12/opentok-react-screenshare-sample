@@ -520,7 +520,7 @@ export const getPastConulstList = (patientid, pageamount, pagenum,) => {
 export const getFaq = ( pageamount, pagenum) => {
   return async dispatch => {
     await axios
-      .get("http://203.251.135.81:9300/v1/doctor/setting/faq", {
+      .get("http://203.251.135.81:9300/v1/doctor/setting/faqs", {
         params: {
           search_text: "",
           page_amount: pageamount,
@@ -534,7 +534,7 @@ export const getFaq = ( pageamount, pagenum) => {
         dispatch({
           type: "GET_FAQ",
           data: response.data.data.FAQ_LIST,
-          totalpage: totalPage
+          totalPages: totalPage
         } )
         
       } else {
@@ -548,7 +548,7 @@ export const getFaq = ( pageamount, pagenum) => {
 export const getNameFaqData = (pageamount, pagenum, fname) => {
   return async dispatch => {
     await axios
-      .get("http://203.251.135.81:9300/v1/doctor/setting/faq", {
+      .get("http://203.251.135.81:9300/v1/doctor/setting/faqs", {
         params: {
           search_text: fname,
           page_amount: pageamount,
