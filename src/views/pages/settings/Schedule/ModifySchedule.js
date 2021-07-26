@@ -249,7 +249,11 @@ class CalendarApp extends React.Component {
   }
 
   
-
+  check = e => {
+    e.preventDefault()
+    console.log(this.state)
+  }
+  
 
   
   loadschedule = () => {
@@ -334,7 +338,7 @@ class CalendarApp extends React.Component {
                 outline
                 type="button"
                 size="lg"
-                onClick={this.saveSchedule}
+                onClick={this.check}
               >
                 <FormattedMessage id="Drafts"/>
               </Button>
