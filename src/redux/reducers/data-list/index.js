@@ -1,5 +1,5 @@
 const initialState = {
-  tokbox:{APPOINT_NUM:0, TOK_KEY:"", TOK_SESSION:"", TOK_TOKEN:""},
+  tokbox:{APPOINT_NUM:0,  TOK_KEY:"", TOK_SESSION:"", TOK_TOKEN:""},
   noticedata:[],
   noticetotalPages: 0,
   faqdata:[],

@@ -655,7 +655,7 @@ class PatientInfo extends React.Component {
           <Col lg="6" md="12" className="d-flex text-right">
           
             <Col className="mx-5 text-left" style={{border:"1px solid #B8B8C2", borderRadius: "5px"}}>
-            {this.props.appo===null
+            {this.props.appo===undefined||this.props.appo.APPOINT_KIND==="2"
               ?null:moment.duration(this.props.appo.APPOINT_TIME.diff(moment())).minutes()<16 && moment.duration(this.props.appo.APPOINT_TIME.diff(moment())).minutes()>0?
                 <h4 className="text-primary" style={{marginTop:"0.5rem"}}>
                   진료 시작까지&nbsp; 

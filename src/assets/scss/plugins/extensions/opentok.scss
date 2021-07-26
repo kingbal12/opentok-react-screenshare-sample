@@ -1,0 +1,32 @@
+/***** ReCharts *****/
+.buttons{
+  position: absolute;
+  bottom: 3%;
+  right: 3%;
+}
+.connectionStatus {
+  padding-top: 20px;
+  margin-left: 5%;
+  font-size: 1.5em;
+}
+.subscriber {
+  position:absolute;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+ 
+}
+.publisher {
+  margin-top: 3%;
+  margin-right: 3%;
+}
+.OTPublisherContainer {
+  position:absolute;
+  float: right;
+  width: 200px !important;
+  height: 200px !important;
+  border-radius: 10%;
+}
+#error {
+  color: red;
+}

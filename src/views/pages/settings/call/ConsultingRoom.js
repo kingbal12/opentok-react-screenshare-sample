@@ -34,6 +34,7 @@ import { Check } from "react-feather"
 import { history } from "../../../../history"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import "../../../../assets/scss/pages/authentication.scss"
+import "../../../../assets/scss/plugins/extensions/opentok.scss"
 import {connect} from "react-redux"
 import { Fragment } from "react"
 // import { OTSession, OTPublisher, OTStreams, OTSubscriber, preloadScript } from 'opentok-react';
@@ -49,9 +50,9 @@ import moment from "moment"
 class CunsultName extends React.Component { 
   render() { 
     return( 
-    <h5>
+    <h6>
       {this.props.row.PART_NAME}/{this.props.row.F_NAME}
-    </h5>
+    </h6>
     ); 
   } 
 }
@@ -59,9 +60,9 @@ class CunsultName extends React.Component {
 class NoteCC extends React.Component { 
   render() { 
     return( 
-    <h5>
+    <h6>
       {this.props.row.NOTE_CC}
-    </h5>
+    </h6>
     ); 
   } 
 }
@@ -69,9 +70,9 @@ class NoteCC extends React.Component {
 class AppointTime extends React.Component { 
   render() { 
     return( 
-    <h5>
+    <h6>
       {this.props.row.APPOINT_TIME.substring(0,10)}
-    </h5>
+    </h6>
     ); 
   } 
 }
@@ -161,7 +162,7 @@ class ConsultingRoom extends React.Component {
   }
 
   startTimer() {
-    if (this.timer == 0 && this.state.seconds > 0) {
+    if (this.timer === 0 && this.state.seconds > 0) {
       this.timer = setInterval(this.countDown, 1000);
     }
   }
@@ -175,7 +176,7 @@ class ConsultingRoom extends React.Component {
     });
     
     // Check if we're at zero.
-    if (seconds == 0) { 
+    if (seconds === 0) { 
       clearInterval(this.timer);
     }
   }
@@ -324,8 +325,8 @@ class ConsultingRoom extends React.Component {
         />
       :file_preview = 
         <img
-          width="70px"
-          height="70px" 
+          width="50px"
+          height="50px" 
           src={"http://203.251.135.81:9300"+this.props.appo.FILE_PATH
           +this.props.appo.FILE_NAME}
           className="dz-img"
@@ -339,7 +340,7 @@ class ConsultingRoom extends React.Component {
         {/* 주소찾기 Modal창 */}
        
         {/* 환자정보, 버튼 모음 Row */}
-        <Row className="d-flex justify-content-between mb-0">
+        <Row className="d-flex justify-content-between mb-1">
         <Helmet>
           <script src="https://static.opentok.com/v2/js/opentok.min.js" type="text/javascript" />
         </Helmet>
@@ -395,24 +396,29 @@ class ConsultingRoom extends React.Component {
         <Row>
           <Col lg="6" md="12"> 
             <Card className="mb-0" style={{height:"650px", border:"solid #7367ef 1px", backgroundColor:"#efefff"}}>
-              <Row className="justify-content-md-center h-400">
+              <Row className="col-12 ml-1">
+                <Col lg="12" md="12" className="m-0 p-0">
                 {this.props.dataList.tokbox.TOK_KEY===""?null:
-                <Opentok 
-                  key={this.props.dataList.tokbox.TOK_KEY}
+                <Opentok className="col-12"
+                  apikey={this.props.dataList.tokbox.TOK_KEY}
+                  // apikey="47274054"
                   session={this.props.dataList.tokbox.TOK_SESSION}
-                  token={this.props.dataList.tokbox.TOK_TOKEN} 
+                  // session= "2_MX40NzI3NDA1NH5-MTYyNjgzMTI5Mjc4MX41bzh1SC80WkZGVHhuS3pLek80MUhDRnB-UH4"
+                  token={this.props.dataList.tokbox.TOK_TOKEN}
+                  // token="T1==cGFydG5lcl9pZD00NzI3NDA1NCZzaWc9MjAzZmZmNWQ5YzA1ZWI0NTZiOTgzNmEzZmYwYTVjNDQ2OGM0ZWNmMTpzZXNzaW9uX2lkPTJfTVg0ME56STNOREExTkg1LU1UWXlOamd6TVRJNU1qYzRNWDQxYnpoMVNDODBXa1pHVkhodVMzcExlazgwTVVoRFJuQi1VSDQmY3JlYXRlX3RpbWU9MTYyNjgzMTI5MiZub25jZT0tMjM4NTk2MzgzJnJvbGU9cHVibGlzaGVyJmV4cGlyZV90aW1lPTE2MjY5MTc2OTI="
                 />
                 }
-              
-               
+                </Col>
               </Row>
             </Card>
           </Col>
           <Col lg="6" md="12">
             <Modal
+              style={{position:"absolute", right:"4%", top:"25%", width:"45%"}}
+              backdrop={false}
               isOpen={this.state.mdnotemodal}
               toggle={this.mdNoteModal}
-              className="modal-dialog-centered modal-lg"
+              className="modal-lg"
             >
               <ModalHeader toggle={this.mdNoteModal}>
                 <b>MD Note</b>
@@ -490,9 +496,11 @@ class ConsultingRoom extends React.Component {
             </Modal>
 
             <Modal
+              style={{position:"absolute", right:"4%", top:"25%", width:"45%"}}
+              backdrop={false}
               isOpen={this.state.presmodal}
               toggle={this.presModal}
-              className="modal-dialog-centered modal-lg"
+              className="modal-lg"
             >
               <ModalHeader toggle={this.presModal}>
                 <b>Prescription</b>
@@ -577,10 +585,12 @@ class ConsultingRoom extends React.Component {
               </ModalFooter>
             </Modal>
             <Modal
-          isOpen={this.state.paymodal}
-          toggle={this.payModal}
-          className="modal-dialog-centered modal-lg"
-        >
+              style={{position:"absolute", right:"4%", top:"10%", width:"45%"}}
+              backdrop={false}
+              isOpen={this.state.paymodal}
+              toggle={this.payModal}
+              className="modal-dialog-centered modal-lg"
+            >
           <ModalHeader toggle={this.payModal}>
             <b>Payment</b>
           </ModalHeader>
@@ -777,7 +787,9 @@ class ConsultingRoom extends React.Component {
                   <CardTitle className="pl-1" style={{paddingTop:"5px"}}>
                     <b>Files</b>
                   </CardTitle>
-
+                  <CardBody className="mt-0 pt-0">
+                    {file_preview}
+                  </CardBody>
                 </Card>
                 <Card className="mb-1" style={{height:"120px"}}>
                   <CardTitle className="px-1 d-flex justify-content-between" style={{paddingTop:"5px"}}>

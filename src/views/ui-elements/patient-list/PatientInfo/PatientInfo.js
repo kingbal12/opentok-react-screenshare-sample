@@ -130,9 +130,9 @@ class PatientInfo extends React.Component {
   }
 
   goCallSetting = e => {
-    e.preventDefault() 
-    history.push("/pages/callsetting")
+    e.preventDefault()
     this.props.gettokbox(this.props.user.login.values.loggedInUser.username, this.props.appo.APPOINT_NUM)
+    history.push("/pages/consultingroom")
   }
 
   goPhoneConsult= e => {
@@ -221,54 +221,54 @@ class PatientInfo extends React.Component {
                     <th><h6 style={{paddingTop:"0.5rem"}}>{this.props.pinfo.BIRTH_DT}</h6></th>
                     <th><h6 style={{paddingTop:"0.5rem"}}>{this.props.pinfo.NOTE_DX}</h6></th>
                     <th><h6 style={{paddingTop:"0.5rem"}}>{this.props.pinfo.FIRST_YN==="N"?"재진":"초진"}</h6></th>
-                    <th>
-                      <h6 style={{paddingTop:"0.5rem"}}>
+                    <th className="text-center"> 
+                      <h6>
                         {
-                          this.props.pinfo.BP==="00"?<img src={pressure_2} alt="pressure_2"/>:
-                          this.props.pinfo.BP==="01"?<img src={pressure_1} alt="pressure_1"/>:
-                          this.props.pinfo.BP==="02"?<img src={pressure_5} alt="pressure_5"/>:
-                          this.props.pinfo.BP==="03"?<img src={pressure_4} alt="pressure_4"/>:
-                          this.props.pinfo.BP==="04"?<img src={pressure_3} alt="pressure_3"/>:
+                          this.props.pinfo.BP==="00"?<img src={pressure_2} width="30px" alt="pressure_2"/>:
+                          this.props.pinfo.BP==="01"?<img src={pressure_1} width="30px" alt="pressure_1"/>:
+                          this.props.pinfo.BP==="02"?<img src={pressure_5} width="30px" alt="pressure_5"/>:
+                          this.props.pinfo.BP==="03"?<img src={pressure_4} width="30px" alt="pressure_4"/>:
+                          this.props.pinfo.BP==="04"?<img src={pressure_3} width="30px" alt="pressure_3"/>:
+                          null 
+                        }
+                        {
+                          this.props.pinfo.PULSE==="00"?<img src={pulse_2} width="30px"  alt="pulse_2"/>:
+                          this.props.pinfo.PULSE==="01"?<img src={pulse_1} width="30px"  alt="pulse_1"/>:
+                          this.props.pinfo.PULSE==="02"?<img src={pulse_5} width="30px"  alt="pulse_5"/>:
+                          this.props.pinfo.PULSE==="03"?<img src={pulse_4} width="30px"  alt="pulse_4"/>:
+                          this.props.pinfo.PULSE==="04"?<img src={pulse_3} width="30px"  alt="pulse_3"/>:
+                          null 
+                        }
+                        {
+                          this.props.pinfo.BW==="00"?<img src={weight_2} width="30px" alt="weight_2"/>:
+                          this.props.pinfo.BW==="01"?<img src={weight_1} width="30px" alt="weight_1"/>:
+                          this.props.pinfo.BW==="02"?<img src={weight_5} width="30px" alt="weight_5"/>:
+                          this.props.pinfo.BW==="03"?<img src={weight_4} width="30px" alt="weight_4"/>:
+                          this.props.pinfo.BW==="04"?<img src={weight_3} width="30px" alt="weight_3"/>:
                           null
                         }
                         {
-                          this.props.pinfo.PULSE==="00"?<img src={pulse_2} alt="pulse_2"/>:
-                          this.props.pinfo.PULSE==="01"?<img src={pulse_1} alt="pulse_1"/>:
-                          this.props.pinfo.PULSE==="02"?<img src={pulse_5} alt="pulse_5"/>:
-                          this.props.pinfo.PULSE==="03"?<img src={pulse_4} alt="pulse_4"/>:
-                          this.props.pinfo.PULSE==="04"?<img src={pulse_3} alt="pulse_3"/>:
+                          this.props.pinfo.BS==="00"?<img src={glucose_2} width="30px" alt="glucose_2"/>:
+                          this.props.pinfo.BS==="01"?<img src={glucose_1} width="30px" alt="glucose_1"/>:
+                          this.props.pinfo.BS==="02"?<img src={glucose_5} width="30px" alt="glucose_5"/>:
+                          this.props.pinfo.BS==="03"?<img src={glucose_4} width="30px" alt="glucose_4"/>:
+                          this.props.pinfo.BS==="04"?<img src={glucose_3} width="30px" alt="glucose_3"/>:
+                          null 
+                        }
+                        {
+                          this.props.pinfo.TEMPERATURE==="00"?<img src={temperature_2} width="30px" alt="temperature_2"/>:
+                          this.props.pinfo.TEMPERATURE==="01"?<img src={temperature_1} width="30px" alt="temperature_1"/>:
+                          this.props.pinfo.TEMPERATURE==="02"?<img src={temperature_5} width="30px" alt="temperature_5"/>:
+                          this.props.pinfo.TEMPERATURE==="03"?<img src={temperature_4} width="30px" alt="temperature_4"/>:
+                          this.props.pinfo.TEMPERATURE==="04"?<img src={temperature_3} width="30px" alt="temperature_3"/>:
                           null
                         }
                         {
-                          this.props.pinfo.BW==="00"?<img src={weight_2} alt="weight_2"/>:
-                          this.props.pinfo.BW==="01"?<img src={weight_1} alt="weight_1"/>:
-                          this.props.pinfo.BW==="02"?<img src={weight_5} alt="weight_5"/>:
-                          this.props.pinfo.BW==="03"?<img src={weight_4} alt="weight_4"/>:
-                          this.props.pinfo.BW==="04"?<img src={weight_3} alt="weight_3"/>:
-                          null
-                        }
-                        {
-                          this.props.pinfo.BS==="00"?<img src={glucose_2} alt="glucose_2"/>:
-                          this.props.pinfo.BS==="01"?<img src={glucose_1} alt="glucose_1"/>:
-                          this.props.pinfo.BS==="02"?<img src={glucose_5} alt="glucose_5"/>:
-                          this.props.pinfo.BS==="03"?<img src={glucose_4} alt="glucose_4"/>:
-                          this.props.pinfo.BS==="04"?<img src={glucose_3} alt="glucose_3"/>:
-                          null
-                        }
-                        {
-                          this.props.pinfo.TEMPERATURE==="00"?<img src={temperature_2} alt="temperature_2"/>:
-                          this.props.pinfo.TEMPERATURE==="01"?<img src={temperature_1} alt="temperature_1"/>:
-                          this.props.pinfo.TEMPERATURE==="02"?<img src={temperature_5} alt="temperature_5"/>:
-                          this.props.pinfo.TEMPERATURE==="03"?<img src={temperature_4} alt="temperature_4"/>:
-                          this.props.pinfo.TEMPERATURE==="04"?<img src={temperature_3} alt="temperature_3"/>:
-                          null
-                        }
-                        {
-                          this.props.pinfo.SPO2==="00"?<img src={spo2_2} alt="spo2_2"/>:
-                          this.props.pinfo.SPO2==="01"?<img src={spo2_1} alt="spo2_1"/>:
-                          this.props.pinfo.SPO2==="02"?<img src={spo2_5} alt="spo2_5"/>:
-                          this.props.pinfo.SPO2==="03"?<img src={spo2_4} alt="spo2_4"/>:
-                          this.props.pinfo.SPO2==="04"?<img src={spo2_3} alt="spo2_3"/>:
+                          this.props.pinfo.SPO2==="00"?<img src={spo2_2} width="30px" alt="spo2_2"/>:
+                          this.props.pinfo.SPO2==="01"?<img src={spo2_1} width="30px" alt="spo2_1"/>:
+                          this.props.pinfo.SPO2==="02"?<img src={spo2_5} width="30px" alt="spo2_5"/>:
+                          this.props.pinfo.SPO2==="03"?<img src={spo2_4} width="30px" alt="spo2_4"/>:
+                          this.props.pinfo.SPO2==="04"?<img src={spo2_3} width="30px" alt="spo2_3"/>:
                           null
                         }
                       </h6>

@@ -48,6 +48,36 @@ import Checkbox from "../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import "../../../assets/scss/plugins/extensions/react-paginate.scss"
 import "../../../assets/scss/pages/data-list.scss"
 import { Fragment } from "react"
+import pressure_1 from "../../../assets/img/dashboard/ID12_08_vital_pressure1.png"
+import pressure_2 from "../../../assets/img/dashboard/ID12_08_vital_pressure2.png"
+import pressure_3 from "../../../assets/img/dashboard/ID12_08_vital_pressure3.png"
+import pressure_4 from "../../../assets/img/dashboard/ID12_08_vital_pressure4.png"
+import pressure_5 from "../../../assets/img/dashboard/ID12_08_vital_pressure5.png"
+import pulse_1 from "../../../assets/img/dashboard/ID12_08_vital_pulse1.png"
+import pulse_2 from "../../../assets/img/dashboard/ID12_08_vital_pulse2.png"
+import pulse_3 from "../../../assets/img/dashboard/ID12_08_vital_pulse3.png"
+import pulse_4 from "../../../assets/img/dashboard/ID12_08_vital_pulse4.png"
+import pulse_5 from "../../../assets/img/dashboard/ID12_08_vital_pulse5.png"
+import weight_1 from "../../../assets/img/dashboard/ID12_08_vital_weight1.png"
+import weight_2 from "../../../assets/img/dashboard/ID12_08_vital_weight2.png"
+import weight_3 from "../../../assets/img/dashboard/ID12_08_vital_weight3.png"
+import weight_4 from "../../../assets/img/dashboard/ID12_08_vital_weight4.png"
+import weight_5 from "../../../assets/img/dashboard/ID12_08_vital_weight5.png"
+import glucose_1 from "../../../assets/img/dashboard/ID12_08_vital_glucose1.png"
+import glucose_2 from "../../../assets/img/dashboard/ID12_08_vital_glucose2.png"
+import glucose_3 from "../../../assets/img/dashboard/ID12_08_vital_glucose3.png"
+import glucose_4 from "../../../assets/img/dashboard/ID12_08_vital_glucose4.png"
+import glucose_5 from "../../../assets/img/dashboard/ID12_08_vital_glucose5.png"
+import temperature_1 from "../../../assets/img/dashboard/ID12_08_vital_temperature1.png"
+import temperature_2 from "../../../assets/img/dashboard/ID12_08_vital_temperature2.png"
+import temperature_3 from "../../../assets/img/dashboard/ID12_08_vital_temperature3.png"
+import temperature_4 from "../../../assets/img/dashboard/ID12_08_vital_temperature4.png"
+import temperature_5 from "../../../assets/img/dashboard/ID12_08_vital_temperature5.png"
+import spo2_1 from "../../../assets/img/dashboard/ID12_08_vital_spo2 1.png"
+import spo2_2 from "../../../assets/img/dashboard/ID12_08_vital_spo2 2.png"
+import spo2_3 from "../../../assets/img/dashboard/ID12_08_vital_spo2 3.png"
+import spo2_4 from "../../../assets/img/dashboard/ID12_08_vital_spo2 4.png"
+import spo2_5 from "../../../assets/img/dashboard/ID12_08_vital_spo2 5.png"
 
 const chipColors = {
   "on hold": "warning",
@@ -202,12 +232,54 @@ class DataListConfig extends Component {
         center:true,
         cell: row => (
           <Fragment>
-            <Droplet stroke={row.BP==="00"?"silver":row.BP==="01"?"white":row.BP==="02"?"green":row.BP==="03"?"yellow":row.BP==="04"?"red":""}></Droplet>
-            <Activity stroke={row.PULSE==="00"?"silver":row.PULSE==="01"?"white":row.PULSE==="02"?"green":row.PULSE==="03"?"yellow":row.PULSE==="04"?"red":""}></Activity>
-            <Thermometer stroke={row.TEMPERATURE==="00"?"silver":row.TEMPERATURE==="01"?"white":row.TEMPERATURE==="02"?"green":row.TEMPERATURE==="03"?"yellow":row.TEMPERATURE==="04"?"red":""}></Thermometer>
-            <Droplet stroke={row.BS==="00"?"silver":row.BS==="01"?"white":row.BS==="02"?"green":row.BS==="03"?"yellow":row.BS==="04"?"red":""}></Droplet>
-            <Compass stroke={row.SPO2==="00"?"silver":row.SPO2==="01"?"white":row.SPO2==="02"?"green":row.SPO2==="03"?"yellow":row.SPO2==="04"?"red":""}></Compass>
-            <Inbox stroke={row.BW==="00"?"silver":row.BW==="01"?"white":row.BW==="02"?"green":row.BW==="03"?"yellow":row.BW==="04"?"red":""}></Inbox>
+            {
+              row.BP==="00"?<img src={pressure_2} alt="pressure_2"/>:
+              row.BP==="01"?<img src={pressure_1} alt="pressure_1"/>:
+              row.BP==="02"?<img src={pressure_5} alt="pressure_5"/>:
+              row.BP==="03"?<img src={pressure_4} alt="pressure_4"/>:
+              row.BP==="04"?<img src={pressure_3} alt="pressure_3"/>:
+              null
+            }
+            {
+              row.PULSE==="00"?<img src={pulse_2} alt="pulse_2"/>:
+              row.PULSE==="01"?<img src={pulse_1} alt="pulse_1"/>:
+              row.PULSE==="02"?<img src={pulse_5} alt="pulse_5"/>:
+              row.PULSE==="03"?<img src={pulse_4} alt="pulse_4"/>:
+              row.PULSE==="04"?<img src={pulse_3} alt="pulse_3"/>:
+              null
+            }
+            {
+              row.BW==="00"?<img src={weight_2} alt="weight_2"/>:
+              row.BW==="01"?<img src={weight_1} alt="weight_1"/>:
+              row.BW==="02"?<img src={weight_5} alt="weight_5"/>:
+              row.BW==="03"?<img src={weight_4} alt="weight_4"/>:
+              row.BW==="04"?<img src={weight_3} alt="weight_3"/>:
+              null
+            }
+            {
+              row.BS==="00"?<img src={glucose_2} alt="glucose_2"/>:
+              row.BS==="01"?<img src={glucose_1} alt="glucose_1"/>:
+              row.BS==="02"?<img src={glucose_5} alt="glucose_5"/>:
+              row.BS==="03"?<img src={glucose_4} alt="glucose_4"/>:
+              row.BS==="04"?<img src={glucose_3} alt="glucose_3"/>:
+              null
+            }
+            {
+              row.TEMPERATURE==="00"?<img src={temperature_2} alt="temperature_2"/>:
+              row.TEMPERATURE==="01"?<img src={temperature_1} alt="temperature_1"/>:
+              row.TEMPERATURE==="02"?<img src={temperature_5} alt="temperature_5"/>:
+              row.TEMPERATURE==="03"?<img src={temperature_4} alt="temperature_4"/>:
+              row.TEMPERATURE==="04"?<img src={temperature_3} alt="temperature_3"/>:
+              null
+            }
+            {
+              row.SPO2==="00"?<img src={spo2_2} alt="spo2_2"/>:
+              row.SPO2==="01"?<img src={spo2_1} alt="spo2_1"/>:
+              row.SPO2==="02"?<img src={spo2_5} alt="spo2_5"/>:
+              row.SPO2==="03"?<img src={spo2_4} alt="spo2_4"/>:
+              row.SPO2==="04"?<img src={spo2_3} alt="spo2_3"/>:
+              null
+            }
           </Fragment>
 
           // 가운데로 옮길것

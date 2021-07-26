@@ -29,8 +29,8 @@ class Question extends React.Component {
         >
           <Card className="bg-authentication rounded-0 mb-0 w-100">
             <Row className="m-0">
-              <Col lg="12" md="12" className="p-0">
-                <Card className="rounded-0 mb-0 p-2">
+              <Col lg="12" md="12" className="p-0 d-flex justify-content-center">
+                <Card className="col-8 p-2">
                   <CardHeader>
                       <CardTitle>
                           

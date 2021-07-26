@@ -63,10 +63,12 @@ const selectedStyle = {
   }
 }
 
+
+
 const ExpandedComponent = props => {
   let file_preview = null;
-
-    {this.props.cousultlist===null||this.props.cousultlist.FILE_NAME===""?
+  let pres_preview = null;
+    {props.data===null||props.data.FILE_NAME===""?
       file_preview = 
         <img
           src={previmg}
@@ -77,8 +79,8 @@ const ExpandedComponent = props => {
         <img
           width="70px"
           height="80px" 
-          src={"http://203.251.135.81:9300"+this.props.cousultlist.FILE_PATH
-          +this.props.cousultlist.FILE_NAME}
+          src={"http://203.251.135.81:9300"+props.data.FILE_PATH
+          +props.data.FILE_NAME}
           className="dz-img"
           alt=""
           style={{cursor:"pointer"}} 
@@ -86,25 +88,25 @@ const ExpandedComponent = props => {
         />
     }
 
-    let pres_preview = null;
+    
 
-    {this.props.cousultlist===null||this.props.cousultlist.FILE_NAME===""?
-      file_preview = 
+    {props.data===null||props.data.FILE_NAME===""?
+      pres_preview = 
         <img
           src={prescription}
           className="dz-img"
           alt=""
         />
-      :file_preview = 
+      :pres_preview = 
         <img
           width="70px"
           height="80px" 
-          src={"http://203.251.135.81:9300"+this.props.cousultlist.RX_PATH
-          +this.props.cousultlist.RX_NAME}
+          src={"http://203.251.135.81:9300"+props.data.RX_PATH
+          +props.data.RX_NAME}
           className="dz-img"
           alt=""
           style={{cursor:"pointer"}} 
-          onClick={this.viewFileModal}
+          onClick={this.viewPressModal}
         />
     }
   return(

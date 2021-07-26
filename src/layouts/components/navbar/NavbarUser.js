@@ -9,8 +9,13 @@ import {
   DropdownToggle,
   Media,
   Badge,
-  Button
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter
 } from "reactstrap"
+import Draggable from 'react-draggable';
 import PerfectScrollbar from "react-perfect-scrollbar"
 import axios from "axios"
 import * as Icon from "react-feather"
@@ -103,9 +108,11 @@ const UserDropdown = props => {
 }
 
 class NavbarUser extends React.PureComponent {
+
   state = {
     navbarSearch: false,
     langDropdown: false,
+    questionmodal: false,
     shoppingCart: [
       {
         id: 1,
@@ -171,6 +178,12 @@ class NavbarUser extends React.PureComponent {
       }
     ],
     suggestions: []
+  }
+
+  questionModal = () => {
+    this.setState(prevState => ({
+      questionmodal: !prevState.questionmodal
+    }))
   }
 
   componentDidMount() {
@@ -244,8 +257,28 @@ class NavbarUser extends React.PureComponent {
 
     return (
       <ul className="nav navbar-nav navbar-nav-user float-right">
-        <img className="pt-1" style={{width:"2rem", height:"3rem"}}  src={Question} alt="question"/>
-        <IntlContext.Consumer>
+        <Modal
+          style={{position:"absolute", top:"4%", right:"3%"}}
+          isOpen={this.state.questionmodal}
+          toggle={this.questionModal}
+          backdrop={false}
+          
+        >
+          <ModalHeader toggle={this.questionModal}>
+            <b>1대1 문의</b>
+          </ModalHeader>
+          <ModalBody>
+            <iframe src= "http://192.168.0.7/lv1/chat.1to1.php?ROOM_ID=room_wind&USERS=바라미환자" width="400px" height="300px"></iframe>
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" outline onClick={this.questionModal}>
+              닫기
+            </Button>
+          </ModalFooter>
+        </Modal> 
+        <img className="pt-1" onClick={this.questionModal} 
+             style={{width:"2rem", height:"3rem", cursor:"pointer"}}  src={Question} alt="question"/>
+        {/* <IntlContext.Consumer>
           {context => {
             let langArr = {
               "en" : "English",
@@ -311,7 +344,7 @@ class NavbarUser extends React.PureComponent {
               </Dropdown>
             )
           }}
-        </IntlContext.Consumer> 
+        </IntlContext.Consumer>  */}
 
         {/* <NavItem className="nav-search" onClick={this.handleNavbarSearch}>
           <NavLink className="nav-link-search">
