@@ -48,6 +48,7 @@
     "react-copy-to-clipboard": "~5.0.2",
     "react-countdown-now": "~2.1.2",
     "react-country-flag": "^2.0.1",
+    "react-csv": "^2.0.3",
     "react-data-table-component": "^6.2.3",
     "react-daum-postcode": "^2.0.6",
     "react-digital-clock": "^0.1.2",

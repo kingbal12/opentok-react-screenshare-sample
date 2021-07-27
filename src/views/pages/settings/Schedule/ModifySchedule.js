@@ -93,6 +93,12 @@ class CalendarApp extends React.Component {
     }))
   }
 
+  alertModal = () => {
+    this.setState(prevState => ({
+      alertmodal: !prevState.alertmodal
+    }))
+  }
+
   static getDerivedStateFromProps(props, state) {
     if (
       props.app.events.length !== state.events ||
@@ -136,7 +142,8 @@ class CalendarApp extends React.Component {
       weekstart: "",
       weekend: "",
       nextweekstart: "",
-      nextweekend:""
+      nextweekend:"",
+      alertmodal:false
     }
   }
 
@@ -149,6 +156,9 @@ class CalendarApp extends React.Component {
     // )
     this.loadschedule()
     this.loadnextschedule()
+    // if(this.props.app.nextevents.length===0) {
+    //   this.setState({alertmodal: true})
+    // }
   }
   
   handleRepeatPeriod = rperiod => {
@@ -396,8 +406,25 @@ class CalendarApp extends React.Component {
                 저장
               </Button>
             </div>
+
             <Modal
-              isOpen={this.state.modal}
+              isOpen={this.state.alertmodal}
+              toggle={this.alertModal}
+              className="modal-dialog-centered"
+            >
+              <ModalBody>
+                <p>스케줄 반복 기간이 일주일 남았습니다.</p>
+                <p>스케줄을 설정하시겠어요?</p>
+              </ModalBody>
+              <ModalFooter className="text-center">
+                <Button color="primary" outline onClick={this.alertModal}>
+                  스케쥴 설정 시작하기
+                </Button>
+              </ModalFooter>
+            </Modal>
+
+            <Modal
+              isOpen={this.state.schedulemodal}
               toggle={this.toggleModal}
               className="modal-dialog-centered"
             >

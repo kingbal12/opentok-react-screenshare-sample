@@ -46,6 +46,8 @@ import "../../../../assets/scss/plugins/extensions/recharts.scss"
 import Opentok from "./opentok"
 import previmg from "../../../../assets/img/dashboard/ID13_11_file.png"
 import moment from "moment"
+import Select from "react-select"
+import Webcam from "react-webcam";
 
 class Cslist extends React.Component { 
   render() { 
@@ -101,7 +103,8 @@ class ConsultingRoom extends React.Component {
       paymodal: false,
       pharmacy: false,
       App: false,
-      viewfilemodal: false
+      viewfilemodal: false,
+      settingmodal: false
     }
     this.state = { time: {},   seconds: 900 };
     this.timer = 0;
@@ -128,7 +131,6 @@ class ConsultingRoom extends React.Component {
 
 
   componentDidMount() {
-    console.log(this.props.pinfo)
     axios
       .get("http://203.251.135.81:9300/v1/doctor/treatment/pharmacy", {
         params: {
@@ -161,6 +163,8 @@ class ConsultingRoom extends React.Component {
         this.startTimer()
       }
     }
+
+   
        
   }
 
@@ -203,6 +207,12 @@ class ConsultingRoom extends React.Component {
   mdNoteModal = () => {
     this.setState(prevState => ({
       mdnotemodal: !prevState.mdnotemodal
+    }))
+  }
+
+  settingModal = () => {
+    this.setState(prevState => ({
+      settingmodal: !prevState.settingmodal
     }))
   }
 
@@ -308,6 +318,16 @@ class ConsultingRoom extends React.Component {
       paymodal: !prevState.paymodal
     }))
   }
+
+  setSpeaker = e => {
+    e.preventDefault()
+    const audioEl = new Audio()
+    audioEl.setSinkId(this.state.speakerset.deviceId).then(function() {
+      console.log('Set deviceId('+audioEl.sinkId+') in the selected audio element');
+   }).catch(error => console.log(error));
+    console.log('Audio is being played on ' + audioEl.sinkId);
+    
+  }
  
 
   // call = e => {
@@ -345,8 +365,7 @@ class ConsultingRoom extends React.Component {
     }
     return (
       <Fragment>
-        {/* 주소찾기 Modal창 */}
-       
+        
         {/* 환자정보, 버튼 모음 Row */}
         <Row className="d-flex justify-content-between mb-1">
         <Helmet>
@@ -394,7 +413,9 @@ class ConsultingRoom extends React.Component {
             <Button
               color="black"
               outline
-              type="button">
+              type="button"
+              onClick={()=> history.push("/pages/callsetting")}
+            >
               설정
             </Button>
           </Col>

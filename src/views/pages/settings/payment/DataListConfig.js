@@ -37,7 +37,7 @@ import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import "../../../../assets/scss/plugins/extensions/react-paginate.scss"
 import "../../../../assets/scss/pages/data-list.scss"
 import moment from "moment"
-import { Fragment } from "react"
+import { CSVLink, CSVDownload } from "react-csv";
 
 
 const chipColors = {
@@ -497,6 +497,7 @@ class DataListConfig extends Component {
         <Row className="d-flex mt-5">
           <Col lg="9" md="12"></Col>
           <Col lg="3" md="12">
+          <CSVLink data={this.state.data}>
             <Button 
             color="primary" 
             type="button"
@@ -504,6 +505,7 @@ class DataListConfig extends Component {
             >
               내역서 다운로드
             </Button>
+          </CSVLink>
           </Col>
         </Row>
       </div>

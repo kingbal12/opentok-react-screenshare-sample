@@ -84,13 +84,13 @@ const ExpandedComponent = props => {
           className="dz-img"
           alt=""
           style={{cursor:"pointer"}} 
-          onClick={this.viewFileModal}
+          // onClick={this.viewFileModal}
         />
     }
 
     
 
-    {props.data===null||props.data.FILE_NAME===""?
+    {props.data===null||props.data.RX_NAME===""?
       pres_preview = 
         <img
           src={prescription}
@@ -106,13 +106,13 @@ const ExpandedComponent = props => {
           className="dz-img"
           alt=""
           style={{cursor:"pointer"}} 
-          onClick={this.viewPressModal}
+          // onClick={this.viewPressModal}
         />
     }
   return(
 
     <Card style={{background:"#efefef"}}>
-      <Card className="p-0 m-0" style={{ marginBottom: '0rem', }}>
+      <Card className="p-0 m-0" style={{ marginBottom: '0rem', background:"#efefef"}}>
         <CardBody className="m-0">
           <Row className="m-0">
             <Col className="col-4 m-0">

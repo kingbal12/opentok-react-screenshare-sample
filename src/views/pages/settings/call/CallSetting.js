@@ -198,35 +198,6 @@ class CallSetting extends React.Component {
               </Table>
             } 
           </Col>
-          <Col lg="6" md="12" className="text-right">
-            <Button
-              className="mr-1"
-              color="primary"
-              outline
-              type="button">
-              남은시간
-            </Button>
-            <Button
-              className="mr-1"
-              color="primary"
-              outline
-              type="button">
-              화면공유
-            </Button>
-            <Button
-              className="mr-1"
-              color="primary"
-              outline
-              type="button">
-              화면녹화
-            </Button>
-            <Button
-              color="primary"
-              outline
-              type="button">
-              설정
-            </Button>
-          </Col>
         </Row>
       <Row className="pt-1 justify-content-center">
         <Col
@@ -326,7 +297,7 @@ class CallSetting extends React.Component {
                         }}
                         // onClick={this.Check}
                         >
-                          원격의료실 입장하기
+                          저장 후 닫기
                         </Button.Ripple>
                       </Col>
                     </Row>
