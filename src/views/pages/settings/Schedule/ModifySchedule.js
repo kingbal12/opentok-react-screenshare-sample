@@ -18,6 +18,8 @@ import {
   updateResize,
   startschedules,
   clearSchedule,
+  mdfpostSchedules,
+  nextfetchEvents
 } from "../../../../redux/actions/calendar/index"
 import { ChevronLeft, ChevronRight } from "react-feather"
 
@@ -120,26 +122,21 @@ class CalendarApp extends React.Component {
     this.state = {
       userid: props.user.login.values.loggedInUser.username,
       events: [],
+      // nextevents: props.app.nextevents, 구지 스테이터스에 저장을 할 필요가 없다
       views: {
         month: true,
         week: true,
         day: true
       },
       id: 1,
-      // eventInfo: null,
-      // startDate: new Date(),
-      // endDate: new Date(),
-      // title: "",
-      // label: null,
-      // allDay: true,
-      // selectable: true
       auto: "true",
       rperiod: "1",
       holiday: "Y",
       modal: false,
       weekstart: "",
-      weekend: ""
-      
+      weekend: "",
+      nextweekstart: "",
+      nextweekend:""
     }
   }
 
@@ -151,6 +148,7 @@ class CalendarApp extends React.Component {
     //   this.state.weekend
     // )
     this.loadschedule()
+    this.loadnextschedule()
   }
   
   handleRepeatPeriod = rperiod => {
@@ -230,17 +228,25 @@ class CalendarApp extends React.Component {
  
 
    onNavigate = (date, view, action) => {
-    let start, end;
+    let start, end, nextstart, nextend;
     let scheduledata
     if (view === 'week') {
       start = moment(date).startOf('week')._d
       end = moment(date).endOf('week')._d
+      nextstart = moment(date).add(7,'d').startOf('week')._d
+      nextend = moment(date).add(7,'d').endOf('week')._d
       this.setState({weekstart: start, weekend: end})
+      this.setState({nextweekstart: nextstart, nextweekend: nextend})
       if(action === "PREV" || action === "NEXT") {
         start = moment(date).startOf('week')._d
         end = moment(date).endOf('week')._d
+        nextstart = moment(date).add(7,'d').startOf('week')._d
+        nextend = moment(date).add(7,'d').endOf('week')._d
         this.setState({events:[]}, () => {
           this.setState({weekstart: start, weekend: end},() => this.loadschedule())
+        })
+        this.setState({nextevents:[]}, () => {
+          this.setState({nextweekstart: nextstart, nextweekend: nextend}, () => this.loadnextschedule())
         })
       }
     } else {
@@ -263,22 +269,37 @@ class CalendarApp extends React.Component {
       this.state.weekend
     )
   }
+
+  loadnextschedule = () => {
+    this.props.nextfetchEvents(
+      this.state.userid,
+      this.state.nextweekstart,
+      this.state.nextweekend
+    )
+  }
   
   modifychedule = e => {
     e.preventDefault()
-    
-    this.props.startschedules(
-      this.state.userid,
-      this.state.weekstart,
-      this.state.weekend,
-      this.state.events)
-    // this.props.startschedules(
-    //   this.state.userid,
-    //   this.state.weekstart,
-    //   this.state.weekend,
-    //   this.state.events)
-    console.log(this.state)
+    if (this.props.app.nextevents.length===0){
+      this.schedulemodal()
+    } else {
+      this.props.startschedules(
+        this.state.userid,
+        this.state.weekstart,
+        this.state.weekend,
+        this.state.events)
+      console.log(this.state)
+    }
+  }
 
+
+  postschedule = e => {
+    e.preventDefault()
+    this.props.mdfpostSchedules(
+      this.state.userid,
+      this.state.holiday,
+      this.state.rperiod,
+      this.state.events)
   }
 
   onSelectEvent(pEvent) {
@@ -513,4 +534,6 @@ export default connect(mapStateToProps, {
   updateResize,
   startschedules,
   clearSchedule,
+  mdfpostSchedules,
+  nextfetchEvents
 })(CalendarApp)

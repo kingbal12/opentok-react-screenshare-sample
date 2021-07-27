@@ -84,6 +84,25 @@ export const fetchEvents = (user_id, weekstart, weekend) => {
   }
 }
 
+export const nextfetchEvents = (user_id, weekstart, weekend) => {
+  return async dispatch => {
+    await axios
+      .get("http://203.251.135.81:9300/v1/doctor/appointment/schedules",{
+        params: {
+          user_id: user_id,
+          start_date: weekstart,
+          end_date: weekend
+        }
+      })
+      .then(response => {
+        console.log(response)
+        
+        dispatch({ type: "NEXT_FETCH_EVENTS", events: response.data.data })
+      })
+      .catch(err => console.log(err))
+  }
+}
+
 export const handleSidebar = bool => {
   return dispatch => dispatch({ type: "HANDLE_SIDEBAR", status: bool })
 }
@@ -113,13 +132,46 @@ export const postSchedules = (userid, holiday, rperiod, events) => {
       .then(response => {
         console.log(response)
         if(response.data.status==="200") {
+          alert("스케줄 설정이 저장되었습니다. 로그인페이지로 이동합니다.")
           history.push("/")
+        } else {
+          alert("스케줄 설정에 문제가 발생했습니다. 관리자에게 문의 바랍니다.")
         }
         // holidayyn의
       })
       .catch(err => console.log(err))
   }
 }
+
+export const mdfpostSchedules = (userid, holiday, rperiod, events) => {
+  return dispatch => {
+    let dateToObj = events.map(event => {
+      event.start = formatDate(event.start)
+      event.end = formatDate(event.end)
+      return event
+    })
+    console.log(events)
+    axios
+      .post("http://203.251.135.81:9300/v1/doctor/appointment/schedules",{
+          user_id: userid,
+          holiday_yn: holiday,
+          count: rperiod,
+          events: dateToObj
+      })
+      .then(response => {
+        console.log(response)
+        if(response.data.status==="200") {
+          alert("수정된 스케줄이 저장되었습니다.")
+        } else if(response.data.status==="400") {
+          alert("수정된 스케줄 저장에 문제가 발생했습니다. 스케줄이 비어있는 주부터 설정을 시작해주세요")
+        } else{
+          alert("수정된 스케줄 저장에 문제가 발생했습니다. 관리자에게 문의 바랍니다.")
+        }
+      })
+      .catch(err => console.log(err))
+  }
+}
+
 
 
 
