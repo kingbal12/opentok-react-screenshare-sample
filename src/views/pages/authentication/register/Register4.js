@@ -39,10 +39,10 @@ class Register extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      userid: "kingbal999@kakao.com",
-      name: "아이오티포헬스",
-      // userid: props.user.register.values.registeruser,
-      // name: props.user.register.values.registername,
+      // userid: "kingbal999@kakao.com",
+      // name: "아이오티포헬스",
+      userid: props.user.register.values.registeruser,
+      name: props.user.register.values.registername,
       filename: "",
       file : "",
       medicalpart: props.cookiere4.medicalpart,

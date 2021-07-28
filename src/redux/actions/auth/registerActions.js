@@ -55,7 +55,7 @@ export const postTerms = (
         if(response.data.status === "200") {
           history.push("/pages/register3");
         } else {
-          alert(response.data.message);
+          // alert(response.data.message);
          
         }
 

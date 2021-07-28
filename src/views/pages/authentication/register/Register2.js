@@ -235,7 +235,7 @@ class Register extends React.Component {
                                 onChange={e => this.setState({ userid: e.target.value })}
                                 // invalid={this.state.useemail.length === 0 ? true : false}
                               />
-                              <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.emailauth}><FormattedMessage id="Sign In"/></Button>
+                              <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.emailauth}><FormattedMessage id="Check"/></Button>
                               </InputGroupAddon>
                             </InputGroup>
                             </div>
@@ -267,7 +267,7 @@ class Register extends React.Component {
                                 value={this.state.email}
                                 onChange={e => this.setState({ email: e.target.value })}
                               />
-                              <InputGroupAddon addonType="append"><Button disabled={this.state.otheremail===true?false:true} color="primary" type="button" onClick={this.emailauth}>이메일 인증</Button></InputGroupAddon>
+                              <InputGroupAddon addonType="append"><Button disabled={this.state.otheremail===true?false:true} color="primary" type="button" onClick={this.emailauth}><FormattedMessage id="Check"/></Button></InputGroupAddon>
                             </InputGroup>
                           </FormGroup>
                           

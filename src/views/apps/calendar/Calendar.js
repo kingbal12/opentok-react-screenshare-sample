@@ -55,7 +55,7 @@ class Toolbar extends React.Component {
               >
                 Today
               </button>
-              {this.props.view === "month"?null:
+
               <button
                 className={`btn ${
                   this.props.view === "month"
@@ -68,8 +68,7 @@ class Toolbar extends React.Component {
               >
                 Month
               </button>
-              }
-              {this.props.view === "week"?null:
+              
               <button
                 className={`btn ${
                   this.props.view === "week"
@@ -82,7 +81,7 @@ class Toolbar extends React.Component {
               >
                 Week
               </button>
-              }
+              
             </ButtonGroup>
           </div>
         </div>

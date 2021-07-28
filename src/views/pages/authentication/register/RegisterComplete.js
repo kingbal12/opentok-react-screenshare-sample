@@ -16,7 +16,7 @@ class RegisterComplete extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      userid: "",
+      username: props.user.register.values.registername,
       filename: "",
       file : "",
       medicalpart: "", 
@@ -41,8 +41,8 @@ class RegisterComplete extends React.Component {
   render() {
     return (
       <Col className="m-0 p-0" style={{background:"linear-gradient(#7367f0, #dff8fc)", width:"100%",height:"100vh"}}>
-        <Row className="w-100  justify-content-center" style={{paddingTop:"15%"}}>
-          <h5 style={{color:"white"}}>제이슨 선생님.</h5>
+        <Row className="w-100  justify-content-center" style={{paddingTop:"10%"}}>
+          <h5 style={{color:"white"}}>{this.state.username} 선생님.</h5>
         </Row>
         <Row className="w-100  justify-content-center">
           <h5 style={{color:"white"}}>가입을 축하드립니다!</h5>

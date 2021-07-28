@@ -177,7 +177,7 @@ class Register extends React.Component {
                     </CardTitle>
                   </CardHeader>
                   <p className="ml-2"><img src={HicareLogo} alt="HicareLogo" style={{width:"90px", paddingBottom:"0.6rem"}}/> 사용을 위해 아래의 약관에 동의해 주세요!</p>
-                  <Nav tabs className="px-3 justify-content-center">
+                  {/* <Nav tabs className="px-3 justify-content-center">
                     <NavItem>
                       <NavLink
                         className={classnames({
@@ -205,7 +205,7 @@ class Register extends React.Component {
                         <h5>외국인</h5>
                       </NavLink>
                     </NavItem>
-                  </Nav>
+                  </Nav> */}
                   <CardBody>
                       <Form action="/" onSubmit={this.handleRegister}>  
                         <Row className="mb-1">

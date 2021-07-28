@@ -66,6 +66,7 @@ export const cookieSchedules = (
   events
   ) => {
   return dispatch => {
+    console.log(events)
     dispatch({ 
       type: "SAVE_SCHDULES", 
       payload: {

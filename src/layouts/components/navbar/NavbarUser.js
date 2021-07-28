@@ -1,31 +1,20 @@
 import React from "react"
 import {
-  NavItem,
-  NavLink,
   UncontrolledDropdown,
-  Dropdown,
   DropdownMenu,
   DropdownItem,
   DropdownToggle,
   Media,
-  Badge,
   Button,
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter
 } from "reactstrap"
-import Draggable from 'react-draggable';
-import PerfectScrollbar from "react-perfect-scrollbar"
 import axios from "axios"
 import * as Icon from "react-feather"
-import classnames from "classnames"
-import ReactCountryFlag from "react-country-flag"
-import Autocomplete from "../../../components/@vuexy/autoComplete/AutoCompleteComponent"
 import { useAuth0 } from "../../../authServices/auth0/auth0Service"
 import { history } from "../../../history"
-import { IntlContext } from "../../../utility/context/Internationalization"
-// import { Button } from "bootstrap"
 import Question from "../../../assets/img/logo/question.png"
 
 
@@ -698,9 +687,9 @@ class NavbarUser extends React.PureComponent {
           <DropdownToggle tag="a" className="nav-link dropdown-user-link">
             <div className="user-nav d-sm-flex d-none">
               <span className="user-name text-bold-600">
-                {this.props.userName}
+                {this.props.f_name}
               </span>
-              <span className="user-status text-bold-500">{this.props.medicalpartnm}</span>
+              <span className="user-status text-bold-500" style={{marginTop:"0.5em"}}>{this.props.medicalpartnm}</span>
             </div>
             <span data-tour="user">
               <img

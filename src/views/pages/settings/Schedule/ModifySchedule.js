@@ -89,7 +89,7 @@ class CalendarApp extends React.Component {
 
   schedulemodal = () => {
     this.setState(prevState => ({
-      modal: !prevState.modal
+      schedulemodal: !prevState.schedulemodal
     }))
   }
 
@@ -143,7 +143,8 @@ class CalendarApp extends React.Component {
       weekend: "",
       nextweekstart: "",
       nextweekend:"",
-      alertmodal:false
+      alertmodal:false,
+      schedulemodal: false
     }
   }
 
@@ -425,10 +426,10 @@ class CalendarApp extends React.Component {
 
             <Modal
               isOpen={this.state.schedulemodal}
-              toggle={this.toggleModal}
+              toggle={this.schedulemodal}
               className="modal-dialog-centered"
             >
-              <ModalHeader toggle={this.toggleModal}>
+              <ModalHeader toggle={this.schedulemodal}>
                 설정
               </ModalHeader>
               <ModalBody>
