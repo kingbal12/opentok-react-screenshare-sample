@@ -2,8 +2,12 @@ import React, { Component } from "react"
 import {
   Progress,
   Row,
-  Col,
-  Input,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Card,
+  CardBody,
   Button
 } from "reactstrap"
 import DataTable from "react-data-table-component"
@@ -38,6 +42,7 @@ import "../../../../assets/scss/plugins/extensions/react-paginate.scss"
 import "../../../../assets/scss/pages/data-list.scss"
 import moment from "moment"
 import { Fragment } from "react"
+import Axios from "axios"
 
 
 const chipColors = {
@@ -82,9 +87,7 @@ const ActionsComponent = props => {
 }
 
 const CustomHeader = props => {
-  return (
-    <div></div>
-  )
+
 }
 
 class DataListConfig extends Component {
@@ -143,31 +146,13 @@ class DataListConfig extends Component {
         center: true,
         cell: row => <p className="text-bold-500 mb-0">{row.TITLE}</p>
       },
-      {
-        name: "1:1 문의",
-        selector: "name",
-        sortable: false,
-        minWidth: "200px",
-        center: true,
-        cell: row => (
-          <div className="d-flex flex-xl-row flex-column align-items-xl-center align-items-start py-xl-0 py-1">
-            <div className="user-info text-truncate ml-xl-50 ml-0">
-              <span
-                title={row.CONTENTS}
-                className="d-block text-bold-500 text-truncate mb-0">
-                {row.CONTENTS}
-              </span>
-            </div>
-          </div>
-        )
-      },
       
       {
         name: "작성자",
         selector: "gender",
         sortable: false,
         center: true,
-        cell: row => <p className="text-bold-500 mb-0">{row.AUTH_NM==="1"?"전화":"화상"}</p>
+        cell: row => <p className="text-bold-500 mb-0">{row.AUTH_NM}</p>
       },
       {
         name: "작성일",
@@ -185,7 +170,11 @@ class DataListConfig extends Component {
     selected: [],
     totalRecords: 0,
     sortIndex: [],
-    addNew: ""
+    addNew: "",
+    seq:0,
+    noticemodal: false,
+    noticetitle: "",
+    noticecontent:""
   }
 
   thumbView = this.props.thumbView
@@ -332,7 +321,36 @@ class DataListConfig extends Component {
   check = () => {
     this.setState({lastday: String(new Date(this.state.year, this.state.month, 0).getDate())},() => console.log(this.state))  
   }
+  checkState=() => {
+    console.log(this.state)
+  }
 
+  getNoticeOne = (seq) => {
+    Axios
+      .get("http://203.251.135.81:9300/v1/doctor/setting/notice", {
+        params: {
+          seq: seq
+        }
+      })
+      .then(response => {
+        if(response.data.status==="200") {
+          console.log(response)
+          this.setState({
+            noticetitle: response.data.data.TITLE,
+            noticecontent: response.data.data.CONTENTS,
+            noticemodal: true
+          })
+        } else {
+          alert("공지사항을 불러오지 못하였습니다.")
+        }
+      })
+  }
+
+  noticeModal = () => {
+    this.setState(prevState => ({
+      noticemodal: !prevState.noticemodal
+    }))
+  }
 
   render() {
     let {
@@ -352,6 +370,27 @@ class DataListConfig extends Component {
         className={`data-list ${
           this.props.thumbView ? "thumb-view" : "list-view"
         }`}>
+        <Modal
+          isOpen={this.state.noticemodal}
+          toggle={this.noticeModal}
+          className="modal-dialog-centered modal-lg"
+        >
+          <ModalHeader toggle={this.noticeModal}>
+            {this.state.noticetitle}
+          </ModalHeader>
+          <ModalBody className="mx-1">
+            <Card className="mt-1">
+              <CardBody className="pt-1">
+                {this.state.noticecontent}
+              </CardBody>
+            </Card>
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this.noticeModal}>
+              확인
+            </Button>
+          </ModalFooter>
+        </Modal>
         <Row>
           <h3 className="text-bold-600 pl-1">공지사항</h3>
         </Row>
@@ -382,11 +421,10 @@ class DataListConfig extends Component {
           subHeader
           // selectableRows
           responsive
-          // pointerOnHover
+          pointerOnHover
           selectableRowsHighlight
-          onSelectedRowsChange={data =>
-            this.setState({ selected: data.selectedRows })
-          }
+          onRowClicked={data =>
+            this.getNoticeOne( data.SEQ )}
           customStyles={selectedStyle}
           subHeaderComponent={
             false

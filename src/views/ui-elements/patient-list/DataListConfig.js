@@ -2,11 +2,7 @@ import React, { Component } from "react"
 import {
   Button,
   Progress,
-  UncontrolledDropdown,
-  DropdownMenu,
-  DropdownToggle,
-  DropdownItem,
-  Input
+  Input,
 } from "reactstrap"
 import DataTable from "react-data-table-component"
 import classnames from "classnames"
@@ -15,15 +11,8 @@ import { history } from "../../../history"
 import {
   Edit,
   Trash,
-  Droplet,
-  Activity,
-  Thermometer,
-  Compass,
-  Inbox,
   ChevronDown,
-  Plus,
   Check,
-  Link,
   ChevronLeft,
   ChevronRight
 } from "react-feather"
@@ -480,6 +469,7 @@ class DataListConfig extends Component {
         className={`data-list ${
           this.props.thumbView ? "thumb-view" : "list-view"
         }`}>
+       
           {/* <Button className="ml-2" color='primary' outline onClick={this.seeState}>검색</Button> */}
         <DataTable
           columns={columns}
