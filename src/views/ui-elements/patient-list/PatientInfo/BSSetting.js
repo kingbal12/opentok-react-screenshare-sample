@@ -64,12 +64,12 @@ class VitalDataSetting extends React.Component {
       <Fragment>
         <Form action="/" className="col-12 m-0 p-0" onSubmit={this.putBS}> 
         <Row className="col-12">    
-            <Table className="m-0 col-12">
+          <Table borderless className="m-0 col-12 shadow">
               <thead className="table-primary">
                 <tr>
-                  <th width={'15%'}></th>
+                  <th id="vitalritopth" width={'15%'}></th>
                   <th width={'15%'}><h5>분류</h5></th>
-                  <th><h5 className="pl-2">mg/dl</h5></th>
+                  <th id="vitalletopth"><h5 className="pl-2">mg/dl</h5></th>
                 </tr>
               </thead>
               <tbody>
@@ -204,7 +204,7 @@ class VitalDataSetting extends React.Component {
               </tbody>
             </Table>
         </Row>
-        <Row>
+        <Row className="mt-3">
           <Col md="12" className="pr-3 d-flex flex-row-reverse">
             <Button.Ripple 
               color="primary"

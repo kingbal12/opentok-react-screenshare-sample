@@ -75,3 +75,20 @@ export const cookieSchedules = (
   }
 }
 
+export const saveMyinfo = (
+  medicalpart,
+  medicalable,
+  medicaldesc,
+  userdesc,
+  ) => {
+  return dispatch => {
+    dispatch({ 
+      type: "SAVE_MYINFO", 
+      payload: {
+      medicalpart,
+      medicalable,
+      medicaldesc,
+      userdesc,
+    } })
+  }
+}

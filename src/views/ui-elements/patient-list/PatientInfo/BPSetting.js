@@ -62,13 +62,13 @@ class VitalDataSetting extends React.Component {
       <Fragment>
         <Form  className="col-12 m-0 p-0" onSubmit={this.putBP}>      
         <Row className="col-12">
-            <Table className="m-0 col-12">
+          <Table borderless className="m-0 col-12 shadow">
               <thead className="table-primary">
                 <tr>
-                  <th width={'15%'}></th>
+                  <th id="vitalritopth"  width={'15%'}></th>
                   <th><h5 className="pl-2">Systolic</h5></th>
                   <th width={'15%'}></th>
-                  <th><h5 className="pl-2">Diastolic</h5></th>
+                  <th id="vitalletopth"><h5 className="pl-2">Diastolic</h5></th>
                 </tr>
               </thead>
               <tbody>
@@ -147,7 +147,7 @@ class VitalDataSetting extends React.Component {
                   </td>
                 </tr>
                 <tr>
-                  <th scope="row" className="text-center"><h5>위험</h5></th>
+                  <th scope="row" className="text-center" ><h5>위험</h5></th>
                   <td className="d-flex align-self-center">
                     <FormGroup className="pt-1 ml-2">
                       <Input 
@@ -161,7 +161,7 @@ class VitalDataSetting extends React.Component {
                     <h1 className="align-self-center ml-2">&#8804;</h1>
                   </td>
                   <td className="text-center"><h5>or</h5></td>
-                  <td className="d-flex align-self-center">
+                  <td  className="d-flex align-self-center">
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
@@ -178,7 +178,7 @@ class VitalDataSetting extends React.Component {
             </Table>
           
         </Row>
-        <Row>
+        <Row className="mt-3">
           <Col md="12" className="pr-3 d-flex flex-row-reverse">
             <Button.Ripple 
               color="primary"

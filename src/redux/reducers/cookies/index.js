@@ -20,6 +20,12 @@ export const cookiesReducer = (
     userdesc: "",
     previewURL : "",
   },
+  myinfo: {
+    medicalpart: "01",
+    medicalable: "",
+    medicaldesc: "",
+    userdesc: "",
+  },
  
   events:[]
  
@@ -39,6 +45,9 @@ export const cookiesReducer = (
     }
     case "SAVE_SCHDULES": {
       return { ...state, events: action.payload }
+    }
+    case "SAVE_MYINFO": {
+      return { ...state, myinfo: action.payload }
     }
     default: {
       return state

@@ -21,7 +21,7 @@ import { putmyinfo, putmyinfonfile } from "../../../../redux/actions/auth/regist
 import { connect } from "react-redux"
 import axios from "axios"
 import previmg from "../../../../assets/img/portrait/small/Sample_User_Icon.png"
-import { saveRegister4 } from "../../../../redux/actions/cookies"
+import { saveMyinfo } from "../../../../redux/actions/cookies"
 import { FormattedMessage } from "react-intl"
 
 class MyInfo extends React.Component {
@@ -34,11 +34,10 @@ class MyInfo extends React.Component {
       userid: props.user.login.values.loggedInUser.username,
       filename: "",
       file : "",
-      medicalpart: props.cookiere4.medicalpart,
-      medicalable: props.cookiere4.medicalable,
-      medicaldesc: props.cookiere4.medicaldesc,
-      medicalnum: props.cookiere4.userdesc,
-      userdesc: props.cookiere4.previewURL,
+      medicalpart: props.cookiemyinfo.medicalpart,
+      medicalable: props.cookiemyinfo.medicalable,
+      medicaldesc: props.cookiemyinfo.medicaldesc,
+      userdesc: props.cookiemyinfo.userdesc,
       previewURL : "",
       previewmodal: false
     }
@@ -46,13 +45,11 @@ class MyInfo extends React.Component {
 
   saveRe4 = e => {
     e.preventDefault()
-    this.props.saveRegister4(
+    this.props.saveMyinfo(
       this.state.medicalpart,
       this.state.medicalable,
       this.state.medicaldesc,
-      this.state.medicalnum,
-      this.state.userdesc,
-      this.state.previewURL,
+      this.state.userdesc
     )
     alert("의사정보가 저장되었습니다.")
   }
@@ -64,7 +61,8 @@ class MyInfo extends React.Component {
   }
 
   componentDidMount() {
-    if(this.props.cookiere4.medicalpart===""){
+    if(this.props.cookiemyinfo.medicalable===""
+    ){
       axios
           .get("http://203.251.135.81:9300/v1/doctor/account/user-info", {
             params: {
@@ -316,19 +314,6 @@ class MyInfo extends React.Component {
                       </small>
                     </FormGroup>
 
-                    <FormGroup className="form-label-group d-flex justify-content-between pt-1">
-                      <div className="col-2 align-self-center"><b>면허번호</b></div>
-                      <InputGroup>
-                        <Input
-                          type="text"
-                          placeholder="TEXT를 입력해주세요"
-                          required
-                          value={this.state.medicalnum}
-                          onChange={e => this.setState({ medicalnum: e.target.value })}
-                        />   
-                      </InputGroup>
-                    </FormGroup>
-
                     <div className="text-right">
                       <Button
                         className='mr-1'
@@ -441,7 +426,7 @@ class MyInfo extends React.Component {
 const mapStateToProps = state => {
   return {
     user: state.auth,
-    cookiere4: state.cookies.register4
+    cookiemyinfo: state.cookies.myinfo
   }
 }
-export default connect(mapStateToProps, {putmyinfo, putmyinfonfile, saveRegister4})(MyInfo)
+export default connect(mapStateToProps, {putmyinfo, putmyinfonfile, saveMyinfo})(MyInfo)
