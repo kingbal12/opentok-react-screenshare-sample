@@ -4,7 +4,7 @@ import { CardBody, FormGroup, Form, Input, Button, FormFeedback } from "reactstr
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import { Mail, Lock, Check } from "react-feather"
 import { loginWithJWT} from "../../../../redux/actions/auth/loginActions"
-import { saveemail, delemail} from "../../../../redux/actions/cookies"
+import { saveemail, delemail} from "../../../../redux/actions/idaction"
 import { connect } from "react-redux"
 import { history } from "../../../../history"
 import firebase from 'firebase'; 

@@ -24,7 +24,7 @@ export const cookiesReducer = (
     medicalpart: "01",
     medicalable: "",
     medicaldesc: "",
-    userdesc: "",
+    userdesc: ""
   },
  
   events:[]
@@ -48,6 +48,12 @@ export const cookiesReducer = (
     }
     case "SAVE_MYINFO": {
       return { ...state, myinfo: action.payload }
+    }
+    case "LOGOUT_WITH_JWT": {
+      return { ...state, myinfo: { medicalpart: "01",
+      medicalable: "",
+      medicaldesc: "",
+      userdesc: ""}}
     }
     default: {
       return state

@@ -39,11 +39,10 @@ export const loginWithJWT = user => {
 
 
 export const logoutWithJWT = () => {
-  return dispatch => {
+   return dispatch => {
 
     dispatch({ type: "LOGOUT_WITH_JWT", payload: {} })
-    persistor.purge("auth","dataList")
-    localStorage.clear();
+    persistor.purge("auth","dataList","cookies");
     history.push("/pages/login")
    
   }
