@@ -70,7 +70,7 @@ class VitalDataSetting extends React.Component {
               <tbody>
                 <tr>
                   <th scope="row">
-                    <h4 className="pl-4">정상</h4>
+                    <h5 className="pl-4">정상</h5>
                   </th>
                   <td className="d-flex align-self-center">
                     <FormGroup className="pt-1 ml-2">
@@ -82,7 +82,7 @@ class VitalDataSetting extends React.Component {
                         onChange={e => this.setState({ normaltemp: e.target.value })} 
                       />
                     </FormGroup>
-                    <h4 className="align-self-center ml-2">&#8764;</h4>
+                    <h5 className="align-self-center ml-2">&#8764;</h5>
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
@@ -96,7 +96,7 @@ class VitalDataSetting extends React.Component {
                 </tr>
                 <tr>
                   <th scope="row">
-                    <h4 className="pl-4">주의</h4>
+                    <h5 className="pl-4">주의</h5>
                   </th>
                   <td className="d-flex align-self-center">
                     <FormGroup className="pt-1 ml-2">
@@ -122,7 +122,7 @@ class VitalDataSetting extends React.Component {
                 </tr>
                 <tr>
                   <th scope="row">
-                  <h4 className="pl-4">위험</h4>
+                  <h5 className="pl-4">위험</h5>
                   </th>
                   <td className="d-flex align-self-center">
                     <FormGroup className="pt-1 pl-2">
@@ -134,7 +134,7 @@ class VitalDataSetting extends React.Component {
                         onChange={e => this.setState({ dangertemp: e.target.value })}
                       />  
                     </FormGroup>
-                    <h4 className= "align-self-center ml-2">&lsaquo;</h4>
+                    <h5 className= "align-self-center ml-2">&lsaquo;</h5>
                   </td>
                 </tr>
               </tbody>

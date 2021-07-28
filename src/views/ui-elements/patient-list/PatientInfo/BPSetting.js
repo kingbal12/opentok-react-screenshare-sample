@@ -66,16 +66,16 @@ class VitalDataSetting extends React.Component {
               <thead className="table-primary">
                 <tr>
                   <th width={'15%'}></th>
-                  <th><h4 className="pl-2">Systolic</h4></th>
+                  <th><h5 className="pl-2">Systolic</h5></th>
                   <th width={'15%'}></th>
-                  <th><h4 className="pl-2">Diastolic</h4></th>
+                  <th><h5 className="pl-2">Diastolic</h5></th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <th scope="row" className="text-center"><h4>정상</h4></th>
+                  <th scope="row" className="text-center"><h5>정상</h5></th>
                   <td className="d-flex align-self-center">
-                    <h4 className= "align-self-center pl-2">	&lsaquo;</h4>
+                    <h5 className= "align-self-center pl-2">	&lsaquo;</h5>
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
@@ -88,7 +88,7 @@ class VitalDataSetting extends React.Component {
                   </td>
                   <td className="text-center"><h5>and</h5></td>
                   <td className="d-flex align-self-center">
-                    <h4 className= "align-self-center pl-2">	&lsaquo;</h4>
+                    <h5 className= "align-self-center pl-2">	&lsaquo;</h5>
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
@@ -101,7 +101,7 @@ class VitalDataSetting extends React.Component {
                   </td>
                 </tr>
                 <tr>
-                  <th scope="row" className="text-center"><h4>주의</h4></th>
+                  <th scope="row" className="text-center"><h5>주의</h5></th>
                   <td className="d-flex align-self-center">
                     <FormGroup className="pt-1 ml-2">
                       <Input 
@@ -112,7 +112,7 @@ class VitalDataSetting extends React.Component {
                         onChange={e => this.setState({ normalsys_val: e.target.value })} 
                       />
                     </FormGroup>
-                    <h4 className="align-self-center ml-2">&#8764;</h4>
+                    <h5 className="align-self-center ml-2">&#8764;</h5>
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
@@ -134,7 +134,7 @@ class VitalDataSetting extends React.Component {
                         onChange={e => this.setState({ normaldia_val: e.target.value })}
                       />
                     </FormGroup>
-                    <h4 className="align-self-center ml-2">&#8764;</h4>
+                    <h5 className="align-self-center ml-2">&#8764;</h5>
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
@@ -147,7 +147,7 @@ class VitalDataSetting extends React.Component {
                   </td>
                 </tr>
                 <tr>
-                  <th scope="row" className="text-center"><h4>위험</h4></th>
+                  <th scope="row" className="text-center"><h5>위험</h5></th>
                   <td className="d-flex align-self-center">
                     <FormGroup className="pt-1 ml-2">
                       <Input 

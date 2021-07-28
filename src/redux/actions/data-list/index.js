@@ -610,8 +610,7 @@ export const getVitalSettingData = (userid, patientid) => {
         }
   })
     .then(response => {  
-      if(response.data.status==="200") {
-        console.log("생체데이터: ",response)
+      if(response.data.status==="200" && response.data.data!== null) {
         
         dispatch({
           type: "GET_VITALDATA_SETTING",

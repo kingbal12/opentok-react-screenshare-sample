@@ -63,13 +63,13 @@ class VitalDataSetting extends React.Component {
               <thead className="table-primary">
                 <tr>
                   <th width={'30%'}></th>
-                  <th><h4 className="pl-2">BPM</h4></th>
+                  <th><h5 className="pl-2">BPM</h5></th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <th scope="row">
-                    <h4 className="pl-4">정상</h4>
+                    <h5 className="pl-4">정상</h5>
                   </th>
                   <td className="d-flex align-self-center">
                     <FormGroup className="pt-1 ml-2">
@@ -95,7 +95,7 @@ class VitalDataSetting extends React.Component {
                 </tr>
                 <tr>
                   <th scope="row">
-                    <h4 className="pl-4">위험</h4>
+                    <h5 className="pl-4">위험</h5>
                   </th>
                   <td className="d-flex align-self-center">
                     <FormGroup className="pt-1 pl-2">
@@ -107,7 +107,7 @@ class VitalDataSetting extends React.Component {
                         onChange={e => this.setState({ dangerBPM: e.target.value })} 
                       />
                     </FormGroup>
-                    <h4 className= "align-self-center ml-2">	&lsaquo;</h4>
+                    <h5 className= "align-self-center ml-2">	&lsaquo;</h5>
                   </td>
                 </tr>
               </tbody>

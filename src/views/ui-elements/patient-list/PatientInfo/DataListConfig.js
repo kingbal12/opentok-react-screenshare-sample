@@ -70,13 +70,13 @@ const ExpandedComponent = props => {
   let pres_preview = null;
     {props.data===null||props.data.FILE_NAME===""?
       file_preview = 
-        <img
+        <embed
           src={previmg}
           className="dz-img"
           alt=""
         />
       :file_preview = 
-        <img
+        <embed
           width="70px"
           height="80px" 
           src={"http://203.251.135.81:9300"+props.data.FILE_PATH
@@ -92,19 +92,17 @@ const ExpandedComponent = props => {
 
     {props.data===null||props.data.RX_NAME===""?
       pres_preview = 
-        <img
+        <embed
           src={prescription}
           className="dz-img"
           alt=""
         />
       :pres_preview = 
-        <img
+        <embed 
           width="70px"
           height="80px" 
           src={"http://203.251.135.81:9300"+props.data.RX_PATH
           +props.data.RX_NAME}
-          className="dz-img"
-          alt=""
           style={{cursor:"pointer"}} 
           // onClick={this.viewPressModal}
         />
@@ -117,24 +115,24 @@ const ExpandedComponent = props => {
           <Row className="m-0">
             <Col className="col-4 m-0">
               <Card className="m-0" style={{height:"23rem"}} >
-                <CardHeader>MD Note</CardHeader>
+                <CardHeader><b className="text-primary">MD Note</b></CardHeader>
                 <CardBody>
-                  <div>C.C {props.data.NOTE_CC}</div>
-                  <div className="mt-1">Diagnosis {props.data.NOTE_DX}</div>
-                  <div className="mt-1">Tx &#38; Rx {props.data.NOTE_RX}</div>
-                  <div className="mt-1">Recommendation</div>
+                  <div>C.C: {props.data.NOTE_CC}</div>
+                  <div className="mt-1">Diagnosis: {props.data.NOTE_DX}</div>
+                  <div className="mt-1">Tx &#38; Rx: {props.data.NOTE_RX}</div>
+                  <div className="mt-1">Recommendation: </div>
                 </CardBody>
               </Card>
             </Col>
             <Col className="col-4 m-0">
               <Card style={{height:"10.5rem"}}>
-                <CardHeader>Present Condition</CardHeader>
+                <CardHeader><b className="text-primary">Present Condition</b></CardHeader>
                 <CardBody>
                   {props.data.SYMPTOM}
                 </CardBody>
               </Card>
               <Card style={{height:"10.5rem"}}>
-                <CardHeader>Files</CardHeader>
+                <CardHeader><b className="text-primary">Files</b></CardHeader>
                 <CardBody>
                   {file_preview}
                 </CardBody>
@@ -142,7 +140,7 @@ const ExpandedComponent = props => {
             </Col> 
             <Col className="col-4 m-0">
               <Card style={{height:"23rem"}}>
-                <CardHeader>Prescription</CardHeader>
+                <CardHeader><b className="text-primary">Prescription</b></CardHeader>
                 <CardBody>
                   {pres_preview}
                 </CardBody>
@@ -229,7 +227,7 @@ class DataListConfig extends Component {
         name: "진료과/진료의",
         selector: "name",
         sortable: false,
-        minWidth: "200px",
+        maxWidth: "300px",
         cell: row => (
           <div className="d-flex flex-xl-row flex-column align-items-xl-center align-items-start py-xl-0 py-1">
             <div className="user-info text-truncate ml-xl-50 ml-0">
@@ -248,6 +246,7 @@ class DataListConfig extends Component {
         name: "진단명",
         selector: "gender",
         sortable: false,
+        maxWidth: "300px",
         cell: row => <p className="text-bold-500 mb-0">{row.NOTE_CC}</p>
       },
       {

@@ -254,7 +254,7 @@ class NavbarUser extends React.PureComponent {
           
         >
           <ModalHeader toggle={this.questionModal}>
-            <b>1대1 문의</b>
+            <b>실시간 문의</b>
           </ModalHeader>
           <ModalBody>
             <iframe src= "http://192.168.0.7/lv1/chat.1to1.php?ROOM_ID=room_wind&USERS=의사" width="400px" height="300px"></iframe>
