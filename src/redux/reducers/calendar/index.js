@@ -2,7 +2,9 @@ const initialState = {
   events: [],
   nextevents: [],
   sidebar: false,
-  selectedEvent: null
+  selectedEvent: null,
+  weekempty:"",
+  nextweekempty:""
 }
 
 
@@ -11,9 +13,9 @@ const calenderReducer = (state = initialState, action) => {
     case "CALENDAR_FETCH_EVENTS":
       return { ...state, events: action.events }
     case "FETCH_EVENTS":
-      return { ...state, events: action.events }
+      return { ...state, events: action.events, weekempty: action.empty }
     case "NEXT_FETCH_EVENTS":
-      return { ...state, nextevents: action.events }
+      return { ...state, nextevents: action.events, nextweekempty: action.empty }
     case "CLEAR_EVENTS":
       console.log(action.event)
     return { ...state, events: action.events }

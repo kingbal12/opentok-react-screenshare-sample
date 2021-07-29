@@ -72,13 +72,18 @@ export const fetchEvents = (user_id, weekstart, weekend) => {
         }
       })
       .then(response => {
-        console.log(response)
+        let weekempty
+        if(response.data.data.length===0) {
+          weekempty="Y"
+        } else {
+          weekempty="N"
+        }
         // 배열안의 데이터 이름을 바꿀 수 있는 방안 연구
         // fake-db의 데이터 항목 참고 
         // react-big-calendar의 dataformat 과 api에서 오는 dataformat이 다르지만
         // fake=db에 있는 데이터 항목대로 substring을 통해 가공해서 보낸다면 해결될것 같음
         
-        dispatch({ type: "FETCH_EVENTS", events: response.data.data })
+        dispatch({ type: "FETCH_EVENTS", events: response.data.data, empty:weekempty })
       })
       .catch(err => console.log(err))
   }
@@ -95,9 +100,13 @@ export const nextfetchEvents = (user_id, weekstart, weekend) => {
         }
       })
       .then(response => {
-        console.log(response)
-        
-        dispatch({ type: "NEXT_FETCH_EVENTS", events: response.data.data })
+        let nextweekempty
+        if(response.data.data.length===0) {
+          nextweekempty="Y"
+        } else {
+          nextweekempty="N"
+        }
+        dispatch({ type: "NEXT_FETCH_EVENTS", events: response.data.data, empty:nextweekempty })
       })
       .catch(err => console.log(err))
   }

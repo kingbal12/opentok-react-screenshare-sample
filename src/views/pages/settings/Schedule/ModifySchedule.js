@@ -28,6 +28,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css"
 import "../../../../assets/scss/plugins/calendars/react-big-calendar.scss" 
 import Radio from "../../../../components/@vuexy/radio/RadioVuexy"
 import { FormattedMessage } from "react-intl"
+import { RichUtils } from "draft-js"
 
 const DragAndDropCalendar = withDragAndDrop(Calendar)
 const localizer = momentLocalizer(moment)
@@ -98,6 +99,11 @@ class CalendarApp extends React.Component {
       alertmodal: !prevState.alertmodal
     }))
   }
+  alert= () => {
+    if(this.state.weekempty === "Y" && this.state.nextweekempty === "N") {
+      this.alertModal()
+    }
+  }
 
   static getDerivedStateFromProps(props, state) {
     if (
@@ -144,7 +150,9 @@ class CalendarApp extends React.Component {
       nextweekstart: "",
       nextweekend:"",
       alertmodal:false,
-      schedulemodal: false
+      schedulemodal: false,
+      weekempty: "",
+      nextweekempty: ""
     }
   }
 
@@ -160,6 +168,10 @@ class CalendarApp extends React.Component {
     // if(this.props.app.nextevents.length===0) {
     //   this.setState({alertmodal: true})
     // }
+    this.setState({
+      weekempty: this.props.app.weekempty, 
+      nextweekempty: this.props.app.nextweekempty}, ()=>
+      this.alert())
   }
   
   handleRepeatPeriod = rperiod => {
@@ -291,7 +303,7 @@ class CalendarApp extends React.Component {
   
   modifychedule = e => {
     e.preventDefault()
-    if (this.props.app.nextevents.length===0){
+    if (this.props.app.nextevents.length===0 && this.props.app.weekempty==="Y"){
       this.schedulemodal()
     } else {
       this.props.startschedules(
