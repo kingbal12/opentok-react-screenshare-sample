@@ -4,11 +4,14 @@ import "../../../../assets/scss/plugins/extensions/opentok.scss"
 import ConnectionStatus from "./ConnectionStatus";
 import Publisher from "./Publisher";
 import Subscriber from "./Subscriber";
+import ScreenShare from "./ScreenShare"
 import { connect } from "react-redux";
 import { Button } from "bootstrap";
 import video from "../../../../assets/img/call/ID25_14_btn_op_video.png"
 import mic from "../../../../assets/img/call/ID25_14_btn_op_mic.png"
 import call from "../../../../assets/img/call/ID25_14_btn_op_end-call.png"
+import ScreenSharingAccPack from "opentok-screen-sharing"
+import { Fragment } from "react";
 
 
 class ConsultingRoom extends React.Component {
@@ -35,7 +38,7 @@ class ConsultingRoom extends React.Component {
       error: null,
       connected: false,
       camerastate: true,
-      micstate: true
+      micstate: true,
     }
     this.sessionEvents = {
       sessionConnected: () => {
@@ -46,7 +49,7 @@ class ConsultingRoom extends React.Component {
       }
     };
   }
-
+  
 
   cameraState = () => {
     this.setState(prevState => ({
@@ -62,23 +65,34 @@ class ConsultingRoom extends React.Component {
   onError = (err) => {
     this.setState({ error: `Failed to connect: ${err.message}` });
   }
+
+  check = () => {
+    console.log(this.state)
+  }
+
+  sessionDisconnect = () => {
+    this.setState({connected: false})
+  }
  
   render() {
-    return (
+    return (       
       <OTSession 
       className="col-12 m-0 p-0"
       apiKey={this.props.apikey} sessionId={this.props.session} token={this.props.token} onError={this.onError} eventHandlers={this.sessionEvents}>
         {/* <ConnectionStatus /> */}
-        <Publisher micstate={this.state.micstate} camerastate={this.state.camerastate} />
+        <Publisher togglescreenshare={this.props.toglescreenshare} micstate={this.state.micstate} camerastate={this.state.camerastate} />
         <OTStreams>
+        
           <Subscriber/>
         </OTStreams>
         <div className="buttons">
           <img src={mic} onClick={this.micState} style={{cursor:"pointer", width: "40px"}} />
           <img src={video} onClick={this.cameraState} style={{cursor:"pointer",  width: "40px"}} className="mr-2"/>
-          <img src={call} onClick={this.sessionDisconnected} style={{cursor:"pointer",  width: "40px"}}/>
+          <img src={call} onClick={this.sessionDisconnect} style={{cursor:"pointer",  width: "40px"}}/>
         </div>
+        
       </OTSession>
+
     )
   }
 }

@@ -29,8 +29,6 @@ class Subscriber extends React.Component {
   render() {
     return (
       <div className="subscriber">
-        Subscriber
-        <div className="testsubscriber"></div>
         {this.state.error ? <div id="error">{this.state.error}</div> : null}
         <OTSubscriber
           className="otsubscriber"

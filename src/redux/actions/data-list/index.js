@@ -278,10 +278,10 @@ export const getVitalData = (patientid) => {
       
       if(response.data.status==="200") {
 
-        let pulselength = response.data.data.PRESSURE_LIST.length
+        // let pulselength = response.data.data.PRESSURE_LIST.length
         let bp = response.data.data.PRESSURE_LIST
         let pulse = new Array()
-        for (let i=0; i<pulselength; i++) {
+        for (let i=0; i<5; i++) {
           let jsonObj		= new Object();         
           jsonObj.CREATE_TIME	= response.data.data.PRESSURE_LIST[i].CREATE_TIME
           jsonObj.PULSE_VAL	= response.data.data.PRESSURE_LIST[i].PULSE_VAL
@@ -674,7 +674,7 @@ export const postPrescriptionData = (userid, apponum, file, filename) => {
 export const postPayData = (userid, apponum, paypatient, paytotal) => {
   return dispatch => {
     axios
-      .post("http://203.251.135.81:9300/v1/doctor/treatment/prescription", {
+      .post("http://203.251.135.81:9300/v1/doctor/treatment/payment", {
         user_id : userid,
         appoint_num : apponum,
         pay_patient : paypatient,

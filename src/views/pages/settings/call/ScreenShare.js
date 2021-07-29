@@ -9,7 +9,7 @@ class Publisher extends React.Component {
         error: null,
         audio: true,
         video: true,
-        videoSource: 'camera'
+        videoSource: 'screen'
       };
     }
 
@@ -32,12 +32,12 @@ class Publisher extends React.Component {
     render() {
       return (
         <div className="publisher">
-            {this.state.error ? <div id="error">{this.state.error}</div> : null}
+            {/* {this.state.error ? <div id="error">{this.state.error}</div> : null} */}
             <OTPublisher
             properties={{
                 publishAudio: this.props.micstate,
                 publishVideo: this.props.camerastate,
-                videoSource: this.props.togglescreenshare === true ? 'screen' : undefined
+                videoSource: this.state.videoSource === 'screen' ? 'screen' : undefined
             }}
             onError={this.onError}
             />

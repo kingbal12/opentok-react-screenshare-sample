@@ -34,7 +34,7 @@ import { Check } from "react-feather"
 import { history } from "../../../../history"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import "../../../../assets/scss/pages/authentication.scss"
-import "../../../../assets/scss/plugins/extensions/opentok.scss"
+// import "../../../../assets/scss/plugins/extensions/opentok.scss"
 import {connect} from "react-redux"
 import { Fragment } from "react"
 // import { OTSession, OTPublisher, OTStreams, OTSubscriber, preloadScript } from 'opentok-react';
@@ -104,9 +104,11 @@ class ConsultingRoom extends React.Component {
       pharmacy: false,
       App: false,
       viewfilemodal: false,
-      settingmodal: false
+      settingmodal: false,
+      screenshare: false,
+      
     }
-    this.state = { time: {},   seconds: 900 };
+    this.state = {time: {},   seconds: 900};
     this.timer = 0;
     this.startTimer = this.startTimer.bind(this);
     this.countDown = this.countDown.bind(this);
@@ -131,41 +133,84 @@ class ConsultingRoom extends React.Component {
 
 
   componentDidMount() {
-    axios
-      .get("http://203.251.135.81:9300/v1/doctor/treatment/pharmacy", {
-        params: {
-          patient_id: this.props.pinfo.PATIENT_ID
-        }
-      })
-      .then(response => {
-        let pharmacy
+    // axios
+    //   .get("http://203.251.135.81:9300/v1/doctor/treatment/pharmacy", {
+    //     params: {
+    //       patient_id: this.props.pinfo.PATIENT_ID
+    //     }
+    //   })
+    //   .then(response => {
+    //     let pharmacy
 
-        if(response.data.status==="200") {
-          console.log(response.data.data)
-          pharmacy = response.data.data
+    //     if(response.data.status==="200") {
+    //       console.log(response.data.data)
+    //       pharmacy = response.data.data
  
-          this.setState({
-            pcode: pharmacy.P_CODE,
-            pname: pharmacy.P_NAME,
-            paddress: pharmacy.P_ADDRESS,
-            telnum: pharmacy.TEL_NUM, 
-            faxnum: pharmacy.FAX_NUM,
-          })
-        } else {
-          alert("약국정보가 없습니다.")
-        }
-      })
-    let timeLeftVar = this.secondsToTime(this.state.seconds);
-    this.setState({ time: timeLeftVar });
-    if(this.props.appo==!undefined) {
-      if((moment.duration(this.props.appo.APPOINT_TIME.diff(moment())).minutes()<16 && 
-      moment.duration(this.props.appo.APPOINT_TIME.diff(moment())).minutes()>0)) {
-        this.startTimer()
-      }
-    }
+    //       this.setState({
+    //         pcode: pharmacy.P_CODE,
+    //         pname: pharmacy.P_NAME,
+    //         paddress: pharmacy.P_ADDRESS,
+    //         telnum: pharmacy.TEL_NUM, 
+    //         faxnum: pharmacy.FAX_NUM,
+    //       })
+    //     } else {
+    //       alert("약국정보가 없습니다.")
+    //     }
+    //   })
+    // let timeLeftVar = this.secondsToTime(this.state.seconds);
+    // this.setState({ time: timeLeftVar });
+    // if(this.props.appo==!undefined) {
+    //   if((moment.duration(this.props.appo.APPOINT_TIME.diff(moment())).minutes()<16 && 
+    //   moment.duration(this.props.appo.APPOINT_TIME.diff(moment())).minutes()>0)) {
+    //     this.startTimer()
+    //   }
+    // }
 
    
        
+  }
+
+  startarchiveVideo() {
+    axios
+      .post("https://api.opentok.com/v2/partner/47274054/archive", 
+      {
+        sessionId : "1_MX40NzI3NDA1NH5-MTYyNzUyMTEzNDA5NH5MYTRBV05oWTlsaXhVNWU1RjhWbTM4QjZ-UH4",
+        hasAudio : true,
+        hasVideo : true,
+        layout : {
+          type: "bestFit"
+        },
+        name : "test",
+        outputMode : "composed",
+        resolution : "640x480",
+    },
+    {
+      headers: { 'Content-Type': 'application/json' }
+    }
+      )
+      .then(response => {
+        console.log(response);
+      })
+  }
+
+  stoparchiveVideo() {
+    axios
+      .post("https://api.opentok.com/v2/project/47274054/archive", 
+      {
+        sessionId : "1_MX40NzI3NDA1NH5-MTYyNzUyMTEzNDA5NH5MYTRBV05oWTlsaXhVNWU1RjhWbTM4QjZ-UH4",
+        hasAudio : true,
+        hasVideo : true,
+        layout : {
+          type: "bestFit"
+        },
+        name : "테스트용",
+        outputMode : "composed",
+        resolution : "640x480",
+    }
+      )
+      .then(response => {
+        console.log(response);
+      })
   }
 
   startTimer() {
@@ -213,6 +258,12 @@ class ConsultingRoom extends React.Component {
   settingModal = () => {
     this.setState(prevState => ({
       settingmodal: !prevState.settingmodal
+    }))
+  }
+
+  setScreenShare = () => {
+    this.setState(prevState => ({
+      screenshare: !prevState.screenshare
     }))
   }
 
@@ -300,7 +351,7 @@ class ConsultingRoom extends React.Component {
 
   Check = e => {
     e.preventDefault()
-    console.log(this.state)
+    console.log(this.state.screenshare)
   }
 
   postPayment = () => {
@@ -326,7 +377,6 @@ class ConsultingRoom extends React.Component {
       console.log('Set deviceId('+audioEl.sinkId+') in the selected audio element');
    }).catch(error => console.log(error));
     console.log('Audio is being played on ' + audioEl.sinkId);
-    
   }
  
 
@@ -367,7 +417,7 @@ class ConsultingRoom extends React.Component {
       <Fragment>
         
         {/* 환자정보, 버튼 모음 Row */}
-        <Row className="d-flex justify-content-between mb-1">
+        <Row className="d-flex justify-content-between">
         <Helmet>
           <script src="https://static.opentok.com/v2/js/opentok.min.js" type="text/javascript" />
         </Helmet>
@@ -400,6 +450,7 @@ class ConsultingRoom extends React.Component {
               className="mr-1"
               color="black"
               outline
+              onClick={this.setScreenShare}
               type="button">
               화면공유
             </Button>
@@ -407,6 +458,7 @@ class ConsultingRoom extends React.Component {
               className="mr-1"
               color="black"
               outline
+              onClick={this.startarchiveVideo}
               type="button">
               화면녹화
             </Button>
@@ -425,18 +477,19 @@ class ConsultingRoom extends React.Component {
         <Row>
           <Col lg="6" md="12"> 
             <Card className="mb-0" style={{height:"650px", border:"solid #7367ef 1px", backgroundColor:"#efefff"}}>
-              <Row className="col-12 ml-1">
-                <Col lg="12" md="12" className="m-0 p-0">
-                {this.props.dataList.tokbox.TOK_KEY===""?null:
+              <Row className="col-12 p-0">
+                <Col lg="12" md="12">
+                {/* {this.props.dataList.tokbox.TOK_KEY===""?null: */}
                 <Opentok className="col-12"
-                  apikey={this.props.dataList.tokbox.TOK_KEY}
-                  // apikey="47274054"
-                  session={this.props.dataList.tokbox.TOK_SESSION}
-                  // session= "2_MX40NzI3NDA1NH5-MTYyNjgzMTI5Mjc4MX41bzh1SC80WkZGVHhuS3pLek80MUhDRnB-UH4"
-                  token={this.props.dataList.tokbox.TOK_TOKEN}
-                  // token="T1==cGFydG5lcl9pZD00NzI3NDA1NCZzaWc9MjAzZmZmNWQ5YzA1ZWI0NTZiOTgzNmEzZmYwYTVjNDQ2OGM0ZWNmMTpzZXNzaW9uX2lkPTJfTVg0ME56STNOREExTkg1LU1UWXlOamd6TVRJNU1qYzRNWDQxYnpoMVNDODBXa1pHVkhodVMzcExlazgwTVVoRFJuQi1VSDQmY3JlYXRlX3RpbWU9MTYyNjgzMTI5MiZub25jZT0tMjM4NTk2MzgzJnJvbGU9cHVibGlzaGVyJmV4cGlyZV90aW1lPTE2MjY5MTc2OTI="
+                  // apikey={this.props.dataList.tokbox.TOK_KEY}
+                  apikey="47274054"
+                  toglescreenshare={this.state.screenshare}
+                  // session={this.props.dataList.tokbox.TOK_SESSION}
+                  session= "1_MX40NzI3NDA1NH5-MTYyNzUyMTEzNDA5NH5MYTRBV05oWTlsaXhVNWU1RjhWbTM4QjZ-UH4"
+                  // token={this.props.dataList.tokbox.TOK_TOKEN}
+                  token="T1==cGFydG5lcl9pZD00NzI3NDA1NCZzaWc9ZDM2NTNmMDBmZThiN2QwZDViNTBlNzZkNWU2YjZkYWY3MzFkYTRhMjpzZXNzaW9uX2lkPTFfTVg0ME56STNOREExTkg1LU1UWXlOelV5TVRFek5EQTVOSDVNWVRSQlYwNW9XVGxzYVhoVk5XVTFSamhXYlRNNFFqWi1VSDQmY3JlYXRlX3RpbWU9MTYyNzUyMTEzNCZub25jZT0yMTQ0MzE5Njk2JnJvbGU9cHVibGlzaGVyJmV4cGlyZV90aW1lPTE2Mjc2MDc1MzQ="
                 />
-                }
+                {/* } */}
                 </Col>
               </Row>
             </Card>
@@ -634,8 +687,7 @@ class ConsultingRoom extends React.Component {
                     <FormGroup className="align-self-center pt-1">
                       <Input
                         type="text"
-                        value={this.state.cc}
-                        onChange={e => this.setState({ cc: e.target.value })}
+                        
                         disabled
                       />
                     </FormGroup>
@@ -654,8 +706,6 @@ class ConsultingRoom extends React.Component {
                     <FormGroup className="align-self-center pt-1">
                       <Input
                         type="text"
-                        value={this.state.cc}
-                        onChange={e => this.setState({ cc: e.target.value })}
                         disabled
                       />
                     </FormGroup>
@@ -676,8 +726,6 @@ class ConsultingRoom extends React.Component {
                     <FormGroup className="align-self-center pt-1">
                       <Input
                         type="text"
-                        value={this.state.cc}
-                        onChange={e => this.setState({ cc: e.target.value })}
                         disabled
                       />
                     </FormGroup>
@@ -696,8 +744,6 @@ class ConsultingRoom extends React.Component {
                     <FormGroup className="align-self-center pt-1">
                       <Input
                         type="text"
-                        value={this.state.cc}
-                        onChange={e => this.setState({ cc: e.target.value })}
                         disabled
                       />
                     </FormGroup>
@@ -804,7 +850,7 @@ class ConsultingRoom extends React.Component {
               </div>
 
               <div style={{width:"60%"}}>
-                <Card className="mb-1" style={{height:"125px"}}>
+                <Card className="mb-1" style={{height:"60px"}}>
                   <CardTitle className="pl-1" style={{paddingTop:"5px"}}>
                     <b>Present Condition</b>
                   </CardTitle>
@@ -820,16 +866,16 @@ class ConsultingRoom extends React.Component {
                     {file_preview}
                   </CardBody>
                 </Card>
-                <Card className="mb-1" style={{height:"120px"}}>
+                <Card className="mb-1" style={{height:"185px"}}>
                   <CardTitle className="px-1 d-flex justify-content-between" style={{paddingTop:"5px"}}>
                     <b>Past Consulting List</b><Menu onClick={() => this.goPastConsultList(this.props.pinfo.PATIENT_ID)} style={{cursor:"pointer"}}/>
                   </CardTitle>
                   <CardBody className="pl-0 pt-0">
                     <table className="col-12 pt-0 mt-0">
                       <tr>
-                        <th className="text-center">진료과 / 진료의</th>
-                        <th className="text-center">진단명</th>
-                        <th className="text-center">진료일자</th>  
+                        <th className="text-center"><h5 className="text-bold-600">진료과 / 진료의</h5></th>
+                        <th className="text-center"><h5 className="text-bold-600">진단명</h5></th>
+                        <th className="text-center"><h5 className="text-bold-600">진료일자</h5></th>  
                       </tr>
                       {
                         this.props.cslist.map(row =>
@@ -1050,6 +1096,15 @@ class ConsultingRoom extends React.Component {
               </CardBody>
             </Card>
             <div className="pt-0 mt-0 text-right" style={{width:"100%"}}>
+              <Button
+                className="mr-1"
+                color="primary"
+                outline
+                type="button"
+                onClick={this.Check}
+              >
+                확인용 버튼
+              </Button>
               <Button
                 className="mr-1"
                 color="primary"
