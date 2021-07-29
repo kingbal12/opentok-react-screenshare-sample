@@ -689,3 +689,17 @@ export const postPayData = (userid, apponum, paypatient, paytotal) => {
       })
   }
 }
+
+export const putStateComplete = (userid, apnum) => {
+  return dispatch => {
+    axios
+      .put("http://203.251.135.81:9300/v1/doctor/account/hospital-info", {
+        user_id: userid,
+        appoint_num: apnum
+      })
+      .then(response => {
+        console.log(response);
+
+      })
+  }
+}

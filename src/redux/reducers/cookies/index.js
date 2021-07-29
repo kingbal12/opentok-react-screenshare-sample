@@ -26,7 +26,14 @@ export const cookiesReducer = (
     medicaldesc: "",
     userdesc: ""
   },
- 
+  consult: {
+    cc: "",
+    diagnosis: "",
+    txrx: "",
+    recommendation: "",
+    paytotal: "",
+    paypatient: ""
+  },
   events:[]
  
  }, action) => {
@@ -49,11 +56,27 @@ export const cookiesReducer = (
     case "SAVE_MYINFO": {
       return { ...state, myinfo: action.payload }
     }
+    case "SAVE_CONSULT": {
+      return { ...state, consult: action.payload }
+    }
     case "LOGOUT_WITH_JWT": {
-      return { ...state, myinfo: { medicalpart: "01",
+      return { ...state, 
+      myinfo: { 
+        medicalpart: "01",
       medicalable: "",
       medicaldesc: "",
-      userdesc: ""}}
+      userdesc: ""
+        },
+      consult: {
+        cc: "",
+        diagnosis: "",
+        txrx: "",
+        recommendation: "",
+        paytotal: "",
+        paypatient: ""
+      }
+     }
+
     }
     default: {
       return state

@@ -77,3 +77,25 @@ export const saveMyinfo = (
     } })
   }
 }
+
+export const saveCookieConsult = (
+  cc,
+  diagnosis,
+  txrx,
+  recommendation,
+  paytotal,
+  paypatient
+) => {
+  return dispatch => {
+    dispatch({ 
+      type: "SAVE_CONSULT", 
+      payload: {
+        cc,
+        diagnosis,
+        txrx,
+        recommendation,
+        paytotal,
+        paypatient
+    } })
+  }
+}

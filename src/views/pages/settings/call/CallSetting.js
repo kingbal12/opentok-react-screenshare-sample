@@ -1,20 +1,18 @@
 import React from "react"
-import {Form, FormGroup, Button,
-  InputGroup, InputGroupAddon,Input,
+import {
+  Button,
   Card,
   Table,
   CardBody,
   Row,
   Col
 } from "reactstrap"
-import { Check } from "react-feather"
+
 import { history } from "../../../../history"
-import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
+
 import "../../../../assets/scss/pages/authentication.scss"
 import {connect} from "react-redux"
-import userImg from "../../../../assets/img/portrait/small/avatar-s-11.jpg"
-import SliderBasic from "./SliderBasic"
-import { ContextLayout } from "../../../../utility/context/Layout"
+
 import { Fragment } from "react"
 import Select from "react-select"
 import Webcam from "react-webcam";

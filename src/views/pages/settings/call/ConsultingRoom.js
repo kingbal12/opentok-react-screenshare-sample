@@ -28,8 +28,12 @@ import {
   resetVitalData,
   postMDNoteData,
   postPrescriptionData,
-  postPayData
+  postPayData,
+  putStateComplete
 } from "../../../../redux/actions/data-list/"
+import {
+  saveCookieConsult
+} from "../../../../redux/actions/cookies/"
 import { Check } from "react-feather"
 import { history } from "../../../../history"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
@@ -87,10 +91,10 @@ class ConsultingRoom extends React.Component {
     super(props);
     this.state = { 
       streams: [],
-      cc: "",
-      diagnosis: "",
-      txrx: "",
-      recommendation: "",
+      cc: props.concookie.cc,
+      diagnosis: props.concookie.diagnosis,
+      txrx: props.concookie.txrx,
+      recommendation: props.concookie.recommendation,
       pcode: "",
       pname: "",
       paddress: "",
@@ -98,6 +102,8 @@ class ConsultingRoom extends React.Component {
       faxnum: "",
       filename: "",
       file : "",
+      paytotal: props.concookie.paytotal,
+      paypatient: props.concookie.paypatient,
       mdnotemodal: false,
       presmodal: false,
       paymodal: false,
@@ -106,12 +112,29 @@ class ConsultingRoom extends React.Component {
       viewfilemodal: false,
       settingmodal: false,
       screenshare: false,
+      camera:[],
+      mic:[],
+      speaker:[],
+      cameraset:{},
+      micset:{},
+      speakerset:{}
       
     }
     this.state = {time: {},   seconds: 900};
     this.timer = 0;
     this.startTimer = this.startTimer.bind(this);
     this.countDown = this.countDown.bind(this);
+  }
+
+  cookieConsult = () =>{
+    this.props.saveCookieConsult(
+      this.state.cc,
+      this.state.diagnosis,
+      this.state.txrx,
+      this.state.recommendation,
+      this.state.paytotal,
+      this.state.paypatient
+    )
   }
 
   secondsToTime(secs){
@@ -133,6 +156,39 @@ class ConsultingRoom extends React.Component {
 
 
   componentDidMount() {
+
+    (async () => {   
+      await navigator.mediaDevices.getUserMedia({audio: true, video:true});   
+      let devices = await navigator.mediaDevices.enumerateDevices().catch();
+      console.log(devices)
+      let camera = await devices.filter(devices => devices.kind ==="videoinput")
+      let mic = await devices.filter(devices =>devices.kind ==="audioinput")
+      let speaker = await devices.filter(devices =>devices.kind ==="audiooutput")
+
+      let modifiedcamera = new Array();
+        for (let i=0; i<camera.length; i++) {
+          let item = {deviceId: camera[i].deviceId, groupId: camera[i].groupId, kind: camera[i].kind, value: camera[i].label, label: camera[i].label }
+          modifiedcamera.push(item);
+        }
+
+      let modifiedmic = new Array();
+        for (let i=0; i<mic.length; i++) {
+          let item = {deviceId: mic[i].deviceId, groupId: mic[i].groupId, kind: mic[i].kind, value: mic[i].label, label: mic[i].label }
+          modifiedmic.push(item);
+        }
+
+      let modifiedspeaker = new Array();
+        for (let i=0; i<speaker.length; i++) {
+          let item = {deviceId: speaker[i].deviceId, groupId: speaker[i].groupId, kind: speaker[i].kind, value: speaker[i].label, label: speaker[i].label }
+          modifiedspeaker.push(item);
+        }
+
+
+      await this.setState({camera:modifiedcamera})
+      await this.setState({mic:modifiedmic})
+      await this.setState({speaker:modifiedspeaker})
+      
+    })();
     // axios
     //   .get("http://203.251.135.81:9300/v1/doctor/treatment/pharmacy", {
     //     params: {
@@ -269,6 +325,14 @@ class ConsultingRoom extends React.Component {
 
   goHome = e => {
     e.preventDefault()
+    this.props.saveCookieConsult(
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    )
     history.push("/analyticsDashboard")
   }
 
@@ -281,6 +345,12 @@ class ConsultingRoom extends React.Component {
       this.state.txrx,
       this.state.recommendation
       )
+
+    this.props.putStateComplete(
+      this.props.user.login.values.loggedInUser.username,
+      this.props.appo.APPOINT_NUM
+    )
+
     this.setState(prevState => ({
       mdnotemodal: !prevState.mdnotemodal
     }))
@@ -319,6 +389,10 @@ class ConsultingRoom extends React.Component {
       this.props.appo.APPOINT_NUM,
       this.state.file,
       this.state.filename
+      )
+      this.props.putStateComplete(
+        this.props.user.login.values.loggedInUser.username,
+        this.props.appo.APPOINT_NUM
       )
     }
     this.setState(prevState => ({
@@ -363,6 +437,10 @@ class ConsultingRoom extends React.Component {
       this.props.appo.APPOINT_NUM,
       this.state.paypatient,
       this.state.paytotal
+      )
+      this.props.putStateComplete(
+        this.props.user.login.values.loggedInUser.username,
+        this.props.appo.APPOINT_NUM
       )
     }
     this.setState(prevState => ({
@@ -495,6 +573,84 @@ class ConsultingRoom extends React.Component {
             </Card>
           </Col>
           <Col lg="6" md="12">
+          <Modal
+              style={{position:"absolute", right:"4%", top:"25%", width:"45%"}}
+              backdrop={false}
+              isOpen={this.state.settingmodal}
+              toggle={this.settingModal}
+              className="modal-lg"
+            >
+              <ModalHeader toggle={this.settingModal}>
+                <b>영상진료 설정</b>
+              </ModalHeader>
+              <ModalBody>
+                <Row className="mt-1">
+                  <Col lg="3" md="12" className="align-self-center">
+                    <h5 className="text-bold-600">카메라 설정</h5>
+                  </Col>
+                  <Col lg="6" md="12">
+                    <Select 
+                      className="React"
+                      classNamePrefix="select"
+                      // defaultValue={this.state.camera[0]}
+                      name="color"
+                      options={this.state.camera}
+                      onChange={e => this.setState({ cameraset: e})}
+                    />
+                  </Col>
+                  <Col lg="3" md="12">
+                    <Button.Ripple outline color="primary" size="md" onClick={this.setCamera}>
+                      적용
+                    </Button.Ripple>
+                  </Col>
+                </Row>    
+                <Row className="mt-1">
+                  <Col lg="3" md="12" className="align-self-center">
+                    <h5 className="text-bold-600">마이크 설정</h5>
+                  </Col>
+                  <Col lg="6" md="12">
+                    <Select 
+                      className="React"
+                      classNamePrefix="select"
+                      // defaultValue={this.state.mic[0]}
+                      name="color"
+                      options={this.state.mic}
+                      onChange={e => this.setState({ micset: e})}
+                    />
+                  </Col>
+                  <Col lg="3" md="12">
+                    <Button.Ripple outline color="primary" size="md">
+                      적용
+                    </Button.Ripple>
+                  </Col>
+                </Row>
+                <Row className="mt-1">
+                  <Col lg="3" md="12" className="align-self-center">
+                    <h5 className="text-bold-600">스피커 설정</h5>
+                  </Col>
+                  <Col lg="6" md="12">
+                    <Select 
+                      className="React"
+                      classNamePrefix="select"
+                      // defaultValue={this.state.speaker[0]}
+                      name="color"
+                      options={this.state.speaker}
+                      onChange={e => this.setState({ speakerset: e})}
+                    />
+                  </Col>
+                  <Col lg="3" md="12">
+                    <Button.Ripple outline color="primary" size="md" onClick={this.setSpeaker}>
+                      저장 후 닫기
+                    </Button.Ripple>
+                  </Col>
+                </Row>  
+              </ModalBody>
+              <ModalFooter>
+                <Button color="primary" onClick={this.settingModal}>
+                  저장
+                </Button>
+              </ModalFooter>
+            </Modal>
             <Modal
               style={{position:"absolute", right:"4%", top:"25%", width:"45%"}}
               backdrop={false}
@@ -1137,6 +1293,7 @@ class ConsultingRoom extends React.Component {
                 color="primary"
                 outline
                 type="button"
+                onClick={this.cookieConsult}
               >
                 Save
               </Button>
@@ -1169,7 +1326,8 @@ const mapStateToProps = state => {
     tempdata: state.dataList.TEMP,
     bsdata : state.dataList.BS,
     wedata : state.dataList.WE,
-    spo2data : state.dataList.SPO2
+    spo2data : state.dataList.SPO2,
+    concookie : state.cookies.consult
   }
 }
 
@@ -1179,4 +1337,6 @@ export default connect(
     resetVitalData,
     postMDNoteData,
     postPrescriptionData,
-    postPayData}) (ConsultingRoom)
+    postPayData,
+    putStateComplete,
+    saveCookieConsult}) (ConsultingRoom)
