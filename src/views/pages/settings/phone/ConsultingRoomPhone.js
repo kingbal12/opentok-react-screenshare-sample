@@ -655,14 +655,14 @@ class PatientInfo extends React.Component {
           <Col lg="6" md="12" className="d-flex text-right">
           
             <Col className="mx-5 text-left" style={{border:"1px solid #B8B8C2", borderRadius: "5px"}}>
-            {this.props.appo===undefined||this.props.appo.APPOINT_KIND==="2"
+            {/* {this.props.appo===undefined||this.props.appo.APPOINT_KIND==="2"
               ?null:moment.duration(this.props.appo.APPOINT_TIME.diff(moment())).minutes()<16 && moment.duration(this.props.appo.APPOINT_TIME.diff(moment())).minutes()>0?
                 <h4 className="text-primary" style={{marginTop:"0.5rem"}}>
                   진료 시작까지&nbsp; 
                     {moment.duration(this.props.appo.APPOINT_TIME.diff(moment())).minutes()}
                   분 남았습니다.
                 </h4>
-              : null}
+              : null} */}
             </Col>
             
             <Button
@@ -703,7 +703,7 @@ class PatientInfo extends React.Component {
                 </div>
               </CardBody>
             </Card>
-            <Card className="mb-1" style={{height:"350px", border:"solid silver 1px"}}>
+            <Card className="mb-1" style={{height:"310px", border:"solid silver 1px"}}>
               <CardTitle className="px-1 d-flex justify-content-between" style={{paddingTop:"5px"}}>
                 <b>Past Consulting List</b><Menu onClick={() => this.goPastConsultList(this.props.pinfo.PATIENT_ID)} style={{cursor:"pointer"}}/>
               </CardTitle>
@@ -772,7 +772,7 @@ class PatientInfo extends React.Component {
               </div>
 
               <div style={{width:"50%"}}>
-                <Card className="mb-1" style={{height:"144px", border:"solid silver 1px"}}>
+                <Card className="mb-1" style={{height:"119px", border:"solid silver 1px"}}>
                   <CardTitle className="pl-1" style={{paddingTop:"5px"}}>
                     <b>Present Condition</b>
                   </CardTitle>
@@ -784,7 +784,7 @@ class PatientInfo extends React.Component {
                   </CardBody>
 
                 </Card>
-                <Card className="mb-1" style={{height:"144px", border:"solid silver 1px"}}>
+                <Card className="mb-1" style={{height:"169px", border:"solid silver 1px"}}>
                   <CardTitle className="pl-1" style={{paddingTop:"5px"}}>
                     <b>Files</b>
                   </CardTitle>
@@ -795,7 +795,7 @@ class PatientInfo extends React.Component {
               </div>
             </div>
             
-            <Card className="mb-1" style={{height:"350px", border:"solid silver 1px"}}>
+            <Card className="mb-1" style={{height:"310px", border:"solid silver 1px"}}>
               <CardTitle className="px-1 d-flex justify-content-between" style={{paddingTop:"5px"}}>
                 <b>Vital Data</b> <Menu onClick={this.goVitalData} style={{cursor:"pointer"}}/>
               </CardTitle>

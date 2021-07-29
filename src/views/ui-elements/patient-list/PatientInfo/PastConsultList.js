@@ -205,7 +205,7 @@ class PastConsultList extends React.Component {
               </table>
             </Col>   
           </Row>
-        <h4 className="page-header text-bold-600 ml-3">Past Consulting List</h4>
+        <h4 className="page-header text-bold-600 ml-2 mt-3">Past Consulting List</h4>
         <DataListConfig parsedFilter={queryString.parse(this.props.location.search)}/>
         
         

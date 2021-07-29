@@ -4,7 +4,12 @@ import {
   Progress,
   Card,
   Input,
-  Row
+  Row,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  CardBody
 } from "reactstrap"
 import DataTable from "react-data-table-component"
 import classnames from "classnames"
@@ -35,9 +40,10 @@ import {
 import Sidebar from "./DataListSidebar"
 import Chip from "../../../../components/@vuexy/chips/ChipComponent"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
-
+import moment from "moment"
 import "../../../../assets/scss/plugins/extensions/react-paginate.scss"
 import "../../../../assets/scss/pages/data-list.scss"
+import Axios from "axios"
 
 const chipColors = {
   "on hold": "warning",
@@ -173,7 +179,7 @@ class DataListConfig extends Component {
         selector: "age",
         sortable: false,
         center:true,
-        cell: row => <p className="text-bold-500 mb-0">{row.CONTENTS}</p>
+        cell: row => <p className="text-bold-500 mb-0">{row.AUTH_NM}</p>
       },
       {
         name: "작성일",
@@ -181,7 +187,7 @@ class DataListConfig extends Component {
         sortable: false,
         center:true,
         cell: row => (
-          <p className="text-bold-500 text-truncate mb-0">{row.CREATE_TIME}</p>
+          <p className="text-bold-500 text-truncate mb-0">{moment(row.CREATE_TIME).format("MMMM, DD")}</p>
         )
       }
     ],
@@ -193,7 +199,11 @@ class DataListConfig extends Component {
     selected: [],
     totalRecords: 0,
     sortIndex: [],
-    addNew: ""
+    addNew: "",
+    seq:0,
+    faqmodal: false,
+    faqtitle: "",
+    faqcontent:""
   }
 
   thumbView = this.props.thumbView
@@ -295,7 +305,7 @@ class DataListConfig extends Component {
   search = e => {
     e.preventDefault()
     if(this.state.name!==""){
-      this.props.getNameFaqData(this.state.user,5,1,this.state.name)
+      this.props.getNameFaqData(5,1,this.state.name)
     }
     
   }
@@ -335,6 +345,32 @@ class DataListConfig extends Component {
     this.setState({ currentPage: page.selected })
   }
 
+  getFaqeOne = (seq) => {
+    Axios
+      .get("http://203.251.135.81:9300/v1/doctor/setting/faq", {
+        params: {
+          seq: seq
+        }
+      })
+      .then(response => {
+        if(response.data.status==="200") {
+          console.log(response)
+          this.setState({
+            faqtitle: response.data.data.TITLE,
+            faqcontent: response.data.data.CONTENTS,
+            faqmodal: true
+          })
+        } else {
+          alert("공지사항을 불러오지 못하였습니다.")
+        }
+      })
+  }
+
+  faqModal = () => {
+    this.setState(prevState => ({
+      faqmodal: !prevState.faqmodal
+    }))
+  }
 
   render() {
     let {
@@ -354,6 +390,27 @@ class DataListConfig extends Component {
         className={`data-list ${
           this.props.thumbView ? "thumb-view" : "list-view"
         }`}>
+        <Modal
+          isOpen={this.state.faqmodal}
+          toggle={this.faqModal}
+          className="modal-dialog-centered modal-lg"
+        >
+          <ModalHeader toggle={this.faqModal}>
+            {this.state.faqtitle}
+          </ModalHeader>
+          <ModalBody className="mx-1">
+            <Card className="mt-1">
+              <CardBody className="pt-1">
+                {this.state.faqcontent}
+              </CardBody>
+            </Card>
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this.faqModal}>
+              확인
+            </Button>
+          </ModalFooter>
+        </Modal>
           {/* <Button className="ml-2" color='primary' outline onClick={this.seeState}>검색</Button> */}
         <DataTable
           columns={columns}
@@ -381,8 +438,10 @@ class DataListConfig extends Component {
           subHeader
           // selectableRows
           responsive
-          // pointerOnHover
+          pointerOnHover
           selectableRowsHighlight
+          onRowClicked={data =>
+            this.getFaqeOne( data.SEQ )}
           onSelectedRowsChange={data =>
             this.setState({ selected: data.selectedRows })
           }

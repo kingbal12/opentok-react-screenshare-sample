@@ -14,10 +14,11 @@ import { history } from "../../../../history"
 import {
   Edit,
   Trash,
-  ChevronDown,
   Check,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  ChevronDown,
+  ChevronUp
 } from "react-feather"
 import { connect } from "react-redux"
 import {
@@ -42,6 +43,7 @@ import "../../../../assets/scss/pages/data-list.scss"
 import moment from "moment"
 import previmg from "../../../../assets/img/dashboard/ID13_11_file.png"
 import prescription from "../../../../assets/img/dashboard/ID14_12_prescription.png"
+import { Collapse } from "bootstrap"
 
 const chipColors = {
   "on hold": "warning",
@@ -62,6 +64,8 @@ const selectedStyle = {
     }
   }
 }
+
+
 
 
 
@@ -179,7 +183,7 @@ const ActionsComponent = props => {
 
 const CustomHeader = props => {
   return (
-    <div>    
+    <div style={{height:"0%"}}>    
     
     </div>
   )
@@ -435,6 +439,10 @@ class DataListConfig extends Component {
           expandableRowsComponent={<ExpandedComponent />}
           pagination
           paginationServer
+          expandableIcon={{
+            collapsed:<ChevronDown/>,
+            expanded:<ChevronUp/>
+          }}
           paginationComponent={() => (
             <ReactPaginate
               previousLabel={<ChevronLeft size={15} />}
@@ -453,7 +461,8 @@ class DataListConfig extends Component {
             />
           )}
           noHeader
-          subHeader
+          // subHeader
+
           // selectableRows
           responsive
           pointerOnHover
