@@ -172,7 +172,7 @@ class ConsultingRoom extends React.Component {
 
   startarchiveVideo() {
     axios
-      .post("https://api.opentok.com/v2/partner/47274054/archive", 
+      .post("https://api.opentok.com/v2/projcect/47274054/archive", 
       {
         sessionId : "1_MX40NzI3NDA1NH5-MTYyNzUyMTEzNDA5NH5MYTRBV05oWTlsaXhVNWU1RjhWbTM4QjZ-UH4",
         hasAudio : true,
