@@ -1,6 +1,7 @@
 // src/components/Subscriber.js
 import React from 'react';
 import { OTSubscriber } from 'opentok-react';
+import { Button } from 'bootstrap';
 // import CheckBox from './CheckBox';
 
 class Subscriber extends React.Component {
@@ -10,7 +11,8 @@ class Subscriber extends React.Component {
     this.state = {
       error: null,
       audio: true,
-      video: true
+      video: true,
+      onsubscribe: false
     };
   }
 
@@ -26,6 +28,12 @@ class Subscriber extends React.Component {
     this.setState({ error: `Failed to subscribe: ${err.message}` });
   }
 
+  onSubscribe = () => {
+    this.setState(prevState => ({
+      onsubscribe: !prevState.onsubscribe
+    }))
+  }
+
   render() {
     return (
       <div className="subscriber">
@@ -36,9 +44,9 @@ class Subscriber extends React.Component {
             subscribeToAudio: this.state.audio,
             subscribeToVideo: this.state.video
           }}
+          onSubscribe={this.onSubscribe}
           onError={this.onError}
         />
-        
       </div>
     );
   }

@@ -28,7 +28,7 @@ class FindId extends React.Component {
   handleLogin = e => {
     e.preventDefault()
     axios
-          .get("http://203.251.135.81:9300/v1/doctor/account/user-id", {
+          .get("https://health.iot4health.co.kr:9300/v1/doctor/account/user-id", {
             params: {
               f_name: this.state.name,
               birth_dt: this.state.bt_date,

@@ -83,7 +83,7 @@ const ExpandedComponent = props => {
         <embed
           width="70px"
           height="80px" 
-          src={"http://203.251.135.81:9300"+props.data.FILE_PATH
+          src={"https://health.iot4health.co.kr:9300"+props.data.FILE_PATH
           +props.data.FILE_NAME}
           className="dz-img"
           alt=""
@@ -105,7 +105,7 @@ const ExpandedComponent = props => {
         <embed 
           width="70px"
           height="80px" 
-          src={"http://203.251.135.81:9300"+props.data.RX_PATH
+          src={"https://health.iot4health.co.kr:9300"+props.data.RX_PATH
           +props.data.RX_NAME}
           style={{cursor:"pointer"}} 
           // onClick={this.viewPressModal}

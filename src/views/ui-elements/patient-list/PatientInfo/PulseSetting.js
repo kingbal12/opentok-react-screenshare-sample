@@ -38,7 +38,7 @@ class VitalDataSetting extends React.Component {
     e.preventDefault()
 
     axios
-    .put("http://203.251.135.81:9300/v1/doctor/vital/base-pulse", {
+    .put("https://health.iot4health.co.kr:9300/v1/doctor/vital/base-pulse", {
         patient_id: this.props.vitaldata.USER_ID,
         pulse_val1 : Number(this.state.normalBPM),
         pulse_val2 : Number(this.state.dangerBPM)

@@ -698,6 +698,7 @@ class NavbarUser extends React.PureComponent {
                 height="40"
                 width="40"
                 alt="avatar"
+                style={{objectFit:"cover"}}
               />
             </span>
           </DropdownToggle>

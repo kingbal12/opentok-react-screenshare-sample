@@ -21,7 +21,7 @@ import { putmyinfo, putmyinfonfile } from "../../../../redux/actions/auth/regist
 import { connect } from "react-redux"
 import axios from "axios"
 import previmg from "../../../../assets/img/portrait/small/Sample_User_Icon.png"
-import { saveMyinfo } from "../../../../redux/actions/cookies"
+import { saveMyinfo, saveImage } from "../../../../redux/actions/cookies"
 import { FormattedMessage } from "react-intl"
 
 class MyInfo extends React.Component {
@@ -39,7 +39,9 @@ class MyInfo extends React.Component {
       medicaldesc: props.cookiemyinfo.medicaldesc,
       userdesc: props.cookiemyinfo.userdesc,
       previewURL : "",
-      previewmodal: false
+      previewmodal: false,
+      getfilepath: "",
+      getfilename: ""
     }
   }
 
@@ -64,7 +66,7 @@ class MyInfo extends React.Component {
     if(this.props.cookiemyinfo.medicalable===""
     ){
       axios
-          .get("http://203.251.135.81:9300/v1/doctor/account/user-info", {
+          .get("https://health.iot4health.co.kr:9300/v1/doctor/account/user-info", {
             params: {
               user_id: this.state.userid
             }
@@ -83,6 +85,8 @@ class MyInfo extends React.Component {
               }
               this.setState({
                 name: myinfo.F_NAME,
+                getfilepath: myinfo.FILE_PATH,
+                getfilename: myinfo.FILE_NAME,
                 medicalpart: myinfo.MEDICAL_PART,
                 medicalable: myinfo.MEDICAL_ABLE,
                 medicaldesc: myinfo.MEDICAL_DESC,
@@ -139,6 +143,9 @@ class MyInfo extends React.Component {
         this.state.userdesc,    
         this.state.previewURL
       )
+      this.props.saveImage(
+        this.state.filename
+      )
     }
     
   }
@@ -148,23 +155,31 @@ class MyInfo extends React.Component {
   render() {
     let profile_preview = null;
     if(this.props.user.login.values.loggedInUser.file_path !== ''&&this.state.file===""&&this.state.filename===""){
+      profile_preview =
+        <img
+          width="150px"
+          height="150px" 
+          src={"https://health.iot4health.co.kr:9300"+this.state.getfilepath
+              +this.state.getfilename } 
+          className="dz-img" 
+          alt="" 
+        />
+
+    } 
+    // else if (this.props.user.login.values.loggedInUser.file_name!==this.props.user.login.values.loggedInUser.username+"-"+this.state.filename
+    //   && this.state.file !== "" && this.state.filename !== ""){
+    //   profile_preview =
+    //     <img
+    //       width="150px"
+    //       height="150px" 
+    //       src={"https://health.iot4health.co.kr:9300/images/doc-img/"
+    //           +this.props.user.login.values.loggedInUser.username+"-"+this.state.filename } 
+    //       className="dz-img" 
+    //       alt="" 
+    //     />
+    // }
+    else if (this.state.file !== "" && this.state.filename !== "") {
       profile_preview = 
-      <div className="dz-thumb ">
-        <div className="dz-thumb-inner">
-          <img
-            width="150px"
-            height="150px" 
-            src={"http://203.251.135.81:9300"+this.props.user.login.values.loggedInUser.file_path
-                +this.props.user.login.values.loggedInUser.file_name } 
-            className="dz-img" 
-            alt="" 
-            />
-        </div>
-      </div>
-    } else if (this.state.file !== "" && this.state.filename !== "") {
-      profile_preview = 
-      <div className="dz-thumb ">
-        <div className="dz-thumb-inner">
           <img
             width="150px"
             height="150px" 
@@ -172,13 +187,10 @@ class MyInfo extends React.Component {
             className="dz-img" 
             alt="" 
             />
-        </div>
-      </div>
+
 
     }else {
       profile_preview = 
-      <div className="dz-thumb ">
-        <div className="dz-thumb-inner">  
           <img
             width="150px"
             height="150px" 
@@ -187,8 +199,7 @@ class MyInfo extends React.Component {
             style={{borderRadius:"100%"}} 
             alt="" 
             />
-        </div>
-      </div>
+
     }
     return (
       <Row className="m-0 justify-content-center">
@@ -241,7 +252,7 @@ class MyInfo extends React.Component {
                           label="  "
                           onChange={this.handleFileOnChange}/> 
                       </InputGroup>
-                      <Row className="justify-content-md-center">{profile_preview}</Row>
+                      <div >{profile_preview}</div>
                     </FormGroup> 
                     <FormGroup className="form-label-group d-flex justify-content-between">
                       <div className="col-2 align-self-center"><b>진료과<span className="text-danger">(필수)</span></b></div>
@@ -429,4 +440,4 @@ const mapStateToProps = state => {
     cookiemyinfo: state.cookies.myinfo
   }
 }
-export default connect(mapStateToProps, {putmyinfo, putmyinfonfile, saveMyinfo})(MyInfo)
+export default connect(mapStateToProps, {putmyinfo, putmyinfonfile, saveMyinfo, saveImage})(MyInfo)

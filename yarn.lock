@@ -10846,6 +10846,11 @@ react-helmet@^6.1.0:
     react-fast-compare "^3.1.1"
     react-side-effect "^2.1.0"
 
+react-horizontal-scrolling-menu@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-horizontal-scrolling-menu/-/react-horizontal-scrolling-menu-2.0.1.tgz#df3796d5ba14634bb20c7c49d4c313ea2f64b652"
+  integrity sha512-z58fMI99bPDYi8pm8ghaoS4L191sYzYzELWgKZYHTzh1vYiz6ecjDynSlaZ5ioQaERVRAVZeDUGWE+SxUXVxOw==
+
 react-id-swiper@~2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/react-id-swiper/-/react-id-swiper-2.4.0.tgz#7080b2e49f2a6db82649360c2ac218eb50facd21"

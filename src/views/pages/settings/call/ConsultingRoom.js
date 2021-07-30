@@ -51,7 +51,8 @@ import Opentok from "./opentok"
 import previmg from "../../../../assets/img/dashboard/ID13_11_file.png"
 import moment from "moment"
 import Select from "react-select"
-import Webcam from "react-webcam";
+import PerfectScrollbar from "perfect-scrollbar"
+import ScrollMenu from 'react-horizontal-scrolling-menu'
 
 class Cslist extends React.Component { 
   render() { 
@@ -120,13 +121,11 @@ class ConsultingRoom extends React.Component {
       speakerset:{}
       
     }
-    this.state = {time: {},   seconds: 900};
-    this.timer = 0;
-    this.startTimer = this.startTimer.bind(this);
-    this.countDown = this.countDown.bind(this);
+
   }
 
   cookieConsult = () =>{
+    
     this.props.saveCookieConsult(
       this.state.cc,
       this.state.diagnosis,
@@ -135,28 +134,13 @@ class ConsultingRoom extends React.Component {
       this.state.paytotal,
       this.state.paypatient
     )
+    alert("진료노트, 결제정보가 임시저장 되었습니다")
   }
 
-  secondsToTime(secs){
-    let hours = Math.floor(secs / (60 * 60));
 
-    let divisor_for_minutes = secs % (60 * 60);
-    let minutes = Math.floor(divisor_for_minutes / 60);
-
-    let divisor_for_seconds = divisor_for_minutes % 60;
-    let seconds = Math.ceil(divisor_for_seconds);
-
-    let obj = {
-      "h": hours,
-      "m": minutes,
-      "s": seconds
-    };
-    return obj;
-  }
 
 
   componentDidMount() {
-
     (async () => {   
       await navigator.mediaDevices.getUserMedia({audio: true, video:true});   
       let devices = await navigator.mediaDevices.enumerateDevices().catch();
@@ -190,7 +174,7 @@ class ConsultingRoom extends React.Component {
       
     })();
     // axios
-    //   .get("http://203.251.135.81:9300/v1/doctor/treatment/pharmacy", {
+    //   .get("https://health.iot4health.co.kr:9300/v1/doctor/treatment/pharmacy", {
     //     params: {
     //       patient_id: this.props.pinfo.PATIENT_ID
     //     }
@@ -213,14 +197,7 @@ class ConsultingRoom extends React.Component {
     //       alert("약국정보가 없습니다.")
     //     }
     //   })
-    // let timeLeftVar = this.secondsToTime(this.state.seconds);
-    // this.setState({ time: timeLeftVar });
-    // if(this.props.appo==!undefined) {
-    //   if((moment.duration(this.props.appo.APPOINT_TIME.diff(moment())).minutes()<16 && 
-    //   moment.duration(this.props.appo.APPOINT_TIME.diff(moment())).minutes()>0)) {
-    //     this.startTimer()
-    //   }
-    // }
+    
 
    
        
@@ -228,7 +205,7 @@ class ConsultingRoom extends React.Component {
 
   startarchiveVideo() {
     axios
-      .post("https://api.opentok.com/v2/projcect/47274054/archive", 
+      .post("https://api.opentok.com/v2/partner/47274054/archive", 
       {
         sessionId : "1_MX40NzI3NDA1NH5-MTYyNzUyMTEzNDA5NH5MYTRBV05oWTlsaXhVNWU1RjhWbTM4QjZ-UH4",
         hasAudio : true,
@@ -483,7 +460,7 @@ class ConsultingRoom extends React.Component {
         <img
           width="50px"
           height="50px" 
-          src={"http://203.251.135.81:9300"+this.props.appo.FILE_PATH
+          src={"https://health.iot4health.co.kr:9300"+this.props.appo.FILE_PATH
           +this.props.appo.FILE_NAME}
           className="dz-img"
           alt=""
@@ -495,7 +472,7 @@ class ConsultingRoom extends React.Component {
       <Fragment>
         
         {/* 환자정보, 버튼 모음 Row */}
-        <Row className="d-flex justify-content-between">
+        <Row className="d-flex justify-content-between mb-1">
         <Helmet>
           <script src="https://static.opentok.com/v2/js/opentok.min.js" type="text/javascript" />
         </Helmet>
@@ -522,7 +499,6 @@ class ConsultingRoom extends React.Component {
               color="black"
               outline
               type="button">
-              {this.state.time.m} : {this.state.time.s}
             </Button>
             <Button
               className="mr-1"
@@ -544,7 +520,8 @@ class ConsultingRoom extends React.Component {
               color="black"
               outline
               type="button"
-              onClick={()=> history.push("/pages/callsetting")}
+              // onClick={()=> history.push("/pages/callsetting")}
+              onClick={this.settingModal}
             >
               설정
             </Button>
@@ -553,7 +530,7 @@ class ConsultingRoom extends React.Component {
 
         {/* 화상통화, 생체데이터, 등등 */}
         <Row>
-          <Col lg="6" md="12"> 
+          <Col lg="6" xl="6" sm="12" md="12"> 
             <Card className="mb-0" style={{height:"650px", border:"solid #7367ef 1px", backgroundColor:"#efefff"}}>
               <Row className="col-12 p-0">
                 <Col lg="12" md="12">
@@ -640,14 +617,14 @@ class ConsultingRoom extends React.Component {
                   </Col>
                   <Col lg="3" md="12">
                     <Button.Ripple outline color="primary" size="md" onClick={this.setSpeaker}>
-                      저장 후 닫기
+                      적용
                     </Button.Ripple>
                   </Col>
                 </Row>  
               </ModalBody>
               <ModalFooter>
                 <Button color="primary" onClick={this.settingModal}>
-                  저장
+                  저장 후 닫기
                 </Button>
               </ModalFooter>
             </Modal>
@@ -1039,36 +1016,6 @@ class ConsultingRoom extends React.Component {
                         )
                       }
                     </table>
-                    {/* <div className="col-4 text-center pt-0">
-                      <h6><span className="text-bold-600">진료과/진료의</span></h6>
-
-                        {
-                          this.props.cslist.map(row =>
-                            (<CunsultName key={row.APPOINT_TIME} row={row}/>)
-                          )
-                        }
-
-                    </div>
-                    <div className="col-4 text-center">
-                      <h6><span className="text-bold-600">진단명</span></h6>
-
-                        {
-                          this.props.cslist.map(row =>
-                            (<NoteCC key={row.APPOINT_TIME} row={row}/>)
-                          )
-                        }
-
-                    </div>
-                    <div className="col-4 text-center">
-                      <h6><span className="text-bold-600">진료일자</span></h6>
-
-                        {
-                          this.props.cslist.map(row =>
-                            (<AppointTime key={row.APPOINT_TIME} row={row}/>)
-                          )
-                        }
-
-                    </div> */}
                   </CardBody>
                 </Card>
               </div>

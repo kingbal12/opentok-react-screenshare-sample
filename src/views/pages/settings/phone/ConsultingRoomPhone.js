@@ -286,7 +286,7 @@ class PatientInfo extends React.Component {
         <img
           width="70px"
           height="70px" 
-          src={"http://203.251.135.81:9300"+this.props.appo.FILE_PATH
+          src={"https://health.iot4health.co.kr:9300"+this.props.appo.FILE_PATH
           +this.props.appo.FILE_NAME}
           className="dz-img"
           alt=""
@@ -311,7 +311,7 @@ class PatientInfo extends React.Component {
               {this.props.appo===null||this.props.appo.FILE_NAME===""?null:
               <img
                 maxwidth="500px"
-                src={"http://203.251.135.81:9300"+this.props.appo.FILE_PATH
+                src={"https://health.iot4health.co.kr:9300"+this.props.appo.FILE_PATH
                 +this.props.appo.FILE_NAME}
                 className="dz-img"
                 alt=""

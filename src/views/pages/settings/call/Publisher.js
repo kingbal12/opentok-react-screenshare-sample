@@ -38,6 +38,7 @@ class Publisher extends React.Component {
                 publishAudio: this.props.micstate,
                 publishVideo: this.props.camerastate,
                 videoSource: this.props.togglescreenshare === true ? 'screen' : undefined
+                
             }}
             onError={this.onError}
             />

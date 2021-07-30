@@ -116,7 +116,7 @@ class Register extends React.Component {
     data.append('user_desc', userdesc)
 
     axios
-      .put("http://203.251.135.81:9300/v1/doctor/account/user-info", data)
+      .put("https://health.iot4health.co.kr:9300/v1/doctor/account/user-info", data)
       .then(response => {
         let register4status;
 

@@ -42,7 +42,7 @@ class VitalDataSetting extends React.Component {
     e.preventDefault()
     
     axios
-    .put("http://203.251.135.81:9300/v1/doctor/vital/base-glucose", {
+    .put("https://health.iot4health.co.kr:9300/v1/doctor/vital/base-glucose", {
         patient_id: this.props.vitaldata.USER_ID,
         fast_val1 : Number(this.state.normalfasting),
         fast_val2 : Number(this.state.alertfasting),

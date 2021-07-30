@@ -49,7 +49,7 @@ class Register extends React.Component {
 postPhone = e => {
   e.preventDefault()
   axios
-      .post("http://203.251.135.81:9300/signup-sms", {
+      .post("https://health.iot4health.co.kr:9300/signup-sms", {
         mobile_num: this.state.phonenum
       })
       .then(response => {
@@ -66,7 +66,7 @@ postPhone = e => {
 auth = e => {
   e.preventDefault()
   axios
-      .get("http://203.251.135.81:9300/signup-sms", {
+      .get("https://health.iot4health.co.kr:9300/signup-sms", {
         params:{
           mobile_num: this.state.phonenum,
           auth_code: Number(this.state.phonauthnum)
@@ -164,7 +164,7 @@ handleComplete = (data) => {
   postBusinessNumber = businessnumber => {
     console.log("작동됨",businessnumber)
       axios
-        .get("http://203.251.135.81:9300/v1/doctor/account/hospital-verify", {
+        .get("https://health.iot4health.co.kr:9300/v1/doctor/account/hospital-verify", {
           params: {
             business_num: businessnumber,
           }

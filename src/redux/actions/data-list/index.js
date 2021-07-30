@@ -17,7 +17,7 @@ import moment from "moment"
 export const gettokbox = (userid, appointnum) => {
   return dispatch => {
     axios
-      .get("http://203.251.135.81:9300/v1/doctor/treatment/video-call", {
+      .get("https://health.iot4health.co.kr:9300/v1/doctor/treatment/video-call", {
         params: {
           user_id : userid,
           appoint_num : appointnum
@@ -45,7 +45,7 @@ export const gettokbox = (userid, appointnum) => {
 export const getPaymentData = (userid, startdate, enddate, pageamount, pagenum) => {
   return async dispatch => {
     await axios
-    .get("http://203.251.135.81:9300/v1/doctor/treatment/payments", {
+    .get("https://health.iot4health.co.kr:9300/v1/doctor/treatment/payments", {
       params: {
         user_id: userid,
         start_date: startdate,
@@ -75,7 +75,7 @@ export const getAppData = (userid, pageamount, pagenum) => {
   let npagenum = Number(pagenum);
   return async dispatch => {
     await axios
-    .get("http://203.251.135.81:9300/v1/doctor/appointment/dashboard", {
+    .get("https://health.iot4health.co.kr:9300/v1/doctor/appointment/dashboard", {
       params: {
         user_id: userid,
         start_date: new Date(),
@@ -122,7 +122,7 @@ export const getData = (userid, pageamount, pagenum) => {
   let npagenum = Number(pagenum);
   return async dispatch => {
     await axios
-      .get("http://203.251.135.81:9300/v1/doctor/patient/patients", {
+      .get("https://health.iot4health.co.kr:9300/v1/doctor/patient/patients", {
         params: {
           user_id: userid,
           page_amount: npagemount,
@@ -171,7 +171,7 @@ export const getData = (userid, pageamount, pagenum) => {
 export const getNameData = (userid, pageamount, pagenum, fname) => {
   return async dispatch => {
     await axios
-      .get("http://203.251.135.81:9300/v1/doctor/patient/patients", {
+      .get("https://health.iot4health.co.kr:9300/v1/doctor/patient/patients", {
         params: {
           user_id: userid,
           page_amount: pageamount,
@@ -224,7 +224,7 @@ export const getNameData = (userid, pageamount, pagenum, fname) => {
 export const getPatientInfo = (userid,patientid) => {
   return async dispatch => {
     await axios
-      .get("http://203.251.135.81:9300/v1/doctor/patient/patient-info", {
+      .get("https://health.iot4health.co.kr:9300/v1/doctor/patient/patient-info", {
         params: {
           user_id: userid,
           patient_id: patientid
@@ -267,7 +267,7 @@ export const getPatientInfo = (userid,patientid) => {
 export const getVitalData = (patientid) => {
   return async dispatch => {
     await axios
-      .get("http://203.251.135.81:9300/v1/doctor/patient/patient-vital", {
+      .get("https://health.iot4health.co.kr:9300/v1/doctor/patient/patient-vital", {
         params: {
           patient_id: patientid,
           start_date: moment().add(-6,'days').format("YYYYMMDD"),
@@ -329,7 +329,7 @@ export const resetVitalData = () => {
 export const getVitalDataAll = (patientid, startdate) => {
   return async dispatch => {
     await axios
-      .get("http://203.251.135.81:9300/v1/doctor/patient/patient-vital", {
+      .get("https://health.iot4health.co.kr:9300/v1/doctor/patient/patient-vital", {
         params: {
           patient_id: patientid,
           start_date: startdate,
@@ -377,7 +377,7 @@ export const getVitalDataAll = (patientid, startdate) => {
 export const serachVitalData = (patientid, startdate, enddate) => {
   return async dispatch => {
     await axios
-      .get("http://203.251.135.81:9300/v1/doctor/patient/patient-vital", {
+      .get("https://health.iot4health.co.kr:9300/v1/doctor/patient/patient-vital", {
         params: {
           patient_id: patientid,
           start_date: moment(startdate[0]).format("YYYYMMDD"),
@@ -485,7 +485,7 @@ export const goPCL = (patientid) => {
 export const getPastConulstList = (patientid, pageamount, pagenum,) => {
   return async dispatch => {
     await axios
-      .get("http://203.251.135.81:9300/v1/doctor/patient/consults", {
+      .get("https://health.iot4health.co.kr:9300/v1/doctor/patient/consults", {
         params: {
           patient_id: patientid,
           page_amount: pageamount,
@@ -520,7 +520,7 @@ export const getPastConulstList = (patientid, pageamount, pagenum,) => {
 export const getFaq = ( pageamount, pagenum) => {
   return async dispatch => {
     await axios
-      .get("http://203.251.135.81:9300/v1/doctor/setting/faqs", {
+      .get("https://health.iot4health.co.kr:9300/v1/doctor/setting/faqs", {
         params: {
           search_text: "",
           page_amount: pageamount,
@@ -548,7 +548,7 @@ export const getFaq = ( pageamount, pagenum) => {
 export const getNameFaqData = (pageamount, pagenum, fname) => {
   return async dispatch => {
     await axios
-      .get("http://203.251.135.81:9300/v1/doctor/setting/faqs", {
+      .get("https://health.iot4health.co.kr:9300/v1/doctor/setting/faqs", {
         params: {
           search_text: fname,
           page_amount: pageamount,
@@ -576,7 +576,7 @@ export const getNameFaqData = (pageamount, pagenum, fname) => {
 export const getNotice = ( pageamount, pagenum) => {
   return async dispatch => {
     await axios
-      .get("http://203.251.135.81:9300/v1/doctor/setting/notices", {
+      .get("https://health.iot4health.co.kr:9300/v1/doctor/setting/notices", {
         params: {
           page_amount: pageamount,
           page_num: pagenum
@@ -603,7 +603,7 @@ export const getNotice = ( pageamount, pagenum) => {
 export const getVitalSettingData = (userid, patientid) => {
   return async dispatch => {
     await axios
-      .get("http://203.251.135.81:9300/v1/doctor/vital/base-patient", {
+      .get("https://health.iot4health.co.kr:9300/v1/doctor/vital/base-patient", {
         params: {
           user_id: userid,
           patient_id: patientid
@@ -633,7 +633,7 @@ export const getVitalSettingData = (userid, patientid) => {
 export const postMDNoteData = (userid, apponum, cc, dx, rx, notevital) => {
   return dispatch => {
     axios
-      .post("http://203.251.135.81:9300/v1/doctor/treatment/md-note", {
+      .post("https://health.iot4health.co.kr:9300/v1/doctor/treatment/md-note", {
         user_id : userid,
         appoint_num : apponum,
         note_cc : cc,
@@ -658,7 +658,7 @@ export const postPrescriptionData = (userid, apponum, file, filename) => {
     data.append('file_name', file);
   return dispatch => {
     axios
-      .post("http://203.251.135.81:9300/v1/doctor/treatment/prescription", data)
+      .post("https://health.iot4health.co.kr:9300/v1/doctor/treatment/prescription", data)
       .then(response => {
         if(response.data.status==="200") {
           alert("처방전 업로드가 완료되엇습니다.")
@@ -674,7 +674,7 @@ export const postPrescriptionData = (userid, apponum, file, filename) => {
 export const postPayData = (userid, apponum, paypatient, paytotal) => {
   return dispatch => {
     axios
-      .post("http://203.251.135.81:9300/v1/doctor/treatment/payment", {
+      .post("https://health.iot4health.co.kr:9300/v1/doctor/treatment/payment", {
         user_id : userid,
         appoint_num : apponum,
         pay_patient : paypatient,
@@ -693,7 +693,7 @@ export const postPayData = (userid, apponum, paypatient, paytotal) => {
 export const putStateComplete = (userid, apnum) => {
   return dispatch => {
     axios
-      .put("http://203.251.135.81:9300/v1/doctor/account/hospital-info", {
+      .put("https://health.iot4health.co.kr:9300/v1/doctor/account/hospital-info", {
         user_id: userid,
         appoint_num: apnum
       })

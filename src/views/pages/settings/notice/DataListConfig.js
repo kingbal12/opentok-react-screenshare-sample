@@ -327,7 +327,7 @@ class DataListConfig extends Component {
 
   getNoticeOne = (seq) => {
     Axios
-      .get("http://203.251.135.81:9300/v1/doctor/setting/notice", {
+      .get("https://health.iot4health.co.kr:9300/v1/doctor/setting/notice", {
         params: {
           seq: seq
         }

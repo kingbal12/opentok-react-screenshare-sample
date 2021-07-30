@@ -29,7 +29,7 @@ export const clearSchedule = () => {
 export const calendarfetchEvents = (userid, monthstart, monthend) => {
   return async dispatch => {
     await axios
-      .get("http://203.251.135.81:9300/v1/doctor/appointment/appointments", {
+      .get("https://health.iot4health.co.kr:9300/v1/doctor/appointment/appointments", {
         params: {
           user_id: userid,
           start_date: monthstart,
@@ -64,7 +64,7 @@ export const calendarfetchEvents = (userid, monthstart, monthend) => {
 export const fetchEvents = (user_id, weekstart, weekend) => {
   return async dispatch => {
     await axios
-      .get("http://203.251.135.81:9300/v1/doctor/appointment/schedules",{
+      .get("https://health.iot4health.co.kr:9300/v1/doctor/appointment/schedules",{
         params: {
           user_id: user_id,
           start_date: weekstart,
@@ -92,7 +92,7 @@ export const fetchEvents = (user_id, weekstart, weekend) => {
 export const nextfetchEvents = (user_id, weekstart, weekend) => {
   return async dispatch => {
     await axios
-      .get("http://203.251.135.81:9300/v1/doctor/appointment/schedules",{
+      .get("https://health.iot4health.co.kr:9300/v1/doctor/appointment/schedules",{
         params: {
           user_id: user_id,
           start_date: weekstart,
@@ -132,7 +132,7 @@ export const postSchedules = (userid, holiday, rperiod, events) => {
     })
     console.log(events)
     axios
-      .post("http://203.251.135.81:9300/v1/doctor/appointment/schedules",{
+      .post("https://health.iot4health.co.kr:9300/v1/doctor/appointment/schedules",{
           user_id: userid,
           holiday_yn: holiday,
           count: rperiod,
@@ -165,7 +165,7 @@ export const mdfpostSchedules = (userid, holiday, rperiod, events) => {
     })
     console.log(events)
     axios
-      .post("http://203.251.135.81:9300/v1/doctor/appointment/schedules",{
+      .post("https://health.iot4health.co.kr:9300/v1/doctor/appointment/schedules",{
           user_id: userid,
           holiday_yn: holiday,
           count: rperiod,
@@ -191,7 +191,7 @@ export const mdfpostSchedules = (userid, holiday, rperiod, events) => {
 export const startschedules = (userid, weekstart, weekend, events) => {
   return dispatch => {
     axios
-      .delete("http://203.251.135.81:9300/v1/doctor/appointment/schedules",{
+      .delete("https://health.iot4health.co.kr:9300/v1/doctor/appointment/schedules",{
         data: {
           user_id:userid,
           start_date:weekstart,
@@ -215,7 +215,7 @@ export const endchedules = (userid, weekstart, weekend, events) => {
       return event
     })
     axios
-      .put("http://203.251.135.81:9300/v1/doctor/appointment/schedules",{
+      .put("https://health.iot4health.co.kr:9300/v1/doctor/appointment/schedules",{
           user_id:userid,
           start_date:weekstart,
           end_date:weekend,

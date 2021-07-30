@@ -41,7 +41,7 @@ class Withdrawal extends React.Component {
     e.preventDefault()
     if(this.state.checkwithdrawal===true) {
       axios
-      .put("http://203.251.135.81:9300/v1/doctor/account/user-state", {
+      .put("https://health.iot4health.co.kr:9300/v1/doctor/account/user-state", {
           user_id : this.state.userid, 
           user_state : "9",
         }

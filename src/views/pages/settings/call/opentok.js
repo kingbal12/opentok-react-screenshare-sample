@@ -50,6 +50,7 @@ class ConsultingRoom extends React.Component {
     };
   }
   
+ 
 
   cameraState = () => {
     this.setState(prevState => ({

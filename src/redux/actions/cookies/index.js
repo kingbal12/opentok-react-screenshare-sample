@@ -99,3 +99,15 @@ export const saveCookieConsult = (
     } })
   }
 }
+
+export const saveImage = (
+  filename
+) => {
+  return dispatch => {
+    dispatch({ 
+      type: "SAVE_IMAGE", 
+      payload: {
+        filename
+    } })
+  }
+}

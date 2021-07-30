@@ -347,7 +347,7 @@ class DataListConfig extends Component {
 
   getFaqeOne = (seq) => {
     Axios
-      .get("http://203.251.135.81:9300/v1/doctor/setting/faq", {
+      .get("https://health.iot4health.co.kr:9300/v1/doctor/setting/faq", {
         params: {
           seq: seq
         }

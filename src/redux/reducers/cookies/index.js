@@ -34,6 +34,7 @@ export const cookiesReducer = (
     paytotal: "",
     paypatient: ""
   },
+  filename:"",
   events:[]
  
  }, action) => {
@@ -59,7 +60,10 @@ export const cookiesReducer = (
     case "SAVE_CONSULT": {
       return { ...state, consult: action.payload }
     }
-    case "LOGOUT_WITH_JWT": {
+    case "SAVE_IMAGE": {
+      return { ...state, filename: action.payload }
+    }
+    case "LOGIN_WITH_JWT": {
       return { ...state, 
       myinfo: { 
         medicalpart: "01",
@@ -74,7 +78,8 @@ export const cookiesReducer = (
         recommendation: "",
         paytotal: "",
         paypatient: ""
-      }
+      },
+      filename: ""
      }
 
     }

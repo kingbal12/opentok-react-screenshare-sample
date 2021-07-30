@@ -89,7 +89,7 @@ class Register extends React.Component {
   verifyemail = (email,idnumber) => {
     
       axios
-        .post("http://203.251.135.81:9300/signup-verify", {
+        .post("https://health.iot4health.co.kr:9300/signup-verify", {
           user_id: email,
           auth_code: idnumber
         })

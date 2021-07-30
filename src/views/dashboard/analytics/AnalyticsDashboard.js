@@ -34,7 +34,7 @@ class AnalyticsDashboard extends React.Component {
 
   componentDidMount() {
         axios
-          .get("http://203.251.135.81:9300/v1/doctor/appointment/dashboard", {
+          .get("https://health.iot4health.co.kr:9300/v1/doctor/appointment/dashboard", {
             params: {
               user_id: this.state.userid,
               start_date: new Date(),

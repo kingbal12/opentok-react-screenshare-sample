@@ -37,7 +37,7 @@ class FindPw extends React.Component {
   searchemail = e => {
     e.preventDefault()
     axios
-          .get("http://203.251.135.81:9300/v1/doctor/account/password", {
+          .get("https://health.iot4health.co.kr:9300/v1/doctor/account/password", {
             params: {
               user_id: this.state.userid,
               f_name: this.state.name,
@@ -54,7 +54,7 @@ class FindPw extends React.Component {
                 emaillabel: response.data.data.EMAIL
               })
               if(response.data.data.USER_ID===response.data.data.EMAIL){
-                axios.post("http://203.251.135.81:9300/v1/doctor/account/password", {
+                axios.post("https://health.iot4health.co.kr:9300/v1/doctor/account/password", {
                     user_id: this.state.userid,
                     email: this.state.email,
                     f_name: this.state.name,
@@ -120,7 +120,7 @@ class FindPw extends React.Component {
 
   changePassword = () => {
     axios
-    .post("http://203.251.135.81:9300/v1/doctor/account/password", {
+    .post("https://health.iot4health.co.kr:9300/v1/doctor/account/password", {
         user_id: this.state.userid,
         email: this.state.email,
         f_name: this.state.name,

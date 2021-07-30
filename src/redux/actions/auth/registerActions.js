@@ -33,7 +33,7 @@ export const postTerms = (
   term_13
   ) => { return dispatch => 
     {axios
-      .post("http://203.251.135.81:9300/terms", {
+      .post("https://health.iot4health.co.kr:9300/terms", {
         user_id : user_id ,
         national_id : national_id ,
         term_11 : term_1,
@@ -78,7 +78,7 @@ export const register2 = (userid, name, phone, password, btdate, gender, email) 
     let registeruser = userid
     let registername = name
     axios
-      .post("http://203.251.135.81:9300/signup", {
+      .post("https://health.iot4health.co.kr:9300/signup", {
         user_id: userid,
         user_pwd: password,
         f_name: name, 
@@ -109,7 +109,7 @@ export const authemail = (userid, email) => {
   return dispatch => {
    
     axios
-      .post("http://203.251.135.81:9300/signup-email", {
+      .post("https://health.iot4health.co.kr:9300/signup-email", {
         user_id: userid,
         email: email
       })
@@ -134,7 +134,7 @@ export const authemail = (userid, email) => {
 //   return dispatch => {
    
 //     axios
-//       .post("http://203.251.135.81:9300/signup-verify", {
+//       .post("https://health.iot4health.co.kr:9300/signup-verify", {
 //         user_id: email,
 //         auth_code: idnumber
 //       })
@@ -175,7 +175,7 @@ export const authemail = (userid, email) => {
 export const register3 = (userid, hospitalname, businessnumber, zipcode, address1, address2, phonenumber, accountname, bankname, accountnumber) => {
   return dispatch => {
     axios
-      .post("http://203.251.135.81:9300/v1/doctor/account/hospital-info", {
+      .post("https://health.iot4health.co.kr:9300/v1/doctor/account/hospital-info", {
         user_id : userid, 
         hospital_name : hospitalname,
         business_num : businessnumber,
@@ -202,7 +202,7 @@ export const register3 = (userid, hospitalname, businessnumber, zipcode, address
 export const postPhonenumber = (phonenumber) => {
   return dispatch => {
     axios
-      .post("http://203.251.135.81:9300/v1/doctor/account/hospital-info", {
+      .post("https://health.iot4health.co.kr:9300/v1/doctor/account/hospital-info", {
         phone_num: phonenumber
       })
       .then(response => {
@@ -220,7 +220,7 @@ export const postPhonenumber = (phonenumber) => {
 export const phoneAuth = (authnumber) => {
   return dispatch => {
     axios
-      .post("http://203.251.135.81:9300/v1/doctor/account/hospital-infosd", {
+      .post("https://health.iot4health.co.kr:9300/v1/doctor/account/hospital-infosd", {
         auth_num: authnumber
       })
       .then(response => {
@@ -240,7 +240,7 @@ export const phoneAuth = (authnumber) => {
 export const puthsinfo = (userid, hospitalname, businessnumber, zipcode, address1, address2, phonenumber, accountname, bankname, accountnumber) => {
   return dispatch => {
     axios
-      .put("http://203.251.135.81:9300/v1/doctor/account/hospital-info", {
+      .put("https://health.iot4health.co.kr:9300/v1/doctor/account/hospital-info", {
         user_id : userid, 
         hospital_name : hospitalname,
         business_num : businessnumber,
@@ -276,7 +276,7 @@ export const register4 = (userid, filename, file, medicalpart, medicalable, medi
   data.append('user_desc', userdesc)
   return dispatch => {
     axios
-      .post("http://203.251.135.81:9300/v1/doctor/account/user-info", data
+      .post("https://health.iot4health.co.kr:9300/v1/doctor/account/user-info", data
 
       )
       .then(response => {
@@ -314,7 +314,7 @@ export const putmyinfo = (userid, filename, file, medicalpart, medicalable, medi
   data.append('user_desc', userdesc)
   return dispatch => {
     axios
-      .put("http://203.251.135.81:9300/v1/doctor/account/user-info", data
+      .put("https://health.iot4health.co.kr:9300/v1/doctor/account/user-info", data
 
       )
       .then(response => {
@@ -340,7 +340,7 @@ export const putmyinfonfile = (userid, medicalpart, medicalable, medicaldesc, me
   data.append('user_desc', userdesc)
   return dispatch => {
     axios
-      .put("http://203.251.135.81:9300/v1/doctor/account/user-info", data
+      .put("https://health.iot4health.co.kr:9300/v1/doctor/account/user-info", data
 
       )
       .then(response => {
@@ -362,7 +362,7 @@ export const putmyinfonfile = (userid, medicalpart, medicalable, medicaldesc, me
 export const getMyInfo = (userid) => {
   return dispatch => {
     axios
-      .get("http://203.251.135.81:9300/v1/doctor/account/user-info", {
+      .get("https://health.iot4health.co.kr:9300/v1/doctor/account/user-info", {
         params: {
           user_id: userid
         }
@@ -389,7 +389,7 @@ export const getMyInfo = (userid) => {
 export const changepassword = (userid, password, newpassword) => {
   return dispatch => {
     axios
-      .put("http://203.251.135.81:9300/v1/doctor/account/password", {
+      .put("https://health.iot4health.co.kr:9300/v1/doctor/account/password", {
           user_id : userid, 
           user_pwd : password,
           new_pwd : newpassword   
@@ -410,7 +410,7 @@ export const changepassword = (userid, password, newpassword) => {
 // export const withdrawal = (userid) => {
 //   return dispatch => {
 //     axios
-//       .put("http://203.251.135.81:9300/v1/doctor/account/user-state", {
+//       .put("https://health.iot4health.co.kr:9300/v1/doctor/account/user-state", {
 //           user_id : userid, 
 //           user_state : "9",
 //         }

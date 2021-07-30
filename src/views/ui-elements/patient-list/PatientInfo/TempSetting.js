@@ -40,7 +40,7 @@ class VitalDataSetting extends React.Component {
     e.preventDefault()
     
     axios
-    .put("http://203.251.135.81:9300/v1/doctor/vital/base-temperature", {
+    .put("https://health.iot4health.co.kr:9300/v1/doctor/vital/base-temperature", {
         patient_id: this.props.vitaldata.USER_ID,
         temp_val1 : Number(this.state.normaltemp),
         temp_val2 : Number(this.state.alerttemp),
