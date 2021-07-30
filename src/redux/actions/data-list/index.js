@@ -482,6 +482,15 @@ export const goPCL = (patientid) => {
   }
 }
 
+export const mPCL = (patientid) => {
+  return dispatch => {
+    dispatch({
+      type: "SAVE_PATIENTID",
+      data: patientid,
+    })
+  }
+}
+
 export const getPastConulstList = (patientid, pageamount, pagenum,) => {
   return async dispatch => {
     await axios

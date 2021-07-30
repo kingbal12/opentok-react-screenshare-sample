@@ -24,7 +24,7 @@ import {
   ResponsiveContainer
 } from "recharts"
 import {
-  goPCL,
+  mPCL,
   resetVitalData,
   postMDNoteData,
   postPrescriptionData,
@@ -38,10 +38,8 @@ import { Check } from "react-feather"
 import { history } from "../../../../history"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import "../../../../assets/scss/pages/authentication.scss"
-// import "../../../../assets/scss/plugins/extensions/opentok.scss"
 import {connect} from "react-redux"
 import { Fragment } from "react"
-// import { OTSession, OTPublisher, OTStreams, OTSubscriber, preloadScript } from 'opentok-react';
 import {Helmet} from "react-helmet";
 import { Menu } from "react-feather"
 import axios from "axios"
@@ -51,8 +49,10 @@ import Opentok from "./opentok"
 import previmg from "../../../../assets/img/dashboard/ID13_11_file.png"
 import moment from "moment"
 import Select from "react-select"
-import PerfectScrollbar from "perfect-scrollbar"
-import ScrollMenu from 'react-horizontal-scrolling-menu'
+import dot from "../../../../assets/img/dashboard/ID13_11_icon.png"
+import VitalDataM from "../../../ui-elements/patient-list/PatientInfo/VitalDataM"
+import PastConsultList from "../../../ui-elements/patient-list/PatientInfo/DataListConfigM"
+import queryString from "query-string"
 
 class Cslist extends React.Component { 
   render() { 
@@ -113,6 +113,8 @@ class ConsultingRoom extends React.Component {
       viewfilemodal: false,
       settingmodal: false,
       screenshare: false,
+      vitaldatamodal: false,
+      pclmodal: false,
       camera:[],
       mic:[],
       speaker:[],
@@ -173,34 +175,6 @@ class ConsultingRoom extends React.Component {
       await this.setState({speaker:modifiedspeaker})
       
     })();
-    // axios
-    //   .get("https://health.iot4health.co.kr:9300/v1/doctor/treatment/pharmacy", {
-    //     params: {
-    //       patient_id: this.props.pinfo.PATIENT_ID
-    //     }
-    //   })
-    //   .then(response => {
-    //     let pharmacy
-
-    //     if(response.data.status==="200") {
-    //       console.log(response.data.data)
-    //       pharmacy = response.data.data
- 
-    //       this.setState({
-    //         pcode: pharmacy.P_CODE,
-    //         pname: pharmacy.P_NAME,
-    //         paddress: pharmacy.P_ADDRESS,
-    //         telnum: pharmacy.TEL_NUM, 
-    //         faxnum: pharmacy.FAX_NUM,
-    //       })
-    //     } else {
-    //       alert("약국정보가 없습니다.")
-    //     }
-    //   })
-    
-
-   
-       
   }
 
   startarchiveVideo() {
@@ -272,14 +246,20 @@ class ConsultingRoom extends React.Component {
     }))
   }
 
-  goPastConsultList(pid) {
-    this.props.getPastConulstList(pid)
-  }
+  // goPastConsultList(pid) {
+  //   this.props.getPastConulstList(pid)
+  // }
 
   goVitalData = e => {
     e.preventDefault()
     this.props.resetVitalData()
-    history.push("/vitaldata")
+    this.vitaldataModal()
+  }
+
+  vitaldataModal = () => {
+    this.setState(prevState => ({
+      vitaldatamodal: !prevState.vitaldatamodal
+    }))
   }
 
   mdNoteModal = () => {
@@ -378,9 +358,15 @@ class ConsultingRoom extends React.Component {
   }
 
   goPastConsultList(pid) {
-    this.props.goPCL(pid)
+    this.props.mPCL(pid)
+    this.pclModal()
   }
-  
+
+  pclModal = () => {
+    this.setState(prevState => ({
+      pclmodal: !prevState.pclmodal
+    }))
+  }
 
   setpharmacy = () => {
     this.setState(prevState => ({
@@ -550,6 +536,50 @@ class ConsultingRoom extends React.Component {
             </Card>
           </Col>
           <Col lg="6" md="12">
+          <Modal
+            style={{position:"absolute", right:"4%", top:"10%"}}
+            backdrop={false}
+            isOpen={this.state.vitaldatamodal}
+            toggle={this.vitaldataModal}
+            className="modal-lg"
+          >
+            <ModalHeader toggle={this.vitaldataModal}>
+              <b>Vital Data</b>
+            </ModalHeader>
+            <ModalBody>
+              
+                <VitalDataM />
+              
+            </ModalBody>
+            <ModalFooter>
+              <Button color="primary" onClick={this.vitaldataModal}>
+                닫기
+              </Button>
+            </ModalFooter>
+          </Modal>
+
+          <Modal
+            style={{position:"absolute", right:"4%", top:"10%", width:"45%"}}
+            backdrop={false}
+            isOpen={this.state.pclmodal}
+            toggle={this.pclModal}
+            className="modal-lg"
+          >
+            <ModalHeader toggle={this.pclModal}>
+              <b>Past Consult List</b>
+            </ModalHeader>
+            <ModalBody>
+              
+                <PastConsultList parsedFilter={queryString.parse(this.props.location.search)} />
+              
+            </ModalBody>
+            <ModalFooter>
+              <Button color="primary" onClick={this.pclModal}>
+                닫기
+              </Button>
+            </ModalFooter>
+          </Modal>
+
           <Modal
               style={{position:"absolute", right:"4%", top:"25%", width:"45%"}}
               backdrop={false}
@@ -1001,7 +1031,9 @@ class ConsultingRoom extends React.Component {
                 </Card>
                 <Card className="mb-1" style={{height:"185px"}}>
                   <CardTitle className="px-1 d-flex justify-content-between" style={{paddingTop:"5px"}}>
-                    <b>Past Consulting List</b><Menu onClick={() => this.goPastConsultList(this.props.pinfo.PATIENT_ID)} style={{cursor:"pointer"}}/>
+                    <b>Past Consulting List</b>
+                    {/* <Menu onClick={() => this.goPastConsultList(this.props.pinfo.PATIENT_ID)} style={{cursor:"pointer"}}/> */}
+                    <img src={dot} onClick={() => this.goPastConsultList(this.props.pinfo.PATIENT_ID)} style={{cursor:"pointer"}}/>
                   </CardTitle>
                   <CardBody className="pl-0 pt-0">
                     <table className="col-12 pt-0 mt-0">
@@ -1023,7 +1055,9 @@ class ConsultingRoom extends React.Component {
             
             <Card className="mb-1" style={{height:"224px"}}>
               <CardTitle className="px-1 d-flex justify-content-between" style={{paddingTop:"5px"}}>
-                <b>Vital Data</b> <Menu onClick={this.goVitalData} style={{cursor:"pointer"}}/>
+                <b>Vital Data</b> 
+                {/* <Menu onClick={this.goVitalData} style={{cursor:"pointer"}}/> */}
+                <img src={dot} onClick={this.goVitalData} style={{cursor:"pointer"}}/>
               </CardTitle>
               <CardBody className="d-flex pl-0">
                 <div className="d-flex col-12 pl-0">
@@ -1280,7 +1314,7 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps, {
-    goPCL, 
+    mPCL, 
     resetVitalData,
     postMDNoteData,
     postPrescriptionData,

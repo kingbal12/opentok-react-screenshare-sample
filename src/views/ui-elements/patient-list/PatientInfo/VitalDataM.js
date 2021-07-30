@@ -31,7 +31,7 @@ import {
   resetVitalData,
   serachVitalData,
   getVitalSettingData
-} from "../../../../redux/actions/data-list/"
+} from "../../../../redux/actions/data-list"
 import Flatpickr from "react-flatpickr"
 import "flatpickr/dist/themes/light.css";
 import "../../../../assets/scss/plugins/forms/flatpickr/flatpickr.scss"
@@ -274,7 +274,7 @@ class VitalData extends React.Component {
           </Row>
         
         <Row className="mt-4 flex-wrap">
-          <Col xl="6" lg="12" md="12" sm="12" className="d-flex">
+          <Col xl="12" lg="12" md="12" sm="12" className="d-flex">
             <h5 className="text-bold-600 align-self-center">선택 항목</h5>
             <ButtonGroup className="ml-1">
               <Button.Ripple outline={this.state.bpbutton===true?false:true} color="primary" onClick={this.handlebp}>혈압</Button.Ripple>
@@ -287,7 +287,7 @@ class VitalData extends React.Component {
             </ButtonGroup>
           </Col>
 
-          <Col xl="4" lg="12" md="12" sm="12" className="d-flex ml-auto">
+          <Col xl="12" lg="12" md="12" sm="12" className="d-flex ml-auto mt-1">
             <h5 className="text-bold-600 align-self-center">기간</h5>
 
             <ButtonGroup className="ml-4" >
@@ -342,10 +342,9 @@ class VitalData extends React.Component {
           </Col>
         </Row>
         <Row className="mt-2">
-          <Col className="col-6">
-          </Col>
 
-          <Col className="col-4 d-flex ml-auto align-self-center">
+
+          <Col xl="12" lg="12" md="12" sm="12" className="d-flex align-self-center">
             <h5 className="text-bold-600 align-self-center">직접입력</h5>
             <Flatpickr
               className="form-control col-3 align-self-center ml-1"

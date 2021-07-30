@@ -33,7 +33,7 @@ import {
   getPatientInfo,
   getVitalData
   // eData
-} from "../../../../redux/actions/data-list/"
+} from "../../../../redux/actions/data-list"
 import Sidebar from "./DataListSidebar"
 import Chip from "../../../../components/@vuexy/chips/ChipComponent"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
@@ -107,7 +107,6 @@ const ExpandedComponent = props => {
           height="80px" 
           src={"https://health.iot4health.co.kr:9300"+props.data.RX_PATH
           +props.data.RX_NAME}
-          // type="application/pdf"
           style={{cursor:"pointer"}} 
           // onClick={this.viewPressModal}
         />
@@ -380,7 +379,7 @@ class DataListConfig extends Component {
   handleRowsPerPage = value => {
     let { parsedFilter, getPastConulstList } = this.props
     let page = parsedFilter.page !== undefined ? parsedFilter.page : 1
-    history.push(`/past-consult-list?page=${page}&perPage=${value}`)
+    history.push(`/pages/consultingroom?page=${page}&perPage=${value}`)
     this.setState({currentPage: page, rowsPerPage: value })
     getPastConulstList({ user_id: this.props.dataList.pid, page: parsedFilter.page, perPage: value })
   }
@@ -402,7 +401,7 @@ class DataListConfig extends Component {
     let perPage = parsedFilter.perPage !== undefined ? parsedFilter.perPage : 5
     let urlPrefix = this.props.thumbView
       ? "/data-list/thumb-view/"
-      : "/past-consult-list"
+      : "/pages/consultingroom"
     history.push(
       `${urlPrefix}?page=${page.selected + 1}&perPage=${perPage}`
     )
