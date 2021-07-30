@@ -52,7 +52,18 @@ class Register extends React.Component {
       eight: "N",
       
 
-      termmodal: false
+      termmodal1: false,
+      termmodal2: false,
+      termmodal3: false,
+      termmodal4: false,
+      termmodal5: false,
+      termmodal6: false,
+      termmodal7: false,
+      termmodal8: false,
+      termmodal9: false,
+      termmodal10: false,
+      termmodal_11: false,
+      termmodal12: false,
 
     }
   }
@@ -89,9 +100,75 @@ class Register extends React.Component {
     })
   }
 
-  termModal = () => {
+  termModal1 = () => {
     this.setState(prevState => ({
-      termmodal: !prevState.termmodal
+      termmodal_1: !prevState.termmodal_1
+    }))
+  }
+
+  termModal2 = () => {
+    this.setState(prevState => ({
+      termmodal2: !prevState.termmodal2
+    }))
+  }
+
+  termModal3 = () => {
+    this.setState(prevState => ({
+      termmodal3: !prevState.termmodal3
+    }))
+  }
+
+  termModal4 = () => {
+    this.setState(prevState => ({
+      termmodal4: !prevState.termmodal4
+    }))
+  }
+
+  termModal5 = () => {
+    this.setState(prevState => ({
+      termmodal5: !prevState.termmodal5
+    }))
+  }
+
+  termModal6 = () => {
+    this.setState(prevState => ({
+      termmodal6: !prevState.termmodal6
+    }))
+  }
+
+  termModal7 = () => {
+    this.setState(prevState => ({
+      termmodal7: !prevState.termmodal7
+    }))
+  }
+
+  termModal8 = () => {
+    this.setState(prevState => ({
+      termmodal8: !prevState.termmodal8
+    }))
+  }
+
+  termModal9 = () => {
+    this.setState(prevState => ({
+      termmodal9: !prevState.termmodal9
+    }))
+  }
+
+  termModal10 = () => {
+    this.setState(prevState => ({
+      termmodal10: !prevState.termmodal10
+    }))
+  }
+
+  termModal11 = () => {
+    this.setState(prevState => ({
+      termmodal_11: !prevState.termmodal_11
+    }))
+  }
+  
+  termModal12 = () => {
+    this.setState(prevState => ({
+      termmodal12: !prevState.termmodal12
     }))
   }
 
@@ -138,23 +215,222 @@ class Register extends React.Component {
       <PerfectScrollbar style={{display:"flex", height:"100vh", alignItems:"center"}}>
       <Row className="m-0 w-100 justify-content-center">
         <Modal
-          isOpen={this.state.termmodal}
-          toggle={this.termModal}
+          isOpen={this.state.termmodal_1}
+          toggle={this.termModal1}
           className="modal-dialog-centered modal-lg"
         >
-          <ModalHeader toggle={this.termModal}>
+          <ModalHeader toggle={this.termModal1}>
             <span className="text-primary text-bold-600">서비스 이용 약관</span>
           </ModalHeader>
           <ModalBody>
-            <iframe src="http://192.168.0.7/lv1/_agree/agree.all.html" style={{width:"100%", height: "50rem"}} />
+            <iframe src="http://203.251.135.81/lv1/_agree/agree.all.php?ids=agree1_1" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
           </ModalBody>
           <ModalFooter className="text-right">
-            <Button color="primary" onClick={ this.termModal}>
+            <Button color="primary" onClick={ this.termModal1}>
               확인
             </Button>
           </ModalFooter>
         </Modal>
-          <Col
+
+        <Modal
+          isOpen={this.state.termmodal2}
+          toggle={this.termModal2}
+          className="modal-dialog-centered modal-lg"
+        >
+          <ModalHeader toggle={this.termModal2}>
+            <span className="text-primary text-bold-600">서비스 이용 약관</span>
+          </ModalHeader>
+          <ModalBody>
+            <iframe src="http://203.251.135.81/lv1/_agree/agree.all.php?ids=agree2" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
+          </ModalBody>
+          <ModalFooter className="text-right">
+            <Button color="primary" onClick={ this.termModal2}>
+              확인
+            </Button>
+          </ModalFooter>
+        </Modal>
+
+        <Modal
+          isOpen={this.state.termmodal3}
+          toggle={this.termModal3}
+          className="modal-dialog-centered modal-lg"
+        >
+          <ModalHeader toggle={this.termModal3}>
+            <span className="text-primary text-bold-600">서비스 이용 약관</span>
+          </ModalHeader>
+          <ModalBody>
+            <iframe src="http://203.251.135.81/lv1/_agree/agree.all.php?ids=agree3" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
+          </ModalBody>
+          <ModalFooter className="text-right">
+            <Button color="primary" onClick={ this.termModal3}>
+              확인
+            </Button>
+          </ModalFooter>
+        </Modal>
+
+        <Modal
+          isOpen={this.state.termmodal4}
+          toggle={this.termModal4}
+          className="modal-dialog-centered modal-lg"
+        >
+          <ModalHeader toggle={this.termModal4}>
+            <span className="text-primary text-bold-600">서비스 이용 약관</span>
+          </ModalHeader>
+          <ModalBody>
+            <iframe src="http://203.251.135.81/lv1/_agree/agree.all.php?ids=agree4" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
+          </ModalBody>
+          <ModalFooter className="text-right">
+            <Button color="primary" onClick={ this.termModal4}>
+              확인
+            </Button>
+          </ModalFooter>
+        </Modal>
+
+        <Modal
+          isOpen={this.state.termmodal5}
+          toggle={this.termModal5}
+          className="modal-dialog-centered modal-lg"
+        >
+          <ModalHeader toggle={this.termModal5}>
+            <span className="text-primary text-bold-600">서비스 이용 약관</span>
+          </ModalHeader>
+          <ModalBody>
+            <iframe src="http://203.251.135.81/lv1/_agree/agree.all.php?ids=agree5" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
+          </ModalBody>
+          <ModalFooter className="text-right">
+            <Button color="primary" onClick={ this.termModal5}>
+              확인
+            </Button>
+          </ModalFooter>
+        </Modal>
+
+        <Modal
+          isOpen={this.state.termmodal6}
+          toggle={this.termModal6}
+          className="modal-dialog-centered modal-lg"
+        >
+          <ModalHeader toggle={this.termModal6}>
+            <span className="text-primary text-bold-600">서비스 이용 약관</span>
+          </ModalHeader>
+          <ModalBody>
+            <iframe src="http://203.251.135.81/lv1/_agree/agree.all.php?ids=agree6" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
+          </ModalBody>
+          <ModalFooter className="text-right">
+            <Button color="primary" onClick={ this.termModal6}>
+              확인
+            </Button>
+          </ModalFooter>
+        </Modal>
+
+        <Modal
+          isOpen={this.state.termmodal7}
+          toggle={this.termModal7}
+          className="modal-dialog-centered modal-lg"
+        >
+          <ModalHeader toggle={this.termModal7}>
+            <span className="text-primary text-bold-600">서비스 이용 약관</span>
+          </ModalHeader>
+          <ModalBody>
+            <iframe src="http://203.251.135.81/lv1/_agree/agree.all.php?ids=agree7" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
+          </ModalBody>
+          <ModalFooter className="text-right">
+            <Button color="primary" onClick={ this.termModal7}>
+              확인
+            </Button>
+          </ModalFooter>
+        </Modal>
+
+        <Modal
+          isOpen={this.state.termmodal8}
+          toggle={this.termModal8}
+          className="modal-dialog-centered modal-lg"
+        >
+          <ModalHeader toggle={this.termModal8}>
+            <span className="text-primary text-bold-600">서비스 이용 약관</span>
+          </ModalHeader>
+          <ModalBody>
+            <iframe src="http://203.251.135.81/lv1/_agree/agree.all.php?ids=agree8" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
+          </ModalBody>
+          <ModalFooter className="text-right">
+            <Button color="primary" onClick={ this.termModal8}>
+              확인
+            </Button>
+          </ModalFooter>
+        </Modal>
+
+        <Modal
+          isOpen={this.state.termmodal9}
+          toggle={this.termModal9}
+          className="modal-dialog-centered modal-lg"
+        >
+          <ModalHeader toggle={this.termModal9}>
+            <span className="text-primary text-bold-600">서비스 이용 약관</span>
+          </ModalHeader>
+          <ModalBody>
+            <iframe src="http://203.251.135.81/lv1/_agree/agree.all.php?ids=agree9" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
+          </ModalBody>
+          <ModalFooter className="text-right">
+            <Button color="primary" onClick={ this.termModal9}>
+              확인
+            </Button>
+          </ModalFooter>
+        </Modal>
+
+        <Modal
+          isOpen={this.state.termmodal10}
+          toggle={this.termModal10}
+          className="modal-dialog-centered modal-lg"
+        >
+          <ModalHeader toggle={this.termModal10}>
+            <span className="text-primary text-bold-600">서비스 이용 약관</span>
+          </ModalHeader>
+          <ModalBody>
+            <iframe src="http://203.251.135.81/lv1/_agree/agree.all.php?ids=agree10" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
+          </ModalBody>
+          <ModalFooter className="text-right">
+            <Button color="primary" onClick={ this.termModal10}>
+              확인
+            </Button>
+          </ModalFooter>
+        </Modal>
+
+        <Modal
+          isOpen={this.state.termmodal_11}
+          toggle={this.termModal11}
+          className="modal-dialog-centered modal-lg"
+        >
+          <ModalHeader toggle={this.termModal11}>
+            <span className="text-primary text-bold-600">서비스 이용 약관</span>
+          </ModalHeader>
+          <ModalBody>
+            <iframe src="http://203.251.135.81/lv1/_agree/agree.all.php?ids=agree11" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
+          </ModalBody>
+          <ModalFooter className="text-right">
+            <Button color="primary" onClick={ this.termModal11}>
+              확인
+            </Button>
+          </ModalFooter>
+        </Modal>
+
+        <Modal
+          isOpen={this.state.termmodal12}
+          toggle={this.termModal12}
+          className="modal-dialog-centered modal-lg"
+        >
+          <ModalHeader toggle={this.termModal12}>
+            <span className="text-primary text-bold-600">서비스 이용 약관</span>
+          </ModalHeader>
+          <ModalBody>
+            <iframe src="http://203.251.135.81/lv1/_agree/agree.all.php?ids=agree12" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
+          </ModalBody>
+          <ModalFooter className="text-right">
+            <Button color="primary" onClick={ this.termModal12}>
+              확인
+            </Button>
+          </ModalFooter>
+        </Modal>
+
+        <Col
           sm="12"
           xl="12"
           lg="12"
@@ -239,18 +515,18 @@ class Register extends React.Component {
                               <small>선택 약관은 동의하지 않아도 회원가입이 가능합니다.</small>
                           </Col>
                           <Col lg="3" md="3" sm="3" xl="3">
-                            <ChevronRight style={{marginTop: "0.2rem", cursor:"pointer"}} onClick={this.termModal}/><br/>
-                            <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal}/><br/>
-                            <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal}/><br/>
-                            <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal}/><br/>
-                            <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal}/><br/>
-                            <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal}/><br/>
-                            <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal}/><br/>
-                            <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal}/><br/>
-                            <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal}/><br/>
-                            <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal}/><br/>
-                            <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal}/><br/>
-                            <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal}/><br/>
+                            <ChevronRight style={{marginTop: "0.2rem", cursor:"pointer"}} onClick={this.termModal1}/><br/>
+                            <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal2}/><br/>
+                            <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal3}/><br/>
+                            <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal4}/><br/>
+                            <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal5}/><br/>
+                            <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal6}/><br/>
+                            <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal7}/><br/>
+                            <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal8}/><br/>
+                            <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal9}/><br/>
+                            <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal10}/><br/>
+                            <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal11}/><br/>
+                            <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal12}/><br/>
                           </Col>
                         </Row>                      
                         <Row >

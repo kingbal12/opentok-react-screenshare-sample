@@ -27,12 +27,17 @@ import {
   ResponsiveContainer
 } from "recharts"
 import {
-  goPCL,
+  mPCL,
   resetVitalData,
   postMDNoteData,
   postPrescriptionData,
-  postPayData
+  postPayData,
+  putStateComplete
 } from "../../../../redux/actions/data-list"
+import {
+  saveCookieConsult
+} from "../../../../redux/actions/cookies/"
+import DateCountdown from 'react-date-countdown-timer';
 import { Check } from "react-feather"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import { history } from "../../../../history"
@@ -44,50 +49,32 @@ import { Menu } from "react-feather"
 import "../../../../assets/scss/plugins/forms/flatpickr/flatpickr.scss"
 import "../../../../assets/scss/plugins/extensions/recharts.scss"
 import moment from "moment"
+import dot from "../../../../assets/img/dashboard/ID13_11_icon.png"
+import VitalDataM from "../../../ui-elements/patient-list/PatientInfo/VitalDataM"
+import PastConsultList from "../../../ui-elements/patient-list/PatientInfo/DataListConfigMP"
+import queryString from "query-string"
 
-
-
-
-
-class CunsultName extends React.Component { 
+class Cslist extends React.Component { 
   render() { 
-    return( 
-    <h5>
-      {this.props.row.PART_NAME}/{this.props.row.F_NAME}
-    </h5>
+    return(
+      <tr>
+        <th className="text-center">{this.props.row.PART_NAME} / {this.props.row.F_NAME}</th>
+        <th className="text-center">{this.props.row.NOTE_CC}</th>
+        <th className="text-center">{this.props.row.APPOINT_TIME.substring(0,10)}</th>  
+      </tr> 
+ 
     ); 
   } 
 }
-
-class NoteCC extends React.Component { 
-  render() { 
-    return( 
-    <h5>
-      {this.props.row.NOTE_CC}
-    </h5>
-    ); 
-  } 
-}
-
-class AppointTime extends React.Component { 
-  render() { 
-    return( 
-    <h5>
-      {this.props.row.APPOINT_TIME.substring(0,10)}
-    </h5>
-    ); 
-  } 
-}
-
 
 class PatientInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cc: "",
-      diagnosis: "",
-      txrx: "",
-      recommendation: "",
+      cc: props.concookie.cc,
+      diagnosis: props.concookie.cc,
+      txrx: props.concookie.txrx,
+      recommendation: props.concookie.recommendation,
       pcode: "",
       pname: "",
       paddress: "",
@@ -102,13 +89,28 @@ class PatientInfo extends React.Component {
       paymodal: false,
       pharmacy: false,
       App: false,
-      viewfilemodal: false
+      viewfilemodal: false,
+      vitaldatamodal: false,
+      pclmodal: false,
       
     }
     this.state = { time: {},   seconds: 900 };
     this.timer = 0;
     this.startTimer = this.startTimer.bind(this);
     this.countDown = this.countDown.bind(this);
+  }
+
+  cookieConsult = () =>{
+    
+    this.props.saveCookieConsult(
+      this.state.cc,
+      this.state.diagnosis,
+      this.state.txrx,
+      this.state.recommendation,
+      this.state.paytotal,
+      this.state.paypatient
+    )
+    alert("진료노트, 결제정보가 임시저장 되었습니다")
   }
 
   secondsToTime(secs){
@@ -162,13 +164,25 @@ class PatientInfo extends React.Component {
 
 
   goPastConsultList(pid) {
-    this.props.goPCL(pid)
+    this.props.mPCL(pid)
+    this.pclModal()
+  }
+
+  pclModal = () => {
+    this.setState(prevState => ({
+      pclmodal: !prevState.pclmodal
+    }))
   }
 
   goVitalData = e => {
     e.preventDefault()
-    this.props.resetVitalData()
-    history.push("/vitaldata")
+    this.vitaldataModal()
+  }
+
+  vitaldataModal = () => {
+    this.setState(prevState => ({
+      vitaldatamodal: !prevState.vitaldatamodal
+    }))
   }
 
   startconsult = e => {
@@ -191,9 +205,26 @@ class PatientInfo extends React.Component {
       this.state.txrx,
       this.state.recommendation
       )
+      this.props.putStateComplete(
+        this.props.user.login.values.loggedInUser.username,
+        this.props.appo.APPOINT_NUM
+      )
     this.setState(prevState => ({
       mdnotemodal: !prevState.mdnotemodal
     }))
+  }
+
+  goHome = e => {
+    e.preventDefault()
+    this.props.saveCookieConsult(
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    )
+    history.push("/analyticsDashboard")
   }
 
   presModal = () => {
@@ -229,6 +260,10 @@ class PatientInfo extends React.Component {
       this.props.appo.APPOINT_NUM,
       this.state.file,
       this.state.filename
+      )
+      this.props.putStateComplete(
+        this.props.user.login.values.loggedInUser.username,
+        this.props.appo.APPOINT_NUM
       )
     }
     this.setState(prevState => ({
@@ -266,6 +301,10 @@ class PatientInfo extends React.Component {
       this.state.paypatient,
       this.state.paytotal
       )
+      this.props.putStateComplete(
+        this.props.user.login.values.loggedInUser.username,
+        this.props.appo.APPOINT_NUM
+      )
     }
     this.setState(prevState => ({
       paymodal: !prevState.paymodal
@@ -298,6 +337,50 @@ class PatientInfo extends React.Component {
 
     return (
       <Fragment>
+        <Modal
+          style={{position:"absolute", right:"4%", top:"10%", width:"45%"}}
+          backdrop={false}
+          isOpen={this.state.pclmodal}
+          toggle={this.pclModal}
+          className="modal-lg"
+        >
+          <ModalHeader toggle={this.pclModal}>
+            <b>Past Consulting List</b>
+          </ModalHeader>
+          <ModalBody>
+            
+              <PastConsultList parsedFilter={queryString.parse(this.props.location.search)} />
+            
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this.pclModal}>
+              닫기
+            </Button>
+          </ModalFooter>
+        </Modal>
+
+        <Modal
+          style={{position:"absolute", right:"4%", top:"10%"}}
+          backdrop={false}
+          isOpen={this.state.vitaldatamodal}
+          toggle={this.vitaldataModal}
+          className="modal-lg"
+        >
+          <ModalHeader toggle={this.vitaldataModal}>
+            <b>Vital Data</b>
+          </ModalHeader>
+          <ModalBody>
+            
+              <VitalDataM />
+            
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this.vitaldataModal}>
+              닫기
+            </Button>
+          </ModalFooter>
+        </Modal>
+        
         <Modal
           isOpen={this.state.viewfilemodal}
           toggle={this.viewFileModal}
@@ -495,6 +578,8 @@ class PatientInfo extends React.Component {
           </ModalFooter>
         </Modal>
         <Modal
+          style={{position:"absolute", right:"4%", top:"10%", width:"45%"}}
+          backdrop={false}
           isOpen={this.state.paymodal}
           toggle={this.payModal}
           className="modal-dialog-centered modal-lg"
@@ -513,8 +598,7 @@ class PatientInfo extends React.Component {
                     <FormGroup className="align-self-center pt-1">
                       <Input
                         type="text"
-                        value={this.state.cc}
-                        onChange={e => this.setState({ cc: e.target.value })}
+                        
                         disabled
                       />
                     </FormGroup>
@@ -533,8 +617,6 @@ class PatientInfo extends React.Component {
                     <FormGroup className="align-self-center pt-1">
                       <Input
                         type="text"
-                        value={this.state.cc}
-                        onChange={e => this.setState({ cc: e.target.value })}
                         disabled
                       />
                     </FormGroup>
@@ -555,8 +637,6 @@ class PatientInfo extends React.Component {
                     <FormGroup className="align-self-center pt-1">
                       <Input
                         type="text"
-                        value={this.state.cc}
-                        onChange={e => this.setState({ cc: e.target.value })}
                         disabled
                       />
                     </FormGroup>
@@ -575,8 +655,6 @@ class PatientInfo extends React.Component {
                     <FormGroup className="align-self-center pt-1">
                       <Input
                         type="text"
-                        value={this.state.cc}
-                        onChange={e => this.setState({ cc: e.target.value })}
                         disabled
                       />
                     </FormGroup>
@@ -654,15 +732,17 @@ class PatientInfo extends React.Component {
           </Col>
           <Col lg="6" md="12" className="d-flex text-right">
           
-            <Col className="mx-5 text-left" style={{border:"1px solid #B8B8C2", borderRadius: "5px"}}>
-            {/* {this.props.appo===undefined||this.props.appo.APPOINT_KIND==="2"
-              ?null:moment.duration(this.props.appo.APPOINT_TIME.diff(moment())).minutes()<16 && moment.duration(this.props.appo.APPOINT_TIME.diff(moment())).minutes()>0?
-                <h4 className="text-primary" style={{marginTop:"0.5rem"}}>
-                  진료 시작까지&nbsp; 
-                    {moment.duration(this.props.appo.APPOINT_TIME.diff(moment())).minutes()}
-                  분 남았습니다.
-                </h4>
-              : null} */}
+            <Col className="mx-5 text-left d-flex" style={{border:"1px solid #B8B8C2", borderRadius: "5px"}}>
+            <h5 className="align-self-center">진료 시작까지</h5>
+              {this.props.appo===null?null:
+                <DateCountdown 
+                  className="align-self-center"
+                  datefrom= {moment(this.props.appo.APPOINT_TIME).add("-15","m")}
+                  ateTo= {this.props.appo.APPOINT_TIME}
+                  // callback={()=>alert('Hello')} 
+                  locales_plural={['년','월','일','시','분','초']} />
+              }
+              <h5 className="align-self-center">남았습니다.</h5>
             </Col>
             
             <Button
@@ -705,39 +785,22 @@ class PatientInfo extends React.Component {
             </Card>
             <Card className="mb-1" style={{height:"310px", border:"solid silver 1px"}}>
               <CardTitle className="px-1 d-flex justify-content-between" style={{paddingTop:"5px"}}>
-                <b>Past Consulting List</b><Menu onClick={() => this.goPastConsultList(this.props.pinfo.PATIENT_ID)} style={{cursor:"pointer"}}/>
+                <b>Past Consulting List</b>
+                <img src={dot} onClick={() => this.goPastConsultList(this.props.pinfo.PATIENT_ID)} style={{cursor:"pointer"}}/>
               </CardTitle>
-              <CardBody className="d-flex pl-0">
-                <div className="col-4 text-center">
-                  <h5><span className="text-bold-600">진료과 / 진료의</span></h5>
-
-                    {
-                      this.props.cslist.map(row =>
-                        (<CunsultName key={row.APPOINT_TIME} row={row}/>)
-                      )
-                    }
-
-                </div>
-                <div className="col-4 text-center">
-                  <h5><span className="text-bold-600">진단명</span></h5>
-
-                    {
-                      this.props.cslist.map(row =>
-                        (<NoteCC key={row.APPOINT_TIME} row={row}/>)
-                      )
-                    }
-
-                </div>
-                <div className="col-4 text-center">
-                  <h5><span className="text-bold-600">진료일자</span></h5>
-
-                    {
-                      this.props.cslist.map(row =>
-                        (<AppointTime key={row.APPOINT_TIME} row={row}/>)
-                      )
-                    }
-
-                </div>
+              <CardBody className="pl-0 pt-0">
+                <table className="col-12 pt-0 mt-0">
+                  <tr>
+                    <th className="text-center"><h5 className="text-bold-600">진료과 / 진료의</h5></th>
+                    <th className="text-center"><h5 className="text-bold-600">진단명</h5></th>
+                    <th className="text-center"><h5 className="text-bold-600">진료일자</h5></th>  
+                  </tr>
+                  {
+                    this.props.cslist.map(row =>
+                    ( <Cslist key={row.APPOINT_TIME} row={row}/> )
+                    )
+                  }
+                </table>
               </CardBody>
             </Card>
           </Col>
@@ -797,7 +860,8 @@ class PatientInfo extends React.Component {
             
             <Card className="mb-1" style={{height:"310px", border:"solid silver 1px"}}>
               <CardTitle className="px-1 d-flex justify-content-between" style={{paddingTop:"5px"}}>
-                <b>Vital Data</b> <Menu onClick={this.goVitalData} style={{cursor:"pointer"}}/>
+                <b>Vital Data</b>
+                <img src={dot} onClick={this.goVitalData} style={{cursor:"pointer"}}/>
               </CardTitle>
               <CardBody className="d-flex pl-0">
                 <div className="d-flex col-12 pl-0">
@@ -1005,6 +1069,7 @@ class PatientInfo extends React.Component {
                 color="primary"
                 outline
                 type="button"
+                onClick={this.cookieConsult}
               >
                 Save
               </Button>
@@ -1012,6 +1077,7 @@ class PatientInfo extends React.Component {
                 color="primary"
                 outline
                 type="button"
+                onClick={this.goHome}
               >
                 End
               </Button>
@@ -1035,10 +1101,10 @@ const mapStateToProps = state => {
     tempdata: state.dataList.TEMP,
     bsdata : state.dataList.BS,
     wedata : state.dataList.WE,
-    spo2data : state.dataList.SPO2
-
+    spo2data : state.dataList.SPO2,
+    concookie : state.cookies.consult
   }
 }
 
-export default connect(mapStateToProps, {goPCL, resetVitalData,  postMDNoteData, postPayData,
-  postPrescriptionData}) (PatientInfo)
+export default connect(mapStateToProps, {mPCL, resetVitalData,  postMDNoteData, postPayData,
+  postPrescriptionData, putStateComplete, saveCookieConsult}) (PatientInfo)

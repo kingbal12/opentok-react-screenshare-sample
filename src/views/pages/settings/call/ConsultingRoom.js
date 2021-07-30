@@ -31,6 +31,7 @@ import {
   postPayData,
   putStateComplete
 } from "../../../../redux/actions/data-list/"
+import DateCountdown from 'react-date-countdown-timer';
 import {
   saveCookieConsult
 } from "../../../../redux/actions/cookies/"
@@ -67,25 +68,7 @@ class Cslist extends React.Component {
   } 
 }
 
-class NoteCC extends React.Component { 
-  render() { 
-    return( 
-    <h6>
-      {this.props.row.NOTE_CC}
-    </h6>
-    ); 
-  } 
-}
 
-class AppointTime extends React.Component { 
-  render() { 
-    return( 
-    <h6>
-      {this.props.row.APPOINT_TIME.substring(0,10)}
-    </h6>
-    ); 
-  } 
-}
 
 class ConsultingRoom extends React.Component {
   constructor(props) {
@@ -246,13 +229,10 @@ class ConsultingRoom extends React.Component {
     }))
   }
 
-  // goPastConsultList(pid) {
-  //   this.props.getPastConulstList(pid)
-  // }
+
 
   goVitalData = e => {
     e.preventDefault()
-    this.props.resetVitalData()
     this.vitaldataModal()
   }
 
@@ -485,6 +465,14 @@ class ConsultingRoom extends React.Component {
               color="black"
               outline
               type="button">
+                {/* 타이머 */}
+              {this.props.appo===null?"15분 전부터 남은시간이 집계됩니다.":
+                <DateCountdown 
+                  datefrom= {this.props.appo.APPOINT_TIME}
+                  ateTo= {moment(this.props.appo.APPOINT_TIME).add("15","m")}
+                  // callback={()=>alert('Hello')} 
+                  locales_plural={['년','월','일','시','분','초']} />
+              }
             </Button>
             <Button
               className="mr-1"
@@ -566,7 +554,7 @@ class ConsultingRoom extends React.Component {
             className="modal-lg"
           >
             <ModalHeader toggle={this.pclModal}>
-              <b>Past Consult List</b>
+              <b>Past Consulting List</b>
             </ModalHeader>
             <ModalBody>
               
@@ -836,134 +824,134 @@ class ConsultingRoom extends React.Component {
               toggle={this.payModal}
               className="modal-dialog-centered modal-lg"
             >
-          <ModalHeader toggle={this.payModal}>
-            <b>Payment</b>
-          </ModalHeader>
-          <ModalBody>
-            <Row>
-              <Col lg="7" md="12" className="align-self-center pt-0">
-                <Row>
-                  <Col lg="5" md="12" className="align-self-center pt-0">
-                    <h5 className="text-bold-600">급여총액</h5>
-                  </Col>
-                  <Col lg="5" md="11" className="align-self-center pt-0">
-                    <FormGroup className="align-self-center pt-1">
-                      <Input
-                        type="text"
-                        
-                        disabled
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col  lg="1" md="1" className="align-self-center">
-                    <h5>원</h5>
-                  </Col>
-                </Row>
-              </Col>
-              <Col lg="5" md="12" >
-                <Row>
-                  <Col lg="4" md="12" className="align-self-center pt-0">
-                    <h5 className="text-bold-600">비급여</h5>
-                  </Col>
-                  <Col lg="6" md="11" className="align-self-center pt-0">
-                    <FormGroup className="align-self-center pt-1">
-                      <Input
-                        type="text"
-                        disabled
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col lg="2" md="1" className="align-self-center">
-                    <h5>원</h5>
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-            <Row>
-              <Col lg="7" md="12" className="align-self-center pt-0">
-                <Row>
-                  <Col lg="5" md="12" className="align-self-center pt-0">
-                    <h5 className="text-bold-600">청구액 (공단부담금)</h5>
-                  </Col>
-                  <Col lg="5" md="11" className="align-self-center pt-0">
-                    <FormGroup className="align-self-center pt-1">
-                      <Input
-                        type="text"
-                        disabled
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col  lg="1" md="1" className="align-self-center">
-                    <h5>원</h5>
-                  </Col>
-                </Row>
-              </Col>
-              <Col lg="5" md="12" >
-                <Row>
-                  <Col lg="4" md="12" className="align-self-center pt-0">
-                    <h5 className="text-bold-600">감액</h5>
-                  </Col>
-                  <Col lg="6" md="11" className="align-self-center pt-0">
-                    <FormGroup className="align-self-center pt-1">
-                      <Input
-                        type="text"
-                        disabled
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col lg="2" md="1" className="align-self-center">
-                    <h5>원</h5>
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-            <Row>
-              <Col lg="7" md="12" className="align-self-center pt-0">
-                <Row>
-                  <Col lg="5" md="12" className="align-self-center pt-0">
-                    <h5 className="text-bold-600">환자 본인부담금</h5>
-                  </Col>
-                  <Col lg="5" md="11" className="align-self-center pt-0">
-                    <FormGroup className="align-self-center pt-1">
-                      <Input
-                        type="text"
-                        value={this.state.paypatient}
-                        onChange={e => this.setState({ paypatient: e.target.value })}
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col  lg="1" md="1" className="align-self-center">
-                    <h5>원</h5>
-                  </Col>
-                </Row>
-              </Col>
-              <Col lg="5" md="12" >
-                <Row>
-                  <Col lg="4" md="12" className="align-self-center pt-0">
-                    <h5 className="text-bold-600">최종 청구액</h5>
-                  </Col>
-                  <Col lg="6" md="11" className="align-self-center pt-0">
-                    <FormGroup className="align-self-center pt-1">
-                      <Input
-                        type="text"
-                        value={this.state.paytotal}
-                        onChange={e => this.setState({ paytotal: e.target.value })}
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col lg="2" md="1" className="align-self-center">
-                    <h5>원</h5>
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-          </ModalBody>
-          <ModalFooter className="text-right">
-            <Button color="primary" onClick={this.postPayment}>
-              전송
-            </Button>
-          </ModalFooter>
-        </Modal>
+            <ModalHeader toggle={this.payModal}>
+              <b>Payment</b>
+            </ModalHeader>
+            <ModalBody>
+              <Row>
+                <Col lg="7" md="12" className="align-self-center pt-0">
+                  <Row>
+                    <Col lg="5" md="12" className="align-self-center pt-0">
+                      <h5 className="text-bold-600">급여총액</h5>
+                    </Col>
+                    <Col lg="5" md="11" className="align-self-center pt-0">
+                      <FormGroup className="align-self-center pt-1">
+                        <Input
+                          type="text"
+                          
+                          disabled
+                        />
+                      </FormGroup>
+                    </Col>
+                    <Col  lg="1" md="1" className="align-self-center">
+                      <h5>원</h5>
+                    </Col>
+                  </Row>
+                </Col>
+                <Col lg="5" md="12" >
+                  <Row>
+                    <Col lg="4" md="12" className="align-self-center pt-0">
+                      <h5 className="text-bold-600">비급여</h5>
+                    </Col>
+                    <Col lg="6" md="11" className="align-self-center pt-0">
+                      <FormGroup className="align-self-center pt-1">
+                        <Input
+                          type="text"
+                          disabled
+                        />
+                      </FormGroup>
+                    </Col>
+                    <Col lg="2" md="1" className="align-self-center">
+                      <h5>원</h5>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+              <Row>
+                <Col lg="7" md="12" className="align-self-center pt-0">
+                  <Row>
+                    <Col lg="5" md="12" className="align-self-center pt-0">
+                      <h5 className="text-bold-600">청구액 (공단부담금)</h5>
+                    </Col>
+                    <Col lg="5" md="11" className="align-self-center pt-0">
+                      <FormGroup className="align-self-center pt-1">
+                        <Input
+                          type="text"
+                          disabled
+                        />
+                      </FormGroup>
+                    </Col>
+                    <Col  lg="1" md="1" className="align-self-center">
+                      <h5>원</h5>
+                    </Col>
+                  </Row>
+                </Col>
+                <Col lg="5" md="12" >
+                  <Row>
+                    <Col lg="4" md="12" className="align-self-center pt-0">
+                      <h5 className="text-bold-600">감액</h5>
+                    </Col>
+                    <Col lg="6" md="11" className="align-self-center pt-0">
+                      <FormGroup className="align-self-center pt-1">
+                        <Input
+                          type="text"
+                          disabled
+                        />
+                      </FormGroup>
+                    </Col>
+                    <Col lg="2" md="1" className="align-self-center">
+                      <h5>원</h5>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+              <Row>
+                <Col lg="7" md="12" className="align-self-center pt-0">
+                  <Row>
+                    <Col lg="5" md="12" className="align-self-center pt-0">
+                      <h5 className="text-bold-600">환자 본인부담금</h5>
+                    </Col>
+                    <Col lg="5" md="11" className="align-self-center pt-0">
+                      <FormGroup className="align-self-center pt-1">
+                        <Input
+                          type="text"
+                          value={this.state.paypatient}
+                          onChange={e => this.setState({ paypatient: e.target.value })}
+                        />
+                      </FormGroup>
+                    </Col>
+                    <Col  lg="1" md="1" className="align-self-center">
+                      <h5>원</h5>
+                    </Col>
+                  </Row>
+                </Col>
+                <Col lg="5" md="12" >
+                  <Row>
+                    <Col lg="4" md="12" className="align-self-center pt-0">
+                      <h5 className="text-bold-600">최종 청구액</h5>
+                    </Col>
+                    <Col lg="6" md="11" className="align-self-center pt-0">
+                      <FormGroup className="align-self-center pt-1">
+                        <Input
+                          type="text"
+                          value={this.state.paytotal}
+                          onChange={e => this.setState({ paytotal: e.target.value })}
+                        />
+                      </FormGroup>
+                    </Col>
+                    <Col lg="2" md="1" className="align-self-center">
+                      <h5>원</h5>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+            </ModalBody>
+            <ModalFooter className="text-right">
+              <Button color="primary" onClick={this.postPayment}>
+                전송
+              </Button>
+            </ModalFooter>
+          </Modal>
             <div className="d-flex justify-content-between">
               <div className="mr-1" style={{width:"40%"}}>
                 <Card className="mb-1" style={{height:"140px"}}>
