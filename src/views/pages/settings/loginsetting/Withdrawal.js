@@ -26,7 +26,8 @@ class Withdrawal extends React.Component {
     this.state = {
       userid: props.user.login.values.loggedInUser.username,
       checkwithdrawal: false,
-      modal: false
+      modal: false,
+      checkmodal: false
     }
   }
   
@@ -63,6 +64,18 @@ class Withdrawal extends React.Component {
       modal: !prevState.modal
     }))
   }
+
+  checkModal = () => {
+    this.setState(prevState => ({
+      checkmodal: !prevState.checkmodal
+    }))
+  }
+
+  confirmWithdrawal = () => {
+    this.handlewithdrawal()
+    this.Modal()
+  }
+
   goLogin = e => {
     e.preventDefault()
     history.push("/")
@@ -90,6 +103,26 @@ class Withdrawal extends React.Component {
             </Button>{" "}
           </ModalFooter>
         </Modal>
+        <Modal
+          isOpen={this.state.checkmodal}
+          toggle={this.checkModal}
+          className="modal-dialog-centered modal-sm"
+        >
+          <ModalHeader toggle={this.checkModal}>
+            
+          </ModalHeader>
+          <ModalBody>
+            회원탈퇴를 진행하시겠습니까?
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" outline onClick={this.checkModal}>
+              취소
+            </Button>
+            <Button color="primary" onClick={this.confirmWithdrawal}>
+              확인
+            </Button>
+          </ModalFooter>
+        </Modal>
       <Col
         sm="12"
         xl="12"
@@ -115,10 +148,7 @@ class Withdrawal extends React.Component {
                   <Form>
                     <div>
                       <div><strong>내 정보 및 서비스 이용기록 삭제 안내</strong></div>
-                      <div>
-                        
-
-                      </div>
+                      <iframe src="http://203.251.135.81/lv1/_agree/agree.all.php?ids=secession" width="100%" height="600px" style={{border:"1px solid silver"}} />
                     </div>
                     <FormGroup className="form-label-group mt-2">
                      <Checkbox
@@ -136,7 +166,7 @@ class Withdrawal extends React.Component {
                       color="primary" 
                       type="button"
                       disabled={this.state.checkwithdrawal===true?false:true}
-                      onClick={this.handlewithdrawal}
+                      onClick={this.checkModal}
                       >
                         회원 탈퇴
                       </Button>

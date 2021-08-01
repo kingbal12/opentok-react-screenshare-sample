@@ -504,7 +504,7 @@ class ConsultingRoom extends React.Component {
 
         {/* 화상통화, 생체데이터, 등등 */}
         <Row>
-          <Col lg="6" xl="6" sm="12" md="12"> 
+          <Col lg="5" xl="5" sm="12" md="12"> 
             <Card className="mb-0" style={{height:"650px", border:"solid #7367ef 1px", backgroundColor:"#efefff"}}>
               <Row className="col-12 p-0">
                 <Col lg="12" md="12">
@@ -523,7 +523,7 @@ class ConsultingRoom extends React.Component {
               </Row>
             </Card>
           </Col>
-          <Col lg="6" md="12">
+          <Col lg="7" md="12">
           <Modal
             style={{position:"absolute", right:"4%", top:"10%"}}
             backdrop={false}
@@ -959,13 +959,13 @@ class ConsultingRoom extends React.Component {
                     <b>Personal Information</b>
                   </CardTitle>
                   <CardBody className="d-flex pl-0 pt-0">
-                    <div className="col-4">
+                    <div className="col-5">
                       <h6><span className="text-bold-600">이름</span></h6>
                       <h6><span className="text-bold-600">성별</span></h6>
                       <h6><span className="text-bold-600">생년월일</span></h6>
                       <h6><span className="text-bold-600">연락처</span></h6>
                     </div>
-                    <div className="col-8">
+                    <div className="col-7">
                       <h6>{this.props.pinfo.F_NAME}</h6>
                       <h6>{this.props.pinfo.GENDER==="1"||this.props.pinfo.GENDER==="3"?"M":"F"}</h6>
                       <h6>{this.props.pinfo.BIRTH_DT}</h6>
@@ -978,7 +978,7 @@ class ConsultingRoom extends React.Component {
                     <b>Physical Data</b>
                   </CardTitle>
                   <CardBody className="d-flex pl-0 pt-0">
-                    <div className="col-4">
+                    <div className="col-5">
                       <h6><span className="text-bold-600">신장/체중</span></h6>
                       <h6><span className="text-bold-600">흡연여부</span></h6>
                       <h6><span className="text-bold-600">음주여부</span></h6>
@@ -987,7 +987,7 @@ class ConsultingRoom extends React.Component {
                       <h6><span className="text-bold-600">복용중인 약</span></h6>
                       <h6><span className="text-bold-600">알러지 유무</span></h6>
                     </div>
-                    <div className="col-8">
+                    <div className="col-7">
                       <h6>{this.props.pinfo.HEIGHT_VAL}cm&nbsp;/&nbsp;{this.props.pinfo.WEIGHT_VAL}kg</h6>
                       <h6>{this.props.pinfo.SMOKE_YN==="Y"?"흡연":"비흡연"}</h6>
                       <h6>{this.props.pinfo.DRINK_YN==="Y"?"음주":"금주"}</h6>
