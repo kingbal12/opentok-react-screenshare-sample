@@ -283,22 +283,44 @@ export const getVitalData = (patientid) => {
       if(response.data.status==="200") {
 
         // let pulselength = response.data.data.PRESSURE_LIST.length
-        let bp = response.data.data.PRESSURE_LIST
+        let bp = new Array()
         let pulse = new Array()
+        let temp = new Array()
+        let bs = new Array()
+        let we = new Array()
+        let spo2 = new Array()
         for (let i=0; i<5; i++) {
-          let jsonObj		= new Object();         
+          let bpobj = new Object();
+          let jsonObj	= new Object();
+          let tempobj	= new Object();
+          let bsobj 	= new Object();
+          let weobj 	= new Object();
+          let spo2obj = new Object();   
+          
+          bpobj = response.data.data.PRESSURE_LIST[i]
           jsonObj.CREATE_TIME	= response.data.data.PRESSURE_LIST[i].CREATE_TIME
           jsonObj.PULSE_VAL	= response.data.data.PRESSURE_LIST[i].PULSE_VAL
+          tempobj = response.data.data.TEMP_LIST[i]
+          bsobj	= response.data.data.GLUCOSE_LIST[i]
+          weobj	= response.data.data.WEIGHT_LIST[i]
+          spo2obj	= response.data.data.SPO2_LIST[i]
 
+          bpobj = JSON.stringify(bpobj);
           jsonObj = JSON.stringify(jsonObj);
-          //String 형태로 파싱한 객체를 다시 json으로 변환
-          pulse.push(JSON.parse(jsonObj));
-        }
+          tempobj = JSON.stringify(tempobj);
+          bsobj = JSON.stringify(bsobj);
+          weobj = JSON.stringify(weobj);
+          spo2obj = JSON.stringify(spo2obj);
 
-        let temp = response.data.data.TEMP_LIST
-        let bs = response.data.data.GLUCOSE_LIST
-        let we = response.data.data.WEIGHT_LIST
-        let spo2 = response.data.data.SPO2_LIST
+          //String 형태로 파싱한 객체를 다시 json으로 변환
+          bp.push(JSON.parse(bpobj));
+          pulse.push(JSON.parse(jsonObj));
+          temp.push(JSON.parse(tempobj));
+          bs.push(JSON.parse(bsobj));
+          we.push(JSON.parse(weobj));
+          spo2.push(JSON.parse(spo2obj));
+          
+        }
 
         dispatch({
           type: "GET_VITAL_DATA",
