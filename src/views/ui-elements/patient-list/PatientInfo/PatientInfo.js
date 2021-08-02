@@ -394,6 +394,7 @@ class PatientInfo extends React.Component {
 
               <div style={{width:"50%"}}>
                 <Card className="mb-1" style={{height:"119px", border:"solid silver 1px"}}>
+                
                   <CardTitle className="pl-1" style={{paddingTop:"5px"}}>
                     <h4><b>Present Condition</b></h4>
                   </CardTitle>
