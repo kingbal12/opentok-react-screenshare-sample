@@ -495,18 +495,18 @@ class ConsultingRoom extends React.Component {
             <Card className="mb-0" style={{height:"650px", border:"solid #7367ef 1px", backgroundColor:"#efefff"}}>
               <Row className="col-12 p-0">
                 <Col lg="12" md="12">
-                {/* {this.props.dataList.tokbox.TOK_KEY===""?null: */}
+                {this.props.dataList.tokbox.TOK_KEY===""?null:
                 <Opentok className="col-12"
                   parentFunction={this.parentFunction}
-                  // apikey={this.props.dataList.tokbox.TOK_KEY}
-                  apikey="47274054"
+                  apikey={this.props.dataList.tokbox.TOK_KEY}
+                  // apikey="47274054"
                   toglescreenshare={this.state.screenshare}
-                  // session={this.props.dataList.tokbox.TOK_SESSION}
-                  session= "1_MX40NzI3NDA1NH5-MTYyNzg2OTY5ODIzNn5kR2VXN2kwUnRHbkZGVUJQYUxIL3E5c2N-UH4"
-                  // token={this.props.dataList.tokbox.TOK_TOKEN}
-                  token="T1==cGFydG5lcl9pZD00NzI3NDA1NCZzaWc9ZGQzNjgxNGMwZmY4NGI3YTkwMDZhZjg2ZGJjZGNiMTYxYzc0ODRiNjpzZXNzaW9uX2lkPTFfTVg0ME56STNOREExTkg1LU1UWXlOemcyT1RZNU9ESXpObjVrUjJWWE4ya3dVblJIYmtaR1ZVSlFZVXhJTDNFNWMyTi1VSDQmY3JlYXRlX3RpbWU9MTYyNzg2OTY5OCZub25jZT0zOTY2NzEzNzAmcm9sZT1wdWJsaXNoZXImZXhwaXJlX3RpbWU9MTYyNzk1NjA5OA=="
+                  session={this.props.dataList.tokbox.TOK_SESSION}
+                  // session= "1_MX40NzI3NDA1NH5-MTYyNzg2OTY5ODIzNn5kR2VXN2kwUnRHbkZGVUJQYUxIL3E5c2N-UH4"
+                  token={this.props.dataList.tokbox.TOK_TOKEN}
+                  // token="T1==cGFydG5lcl9pZD00NzI3NDA1NCZzaWc9ZGQzNjgxNGMwZmY4NGI3YTkwMDZhZjg2ZGJjZGNiMTYxYzc0ODRiNjpzZXNzaW9uX2lkPTFfTVg0ME56STNOREExTkg1LU1UWXlOemcyT1RZNU9ESXpObjVrUjJWWE4ya3dVblJIYmtaR1ZVSlFZVXhJTDNFNWMyTi1VSDQmY3JlYXRlX3RpbWU9MTYyNzg2OTY5OCZub25jZT0zOTY2NzEzNzAmcm9sZT1wdWJsaXNoZXImZXhwaXJlX3RpbWU9MTYyNzk1NjA5OA=="
                 />
-                {/* } */}
+                }
                 </Col>
               </Row>
             </Card>
