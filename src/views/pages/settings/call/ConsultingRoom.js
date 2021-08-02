@@ -103,7 +103,8 @@ class ConsultingRoom extends React.Component {
       speaker:[],
       cameraset:{},
       micset:{},
-      speakerset:{}
+      speakerset:{},
+      onsubscribe: "N"
       
     }
 
@@ -160,48 +161,40 @@ class ConsultingRoom extends React.Component {
     })();
   }
 
+  // startarchiveVideo() {
+  //   axios
+  //     .post("https://api.opentok.com/v2/project/47274054/archive", 
+  //     {
+  //       sessionId : "1_MX40NzI3NDA1NH5-MTYyNzg2OTY5ODIzNn5kR2VXN2kwUnRHbkZGVUJQYUxIL3E5c2N-UH4",
+  //       hasAudio : true,
+  //       hasVideo : true,
+  //       layout : {
+  //         type: "bestFit"
+  //       },
+  //       // name : "test",
+  //       outputMode : "composed",
+  //       resolution : "640x480"
+  //   },
+  //   {
+  //     headers: { 
+  //       'Authorization':'T1==cGFydG5lcl9pZD00NzI3NDA1NCZzaWc9ZGQzNjgxNGMwZmY4NGI3YTkwMDZhZjg2ZGJjZGNiMTYxYzc0ODRiNjpzZXNzaW9uX2lkPTFfTVg0ME56STNOREExTkg1LU1UWXlOemcyT1RZNU9ESXpObjVrUjJWWE4ya3dVblJIYmtaR1ZVSlFZVXhJTDNFNWMyTi1VSDQmY3JlYXRlX3RpbWU9MTYyNzg2OTY5OCZub25jZT0zOTY2NzEzNzAmcm9sZT1wdWJsaXNoZXImZXhwaXJlX3RpbWU9MTYyNzk1NjA5OA==',
+  //       'Content-Type': 'application/json' 
+  //     }
+  //   }
+  //     )
+  //     .then(response => {
+  //       console.log(response);
+  //     })
+  // }
+
   startarchiveVideo() {
     axios
-      .post("https://api.opentok.com/v2/partner/47274054/archive", 
-      {
-        sessionId : "1_MX40NzI3NDA1NH5-MTYyNzUyMTEzNDA5NH5MYTRBV05oWTlsaXhVNWU1RjhWbTM4QjZ-UH4",
-        hasAudio : true,
-        hasVideo : true,
-        layout : {
-          type: "bestFit"
-        },
-        name : "test",
-        outputMode : "composed",
-        resolution : "640x480",
-    },
-    {
-      headers: { 'Content-Type': 'application/json' }
-    }
-      )
+      .post('http://localhost:3000' + '/archive/start', {'sessionId': '1_MX40NzI3NDA1NH5-MTYyNzUyMTEzNDA5NH5MYTRBV05oWTlsaXhVNWU1RjhWbTM4QjZ-UH4'}, null, 'json')
       .then(response => {
         console.log(response);
       })
   }
 
-  stoparchiveVideo() {
-    axios
-      .post("https://api.opentok.com/v2/project/47274054/archive", 
-      {
-        sessionId : "1_MX40NzI3NDA1NH5-MTYyNzUyMTEzNDA5NH5MYTRBV05oWTlsaXhVNWU1RjhWbTM4QjZ-UH4",
-        hasAudio : true,
-        hasVideo : true,
-        layout : {
-          type: "bestFit"
-        },
-        name : "테스트용",
-        outputMode : "composed",
-        resolution : "640x480",
-    }
-      )
-      .then(response => {
-        console.log(response);
-      })
-  }
 
   startTimer() {
     if (this.timer === 0 && this.state.seconds > 0) {
@@ -401,16 +394,9 @@ class ConsultingRoom extends React.Component {
   }
  
 
-  // call = e => {
-  //   e.preventDefault()
-  //   this.sessionHelper = createSession({
-    
-  //   api_key: "47274054",
-  //   session_id: "2_MX40NzI3NDA1NH5-MTYyNjA2NzI0ODM1Mn56aTZQdnVxVnNaNS82a2Q3YWZndmplc3V-UH4",
-  //   tokens: "T1==cGFydG5lcl9pZD00NzI3NDA1NCZzaWc9M2E4ZDA3ODFiMjk4ZTg5M2M4NGY3ZjU2YWIwNDQ2ZmJlZTIzM2JjMDpzZXNzaW9uX2lkPTJfTVg0ME56STNOREExTkg1LU1UWXlOakEyTnpJME9ETTFNbjU2YVRaUWRuVnhWbk5hTlM4MmEyUTNZV1puZG1wbGMzVi1VSDQmY3JlYXRlX3RpbWU9MTYyNjA2NzI0NiZub25jZT0xMTI5ODg0NDUwJnJvbGU9cHVibGlzaGVyJmV4cGlyZV90aW1lPTE2MjYxNTM2NDY=",
-  //   onStreamsUpdated: streams => { this.setState({ streams }); }
-  //   });
-  // }
+  parentFunction = (data) => {
+    this.setState({onsubscribe: data})
+} 
  
   render() {
     let file_preview = null;
@@ -466,16 +452,17 @@ class ConsultingRoom extends React.Component {
               outline
               type="button">
                 {/* 타이머 */}
-              {this.props.appo===null?"15분 전부터 남은시간이 집계됩니다.":
+              {this.props.appo===null?"진료 시작 전입니다.":
                 <DateCountdown 
-                  datefrom= {this.props.appo.APPOINT_TIME}
-                  ateTo= {moment(this.props.appo.APPOINT_TIME).add("15","m")}
+                  datefrom= {this.props.rtime}
+                  ateTo= {moment(this.props.rtime).add("15","m")}
                   // callback={()=>alert('Hello')} 
                   locales_plural={['년','월','일','시','분','초']} />
               }
             </Button>
             <Button
               className="mr-1"
+              disabled={this.state.onsubscribe==="N"?true:false}
               color="black"
               outline
               onClick={this.setScreenShare}
@@ -510,13 +497,14 @@ class ConsultingRoom extends React.Component {
                 <Col lg="12" md="12">
                 {/* {this.props.dataList.tokbox.TOK_KEY===""?null: */}
                 <Opentok className="col-12"
+                  parentFunction={this.parentFunction}
                   // apikey={this.props.dataList.tokbox.TOK_KEY}
                   apikey="47274054"
                   toglescreenshare={this.state.screenshare}
                   // session={this.props.dataList.tokbox.TOK_SESSION}
-                  session= "1_MX40NzI3NDA1NH5-MTYyNzUyMTEzNDA5NH5MYTRBV05oWTlsaXhVNWU1RjhWbTM4QjZ-UH4"
+                  session= "1_MX40NzI3NDA1NH5-MTYyNzg2OTY5ODIzNn5kR2VXN2kwUnRHbkZGVUJQYUxIL3E5c2N-UH4"
                   // token={this.props.dataList.tokbox.TOK_TOKEN}
-                  token="T1==cGFydG5lcl9pZD00NzI3NDA1NCZzaWc9ZDM2NTNmMDBmZThiN2QwZDViNTBlNzZkNWU2YjZkYWY3MzFkYTRhMjpzZXNzaW9uX2lkPTFfTVg0ME56STNOREExTkg1LU1UWXlOelV5TVRFek5EQTVOSDVNWVRSQlYwNW9XVGxzYVhoVk5XVTFSamhXYlRNNFFqWi1VSDQmY3JlYXRlX3RpbWU9MTYyNzUyMTEzNCZub25jZT0yMTQ0MzE5Njk2JnJvbGU9cHVibGlzaGVyJmV4cGlyZV90aW1lPTE2Mjc2MDc1MzQ="
+                  token="T1==cGFydG5lcl9pZD00NzI3NDA1NCZzaWc9ZGQzNjgxNGMwZmY4NGI3YTkwMDZhZjg2ZGJjZGNiMTYxYzc0ODRiNjpzZXNzaW9uX2lkPTFfTVg0ME56STNOREExTkg1LU1UWXlOemcyT1RZNU9ESXpObjVrUjJWWE4ya3dVblJIYmtaR1ZVSlFZVXhJTDNFNWMyTi1VSDQmY3JlYXRlX3RpbWU9MTYyNzg2OTY5OCZub25jZT0zOTY2NzEzNzAmcm9sZT1wdWJsaXNoZXImZXhwaXJlX3RpbWU9MTYyNzk1NjA5OA=="
                 />
                 {/* } */}
                 </Col>
@@ -1296,7 +1284,8 @@ const mapStateToProps = state => {
     bsdata : state.dataList.BS,
     wedata : state.dataList.WE,
     spo2data : state.dataList.SPO2,
-    concookie : state.cookies.consult
+    concookie : state.cookies.consult,
+    rtime: state.dataList.rtime
   }
 }
 

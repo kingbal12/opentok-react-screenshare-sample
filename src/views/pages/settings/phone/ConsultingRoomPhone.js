@@ -733,16 +733,18 @@ class PatientInfo extends React.Component {
           <Col lg="6" md="12" className="d-flex text-right">
           
             <Col className="mx-5 text-left d-flex" style={{border:"1px solid #B8B8C2", borderRadius: "5px"}}>
-            <h5 className="align-self-center">진료 시작까지</h5>
-              {this.props.appo===null?null:
-                <DateCountdown 
-                  className="align-self-center"
-                  datefrom= {moment(this.props.appo.APPOINT_TIME).add("-15","m")}
-                  ateTo= {this.props.appo.APPOINT_TIME}
-                  // callback={()=>alert('Hello')} 
-                  locales_plural={['년','월','일','시','분','초']} />
-              }
-              <h5 className="align-self-center">남았습니다.</h5>
+              <h5 className="align-self-center text-primary mr-1" style={{paddingTop:"0.3rem"}}>진료 시작까지</h5>
+                {this.props.appo===null?null:
+                <span  style={{paddingTop:"0.2rem"}}>
+                  <DateCountdown 
+                    className="align-self-center text-primary"
+                    datefrom= {moment(this.props.rtime).add("-15","m")}
+                    dateTo= {this.props.rtime}
+                    // callback={()=>alert('Hello')} 
+                    locales_plural={['년','월','일','시','분',"초"]} />
+                </span>  
+                }
+              <h5 className="align-self-center text-primary" style={{paddingTop:"0.3rem"}}>남았습니다.</h5>
             </Col>
             
             <Button
@@ -1102,7 +1104,8 @@ const mapStateToProps = state => {
     bsdata : state.dataList.BS,
     wedata : state.dataList.WE,
     spo2data : state.dataList.SPO2,
-    concookie : state.cookies.consult
+    concookie : state.cookies.consult,
+    rtime: state.dataList.rtime
   }
 }
 

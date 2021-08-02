@@ -12,7 +12,7 @@ class Subscriber extends React.Component {
       error: null,
       audio: true,
       video: true,
-      onsubscribe: false
+      
     };
   }
 
@@ -28,25 +28,12 @@ class Subscriber extends React.Component {
     this.setState({ error: `Failed to subscribe: ${err.message}` });
   }
 
-  onSubscribe = () => {
-    this.setState(prevState => ({
-      onsubscribe: !prevState.onsubscribe
-    }))
-  }
-
+  
   render() {
     return (
       <div className="subscriber">
         {this.state.error ? <div id="error">{this.state.error}</div> : null}
-        <OTSubscriber
-          className="otsubscriber"
-          properties={{
-            subscribeToAudio: this.state.audio,
-            subscribeToVideo: this.state.video
-          }}
-          onSubscribe={this.onSubscribe}
-          onError={this.onError}
-        />
+        
       </div>
     );
   }

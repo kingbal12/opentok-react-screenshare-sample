@@ -1,5 +1,5 @@
 import React from "react"
-import { OTSession,OTStreams,preloadScript } from 'opentok-react';
+import { OTSession,OTStreams,preloadScript,  OTSubscriber } from 'opentok-react';
 import "../../../../assets/scss/plugins/extensions/opentok.scss"
 import ConnectionStatus from "./ConnectionStatus";
 import Publisher from "./Publisher";
@@ -39,6 +39,8 @@ class ConsultingRoom extends React.Component {
       connected: false,
       camerastate: true,
       micstate: true,
+      disconnect: "N",
+      onsubscribe: false
     }
     this.sessionEvents = {
       sessionConnected: () => {
@@ -71,25 +73,55 @@ class ConsultingRoom extends React.Component {
     console.log(this.state)
   }
 
-  sessionDisconnect = () => {
-    this.setState({connected: false})
+  disconnectSession = () => {
+    this.setState({disconnect: true})
   }
+
+  childFunction = () => {
+    this.props.parentFunction(this.state.onsubscribe); 
+  }
+
+  onSubscribe = () => {
+    this.setState({
+      onsubscribe: "Y"
+    })
+    this.childFunction()
+  }
+
+  childText = 'childText';
+    
+  
+
  
   render() {
     return (       
       <OTSession 
-      className="col-12 m-0 p-0"
-      apiKey={this.props.apikey} sessionId={this.props.session} token={this.props.token} onError={this.onError} eventHandlers={this.sessionEvents}>
+        className="col-12 m-0 p-0"
+        apiKey={this.props.apikey} 
+        sessionId={this.props.session} 
+        token={this.props.token} 
+        onError={this.onError} 
+        eventHandlers={this.sessionEvents}
+      >
         {/* <ConnectionStatus /> */}
         <Publisher togglescreenshare={this.props.toglescreenshare} micstate={this.state.micstate} camerastate={this.state.camerastate} />
         <OTStreams>
-        
-          <Subscriber/>
+          <OTSubscriber
+            className="otsubscriber"
+            properties={{
+              subscribeToAudio: this.state.audio,
+              subscribeToVideo: this.state.video
+            }}
+            onSubscribe={this.onSubscribe}
+            onError={this.onError}
+          />
         </OTStreams>
         <div className="buttons">
           <img src={mic} onClick={this.micState} style={{cursor:"pointer", width: "40px"}} />
           <img src={video} onClick={this.cameraState} style={{cursor:"pointer",  width: "40px"}} className="mr-2"/>
-          <img src={call} onClick={this.sessionDisconnect} style={{cursor:"pointer",  width: "40px"}}/>
+          <img src={call} onClick={this.disconnectSession} style={{cursor:"pointer",  width: "40px"}}/>
+          {/* <button onClick={this.check}>확인용</button> */}
+          {/* <button onClick={this.childFunction}>Click</button> */}
         </div>
         
       </OTSession>

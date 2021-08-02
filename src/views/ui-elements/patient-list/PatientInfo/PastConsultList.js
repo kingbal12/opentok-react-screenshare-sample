@@ -44,8 +44,8 @@ import spo2_2 from "../../../../assets/img/dashboard/ID12_08_vital_spo2 2.png"
 import spo2_3 from "../../../../assets/img/dashboard/ID12_08_vital_spo2 3.png"
 import spo2_4 from "../../../../assets/img/dashboard/ID12_08_vital_spo2 4.png"
 import spo2_5 from "../../../../assets/img/dashboard/ID12_08_vital_spo2 5.png"
-
-
+import moment from "moment"
+import DateCountdown from 'react-date-countdown-timer';
 
 class PastConsultList extends React.Component {
   constructor(props) {
@@ -205,10 +205,30 @@ class PastConsultList extends React.Component {
               </table>
             </Col>   
           </Row>
-        <h4 className="page-header text-bold-600 ml-2 mt-3">Past Consulting List</h4>
-        <DataListConfig parsedFilter={queryString.parse(this.props.location.search)}/>
-        
-        
+          <Row className="mt-3 mb-1 mx-2">
+            <Col lg="6" md="12">
+              <h4 className="page-header text-bold-600">Past Consulting List</h4>
+            </Col> 
+            <Col lg="3" md="12"></Col>
+            {/* {this.props.appo===null?null:   */}
+            <Col lg="3" md="12" className="text-left d-flex justify-content-center" style={{border:"1px solid #B8B8C2", borderRadius: "5px"}}>  
+              <h5 className="align-self-center text-primary mr-1" style={{paddingTop:"0.3rem"}}>진료 시작까지</h5>
+                {this.props.appo===null?null:
+                <span  style={{paddingTop:"0.2rem"}}>
+                  <DateCountdown 
+                    className="align-self-center text-primary"
+                    datefrom= {moment(this.props.rtime).add("-15","m")}
+                    dateTo= {this.props.rtime}
+                    // callback={()=>alert('Hello')} 
+                    locales_plural={['년','월','일','시','분',"초"]} />
+                </span>  
+                }
+              <h5 className="align-self-center text-primary" style={{paddingTop:"0.3rem"}}>남았습니다.</h5>
+            </Col>
+            {/* } */}
+          </Row>
+
+            <DataListConfig parsedFilter={queryString.parse(this.props.location.search)}/>
       </div>
     )
   }
@@ -221,8 +241,8 @@ const mapStateToProps = state => {
     appo: state.dataList.appointment,
     pinfo: state.dataList.patient,
     cousultlist: state.dataList.pastconsultlist,
-    totalpage: state.dataList.totalPages
-
+    totalpage: state.dataList.totalPages,
+    rtime: state.dataList.rtime
   }
 }
 

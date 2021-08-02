@@ -19,6 +19,7 @@ const initialState = {
   csdata: [],
   patient: "",
   appointment: "",
+  rtime: "",
   BP:[],
   PULSE:[],
   TEMP:[],
@@ -154,7 +155,8 @@ const DataListReducer = (state = initialState, action) => {
         ...state,
         csdata: action.list,
         patient: action.info,
-        appointment: action.appointment
+        appointment: action.appointment,
+        rtime: action.rtime
       }
 
     case "GET_VITAL_DATA":
@@ -177,6 +179,11 @@ const DataListReducer = (state = initialState, action) => {
         BS: action.BS,
         WE: action.WE,
         SPO2: action.SPO2
+      }
+
+    case "RESET_APPO_DATA":
+      return {
+        ...state,
       }
     case "GET_VITAL_DATA_ALL":
       return {

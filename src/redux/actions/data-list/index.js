@@ -235,6 +235,7 @@ export const getPatientInfo = (userid,patientid) => {
       if(response.data.status==="200") {
         history.push("/patientinfo")
         console.log("환자데이터: ", response.data.data)
+        let rtime= "";
         let appoint = response.data.data.APPOINT_INFO
         let consultlist = response.data.data.CONSULT_LIST
         let personalinfo = response.data.data.PERSONAL_INFO;
@@ -244,14 +245,17 @@ export const getPatientInfo = (userid,patientid) => {
         personalinfo.BS = response.data.data.PERSONAL_INFO["4_STATE"]
         personalinfo.SPO2 = response.data.data.PERSONAL_INFO["5_STATE"]
         personalinfo.BW = response.data.data.PERSONAL_INFO["6_STATE"]
+        if(appoint !== null) {rtime= response.data.data.APPOINT_INFO.APPOINT_TIME}
         if(appoint !== null){appoint.APPOINT_TIME = moment(appoint.APPOINT_TIME).format("hh:mm A")}
+        
         personalinfo.BIRTH_DT = moment(personalinfo.BIRTH_DT).format("MMMM DD, YYYY")
 
         dispatch({
           type: "GET_PATIENT_INFO",
           list: consultlist,
           info: personalinfo,
-          appointment: appoint
+          appointment: appoint,
+          rtime: rtime
         })
       } else {
         alert("환자 정보를 불러오지 못하였습니다.")
@@ -321,6 +325,16 @@ export const resetVitalData = () => {
       BS: [],
       WE: [],
       SPO2: [],
+    })
+  }
+}
+
+export const resetappodata = () => {
+  return dispatch => {
+    dispatch ({
+      type: "RESET_APPO_DATA",
+      appointment: "",
+      rtime: ""
     })
   }
 }

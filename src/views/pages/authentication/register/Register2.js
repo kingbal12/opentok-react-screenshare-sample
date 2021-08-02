@@ -110,11 +110,16 @@ class Register extends React.Component {
     
   }
 
- 
+  
+
 
   handleRegister1 = e => {
     e.preventDefault()
     if(this.state.verifyemailyn==="Y") {
+      let check = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,14}$/;
+      if(!check.test(this.state.password)){
+        alert("비밀번호 형식이 올바르지 않습니다.\n비밀번호 형식은 영어, 숫자, 특수문자 포함 6자~14자 이내 입니다.")
+      } else{
       if(this.state.password===this.state.chkpassword) {
         if(this.state.otheremail===false) {
           this.props.register2(
@@ -162,6 +167,7 @@ class Register extends React.Component {
       } else {
         this.setState({chkpasswordmodal:true})
       }
+    }
     } else {
       alert("이메일인증을 완료해주십시오")
     }
@@ -420,7 +426,7 @@ class Register extends React.Component {
           <ModalFooter>
             <Button color="primary" onClick={this.verifyEmailModal}>
               확인
-            </Button>{" "}
+            </Button>
           </ModalFooter>
         </Modal>
 
@@ -439,7 +445,7 @@ class Register extends React.Component {
           <ModalFooter>
             <Button color="primary" onClick={this.chkpasswordModal}>
               확인
-            </Button>{" "}
+            </Button>
           </ModalFooter>
         </Modal>
       </Row>

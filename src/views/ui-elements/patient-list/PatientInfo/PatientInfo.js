@@ -165,7 +165,15 @@ class PatientInfo extends React.Component {
   render() {
     let file_preview = null;
 
-    {this.props.appo===null||this.props.appo.FILE_NAME===""?
+    {this.props.appo===null
+      ?
+      file_preview = 
+        <img
+          src={previmg}
+          className="dz-img"
+          alt=""
+        />
+      : this.props.appo.FILE_NAME===""?
       file_preview = 
         <img
           src={previmg}
@@ -610,8 +618,8 @@ const mapStateToProps = state => {
     tempdata: state.dataList.TEMP,
     bsdata : state.dataList.BS,
     wedata : state.dataList.WE,
-    spo2data : state.dataList.SPO2
-
+    spo2data : state.dataList.SPO2,
+    rtime: state.dataList.rtime
   }
 }
 
