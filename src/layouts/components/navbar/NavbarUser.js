@@ -257,7 +257,7 @@ class NavbarUser extends React.PureComponent {
             <b>실시간 문의</b>
           </ModalHeader>
           <ModalBody>
-            <iframe src= "http://192.168.0.7/lv1/chat.1to1.php?ROOM_ID=room_wind&USERS=의사" width="400px" height="300px"></iframe>
+            <iframe src= "https://192.168.0.7/lv1/chat.1to1.php?ROOM_ID=room_wind&USERS=의사" width="400px" height="300px"></iframe>
           </ModalBody>
           <ModalFooter>
             <Button color="primary" outline onClick={this.questionModal}>
