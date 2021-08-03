@@ -143,7 +143,7 @@ class PatientInfo extends React.Component {
   goCallSetting = e => {
     e.preventDefault()
     this.props.gettokbox(this.props.user.login.values.loggedInUser.username, this.props.appo.APPOINT_NUM)
-    history.push("/pages/consultingroom")
+    
   }
 
   goPhoneConsult= e => {
@@ -303,18 +303,17 @@ class PatientInfo extends React.Component {
                       this.props.appo.APPOINT_KIND==="1"?
                       <th id="tblBottomBarTh" className="text-right">
                         <img onClick={this.goPhoneConsult}  src={call} alt="call" style={{cursor:"pointer"}} className="mr-1"/>
-                        <img src={nvideo} alt="nvideo" />
+                        <img src={nvideo} alt="nvideo"/>
                       </th>
                       :this.props.appo.APPOINT_KIND==="2"?
                       <th id="tblBottomBarTh" className="text-right">
                         <img src={ncall} alt="call" className="mr-1"/>
-                        <img onClick={this.goCallSetting} src={video} alt="video" style={{cursor:"pointer"}}  />
+                        <img onClick={this.goCallSetting} src={video} alt="video" style={{cursor:"pointer"}} />
                       </th>
                       : null
                     }
                   </tr>
                 </thead>
-
               </table>
             </Col>   
           </Row>

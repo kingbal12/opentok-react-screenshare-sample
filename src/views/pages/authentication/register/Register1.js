@@ -223,7 +223,7 @@ class Register extends React.Component {
             <span className="text-primary text-bold-600">서비스 이용 약관</span>
           </ModalHeader>
           <ModalBody>
-            <iframe src="https://203.251.135.81/lv1/_agree/agree.all.php?ids=agree1_1" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
+            <iframe src="https://health.iot4health.co.kr/lv1/_agree/agree.all.php?ids=agree1_1" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
           </ModalBody>
           <ModalFooter className="text-right">
             <Button color="primary" onClick={ this.termModal1}>
@@ -241,7 +241,7 @@ class Register extends React.Component {
             <span className="text-primary text-bold-600">서비스 이용 약관</span>
           </ModalHeader>
           <ModalBody>
-            <iframe src="https://203.251.135.81/lv1/_agree/agree.all.php?ids=agree2" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
+            <iframe src="https://health.iot4health.co.kr/lv1/_agree/agree.all.php?ids=agree2" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
           </ModalBody>
           <ModalFooter className="text-right">
             <Button color="primary" onClick={ this.termModal2}>
@@ -259,7 +259,7 @@ class Register extends React.Component {
             <span className="text-primary text-bold-600">서비스 이용 약관</span>
           </ModalHeader>
           <ModalBody>
-            <iframe src="https://203.251.135.81/lv1/_agree/agree.all.php?ids=agree3" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
+            <iframe src="https://health.iot4health.co.kr/lv1/_agree/agree.all.php?ids=agree3" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
           </ModalBody>
           <ModalFooter className="text-right">
             <Button color="primary" onClick={ this.termModal3}>
@@ -277,7 +277,7 @@ class Register extends React.Component {
             <span className="text-primary text-bold-600">서비스 이용 약관</span>
           </ModalHeader>
           <ModalBody>
-            <iframe src="https://203.251.135.81/lv1/_agree/agree.all.php?ids=agree4" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
+            <iframe src="https://health.iot4health.co.kr/lv1/_agree/agree.all.php?ids=agree4" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
           </ModalBody>
           <ModalFooter className="text-right">
             <Button color="primary" onClick={ this.termModal4}>
@@ -295,7 +295,7 @@ class Register extends React.Component {
             <span className="text-primary text-bold-600">서비스 이용 약관</span>
           </ModalHeader>
           <ModalBody>
-            <iframe src="https://203.251.135.81/lv1/_agree/agree.all.php?ids=agree5" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
+            <iframe src="https://health.iot4health.co.kr/lv1/_agree/agree.all.php?ids=agree5" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
           </ModalBody>
           <ModalFooter className="text-right">
             <Button color="primary" onClick={ this.termModal5}>
@@ -313,7 +313,7 @@ class Register extends React.Component {
             <span className="text-primary text-bold-600">서비스 이용 약관</span>
           </ModalHeader>
           <ModalBody>
-            <iframe src="https://203.251.135.81/lv1/_agree/agree.all.php?ids=agree6" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
+            <iframe src="https://health.iot4health.co.kr/lv1/_agree/agree.all.php?ids=agree6" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
           </ModalBody>
           <ModalFooter className="text-right">
             <Button color="primary" onClick={ this.termModal6}>
@@ -331,7 +331,7 @@ class Register extends React.Component {
             <span className="text-primary text-bold-600">서비스 이용 약관</span>
           </ModalHeader>
           <ModalBody>
-            <iframe src="https://203.251.135.81/lv1/_agree/agree.all.php?ids=agree7" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
+            <iframe src="https://health.iot4health.co.kr/lv1/_agree/agree.all.php?ids=agree7" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
           </ModalBody>
           <ModalFooter className="text-right">
             <Button color="primary" onClick={ this.termModal7}>
@@ -349,7 +349,7 @@ class Register extends React.Component {
             <span className="text-primary text-bold-600">서비스 이용 약관</span>
           </ModalHeader>
           <ModalBody>
-            <iframe src="https://203.251.135.81/lv1/_agree/agree.all.php?ids=agree8" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
+            <iframe src="https://health.iot4health.co.kr/lv1/_agree/agree.all.php?ids=agree8" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
           </ModalBody>
           <ModalFooter className="text-right">
             <Button color="primary" onClick={ this.termModal8}>
@@ -367,7 +367,7 @@ class Register extends React.Component {
             <span className="text-primary text-bold-600">서비스 이용 약관</span>
           </ModalHeader>
           <ModalBody>
-            <iframe src="https://203.251.135.81/lv1/_agree/agree.all.php?ids=agree9" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
+            <iframe src="https://health.iot4health.co.kr/lv1/_agree/agree.all.php?ids=agree9" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
           </ModalBody>
           <ModalFooter className="text-right">
             <Button color="primary" onClick={ this.termModal9}>
@@ -385,7 +385,7 @@ class Register extends React.Component {
             <span className="text-primary text-bold-600">서비스 이용 약관</span>
           </ModalHeader>
           <ModalBody>
-            <iframe src="https://203.251.135.81/lv1/_agree/agree.all.php?ids=agree10" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
+            <iframe src="https://health.iot4health.co.kr/lv1/_agree/agree.all.php?ids=agree10" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
           </ModalBody>
           <ModalFooter className="text-right">
             <Button color="primary" onClick={ this.termModal10}>
@@ -403,7 +403,7 @@ class Register extends React.Component {
             <span className="text-primary text-bold-600">서비스 이용 약관</span>
           </ModalHeader>
           <ModalBody>
-            <iframe src="https://203.251.135.81/lv1/_agree/agree.all.php?ids=agree11" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
+            <iframe src="https://health.iot4health.co.kr/lv1/_agree/agree.all.php?ids=agree11" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
           </ModalBody>
           <ModalFooter className="text-right">
             <Button color="primary" onClick={ this.termModal11}>
@@ -421,7 +421,7 @@ class Register extends React.Component {
             <span className="text-primary text-bold-600">서비스 이용 약관</span>
           </ModalHeader>
           <ModalBody>
-            <iframe src="https://203.251.135.81/lv1/_agree/agree.all.php?ids=agree12" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
+            <iframe src="https://health.iot4health.co.kr/lv1/_agree/agree.all.php?ids=agree12" style={{width:"100%", height: "50rem", border:"1px solid silver" }} />
           </ModalBody>
           <ModalFooter className="text-right">
             <Button color="primary" onClick={ this.termModal12}>

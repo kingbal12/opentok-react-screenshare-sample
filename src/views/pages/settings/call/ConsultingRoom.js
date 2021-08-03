@@ -455,7 +455,7 @@ class ConsultingRoom extends React.Component {
               {this.props.appo===null?"진료 시작 전입니다.":
                 <DateCountdown 
                   datefrom= {this.props.rtime}
-                  ateTo= {moment(this.props.rtime).add("15","m")}
+                  dateTo= {moment(this.props.rtime).add("15","m")}
                   // callback={()=>alert('Hello')} 
                   locales_plural={['년','월','일','시','분','초']} />
               }
@@ -1209,7 +1209,7 @@ class ConsultingRoom extends React.Component {
               </CardBody>
             </Card>
             <div className="pt-0 mt-0 text-right" style={{width:"100%"}}>
-              <Button
+              {/* <Button
                 className="mr-1"
                 color="primary"
                 outline
@@ -1217,7 +1217,7 @@ class ConsultingRoom extends React.Component {
                 onClick={this.Check}
               >
                 확인용 버튼
-              </Button>
+              </Button> */}
               <Button
                 className="mr-1"
                 color="primary"

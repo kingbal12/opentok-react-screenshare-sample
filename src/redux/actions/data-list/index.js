@@ -27,15 +27,15 @@ export const gettokbox = (userid, appointnum) => {
       .then(response => {
         console.log(response)
 
-        if (response.data.status==="200") {
-          
+        if (response.data.status==="200"&&response.data.data.TOK_KEY!=="") {
           dispatch({
             type: "GET_TOKBOX",
             data: response.data.data
           })
+          history.push("/pages/consultingroom")
         }
         else {
-          alert(response.data.message)
+          alert("진료실은 진료시간 5분전부터 입장 가능합니다.")
         }
       })
       .catch(err => console.log(err))

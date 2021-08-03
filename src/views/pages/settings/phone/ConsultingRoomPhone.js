@@ -732,11 +732,11 @@ class PatientInfo extends React.Component {
           </Col>
           <Col lg="6" md="12" className="d-flex text-right">
           
-            <Col className="mx-5 text-left d-flex" style={{border:"1px solid #B8B8C2", borderRadius: "5px"}}>
+            <Col className="mx-5 text-left d-flex" style={{border:"1px solid #B8B8C2", borderRadius: "5px", height:"35px"}}>
               <h5 className="align-self-center text-primary mr-1" style={{paddingTop:"0.3rem"}}>진료 시작까지</h5>
                 {this.props.appo===null?null:
                 <span  style={{paddingTop:"0.2rem"}}>
-                  <DateCountdown 
+                  <DateCountdown
                     className="align-self-center text-primary"
                     datefrom= {moment(this.props.rtime).add("-15","m")}
                     dateTo= {this.props.rtime}

@@ -35,7 +35,7 @@ class Term extends React.Component {
                   </CardTitle>
                 </CardHeader>   
               <CardBody className="px-6 pb-50">
-                <iframe src="https://203.251.135.81/lv1/_agree/agree.all.html" style={{width:"100%", height:"40rem"}} />
+                <iframe src="https://health.iot4health.co.kr/lv1/_agree/agree.all.html" style={{width:"100%", height:"40rem"}} />
               </CardBody>
             </Card>
             </Col>

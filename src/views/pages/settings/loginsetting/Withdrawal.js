@@ -148,7 +148,7 @@ class Withdrawal extends React.Component {
                   <Form>
                     <div>
                       <div><strong>내 정보 및 서비스 이용기록 삭제 안내</strong></div>
-                      <iframe src="https://203.251.135.81/lv1/_agree/agree.all.php?ids=secession" width="100%" height="600px" style={{border:"1px solid silver"}} />
+                      <iframe src="https://health.iot4health.co.kr/lv1/_agree/agree.all.php?ids=secession" width="100%" height="600px" style={{border:"1px solid silver"}} />
                     </div>
                     <FormGroup className="form-label-group mt-2">
                      <Checkbox

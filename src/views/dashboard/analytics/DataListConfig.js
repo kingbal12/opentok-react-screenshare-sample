@@ -35,8 +35,11 @@ import "../../../assets/scss/plugins/extensions/react-paginate.scss"
 import "../../../assets/scss/pages/data-list.scss"
 import Call from "../../../assets/img/dashboard/ID9_07_table_method_call.png"
 import Video from "../../../assets/img/dashboard/ID9_07_table_method_video.png"
-import Vital_5 from "../../../assets/img/dashboard/ID9_07_table_vital5.png"
+import Vital_1 from "../../../assets/img/dashboard/ID9_07_table_vital1.png"
+import Vital_2 from "../../../assets/img/dashboard/ID9_07_table_vital2.png"
+import Vital_3 from "../../../assets/img/dashboard/ID9_07_table_vital3.png"
 import Vital_4 from "../../../assets/img/dashboard/ID9_07_table_vital4.png"
+import Vital_5 from "../../../assets/img/dashboard/ID9_07_table_vital5.png"
 import chartimage from "../../../assets/img/dashboard/ID09_07_chart.png"
 import moment from "moment"
 
@@ -196,7 +199,7 @@ class DataListConfig extends Component {
         name: "초진/재진",
         center: true,
         cell: row => (
-          <p className="text-bold-500 text-truncate mb-0">{row.FIRST_YN}</p>
+          <p className="text-bold-500 text-truncate mb-0">{row.FIRST_YN===""?"초진":row.FIRST_YN==="Y"?"초진":row.FIRST_YN==="N"?"재진":null}</p>
         )
       },
       {
@@ -210,7 +213,12 @@ class DataListConfig extends Component {
         name: "VitalData",
         center: true,
         cell: row => (
-          <p className="text-bold-500 text-truncate mb-0">{row.VITAL_STATE===""?<img src={Vital_5} alt="Vital_5" />:<img src={Vital_4} alt="Vital_4" />}</p>
+          <p className="text-bold-500 text-truncate mb-0">{row.VITAL_STATE==="00"?<img src={Vital_5} alt="Vital_5" />:
+                                                            row.VITAL_STATE==="01"? <img src={Vital_1} alt="Vital_1"/>:
+                                                            row.VITAL_STATE==="02"? <img src={Vital_4} alt="Vital_4"/>:
+                                                            row.VITAL_STATE==="03"? <img src={Vital_3} alt="Vital_3"/>:
+                                                            row.VITAL_STATE==="04"? <img src={Vital_2} alt="Vital_2"/>:
+                                                            null}</p>
         )
       },
       {

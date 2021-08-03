@@ -37,7 +37,7 @@ class Question extends React.Component {
                       </CardTitle>
                   </CardHeader>
                   <CardBody className="pt-1 pb-50 justify-content-center">
-                    <iframe src={"https://203.251.135.81/lv1/mypage.chat.1to1.php?HeaderHide=ok"}  style={{width:"100%", height:"60vh"}}/>
+                    <iframe src={"https://health.iot4health.co.kr/lv1/mypage.chat.1to1.php?HeaderHide=ok"}  style={{width:"100%", height:"60vh"}}/>
                   </CardBody> 
                 </Card>
               </Col>
