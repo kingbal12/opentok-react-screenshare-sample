@@ -219,7 +219,14 @@ export const getNameData = (userid, pageamount, pagenum, fname) => {
   }
 }
 
-
+export const resetPastConsult = () => {
+  return dispatch => {
+    dispatch({
+      type: "RESET_PAST_DATA",
+      list: []
+    })
+  }
+}
 
 export const getPatientInfo = (userid,patientid) => {
   return async dispatch => {

@@ -150,6 +150,11 @@ const DataListReducer = (state = initialState, action) => {
           action.params
         )
       }
+    case "RESET_PAST_DATA":
+      return {
+        ...state,
+        csdata: action.list
+      }
     case "GET_PATIENT_INFO":
       return {
         ...state,

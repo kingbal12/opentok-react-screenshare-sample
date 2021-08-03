@@ -25,7 +25,8 @@ import {
   filterData,
   resetVitalData,
   getPatientInfo,
-  getVitalData
+  getVitalData,
+  resetPastConsult
   // eData
 } from "../../../redux/actions/data-list/"
 import Sidebar from "./DataListSidebar"
@@ -327,6 +328,7 @@ class DataListConfig extends Component {
   goPatientList(id) {
     // id.preventDefault()
     this.props.resetVitalData()
+    this.props.resetPastConsult()
     this.props.getPatientInfo(this.state.user,id)
     this.props.getVitalData(id)
   }
@@ -492,5 +494,6 @@ export default connect(mapStateToProps, {
   filterData,
   resetVitalData,
   getPatientInfo,
-  getVitalData
+  getVitalData,
+  resetPastConsult
 })(DataListConfig)

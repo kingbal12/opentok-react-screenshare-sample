@@ -102,7 +102,6 @@ class PastConsultList extends React.Component {
   goCallSetting = e => {
     e.preventDefault() 
     this.props.gettokbox(this.props.user.login.values.loggedInUser.username, this.props.appo.APPOINT_NUM)
-    history.push("/pages/consultingroom")
   }
 
   goPhoneConsult= e => {
