@@ -213,7 +213,7 @@ class DataListConfig extends Component {
         name: "초진/재진",
         center:true,
         cell: row => (
-          <p className="text-bold-500 text-truncate mb-0">{row.FIRST_YN}</p>
+          <p className="text-bold-500 text-truncate mb-0">{row.FIRST_YN==="Y"?"초진":row.FIRST_YN===""?"초진":"재진"}</p>
         )
       },
       {

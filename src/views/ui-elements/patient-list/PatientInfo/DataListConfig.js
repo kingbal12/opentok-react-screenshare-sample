@@ -122,10 +122,22 @@ const ExpandedComponent = props => {
               <Card className="m-0" style={{height:"23rem"}} >
                 <CardHeader><b className="text-primary">MD Note</b></CardHeader>
                 <CardBody>
-                  <div>C.C: {props.data.NOTE_CC}</div>
-                  <div className="mt-1">Diagnosis: {props.data.NOTE_DX}</div>
-                  <div className="mt-1">Tx &#38; Rx: {props.data.NOTE_RX}</div>
-                  <div className="mt-1">Recommendation: </div>
+                  <Row>
+                    <Col className="col-3 text-center"><b>C.C:</b></Col>
+                    <Col className="col-9 align-self-center">{props.data.NOTE_CC}</Col>
+                  </Row>
+                  <Row className="mt-1">
+                    <Col className="col-3  text-center"><b>Diagnosis:</b></Col>
+                    <Col className="col-9 align-self-center">{props.data.NOTE_DX}</Col>
+                  </Row>
+                  <Row className="mt-1">
+                    <Col className="col-3  text-center"><b>Tx &#38; Rx: </b></Col>
+                    <Col className="col-9 align-self-center">{props.data.NOTE_RX}</Col>
+                  </Row>
+                  <Row className="mt-1">
+                    <Col className="col-4  text-center"><b>Recommendation:</b></Col>
+                    <Col className="col-8 align-self-center"></Col>
+                  </Row>
                 </CardBody>
               </Card>
             </Col>

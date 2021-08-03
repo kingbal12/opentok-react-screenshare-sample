@@ -57,8 +57,15 @@ export const getPaymentData = (userid, startdate, enddate, pageamount, pagenum) 
     .then(response => {
       let totalPage = Math.ceil(response.data.data.COUNT / 5)
       console.log(totalPage, response)
-      let totalPay = 0
-      totalPay= response.data.data.PAY_TOTAL.reduce((a,b)=>(a+b));
+      let length = response.data.data.COUNT
+      let totalPay = new Array();
+      for (let i=0; i<length; i++) {
+        let jsonObj		= new Object();
+        jsonObj.PAY_TOTAL = response.data.data.PAY_LIST[i].PAY_TOTAL
+        jsonObj = JSON.stringify(jsonObj);
+        totalPay.push(JSON.parse(jsonObj));
+      }
+      if (totalPay.length!==0) {totalPay= totalPay.reduce((a,b)=>(a+b));}
       dispatch({
         type: "GET_PAYMENT_DATA",
         data: response.data.data.PAY_LIST,
