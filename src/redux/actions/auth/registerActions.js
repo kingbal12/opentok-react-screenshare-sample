@@ -100,7 +100,7 @@ export const register2 = (userid, name, phone, password, btdate, gender, email) 
       })
       dispatch({
         type: "REGISTER_USER",
-        payload: {registeruser, registername}
+        payload: {registeruser, registername, phone}
       })
   }
 }

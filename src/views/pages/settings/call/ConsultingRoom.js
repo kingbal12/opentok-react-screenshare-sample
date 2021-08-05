@@ -806,7 +806,7 @@ class ConsultingRoom extends React.Component {
               </ModalFooter>
             </Modal>
             <Modal
-              style={{position:"absolute", right:"4%", top:"10%", width:"45%"}}
+              style={{position:"absolute", right:"4%", top:"10%", width:"60%"}}
               backdrop={false}
               isOpen={this.state.paymodal}
               toggle={this.payModal}

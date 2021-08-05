@@ -22,6 +22,7 @@ import 'react-perfect-scrollbar/dist/css/styles.css'
 import PerfectScrollbar from "react-perfect-scrollbar";
 import HicareLogo from "../../../../assets/img/logo/logo1.png"
 import { FormattedMessage } from "react-intl"
+import previewimage from "../../../../assets/img/elements/mypage_profile_de.png"
 
 //  '01' : 가정의학과, '02' : 내과 
 //  '03' : 산부인과, '04' : 피부과 
@@ -39,8 +40,8 @@ class Register extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      // userid: "kingbal999@kakao.com",
-      // name: "아이오티포헬스",
+      // userid: "kingbal999@gmail.com",
+      // name: "강주형",
       userid: props.user.register.values.registeruser,
       name: props.user.register.values.registername,
       filename: "",
@@ -118,9 +119,11 @@ class Register extends React.Component {
     axios
       .put("https://health.iot4health.co.kr:9300/v1/doctor/account/user-info", data)
       .then(response => {
+        
         let register4status;
 
         if(response.data.status === "200") {
+          console.log(response)
           register4status = response.data.status
           console.log(register4status)
           this.registerModal()
@@ -148,7 +151,7 @@ class Register extends React.Component {
 
   goRegisterComplete = e => {
     e.preventDefault()
-    history.push("/pages/registtercomplete")
+    history.push("/schedule")
   }
 
   previewModal = e => {
@@ -177,9 +180,9 @@ class Register extends React.Component {
           <img
             width="150px"
             height="150px" 
-            src={previmg}
+            src={previewimage}
             className="dz-img"
-            style={{borderRadius:"100%"}} 
+            // style={{borderRadius:"50px"}} 
             alt="" 
             />
        
@@ -218,7 +221,7 @@ class Register extends React.Component {
                       <Row className="pl-1">
                         
                           <Col lg="2" md="12" className="align-self-start"><b><FormattedMessage id="Add Image"/><span className="text-danger">(필수)</span></b></Col>
-                          <Col lg="8" md="12" className="p-0 m-0">
+                          <Col lg="7" md="12" className="p-0 m-0">
                           <InputGroup>
                             <CustomInput
                               type="file" 
@@ -316,10 +319,10 @@ class Register extends React.Component {
                     </FormGroup>
 
                     <FormGroup className="form-label-group d-flex justify-content-between pt-1">
-                      <div className="col-2 align-self-center"><b><FormattedMessage id="License"/><span className="text-danger">(필수)</span></b></div>
+                      <div className="col-2 align-self-center"><b><FormattedMessage id="License"/><br/><span className="text-danger">(필수)</span></b></div>
                       <InputGroup>
                         <Input
-                          type="text"
+                          type="number"
                           placeholder="의사 면허번호 입력"
                           required
                           value={this.state.medicalnum}

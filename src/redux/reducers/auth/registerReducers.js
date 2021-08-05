@@ -16,6 +16,11 @@ export const register = (state = {}, action) => {
           ...state,
           values: action.payload
         }
+    case "REGISTER_PHONE":
+      return {
+        ...state,
+        values: action.payload
+      }
     case "VERIFY_EMAIL": {
       return { ...state, verify: action.payload }
     }

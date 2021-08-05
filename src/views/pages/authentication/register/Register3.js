@@ -48,7 +48,8 @@ class Register extends React.Component {
 
 postPhone = e => {
   e.preventDefault()
-  axios
+  if(this.props.user.register.values.phone === this.state.phonenum){
+    axios
       .post("https://health.iot4health.co.kr:9300/signup-sms", {
         mobile_num: this.state.phonenum
       })
@@ -61,6 +62,10 @@ postPhone = e => {
         }
 
       })
+  } else {
+    alert("본인의 휴대폰번호와 다릅니다.\n본인의 휴대폰 번호를 입력해 주세요")
+  }
+  
 }
 
 auth = e => {
@@ -300,6 +305,7 @@ handleComplete = (data) => {
                       <InputGroup>
                         <Input
                           type="text"
+                          maxLength="10"
                           placeholder="하이픈(-)을 생략, 숫자만 입력"
                           required
                           value={this.state.businessnumber}
@@ -424,7 +430,7 @@ handleComplete = (data) => {
                           <InputGroupText>계좌번호</InputGroupText>
                         </InputGroupAddon>  
                         <Input
-                          type="text"
+                          type="number"
                           value={this.state.accountnumber}
                           onChange={e => this.setState({ accountnumber: e.target.value })}
                         />
