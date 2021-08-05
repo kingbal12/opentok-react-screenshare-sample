@@ -59,9 +59,9 @@ class Cslist extends React.Component {
   render() { 
     return(
       <tr>
-        <th className="text-center">{this.props.row.PART_NAME} / {this.props.row.F_NAME}</th>
-        <th className="text-center">{this.props.row.NOTE_CC}</th>
-        <th className="text-center">{this.props.row.APPOINT_TIME.substring(0,10)}</th>  
+        <th className="text-center"><h6>{this.props.row.PART_NAME} / {this.props.row.F_NAME}</h6></th>
+        <th className="text-center"><h6>{this.props.row.NOTE_CC}</h6></th>
+        <th className="text-center"><h6>{this.props.row.APPOINT_TIME.substring(0,10)}</h6></th>  
       </tr> 
  
     ); 

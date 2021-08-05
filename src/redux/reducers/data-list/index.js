@@ -29,6 +29,7 @@ const initialState = {
   pastconsulttotal:0,
   pastconsultlist:[],
   vitaldata:"",
+  pharmacy:"",
   pid:""
 }
 
@@ -226,6 +227,11 @@ const DataListReducer = (state = initialState, action) => {
       return {
         ...state,
         vitaldata: action.data
+      }
+    case "GET_PHARMACY":
+      return {
+        ...state,
+        pharmacy: action.data
       }
     case "GET_ALL_DATA":
       return {

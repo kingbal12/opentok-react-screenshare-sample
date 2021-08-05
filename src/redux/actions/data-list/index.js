@@ -768,3 +768,28 @@ export const putStateComplete = (userid, apnum) => {
       })
   }
 }
+
+export const getPharmacy = (patientid) => {
+  return async dispatch => {
+    await axios
+      .get("https://health.iot4health.co.kr:9300/v1/doctor/treatment/pharmacy", {
+        params: {
+          patient_id: patientid
+        }
+  })
+    .then(response => {  
+      console.log(response.data.data)
+      if(response.data.status==="200" && response.data.data.P_NAME!== "") {
+        dispatch({
+          type: "GET_PHARMACY",
+          data: response.data.data
+        })
+        history.push("/vitaldatasetting" )
+      } else {
+        alert("약국정보를 불러오지 못하였습니다.")
+      }
+    })
+    
+    .catch(err => console.log(err))
+  }
+}

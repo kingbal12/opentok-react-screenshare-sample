@@ -24,7 +24,8 @@ import {
 } from "recharts"
 import {
   resetVitalData,
-  goPCL
+  goPCL,
+  getPharmacy
 } from "../../../../redux/actions/data-list/"
 import { history } from "../../../../history"
 import "../../../../assets/scss/pages/authentication.scss"
@@ -143,7 +144,7 @@ class PatientInfo extends React.Component {
   goCallSetting = e => {
     e.preventDefault()
     this.props.gettokbox(this.props.user.login.values.loggedInUser.username, this.props.appo.APPOINT_NUM)
-    
+    this.props.getPharmacy(this.props.pinfo.PATIENT_ID)
   }
 
   goPhoneConsult= e => {
@@ -629,4 +630,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {goPCL, resetVitalData, gettokbox}) (PatientInfo)
+export default connect(mapStateToProps, {goPCL, resetVitalData, gettokbox, getPharmacy}) (PatientInfo)
