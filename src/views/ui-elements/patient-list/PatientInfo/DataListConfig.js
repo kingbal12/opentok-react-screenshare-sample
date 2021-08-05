@@ -136,7 +136,7 @@ const ExpandedComponent = props => {
                   </Row>
                   <Row className="mt-1">
                     <Col className="col-4  text-center"><b>Recommendation:</b></Col>
-                    <Col className="col-8 align-self-center"></Col>
+                    <Col className="col-8 align-self-center">{props.data.NOTE_VITAL}</Col>
                   </Row>
                 </CardBody>
               </Card>
@@ -264,7 +264,7 @@ class DataListConfig extends Component {
         selector: "gender",
         sortable: false,
         maxWidth: "300px",
-        cell: row => <p className="text-bold-500 mb-0">{row.NOTE_CC}</p>
+        cell: row => <p className="text-bold-500 mb-0">{row.NOTE_DX}</p>
       },
       {
         name: "진료일자",

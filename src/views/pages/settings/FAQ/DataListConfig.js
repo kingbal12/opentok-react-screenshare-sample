@@ -304,9 +304,7 @@ class DataListConfig extends Component {
   
   search = e => {
     e.preventDefault()
-    if(this.state.name!==""){
-      this.props.getNameFaqData(5,1,this.state.name)
-    }
+    this.props.getNameFaqData(5,1,this.state.name)
     
   }
 

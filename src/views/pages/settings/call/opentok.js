@@ -9,6 +9,8 @@ import { connect } from "react-redux";
 import { Button } from "bootstrap";
 import video from "../../../../assets/img/call/ID25_14_btn_op_video.png"
 import mic from "../../../../assets/img/call/ID25_14_btn_op_mic.png"
+import video_off from "../../../../assets/img/call/ID25_14_btn_op_video_off.png"
+import mic_off from "../../../../assets/img/call/ID25_14_btn_op_mic_off.png"
 import call from "../../../../assets/img/call/ID25_14_btn_op_end-call.png"
 import ScreenSharingAccPack from "opentok-screen-sharing"
 import { Fragment } from "react";
@@ -117,8 +119,8 @@ class ConsultingRoom extends React.Component {
           />
         </OTStreams>
     <div className="buttons">
-          <img src={mic} onClick={this.micState} style={{cursor:"pointer", width: "40px"}} />
-          <img src={video} onClick={this.cameraState} style={{cursor:"pointer",  width: "40px"}} className="mr-2"/>
+          <img src={this.state.micstate===true?mic:mic_off} onClick={this.micState} style={{cursor:"pointer", width: "40px"}} />
+          <img src={this.state.camerastate===true?video:video_off} onClick={this.cameraState} style={{cursor:"pointer",  width: "40px"}} className="mr-2"/>
           <img src={call} onClick={this.disconnectSession} style={{cursor:"pointer",  width: "40px"}}/>
           {/* <button onClick={this.check}>확인용</button> */}
           {/* <button onClick={this.childFunction}>Click</button> */}

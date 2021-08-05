@@ -249,6 +249,7 @@ export const getPatientInfo = (userid,patientid) => {
       if(response.data.status==="200") {
         history.push("/patientinfo")
         console.log("환자데이터: ", response.data.data)
+        console.log(response.data.data.APPOINT_INFO)
         let rtime= "";
         let appoint = response.data.data.APPOINT_INFO
         let consultlist = response.data.data.CONSULT_LIST
@@ -312,11 +313,11 @@ export const getVitalData = (patientid) => {
           let bsobj 	= new Object();
           let weobj 	= new Object();
           let spo2obj = new Object();   
-          if(response.data.data.PRESSURE_LIST.length!==0) {
+    
             bpobj = response.data.data.PRESSURE_LIST[i]
             jsonObj.CREATE_TIME	= response.data.data.PRESSURE_LIST[i].CREATE_TIME
             jsonObj.PULSE_VAL	= response.data.data.PRESSURE_LIST[i].PULSE_VAL
-          }
+         
           
           tempobj = response.data.data.TEMP_LIST[i]
           bsobj	= response.data.data.GLUCOSE_LIST[i]
@@ -331,12 +332,12 @@ export const getVitalData = (patientid) => {
           spo2obj = JSON.stringify(spo2obj);
 
           //String 형태로 파싱한 객체를 다시 json으로 변환
-          bp.push(JSON.parse(bpobj));
-          pulse.push(JSON.parse(jsonObj));
-          temp.push(JSON.parse(tempobj));
-          bs.push(JSON.parse(bsobj));
-          we.push(JSON.parse(weobj));
-          spo2.push(JSON.parse(spo2obj));
+          if(bpobj!==undefined){bp.push(JSON.parse(bpobj))}
+          if(jsonObj!==undefined){pulse.push(JSON.parse(jsonObj))}
+          if(tempobj!==undefined){temp.push(JSON.parse(tempobj))}
+          if(bsobj!==undefined){bs.push(JSON.parse(bsobj))}
+          if(weobj!==undefined){we.push(JSON.parse(weobj))}
+          if(spo2obj!==undefined){spo2.push(JSON.parse(spo2obj))}
           
         }
 
@@ -623,9 +624,9 @@ export const getNameFaqData = (pageamount, pagenum, fname) => {
         let totalPage = Math.ceil(response.data.data.COUNT / 5)
       if(response.data.status==="200") {
         dispatch({
-          type: "GET_FAQ",
+          type: "GET_FAQ_NAME",
           data: response.data.data.FAQ_LIST,
-          totalpage: totalPage
+          totalPages: totalPage
         } )
         
       } else {

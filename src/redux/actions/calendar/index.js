@@ -44,7 +44,7 @@ export const calendarfetchEvents = (userid, monthstart, monthend) => {
           for (let i=0; i<length; i++) {
             let jsonObj		= new Object();         
             jsonObj.id		= (i+1);
-            jsonObj.title = response.data.data[i].F_NAME +" " +  moment(response.data.data[i].APPOINT_TIME).format("hh:mm A")
+            jsonObj.title = moment(response.data.data[i].APPOINT_TIME).format("hh:mm A") + " " +  response.data.data[i].F_NAME
             jsonObj.start	= response.data.data[i].APPOINT_TIME
             jsonObj.end = response.data.data[i].APPOINT_TIME
             jsonObj.label = "others"

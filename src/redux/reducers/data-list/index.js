@@ -75,7 +75,19 @@ const DataListReducer = (state = initialState, action) => {
         ...state,
         faqdata: action.data,
         faqtotalPages: action.totalPages,
-        totalpay: action.totalPay,
+        params: action.params,
+        sortIndex: getIndex(
+          state.allData,
+          action.data,
+          state.sortIndex,
+          action.params
+        )
+      }
+    case "GET_FAQ_NAME":
+      return {
+        ...state,
+        faqdata: action.data,
+        faqtotalPages: action.totalPages,
         params: action.params,
         sortIndex: getIndex(
           state.allData,
