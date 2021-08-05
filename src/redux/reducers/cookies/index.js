@@ -81,7 +81,30 @@ export const cookiesReducer = (
       },
       filename: ""
      }
+    }
 
+    case "RESET": {
+      return { ...state, 
+        register3: {
+          hospitalname: "",
+          businessnumber:"",
+          zipcode:"",
+          address1:"",
+          address2:"",
+          phonenumber:"",
+          accountname:"",
+          bankname:"",
+          accountnumber:""
+        },
+        register4: {
+          medicalpart: "01", 
+          medicalable: "", 
+          medicaldesc: "", 
+          medicalnum: "", 
+          userdesc: "",
+          previewURL : "",
+        }
+     }
     }
     default: {
       return state

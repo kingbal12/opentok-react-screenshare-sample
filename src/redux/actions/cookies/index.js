@@ -111,3 +111,15 @@ export const saveImage = (
     } })
   }
 }
+
+export const resetCookie = (
+
+) => {
+  return dispatch => {
+    dispatch({ 
+      type: "RESET", 
+      payload: {
+
+    } })
+  }
+}

@@ -29,7 +29,7 @@ class MyInfo extends React.Component {
     super(props)
     this.state = {
       name: "",
-      birthday:"1991.08.28",
+      birthday:"",
       gender:"",
       userid: props.user.login.values.loggedInUser.username,
       filename: "",
@@ -72,6 +72,7 @@ class MyInfo extends React.Component {
             }
           })
           .then(response => {
+            console.log(response)
             let myinfo;
     
             if(response.data.status==="200") {
@@ -85,6 +86,7 @@ class MyInfo extends React.Component {
               }
               this.setState({
                 name: myinfo.F_NAME,
+                birthday: myinfo.BIRTH_DT,
                 getfilepath: myinfo.FILE_PATH,
                 getfilename: myinfo.FILE_NAME,
                 medicalpart: myinfo.MEDICAL_PART,

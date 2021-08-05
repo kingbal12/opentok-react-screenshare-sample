@@ -299,7 +299,6 @@ class DataListConfig extends Component {
     if(this.state.name!==""){
       this.props.getNameData(5,1,this.state.name)
     }
-    
   }
 
 
@@ -345,6 +344,17 @@ class DataListConfig extends Component {
       perPage, 
       page.selected + 1 )
     this.setState({ currentPage: page.selected })
+  }
+
+  getpay = () => {
+    this.setState({lastday: String(new Date(this.state.year, this.state.month, 0).getDate())},() => 
+    this.props.getPaymentData(
+      this.state.user,
+      this.state.year+this.state.month+"01",
+      this.state.year+this.state.month+this.state.lastday,
+      5, 
+      1))
+    
   }
 
   check = () => {
@@ -409,6 +419,7 @@ class DataListConfig extends Component {
               <option value="12">12</option>                 
             </Input>
             <h5 className="align-self-center  ml-1 text-bold-600">월</h5> 
+            <Button className="ml-1" style={{marginBottom:"0.5em"}} color="primary" onClick={this.getpay}>조회</Button>
           </Col>
           
         </Row>
@@ -501,7 +512,7 @@ class DataListConfig extends Component {
             <Button 
             color="primary" 
             type="button"
-            onClick={this.check}
+            
             >
               내역서 다운로드
             </Button>

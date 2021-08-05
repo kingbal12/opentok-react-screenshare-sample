@@ -10,6 +10,7 @@ import { history } from "../../../../history"
 import firebase from 'firebase'; 
 import { FormattedMessage } from "react-intl"
 import axios from "axios"
+import { resetCookie } from "../../../../redux/actions/cookies"
 
 
 const config =  { 
@@ -182,6 +183,7 @@ class LoginJWT extends React.Component {
                   block
                   onClick={() => {
                     history.push("/pages/register1")
+                    this.props.resetCookie()
                   }}
                   // onClick={this.startarchiveVideo}
                 >
@@ -199,4 +201,4 @@ const mapStateToProps = state => {
     values: state.cookies
   }
 }
-export default connect(mapStateToProps, { loginWithJWT, saveemail, delemail })(LoginJWT)
+export default connect(mapStateToProps, { loginWithJWT, saveemail, delemail, resetCookie})(LoginJWT)
