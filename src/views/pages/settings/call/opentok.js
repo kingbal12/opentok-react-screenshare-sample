@@ -116,7 +116,7 @@ class ConsultingRoom extends React.Component {
             onError={this.onError}
           />
         </OTStreams>
-        <div className="buttons">
+    <div className="buttons">
           <img src={mic} onClick={this.micState} style={{cursor:"pointer", width: "40px"}} />
           <img src={video} onClick={this.cameraState} style={{cursor:"pointer",  width: "40px"}} className="mr-2"/>
           <img src={call} onClick={this.disconnectSession} style={{cursor:"pointer",  width: "40px"}}/>

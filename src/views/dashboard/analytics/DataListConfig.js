@@ -190,13 +190,6 @@ class DataListConfig extends Component {
         )
       },
       {
-        name: "진단명",
-        center: true,
-        cell: row => (
-          <p className="text-bold-500 text-truncate mb-0">{row.NOTE_DX===""?"-":row.NOTE_DX}</p>
-        )
-      },
-      {
         name: "초진/재진",
         center: true,
         cell: row => (
@@ -212,7 +205,7 @@ class DataListConfig extends Component {
       },
       {
         name: "VitalData",
-        center: true,
+        // center: true,
         cell: row => (
           <p className="text-bold-500 text-truncate mb-0">{row.VITAL_STATE==="00"?<img src={Vital_5} alt="Vital_5" />:
                                                             row.VITAL_STATE==="01"? <img src={Vital_1} alt="Vital_1"/>:

@@ -311,7 +311,7 @@ class ConsultingRoom extends React.Component {
   }
 
   postPrescription = () => {
-    if(this.props.appo===undefined){
+    if(this.props.appo===null){
       alert("예약정보가 없기때문에 처방전 저장이 불가능합니다.")
     } else{
       this.props.postPrescriptionData(

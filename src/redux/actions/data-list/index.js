@@ -303,17 +303,21 @@ export const getVitalData = (patientid) => {
         let bs = new Array()
         let we = new Array()
         let spo2 = new Array()
-        for (let i=0; i<5; i++) {
+        let forLimit = 6
+        if(response.data.data.PRESSURE_LIST.length < forLimit) forLimit = response.data.data.PRESSURE_LIST.length
+        for (let i=0; i<forLimit; i++) {
           let bpobj = new Object();
           let jsonObj	= new Object();
           let tempobj	= new Object();
           let bsobj 	= new Object();
           let weobj 	= new Object();
           let spo2obj = new Object();   
+          if(response.data.data.PRESSURE_LIST.length!==0) {
+            bpobj = response.data.data.PRESSURE_LIST[i]
+            jsonObj.CREATE_TIME	= response.data.data.PRESSURE_LIST[i].CREATE_TIME
+            jsonObj.PULSE_VAL	= response.data.data.PRESSURE_LIST[i].PULSE_VAL
+          }
           
-          bpobj = response.data.data.PRESSURE_LIST[i]
-          jsonObj.CREATE_TIME	= response.data.data.PRESSURE_LIST[i].CREATE_TIME
-          jsonObj.PULSE_VAL	= response.data.data.PRESSURE_LIST[i].PULSE_VAL
           tempobj = response.data.data.TEMP_LIST[i]
           bsobj	= response.data.data.GLUCOSE_LIST[i]
           weobj	= response.data.data.WEIGHT_LIST[i]
@@ -719,6 +723,7 @@ export const postPrescriptionData = (userid, apponum, file, filename) => {
     axios
       .post("https://health.iot4health.co.kr:9300/v1/doctor/treatment/prescription", data)
       .then(response => {
+        console.log(response);
         if(response.data.status==="200") {
           alert("처방전 업로드가 완료되엇습니다.")
         }else {
@@ -733,7 +738,7 @@ export const postPrescriptionData = (userid, apponum, file, filename) => {
 export const postPayData = (userid, apponum, paypatient, paytotal) => {
   return dispatch => {
     axios
-      .post("https://health.iot4health.co.kr:9300/v1/doctor/treatment/payment", {
+      .post("https://health.iot4health.co.kr:45/v1/doctor/treatment/payment", {
         user_id : userid,
         appoint_num : apponum,
         pay_patient : paypatient,
@@ -752,7 +757,7 @@ export const postPayData = (userid, apponum, paypatient, paytotal) => {
 export const putStateComplete = (userid, apnum) => {
   return dispatch => {
     axios
-      .put("https://health.iot4health.co.kr:9300/v1/doctor/account/hospital-info", {
+      .put("https://health.iot4health.co.kr:9300/v1/doctor/treatment/state-complete", {
         user_id: userid,
         appoint_num: apnum
       })

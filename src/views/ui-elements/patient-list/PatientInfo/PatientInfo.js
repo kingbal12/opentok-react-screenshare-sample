@@ -382,9 +382,9 @@ class PatientInfo extends React.Component {
                       <h5>{this.props.pinfo.HEIGHT_VAL}cm&nbsp;/&nbsp;{this.props.pinfo.WEIGHT_VAL}kg</h5>
                       <h5>{this.props.pinfo.SMOKE_YN==="Y"?"흡연":"비흡연"}</h5>
                       <h5>{this.props.pinfo.DRINK_YN==="Y"?"자주":"가끔"}</h5>
-                      <h5>{this.props.pinfo.DISEASE_DESC}</h5>
-                      <h5>{this.props.pinfo.FAMILY_DESC}</h5>
-                      <h5>{this.props.pinfo.USE_MED}</h5>
+                      <h5>{this.props.pinfo.DISEASE_DESC===""? "-":this.props.pinfo.DISEASE_DESC}</h5>
+                      <h5>{this.props.pinfo.FAMILY_DESC===""? "-":this.props.pinfo.FAMILY_DESC}</h5>
+                      <h5>{this.props.pinfo.USE_MED===""? "-":this.props.pinfo.USE_MED}</h5>
                       <h5>{this.props.pinfo.ALLERGY_YN==="Y"?"있음":"없음"}&nbsp;{this.props.pinfo.ALLERGY_DESC}</h5>
                     </div>
                   </CardBody>
