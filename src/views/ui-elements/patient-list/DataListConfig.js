@@ -224,6 +224,7 @@ class DataListConfig extends Component {
             {
               row.BP==="00"?<img src={pressure_2} alt="pressure_2"/>:
               row.BP==="01"?<img src={pressure_1} alt="pressure_1"/>:
+              row.BP==="99"?<img src={pressure_1} alt="pressure_1"/>:
               row.BP==="02"?<img src={pressure_5} alt="pressure_5"/>:
               row.BP==="03"?<img src={pressure_4} alt="pressure_4"/>:
               row.BP==="04"?<img src={pressure_3} alt="pressure_3"/>:
@@ -232,6 +233,7 @@ class DataListConfig extends Component {
             {
               row.PULSE==="00"?<img src={pulse_2} alt="pulse_2"/>:
               row.PULSE==="01"?<img src={pulse_1} alt="pulse_1"/>:
+              row.PULSE==="99"?<img src={pulse_1} alt="pulse_1"/>:
               row.PULSE==="02"?<img src={pulse_5} alt="pulse_5"/>:
               row.PULSE==="03"?<img src={pulse_4} alt="pulse_4"/>:
               row.PULSE==="04"?<img src={pulse_3} alt="pulse_3"/>:
@@ -240,6 +242,7 @@ class DataListConfig extends Component {
             {
               row.BW==="00"?<img src={weight_2} alt="weight_2"/>:
               row.BW==="01"?<img src={weight_1} alt="weight_1"/>:
+              row.BW==="99"?<img src={weight_1} alt="weight_1"/>:
               row.BW==="02"?<img src={weight_5} alt="weight_5"/>:
               row.BW==="03"?<img src={weight_4} alt="weight_4"/>:
               row.BW==="04"?<img src={weight_3} alt="weight_3"/>:
@@ -248,6 +251,7 @@ class DataListConfig extends Component {
             {
               row.BS==="00"?<img src={glucose_2} alt="glucose_2"/>:
               row.BS==="01"?<img src={glucose_1} alt="glucose_1"/>:
+              row.BS==="99"?<img src={glucose_1} alt="glucose_1"/>:
               row.BS==="02"?<img src={glucose_5} alt="glucose_5"/>:
               row.BS==="03"?<img src={glucose_4} alt="glucose_4"/>:
               row.BS==="04"?<img src={glucose_3} alt="glucose_3"/>:
@@ -256,6 +260,7 @@ class DataListConfig extends Component {
             {
               row.TEMPERATURE==="00"?<img src={temperature_2} alt="temperature_2"/>:
               row.TEMPERATURE==="01"?<img src={temperature_1} alt="temperature_1"/>:
+              row.TEMPERATURE==="99"?<img src={temperature_1} alt="temperature_1"/>:
               row.TEMPERATURE==="02"?<img src={temperature_5} alt="temperature_5"/>:
               row.TEMPERATURE==="03"?<img src={temperature_4} alt="temperature_4"/>:
               row.TEMPERATURE==="04"?<img src={temperature_3} alt="temperature_3"/>:
@@ -264,6 +269,7 @@ class DataListConfig extends Component {
             {
               row.SPO2==="00"?<img src={spo2_2} alt="spo2_2"/>:
               row.SPO2==="01"?<img src={spo2_1} alt="spo2_1"/>:
+              row.SPO2==="99"?<img src={spo2_1} alt="spo2_1"/>:
               row.SPO2==="02"?<img src={spo2_5} alt="spo2_5"/>:
               row.SPO2==="03"?<img src={spo2_4} alt="spo2_4"/>:
               row.SPO2==="04"?<img src={spo2_3} alt="spo2_3"/>:

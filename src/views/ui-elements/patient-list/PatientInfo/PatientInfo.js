@@ -246,6 +246,7 @@ class PatientInfo extends React.Component {
                         {
                           this.props.pinfo.BP==="00"?<img src={pressure_2} width="35px" alt="pressure_2"/>:
                           this.props.pinfo.BP==="01"?<img src={pressure_1} width="35px" alt="pressure_1"/>:
+                          this.props.pinfo.BP==="99"?<img src={pressure_1} width="35px" alt="pressure_1"/>:
                           this.props.pinfo.BP==="02"?<img src={pressure_5} width="35px" alt="pressure_5"/>:
                           this.props.pinfo.BP==="03"?<img src={pressure_4} width="35px" alt="pressure_4"/>:
                           this.props.pinfo.BP==="04"?<img src={pressure_3} width="35px" alt="pressure_3"/>:
@@ -254,6 +255,7 @@ class PatientInfo extends React.Component {
                         {
                           this.props.pinfo.PULSE==="00"?<img src={pulse_2} width="35px"  alt="pulse_2"/>:
                           this.props.pinfo.PULSE==="01"?<img src={pulse_1} width="35px"  alt="pulse_1"/>:
+                          this.props.pinfo.PULSE==="99"?<img src={pulse_1} width="35px"  alt="pulse_1"/>:
                           this.props.pinfo.PULSE==="02"?<img src={pulse_5} width="35px"  alt="pulse_5"/>:
                           this.props.pinfo.PULSE==="03"?<img src={pulse_4} width="35px"  alt="pulse_4"/>:
                           this.props.pinfo.PULSE==="04"?<img src={pulse_3} width="35px"  alt="pulse_3"/>:
@@ -262,6 +264,7 @@ class PatientInfo extends React.Component {
                         {
                           this.props.pinfo.BW==="00"?<img src={weight_2} width="35px" alt="weight_2"/>:
                           this.props.pinfo.BW==="01"?<img src={weight_1} width="35px" alt="weight_1"/>:
+                          this.props.pinfo.BW==="99"?<img src={weight_1} width="35px" alt="weight_1"/>:
                           this.props.pinfo.BW==="02"?<img src={weight_5} width="35px" alt="weight_5"/>:
                           this.props.pinfo.BW==="03"?<img src={weight_4} width="35px" alt="weight_4"/>:
                           this.props.pinfo.BW==="04"?<img src={weight_3} width="35px" alt="weight_3"/>:
@@ -270,6 +273,7 @@ class PatientInfo extends React.Component {
                         {
                           this.props.pinfo.BS==="00"?<img src={glucose_2} width="35px" alt="glucose_2"/>:
                           this.props.pinfo.BS==="01"?<img src={glucose_1} width="35px" alt="glucose_1"/>:
+                          this.props.pinfo.BS==="99"?<img src={glucose_1} width="35px" alt="glucose_1"/>:
                           this.props.pinfo.BS==="02"?<img src={glucose_5} width="35px" alt="glucose_5"/>:
                           this.props.pinfo.BS==="03"?<img src={glucose_4} width="35px" alt="glucose_4"/>:
                           this.props.pinfo.BS==="04"?<img src={glucose_3} width="35px" alt="glucose_3"/>:
@@ -278,6 +282,7 @@ class PatientInfo extends React.Component {
                         {
                           this.props.pinfo.TEMPERATURE==="00"?<img src={temperature_2} width="35px" alt="temperature_2"/>:
                           this.props.pinfo.TEMPERATURE==="01"?<img src={temperature_1} width="35px" alt="temperature_1"/>:
+                          this.props.pinfo.TEMPERATURE==="99"?<img src={temperature_1} width="35px" alt="temperature_1"/>:
                           this.props.pinfo.TEMPERATURE==="02"?<img src={temperature_5} width="35px" alt="temperature_5"/>:
                           this.props.pinfo.TEMPERATURE==="03"?<img src={temperature_4} width="35px" alt="temperature_4"/>:
                           this.props.pinfo.TEMPERATURE==="04"?<img src={temperature_3} width="35px" alt="temperature_3"/>:
@@ -286,6 +291,7 @@ class PatientInfo extends React.Component {
                         {
                           this.props.pinfo.SPO2==="00"?<img src={spo2_2} width="35px" alt="spo2_2"/>:
                           this.props.pinfo.SPO2==="01"?<img src={spo2_1} width="35px" alt="spo2_1"/>:
+                          this.props.pinfo.SPO2==="99"?<img src={spo2_1} width="35px" alt="spo2_1"/>:
                           this.props.pinfo.SPO2==="02"?<img src={spo2_5} width="35px" alt="spo2_5"/>:
                           this.props.pinfo.SPO2==="03"?<img src={spo2_4} width="35px" alt="spo2_4"/>:
                           this.props.pinfo.SPO2==="04"?<img src={spo2_3} width="35px" alt="spo2_3"/>:

@@ -209,6 +209,7 @@ class DataListConfig extends Component {
         cell: row => (
           <p className="text-bold-500 text-truncate mb-0">{row.VITAL_STATE==="00"?<img src={Vital_5} alt="Vital_5" />:
                                                             row.VITAL_STATE==="01"? <img src={Vital_1} alt="Vital_1"/>:
+                                                            row.VITAL_STATE==="99"? <img src={Vital_1} alt="Vital_1"/>:
                                                             row.VITAL_STATE==="02"? <img src={Vital_4} alt="Vital_4"/>:
                                                             row.VITAL_STATE==="03"? <img src={Vital_3} alt="Vital_3"/>:
                                                             row.VITAL_STATE==="04"? <img src={Vital_2} alt="Vital_2"/>:
