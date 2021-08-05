@@ -40,7 +40,7 @@ class Register extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      // userid: "kingbal999@gmail.com",
+      // userid: "king@king",
       // name: "강주형",
       userid: props.user.register.values.registeruser,
       name: props.user.register.values.registername,
@@ -277,6 +277,7 @@ class Register extends React.Component {
                         <div className="col-2 align-self-start"><b><FormattedMessage id="EMPE"/><span className="text-danger">(필수)</span></b></div>
                         <InputGroup>
                           <Input
+                            maxLength="400"
                             type="textarea"
                             placeholder="진료분야 입력. 예)당뇨, 고혈압, 수면장애 등"
                             required
@@ -297,11 +298,12 @@ class Register extends React.Component {
 
                     <FormGroup className="form-label-group pt-1">
                       <div className="d-flex justify-content-between">
-                        <div className="col-2 align-self-start"><b><FormattedMessage id="Introduction"/></b></div>
+                        <div className="col-2 align-self-start"><b><FormattedMessage id="Introduction"/><span className="text-danger">(필수)</span></b></div>
                         <InputGroup>
                           <Input
+                            maxLength="400"
                             type="textarea"
-                            placeholder="약력 입력"
+                            placeholder="TEXT를 입력해주세요"
                             required
                             rows="3"
                             value={this.state.userdesc}

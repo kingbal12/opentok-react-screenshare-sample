@@ -244,7 +244,7 @@ class Register extends React.Component {
                                 onChange={e => this.setState({ userid: e.target.value })}
                                 // invalid={this.state.useemail.length === 0 ? true : false}
                               />
-                              <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.emailauth}><FormattedMessage id="Check"/></Button>
+                              <InputGroupAddon addonType="append"><Button disabled={this.state.otheremail===true?true:false} color="primary" type="button" onClick={this.emailauth}><FormattedMessage id="Check"/></Button>
                               </InputGroupAddon>
                             </InputGroup>
                             </div>

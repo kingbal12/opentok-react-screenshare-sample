@@ -115,8 +115,8 @@ class CalendarApp extends React.Component {
     }
     super(props)
     this.state = {
-      // userid: props.user.register.values.registeruser,
-      userid: "kingbal999@gmail.com",
+      userid: props.user.register.values.registeruser,
+      // userid: "kingbal999@gmail.com",
       // 이벤트가 왜 저장이 안되는지 모르겠음
       events: cookie,
       views: {

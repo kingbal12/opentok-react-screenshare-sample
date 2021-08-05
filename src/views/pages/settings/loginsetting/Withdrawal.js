@@ -38,8 +38,7 @@ class Withdrawal extends React.Component {
     })
   }
 
-  handlewithdrawal = e => {
-    e.preventDefault()
+  handlewithdrawal = () => {
     if(this.state.checkwithdrawal===true) {
       axios
       .put("https://health.iot4health.co.kr:9300/v1/doctor/account/user-state", {
