@@ -79,11 +79,11 @@ class ConsultingRoom extends React.Component {
       diagnosis: props.concookie.diagnosis,
       txrx: props.concookie.txrx,
       recommendation: props.concookie.recommendation,
-      pcode: "",
-      pname: "",
-      paddress: "",
-      telnum: "", 
-      faxnum: "",
+      pcode: props.pharmacy.P_CODE,
+      pname: props.pharmacy.P_NAME,
+      paddress: props.pharmacy.P_ADDRESS,
+      telnum: props.pharmacy.TEL_NUM,
+      faxnum: props.pharmacy.FAX_NUM,
       filename: "",
       file : "",
       paytotal: props.concookie.paytotal,
@@ -533,6 +533,35 @@ class ConsultingRoom extends React.Component {
               </Button>
             </ModalFooter>
           </Modal>
+          <Modal
+            isOpen={this.state.viewfilemodal}
+            toggle={this.viewFileModal}
+            className="modal-dialog-centered modal-lg"
+          >
+            <ModalHeader toggle={this.viewFileModal}>
+              
+            </ModalHeader>
+            <ModalBody>
+              <Row className="justify-content-center">
+                {this.props.appo===null||this.props.appo.FILE_NAME===""?null:
+                <img
+                  maxwidth="500px"
+                  src={"https://health.iot4health.co.kr:9300"+this.props.appo.FILE_PATH
+                  +this.props.appo.FILE_NAME}
+                  className="dz-img"
+                  alt=""
+                  style={{cursor:"pointer"}} 
+                  onClick={this.viewFileModal}
+                />
+                }
+              </Row>
+            </ModalBody>
+            <ModalFooter className="justify-content-center">
+              <Button color="primary" onClick={this.viewFileModal}>
+                확인
+              </Button>{" "}
+            </ModalFooter>
+          </Modal>
 
           <Modal
             style={{position:"absolute", right:"4%", top:"10%", width:"45%"}}
@@ -740,7 +769,7 @@ class ConsultingRoom extends React.Component {
                     <h5 className="text-bold-600">약국명</h5>
                   </Col>
                   <Col lg="9" md="12" >
-                      <h5>{this.state.pname}</h5>
+                      <h5>{this.state.pname===undefined?"없음":this.state.pname}</h5>
                   </Col>
                 </Row>
                 <Row className="mt-1">
@@ -748,7 +777,7 @@ class ConsultingRoom extends React.Component {
                     <h5 className="text-bold-600">약국 주소</h5>
                   </Col>
                   <Col lg="9" md="12" >
-                      <h5>{this.state.paddress}</h5>
+                      <h5>{this.state.paddress===undefined?"없음":this.state.paddress}</h5>
                   </Col>
                 </Row>
                 <Row className="mt-1">
@@ -756,7 +785,7 @@ class ConsultingRoom extends React.Component {
                     <h5 className="text-bold-600">Fax</h5>
                   </Col>
                   <Col lg="9" md="12" >
-                      <h5>{this.state.faxnum}</h5>
+                      <h5>{this.state.faxnum===undefined?"없음":this.state.faxnum}</h5>
                   </Col>
                 </Row>
                 <Row className="mt-1">
@@ -1285,7 +1314,8 @@ const mapStateToProps = state => {
     wedata : state.dataList.WE,
     spo2data : state.dataList.SPO2,
     concookie : state.cookies.consult,
-    rtime: state.dataList.rtime
+    rtime: state.dataList.rtime,
+    pharmacy: state.dataList.pharmacy
   }
 }
 

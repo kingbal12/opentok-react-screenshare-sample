@@ -263,7 +263,7 @@ handleComplete = (data) => {
               <CardBody className="pt-1 pb-50">
                   <Form action="/" onSubmit={this.handleRegister}>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-3 align-self-center"><b>휴대폰인증<span className="text-danger">(필수)</span></b><span className="text-danger">(필수)</span></div>            
+                      <div className="col-3 align-self-center"><b>휴대폰인증<span className="text-danger">(필수)</span></b></div>            
                       <InputGroup>
                         <Input
                           type="text"

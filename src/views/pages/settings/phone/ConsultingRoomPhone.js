@@ -1105,7 +1105,8 @@ const mapStateToProps = state => {
     wedata : state.dataList.WE,
     spo2data : state.dataList.SPO2,
     concookie : state.cookies.consult,
-    rtime: state.dataList.rtime
+    rtime: state.dataList.rtime,
+    pharmacy: state.dataList.pharmacy
   }
 }
 

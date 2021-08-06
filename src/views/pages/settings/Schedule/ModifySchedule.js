@@ -341,7 +341,8 @@ class CalendarApp extends React.Component {
 
   render() {
     const { events, views, sidebar } = this.state
- 
+    const today = new Date();
+
     return (
       <div className="app-calendar position-relative">
         <div
@@ -355,6 +356,23 @@ class CalendarApp extends React.Component {
           <CardBody>
             <DragAndDropCalendar style={{height:"600px", position:"relative"}}
               // formats={dayFormat}
+              min={
+                new Date(
+                  today.getFullYear(), 
+                  today.getMonth(), 
+                  today.getDate(), 
+                  8
+                )
+              }
+
+              max={
+                new Date(
+                  today.getFullYear(), 
+                  today.getMonth(), 
+                  today.getDate(), 
+                  20
+                )
+              }
               culture='kr'
               localizer={localizer}
               events={events}

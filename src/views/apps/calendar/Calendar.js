@@ -257,26 +257,9 @@ class CalendarApp extends React.Component {
 
   render() {
     const { events, views, sidebar } = this.state
-   
-    // let formats = {
-    //   timeGutterFormat: 'HH:mm',
-    //   eventTimeRangeFormat: ({
-    //       start,
-    //       end
-    //     }, culture, local) =>
-    //     local.format(start, 'HH:mm', culture) + '-' +
-    //     local.format(end, 'HH:mm', culture),
-    //   dayFormat: 'MM-DD' + ' ' + '星期' + 'dd',
-    //   agendaTimeRangeFormat: ({
-    //       start,
-    //       end
-    //     }, culture, local) =>
-    //     local.format(start, 'HH:mm', culture) + '-' +
-    //     local.format(end, 'HH:mm', culture),
-    //   agendaDateFormat: 'MM-DD' + ' ' + '星期' + 'dd',
-  
-    // }
+    const today = new Date();
     return (
+      
       <div className="app-calendar position-relative">
         <div
           className={`app-content-overlay ${sidebar ? "show" : "hidden"}`}
@@ -289,10 +272,29 @@ class CalendarApp extends React.Component {
           <CardBody>
             <DragAndDropCalendar
               // formats={formats}
+              min={
+                new Date(
+                  today.getFullYear(), 
+                  today.getMonth(), 
+                  today.getDate(), 
+                  8
+                )
+              }
+
+              max={
+                new Date(
+                  today.getFullYear(), 
+                  today.getMonth(), 
+                  today.getDate(), 
+                  20
+                )
+              }
               localizer={localizer}
               events={events}
               onEventDrop={this.moveEvent}
               onEventResize={this.resizeEvent}
+              timeslots={4}
+              step={15}
               // onNavigate={this.onNavigate}
               startAccessor="start"
               endAccessor="end"

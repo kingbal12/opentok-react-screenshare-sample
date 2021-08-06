@@ -149,6 +149,7 @@ class PatientInfo extends React.Component {
 
   goPhoneConsult= e => {
     e.preventDefault() 
+    this.props.getPharmacy(this.props.pinfo.PATIENT_ID)
     history.push("/pages/phoneconsulting")
   }
 
