@@ -71,7 +71,7 @@ import spo2_3 from "../../../../assets/img/dashboard/ID12_08_vital_spo2 3.png"
 import spo2_4 from "../../../../assets/img/dashboard/ID12_08_vital_spo2 4.png"
 import spo2_5 from "../../../../assets/img/dashboard/ID12_08_vital_spo2 5.png"
 import dot from "../../../../assets/img/dashboard/ID13_11_icon.png"
-
+import moment from "moment"
 
 
 
@@ -80,11 +80,10 @@ class Cslist extends React.Component {
   render() { 
     return(
       <tr>
-        <th className="text-center"><h5>{this.props.row.PART_NAME} / {this.props.row.F_NAME}</h5></th>
-        <th className="text-center"><h5>{this.props.row.NOTE_CC}</h5></th>
-        <th className="text-center"><h5>{this.props.row.APPOINT_TIME.substring(0,10)}</h5></th>  
-      </tr> 
- 
+        <th className="text-center"><h6>{this.props.row.PART_NAME} / {this.props.row.F_NAME}</h6></th>
+        <th className="text-center"><h6>{this.props.row.NOTE_CC}</h6></th>
+        <th className="text-center"><h6>{moment(this.props.row.APPOINT_TIME).format("YYYY-MM-DD hh:ss A")}</h6></th>  
+      </tr>  
     ); 
   } 
 }

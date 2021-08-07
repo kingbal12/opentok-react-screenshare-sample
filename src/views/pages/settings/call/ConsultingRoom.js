@@ -61,7 +61,7 @@ class Cslist extends React.Component {
       <tr>
         <th className="text-center"><h6>{this.props.row.PART_NAME} / {this.props.row.F_NAME}</h6></th>
         <th className="text-center"><h6>{this.props.row.NOTE_CC}</h6></th>
-        <th className="text-center"><h6>{this.props.row.APPOINT_TIME.substring(0,10)}</h6></th>  
+        <th className="text-center"><h6>{moment(this.props.row.APPOINT_TIME).format("YYYY-MM-DD hh:ss A")}</h6></th>  
       </tr> 
  
     ); 
@@ -79,11 +79,11 @@ class ConsultingRoom extends React.Component {
       diagnosis: props.concookie.diagnosis,
       txrx: props.concookie.txrx,
       recommendation: props.concookie.recommendation,
-      pcode: props.pharmacy.P_CODE,
-      pname: props.pharmacy.P_NAME,
-      paddress: props.pharmacy.P_ADDRESS,
-      telnum: props.pharmacy.TEL_NUM,
-      faxnum: props.pharmacy.FAX_NUM,
+      // pcode: props.pharmacy.P_CODE,
+      // pname: props.pharmacy.P_NAME,
+      // paddress: props.pharmacy.P_ADDRESS,
+      // telnum: props.pharmacy.TEL_NUM,
+      // faxnum: props.pharmacy.FAX_NUM,
       filename: "",
       file : "",
       paytotal: props.concookie.paytotal,

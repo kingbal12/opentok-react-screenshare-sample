@@ -118,36 +118,36 @@ const ExpandedComponent = props => {
         <CardBody className="m-0">
           <Row className="m-0">
             <Col className="col-4 m-0">
-              <Card className="m-0" style={{height:"23rem"}} >
+              <Card className="m-0" style={{height:"35rem"}} >
                 <CardHeader><b className="text-primary">MD Note</b></CardHeader>
                 <CardBody>
                   <Row>
-                    <Col className="col-3 text-center"><b>C.C:</b></Col>
-                    <Col className="col-9 align-self-center">{props.data.NOTE_CC}</Col>
+                    <Col md="12" className="align-self-center"><b>C.C:</b></Col>
+                    <Col md="12" className="align-self-center">{props.data.NOTE_CC}</Col>
                   </Row>
                   <Row className="mt-1">
-                    <Col className="col-3  text-center"><b>Diagnosis:</b></Col>
-                    <Col className="col-9 align-self-center">{props.data.NOTE_DX}</Col>
+                    <Col md="12" className="align-self-center"><b>Diagnosis:</b></Col>
+                    <Col md="12" className="align-self-center">{props.data.NOTE_DX}</Col>
                   </Row>
                   <Row className="mt-1">
-                    <Col className="col-3  text-center"><b>Tx &#38; Rx: </b></Col>
-                    <Col className="col-9 align-self-center">{props.data.NOTE_RX}</Col>
+                    <Col md="12" className="align-self-center"><b>Tx &#38; Rx: </b></Col>
+                    <Col md="12" className="align-self-center">{props.data.NOTE_RX}</Col>
                   </Row>
                   <Row className="mt-1">
-                    <Col className="col-4  text-center"><b>Recommendation:</b></Col>
-                    <Col className="col-8 align-self-center">{props.data.NOTE_VITAL}</Col>
+                    <Col md="12" className="align-self-center"><b>Recommendation:</b></Col>
+                    <Col md="12" className="align-self-center">{props.data.NOTE_VITAL}</Col>
                   </Row>
                 </CardBody>
               </Card>
             </Col>
             <Col className="col-4 m-0">
-              <Card style={{height:"10.5rem"}}>
+              <Card style={{height:"16.5rem"}}>
                 <CardHeader><b className="text-primary">Present Condition</b></CardHeader>
                 <CardBody>
                   {props.data.SYMPTOM}
                 </CardBody>
               </Card>
-              <Card style={{height:"10.5rem"}}>
+              <Card style={{height:"16.5rem"}}>
                 <CardHeader><b className="text-primary">Files</b></CardHeader>
                 <CardBody>
                   {file_preview}
@@ -155,7 +155,7 @@ const ExpandedComponent = props => {
               </Card>
             </Col> 
             <Col className="col-4 m-0">
-              <Card style={{height:"23rem"}}>
+              <Card style={{height:"35rem"}}>
                 <CardHeader><b className="text-primary">Prescription</b></CardHeader>
                 <CardBody>
                   {pres_preview}
