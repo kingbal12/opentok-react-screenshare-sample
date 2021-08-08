@@ -294,12 +294,14 @@ class CalendarApp extends React.Component {
               onEventResize={this.resizeEvent}
               timeslots={4}
               step={15}
+              dayLayoutAlgorithm="no-overlap"
               // onNavigate={this.onNavigate}
               startAccessor="start"
               endAccessor="end"
               resourceAccessor="url"
               startAccessor={this.getEventDate}
               views={views}
+              draggableAccessor={event => false}
               components={{ 
                 toolbar: Toolbar 
               //   ,week: {

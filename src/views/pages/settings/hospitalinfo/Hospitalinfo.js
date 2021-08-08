@@ -253,9 +253,10 @@ class Hospitalinfo extends React.Component {
                       <div className="col-3 align-self-center"><b>사업자 등록번호 <span className="text-danger">(필수)</span></b></div>
                       <InputGroup>
                         <Input
-                          type="text"
+                          type="number"
                           placeholder="하이픈(-)을 생략하고 입력해주세요"
                           required
+                          maxLength="10"
                           value={this.state.businessnumber}
                           onChange={e => this.setState({ businessnumber: e.target.value })}
                         />
@@ -338,7 +339,7 @@ class Hospitalinfo extends React.Component {
                       <div className="col-3 align-self-center"><b>병원 전화번호 <span className="text-danger">(필수)</span></b></div>
                       <InputGroup>
                         <Input
-                          type="text"
+                          type="number"
                           placeholder="하이픈(-)을 생략하고 입력해주세요"
                           required
                           value={this.state.phonenumber}
@@ -380,7 +381,7 @@ class Hospitalinfo extends React.Component {
                           <InputGroupText>계좌번호</InputGroupText>
                         </InputGroupAddon>  
                         <Input
-                          type="text"
+                          type="number"
                           required
                           value={this.state.accountnumber}
                           onChange={e => this.setState({ accountnumber: e.target.value })}

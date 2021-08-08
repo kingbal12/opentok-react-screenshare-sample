@@ -30,17 +30,20 @@ class ChagePassword extends React.Component {
 
   handlechangepassword = e => {
     e.preventDefault()
-    if(this.state.newpassword==this.state.confirmnewpassword) {
-      this.props.changepassword(
-        this.state.userid,
-        this.state.password,
-        this.state.newpassword
-      )
+    let pwcheck = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,14}$/;
+    if (!pwcheck.test(this.state.newpassword)) {
+      if(this.state.newpassword===this.state.confirmnewpassword){
+        this.props.changepassword(
+          this.state.userid,
+          this.state.password,
+          this.state.newpassword
+        )
+      } else {
+        alert("설정된 새로운 비밀번호와 비밀번호 확인이 일치하지 않습니다.")
+      }
     } else {
-      alert("새 비밀번호를 다시 확인해주십시오")
-    }
-    
-    
+      alert("비밀번호 형식이 올바르지 않습니다.\n비밀번호 형식은 영어, 숫자, 특수문자 포함 6자~14자 이내 입니다.") 
+    }   
   }
 
   render() {

@@ -389,10 +389,6 @@ class CalendarApp extends React.Component {
               components={{ toolbar: Toolbar }}
               eventPropGetter={this.handleEventColors}
               popup={false}
-              // onSelectEvent={event => {
-              //   this.handleSelectEvent(event)
-              // }}
-              // onSelectEvent = {event => this.onSelectEvent(event)}
               onSelectSlot={({ start, end }) => {
                 this.setState({
                   // title: "테스트",
