@@ -18,11 +18,10 @@ import {
 import { ChevronLeft, ChevronRight } from "react-feather"
 
 import "react-big-calendar/lib/addons/dragAndDrop/styles.scss"
-// import "react-big-calendar/lib/css/react-big-calendar.css"
 import "../../../assets/scss/plugins/calendars/react-big-calendar.scss"
 import "../../../assets/scss/plugins/calendars/react-big-calendar.css"
 import { Fragment } from "react"
-import { history } from "../../../history"
+
 const DragAndDropCalendar = withDragAndDrop(Calendar)
 const localizer = momentLocalizer(moment)
 const eventColors = {
