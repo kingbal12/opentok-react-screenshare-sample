@@ -1,11 +1,16 @@
-import React, { Component } from "react"
+import React, { Component, useState } from "react"
 import {
   Progress,
   Card,
   CardHeader,
   CardBody,
   Row,
-  Col
+  Col,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter
 } from "reactstrap"
 import DataTable from "react-data-table-component"
 import classnames from "classnames"
@@ -70,6 +75,25 @@ const selectedStyle = {
 
 
 const ExpandedComponent = props => {
+
+  const [ modalOpen, setModalOpen ] = useState(false);
+  const [ pmodalOpen, setpModalOpen ] = useState(false);
+
+
+  const openModal = () => {
+    setModalOpen(true);
+  }
+  const closeModal = () => {
+      setModalOpen(false);
+  }
+
+  const popenModal = () => {
+    setpModalOpen(true);
+  }
+  const pcloseModal = () => {
+      setpModalOpen(false);
+  }
+
   let file_preview = null;
   let pres_preview = null;
     {props.data===null||props.data.FILE_NAME===""?
@@ -88,7 +112,7 @@ const ExpandedComponent = props => {
           className="dz-img"
           alt=""
           style={{cursor:"pointer"}} 
-          // onClick={this.viewFileModal}
+          onClick={openModal}
         />
     }
 
@@ -96,25 +120,74 @@ const ExpandedComponent = props => {
 
     {props.data===null||props.data.RX_NAME===""?
       pres_preview = 
+        null
+      :pres_preview = 
         <embed
           src={prescription}
           className="dz-img"
-          alt=""
-        />
-      :pres_preview = 
-        <embed 
-          width="70px"
-          height="80px" 
-          src={"https://health.iot4health.co.kr:9300"+props.data.RX_PATH
-          +props.data.RX_NAME}
-          // type="application/pdf"
-          style={{cursor:"pointer"}} 
-          // onClick={this.viewPressModal}
+          onClick={popenModal}
+          style={{cursor:"pointer"}}
         />
     }
   return(
 
+    
     <Card style={{background:"#efefef"}}>
+      <Modal
+        isOpen={modalOpen}
+        toggle={closeModal}
+        className="modal-dialog-centered modal-lg"
+      >
+        <ModalHeader toggle={closeModal}>
+          
+        </ModalHeader>
+        <ModalBody>
+          <Row className="justify-content-center">
+            {props.data===null||props.data.FILE_NAME===""?null:
+            <img
+              maxwidth="500px"
+              src={"https://health.iot4health.co.kr:9300"+props.data.FILE_PATH
+              +props.data.FILE_NAME}
+              className="dz-img"
+              alt=""
+              style={{cursor:"pointer"}} 
+            />
+            }
+          </Row>
+        </ModalBody>
+        <ModalFooter className="justify-content-center">
+          <Button color="primary" onClick={closeModal}>
+            확인
+          </Button>
+        </ModalFooter>
+      </Modal>
+
+      <Modal
+        isOpen={pmodalOpen}
+        toggle={pcloseModal}
+        className="modal-dialog-centered modal-lg"
+      >
+        <ModalHeader toggle={pcloseModal}>
+          
+        </ModalHeader>
+        <ModalBody>
+          <Row className="justify-content-center">
+            {props.data===null||props.data.RX_NAME===""?null:
+            <img
+              maxwidth="500px"
+              src={"http://docs.google.com/viewer?url=https://health.iot4health.co.kr:9300" +props.data.RX_PATH
+              +props.data.RX_NAME + "&embedded=true"}
+            />
+            }
+          </Row>
+        </ModalBody>
+        <ModalFooter className="justify-content-center">
+          <Button color="primary" onClick={pcloseModal}>
+            확인
+          </Button>
+        </ModalFooter>
+      </Modal>
+
       <Card className="p-0 m-0" style={{ marginBottom: '0rem', background:"#efefef"}}>
         <CardBody className="m-0">
           <Row className="m-0">

@@ -6,7 +6,6 @@ import {
   CardBody,
   Row,
   Col,
-  Table,
   Modal,
   ModalHeader,
   ModalBody,
