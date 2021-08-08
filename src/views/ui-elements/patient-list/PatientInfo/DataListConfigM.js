@@ -144,6 +144,7 @@ const ExpandedComponent = props => {
             {props.data===null||props.data.FILE_NAME===""?null:
             <img
               maxwidth="500px"
+              height="500px"
               src={"https://health.iot4health.co.kr:9300"+props.data.FILE_PATH
               +props.data.FILE_NAME}
               className="dz-img"
@@ -173,6 +174,7 @@ const ExpandedComponent = props => {
             {props.data===null||props.data.RX_NAME===""?null:
             <img
               maxwidth="500px"
+              height="500px"
               src={"http://docs.google.com/viewer?url=https://health.iot4health.co.kr:9300" +props.data.RX_PATH
               +props.data.RX_NAME + "&embedded=true"}
             />
