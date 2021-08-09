@@ -385,7 +385,7 @@ class DataListConfig extends Component {
   goPatientList(id) {
     // id.preventDefault()
     this.props.resetVitalData()
-    this.props.getPatientInfo(this.state.user,id)
+    this.props.getPatientInfo(this.state.user,id,"")
     this.props.getVitalData(id)
   }
 
