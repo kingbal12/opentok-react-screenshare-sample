@@ -60,7 +60,7 @@ class Cslist extends React.Component {
     return(
       <tr>
         <th className="text-center"><h6>{this.props.row.PART_NAME} / {this.props.row.F_NAME}</h6></th>
-        <th className="text-center"><h6>{this.props.row.NOTE_CC}</h6></th>
+        <th className="text-center"><h6>{this.props.row.NOTE_DX}</h6></th>
         <th className="text-center"><h6>{moment(this.props.row.APPOINT_TIME).format("YYYY-MM-DD hh:ss A")}</h6></th>  
       </tr> 
  
@@ -79,11 +79,11 @@ class ConsultingRoom extends React.Component {
       diagnosis: props.concookie.diagnosis,
       txrx: props.concookie.txrx,
       recommendation: props.concookie.recommendation,
-      // pcode: props.pharmacy.P_CODE,
-      // pname: props.pharmacy.P_NAME,
-      // paddress: props.pharmacy.P_ADDRESS,
-      // telnum: props.pharmacy.TEL_NUM,
-      // faxnum: props.pharmacy.FAX_NUM,
+      pcode: props.pharmacy.P_CODE,
+      pname: props.pharmacy.P_NAME,
+      paddress: props.pharmacy.P_ADDRESS,
+      telnum: props.pharmacy.TEL_NUM,
+      faxnum: props.pharmacy.FAX_NUM,
       filename: "",
       file : "",
       paytotal: props.concookie.paytotal,
@@ -256,12 +256,12 @@ class ConsultingRoom extends React.Component {
   goHome = e => {
     e.preventDefault()
     this.props.saveCookieConsult(
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
+      this.state.cc,
+      this.state.diagnosis,
+      this.state.txrx,
+      this.state.recommendation,
+      this.state.paytotal,
+      this.state.paypatient
     )
     history.push("/analyticsDashboard")
   }
@@ -317,8 +317,8 @@ class ConsultingRoom extends React.Component {
       this.props.postPrescriptionData(
       this.props.user.login.values.loggedInUser.username,
       this.props.appo.APPOINT_NUM,
-      this.state.file,
-      this.state.filename
+      this.state.filename,
+      this.state.file
       )
       this.props.putStateComplete(
         this.props.user.login.values.loggedInUser.username,
@@ -372,7 +372,7 @@ class ConsultingRoom extends React.Component {
       this.props.user.login.values.loggedInUser.username,
       this.props.appo.APPOINT_NUM,
       this.state.paypatient,
-      this.state.paytotal
+      this.state.paypatient
       )
       this.props.putStateComplete(
         this.props.user.login.values.loggedInUser.username,
@@ -462,7 +462,7 @@ class ConsultingRoom extends React.Component {
             </Button>
             <Button
               className="mr-1"
-              disabled={this.state.onsubscribe==="N"?true:false}
+              // disabled={this.state.onsubscribe==="N"?true:false}
               color="black"
               outline
               onClick={this.setScreenShare}
@@ -952,8 +952,9 @@ class ConsultingRoom extends React.Component {
                       <FormGroup className="align-self-center pt-1">
                         <Input
                           type="text"
-                          value={this.state.paytotal}
+                          value={this.state.paypatient}
                           onChange={e => this.setState({ paytotal: e.target.value })}
+                          // disabled
                         />
                       </FormGroup>
                     </Col>

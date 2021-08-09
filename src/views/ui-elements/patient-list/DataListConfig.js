@@ -202,13 +202,13 @@ class DataListConfig extends Component {
           <p className="text-bold-500 text-truncate mb-0">{row.BIRTH_DT}</p>
         )
       },
-      {
-        name: "진단명",
-        center:true,
-        cell: row => (
-          <p className="text-bold-500 text-truncate mb-0">{row.NOTE_DX}</p>
-        )
-      },
+      // {
+      //   name: "진단명",
+      //   center:true,
+      //   cell: row => (
+      //     <p className="text-bold-500 text-truncate mb-0">{row.NOTE_DX}</p>
+      //   )
+      // },
       {
         name: "초진/재진",
         center:true,

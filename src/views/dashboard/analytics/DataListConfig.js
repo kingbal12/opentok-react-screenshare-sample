@@ -220,7 +220,7 @@ class DataListConfig extends Component {
         name: "차트보기",
         center: true,
         cell: row => (
-          <img src={chartimage} alt="chartimage"   onClick={() => this.goPatientList(row.PATIENT_ID)} style={{cursor:"pointer", width:"25px"}}/>
+          <img src={chartimage} alt="chartimage"   onClick={() => this.goPatientList(row.PATIENT_ID,row.APPOINT_NUM)} style={{cursor:"pointer", width:"25px"}}/>
 
         )
       }
@@ -319,11 +319,11 @@ class DataListConfig extends Component {
     }
   }
 
-  goPatientList(id) {
+  goPatientList(id,apnum) {
     // id.preventDefault()
     this.props.resetVitalData()
     this.props.resetPastConsult()
-    this.props.getPatientInfo(this.state.user,id)
+    this.props.getPatientInfo(this.state.user, id, apnum)
     this.props.getVitalData(id)
   }
 

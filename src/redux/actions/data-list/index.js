@@ -237,13 +237,14 @@ export const resetPastConsult = () => {
   }
 }
 
-export const getPatientInfo = (userid,patientid) => {
+export const getPatientInfo = (userid,patientid, appointnum) => {
   return async dispatch => {
     await axios
       .get("https://health.iot4health.co.kr:9300/v1/doctor/patient/patient-info", {
         params: {
           user_id: userid,
-          patient_id: patientid
+          patient_id: patientid,
+          appoint_num: appointnum
         }
   })
     .then(response => {
@@ -717,7 +718,7 @@ export const postMDNoteData = (userid, apponum, cc, dx, rx, notevital) => {
   }
 }
 
-export const postPrescriptionData = (userid, apponum, file, filename) => {
+export const postPrescriptionData = (userid, apponum, filename, file) => {
   let data = new FormData();
     data.append('user_id', userid);
     data.append('appoint_num', apponum);
@@ -741,7 +742,7 @@ export const postPrescriptionData = (userid, apponum, file, filename) => {
 export const postPayData = (userid, apponum, paypatient, paytotal) => {
   return dispatch => {
     axios
-      .post("https://health.iot4health.co.kr:45/v1/doctor/treatment/payment", {
+      .post("https://health.iot4health.co.kr:9300/v1/doctor/treatment/payment", {
         user_id : userid,
         appoint_num : apponum,
         pay_patient : paypatient,
@@ -763,10 +764,6 @@ export const putStateComplete = (userid, apnum) => {
       .put("https://health.iot4health.co.kr:9300/v1/doctor/treatment/state-complete", {
         user_id: userid,
         appoint_num: apnum
-      })
-      .then(response => {
-        console.log(response);
-
       })
   }
 }

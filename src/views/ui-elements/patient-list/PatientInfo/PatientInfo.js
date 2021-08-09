@@ -80,7 +80,7 @@ class Cslist extends React.Component {
     return(
       <tr>
         <th className="text-center"><h6>{this.props.row.PART_NAME} / {this.props.row.F_NAME}</h6></th>
-        <th className="text-center"><h6>{this.props.row.NOTE_CC}</h6></th>
+        <th className="text-center"><h6>{this.props.row.NOTE_DX}</h6></th>
         <th className="text-center"><h6>{moment(this.props.row.APPOINT_TIME).format("YYYY-MM-DD hh:ss A")}</h6></th>  
       </tr>  
     ); 
@@ -239,7 +239,7 @@ class PatientInfo extends React.Component {
                     <th><h5 className="text-bold-600">{this.props.pinfo.GENDER==="1"||this.props.pinfo.GENDER==="3"?"M":"F"}</h5></th>
                     <th><h5 className="text-bold-600">{this.props.pinfo.AGE}</h5></th>
                     <th><h5 className="text-bold-600">{this.props.pinfo.BIRTH_DT}</h5></th>
-                    <th><h5 className="text-bold-600">{this.props.pinfo.NOTE_DX}</h5></th>
+                    {/* <th><h5 className="text-bold-600">{this.props.pinfo.NOTE_DX}</h5></th> */}
                     <th><h5 className="text-bold-600">{this.props.pinfo.FIRST_YN==="N"?"재진":"초진"}</h5></th>
                     <th className="text-center"> 
                       <h5 id="vitalIcons">

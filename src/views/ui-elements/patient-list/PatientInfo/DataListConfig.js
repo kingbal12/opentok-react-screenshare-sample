@@ -174,11 +174,13 @@ const ExpandedComponent = props => {
         <ModalBody>
           <Row className="justify-content-center">
             {props.data===null||props.data.RX_NAME===""?null:
-            <img
-              maxwidth="500px"
+            <iframe 
+              id="modal_PrescriptionIfr" 
+              src={"https://health.iot4health.co.kr/lv1/ts.pdf.php?url=https://health.iot4health.co.kr:9300"+props.data.RX_PATH
+                +props.data.RX_NAME}
+              maxwidth="100%"
               height="500px"
-              src={"http://docs.google.com/viewer?url=https://health.iot4health.co.kr:9300" +props.data.RX_PATH
-              +props.data.RX_NAME + "&embedded=true"}
+              frameBorder="0"
             />
             }
           </Row>

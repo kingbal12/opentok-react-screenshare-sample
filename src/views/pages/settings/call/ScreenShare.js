@@ -21,10 +21,6 @@ class Publisher extends React.Component {
         this.setState({ video });
     }
 
-    changeVideoSource = (videoSource) => {
-        (this.state.videoSource !== 'camera') ? this.setState({videoSource: 'camera'}) : this.setState({ videoSource: 'screen' })
-    }
-
     onError = (err) => {
         this.setState({ error: `Failed to publish: ${err.message}` });
     }
@@ -37,7 +33,7 @@ class Publisher extends React.Component {
             properties={{
                 publishAudio: this.props.micstate,
                 publishVideo: this.props.camerastate,
-                videoSource: this.state.videoSource === 'screen' ? 'screen' : undefined
+                videoSource: this.state.videoSource
             }}
             onError={this.onError}
             />
