@@ -47,10 +47,6 @@ class Register extends React.Component {
   }
 }
 
-componentDidMount() {
-
-  this.unblock = history.block("정말 떠나실 건가요?");
-}
 
 
 
