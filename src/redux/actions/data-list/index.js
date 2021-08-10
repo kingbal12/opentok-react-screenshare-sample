@@ -57,7 +57,7 @@ export const getPaymentData = (userid, startdate, enddate, pageamount, pagenum) 
     .then(response => {
       let totalPage = Math.ceil(response.data.data.COUNT / 5)
       console.log(totalPage, response)
-      let len = response.data.data.COUNT
+      let len = response.data.data.PAY_LIST.length
       let totalPay = new Array();
       let sumtotal = 0;
       for (let i=0; i<len; i++) {
