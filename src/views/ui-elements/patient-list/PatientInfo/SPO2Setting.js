@@ -46,8 +46,10 @@ class VitalDataSetting extends React.Component {
     })
     .then(response => {
       if(response.data.status==="200") {
-        alert("산소포화도데이터 세팅이 저장되었습니다.")
-      } else {
+        alert("혈압데이터 세팅이 저장되었습니다.")
+      } else if(response.data.status==="400") {
+        alert("적정값을 입력하여 주십시오\n값이 올바르지 않거나 너무 크거나 작습니다.")
+      } else{
         alert("저장도중 문제가 발생하였습니다.")
       }
     })

@@ -80,17 +80,23 @@ class Register extends React.Component {
 
   handleRegister = e => {
     e.preventDefault()
-    this.register4(
-      this.state.userid,
-      this.state.filename,
-      this.state.file,
-      this.state.medicalpart,
-      this.state.medicalable,
-      this.state.medicaldesc,
-      this.state.medicalnum,
-      this.state.userdesc,    
-      this.state.previewURL
-    )
+    let regexp = /^[0-9]*$/
+    if(regexp.test(this.state.medicalnum)) {
+      this.register4(
+        this.state.userid,
+        this.state.filename,
+        this.state.file,
+        this.state.medicalpart,
+        this.state.medicalable,
+        this.state.medicaldesc,
+        this.state.medicalnum,
+        this.state.userdesc,    
+        this.state.previewURL
+      )
+    } else {
+      alert("의사 면허번호는 숫자로만 입력하여 주십시오")
+    }
+    
   }
 
   saveRe4 = e => {
@@ -324,7 +330,8 @@ class Register extends React.Component {
                       <div className="col-2 align-self-center"><b><FormattedMessage id="License"/><br/><span className="text-danger">(필수)</span></b></div>
                       <InputGroup>
                         <Input
-                          type="number"
+                          type="text"
+                          maxLength="5"
                           placeholder="의사 면허번호 입력"
                           required
                           value={this.state.medicalnum}

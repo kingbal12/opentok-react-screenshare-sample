@@ -359,7 +359,7 @@ class Register extends React.Component {
                             <InputGroup>
                               <Input
                                 maxLength="6"
-                                type="text"
+                                type="number"
                                 placeholder="주민번호 앞 6자리"
                                 required
                                 value={this.state.btdate}
@@ -369,7 +369,7 @@ class Register extends React.Component {
                               <Input
                                 maxLength="1"
                                 className="col-1"
-                                type="text"
+                                type="number"
                                 placeholder="1,or2"
                                 required
                                 value={this.state.gender}

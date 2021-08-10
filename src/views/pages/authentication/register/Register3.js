@@ -21,13 +21,14 @@ import 'react-perfect-scrollbar/dist/css/styles.css'
 import PerfectScrollbar from "react-perfect-scrollbar";
 import HicareLogo from "../../../../assets/img/logo/logo1.png"
 import { FormattedMessage } from "react-intl"
+import { history } from "../../../../history"
 
 class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      userid: props.user.register.values.registeruser,
-      // userid: "kingbal999@kakao.com",
+      // userid: props.user.register.values.registeruser,
+      userid: "kingbal999@kakao.com",
       phonenum: "",
       phonauthnum: "",
       hospitalname: props.cookiere3.hospitalname,
@@ -45,6 +46,13 @@ class Register extends React.Component {
       phoneauthveryfied:"N"
   }
 }
+
+componentDidMount() {
+
+  this.unblock = history.block("정말 떠나실 건가요?");
+}
+
+
 
 postPhone = e => {
   e.preventDefault()
@@ -115,19 +123,27 @@ handleComplete = (data) => {
 
   handleRegister = e => {
     e.preventDefault()
+    let regexp = /^[0-9]*$/
     if(this.state.phoneauthveryfied==="Y"){
-      this.props.register3(
-        this.state.userid,
-        this.state.hospitalname,
-        this.state.businessnumber,
-        this.state.zipcode,
-        this.state.address1,
-        this.state.address2,
-        this.state.phonenumber,
-        this.state.accountname,
-        this.state.bankname,
-        this.state.accountnumber
-      )
+      if(!regexp.test(this.state.hospitalname)){
+        if(!regexp.test(this.state.accountname) || !regexp.test(this.state.bankname)){
+            this.props.register3(
+            this.state.userid,
+            this.state.hospitalname,
+            this.state.businessnumber,
+            this.state.zipcode,
+            this.state.address1,
+            this.state.address2,
+            this.state.phonenumber,
+            this.state.accountname,
+            this.state.bankname,
+            this.state.accountnumber)
+        } else{
+          alert("예금주나 은행이름을 숫자로만 입력할 수 없습니다.")
+        }
+      } else{
+        alert("병원 이름을 숫자로만 입력할수 없습니다.")
+      }
     } else {
       alert("휴대폰 인증을 진행해주시기 바랍니다.")
     }
@@ -167,7 +183,10 @@ handleComplete = (data) => {
 
   // 여기부터 수정
   postBusinessNumber = businessnumber => {
-    console.log("작동됨",businessnumber)
+    let regexp = /^[0-9]*$/
+      if(!regexp.test(this.state.businessnumber)) {
+        alert("사업자 등록번호에는 숫자만 입력하세요")
+      } else {
       axios
         .get("https://health.iot4health.co.kr:9300/v1/doctor/account/hospital-verify", {
           params: {
@@ -177,6 +196,7 @@ handleComplete = (data) => {
   
         .then(response => {
           if(response.data.status==="200"){
+            
             if(response.data.data.COUNT===0) {
               this.setState({
                 businessmodal:true, 
@@ -195,6 +215,7 @@ handleComplete = (data) => {
           }
   
         })
+      }
         
     
   }
@@ -266,7 +287,7 @@ handleComplete = (data) => {
                       <div className="col-3 align-self-center"><b>휴대폰인증<span className="text-danger">(필수)</span></b></div>            
                       <InputGroup>
                         <Input
-                          type="text"
+                          type="number"
                           placeholder="휴대폰번호를 - 없이 입력해주세요"
                           required
                           value={this.state.phonenum}
@@ -279,8 +300,8 @@ handleComplete = (data) => {
                       <div className="col-3 align-self-center"></div>            
                       <InputGroup>
                         <Input
-                          type="text"
-                          placeholder="인정번호 입력"
+                          type="number"
+                          placeholder="인증번호 입력"
                           required
                           value={this.state.phonauthnum}
                           onChange={e => this.setState({ phonauthnum: e.target.value })}
@@ -304,8 +325,8 @@ handleComplete = (data) => {
                       <div className="col-3 align-self-center"><b><FormattedMessage id="CRN"/> <span className="text-danger">(필수)</span></b></div>
                       <InputGroup>
                         <Input
-                          type="text"
                           maxLength="10"
+                          type="text"
                           placeholder="하이픈(-)을 생략, 숫자만 입력"
                           required
                           value={this.state.businessnumber}
@@ -390,7 +411,7 @@ handleComplete = (data) => {
                       <div className="col-3 align-self-center"><b><FormattedMessage id="CNumber"/> <span className="text-danger">(필수)</span></b></div>
                       <InputGroup>
                         <Input
-                          type="text"
+                          type="number"
                           placeholder="하이픈(-)을 생략, 숫자만 입력"
                           required
                           value={this.state.phonenumber}

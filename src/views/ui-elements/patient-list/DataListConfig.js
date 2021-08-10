@@ -67,6 +67,7 @@ import spo2_2 from "../../../assets/img/dashboard/ID12_08_vital_spo2 2.png"
 import spo2_3 from "../../../assets/img/dashboard/ID12_08_vital_spo2 3.png"
 import spo2_4 from "../../../assets/img/dashboard/ID12_08_vital_spo2 4.png"
 import spo2_5 from "../../../assets/img/dashboard/ID12_08_vital_spo2 5.png"
+import chartimage from "../../../assets/img/dashboard/ID09_07_chart.png"
 
 const chipColors = {
   "on hold": "warning",
@@ -285,7 +286,7 @@ class DataListConfig extends Component {
         name: "차트보기",
         center:true,
         cell: row => (
-          <Edit onClick={() => this.goPatientList(row.PATIENT_ID)} style={{cursor:"pointer"}}></Edit>
+          <img src={chartimage} alt="chartimage"  onClick={() => this.goPatientList(row.PATIENT_ID)} style={{cursor:"pointer", width:"25px"}} />
         )
       }
     ],
