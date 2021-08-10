@@ -16,7 +16,8 @@ import {
   ChevronDown,
   Check,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  ChevronsDown
 } from "react-feather"
 import { connect } from "react-redux"
 import {
@@ -38,7 +39,7 @@ import "../../../../assets/scss/plugins/extensions/react-paginate.scss"
 import "../../../../assets/scss/pages/data-list.scss"
 import moment from "moment"
 import { CSVLink, CSVDownload } from "react-csv";
-
+import select from "../../../../assets/img/dashboard/down-chevron.png"
 
 const chipColors = {
   "on hold": "warning",
@@ -389,22 +390,27 @@ class DataListConfig extends Component {
             <Input 
               type="select" 
               name="select"
+              id="select"
               className="col-2" 
-              value={this.state.year}  onChange={e => this.setState({ year: e.target.value })}>
+              value={this.state.year}  onChange={e => this.setState({ year: e.target.value })}>            
               <option value="2021">2021</option>
               <option value="2022">2022</option>
               <option value="2023">2023</option>
               <option value="2024">2024</option>
               <option value="2025">2025</option>
               <option value="2026">2026</option>
+              
             </Input>
+            
             <h5 className="align-self-center ml-1 text-bold-600">년</h5> 
             <Input
               style={{marginBottom:"0.5rem"}} 
               type="select" 
               name="select"
+              id="select"
               className="col-2 ml-2"  
               value={this.state.month}  onChange={e => this.setState({ month: e.target.value })}>
+                
               <option value="01">01</option>
               <option value="02">02</option>
               <option value="03">03</option>
@@ -418,6 +424,7 @@ class DataListConfig extends Component {
               <option value="11">11</option>
               <option value="12">12</option>                 
             </Input>
+
             <h5 className="align-self-center  ml-1 text-bold-600">월</h5> 
             <Button className="ml-1" style={{marginBottom:"0.5em"}} color="primary" onClick={this.getpay}>조회</Button>
           </Col>
