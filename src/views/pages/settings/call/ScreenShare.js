@@ -31,6 +31,7 @@ class Publisher extends React.Component {
             {/* {this.state.error ? <div id="error">{this.state.error}</div> : null} */}
             <OTPublisher
             properties={{
+                showControls: false,
                 publishAudio: this.props.micstate,
                 publishVideo: this.props.camerastate,
                 videoSource: this.state.videoSource

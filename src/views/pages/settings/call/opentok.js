@@ -104,21 +104,23 @@ class ConsultingRoom extends React.Component {
         token={this.props.token} 
         onError={this.onError} 
         eventHandlers={this.sessionEvents}
-        session
       >
         {/* <ConnectionStatus /> */}
-        {this.props.toglescreenshare===true ?
-          <ScreenShare
+        {/* {this.props.toglescreenshare===true ?  */}
+          {/* <ScreenShare
           togglescreenshare={this.props.toglescreenshare} 
           micstate={this.state.micstate} 
           camerastate={this.state.camerastate} />
           :
+          this.props.toglescreenshare===false? */}
           <Publisher 
           togglescreenshare={this.props.toglescreenshare} 
           micstate={this.state.micstate} 
           camerastate={this.state.camerastate} />
+          {/* : null
+          
         }
-        
+         */}
         
         <OTStreams>
           <OTSubscriber
