@@ -510,6 +510,7 @@ class DataListConfig extends Component {
           <Col lg="3" md="12">
           <CSVLink data={this.state.data}>
             <Button 
+            disabled={this.props.dataList.paydata.length===0?true:false}
             color="primary" 
             type="button"
             

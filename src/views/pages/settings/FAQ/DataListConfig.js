@@ -155,9 +155,10 @@ class DataListConfig extends Component {
         minWidth: "200px",
         center:true,
         cell: row => (
-          <div className="d-flex flex-xl-row flex-column align-items-xl-center align-items-start py-xl-0 py-1">
-            <div className="user-info text-truncate ml-xl-50 ml-0">
+          <div data-tag="allowRowEvents" className="d-flex flex-xl-row flex-column align-items-xl-center align-items-start py-xl-0 py-1">
+            <div  className="user-info text-truncate ml-xl-50 ml-0">
               <span
+                data-tag="allowRowEvents"
                 title={row.F_NAME}
                 className="d-block text-bold-500 text-truncate mb-0">
                 {row.SEQ}
@@ -172,14 +173,14 @@ class DataListConfig extends Component {
         selector: "gender",
         sortable: false,
         center:true,
-        cell: row => <p className="text-bold-500 mb-0">{row.TITLE}</p>
+        cell: row => <p data-tag="allowRowEvents" className="text-bold-500 mb-0">{row.TITLE}</p>
       },
       {
         name: "작성자",
         selector: "age",
         sortable: false,
         center:true,
-        cell: row => <p className="text-bold-500 mb-0">{row.AUTH_NM}</p>
+        cell: row => <p data-tag="allowRowEvents" className="text-bold-500 mb-0">{row.AUTH_NM}</p>
       },
       {
         name: "작성일",
@@ -187,7 +188,7 @@ class DataListConfig extends Component {
         sortable: false,
         center:true,
         cell: row => (
-          <p className="text-bold-500 text-truncate mb-0">{moment(row.CREATE_TIME).format("MMMM, DD")}</p>
+          <p data-tag="allowRowEvents" className="text-bold-500 text-truncate mb-0">{moment(row.CREATE_TIME).format("MMMM, DD")}</p>
         )
       }
     ],
@@ -223,6 +224,7 @@ class DataListConfig extends Component {
           selector: "img",
           minWidth: "220px",
           cell: row => <img src={row.img} height="100" alt={row.name} />
+          
         },
         {
           name: "Name",

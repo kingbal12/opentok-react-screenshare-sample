@@ -137,14 +137,14 @@ class DataListConfig extends Component {
         sortable: false,
         minWidth: "150px",
         center: true,
-        cell: row => <p className="text-bold-500 mb-0">{row.SEQ}</p>
+        cell: row => <p data-tag="allowRowEvents" className="text-bold-500 mb-0">{row.SEQ}</p>
       },
       {
         name: "제목",
         selector: "gender",
         sortable: false,
         center: true,
-        cell: row => <p className="text-bold-500 mb-0">{row.TITLE}</p>
+        cell: row => <p data-tag="allowRowEvents" className="text-bold-500 mb-0">{row.TITLE}</p>
       },
       
       {
@@ -152,14 +152,14 @@ class DataListConfig extends Component {
         selector: "gender",
         sortable: false,
         center: true,
-        cell: row => <p className="text-bold-500 mb-0">{row.AUTH_NM}</p>
+        cell: row => <p data-tag="allowRowEvents" className="text-bold-500 mb-0">{row.AUTH_NM}</p>
       },
       {
         name: "작성일",
         selector: "age",
         sortable: false,
         center: true,
-        cell: row => <p className="text-bold-500 mb-0">{moment(row.CREATE_TIME).format("MMMM, DD")}</p>
+        cell: row => <p  data-tag="allowRowEvents" className="text-bold-500 mb-0">{moment(row.CREATE_TIME).format("MMMM, DD")}</p>
       },
     ],
     allData: [],

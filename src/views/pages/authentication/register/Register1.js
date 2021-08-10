@@ -86,7 +86,6 @@ class Register extends React.Component {
     let certifications = this.state.certifications
     certifications.forEach(certification => (certification.isChecked = e.target.checked));
     this.setState({certifications: certifications})
-    console.log(this.state)
   }
 
   handleCheckChieldElement = e => {
@@ -495,7 +494,21 @@ class Register extends React.Component {
                                 label="모든 약관에 동의"
                                 value="checkedall"
                                 onChange={this.handleAllChecked}
-                                
+                                checked={
+                                  this.state.certifications[0].isChecked===true&&
+                                  this.state.certifications[1].isChecked===true&& 
+                                  this.state.certifications[2].isChecked===true&&
+                                  this.state.certifications[3].isChecked===true&&
+                                  this.state.certifications[4].isChecked===true&&
+                                  this.state.certifications[5].isChecked===true&&
+                                  this.state.certifications[6].isChecked===true&&
+                                  this.state.certifications[7].isChecked===true&&
+                                  this.state.certifications[8].isChecked===true&&
+                                  this.state.certifications[9].isChecked===true&&
+                                  this.state.certifications[10].isChecked===true&& 
+                                  this.state.certifications[11].isChecked===true
+                                  ?true:false
+                                }
                               />
                             </FormGroup>
                           </Col>
