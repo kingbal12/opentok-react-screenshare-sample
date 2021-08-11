@@ -24,7 +24,7 @@ import classnames from "classnames"
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import HicareLogo from "../../../../assets/img/logo/logo1.png"
 import { FormattedMessage } from "react-intl"
-
+import { history } from "../../../../history"
 
 
 class Register extends React.Component {
@@ -39,14 +39,14 @@ class Register extends React.Component {
         {id: "2", label: "라이프레코드 이용약관(필수)",           value: "2",  isChecked: false},
         {id: "3", label: "라이프레코드 개인정보처리방침(필수)",   value: "3",   isChecked: false},
         {id: "4", label: "위치기반서비스 이용약관(필수)",         value: "4",  isChecked: false},
-        {id: "5", label: "개인정보 수집 및 이용동의(필수)",       value: "5",  isChecked: false},
-        {id: "6", label: "개인정보 수집 및 이용동의(선택)",       value: "6",  isChecked: false},
-        {id: "7", label: "민감정보 수집 및 이용동의(필수)",       value: "7",  isChecked: false},
-        {id: "8", label: "민감정보 수집 및 이용동의(선택)",       value: "8",  isChecked: false},
-        {id: "9", label: "고유식별 정도 수집 및 이용동의(필수)",  value: "9",  isChecked: false},
-        {id: "10", label: "개인정보 제 3자 제공동의(필수)",      value: "10",  isChecked: false},
-        {id: "11", label: "민감정보 제 3자 제공동의(필수)",      value: "11",  isChecked: false},
-        {id: "12", label: "회원가입 유의사항(필수)",             value: "12",  isChecked: false}
+        {id: "5", label: "개인정보 수집 및 이용동의(필수)",       value: "5",  isChecked: false},       
+        {id: "6", label: "민감정보 수집 및 이용동의(필수)",       value: "7",  isChecked: false},       
+        {id: "7", label: "고유식별 정도 수집 및 이용동의(필수)",  value: "9",  isChecked: false},
+        {id: "8", label: "개인정보 제 3자 제공동의(필수)",      value: "10",  isChecked: false},
+        {id: "9", label: "민감정보 제 3자 제공동의(필수)",      value: "11",  isChecked: false},
+        {id: "10", label: "회원가입 유의사항(필수)",             value: "12",  isChecked: false},
+        {id: "11", label: "개인정보 수집 및 이용동의(선택)",       value: "6",  isChecked: false},
+        {id: "12", label: "민감정보 수집 및 이용동의(선택)",       value: "8",  isChecked: false}
       ],
       six:"N",
       eight: "N",
@@ -441,7 +441,14 @@ class Register extends React.Component {
             <Row className="m-0 d-flex justify-content-center ">
               <Col lg="3" md="12">
                 <h3 className="mt-5 pl-2 text-bold-600">
-                  <img className="px-2" src={HicareLogo} alt="HicareLogo" style={{width:"150px", paddingBottom:"0.7rem"}}/><FormattedMessage id="Sign In"/>
+                  <img 
+                    className="px-2" 
+                    onClick={()=>history.push("/")} 
+                    src={HicareLogo} 
+                    alt="HicareLogo" 
+                    style={{width:"150px", paddingBottom:"0.7rem", cursor:"pointer"}}
+                  />
+                  <FormattedMessage id="Sign In"/>
                 </h3>
               </Col>
               <Col lg="6" md="12">
@@ -533,13 +540,13 @@ class Register extends React.Component {
                             <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal3}/><br/>
                             <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal4}/><br/>
                             <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal5}/><br/>
-                            <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal6}/><br/>
                             <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal7}/><br/>
-                            <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal8}/><br/>
                             <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal9}/><br/>
                             <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal10}/><br/>
                             <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal11}/><br/>
                             <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal12}/><br/>
+                            <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal6}/><br/>
+                            <ChevronRight style={{marginTop: "1.7rem", cursor:"pointer"}} onClick={this.termModal8}/><br/>
                           </Col>
                         </Row>                      
                         <Row >
@@ -552,11 +559,11 @@ class Register extends React.Component {
                               this.state.certifications[2].isChecked===true&&
                               this.state.certifications[3].isChecked===true&&
                               this.state.certifications[4].isChecked===true&&
+                              this.state.certifications[5].isChecked===true&&
                               this.state.certifications[6].isChecked===true&&
-                              this.state.certifications[8].isChecked===true&&
-                              this.state.certifications[9].isChecked===true&&
-                              this.state.certifications[10].isChecked===true&& 
-                              this.state.certifications[11].isChecked===true
+                              this.state.certifications[7].isChecked===true&&
+                              this.state.certifications[8].isChecked===true&& 
+                              this.state.certifications[9].isChecked===true
                               ?false:true}
                             color="primary" 
                             type="button"

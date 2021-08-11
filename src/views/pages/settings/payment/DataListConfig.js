@@ -362,7 +362,7 @@ class DataListConfig extends Component {
     this.setState({lastday: String(new Date(this.state.year, this.state.month, 0).getDate())},() => console.log(this.state))  
   }
 
-
+  
   render() {
     let {
       columns,
@@ -376,6 +376,16 @@ class DataListConfig extends Component {
       totalRecords,
       sortIndex
     } = this.state
+
+    let headers = [
+      { label: "No", key: "APPOINT_NUM" },
+      { label: "환자명", key: "F_NAME" },
+      { label: "환자ID", key: "USER_ID" },
+      { label: "진료날짜", key: "APPOINT_TIME" },
+      { label: "진료종류(1=전화, 2=영상)", key: "APPOINT_KIND" },
+      { label: "최종청구액", key: "PAY_TOTAL" }
+    ];
+  
     return (
       <div
         className={`data-list ${
@@ -515,7 +525,7 @@ class DataListConfig extends Component {
         <Row className="d-flex mt-5">
           <Col lg="9" md="12"></Col>
           <Col lg="3" md="12">
-          <CSVLink data={this.state.data}>
+          <CSVLink data={this.state.data} headers={headers}>
             <Button 
             disabled={this.props.dataList.paydata.length===0?true:false}
             color="primary" 

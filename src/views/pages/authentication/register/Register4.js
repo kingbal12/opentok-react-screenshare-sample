@@ -15,7 +15,6 @@ import {InputGroup, Form, FormGroup, Input, Button,
 import "../../../../assets/scss/pages/authentication.scss"
 import { saveRegister4 } from "../../../../redux/actions/cookies"
 import { connect } from "react-redux"
-import previmg from "../../../../assets/img/portrait/small/Sample_User_Icon.png"
 import { history } from "../../../../history"
 import axios from "axios"
 import 'react-perfect-scrollbar/dist/css/styles.css'
@@ -214,7 +213,14 @@ class Register extends React.Component {
           <Row className="m-0 d-flex">
             <Col lg="3" md="12">
               <h3 className="mt-5 pl-2 text-bold-600">
-                <img className="px-2" src={HicareLogo} alt="HicareLogo" style={{width:"150px", paddingBottom:"0.7rem"}}/><FormattedMessage id="Sign In"/>
+                <img 
+                  className="px-2" 
+                  onClick={()=>history.push("/")} 
+                  src={HicareLogo} 
+                  alt="HicareLogo" 
+                  style={{width:"150px", paddingBottom:"0.7rem", cursor:"pointer"}}
+                />
+                <FormattedMessage id="Sign In"/>
               </h3>
             </Col>
           </Row>

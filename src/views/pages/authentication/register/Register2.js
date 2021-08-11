@@ -21,6 +21,7 @@ import 'react-perfect-scrollbar/dist/css/styles.css'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import HicareLogo from "../../../../assets/img/logo/logo1.png"
 import { FormattedMessage } from "react-intl"
+import { history } from "../../../../history"
 
 
 class Register extends React.Component {
@@ -218,7 +219,14 @@ class Register extends React.Component {
               <Row className="m-0 d-flex">
                 <Col lg="3" md="12">
                   <h3 className="mt-5 pl-2 text-bold-600">
-                    <img className="px-2" src={HicareLogo} alt="HicareLogo" style={{width:"150px", paddingBottom:"0.7rem"}}/><FormattedMessage id="Sign In"/>
+                    <img 
+                      className="px-2" 
+                      onClick={()=>history.push("/")} 
+                      src={HicareLogo} 
+                      alt="HicareLogo" 
+                      style={{width:"150px", paddingBottom:"0.7rem", cursor:"pointer"}}
+                    />
+                    <FormattedMessage id="Sign In"/>
                   </h3>
                 </Col>
               </Row>
