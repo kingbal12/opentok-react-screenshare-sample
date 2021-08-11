@@ -27,8 +27,8 @@ class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      // userid: props.user.register.values.registeruser,
-      userid: "kingbal999@kakao.com",
+      userid: props.user.register.values.registeruser,
+      // userid: "kingbal999@kakao.com",
       phonenum: "",
       phonauthnum: "",
       hospitalname: props.cookiere3.hospitalname,
@@ -228,7 +228,11 @@ handleComplete = (data) => {
     }))
   }
 
-  
+  maxLengthCheck = (object) => {
+    if (object.target.value.length > object.target.maxLength) {
+     object.target.value = object.target.value.slice(0, object.target.maxLength)
+    }
+  }
 
   
   render() {
@@ -322,10 +326,11 @@ handleComplete = (data) => {
                       <InputGroup>
                         <Input
                           maxLength="10"
-                          type="text"
+                          type="number"
                           placeholder="하이픈(-)을 생략, 숫자만 입력"
                           required
                           value={this.state.businessnumber}
+                          onInput={this.maxLengthCheck}
                           onChange={e => this.setState({ businessnumber: e.target.value })}
                         />
                         <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.verifyBusinessNumber}>중복확인</Button></InputGroupAddon>

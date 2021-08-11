@@ -196,6 +196,11 @@ class Register extends React.Component {
     }))
   }
 
+  maxLengthCheck = (object) => {
+    if (object.target.value.length > object.target.maxLength) {
+     object.target.value = object.target.value.slice(0, object.target.maxLength)
+    }
+  }
 
   render() {
     return (
@@ -315,7 +320,7 @@ class Register extends React.Component {
                             </div>
                             <InputGroup>
                               <Input
-                                type="text"
+                                type="number"
                                 // placeholder="휴대폰번호"
                                 required
                                 value={this.state.phone}
@@ -358,11 +363,12 @@ class Register extends React.Component {
                             </div>
                             <InputGroup>
                               <Input
-                                maxLength="6"
                                 type="number"
+                                maxLength="6"
                                 placeholder="주민번호 앞 6자리"
                                 required
                                 value={this.state.btdate}
+                                onInput={this.maxLengthCheck}
                                 onChange={e => this.setState({ btdate: e.target.value })}
                               />
                               <div className="align-self-center"><b>&nbsp;-&nbsp;</b></div>
@@ -373,6 +379,7 @@ class Register extends React.Component {
                                 placeholder="1,or2"
                                 required
                                 value={this.state.gender}
+                                onInput={this.maxLengthCheck}
                                 onChange={e => this.setState({ gender: e.target.value })}
                               />
                               <div className="align-self-center"><h2>&nbsp;&nbsp;&nbsp;&#42;&nbsp;&nbsp;&#42;&nbsp;&nbsp;&#42;&nbsp;&nbsp;&#42;&nbsp;&nbsp;&#42;&nbsp;&nbsp;&#42;&nbsp;&nbsp;&nbsp;</h2></div>

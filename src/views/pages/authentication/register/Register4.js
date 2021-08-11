@@ -166,6 +166,12 @@ class Register extends React.Component {
     }))
   }
 
+  maxLengthCheck = (object) => {
+    if (object.target.value.length > object.target.maxLength) {
+     object.target.value = object.target.value.slice(0, object.target.maxLength)
+    }
+  }
+
 
   render() {
     let profile_preview = null;
@@ -330,11 +336,12 @@ class Register extends React.Component {
                       <div className="col-2 align-self-center"><b><FormattedMessage id="License"/><br/><span className="text-danger">(필수)</span></b></div>
                       <InputGroup>
                         <Input
-                          type="text"
+                          type="number"
                           maxLength="5"
                           placeholder="의사 면허번호 입력"
                           required
                           value={this.state.medicalnum}
+                          onInput={this.maxLengthCheck}
                           onChange={e => this.setState({ medicalnum: e.target.value })}
                         />   
                       </InputGroup>
