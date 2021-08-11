@@ -27,8 +27,8 @@ class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      userid: props.user.register.values.registeruser,
-      // userid: "kingbal999@kakao.com",
+      // userid: props.user.register.values.registeruser,
+      userid: "kingbal999@kakao.com",
       phonenum: "",
       phonauthnum: "",
       hospitalname: props.cookiere3.hospitalname,
@@ -43,7 +43,8 @@ class Register extends React.Component {
       modal: false,
       businessmodal: false,
       businessmodalmsg: "",
-      phoneauthveryfied:"N"
+      phoneauthveryfied:"N",
+      
   }
 }
 
@@ -52,23 +53,24 @@ class Register extends React.Component {
 
 postPhone = e => {
   e.preventDefault()
-  if(this.props.user.register.values.phone === this.state.phonenum){
-    axios
-      .post("https://health.iot4health.co.kr:9300/signup-sms", {
-        mobile_num: this.state.phonenum
-      })
-      .then(response => {
-        console.log(response);
-        if(response.data.status === "200") {
-          alert(response.data.message);
-        } else{
-          alert(response.data.message);
-        }
+ 
+    if(this.props.user.register.values.phone === this.state.phonenum){
+      axios
+        .post("https://health.iot4health.co.kr:9300/signup-sms", {
+          mobile_num: this.state.phonenum
+        })
+        .then(response => {
+          console.log(response);
+          if(response.data.status === "200") {
+            alert(response.data.message);
+          } else{
+            alert(response.data.message);
+          }
 
-      })
-  } else {
-    alert("본인의 휴대폰번호와 다릅니다.\n본인의 휴대폰 번호를 입력해 주세요")
-  }
+        })
+    } else {
+      alert("본인의 휴대폰번호와 다릅니다.\n본인의 휴대폰 번호를 입력해 주세요")
+    }
   
 }
 
