@@ -54,6 +54,7 @@ import dot from "../../../../assets/img/dashboard/ID13_11_icon.png"
 import VitalDataM from "../../../ui-elements/patient-list/PatientInfo/VitalDataM"
 import PastConsultList from "../../../ui-elements/patient-list/PatientInfo/DataListConfigM"
 import queryString from "query-string"
+import Publisher from "./Publisher"
 
 class Cslist extends React.Component { 
   render() { 
@@ -454,7 +455,7 @@ class ConsultingRoom extends React.Component {
                 {/* 타이머 */}
               {this.props.appo===null?"진료 시작 전입니다.":
                 <DateCountdown 
-                  datefrom= {this.props.rtime}
+                  dateFrom= {this.props.rtime}
                   dateTo= {moment(this.props.rtime).add("15","m")}
                   // callback={()=>alert('Hello')} 
                   locales_plural={['년','월','일','시','분','초']} />

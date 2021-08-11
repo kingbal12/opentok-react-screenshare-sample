@@ -471,6 +471,15 @@ handleComplete = (data) => {
                         outline
                         color="light" 
                         type="button"
+                        onClick={()=> history.push("/pages/register2")}
+                      >
+                        이전단계
+                      </Button>
+                      <Button
+                        className="mr-1 text-bold-600"
+                        outline
+                        color="light" 
+                        type="button"
                         onClick={this.saveRe3}
                       >
                         <FormattedMessage id="Drafts"/>

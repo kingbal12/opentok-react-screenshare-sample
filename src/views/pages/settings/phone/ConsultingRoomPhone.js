@@ -53,13 +53,15 @@ import dot from "../../../../assets/img/dashboard/ID13_11_icon.png"
 import VitalDataM from "../../../ui-elements/patient-list/PatientInfo/VitalDataM"
 import PastConsultList from "../../../ui-elements/patient-list/PatientInfo/DataListConfigMP"
 import queryString from "query-string"
+import loader from "sass-loader"
+
 
 class Cslist extends React.Component { 
   render() { 
     return(
       <tr>
         <th className="text-center">{this.props.row.PART_NAME} / {this.props.row.F_NAME}</th>
-        <th className="text-center">{this.props.row.NOTE_CC}</th>
+        <th className="text-center">{this.props.row.NOTE_DX}</th>
         <th className="text-center">{this.props.row.APPOINT_TIME.substring(0,10)}</th>  
       </tr> 
  
@@ -93,11 +95,11 @@ class PatientInfo extends React.Component {
       vitaldatamodal: false,
       pclmodal: false,
       
-    }
-    this.state = { time: {},   seconds: 900 };
-    this.timer = 0;
-    this.startTimer = this.startTimer.bind(this);
-    this.countDown = this.countDown.bind(this);
+    };
+    // this.state = { time: {},   seconds: 900 };
+    // this.timer = 0;
+    // this.startTimer = this.startTimer.bind(this);
+    // this.countDown = this.countDown.bind(this);
   }
 
   cookieConsult = () =>{
@@ -113,48 +115,48 @@ class PatientInfo extends React.Component {
     alert("진료노트, 결제정보가 임시저장 되었습니다")
   }
 
-  secondsToTime(secs){
-    let hours = Math.floor(secs / (60 * 60));
+  // secondsToTime(secs){
+  //   let hours = Math.floor(secs / (60 * 60));
 
-    let divisor_for_minutes = secs % (60 * 60);
-    let minutes = Math.floor(divisor_for_minutes / 60);
+  //   let divisor_for_minutes = secs % (60 * 60);
+  //   let minutes = Math.floor(divisor_for_minutes / 60);
 
-    let divisor_for_seconds = divisor_for_minutes % 60;
-    let seconds = Math.ceil(divisor_for_seconds);
+  //   let divisor_for_seconds = divisor_for_minutes % 60;
+  //   let seconds = Math.ceil(divisor_for_seconds);
 
-    let obj = {
-      "h": hours,
-      "m": minutes,
-      "s": seconds
-    };
-    return obj;
-  }
+  //   let obj = {
+  //     "h": hours,
+  //     "m": minutes,
+  //     "s": seconds
+  //   };
+  //   return obj;
+  // }
 
-  componentDidMount() {
-    let timeLeftVar = this.secondsToTime(this.state.seconds);
-    this.setState({ time: timeLeftVar });
+  // componentDidMount() {
+  //   let timeLeftVar = this.secondsToTime(this.state.seconds);
+  //   this.setState({ time: timeLeftVar });
 
-  }
+  // }
 
-  startTimer() {
-    if (this.timer == 0 && this.state.seconds > 0) {
-      this.timer = setInterval(this.countDown, 1000);
-    }
-  }
+  // startTimer() {
+  //   if (this.timer == 0 && this.state.seconds > 0) {
+  //     this.timer = setInterval(this.countDown, 1000);
+  //   }
+  // }
 
-  countDown() {
-    // Remove one second, set state so a re-render happens.
-    let seconds = this.state.seconds - 1;
-    this.setState({
-      time: this.secondsToTime(seconds),
-      seconds: seconds,
-    });
+  // countDown() {
+  //   // Remove one second, set state so a re-render happens.
+  //   let seconds = this.state.seconds - 1;
+  //   this.setState({
+  //     time: this.secondsToTime(seconds),
+  //     seconds: seconds,
+  //   });
     
-    // Check if we're at zero.
-    if (seconds == 0) { 
-      clearInterval(this.timer);
-    }
-  }
+  //   // Check if we're at zero.
+  //   if (seconds == 0) { 
+  //     clearInterval(this.timer);
+  //   }
+  // }
 
   viewFileModal = () => {
     this.setState(prevState => ({
@@ -694,8 +696,8 @@ class PatientInfo extends React.Component {
                     <FormGroup className="align-self-center pt-1">
                       <Input
                         type="text"
-                        value={this.state.paytotal}
-                        onChange={e => this.setState({ paytotal: e.target.value })}
+                        value={this.state.paypatient}
+                          onChange={e => this.setState({ paytotal: e.target.value })}
                       />
                     </FormGroup>
                   </Col>
@@ -760,7 +762,7 @@ class PatientInfo extends React.Component {
               color="black"
               outline
               type="button">
-              {this.state.time.m} : {this.state.time.s}
+              {/* {this.state.time.m} : {this.state.time.s} */}
             </Button>
           </Col>
         </Row>
