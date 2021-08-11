@@ -57,6 +57,7 @@ class Register extends React.Component {
     if(this.state.userid===this.state.email){
       alert("아이디용 이메일과 보안이메일은 다른 이메일로 입력해주시기 바랍니다.")
     } else {
+
       if(this.state.otheremail===false){
         this.props.authemail(
           this.state.userid,
@@ -69,6 +70,8 @@ class Register extends React.Component {
         )
       }
     }
+
+
   }
 
 

@@ -1,6 +1,6 @@
 import { history } from "../../../history"
 import axios from "axios"
-import ReactLoading from 'react-loading';
+
 
 
 export const setTerm = (national_id, term1, term2, six, eight) => {
@@ -107,7 +107,6 @@ export const register2 = (userid, name, phone, password, btdate, gender, email) 
 
 export const authemail = (userid, email) => {
   return dispatch => {
-
     axios
       .post("https://health.iot4health.co.kr:9300/signup-email", {
         user_id: userid,
