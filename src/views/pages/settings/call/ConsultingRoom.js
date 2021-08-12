@@ -42,7 +42,6 @@ import "../../../../assets/scss/pages/authentication.scss"
 import {connect} from "react-redux"
 import { Fragment } from "react"
 import {Helmet} from "react-helmet";
-import { Menu } from "react-feather"
 import axios from "axios"
 import "../../../../assets/scss/plugins/forms/flatpickr/flatpickr.scss"
 import "../../../../assets/scss/plugins/extensions/recharts.scss"
@@ -54,7 +53,7 @@ import dot from "../../../../assets/img/dashboard/ID13_11_icon.png"
 import VitalDataM from "../../../ui-elements/patient-list/PatientInfo/VitalDataM"
 import PastConsultList from "../../../ui-elements/patient-list/PatientInfo/DataListConfigM"
 import queryString from "query-string"
-import Publisher from "./Publisher"
+import Countdown from 'react-countdown';
 
 class Cslist extends React.Component { 
   render() { 
@@ -398,6 +397,8 @@ class ConsultingRoom extends React.Component {
   parentFunction = (data) => {
     this.setState({onsubscribe: data})
 } 
+
+  Completionist = () => <span>진료시간이 완료되었습니다.</span>
  
   render() {
     let file_preview = null;
@@ -454,11 +455,14 @@ class ConsultingRoom extends React.Component {
               type="button">
                 {/* 타이머 */}
               {this.props.appo===null?"진료 시작 전입니다.":
-                <DateCountdown 
-                  dateFrom= {this.props.rtime}
-                  dateTo= {moment(this.props.rtime).add("15","m")}
-                  // callback={()=>alert('Hello')} 
-                  locales_plural={['년','월','일','시','분','초']} />
+                <Countdown date={moment(this.props.rtime) + 900000} >
+                  <this.Completionist />
+                </Countdown>
+                // <DateCountdown 
+                //   dateFrom= {this.props.rtime}
+                //   dateTo= {moment(this.props.rtime).add("15","m")}
+                //   // callback={()=>alert('Hello')} 
+                //   locales_plural={['년','월','일','시','분','초']} />
               }
             </Button>
             <Button
