@@ -46,6 +46,8 @@ class Publisher extends React.Component {
 
     onError = (err) => {
         this.setState({ error: `Failed to publish: ${err.message}` });
+        alert("인터넷 상태로 인해 화면공유에 오류가 발생하였습니다\n화면공유를 다시 시도해 주십시오")
+        window.location.reload()
     }
 
   
@@ -54,7 +56,7 @@ class Publisher extends React.Component {
       return (
         <div className="publisher">
             {this.state.error ? <div id="error">{this.state.error}</div> : null}
-            {this.props.togglescreenshare === false ?
+            {/* {this.props.togglescreenshare === false ? */}
               <OTPublisher
                 properties={{
                     showControls: false,
@@ -69,8 +71,8 @@ class Publisher extends React.Component {
                 eventHandlers={this.publishEvents}
                 onError={this.onError}
               />
-              : null
-            }
+              {/* : null
+            } */}
             
             {this.props.togglescreenshare !== false ?
               <OTPublisher
@@ -87,9 +89,8 @@ class Publisher extends React.Component {
                 eventHandlers={this.publishEvents}
                 onError={this.onError}
               />
-              : null
-            }
-
+               : null
+            } 
             
       </div>
       );

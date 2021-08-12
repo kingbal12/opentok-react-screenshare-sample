@@ -307,41 +307,73 @@ export const getVitalData = (patientid) => {
         let bs = new Array()
         let we = new Array()
         let spo2 = new Array()
+        let gforLimit = 6
         let forLimit = 6
+        let sforLimit = 6
+        let tforLimit = 6
+        let wforLimit = 6
+        if(response.data.data.GLUCOSE_LIST.length < gforLimit) gforLimit = response.data.data.GLUCOSE_LIST.length
         if(response.data.data.PRESSURE_LIST.length < forLimit) forLimit = response.data.data.PRESSURE_LIST.length
+        if(response.data.data.SPO2_LIST.length < sforLimit) sforLimit = response.data.data.SPO2_LIST.length
+        if(response.data.data.TEMP_LIST.length < tforLimit) tforLimit = response.data.data.TEMP_LIST.length
+        if(response.data.data.WEIGHT_LIST.length < wforLimit) wforLimit = response.data.data.WEIGHT_LIST.length
+
+        for (let i=0; i<gforLimit; i++) {
+          let bsobj 	= new Object();
+           
+          bsobj	= response.data.data.GLUCOSE_LIST[i]
+         
+          bsobj = JSON.stringify(bsobj);
+          //String 형태로 파싱한 객체를 다시 json으로 변환
+          if(bsobj!==undefined){bs.push(JSON.parse(bsobj))}          
+        }
+
         for (let i=0; i<forLimit; i++) {
           let bpobj = new Object();
           let jsonObj	= new Object();
-          let tempobj	= new Object();
-          let bsobj 	= new Object();
-          let weobj 	= new Object();
-          let spo2obj = new Object();   
-    
-            bpobj = response.data.data.PRESSURE_LIST[i]
-            jsonObj.CREATE_TIME	= response.data.data.PRESSURE_LIST[i].CREATE_TIME
-            jsonObj.PULSE_VAL	= response.data.data.PRESSURE_LIST[i].PULSE_VAL
+           
+          bpobj = response.data.data.PRESSURE_LIST[i]
+          jsonObj.CREATE_TIME	= response.data.data.PRESSURE_LIST[i].CREATE_TIME
+          jsonObj.PULSE_VAL	= response.data.data.PRESSURE_LIST[i].PULSE_VAL
          
           
-          tempobj = response.data.data.TEMP_LIST[i]
-          bsobj	= response.data.data.GLUCOSE_LIST[i]
-          weobj	= response.data.data.WEIGHT_LIST[i]
-          spo2obj	= response.data.data.SPO2_LIST[i]
-
           bpobj = JSON.stringify(bpobj);
           jsonObj = JSON.stringify(jsonObj);
-          tempobj = JSON.stringify(tempobj);
-          bsobj = JSON.stringify(bsobj);
-          weobj = JSON.stringify(weobj);
-          spo2obj = JSON.stringify(spo2obj);
+          
 
           //String 형태로 파싱한 객체를 다시 json으로 변환
           if(bpobj!==undefined){bp.push(JSON.parse(bpobj))}
-          if(jsonObj!==undefined){pulse.push(JSON.parse(jsonObj))}
-          if(tempobj!==undefined){temp.push(JSON.parse(tempobj))}
-          if(bsobj!==undefined){bs.push(JSON.parse(bsobj))}
-          if(weobj!==undefined){we.push(JSON.parse(weobj))}
-          if(spo2obj!==undefined){spo2.push(JSON.parse(spo2obj))}
-          
+          if(jsonObj!==undefined){pulse.push(JSON.parse(jsonObj))}          
+        }
+
+        for (let i=0; i<sforLimit; i++) {
+          let spo2obj = new Object(); 
+           
+          spo2obj	= response.data.data.SPO2_LIST[i]
+         
+          spo2obj = JSON.stringify(spo2obj);
+          //String 형태로 파싱한 객체를 다시 json으로 변환
+          if(spo2obj!==undefined){spo2.push(JSON.parse(spo2obj))}          
+        }
+
+        for (let i=0; i<tforLimit; i++) {
+          let tempobj	= new Object();
+           
+          tempobj = response.data.data.TEMP_LIST[i]
+         
+          tempobj = JSON.stringify(tempobj);
+          //String 형태로 파싱한 객체를 다시 json으로 변환
+          if(tempobj!==undefined){temp.push(JSON.parse(tempobj))}          
+        }
+
+        for (let i=0; i<tforLimit; i++) {
+          let weobj 	= new Object();
+
+          weobj	= response.data.data.WEIGHT_LIST[i]
+
+          weobj = JSON.stringify(weobj);
+
+          if(weobj!==undefined){we.push(JSON.parse(weobj))}  
         }
 
         dispatch({

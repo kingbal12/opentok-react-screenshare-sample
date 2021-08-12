@@ -62,7 +62,7 @@ class Cslist extends React.Component {
       <tr>
         <th className="text-center"><h6>{this.props.row.PART_NAME} / {this.props.row.F_NAME}</h6></th>
         <th className="text-center"><h6>{this.props.row.NOTE_DX}</h6></th>
-        <th className="text-center"><h6>{moment(this.props.row.APPOINT_TIME).format("YYYY-MM-DD hh:ss A")}</h6></th>  
+        <th className="text-center"><h6>{moment(this.props.row.APPOINT_TIME).format("YYYY-MM-DD hh:mm A")}</h6></th>  
       </tr> 
  
     ); 
@@ -493,7 +493,7 @@ class ConsultingRoom extends React.Component {
         {/* 화상통화, 생체데이터, 등등 */}
         <Row>
           <Col lg="5" xl="5" sm="12" md="12"> 
-            <Card className="mb-0" style={{height:"650px", border:"solid #7367ef 1px", backgroundColor:"#efefff"}}>
+            <Card className="mb-0" style={{height:"680px", border:"solid #7367ef 1px", backgroundColor:"#efefff"}}>
               <Row className="col-12 p-0">
                 <Col lg="12" md="12">
                 {this.props.dataList.tokbox.TOK_KEY===""?null:
@@ -993,12 +993,12 @@ class ConsultingRoom extends React.Component {
                     </div>
                   </CardBody>
                 </Card>
-                <Card className="mb-1" style={{height:"210px"}}>
+                <Card className="mb-1" style={{height:"240px"}}>
                   <CardTitle className="pl-1" style={{paddingTop:"5px"}}>
                     <b>Physical Data</b>
                   </CardTitle>
                   <CardBody className="d-flex pl-0 pt-0">
-                    <div className="col-5">
+                    <div className="col-4">
                       <h6><span className="text-bold-600">신장/체중</span></h6>
                       <h6><span className="text-bold-600">흡연여부</span></h6>
                       <h6><span className="text-bold-600">음주여부</span></h6>
@@ -1007,14 +1007,14 @@ class ConsultingRoom extends React.Component {
                       <h6><span className="text-bold-600">복용중인 약</span></h6>
                       <h6><span className="text-bold-600">알러지 유무</span></h6>
                     </div>
-                    <div className="col-7">
+                    <div className="col-8">
                       <h6>{this.props.pinfo.HEIGHT_VAL}cm&nbsp;/&nbsp;{this.props.pinfo.WEIGHT_VAL}kg</h6>
                       <h6>{this.props.pinfo.SMOKE_YN==="Y"?"흡연":"비흡연"}</h6>
                       <h6>{this.props.pinfo.DRINK_YN==="Y"?"음주":"금주"}</h6>
-                      <h6>{this.props.pinfo.DISEASE_DESC}</h6>
-                      <h6>{this.props.pinfo.FAMILY_DESC}</h6>
-                      <h6>{this.props.pinfo.USE_MED}</h6>
-                      <h6>{this.props.pinfo.ALLERGY_YN==="Y"?"있음":"없음"}&nbsp;{this.props.pinfo.ALLERGY_DESC}</h6>
+                      <h6>{this.props.pinfo.DISEASE_DESC===""? "없음":this.props.pinfo.DISEASE_DESC}</h6>
+                      <h6>{this.props.pinfo.FAMILY_DESC===""? "없음":this.props.pinfo.FAMILY_DESC}</h6>
+                      <h6>{this.props.pinfo.USE_MED===""? "없음":this.props.pinfo.USE_MED}</h6>
+                      <h6>{this.props.pinfo.ALLERGY_YN==="Y"?"있음":"없음"}&nbsp;{this.props.pinfo.ALLERGY_DESC===""?"없음":this.props.pinfo.ALLERGY_DESC}</h6>
                     </div>
                   </CardBody>
                 </Card>
@@ -1037,7 +1037,7 @@ class ConsultingRoom extends React.Component {
                     {file_preview}
                   </CardBody>
                 </Card>
-                <Card className="mb-1" style={{height:"185px"}}>
+                <Card className="mb-1" style={{height:"215px"}}>
                   <CardTitle className="px-1 d-flex justify-content-between" style={{paddingTop:"5px"}}>
                     <b>Past Consulting List</b>
                     {/* <Menu onClick={() => this.goPastConsultList(this.props.pinfo.PATIENT_ID)} style={{cursor:"pointer"}}/> */}

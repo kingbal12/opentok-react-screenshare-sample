@@ -10,6 +10,7 @@ import {InputGroup, InputGroupAddon, Form, FormGroup, Input, Button,
   ModalHeader,
   ModalBody,
   ModalFooter,
+  Spinner,
 } from "reactstrap"
 import { Check } from "react-feather"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
@@ -22,6 +23,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar'
 import HicareLogo from "../../../../assets/img/logo/logo1.png"
 import { FormattedMessage } from "react-intl"
 import { history } from "../../../../history"
+import Loader from "react-loading"
 
 
 class Register extends React.Component {
@@ -41,7 +43,8 @@ class Register extends React.Component {
       idmodal: false,
       vfemodal: false,
       verifyemailyn:"N",
-      chkpasswordmodal: false
+      chkpasswordmodal: false,
+      loadingmodal: false
     }
   }
 
@@ -57,21 +60,39 @@ class Register extends React.Component {
     if(this.state.userid===this.state.email){
       alert("아이디용 이메일과 보안이메일은 다른 이메일로 입력해주시기 바랍니다.")
     } else {
-
+      this.setState({loadingmodal:true})
       if(this.state.otheremail===false){
-        this.props.authemail(
+        this.authemail(
           this.state.userid,
           this.state.userid
         )
       } else {
-        this.props.authemail(
+        this.authemail(
           this.state.userid,
           this.state.email
         )
       }
     }
+  }
+
+  authemail = (userid, email) => {
+    axios
+      .post("https://health.iot4health.co.kr:9300/signup-email", {
+        user_id: userid,
+        email: email
+      })
 
 
+      .then(response => {
+        
+        if(response.data.status === "200") {
+          this.setState({loadingmodal:false},()=> alert(response.data.message))
+          
+        } else {
+          this.setState({loadingmodal:false},()=> alert(response.data.message))
+        }
+
+      })
   }
 
 
@@ -414,7 +435,15 @@ class Register extends React.Component {
           </Card>
 
         </Col>
-
+        
+        <Modal
+          isOpen={this.state.loadingmodal}
+          className="modal-dialog-centered modal-sm"
+        >
+          <ModalBody className="d-flex justify-content-center">
+            <Loader type={"spin"} color={"silver"} height={'30%'} width={'30%'}/>
+          </ModalBody>
+        </Modal>
         <Modal
           isOpen={this.state.idmodal}
           toggle={this.idModal}
