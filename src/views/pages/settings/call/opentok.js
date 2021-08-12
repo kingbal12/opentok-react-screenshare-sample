@@ -1,19 +1,12 @@
 import React from "react"
 import { OTSession,OTStreams,preloadScript,  OTSubscriber, OTPublisher } from 'opentok-react';
 import "../../../../assets/scss/plugins/extensions/opentok.scss"
-import ConnectionStatus from "./ConnectionStatus";
-import Publisher from "./Publisher";
-import Subscriber from "./Subscriber";
-import ScreenShare from "./ScreenShare"
-import { connect } from "react-redux";
-import { Button } from "bootstrap";
 import video from "../../../../assets/img/call/ID25_14_btn_op_video.png"
 import mic from "../../../../assets/img/call/ID25_14_btn_op_mic.png"
 import video_off from "../../../../assets/img/call/ID25_14_btn_op_video_off.png"
 import mic_off from "../../../../assets/img/call/ID25_14_btn_op_mic_off.png"
 import call from "../../../../assets/img/call/ID25_14_btn_op_end-call.png"
-import ScreenSharingAccPack from "opentok-screen-sharing"
-import { Fragment } from "react";
+
 
 
 class ConsultingRoom extends React.Component {
