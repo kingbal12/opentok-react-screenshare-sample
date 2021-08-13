@@ -19,7 +19,8 @@ class ConsultingRoom extends React.Component {
       camerastate: true,
       micstate: true,
       disconnect: false,
-      onsubscribe: false
+      onsubscribe: false,
+      connectedtag: true
     }
     this.sessionEvents = {
       sessionConnected: () => {
@@ -53,7 +54,7 @@ class ConsultingRoom extends React.Component {
   }
 
   disconnectSession = () => {
-    this.setState({connected: false})
+    this.setState({connectedtag: false})
   }
 
   childFunction = () => {
@@ -94,8 +95,9 @@ class ConsultingRoom extends React.Component {
         onError={this.onError} 
         eventHandlers={this.sessionEvents}
       >
-
+        
           {this.state.error ? <div id="error">{this.state.error}</div> : null}
+          {/* {this.connectedtag=== true? */}
               <OTPublisher
                 properties={{
                     showControls: false,
@@ -110,7 +112,7 @@ class ConsultingRoom extends React.Component {
                 }}
                 onError={this.onError}
               />
-
+            {/* : null} */}
             
             {this.props.toglescreenshare !== false ?
               <OTPublisher
@@ -128,6 +130,7 @@ class ConsultingRoom extends React.Component {
               />
                : null
             }
+        {/* {this.connectedtag=== true? */}
         <OTStreams>
           <OTSubscriber
             className="otsubscriber"
@@ -140,10 +143,11 @@ class ConsultingRoom extends React.Component {
             onError={this.onError}
           />
         </OTStreams>
-    <div className="buttons">
+        {/* : null} */}
+        <div className="buttons">
           <img src={this.state.micstate===true?mic:mic_off} onClick={this.micState} style={{cursor:"pointer", width: "40px"}} />
           <img src={this.state.camerastate===true?video:video_off} onClick={this.cameraState} style={{cursor:"pointer",  width: "40px"}} className="mr-2"/>
-          <img src={call} onClick={this.sessionEvents.sessionDisconnected} style={{cursor:"pointer",  width: "40px"}}/>
+          <img src={call} onClick={this.disconnectSession} style={{cursor:"pointer",  width: "40px"}}/>
           {/* <button onClick={this.check}>확인용</button> */}
         </div>
         
