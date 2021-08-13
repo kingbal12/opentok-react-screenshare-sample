@@ -665,7 +665,7 @@ export const getNameFaqData = (pageamount, pagenum, fname) => {
         } )
         
       } else {
-        alert("FAQ를 불러오지 못하였습니다.")
+        alert(response.data.message)
       }
     })
     .catch(err => console.log(err))

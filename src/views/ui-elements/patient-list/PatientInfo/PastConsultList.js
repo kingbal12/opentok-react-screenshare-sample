@@ -6,7 +6,7 @@ import {Table,
 import "../../../../assets/scss/plugins/extensions/react-paginate.scss"
 import "../../../../assets/scss/pages/authentication.scss"
 import {connect} from "react-redux"
-import {gettokbox} from "../../../../redux/actions/data-list/"
+import {gettokbox, getPharmacy} from "../../../../redux/actions/data-list/"
 import { history } from "../../../../history"
 import DataListConfig from "./DataListConfig"
 import queryString from "query-string"
@@ -101,12 +101,22 @@ class PastConsultList extends React.Component {
 
   goCallSetting = e => {
     e.preventDefault() 
-    this.props.gettokbox(this.props.user.login.values.loggedInUser.username, this.props.appo.APPOINT_NUM)
+    if(moment() >= moment(this.props.rtime).add(-5,"m") && moment() <= moment(this.props.rtime).add(15,"m")) {
+      this.props.gettokbox(this.props.user.login.values.loggedInUser.username, this.props.appo.APPOINT_NUM)
+      this.props.getPharmacy(this.props.pinfo.PATIENT_ID)
+    } else {
+      alert("진료실은 5분 전부터 입장 가능합니다.")
+    }
   }
 
   goPhoneConsult= e => {
     e.preventDefault() 
-    history.push("/pages/phoneconsulting")
+    if(moment() >= moment(this.props.rtime).add(-5,"m") && moment() <= moment(this.props.rtime).add(15,"m")) {
+      this.props.getPharmacy(this.props.pinfo.PATIENT_ID)
+      history.push("/pages/phoneconsulting")
+    } else {
+      alert("진료실은 5분 전부터 입장 가능합니다.")
+    }
   }
  
   render() {
@@ -251,4 +261,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps,{gettokbox}) (PastConsultList)
+export default connect(mapStateToProps,{gettokbox, getPharmacy}) (PastConsultList)

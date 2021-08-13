@@ -12,6 +12,7 @@ import { connect } from "react-redux"
 import { FormattedMessage } from "react-intl"
 import { history } from "../../../../history"
 import navigationConfig from "../../../../configs/horizontalMenuConfig"
+
 class HorizontalSidebar extends React.Component {
   constructor(props) {
     super(props)
@@ -293,6 +294,7 @@ class HorizontalSidebar extends React.Component {
               </Dropdown>
             ) : (
               <CustomAnchorTag
+                
                 className={classnames({
                   "nav-link": item.type === "item",
                   hover: this.state.parentHover === item.id

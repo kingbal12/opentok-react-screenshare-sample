@@ -31,6 +31,7 @@ class MyInfo extends React.Component {
       name: "",
       birthday:"",
       gender:"",
+      phonenumber: "",
       userid: props.user.login.values.loggedInUser.username,
       filename: "",
       file : "",
@@ -41,7 +42,11 @@ class MyInfo extends React.Component {
       previewURL : "",
       previewmodal: false,
       getfilepath: "",
-      getfilename: ""
+      getfilename: "",
+      phonenumtoggle: false,
+      vfauth: "N",
+      mdfphonenum: "",
+      authnum: ""
     }
   }
 
@@ -62,6 +67,55 @@ class MyInfo extends React.Component {
     }))
   }
 
+  togglePhonenum = e =>{
+    this.setState(prevState => ({
+      phonenumtoggle: !prevState.phonenumtoggle
+    }))
+  }
+
+
+  postPhone = e => {
+    e.preventDefault()
+    axios
+      .post("https://health.iot4health.co.kr:9300/signup-sms", {
+        mobile_num: this.state.mdfphonenum
+      })
+      .then(response => {
+        console.log(response);
+        if(response.data.status === "200") {
+          alert(response.data.message);
+        } else{
+          alert(response.data.message);
+        }
+
+      })
+     
+    
+  }
+  
+  auth = e => {
+    e.preventDefault()
+    axios
+        .get("https://health.iot4health.co.kr:9300/signup-sms", {
+          params:{
+            mobile_num: this.state.mdfphonenum,
+            auth_code: Number(this.state.authnum)
+          }
+        })
+        .then(response => {
+          console.log(response);
+          if(response.data.status === "200") {
+            alert(response.data.message);
+            this.setState({vfauth:"Y"})
+          } else{
+            alert(response.data.message);
+          }
+  
+        })
+  }
+
+  
+
   componentDidMount() {
     if(this.props.cookiemyinfo.medicalable===""
     ){
@@ -78,14 +132,15 @@ class MyInfo extends React.Component {
             if(response.data.status==="200") {
               myinfo = response.data.data
               if(myinfo.GENDER==='1' || myinfo.GENDER==='3') {
-                this.setState({gender: "M"})
+                this.setState({gender: "남성"})
               } else if(myinfo.GENDER==='2' || myinfo.GENDER==='4'){
-                this.setState({gender: "F"})
+                this.setState({gender: "여성"})
               } else{
                 this.setState({gender: "성별정보가 저장되어있지 않습니다."})
               }
               this.setState({
                 name: myinfo.F_NAME,
+                phonenumber: myinfo.MOBILE_NUM,
                 birthday: myinfo.BIRTH_DT,
                 getfilepath: myinfo.FILE_PATH,
                 getfilename: myinfo.FILE_NAME,
@@ -123,9 +178,12 @@ class MyInfo extends React.Component {
   handleRegister = e => {
     
     e.preventDefault()
-    if(this.state.filename===""){
+    if(this.state.vfauth==="Y"){
       this.props.putmyinfonfile(
+        this.state.mdfphonenum,
         this.state.userid,
+        this.state.filename,
+        this.state.file,
         this.state.medicalpart,
         this.state.medicalable,
         this.state.medicaldesc,
@@ -135,6 +193,7 @@ class MyInfo extends React.Component {
       )
     } else{
       this.props.putmyinfo(
+        this.state.phonenumber,
         this.state.userid,
         this.state.filename,
         this.state.file,
@@ -228,22 +287,60 @@ class MyInfo extends React.Component {
                   </Col>
                   <Col lg="8" md="12">
                   <div className="form-label-group d-flex">
-                    <div className="col-1 align-self-center"><b>아이디</b></div>
+                    <div className="col-2 align-self-center"><b>아이디</b></div>
                     <div>{this.state.userid}</div>
-                  </div> 
-                  <div className="form-label-group d-flex">
+                    <div className="col-1"></div>
                     <div className="col-1 align-self-center"><b>이름</b></div>
                     <div>{this.state.name}</div>
-                    <div className="col-2"></div>
-                    <div className="col-1 align-self-center"><b>생일</b></div>
+                  </div> 
+                  <div className="form-label-group d-flex">
+                    <div className="col-2 align-self-center"><b>생년월일</b></div>
                     <div>{this.state.birthday}</div>
                     <div className="col-2"></div>
                     <div className="col-1 align-self-center"><b>성별</b></div>
                     <div>{this.state.gender}</div>
-                  </div> 
+                    <div className="col-2"></div>
+                    <div className="col-2 align-self-center"><b>의사 면허번호</b></div>
+                    <div>{this.state.medicalnum}</div>
+                  </div>
+                  <div className="form-label-group d-flex" >
+                    <div className="col-2 align-self-center"><b>휴대폰 번호</b></div>
+                    <div>{this.state.phonenumber}</div>
+
+                    <Button className="ml-1" color="primary" size="sm" onClick={this.togglePhonenum}>
+                      {this.state.phonenumtoggle===false?"변경":"취소"}
+                    </Button>
+                  </div>
+                  {this.state.phonenumtoggle===false? null:
+                  <div className="form-label-group d-flex" >
+                    <div className="col-2 align-self-center"><b>변경정보</b></div>
+                    <Input
+                      className="col-2"
+                      type="number"
+                      placeholder="변경할 휴대폰 번호 입력"
+                      required
+                      value={this.state.mdfphonenum}
+                      onChange={e => this.setState({ mdfphonenum: e.target.value })}
+                    />   
+                    <Button className="ml-1" color="primary" onClick={this.postPhone}>
+                      인증 요청
+                    </Button>
+                    <Input
+                      className="col-2 ml-1"
+                      type="number"
+                      placeholder="인증번호 입력"
+                      required
+                      value={this.state.authnum}
+                      onChange={e => this.setState({ authnum: e.target.value })}
+                    /> 
+                    <Button className="ml-1" color="primary" onClick={this.auth}>
+                      인증 확인
+                    </Button>
+                  </div>  
+                  }  
                   <Form action="/" onSubmit={this.handleRegister}>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-2 align-self-center"><b>프로필 사진 등록<span className="text-danger">(필수)</span></b></div>
+                      <div className="col-2"><b>프로필 사진 등록<span className="text-danger">(필수)</span></b></div>
                       <InputGroup>
                         <CustomInput
                           className="col-11" 

@@ -4,6 +4,11 @@ import Breadcrumbs from "../../../components/@vuexy/breadCrumbs/BreadCrumb"
 import ListViewConfig from "./DataListConfig"
 import queryString from "query-string"
 class PatientListView extends React.Component {
+  componentDidUpdate(){
+    if(this.props.location.search==="") {
+      window.location.reload()
+    }
+  }
   render() {
     return (
       <React.Fragment>

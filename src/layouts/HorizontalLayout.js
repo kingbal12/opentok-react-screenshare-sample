@@ -14,6 +14,8 @@ import {
   hideScrollToTop,
   changeMode
 } from "../redux/actions/customizer/index"
+import queryString from "query-string"
+
 
 class HorizontalLayout extends PureComponent {
   state = {
@@ -81,6 +83,8 @@ class HorizontalLayout extends PureComponent {
           currRoute: this.props.location.pathname
         })
       }
+
+      
 
       let layout = this.props.app.customizer.theme
       if (layout === "dark") {

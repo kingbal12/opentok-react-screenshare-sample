@@ -218,11 +218,10 @@ class PatientInfo extends React.Component {
             <Row className="justify-content-center">
               {this.props.appo===null||this.props.appo.FILE_NAME===""?null:
               <img
-                maxwidth="500px"
                 src={"https://health.iot4health.co.kr:9300"+this.props.appo.FILE_PATH
                 +this.props.appo.FILE_NAME}
-                className="dz-img"
-                alt=""
+                maxwidth="500px"
+                height="500px"
                 style={{cursor:"pointer"}} 
                 onClick={this.viewFileModal}
               />

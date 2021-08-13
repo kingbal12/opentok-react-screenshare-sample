@@ -14,6 +14,13 @@ import queryString from "query-string"
 
 
 class PaymentManagement extends React.Component {
+
+  componentDidUpdate(){
+    if(this.props.location.search==="") {
+      window.location.reload()
+    }
+  }
+  
   render() {
     return (
       <Row className="m-0 justify-content-center">

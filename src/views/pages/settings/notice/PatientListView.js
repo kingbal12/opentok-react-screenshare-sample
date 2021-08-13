@@ -3,6 +3,7 @@ import { Row, Col } from "reactstrap"
 import ListViewConfig from "./DataListConfig"
 import queryString from "query-string"
 class PatientListView extends React.Component {
+  
   render() {
     return (
       <React.Fragment>
