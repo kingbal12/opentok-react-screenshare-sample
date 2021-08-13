@@ -76,6 +76,12 @@ class ConsultingRoom extends React.Component {
     window.location.reload()
   }
 
+  onError = (err) => {
+    this.setState({ error: `Failed to publish: ${err.message}` });
+    alert("기기설정에 문제가 발생하였습니다.\n기기설정을 다시 시도해 주시거나 카메라,마이크를 사용하시던 프로그램을 종료해주십시오")
+    window.location.reload()
+  }
+
 
  
   render() {
@@ -99,9 +105,10 @@ class ConsultingRoom extends React.Component {
 
                     // deviceid로 작동
                     // videoSource: this.props.togglescreenshare === true ? 'screen' : undefined
-                    videoSource: undefined
+                    videoSource: this.props.cameraset===""? undefined : this.props.cameraset,
+                    audioSource: this.props.micset===""? undefined : this.props.micset
                 }}
-                onError={this.onError1}
+                onError={this.onError}
               />
 
             
@@ -138,7 +145,6 @@ class ConsultingRoom extends React.Component {
           <img src={this.state.camerastate===true?video:video_off} onClick={this.cameraState} style={{cursor:"pointer",  width: "40px"}} className="mr-2"/>
           <img src={call} onClick={this.sessionEvents.sessionDisconnected} style={{cursor:"pointer",  width: "40px"}}/>
           {/* <button onClick={this.check}>확인용</button> */}
-          {/* <button onClick={this.childFunction}>Click</button> */}
         </div>
         
       </OTSession>

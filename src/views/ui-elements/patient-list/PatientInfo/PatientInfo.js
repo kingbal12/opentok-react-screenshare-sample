@@ -138,17 +138,25 @@ class PatientInfo extends React.Component {
     
   
   }
-
+  
   goCallSetting = e => {
     e.preventDefault()
-    this.props.gettokbox(this.props.user.login.values.loggedInUser.username, this.props.appo.APPOINT_NUM)
-    this.props.getPharmacy(this.props.pinfo.PATIENT_ID)
+    if(moment() >= moment(this.props.rtime).add(-5,"m") && moment() <= moment(this.props.rtime).add(15,"m")) {
+      this.props.gettokbox(this.props.user.login.values.loggedInUser.username, this.props.appo.APPOINT_NUM)
+      this.props.getPharmacy(this.props.pinfo.PATIENT_ID)
+    } else {
+      alert("진료실은 5분 전부터 입장 가능합니다.")
+    }
   }
 
   goPhoneConsult= e => {
     e.preventDefault() 
-    this.props.getPharmacy(this.props.pinfo.PATIENT_ID)
-    history.push("/pages/phoneconsulting")
+    if(moment() >= moment(this.props.rtime).add(-5,"m") && moment() <= moment(this.props.rtime).add(15,"m")) {
+      this.props.getPharmacy(this.props.pinfo.PATIENT_ID)
+      history.push("/pages/phoneconsulting")
+    } else {
+      alert("진료실은 5분 전부터 입장 가능합니다.")
+    }
   }
 
   goPastConsultList(pid) {

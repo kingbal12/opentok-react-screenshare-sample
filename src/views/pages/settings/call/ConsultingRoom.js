@@ -31,7 +31,6 @@ import {
   postPayData,
   putStateComplete
 } from "../../../../redux/actions/data-list/"
-import DateCountdown from 'react-date-countdown-timer';
 import {
   saveCookieConsult
 } from "../../../../redux/actions/cookies/"
@@ -53,7 +52,7 @@ import dot from "../../../../assets/img/dashboard/ID13_11_icon.png"
 import VitalDataM from "../../../ui-elements/patient-list/PatientInfo/VitalDataM"
 import PastConsultList from "../../../ui-elements/patient-list/PatientInfo/DataListConfigM"
 import queryString from "query-string"
-import Countdown from 'react-countdown';
+import Countdown from 'react-countdown'
 
 class Cslist extends React.Component { 
   render() { 
@@ -361,7 +360,7 @@ class ConsultingRoom extends React.Component {
 
   Check = e => {
     e.preventDefault()
-    console.log(this.state.screenshare)
+    console.log(this.state)
   }
 
   postPayment = () => {
@@ -398,7 +397,7 @@ class ConsultingRoom extends React.Component {
     this.setState({onsubscribe: data})
 } 
 
-  Completionist = () => <span>진료시간이 완료되었습니다.</span>
+  Completionist = () => <span>진료시간이 종료되었습니다.</span>
  
   render() {
     let file_preview = null;
@@ -458,11 +457,6 @@ class ConsultingRoom extends React.Component {
                 <Countdown date={moment(this.props.rtime) + 900000} >
                   <this.Completionist />
                 </Countdown>
-                // <DateCountdown 
-                //   dateFrom= {this.props.rtime}
-                //   dateTo= {moment(this.props.rtime).add("15","m")}
-                //   // callback={()=>alert('Hello')} 
-                //   locales_plural={['년','월','일','시','분','초']} />
               }
             </Button>
             <Button
@@ -502,14 +496,13 @@ class ConsultingRoom extends React.Component {
                 <Col lg="12" md="12">
                 {this.props.dataList.tokbox.TOK_KEY===""?null:
                 <Opentok className="col-12"
+                  toglescreenshare={this.state.screenshare}
                   parentFunction={this.parentFunction}
                   apikey={this.props.dataList.tokbox.TOK_KEY}
-                  // apikey="47274054"
-                  toglescreenshare={this.state.screenshare}
                   session={this.props.dataList.tokbox.TOK_SESSION}
-                  // session= "1_MX40NzI3NDA1NH5-MTYyNzg2OTY5ODIzNn5kR2VXN2kwUnRHbkZGVUJQYUxIL3E5c2N-UH4"
                   token={this.props.dataList.tokbox.TOK_TOKEN}
-                  // token="T1==cGFydG5lcl9pZD00NzI3NDA1NCZzaWc9ZGQzNjgxNGMwZmY4NGI3YTkwMDZhZjg2ZGJjZGNiMTYxYzc0ODRiNjpzZXNzaW9uX2lkPTFfTVg0ME56STNOREExTkg1LU1UWXlOemcyT1RZNU9ESXpObjVrUjJWWE4ya3dVblJIYmtaR1ZVSlFZVXhJTDNFNWMyTi1VSDQmY3JlYXRlX3RpbWU9MTYyNzg2OTY5OCZub25jZT0zOTY2NzEzNzAmcm9sZT1wdWJsaXNoZXImZXhwaXJlX3RpbWU9MTYyNzk1NjA5OA=="
+                  cameraset={this.state.cameraset}
+                  micset={this.state.micset}
                 />
                 }
                 </Col>
@@ -1245,7 +1238,7 @@ class ConsultingRoom extends React.Component {
               </CardBody>
             </Card>
             <div className="pt-0 mt-0 text-right" style={{width:"100%"}}>
-              {/* <Button
+              <Button
                 className="mr-1"
                 color="primary"
                 outline
@@ -1253,7 +1246,7 @@ class ConsultingRoom extends React.Component {
                 onClick={this.Check}
               >
                 확인용 버튼
-              </Button> */}
+              </Button>
               <Button
                 className="mr-1"
                 color="primary"

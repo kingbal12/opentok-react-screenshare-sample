@@ -37,7 +37,6 @@ import {
 import {
   saveCookieConsult
 } from "../../../../redux/actions/cookies/"
-import DateCountdown from 'react-date-countdown-timer';
 import { Check } from "react-feather"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import { history } from "../../../../history"
@@ -45,7 +44,6 @@ import "../../../../assets/scss/pages/authentication.scss"
 import {connect} from "react-redux"
 import { Fragment } from "react"
 import previmg from "../../../../assets/img/dashboard/ID13_11_file.png"
-import { Menu } from "react-feather"
 import "../../../../assets/scss/plugins/forms/flatpickr/flatpickr.scss"
 import "../../../../assets/scss/plugins/extensions/recharts.scss"
 import moment from "moment"
@@ -53,7 +51,7 @@ import dot from "../../../../assets/img/dashboard/ID13_11_icon.png"
 import VitalDataM from "../../../ui-elements/patient-list/PatientInfo/VitalDataM"
 import PastConsultList from "../../../ui-elements/patient-list/PatientInfo/DataListConfigMP"
 import queryString from "query-string"
-import loader from "sass-loader"
+import Countdown from 'react-countdown'
 
 
 class Cslist extends React.Component { 
@@ -312,6 +310,13 @@ class PatientInfo extends React.Component {
       paymodal: !prevState.paymodal
     }))
   }
+
+  parentFunction = (data) => {
+    this.setState({onsubscribe: data})
+  } 
+
+  Completionist = () => <span><h5 className="text-primary" style={{paddingTop:"0.2rem"}}>0분</h5></span>
+  Completephone = () => <span><h5 className="text-primary" style={{paddingTop:"0.2rem"}}>진료시간이 종료되었습니다.</h5></span>
  
   render() {
     let file_preview = null;
@@ -734,36 +739,28 @@ class PatientInfo extends React.Component {
           </Col>
           <Col lg="6" md="12" className="d-flex text-right">
           
-            <Col className="mx-5 text-left d-flex" style={{border:"1px solid #B8B8C2", borderRadius: "5px", height:"35px"}}>
+            <Col className="mx-2 text-left d-flex" style={{border:"1px solid #B8B8C2", borderRadius: "5px", height:"35px"}}>
               <h5 className="align-self-center text-primary mr-1" style={{paddingTop:"0.3rem"}}>진료 시작까지</h5>
                 {this.props.appo===null?null:
                 <span  style={{paddingTop:"0.2rem"}}>
-                  <DateCountdown
-                    className="align-self-center text-primary"
-                    datefrom= {moment(this.props.rtime).add("-15","m")}
-                    dateTo= {this.props.rtime}
-                    // callback={()=>alert('Hello')} 
-                    locales_plural={['년','월','일','시','분',"초"]} />
+                  <Countdown date={moment(this.props.rtime)} >
+                    <this.Completionist />
+                  </Countdown>
                 </span>  
                 }
               <h5 className="align-self-center text-primary" style={{paddingTop:"0.3rem"}}>남았습니다.</h5>
             </Col>
             
-            <Button
-              className="mr-1"
-              color="black"
-              outline
-              type="button"
-              onClick={this.startTimer}>
-              진료시작
-            </Button>
-
-            <Button
-              color="black"
-              outline
-              type="button">
-              {/* {this.state.time.m} : {this.state.time.s} */}
-            </Button>
+            <Col className="mx-2 text-left d-flex" style={{border:"1px solid #B8B8C2", borderRadius: "5px", height:"35px"}}>
+              <h5 className="align-self-center text-primary mr-1" style={{paddingTop:"0.3rem"}}>진료 종료까지 남은시간:</h5>
+                  {this.props.appo===null?null:
+                <span  style={{paddingTop:"0.2rem"}}>
+                  <Countdown date={moment(this.props.rtime) + 900000} >
+                    <this.Completephone />
+                  </Countdown>
+                </span>  
+              }
+            </Col>
           </Col>
         </Row>
         <Row className="mt-1">
