@@ -384,6 +384,7 @@ class CalendarApp extends React.Component {
               resourceAccessor="url"
               defaultView='week'
               views={views}
+              dayLayoutAlgorithm="no-overlap"
               // 15분 간격 설정(기존은 30분)
               step={15}
               components={{ toolbar: Toolbar }}

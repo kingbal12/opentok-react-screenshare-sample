@@ -21,10 +21,10 @@ export const login = (state = { userRole: "admin", email: "" }, action) => {
     }
     
     case "LOGOUT_WITH_JWT": {
-      return { ...state, values: action.payload }
+      return { ...state, values: action.payload}
     }
     case "LOGOUT_WITH_FIREBASE": {
-      return { ...state, values: action.payload }
+      return { ...state, values: action.payload}
     }
     case "CHANGE_ROLE": {
       return { ...state, userRole: action.userRole }

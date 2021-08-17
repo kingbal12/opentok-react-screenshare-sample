@@ -53,6 +53,7 @@ import VitalDataM from "../../../ui-elements/patient-list/PatientInfo/VitalDataM
 import PastConsultList from "../../../ui-elements/patient-list/PatientInfo/DataListConfigM"
 import queryString from "query-string"
 import Countdown from 'react-countdown'
+import PerfectScrollbar from "perfect-scrollbar"
 
 class Cslist extends React.Component { 
   render() { 
@@ -395,9 +396,11 @@ class ConsultingRoom extends React.Component {
 
   parentFunction = (data) => {
     this.setState({onsubscribe: data})
-} 
+  } 
 
   Completionist = () => <span>진료시간이 종료되었습니다.</span>
+
+  
  
   render() {
     let file_preview = null;
@@ -421,6 +424,8 @@ class ConsultingRoom extends React.Component {
           onClick={this.viewFileModal}
         />
     }
+
+  
     return (
       <Fragment>
         

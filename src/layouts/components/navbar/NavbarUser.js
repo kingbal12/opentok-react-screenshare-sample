@@ -23,6 +23,8 @@ const handleNavigation = (e, path) => {
   history.push(path)
 }
 
+
+
 // const UserDropdown = props => {
 //   const { logout, isAuthenticated } = useAuth0()
 //   return (
@@ -97,6 +99,8 @@ const handleNavigation = (e, path) => {
 // }
 
 class NavbarUser extends React.PureComponent {
+
+
 
   state = {
     navbarSearch: false,
@@ -199,6 +203,8 @@ class NavbarUser extends React.PureComponent {
 
   handleLangDropdown = () =>
     this.setState({ langDropdown: !this.state.langDropdown })
+
+  
 
   render() {
     const renderCartItems = this.state.shoppingCart.map(item => {

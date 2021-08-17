@@ -57,8 +57,10 @@ const ThemeNavbar = props => {
   return (
     <React.Fragment>
       <div className="content-overlay" />
-      <div className="header-navbar-shadow" />
+      
+      <div className="header-navbar-shadow"  />
       <Navbar
+        
         className={classnames(
           "header-navbar navbar-expand-lg navbar navbar-with-menu navbar-shadow",
           {
@@ -152,7 +154,9 @@ const ThemeNavbar = props => {
                     : user !== undefined && user.picture ? user.picture
                     : userImg
                 }
-                medicalpartnm={props.user.login.values.loggedInUser.medical_part_nm}
+                medicalpartnm={props.user.login.values === undefined || props.user.login.values.loggedInUser === undefined
+                  ? window.location.replace("/")
+                  : props.user.login.values.loggedInUser.medical_part_nm}
                 f_name= {props.user.login.values.loggedInUser.f_name}
                 loggedInWith={
                   props.user !== undefined &&

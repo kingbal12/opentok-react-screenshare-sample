@@ -288,15 +288,15 @@ class MyInfo extends React.Component {
                   <Col lg="8" md="12">
                   <div className="form-label-group d-flex">
                     <div className="col-2 align-self-center"><b>아이디</b></div>
-                    <div>{this.state.userid}</div>
+                    <div className="col-3">{this.state.userid}</div>
                     <div className="col-1"></div>
                     <div className="col-1 align-self-center"><b>이름</b></div>
-                    <div>{this.state.name}</div>
+                    <div className="align-self-center">{this.state.name}</div>
                   </div> 
                   <div className="form-label-group d-flex">
                     <div className="col-2 align-self-center"><b>생년월일</b></div>
-                    <div>{this.state.birthday}</div>
-                    <div className="col-2"></div>
+                    <div className="col-3">{this.state.birthday}</div>
+                    <div className="col-1"></div>
                     <div className="col-1 align-self-center"><b>성별</b></div>
                     <div>{this.state.gender}</div>
                     <div className="col-2"></div>
@@ -305,9 +305,9 @@ class MyInfo extends React.Component {
                   </div>
                   <div className="form-label-group d-flex" >
                     <div className="col-2 align-self-center"><b>휴대폰 번호</b></div>
-                    <div>{this.state.phonenumber}</div>
+                    <div className="col-2 align-self-center">{this.state.phonenumber}</div>
 
-                    <Button className="ml-1" color="primary" size="sm" onClick={this.togglePhonenum}>
+                    <Button className="ml-1" color="primary" onClick={this.togglePhonenum}>
                       {this.state.phonenumtoggle===false?"변경":"취소"}
                     </Button>
                   </div>

@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "react-router-dom"
 import { CardBody, FormGroup, Form, Input, Button, FormFeedback } from "reactstrap"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
-import { Mail, Lock, Check } from "react-feather"
+import { Check } from "react-feather"
 import { loginWithJWT} from "../../../../redux/actions/auth/loginActions"
 import { saveemail, delemail} from "../../../../redux/actions/idaction"
 import { connect } from "react-redux"
@@ -39,38 +39,38 @@ class LoginJWT extends React.Component {
 
 
 
-  // componentDidMount() {
-  //   if (!firebase.apps.length) {
+  componentDidMount() {
+    if (!firebase.apps.length) {
 
-  //     firebase.initializeApp(config);  
-  //     const messaging = firebase.messaging();
+      firebase.initializeApp(config);  
+      const messaging = firebase.messaging();
 
-  //     messaging.usePublicVapidKey("BL0eTL3wIbAxmATwORsjQ-pNPCQBYrFNofCAr1xnArzbBjkRDreJLmiXYd-ySpazU-GTEAhtThWIhCLxYLvTGvY");
+      messaging.usePublicVapidKey("BL0eTL3wIbAxmATwORsjQ-pNPCQBYrFNofCAr1xnArzbBjkRDreJLmiXYd-ySpazU-GTEAhtThWIhCLxYLvTGvY");
 
-  //     //허가를 요청합니다!
-  //     Notification.requestPermission()
-  //     .then(function() {
-  //       console.log('허가!');
-  //       return messaging.getToken();
-  //     })
+      //허가를 요청합니다!
+      Notification.requestPermission()
+      .then(function() {
+        console.log('허가!');
+        return messaging.getToken();
+      })
 
-  //     .then(token => {
-  //       console.log(token); //토큰을 출력!
-  //       this.setState({tokendata:token})
-  //     })
+      .then(token => {
+        console.log(token); //토큰을 출력!
+        this.setState({tokendata:token})
+      })
 
-  //     .catch(function(err) {
-  //       console.log('fcm에러 : ', err);
-  //     })
+      .catch(function(err) {
+        console.log('fcm에러 : ', err);
+      })
     
-  //   } else {
+    } else {
     
-  //     firebase.app();
+      firebase.app();
     
-  //   }
+    }
 
     
-  // }
+  }
   
   startarchiveVideo() {
     axios
