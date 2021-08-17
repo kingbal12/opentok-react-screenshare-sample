@@ -464,7 +464,7 @@ class ConsultingRoom extends React.Component {
                 </Countdown>
               }
             </Button>
-            <Button
+            {/* <Button
               className="mr-1"
               // disabled={this.state.onsubscribe==="N"?true:false}
               color="black"
@@ -480,7 +480,7 @@ class ConsultingRoom extends React.Component {
               onClick={this.startarchiveVideo}
               type="button">
               화면녹화
-            </Button>
+            </Button> */}
             <Button
               color="black"
               outline
