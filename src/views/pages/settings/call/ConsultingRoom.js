@@ -104,8 +104,8 @@ class ConsultingRoom extends React.Component {
       cameraset:{},
       micset:{},
       speakerset:{},
-      onsubscribe: "N"
-      
+      onsubscribe: "N",
+      disconnect: false
     }
 
   }

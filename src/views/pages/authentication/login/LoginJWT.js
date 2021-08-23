@@ -157,7 +157,7 @@ class LoginJWT extends React.Component {
               <Checkbox
                 color="primary"
                 icon={<Check className="vx-icon" size={16} />}
-                label="아이디 기억"
+                label="아이디 저장"
                 defaultChecked={this.state.email===""?false:true}
                 onChange={this.handleRemember}
               />
