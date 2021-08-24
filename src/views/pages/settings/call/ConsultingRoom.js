@@ -163,6 +163,44 @@ class ConsultingRoom extends React.Component {
       await this.setState({speaker:modifiedspeaker})
       
     })();
+
+    navigator.mediaDevices.addEventListener('devicechange', () => {
+      
+      navigator.mediaDevices.enumerateDevices()
+        .then(devices => {
+          
+          let camera = devices.filter(devices => devices.kind ==="videoinput")
+          let mic =  devices.filter(devices =>devices.kind ==="audioinput")
+          let speaker =  devices.filter(devices =>devices.kind ==="audiooutput")
+
+          let modifiedcamera = new Array();
+            for (let i=0; i<camera.length; i++) {
+              let item = {deviceId: camera[i].deviceId, groupId: camera[i].groupId, kind: camera[i].kind, value: camera[i].label, label: camera[i].label }
+              modifiedcamera.push(item);
+            }
+
+          let modifiedmic = new Array();
+            for (let i=0; i<mic.length; i++) {
+              let item = {deviceId: mic[i].deviceId, groupId: mic[i].groupId, kind: mic[i].kind, value: mic[i].label, label: mic[i].label }
+              modifiedmic.push(item);
+            }
+
+          let modifiedspeaker = new Array();
+            for (let i=0; i<speaker.length; i++) {
+              let item = {deviceId: speaker[i].deviceId, groupId: speaker[i].groupId, kind: speaker[i].kind, value: speaker[i].label, label: speaker[i].label }
+              modifiedspeaker.push(item);
+            }
+
+
+          this.setState({camera:modifiedcamera})
+          this.setState({mic:modifiedmic})
+          this.setState({speaker:modifiedspeaker})
+          console.log(devices); 
+          
+      });
+    });
+
+    
   }
 
   // startarchiveVideo() {
@@ -598,7 +636,7 @@ class ConsultingRoom extends React.Component {
             <Card className="mb-0" style={{height:"680px", border:"solid #7367ef 1px", backgroundColor:"#efefff"}}>
               <Row className="col-12 p-0">
                 <Col lg="12" md="12">
-                {/* {this.props.dataList.tokbox.TOK_KEY===""?null:
+                {this.props.dataList.tokbox.TOK_KEY===""?null:
                 <Opentok className="col-12"
                   toglescreenshare={this.state.screenshare}
                   parentFunction={this.parentFunction}
@@ -608,7 +646,7 @@ class ConsultingRoom extends React.Component {
                   cameraset={this.state.cameraset}
                   micset={this.state.micset}
                 />
-                } */}
+                }
                 </Col>
               </Row>
             </Card>
@@ -727,7 +765,7 @@ class ConsultingRoom extends React.Component {
                     <Select 
                       className="React"
                       classNamePrefix="select"
-                      // defaultValue={this.state.mic[0]}
+                      defaultValue={this.state.micset}
                       name="color"
                       options={this.state.mic}
                       onChange={e => this.setState({ micset: e})}
@@ -747,7 +785,7 @@ class ConsultingRoom extends React.Component {
                     <Select 
                       className="React"
                       classNamePrefix="select"
-                      // defaultValue={this.state.speaker[0]}
+                      defaultValue={this.state.speakerset}
                       name="color"
                       options={this.state.speaker}
                       onChange={e => this.setState({ speakerset: e})}
