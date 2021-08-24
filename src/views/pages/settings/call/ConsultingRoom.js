@@ -53,7 +53,9 @@ import VitalDataM from "../../../ui-elements/patient-list/PatientInfo/VitalDataM
 import PastConsultList from "../../../ui-elements/patient-list/PatientInfo/DataListConfigM"
 import queryString from "query-string"
 import Countdown from 'react-countdown'
-import PerfectScrollbar from "perfect-scrollbar"
+import Question from "../../../../assets/img/logo/question.png"
+import Clock from 'react-live-clock';
+import HicareLogo from "../../../../assets/img/logo/logo2.png"
 
 class Cslist extends React.Component { 
   render() { 
@@ -105,7 +107,9 @@ class ConsultingRoom extends React.Component {
       micset:{},
       speakerset:{},
       onsubscribe: "N",
-      disconnect: false
+      disconnect: false,
+      questionmodal: false,
+      gonomemodal: false
     }
 
   }
@@ -255,6 +259,16 @@ class ConsultingRoom extends React.Component {
 
   goHome = e => {
     e.preventDefault()
+    this.goHomeModal()
+  }
+
+  goHomeModal = () => {
+    this.setState(prevState => ({
+      gohomemodal: !prevState.gohomemodal
+    }))
+  }
+
+  pushGoHome = () => {
     this.props.saveCookieConsult(
       this.state.cc,
       this.state.diagnosis,
@@ -400,7 +414,11 @@ class ConsultingRoom extends React.Component {
 
   Completionist = () => <span>진료시간이 종료되었습니다.</span>
 
-  
+  questionModal = () => {
+    this.setState(prevState => ({
+      questionmodal: !prevState.questionmodal
+    }))
+  }
  
   render() {
     let file_preview = null;
@@ -427,8 +445,89 @@ class ConsultingRoom extends React.Component {
 
   
     return (
-      <Fragment>
-        
+      
+      <div style={{height:"100vh", alignItems:"center"}} className="mx-1 " >
+        <Row style={{backgroundColor:"white"}} className="mb-2 mt-1">
+          <Col lg="3" md="6">
+            <Clock 
+            format={'YYYY-MM-DD'} 
+            ticking={true}  />
+            <p></p>
+            <Clock 
+            format={'hh:mm A'} 
+            ticking={true}  />
+          </Col>
+          <Col lg="6" md="6" className="text-center align-self-center">
+            <img className="px-5" src={HicareLogo} alt="HicareLogo" style={{width:"250px"}}/>
+          </Col>
+          <Col lg="3" md="12" className="d-flex justify-content-end">
+            <div className="mr-1">
+              <img className="pt-1" onClick={this.questionModal} style={{width:"2rem", height:"3rem", cursor:"pointer"}}  src={Question} alt="question"/>
+            </div>
+            <div className="align-self-center text-right mr-1">
+              <b>{this.props.user.login.values.loggedInUser.f_name}</b>
+              <br/>
+              {this.props.user.login.values.loggedInUser.medical_part_nm}
+            </div>
+            <div className="align-self-center">
+              <img
+                src={"https://health.iot4health.co.kr:9300"+this.props.user.login.values.loggedInUser.file_path
+                +this.props.user.login.values.loggedInUser.file_name}
+                className="round"
+                height="40"
+                width="40"
+                alt="avatar"
+                style={{objectFit:"cover"}}
+              />
+            </div>  
+          </Col>
+        </Row>
+        <Modal
+          style={{position:"absolute", top:"4%", right:"3%"}}
+          isOpen={this.state.questionmodal}
+          toggle={this.questionModal}
+          backdrop={false}
+          
+        >
+          <ModalHeader toggle={this.questionModal}>
+            <b>실시간 문의</b>
+          </ModalHeader>
+          <ModalBody>
+            <iframe src= "https://health.iot4health.co.kr/lv1/chat.1to1.php?ROOM_ID=room_wind&USERS=의사" width="400px" height="300px"></iframe>
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" outline onClick={this.questionModal}>
+              닫기
+            </Button>
+          </ModalFooter>
+        </Modal>
+
+        <Modal
+          isOpen={this.state.gohomemodal}
+          toggle={this.goHomeModal}
+        >
+          <ModalHeader toggle={this.goHomeModal}>
+            <b>주의</b>
+          </ModalHeader>
+          <ModalBody>
+            MD Note, Presciption, Payment를 모두 작성완료 하셨습니까?
+            <br/>
+            진료시간 이 모두 지나면 방에 재입장이 불가능 하오니
+            <br/>
+            이점 유의하시기 바랍니다.
+            <br/>
+            진료실에서 나가시려면 확인을 클릭해주시기 바랍니다.
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this.pushGoHome}>
+              확인
+            </Button>
+            <Button color="primary" outline onClick={this.goHomeModal}>
+              취소
+            </Button>
+          </ModalFooter>
+        </Modal>
+
         {/* 환자정보, 버튼 모음 Row */}
         <Row className="d-flex justify-content-between mb-1">
         <Helmet>
@@ -499,7 +598,7 @@ class ConsultingRoom extends React.Component {
             <Card className="mb-0" style={{height:"680px", border:"solid #7367ef 1px", backgroundColor:"#efefff"}}>
               <Row className="col-12 p-0">
                 <Col lg="12" md="12">
-                {this.props.dataList.tokbox.TOK_KEY===""?null:
+                {/* {this.props.dataList.tokbox.TOK_KEY===""?null:
                 <Opentok className="col-12"
                   toglescreenshare={this.state.screenshare}
                   parentFunction={this.parentFunction}
@@ -509,7 +608,7 @@ class ConsultingRoom extends React.Component {
                   cameraset={this.state.cameraset}
                   micset={this.state.micset}
                 />
-                }
+                } */}
                 </Col>
               </Row>
             </Card>
@@ -1243,7 +1342,7 @@ class ConsultingRoom extends React.Component {
               </CardBody>
             </Card>
             <div className="pt-0 mt-0 text-right" style={{width:"100%"}}>
-              <Button
+              {/* <Button
                 className="mr-1"
                 color="primary"
                 outline
@@ -1251,7 +1350,7 @@ class ConsultingRoom extends React.Component {
                 onClick={this.Check}
               >
                 확인용 버튼
-              </Button>
+              </Button> */}
               <Button
                 className="mr-1"
                 color="primary"
@@ -1300,7 +1399,7 @@ class ConsultingRoom extends React.Component {
           </Col>
         </Row>
        
-      </Fragment>
+      </div>
     )
   }
 }
@@ -1308,6 +1407,7 @@ class ConsultingRoom extends React.Component {
 const mapStateToProps = state => {
   return {
     user: state.auth,
+    filename: state.cookies.filename.filename,
     dataList: state.dataList,
     appo: state.dataList.appointment,
     pinfo: state.dataList.patient,

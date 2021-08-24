@@ -57,6 +57,12 @@ class VitalDataSetting extends React.Component {
       }
     })
   }
+
+  maxLengthCheck = (object) => {
+    if (object.target.value.length > object.target.maxLength) {
+     object.target.value = object.target.value.slice(0, object.target.maxLength)
+    }
+  }
   
  
   render() {
@@ -81,7 +87,8 @@ class VitalDataSetting extends React.Component {
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                        
+                        maxLength="4"
+                        onInput={this.maxLengthCheck}
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.normalsys_val}
                         onChange={e => this.setState({ normalsys_val: e.target.value })} 
@@ -94,7 +101,7 @@ class VitalDataSetting extends React.Component {
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                        
+                        maxLength="4" 
                         disabled={this.state.edit===true?false:true}  
                         value={this.state.normaldia_val}
                         onChange={e => this.setState({ normaldia_val: e.target.value })} 
@@ -108,7 +115,7 @@ class VitalDataSetting extends React.Component {
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                         
+                        maxLength="4"
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.normalsys_val}
                         onChange={e => this.setState({ normalsys_val: e.target.value })} 
@@ -118,7 +125,7 @@ class VitalDataSetting extends React.Component {
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                         
+                        maxLength="4"
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.dangersys_val}
                         onChange={e => this.setState({ dangersys_val: e.target.value })}
@@ -130,7 +137,7 @@ class VitalDataSetting extends React.Component {
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                         
+                        maxLength="4"
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.normaldia_val}
                         onChange={e => this.setState({ normaldia_val: e.target.value })}
@@ -140,7 +147,7 @@ class VitalDataSetting extends React.Component {
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                         
+                        maxLength="4"
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.dangerdia_val}
                         onChange={e => this.setState({ dangerdia_val: e.target.value })}
@@ -154,7 +161,7 @@ class VitalDataSetting extends React.Component {
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                         
+                        maxLength="4"
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.dangersys_val}
                         onChange={e => this.setState({ dangersys_val: e.target.value })}
@@ -167,7 +174,7 @@ class VitalDataSetting extends React.Component {
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                         
+                        maxLength="4"
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.dangerdia_val}
                         onChange={e => this.setState({ dangerdia_val: e.target.value })}
