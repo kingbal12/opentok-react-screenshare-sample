@@ -233,12 +233,8 @@ class CalendarApp extends React.Component {
     this.props.addEvent(
       {
       id,
-      // title: this.state.title,
       start: this.state.startDate,
       end: this.state.endDate,
-      // label: this.state.label === null ? "others" : this.state.label,
-      // allDay: this.state.allDay,
-      // selectable: this.state.selectable
     })
   }
 
