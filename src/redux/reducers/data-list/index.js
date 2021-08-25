@@ -7,6 +7,7 @@ const initialState = {
   paydata:[],
   paytotalPages: 0,
   totalpay:0,
+  totalpaydata:[],
   apdata:[],
   aptotalPages: 0,
   data: [],
@@ -109,13 +110,18 @@ const DataListReducer = (state = initialState, action) => {
           state.sortIndex,
           action.params
         )
+      }
+    case "GET_PAYMENT_TOTAL_DATA":
+      return {
+        ...state,
+        totalpay: action.totalPay,
+        totalpaydata: action.totalpaydata
       }   
     case "GET_PAYMENT_DATA":
       return {
         ...state,
         paydata: action.data,
         paytotalPages: action.totalPages,
-        totalpay: action.totalPay,
         params: action.params,
         sortIndex: getIndex(
           state.allData,

@@ -45,7 +45,7 @@ class VitalDataSetting extends React.Component {
     })
     .then(response => {
       if(response.data.status==="200") {
-        alert("혈압데이터 세팅이 저장되었습니다.")
+        alert("체중데이터 세팅이 저장되었습니다.")
       } else if(response.data.status==="400") {
         alert("적정값을 입력하여 주십시오\n값이 올바르지 않거나 너무 크거나 작습니다.")
       } else{
@@ -79,7 +79,9 @@ class VitalDataSetting extends React.Component {
                         onChange={e => this.setState({ normalBMI: e.target.value })} 
                       />
                     </FormGroup>
-                    <h5 className="align-self-center ml-2">&#8764;</h5>
+                    <h2 className="align-self-center ml-2">	&#8806;</h2>
+                    <h5 className="align-self-center ml-2">	bmi</h5>
+                    <h4 className="align-self-center ml-2" style={{paddingBottom:"3px"}}>	&lsaquo;</h4>
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
@@ -105,7 +107,9 @@ class VitalDataSetting extends React.Component {
                         onChange={e => this.setState({ alertBMI: e.target.value })} 
                       />
                     </FormGroup>
-                    <h5 className="align-self-center ml-2">&#8764;</h5>
+                    <h2 className="align-self-center ml-2">	&#8806;</h2>
+                    <h5 className="align-self-center ml-2">	bmi</h5>
+                    <h4 className="align-self-center ml-2" style={{paddingBottom:"3px"}}>	&lsaquo;</h4>
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
@@ -120,6 +124,7 @@ class VitalDataSetting extends React.Component {
                 <tr>
                   <th scope="row"></th>
                   <td className="d-flex align-self-center">
+                    <h5 className="align-self-center ml-2" style={{paddingLeft:"233px"}}>	bmi</h5>
                     <h5 className= "align-self-center pl-2">	&lsaquo;</h5>
                     <FormGroup className="pt-1 ml-2">
                       <Input 
@@ -146,7 +151,8 @@ class VitalDataSetting extends React.Component {
                         onChange={e => this.setState({ dangerBMI: e.target.value })}
                       />  
                     </FormGroup>
-                    <h1 className= "align-self-center ml-2">&#8804;</h1>
+                    <h2 className="align-self-center ml-2">	&#8806;</h2>
+                    <h5 className="align-self-center ml-2">	bmi</h5>
                   </td>
                 </tr>
               </tbody>

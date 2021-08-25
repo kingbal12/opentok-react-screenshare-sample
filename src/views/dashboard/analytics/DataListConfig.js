@@ -1,6 +1,7 @@
-import React, { Component } from "react"
+import React, { Component, Fragment } from "react"
 import {
-  Progress
+  Progress,
+  UncontrolledTooltip
 } from "reactstrap"
 import DataTable from "react-data-table-component"
 import classnames from "classnames"
@@ -27,7 +28,6 @@ import {
   getPatientInfo,
   getVitalData,
   resetPastConsult
-  // eData
 } from "../../../redux/actions/data-list/"
 import Sidebar from "./DataListSidebar"
 import Chip from "../../../components/@vuexy/chips/ChipComponent"
@@ -205,15 +205,45 @@ class DataListConfig extends Component {
       },
       {
         name: "VitalData",
-        // center: true,
+        center: true,
         cell: row => (
-          <p className="text-bold-500 text-truncate mb-0">{row.VITAL_STATE==="00"?<img src={Vital_5} alt="Vital_5" />:
-                                                            row.VITAL_STATE==="01"? <img src={Vital_1} alt="Vital_1"/>:
-                                                            row.VITAL_STATE==="99"? <img src={Vital_1} alt="Vital_1"/>:
-                                                            row.VITAL_STATE==="02"? <img src={Vital_4} alt="Vital_4"/>:
-                                                            row.VITAL_STATE==="03"? <img src={Vital_3} alt="Vital_3"/>:
-                                                            row.VITAL_STATE==="04"? <img src={Vital_2} alt="Vital_2"/>:
-                                                            null}</p>
+            <p className="text-bold-500 text-truncate mb-0">{ row.VITAL_STATE==="00"? 
+                                                              
+                                                                <img id="Vital_5" title="연동기기가 없습니다." src={Vital_5} alt="Vital_5" />
+                                                              
+                                                              
+                                                              :
+                                                            row.VITAL_STATE==="01"? 
+                                                              
+                                                                <img id="Vital_1"  title="측정값이 없습니다." src={Vital_1} alt="Vital_1"/>
+                                                               
+                                                              
+                                                              :
+                                                            row.VITAL_STATE==="99"? 
+                                                              
+                                                                <img id="Vital_99" title="측정값이 없습니다." src={Vital_1} alt="Vital_99"/>
+                                                               
+                                                              
+                                                              :
+                                                            row.VITAL_STATE==="02"? 
+                                                              
+                                                                <img id="Vital_4" title="정상" src={Vital_4} alt="Vital_4"/>
+                                                                
+                                                              
+                                                              :
+                                                            row.VITAL_STATE==="03"? 
+                                                              
+                                                                <img id="Vital_3" title="주의" src={Vital_3} alt="Vital_3"/>
+                                                                
+                                                              
+                                                              :
+                                                            row.VITAL_STATE==="04"?
+
+                                                                <img id="Vital_2" title="위험" src={Vital_2} alt="Vital_2"/>
+                                                                
+                                                              :
+                                                            null}
+                                                            </p>                                          
         )
       },
       {

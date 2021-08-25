@@ -45,7 +45,7 @@ class VitalDataSetting extends React.Component {
     })
     .then(response => {
       if(response.data.status==="200") {
-        alert("혈압데이터 세팅이 저장되었습니다.")
+        alert("맥박데이터 세팅이 저장되었습니다.")
       } else if(response.data.status==="400") {
         alert("적정값을 입력하여 주십시오\n값이 올바르지 않거나 너무 크거나 작습니다.")
       } else{
@@ -83,7 +83,9 @@ class VitalDataSetting extends React.Component {
                         onChange={e => this.setState({ normalBPM: e.target.value })}
                       />
                     </FormGroup>
-                    <h5 className="align-self-center ml-2">&#8764;</h5>
+                    <h2 className="align-self-center ml-2">	&#8806;</h2>
+                    <h5 className="align-self-center ml-2">	bpm</h5>
+                    <h2 className="align-self-center ml-2">	&#8806;</h2>
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
@@ -110,6 +112,7 @@ class VitalDataSetting extends React.Component {
                       />
                     </FormGroup>
                     <h5 className= "align-self-center ml-2">	&lsaquo;</h5>
+                    <h5 className="align-self-center ml-2">	bpm</h5>
                   </td>
                 </tr>
               </tbody>

@@ -31,7 +31,7 @@ class ChagePassword extends React.Component {
   handlechangepassword = e => {
     e.preventDefault()
     let pwcheck = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,14}$/;
-    if (!pwcheck.test(this.state.newpassword)) {
+    if (pwcheck.test(this.state.newpassword)) {
       if(this.state.newpassword===this.state.confirmnewpassword){
         this.props.changepassword(
           this.state.userid,

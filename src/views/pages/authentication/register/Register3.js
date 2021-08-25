@@ -461,7 +461,9 @@ handleComplete = (data) => {
                           <InputGroupText>계좌번호</InputGroupText>
                         </InputGroupAddon>  
                         <Input
+                          maxLength="15"
                           type="number"
+                          onInput={this.maxLengthCheck}
                           value={this.state.accountnumber}
                           onChange={e => this.setState({ accountnumber: e.target.value })}
                         />

@@ -353,7 +353,8 @@ class Register extends React.Component {
                             <InputGroup>
                               <Input
                                 type="number"
-                                // placeholder="휴대폰번호"
+                                maxLength="15"
+                                onInput={this.maxLengthCheck}
                                 required
                                 value={this.state.phone}
                                 onChange={e => this.setState({ phone: e.target.value })}

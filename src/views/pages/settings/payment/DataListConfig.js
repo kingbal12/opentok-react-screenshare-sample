@@ -22,6 +22,7 @@ import {
 import { connect } from "react-redux"
 import {
   getPaymentData,
+  getPaymentTotalData,
   getNameData,
   getInitialData,
   deleteData,
@@ -206,6 +207,15 @@ class DataListConfig extends Component {
         this.props.parsedFilter.perPage, 
         this.props.parsedFilter.page)
     }
+
+    this.setState({lastday: String(new Date(this.state.year, this.state.month, 0).getDate())},() => 
+    this.props.getPaymentTotalData(
+      this.state.user,
+      this.state.year+this.state.month+"01",
+      this.state.year+this.state.month+this.state.lastday
+      ))
+
+   
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -355,7 +365,12 @@ class DataListConfig extends Component {
       this.state.year+this.state.month+this.state.lastday,
       5, 
       1))
-    
+
+    this.props.getPaymentTotalData(
+      this.state.user,
+      this.state.year+this.state.month+"01",
+      this.state.year+this.state.month+this.state.lastday
+      )
   }
 
   check = () => {
@@ -525,7 +540,7 @@ class DataListConfig extends Component {
         <Row className="d-flex mt-5">
           <Col lg="9" md="12"></Col>
           <Col lg="3" md="12">
-          <CSVLink data={this.state.data} headers={headers}>
+          <CSVLink data={this.props.dataList.totalpaydata} headers={headers}>
             <Button 
             disabled={this.props.dataList.paydata.length===0?true:false}
             color="primary" 
@@ -551,6 +566,7 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
   getPaymentData,
+  getPaymentTotalData,
   getNameData,
   deleteData,
   updateData,

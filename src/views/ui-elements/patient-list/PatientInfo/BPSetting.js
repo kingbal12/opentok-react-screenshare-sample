@@ -83,7 +83,8 @@ class VitalDataSetting extends React.Component {
                 <tr>
                   <th scope="row" className="text-center"><h5>정상</h5></th>
                   <td className="d-flex align-self-center">
-                    <h5 className= "align-self-center pl-2">	&lsaquo;</h5>
+                    <h5 className="align-self-center" style={{marginLeft:"253px"}}>sys.</h5>
+                    <h5 className= "align-self-center pl-2">&lsaquo;</h5>
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
@@ -97,11 +98,13 @@ class VitalDataSetting extends React.Component {
                   </td>
                   <td className="text-center"><h5>and</h5></td>
                   <td className="d-flex align-self-center">
-                    <h5 className= "align-self-center pl-2">	&lsaquo;</h5>
+                  <h5 className="align-self-center" style={{marginLeft:"253px"}}>dia.</h5>
+                    <h5 className= "align-self-center pl-2">&lsaquo;</h5>
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                        maxLength="4" 
+                        maxLength="4"
+                        onInput={this.maxLengthCheck} 
                         disabled={this.state.edit===true?false:true}  
                         value={this.state.normaldia_val}
                         onChange={e => this.setState({ normaldia_val: e.target.value })} 
@@ -116,16 +119,20 @@ class VitalDataSetting extends React.Component {
                       <Input 
                         type="number" 
                         maxLength="4"
+                        onInput={this.maxLengthCheck} 
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.normalsys_val}
                         onChange={e => this.setState({ normalsys_val: e.target.value })} 
                       />
                     </FormGroup>
-                    <h5 className="align-self-center ml-2">&#8764;</h5>
+                    <h2 className="align-self-center ml-2">	&#8806;</h2>
+                    <h5 className="align-self-center ml-2">	sys.</h5>
+                    <h2 className="align-self-center ml-2">	&#8806;</h2>
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
                         maxLength="4"
+                        onInput={this.maxLengthCheck} 
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.dangersys_val}
                         onChange={e => this.setState({ dangersys_val: e.target.value })}
@@ -138,16 +145,20 @@ class VitalDataSetting extends React.Component {
                       <Input 
                         type="number" 
                         maxLength="4"
+                        onInput={this.maxLengthCheck} 
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.normaldia_val}
                         onChange={e => this.setState({ normaldia_val: e.target.value })}
                       />
                     </FormGroup>
-                    <h5 className="align-self-center ml-2">&#8764;</h5>
+                    <h2 className="align-self-center ml-2">	&#8806;</h2>
+                    <h5 className="align-self-center ml-2">	dia.</h5>
+                    <h2 className="align-self-center ml-2">	&#8806;</h2>
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
                         maxLength="4"
+                        onInput={this.maxLengthCheck} 
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.dangerdia_val}
                         onChange={e => this.setState({ dangerdia_val: e.target.value })}
@@ -162,12 +173,14 @@ class VitalDataSetting extends React.Component {
                       <Input 
                         type="number" 
                         maxLength="4"
+                        onInput={this.maxLengthCheck} 
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.dangersys_val}
                         onChange={e => this.setState({ dangersys_val: e.target.value })}
                       />  
                     </FormGroup>
-                    <h1 className="align-self-center ml-2">&#8804;</h1>
+                    <h5 className= "align-self-center pl-2">&lsaquo;</h5>
+                    <h5 className= "align-self-center pl-2" style={{marginLeft:"8px"}}>sys.</h5>
                   </td>
                   <td className="text-center"><h5>or</h5></td>
                   <td  className="d-flex align-self-center">
@@ -175,12 +188,14 @@ class VitalDataSetting extends React.Component {
                       <Input 
                         type="number" 
                         maxLength="4"
+                        onInput={this.maxLengthCheck} 
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.dangerdia_val}
                         onChange={e => this.setState({ dangerdia_val: e.target.value })}
                       />  
                     </FormGroup>
-                    <h1 className="align-self-center ml-2">&#8804;</h1>
+                    <h5 className= "align-self-center pl-2">&lsaquo;</h5>
+                    <h5 className= "align-self-center pl-2" style={{marginLeft:"8px"}}>dia.</h5>
                   </td>
                 </tr>
               </tbody>

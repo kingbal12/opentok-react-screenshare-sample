@@ -147,13 +147,13 @@ class DataListConfig extends Component {
         cell: row => <p data-tag="allowRowEvents" className="text-bold-500 mb-0">{row.TITLE}</p>
       },
       
-      {
-        name: "작성자",
-        selector: "gender",
-        sortable: false,
-        center: true,
-        cell: row => <p data-tag="allowRowEvents" className="text-bold-500 mb-0">{row.AUTH_NM}</p>
-      },
+      // {
+      //   name: "작성자",
+      //   selector: "gender",
+      //   sortable: false,
+      //   center: true,
+      //   cell: row => <p data-tag="allowRowEvents" className="text-bold-500 mb-0">{row.AUTH_NM}</p>
+      // },
       {
         name: "작성일",
         selector: "age",

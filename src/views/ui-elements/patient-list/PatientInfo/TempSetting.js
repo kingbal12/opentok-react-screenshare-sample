@@ -48,13 +48,19 @@ class VitalDataSetting extends React.Component {
     })
     .then(response => {
       if(response.data.status==="200") {
-        alert("혈압데이터 세팅이 저장되었습니다.")
+        alert("체온데이터 세팅이 저장되었습니다.")
       } else if(response.data.status==="400") {
         alert("적정값을 입력하여 주십시오\n값이 올바르지 않거나 너무 크거나 작습니다.")
       } else{
         alert("저장도중 문제가 발생하였습니다.")
       }
     })
+  }
+
+  maxLengthCheck = (object) => {
+    if (object.target.value.length > object.target.maxLength) {
+     object.target.value = object.target.value.slice(0, object.target.maxLength)
+    }
   }
  
   render() {
@@ -66,7 +72,7 @@ class VitalDataSetting extends React.Component {
               <thead className="table-primary">
                 <tr>
                   <th id="vitalritopth" width={'30%'}></th>
-                  <th id="vitalletopth"><h5 className="pl-2">&#8451;</h5></th>
+                  <th id="vitalletopth"><h3 className="pl-2">&#8451;</h3></th>
                 </tr>
               </thead>
               <tbody>
@@ -78,17 +84,21 @@ class VitalDataSetting extends React.Component {
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                         
+                        maxLength="4"
+                        onInput={this.maxLengthCheck}  
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.normaltemp}
                         onChange={e => this.setState({ normaltemp: e.target.value })} 
                       />
                     </FormGroup>
-                    <h5 className="align-self-center ml-2">&#8764;</h5>
+                    <h2 className="align-self-center ml-2">	&#8806;</h2>
+                    <h3 className="align-self-center ml-2">&#8451;</h3>
+                    <h4 className="align-self-center ml-2" style={{paddingBottom:"3px"}}>	&lsaquo;</h4>
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                         
+                        maxLength="4"
+                        onInput={this.maxLengthCheck}  
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.alerttemp}
                         onChange={e => this.setState({ alerttemp: e.target.value })}
@@ -104,17 +114,21 @@ class VitalDataSetting extends React.Component {
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                         
+                        maxLength="4"
+                        onInput={this.maxLengthCheck}  
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.alerttemp}
                         onChange={e => this.setState({ alerttemp: e.target.value })} 
                       />
                     </FormGroup>
-                    <h5 className="align-self-center ml-2">&#8764;</h5>
+                    <h2 className="align-self-center ml-2">	&#8806;</h2>
+                    <h3 className="align-self-center ml-2">&#8451;</h3>
+                    <h4 className="align-self-center ml-2" style={{paddingBottom:"3px"}}>	&lsaquo;</h4>
                     <FormGroup className="pt-1 ml-2">
                       <Input 
                         type="number" 
-                         
+                        maxLength="4"
+                        onInput={this.maxLengthCheck}  
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.dangertemp}
                         onChange={e => this.setState({ dangertemp: e.target.value })}
@@ -130,13 +144,15 @@ class VitalDataSetting extends React.Component {
                     <FormGroup className="pt-1 pl-2">
                       <Input 
                         type="number" 
-                         
+                        maxLength="4"
+                        onInput={this.maxLengthCheck}  
                         disabled={this.state.edit===true?false:true} 
                         value={this.state.dangertemp}
                         onChange={e => this.setState({ dangertemp: e.target.value })}
                       />  
                     </FormGroup>
-                    <h5 className= "align-self-center ml-2">&lsaquo;</h5>
+                    <h2 className="align-self-center ml-2">	&#8806;</h2>
+                    <h3 className="align-self-center ml-2">&#8451;</h3>
                   </td>
                 </tr>
               </tbody>

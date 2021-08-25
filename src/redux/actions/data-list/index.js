@@ -41,6 +41,39 @@ export const gettokbox = (userid, appointnum) => {
       .catch(err => console.log(err))
   }
 }
+export const getPaymentTotalData = (userid, startdate, enddate) => {
+  return async dispatch => {
+    await axios
+    .get("https://health.iot4health.co.kr:9300/v1/doctor/treatment/payments", {
+      params: {
+        user_id: userid,
+        start_date: startdate,
+        end_date: enddate,
+        page_amount: 500000,
+        page_num: 1
+      }
+    })
+    .then(response => {
+      let len = response.data.data.PAY_LIST.length
+      let totalPay = new Array();
+      let sumtotal = 0;
+      for (let i=0; i<len; i++) {
+        let jsonObj		= new Object();
+        jsonObj.PAY_TOTAL = response.data.data.PAY_LIST[i].PAY_TOTAL
+        jsonObj = JSON.stringify(jsonObj);
+        totalPay.push(JSON.parse(jsonObj));
+        if (len>0) {sumtotal= totalPay[i].PAY_TOTAL+sumtotal}
+      }
+     
+      dispatch({
+        type: "GET_PAYMENT_TOTAL_DATA",
+        totalPay: sumtotal,
+        totalpaydata: response.data.data.PAY_LIST
+      })
+    })
+    .catch(err => console.log(err))
+  }
+}
 
 export const getPaymentData = (userid, startdate, enddate, pageamount, pagenum) => {
   return async dispatch => {
@@ -56,23 +89,11 @@ export const getPaymentData = (userid, startdate, enddate, pageamount, pagenum) 
     })
     .then(response => {
       let totalPage = Math.ceil(response.data.data.COUNT / 5)
-      console.log(totalPage, response)
-      let len = response.data.data.PAY_LIST.length
-      let totalPay = new Array();
-      let sumtotal = 0;
-      for (let i=0; i<len; i++) {
-        let jsonObj		= new Object();
-        jsonObj.PAY_TOTAL = response.data.data.PAY_LIST[i].PAY_TOTAL
-        jsonObj = JSON.stringify(jsonObj);
-        totalPay.push(JSON.parse(jsonObj));
-        if (len>0) {sumtotal= totalPay[i].PAY_TOTAL+sumtotal}
-      }
      
       dispatch({
         type: "GET_PAYMENT_DATA",
         data: response.data.data.PAY_LIST,
         totalPages: totalPage,
-        totalPay: sumtotal
       })
     })
     .catch(err => console.log(err))
@@ -758,6 +779,7 @@ export const postPrescriptionData = (userid, apponum, filename, file) => {
   return dispatch => {
     axios
       .post("https://health.iot4health.co.kr:9300/v1/doctor/treatment/prescription", data)
+      // .post("http://192.168.0.45:9300/v1/doctor/treatment/prescription", data)
       .then(response => {
         console.log(response);
         if(response.data.status==="200") {
