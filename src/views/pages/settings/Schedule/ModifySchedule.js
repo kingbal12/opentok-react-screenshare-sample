@@ -158,16 +158,10 @@ class CalendarApp extends React.Component {
 
   async componentDidMount() {
     await this.onNavigate(new Date(), "week");
-    // await this.props.fetchEvents(
-    //   this.state.userid,
-    //   this.state.weekstart,
-    //   this.state.weekend
-    // )
+
     this.loadschedule()
     this.loadnextschedule()
-    // if(this.props.app.nextevents.length===0) {
-    //   this.setState({alertmodal: true})
-    // }
+
     this.setState({
       weekempty: this.props.app.weekempty, 
       nextweekempty: this.props.app.nextweekempty}, ()=>
@@ -401,7 +395,7 @@ class CalendarApp extends React.Component {
               selectable={true}
             />
             <div className="pt-1 text-right">
-              <Button
+              {/* <Button
                 className="mr-2"
                 color="primary"
                 outline
@@ -410,7 +404,7 @@ class CalendarApp extends React.Component {
                 onClick={this.check}
               >
                 <FormattedMessage id="Drafts"/>
-              </Button>
+              </Button> */}
               <Button
                 className="mr-2"
                 color="primary"
