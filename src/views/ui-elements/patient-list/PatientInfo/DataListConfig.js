@@ -184,6 +184,7 @@ const ExpandedComponent = props => {
             />
             }
           </Row>
+
         </ModalBody>
         <ModalFooter className="justify-content-center">
           <Button color="primary" onClick={pcloseModal}>

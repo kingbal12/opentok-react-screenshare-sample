@@ -1153,7 +1153,7 @@ class ConsultingRoom extends React.Component {
                       <h6>{this.props.pinfo.DISEASE_DESC===""? "없음":this.props.pinfo.DISEASE_DESC}</h6>
                       <h6>{this.props.pinfo.FAMILY_DESC===""? "없음":this.props.pinfo.FAMILY_DESC}</h6>
                       <h6>{this.props.pinfo.USE_MED===""? "없음":this.props.pinfo.USE_MED}</h6>
-                      <h6>{this.props.pinfo.ALLERGY_YN==="Y"?"있음":"없음"}&nbsp;{this.props.pinfo.ALLERGY_DESC===""?"없음":this.props.pinfo.ALLERGY_DESC}</h6>
+                      <h6>{this.props.pinfo.ALLERGY_YN==="Y"?"있음":"없음"}&nbsp;/&nbsp;{this.props.pinfo.ALLERGY_DESC===""?"없음":this.props.pinfo.ALLERGY_DESC}</h6>
                     </div>
                   </CardBody>
                 </Card>
