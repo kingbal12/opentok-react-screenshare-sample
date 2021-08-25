@@ -175,6 +175,7 @@ export const mdfpostSchedules = (userid, holiday, rperiod, events) => {
         console.log(response)
         if(response.data.status==="200") {
           alert("수정된 스케줄이 저장되었습니다.")
+          window.location.reload()
         } else if(response.data.status==="400") {
           alert("수정된 스케줄 저장에 문제가 발생했습니다. 스케줄이 비어있는 주부터 설정을 시작해주세요")
         } else{
@@ -225,7 +226,7 @@ export const endchedules = (userid, weekstart, weekend, events) => {
         console.log(response)
         if(response.data.status==="200") {
           alert("스케쥴이 정상적으로 수정되었습니다.")
-          
+          window.location.reload()
         }
       })
       .catch(err => console.log(err))
