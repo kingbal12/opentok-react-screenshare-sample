@@ -271,8 +271,8 @@ class NavbarUser extends React.PureComponent {
             </Button>
           </ModalFooter>
         </Modal> 
-        <img className="pt-1" onClick={this.questionModal} 
-             style={{width:"2rem", height:"3rem", cursor:"pointer"}}  src={Question} alt="question"/>
+        {/* <img className="pt-1" onClick={this.questionModal} 
+             style={{width:"2rem", height:"3rem", cursor:"pointer"}}  src={Question} alt="question"/> */}
         {/* <IntlContext.Consumer>
           {context => {
             let langArr = {

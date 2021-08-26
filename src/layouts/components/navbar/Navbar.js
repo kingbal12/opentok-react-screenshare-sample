@@ -141,15 +141,17 @@ const ThemeNavbar = props => {
                   props.user.login.values !== undefined &&
                   props.user.login.values.loggedInWith === "jwt" &&
                   props.user.login.values.loggedInUser.file_path &&
-                  props.filename===undefined
+                  props.filename===""||props.filename===undefined
                     ? "https://health.iot4health.co.kr:9300"+props.user.login.values.loggedInUser.file_path
                       +props.user.login.values.loggedInUser.file_name 
                     : props.user.login.values !== undefined &&
                     props.user.login.values.loggedInWith === "jwt" &&
                     props.user.login.values.loggedInUser.file_path &&
                     props.filename!==""
-                    ?"https://health.iot4health.co.kr:9300"+props.user.login.values.loggedInUser.file_path
-                      +props.user.login.values.loggedInUser.username + "-" + props.filename 
+                    ?
+                    // "https://health.iot4health.co.kr:9300"+props.user.login.values.loggedInUser.file_path
+                    //   +props.user.login.values.loggedInUser.username + "-" + props.filename
+                    props.filename
                      
                     : user !== undefined && user.picture ? user.picture
                     : userImg

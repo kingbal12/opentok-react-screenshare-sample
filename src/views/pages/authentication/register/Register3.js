@@ -421,7 +421,9 @@ handleComplete = (data) => {
                       <div className="col-3 align-self-center"><b><FormattedMessage id="CNumber"/> <span className="text-danger">(필수)</span></b></div>
                       <InputGroup>
                         <Input
+                          maxLength="15"
                           type="number"
+                          onInput={this.maxLengthCheck}
                           placeholder="하이픈(-)을 생략, 숫자만 입력"
                           required
                           value={this.state.phonenumber}

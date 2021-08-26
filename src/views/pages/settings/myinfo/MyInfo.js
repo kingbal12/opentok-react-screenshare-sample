@@ -188,8 +188,7 @@ class MyInfo extends React.Component {
         this.state.medicalable,
         this.state.medicaldesc,
         this.state.medicalnum,
-        this.state.userdesc,    
-        this.state.previewURL
+        this.state.userdesc
       )
     } else{
       this.props.putmyinfo(
@@ -201,11 +200,10 @@ class MyInfo extends React.Component {
         this.state.medicalable,
         this.state.medicaldesc,
         this.state.medicalnum,
-        this.state.userdesc,    
-        this.state.previewURL
+        this.state.userdesc
       )
       this.props.saveImage(
-        this.state.filename
+        this.state.previewURL
       )
     }
     

@@ -440,9 +440,9 @@ class ConsultingRoom extends React.Component {
     e.preventDefault()
     const audioEl = new Audio()
     audioEl.setSinkId(this.state.speakerset.deviceId).then(function() {
-      console.log('Set deviceId('+audioEl.sinkId+') in the selected audio element');
+      // console.log('Set deviceId('+audioEl.sinkId+') in the selected audio element');
    }).catch(error => console.log(error));
-    console.log('Audio is being played on ' + audioEl.sinkId);
+    // console.log('Audio is being played on ' + audioEl.sinkId);
   }
  
 

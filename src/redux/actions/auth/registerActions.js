@@ -302,20 +302,22 @@ export const register4 = (userid, filename, file, medicalpart, medicalable, medi
   }
 }
 
-export const putmyinfo = (userid, filename, file, medicalpart, medicalable, medicaldesc, medicalnum, userdesc) => {
+export const putmyinfo = (phonenum, userid, filename, file, medicalpart, medicalable, medicaldesc, medicalnum, userdesc) => {
   let data = new FormData();
+  data.append('mobile_num', phonenum);
   data.append('user_id', userid);
   data.append('file_name', file);
   data.append('medical_part', medicalpart);
   data.append('medical_able', medicalable);
   data.append('medical_desc', medicaldesc);
   data.append('medical_num', medicalnum);
-  data.append('user_desc', userdesc)
+  data.append('user_desc', userdesc);
+  
   return dispatch => {
     axios
-      .put("https://health.iot4health.co.kr:9300/v1/doctor/account/user-info", data
+      .put("https://health.iot4health.co.kr:9300/v1/doctor/account/user-info", data)
+      // .put("http://192.168.0.45:9300/v1/doctor/account/user-info", data)
 
-      )
       .then(response => {
         if(response.data.status === "200") {
 
@@ -329,9 +331,11 @@ export const putmyinfo = (userid, filename, file, medicalpart, medicalable, medi
   }
 }
 
-export const putmyinfonfile = (userid, medicalpart, medicalable, medicaldesc, medicalnum, userdesc) => {
+export const putmyinfonfile = (mdfphonenum, userid,  filename, file, medicalpart, medicalable, medicaldesc, medicalnum, userdesc) => {
   let data = new FormData();
+  data.append('mobile_num', mdfphonenum);
   data.append('user_id', userid);
+  data.append('file_name', file);
   data.append('medical_part', medicalpart);
   data.append('medical_able', medicalable);
   data.append('medical_desc', medicaldesc);
@@ -339,9 +343,8 @@ export const putmyinfonfile = (userid, medicalpart, medicalable, medicaldesc, me
   data.append('user_desc', userdesc)
   return dispatch => {
     axios
-      .put("https://health.iot4health.co.kr:9300/v1/doctor/account/user-info", data
-
-      )
+      .put("https://health.iot4health.co.kr:9300/v1/doctor/account/user-info", data)
+      // .put("http://192.168.0.45:9300/v1/doctor/account/user-info", data)
       .then(response => {
         if(response.data.status === "200") {
 
