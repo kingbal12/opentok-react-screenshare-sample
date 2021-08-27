@@ -17,7 +17,7 @@ import {InputGroup,
 } from "reactstrap"
 
 import "../../../../assets/scss/pages/authentication.scss"
-import { putmyinfo, putmyinfonfile } from "../../../../redux/actions/auth/registerActions"
+import { putmyinfo, putmyinfonfile, putMyInfoNonFile } from "../../../../redux/actions/auth/registerActions"
 import { connect } from "react-redux"
 import axios from "axios"
 import previmg from "../../../../assets/img/portrait/small/Sample_User_Icon.png"
@@ -179,29 +179,53 @@ class MyInfo extends React.Component {
     
     e.preventDefault()
     if(this.state.vfauth==="Y"){
-      this.props.putmyinfonfile(
-        this.state.mdfphonenum,
-        this.state.userid,
-        this.state.filename,
-        this.state.file,
-        this.state.medicalpart,
-        this.state.medicalable,
-        this.state.medicaldesc,
-        this.state.medicalnum,
-        this.state.userdesc
-      )
+      if(this.state.filename==="") {
+        this.props.putMyInfoNonFile(
+          this.state.mdfphonenum,
+          this.state.userid,
+          this.state.medicalpart,
+          this.state.medicalable,
+          this.state.medicaldesc,
+          this.state.medicalnum,
+          this.state.userdesc
+        )
+      } else {
+        this.props.putmyinfonfile(
+          this.state.mdfphonenum,
+          this.state.userid,
+          this.state.filename,
+          this.state.file,
+          this.state.medicalpart,
+          this.state.medicalable,
+          this.state.medicaldesc,
+          this.state.medicalnum,
+          this.state.userdesc
+        )
+      }
     } else{
-      this.props.putmyinfo(
-        this.state.phonenumber,
-        this.state.userid,
-        this.state.filename,
-        this.state.file,
-        this.state.medicalpart,
-        this.state.medicalable,
-        this.state.medicaldesc,
-        this.state.medicalnum,
-        this.state.userdesc
-      )
+      if(this.state.filename==="") {
+        this.props.putMyInfoNonFile(
+          this.state.phonenumber,
+          this.state.userid,
+          this.state.medicalpart,
+          this.state.medicalable,
+          this.state.medicaldesc,
+          this.state.medicalnum,
+          this.state.userdesc
+        )
+      } else {
+        this.props.putmyinfo(
+          this.state.phonenumber,
+          this.state.userid,
+          this.state.filename,
+          this.state.file,
+          this.state.medicalpart,
+          this.state.medicalable,
+          this.state.medicaldesc,
+          this.state.medicalnum,
+          this.state.userdesc
+        )
+      }
       this.props.saveImage(
         this.state.previewURL
       )
@@ -537,4 +561,4 @@ const mapStateToProps = state => {
     cookiemyinfo: state.cookies.myinfo
   }
 }
-export default connect(mapStateToProps, {putmyinfo, putmyinfonfile, saveMyinfo, saveImage})(MyInfo)
+export default connect(mapStateToProps, {putmyinfo, putmyinfonfile, putMyInfoNonFile, saveMyinfo, saveImage})(MyInfo)

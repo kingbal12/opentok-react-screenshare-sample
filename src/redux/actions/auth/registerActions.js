@@ -358,6 +358,31 @@ export const putmyinfonfile = (mdfphonenum, userid,  filename, file, medicalpart
   }
 }
 
+export const putMyInfoNonFile = (mdfphonenum, userid, medicalpart, medicalable, medicaldesc, medicalnum, userdesc) => {
+  let data = new FormData();
+  data.append('mobile_num', mdfphonenum);
+  data.append('user_id', userid);
+  data.append('medical_part', medicalpart);
+  data.append('medical_able', medicalable);
+  data.append('medical_desc', medicaldesc);
+  data.append('medical_num', medicalnum);
+  data.append('user_desc', userdesc)
+  return dispatch => {
+    axios
+      .put("https://health.iot4health.co.kr:9300/v1/doctor/account/user-info", data)
+      .then(response => {
+        if(response.data.status === "200") {
+
+          alert("개인정보가 정상적으로 변경되었습니다.")
+         
+        } else {
+          alert(response.data.message);
+        }
+
+      })
+  }
+}
+
 
 
 

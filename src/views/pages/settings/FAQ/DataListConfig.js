@@ -361,7 +361,7 @@ class DataListConfig extends Component {
             faqmodal: true
           })
         } else {
-          alert("공지사항을 불러오지 못하였습니다.")
+          alert("FAQ를 불러오지 못하였습니다.")
         }
       })
   }

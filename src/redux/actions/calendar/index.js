@@ -144,7 +144,7 @@ export const postSchedules = (userid, holiday, rperiod, events) => {
           alert("스케줄 설정이 저장되었습니다.\n로그인페이지로 이동합니다.")
           history.push("/")
         } else if(response.data.status==="400") {
-          alert("등록된 스케줄이 없습니다.\n로그인 이후 스케줄을 수정해주시기 바랍니다.n\로그인페이지로 이동합니다.")
+          alert("등록된 스케줄이 없습니다.\n로그인 이후 스케줄을 수정해주시기 바랍니다.\n로그인페이지로 이동합니다.")
           history.push("/")
         } else {
           alert("스케줄 설정에 문제가 발생했습니다.\n관리자에게 문의 바랍니다.")

@@ -252,20 +252,20 @@ class PatientInfo extends React.Component {
   }
 
   postPrescription = () => {
-    if(this.props.appo===undefined){
-      alert("예약정보가 없기때문에 처방전 저장이 불가능합니다.")
-    } else{
+    // if(this.props.appo===undefined){
+    //   alert("예약정보가 없기때문에 처방전 저장이 불가능합니다.")
+    // } else{
       this.props.postPrescriptionData(
       this.props.user.login.values.loggedInUser.username,
       this.props.appo.APPOINT_NUM,
       this.state.file,
       this.state.filename
       )
-      this.props.putStateComplete(
-        this.props.user.login.values.loggedInUser.username,
-        this.props.appo.APPOINT_NUM
-      )
-    }
+    //   this.props.putStateComplete(
+    //     this.props.user.login.values.loggedInUser.username,
+    //     this.props.appo.APPOINT_NUM
+    //   )
+    // }
     this.setState(prevState => ({
       presmodal: !prevState.presmodal
     }))
@@ -292,20 +292,20 @@ class PatientInfo extends React.Component {
   }
 
   postPayment = () => {
-    if(this.props.appo===undefined){
-      alert("예약정보가 없기때문에 결제금액 입력이 불가합니다.")
-    } else{
+    // if(this.props.appo===undefined){
+    //   alert("예약정보가 없기때문에 결제금액 입력이 불가합니다.")
+    // } else{
       this.props.postPayData(
       this.props.user.login.values.loggedInUser.username,
       this.props.appo.APPOINT_NUM,
       this.state.paypatient,
       this.state.paytotal
       )
-      this.props.putStateComplete(
-        this.props.user.login.values.loggedInUser.username,
-        this.props.appo.APPOINT_NUM
-      )
-    }
+      // this.props.putStateComplete(
+      //   this.props.user.login.values.loggedInUser.username,
+      //   this.props.appo.APPOINT_NUM
+      // )
+    // }
     this.setState(prevState => ({
       paymodal: !prevState.paymodal
     }))

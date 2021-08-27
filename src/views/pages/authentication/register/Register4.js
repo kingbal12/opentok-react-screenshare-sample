@@ -128,9 +128,7 @@ class Register extends React.Component {
         let register4status;
 
         if(response.data.status === "200") {
-          console.log(response)
           register4status = response.data.status
-          console.log(register4status)
           this.registerModal()
 
         } else {
