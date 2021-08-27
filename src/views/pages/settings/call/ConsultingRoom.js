@@ -458,7 +458,7 @@ class ConsultingRoom extends React.Component {
   render() {
     let file_preview = null;
 
-    {this.props.appo===null||this.props.appo.FILE_NAME===""?
+    {this.props.appo===null||this.props.appo.FILE_NAME===""||this.props.appo.FILE_NAME==="blob"?
       file_preview = 
         <img
           src={previmg}
@@ -680,7 +680,7 @@ class ConsultingRoom extends React.Component {
             </ModalHeader>
             <ModalBody>
               <Row className="justify-content-center">
-                {this.props.appo===null||this.props.appo.FILE_NAME===""?null:
+                {this.props.appo===null||this.props.appo.FILE_NAME===""||this.props.FILE_NAME===undefined?null:
                 <img
                   maxwidth="500px"
                   height="500px"
@@ -957,7 +957,7 @@ class ConsultingRoom extends React.Component {
                     <FormGroup>
                       <CustomInput 
                         type="file" 
-                        // accept="image/gif,image/jpeg,image/png" 
+                        accept="image/gif,image/jpeg,image/png,.pdf" 
                         id="exampleCustomFileBrowser" 
                         name="customFile" 
                         label=""

@@ -40,7 +40,7 @@ import "../../../../assets/scss/plugins/extensions/react-paginate.scss"
 import "../../../../assets/scss/pages/data-list.scss"
 import moment from "moment"
 import { CSVLink, CSVDownload } from "react-csv";
-import select from "../../../../assets/img/dashboard/down-chevron.png"
+import axios from "axios"
 
 const chipColors = {
   "on hold": "warning",
@@ -191,7 +191,8 @@ class DataListConfig extends Component {
     selected: [],
     totalRecords: 0,
     sortIndex: [],
-    addNew: ""
+    addNew: "",
+    totaldata: this.props.dataList.totalpaydata
   }
 
   thumbView = this.props.thumbView
@@ -208,12 +209,38 @@ class DataListConfig extends Component {
         this.props.parsedFilter.page)
     }
 
-    this.setState({lastday: String(new Date(this.state.year, this.state.month, 0).getDate())},() => 
+    this.setState({lastday: String(new Date(this.state.year, this.state.month, 0).getDate())}
+    ,() => 
+    // axios
+    // .get("https://health.iot4health.co.kr:9300/v1/doctor/treatment/payments", {
+    //   params: {
+    //     user_id: this.state.user,
+    //     start_date: this.state.year+this.state.month+"01",
+    //     end_date: this.state.year+this.state.month+this.state.lastday,
+    //     page_amount: 500000,
+    //     page_num: 1
+    //   }
+    // })
+    // .then(response => {
+    //   let len = response.data.data.PAY_LIST.length
+    //   let totalPay = new Array();
+    //   let sumtotal = 0;
+    //   for (let i=0; i<len; i++) {
+    //     let jsonObj		= new Object();
+    //     jsonObj.PAY_TOTAL = response.data.data.PAY_LIST[i].PAY_TOTAL
+    //     jsonObj = JSON.stringify(jsonObj);
+    //     totalPay.push(JSON.parse(jsonObj));
+    //     if (len>0) {sumtotal= totalPay[i].PAY_TOTAL+sumtotal}
+    //   }
+    //  this.setState({totaldata:totalPay})
+    // })
+    // .catch(err => console.log(err))
     this.props.getPaymentTotalData(
       this.state.user,
       this.state.year+this.state.month+"01",
       this.state.year+this.state.month+this.state.lastday
-      ))
+      )
+    )
 
    
   }

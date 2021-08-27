@@ -775,11 +775,16 @@ export const postMDNoteData = (userid, apponum, cc, dx, rx, notevital) => {
 export const postPrescriptionData = (userid, apponum, filename, file) => {
   let data = new FormData();
     data.append('user_id', userid);
-    data.append('appoint_num', apponum);
     data.append('file_name', file);
+    data.append('appoint_num', apponum);
+    
   return dispatch => {
     axios
-      .post("https://health.iot4health.co.kr:9300/v1/doctor/treatment/prescription", data)
+      .post("https://health.iot4health.co.kr:9300/v1/doctor/treatment/prescription", data,  
+      {headers: {
+        'content-type': 'multipart/form-data'
+    }}
+    )
       // .post("http://192.168.0.45:9300/v1/doctor/treatment/prescription", data)
       .then(response => {
         console.log(response);

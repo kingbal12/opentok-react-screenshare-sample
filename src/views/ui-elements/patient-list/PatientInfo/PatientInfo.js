@@ -154,7 +154,7 @@ class PatientInfo extends React.Component {
   render() {
     let file_preview = null;
 
-    {this.props.appo===null
+    {this.props.appo===null||this.props.appo.FILE_NAME===""||this.props.appo.FILE_NAME==="blob"
       ?
       file_preview = 
         <img
