@@ -11,6 +11,7 @@ import firebase from 'firebase';
 import { FormattedMessage } from "react-intl"
 import axios from "axios"
 import { resetCookie } from "../../../../redux/actions/cookies"
+// import {serviceworker} from "../../../../firebase-messaging-sw"
 
 
 const config =  { 
@@ -47,6 +48,8 @@ class LoginJWT extends React.Component {
 
       messaging.usePublicVapidKey("BL0eTL3wIbAxmATwORsjQ-pNPCQBYrFNofCAr1xnArzbBjkRDreJLmiXYd-ySpazU-GTEAhtThWIhCLxYLvTGvY");
 
+      
+
       //허가를 요청합니다!
       Notification.requestPermission()
       .then(function() {
@@ -57,10 +60,22 @@ class LoginJWT extends React.Component {
       .then(token => {
         console.log(token); //토큰을 출력!
         this.setState({tokendata:token})
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('../../../../firebase-messaging-sw.js')
+          .then(function(registration) {
+            console.log('Registration successful, scope is:', registration.scope);
+          }).catch(function(err) {
+            console.log('Service worker registration failed, error:', err);
+          });
+        }
       })
 
       .catch(function(err) {
         console.log('fcm에러 : ', err);
+      })
+
+      messaging.onMessage(function(payload){
+        console.log(payload.notification);
       })
     
     } else {
@@ -68,32 +83,17 @@ class LoginJWT extends React.Component {
       firebase.app();
     
     }
-
     
   }
-  
-  startarchiveVideo() {
-    axios
-      .post("https://api.opentok.com/v2/project/<47274054>/archive", 
-      {
-        sessionId : "1_MX40NzI3NDA1NH5-MTYyNzUyMTEzNDA5NH5MYTRBV05oWTlsaXhVNWU1RjhWbTM4QjZ-UH4",
-        hasAudio : true,
-        hasVideo : true,
-        layout : {
-          type: "bestFit"
-        },
-        name : "test",
-        outputMode : "composed",
-        resolution : "640x480",
-    },
-    {
-      headers: { 'Content-Type': 'application/json' }
-    }
-      )
-      .then(response => {
-        console.log(response);
-      })
+
+  componentDidUpdate() {
+    const messaging = firebase.messaging();
+    messaging.onMessage(function(payload){
+	    console.log(payload.notification);
+    })
   }
+
+
   
 
   handleLogin = e => {

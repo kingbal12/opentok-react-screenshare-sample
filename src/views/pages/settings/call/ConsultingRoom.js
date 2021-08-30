@@ -711,10 +711,8 @@ class ConsultingRoom extends React.Component {
             <ModalHeader toggle={this.pclModal}>
               <b>Past Consulting List</b>
             </ModalHeader>
-            <ModalBody>
-              
-                <PastConsultList parsedFilter={queryString.parse(this.props.location.search)} />
-              
+            <ModalBody>              
+              <PastConsultList parsedFilter={queryString.parse(this.props.location.search)} />              
             </ModalBody>
             <ModalFooter>
               <Button color="primary" onClick={this.pclModal}>

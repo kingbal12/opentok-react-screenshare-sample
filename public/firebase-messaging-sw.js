@@ -15,12 +15,13 @@ var config = {
 firebase.initializeApp(config); 
 
 const messaging = firebase.messaging();
-//messaging.usePublicVapidKey("BL0eTL3wIbAxmATwORsjQ-pNPCQBYrFNofCAr1xnArzbBjkRDreJLmiXYd-ySpazU-GTEAhtThWIhCLxYLvTGvY");
 
 messaging.setBackgroundMessageHandler(function(payload) { 
-	const title = "Hello World"; 
+	console.log('[firebase-messaging-sw.js] onBackgroundMessage ', payload)
+	console.log(payload.notification)
+	const title = "테스트하는중!"; 
 	const options = { 
-		body: payload.data.status 
+		body: payload.notification.body
 	}; 
 	return self.registration.showNotification(title,options); 
 });

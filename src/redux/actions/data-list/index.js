@@ -773,28 +773,27 @@ export const postMDNoteData = (userid, apponum, cc, dx, rx, notevital) => {
 }
 
 export const postPrescriptionData = (userid, apponum, filename, file) => {
-  let data = new FormData();
-    data.append('user_id', userid);
-    data.append('file_name', file);
-    data.append('appoint_num', apponum);
+  let formData = new FormData();
+  formData.append('file_name', file, filename);
+  formData.append('user_id', userid);
+  formData.append('appoint_num', apponum);
     
   return dispatch => {
-    axios
-      .post("https://health.iot4health.co.kr:9300/v1/doctor/treatment/prescription", data,  
-      {headers: {
-        'content-type': 'multipart/form-data'
-    }}
-    )
-      // .post("http://192.168.0.45:9300/v1/doctor/treatment/prescription", data)
-      .then(response => {
-        console.log(response);
-        if(response.data.status==="200") {
-          alert("처방전 업로드가 완료되엇습니다.")
-        }else {
-          alert("처방전 업로드에 문제가 발생했습니다.\n다시 시도해 주십시오")
-        }
-      })
-      .catch(err => alert(err+"\n네트워크 문제로 처방전 업로드에 문제가 발생했습니다.\n다시 시도해 주십시오 "),)
+    axios.post("https://health.iot4health.co.kr:9300/v1/doctor/treatment/prescription", formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+    // .post("http://192.168.0.45:9300/v1/doctor/treatment/prescription", data)
+    .then(response => {
+      console.log(response);
+      if(response.data.status==="200") {
+        alert("처방전 업로드가 완료되엇습니다.")
+      }else {
+        alert("처방전 업로드에 문제가 발생했습니다.\n다시 시도해 주십시오")
+      }
+    })
+    .catch(err => alert(err+"\n네트워크 문제로 처방전 업로드에 문제가 발생했습니다.\n다시 시도해 주십시오 "),)
   }
 }
 
