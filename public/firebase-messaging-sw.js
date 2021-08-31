@@ -1,6 +1,6 @@
 importScripts('https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js'); 
 importScripts('https://www.gstatic.com/firebasejs/7.6.1/firebase-messaging.js'); 
-
+console.log("sw.js 실행됨")
 // Initialize Firebase 
 var config = { 
 	apiKey: "AIzaSyAMiyzuGLBHAk4K18Q4Bla4ljA4cfUf-oM"
@@ -15,15 +15,14 @@ var config = {
 firebase.initializeApp(config); 
 
 const messaging = firebase.messaging();
+//messaging.usePublicVapidKey("BL0eTL3wIbAxmATwORsjQ-pNPCQBYrFNofCAr1xnArzbBjkRDreJLmiXYd-ySpazU-GTEAhtThWIhCLxYLvTGvY");
 
-//self.addEventListener
-
-messaging.setBackgroundMessageHandler(function(payload) { 
-	console.log('[firebase-messaging-sw.js] onBackgroundMessage ', payload)
-	console.log(payload.notification)
-	const title = "테스트하는중!"; 
+messaging.setBackgroundMessageHandler(function(payload) {
+	const title = "Hello World"; 
 	const options = { 
-		body: payload.notification.body
+		body: payload.data.status 
 	}; 
 	return self.registration.showNotification(title,options); 
 });
+
+

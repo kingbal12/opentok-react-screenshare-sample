@@ -133,3 +133,27 @@ export function unregister() {
     })
   }
 }
+
+// export const registerServiceWorker = () => {
+//   if ('serviceWorker' in navigator) {
+//     navigator.serviceWorker
+//       .register('firebase-messaging-sw.js')
+//       .then(handleSWRegistration)
+//       .catch(function (err) {
+//         return err;
+//       });
+//   }
+// };
+
+// function handleSWRegistration(reg) {
+//   if (reg.installing) {
+//       console.log('Service worker installing');
+//   } else if (reg.waiting) {
+//       console.log('Service worker installed');
+//   } else if (reg.active) {
+//       console.log('Service worker active');
+//   }
+
+// }
+
+
