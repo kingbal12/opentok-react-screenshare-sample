@@ -1,5 +1,5 @@
-importScripts('https://www.gstatic.com/firebasejs/7.8.0/firebase-app.js');
-importScripts('https://www.gstatic.com/firebasejs/7.8.0/firebase-messaging.js');
+importScripts('https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js');
+importScripts('https://www.gstatic.com/firebasejs/8.7.1/firebase-messaging.js');
 console.log("sw.js 실행됨")
 // Initialize Firebase 
 var config = { 
@@ -22,7 +22,9 @@ messaging.setBackgroundMessageHandler(function(payload) {
 	const options = { 
 		body: payload.data.status 
 	}; 
-	return self.registration.showNotification(title,options); 
+	return self.registration.showNotification(title,options); 	
 });
+
+
 
 

@@ -9,7 +9,6 @@ import { connect } from "react-redux"
 import { history } from "../../../../history"
 import firebase from 'firebase'; 
 import { FormattedMessage } from "react-intl"
-import axios from "axios"
 import { resetCookie } from "../../../../redux/actions/cookies"
 
 
@@ -29,8 +28,6 @@ const messaging = firebase.messaging();
 
 messaging.usePublicVapidKey("BL0eTL3wIbAxmATwORsjQ-pNPCQBYrFNofCAr1xnArzbBjkRDreJLmiXYd-ySpazU-GTEAhtThWIhCLxYLvTGvY");
 
-
-
 //허가를 요청합니다!
 Notification.requestPermission()
 .then(function() {
@@ -41,31 +38,31 @@ Notification.requestPermission()
 .then(token => {
   console.log(token); //토큰을 출력!
   // this.setState({tokendata:token})
-  // if ('serviceWorker' in navigator) {
-  //   navigator.serviceWorker.register('firebase-messaging-sw.js')
-  //   .then(handleSWRegistration);
-  // }
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('firebase-messaging-sw.js')
+    .then(handleSWRegistration);
+  }
 
-  // function handleSWRegistration(reg) {
-  //   if (reg.installing) {
-  //       console.log('Service worker installing');
-  //   } else if (reg.waiting) {
-  //       console.log('Service worker installed');
-  //   } else if (reg.active) {
-  //       console.log('Service worker active');
-  //   }
+  function handleSWRegistration(reg) {
+    if (reg.installing) {
+        console.log('Service worker installing');
+    } else if (reg.waiting) {
+        console.log('Service worker installed');
+    } else if (reg.active) {
+        console.log('Service worker active');
+    }
   
-  // }
+  }
 })
 
 .catch(function(err) {
   console.log('fcm에러 : ', err);
 })
 
-
 messaging.onMessage(function(payload){
-  alert('Got a ' + payload.notification.title + '\n' + payload.notification.body);
+  console.log(payload);
 })
+
 
 class LoginJWT extends React.Component {
   constructor(props){
@@ -82,15 +79,13 @@ class LoginJWT extends React.Component {
 
   
 
-  // componentWillMount() {
+  // componentDidMount() {
   //   if (!firebase.apps.length) {
 
   //     firebase.initializeApp(config);  
   //     const messaging = firebase.messaging();
 
   //     messaging.usePublicVapidKey("BL0eTL3wIbAxmATwORsjQ-pNPCQBYrFNofCAr1xnArzbBjkRDreJLmiXYd-ySpazU-GTEAhtThWIhCLxYLvTGvY");
-
-      
 
   //     //허가를 요청합니다!
   //     Notification.requestPermission()
@@ -123,15 +118,12 @@ class LoginJWT extends React.Component {
   //       console.log('fcm에러 : ', err);
   //     })
 
-      
   //     messaging.onMessage(function(payload){
   //       console.log(payload);
   //     })
-    
-  //   } else {
-    
-  //     firebase.app();
-    
+
+  //   } else {  
+  //     firebase.app();   
   //   }
     
   // }
