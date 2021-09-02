@@ -225,12 +225,15 @@ class CalendarApp extends React.Component {
   }
 
   onNavigate = (date, view, action) => {
+    console.log(this.state.events)
     let start, end
     if (view === 'month') {
+      console.log(this.state.events)
       start = moment(date).startOf('month')._d
       end = moment(date).endOf('month')._d
       this.setState({monthstart: start, monthend: end})
-      if(action === "PREV" || action === "NEXT") {
+      if(action === "PREV" || action === "NEXT" || action ==="TODAY") {
+        
         start = moment(date).startOf('month')._d
         end = moment(date).endOf('month')._d
         this.setState({monthstart: start, monthend: end}, () => {
@@ -238,10 +241,11 @@ class CalendarApp extends React.Component {
         })
       }
     }else{
+      console.log(this.state.events)
       start = moment(date).startOf('month')._d
       end = moment(date).endOf('month')._d
       this.setState({monthstart: start, monthend: end})
-      if(action === "PREV" || action === "NEXT") {
+      if(action === "PREV" || action === "NEXT" || action ==="TODAY") {
         start = moment(date).startOf('month')._d
         end = moment(date).endOf('month')._d
         this.setState({monthstart: start, monthend: end}, () => {
@@ -295,7 +299,7 @@ class CalendarApp extends React.Component {
               timeslots={4}
               step={15}
               dayLayoutAlgorithm="no-overlap"
-              // onNavigate={this.onNavigate}
+              onNavigate={this.onNavigate}
               startAccessor="start"
               endAccessor="end"
               resourceAccessor="url"
