@@ -116,7 +116,7 @@ const CustomHeader = props => {
     <div className="data-list-header d-flex justify-content-between flex-wrap">    
       <div className="actions-right d-flex flex-wrap mt-sm-0 mt-2 col-8">
         <div className="filter-section col-5">
-            <Input type="text" placeholder="Search" onChange={e => props.handleFilter(e)} />
+            <Input type="text" placeholder="환자 이름으로 검색" onChange={e => props.handleFilter(e)} />
         </div>
         <Button className="ml-2" color='primary' outline onClick={e => props.search(e)}>검색</Button>
       </div>

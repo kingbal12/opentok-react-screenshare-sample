@@ -320,7 +320,7 @@ export const putmyinfo = (phonenum, userid, filename, file, medicalpart, medical
 
       .then(response => {
         if(response.data.status === "200") {
-
+          window.location.reload()
           alert("개인정보가 정상적으로 변경되었습니다.")
          
         } else {
@@ -347,7 +347,7 @@ export const putmyinfonfile = (mdfphonenum, userid,  filename, file, medicalpart
       // .put("http://192.168.0.45:9300/v1/doctor/account/user-info", data)
       .then(response => {
         if(response.data.status === "200") {
-
+          window.location.reload()
           alert("개인정보가 정상적으로 변경되었습니다.")
          
         } else {
@@ -372,7 +372,7 @@ export const putMyInfoNonFile = (mdfphonenum, userid, medicalpart, medicalable, 
       .put("https://health.iot4health.co.kr:9300/v1/doctor/account/user-info", data)
       .then(response => {
         if(response.data.status === "200") {
-
+          window.location.reload()
           alert("개인정보가 정상적으로 변경되었습니다.")
          
         } else {
