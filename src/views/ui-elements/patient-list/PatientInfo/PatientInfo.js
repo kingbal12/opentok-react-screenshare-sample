@@ -72,7 +72,7 @@ import spo2_4 from "../../../../assets/img/dashboard/ID12_08_vital_spo2 4.png"
 import spo2_5 from "../../../../assets/img/dashboard/ID12_08_vital_spo2 5.png"
 import dot from "../../../../assets/img/dashboard/ID13_11_icon.png"
 import moment from "moment"
-
+import Countdown from 'react-countdown'
 
 
 
@@ -323,6 +323,14 @@ class PatientInfo extends React.Component {
                         산소포화도
                       </UncontrolledTooltip>
                     </th>
+                    <th>
+                      {this.props.appo!==null&&moment() >= moment(this.props.rtime).add(-15,"m")?
+                      <Countdown date={moment(this.props.rtime)} >
+                        <this.Completionist />
+                      </Countdown>
+                      :"예약된 진료가 없습니다."  
+                      }
+                    </th>
                     {
                       this.props.appo===null?
                       <th id="tblBottomBarTh" className="text-right">
@@ -342,6 +350,7 @@ class PatientInfo extends React.Component {
                       </th>
                       : null
                     }
+                    
                   </tr>
                 </thead>
               </table>

@@ -51,6 +51,7 @@ class Register extends React.Component {
       medicalnum:  props.cookiere4.medicalnum, 
       userdesc:  props.cookiere4.userdesc,
       previewURL :  props.cookiere4.previewURL,
+      phonenum: props.user.register.values.phone,
       registermodal: false,
       previewmodal: false
 
@@ -90,7 +91,7 @@ class Register extends React.Component {
         this.state.medicaldesc,
         this.state.medicalnum,
         this.state.userdesc,    
-        this.state.previewURL
+        this.state.phonenum
       )
     } else {
       alert("의사 면허번호는 숫자로만 입력하여 주십시오")
@@ -111,7 +112,7 @@ class Register extends React.Component {
     alert("의사정보가 저장되었습니다.")
   }
 
-  register4 = (userid, filename, file, medicalpart, medicalable, medicaldesc, medicalnum, userdesc) => {
+  register4 = (userid, filename, file, medicalpart, medicalable, medicaldesc, medicalnum, userdesc, phonenum) => {
     let data = new FormData();
     data.append('user_id', userid);
     data.append('file_name', file);
@@ -120,6 +121,7 @@ class Register extends React.Component {
     data.append('medical_desc', medicaldesc);
     data.append('medical_num', medicalnum);
     data.append('user_desc', userdesc)
+    data.append('mobile_num', phonenum);
 
     axios
       .put("https://health.iot4health.co.kr:9300/v1/doctor/account/user-info", data)
