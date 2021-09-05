@@ -1175,7 +1175,7 @@ class ConsultingRoom extends React.Component {
                   <CardTitle className="px-1 d-flex justify-content-between" style={{paddingTop:"5px"}}>
                     <b>Past Consulting List</b>
                     {/* <Menu onClick={() => this.goPastConsultList(this.props.pinfo.PATIENT_ID)} style={{cursor:"pointer"}}/> */}
-                    <img src={dot} onClick={() => this.goPastConsultList(this.props.pinfo.PATIENT_ID)} style={{cursor:"pointer"}}/>
+                    <img src={dot} onClick={() => this.goPastConsultList(this.props.pinfo.PATIENT_ID)} style={{cursor:"pointer", width:"10px"}}/>
                   </CardTitle>
                   <CardBody className="pl-0 pt-0">
                     <table className="col-12 pt-0 mt-0">
@@ -1199,7 +1199,7 @@ class ConsultingRoom extends React.Component {
               <CardTitle className="px-1 d-flex justify-content-between" style={{paddingTop:"5px"}}>
                 <b>Vital Data</b> 
                 {/* <Menu onClick={this.goVitalData} style={{cursor:"pointer"}}/> */}
-                <img src={dot} onClick={this.goVitalData} style={{cursor:"pointer"}}/>
+                <img src={dot} onClick={this.goVitalData} style={{cursor:"pointer", width:"10px"}}/>
               </CardTitle>
               <CardBody className="d-flex pl-0">
                 <div className="d-flex col-12 pl-0">

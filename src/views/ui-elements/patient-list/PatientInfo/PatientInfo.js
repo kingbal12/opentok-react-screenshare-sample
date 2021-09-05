@@ -382,7 +382,7 @@ class PatientInfo extends React.Component {
               <CardTitle className="px-1 d-flex justify-content-between" style={{paddingTop:"5px"}}>
                 <h4><b>Past Consulting List</b></h4>
                 {/* <Menu onClick={() => this.goPastConsultList(this.props.pinfo.PATIENT_ID)} style={{cursor:"pointer"}}/> */}
-                <img src={dot} onClick={() => this.goPastConsultList(this.props.pinfo.PATIENT_ID)} style={{cursor:"pointer"}} />
+                <img src={dot} onClick={() => this.goPastConsultList(this.props.pinfo.PATIENT_ID)} style={{cursor:"pointer", width:"10px"}} />
               </CardTitle>
               <CardBody className="p-0 m-0">
                 <table className="col-12  pt-0 mt-0">
@@ -458,7 +458,7 @@ class PatientInfo extends React.Component {
               <CardTitle className="px-1 d-flex justify-content-between" style={{paddingTop:"5px"}}>
                 <h4><b>Vital Data</b></h4>
                  {/* <Menu onClick={this.goVitalData} style={{cursor:"pointer"}}/> */}
-                 <img src={dot} onClick={this.goVitalData} style={{cursor:"pointer"}} />
+                 <img src={dot} onClick={this.goVitalData} style={{cursor:"pointer", width:"10px"}} />
               </CardTitle>
               <CardBody className="d-flex pl-0">
                 <div className="d-flex col-12 pl-0">
