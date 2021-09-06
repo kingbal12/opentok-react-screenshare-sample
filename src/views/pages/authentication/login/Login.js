@@ -54,7 +54,7 @@ class Login extends React.Component {
                   <CardHeader className="pb-3 pt-3 d-flex justify-content-center">      
                       <img className="px-3" src={HicareLogo} alt="HicareLogo" style={{width:"90%"}}/>
                   </CardHeader>
-                  {/* <Row className="d-flex justify-content-center">
+                  <Row className="d-flex justify-content-center">
                     <Col lg="6" md="6" className="d-flex justify-content-center">
                     <ul className="nav">
                       <IntlContext.Consumer>
@@ -62,9 +62,9 @@ class Login extends React.Component {
                           let langArr = {
                             "ko" : "Korean",
                             "en" : "English",
-                            "de" : "German",
-                            "fr" : "French",
-                            "pt" : "Portuguese"
+                            // "de" : "German",
+                            // "fr" : "French",
+                            // "pt" : "Portuguese"
                           }
                           return (
                             <Dropdown
@@ -106,7 +106,7 @@ class Login extends React.Component {
                                   <ReactCountryFlag className="country-flag" countryCode="us" svg />
                                   <span className="ml-1">English</span>
                                 </DropdownItem>
-                                <DropdownItem
+                                {/* <DropdownItem
                                   tag="a"
                                   onClick={e => context.switchLanguage("fr")}
                                 >
@@ -126,7 +126,7 @@ class Login extends React.Component {
                                 >
                                   <ReactCountryFlag className="country-flag" countryCode="pt" svg />
                                   <span className="ml-1">Portuguese</span>
-                                </DropdownItem>
+                                </DropdownItem> */}
                               </DropdownMenu>
                             </Dropdown>
                           )
@@ -134,7 +134,7 @@ class Login extends React.Component {
                       </IntlContext.Consumer> 
                     </ul>
                     </Col>
-                    </Row> */}
+                    </Row>
                   <TabContent activeTab={this.state.activeTab}>
                     <TabPane tabId="1">
                       <LoginJWT />

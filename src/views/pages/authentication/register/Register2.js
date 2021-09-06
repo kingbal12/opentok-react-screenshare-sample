@@ -21,9 +21,10 @@ import axios from "axios"
 import 'react-perfect-scrollbar/dist/css/styles.css'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import HicareLogo from "../../../../assets/img/logo/logo1.png"
-import { FormattedMessage } from "react-intl"
+import { FormattedMessage} from "react-intl"
 import { history } from "../../../../history"
 import Loader from "react-loading"
+
 
 
 class Register extends React.Component {
@@ -228,6 +229,7 @@ class Register extends React.Component {
   }
 
   render() {
+    
     return (
       <PerfectScrollbar style={{display:"flex",height:"100vh", alignItems:"center"}}>
       <Row className="m-0 w-100 justify-content-center">
@@ -273,14 +275,18 @@ class Register extends React.Component {
                               <h5 className="text-bold-600"><FormattedMessage id="ID"/></h5>
                             </div>
                             <InputGroup>
+                            <FormattedMessage id="LoginPH">
+                              {(LoginPH) =>
                               <Input
                                 type="email"
-                                placeholder="사용 가능한 이메일 입력"
+                                placeholder={LoginPH}
                                 required
                                 value={this.state.userid}
                                 onChange={e => this.setState({ userid: e.target.value })}
                                 // invalid={this.state.useemail.length === 0 ? true : false}
                               />
+                              }
+                              </FormattedMessage>
                               <InputGroupAddon addonType="append"><Button disabled={this.state.otheremail===true?true:false} color="primary" type="button" onClick={this.emailauth}><FormattedMessage id="Check"/></Button>
                               </InputGroupAddon>
                             </InputGroup>
