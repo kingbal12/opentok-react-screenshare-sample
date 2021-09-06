@@ -465,19 +465,17 @@ class PatientInfo extends React.Component {
                 <div className="d-flex col-12 pl-0">
                   {this.props.bpdata.length===0?null:
                     <div className="col-2 pl-0">
-                      <Row className="justify-content-center"><h5>혈압</h5></Row>
-                      <ResponsiveContainer>
+                      <Row className="justify-content-center" ><h5>혈압</h5></Row>
+                      <ResponsiveContainer width={200} height="95%">
                         <LineChart
                           className="col-2"
-                          width={500}
-                          height={300}
                           data={this.props.bpdata}
                         >
                           <CartesianGrid strokeDasharray="3 3" />
                           <XAxis tick={{fontSize: 10}} dataKey="CREATE_TIME" />
                           <YAxis />
                           <Tooltip />
-                          <Legend />
+                          <Legend style={{marginTop:"1px"}} />
                           <Line
                             name="수축기"
                             type="monotone"
@@ -499,11 +497,9 @@ class PatientInfo extends React.Component {
                   {this.props.pulstdata.length===0?null:
                     <div className="col-2 pl-0">
                       <Row className="justify-content-center"><h5>맥박</h5></Row>
-                      <ResponsiveContainer>
+                      <ResponsiveContainer width={200}  height="95%">
                         <LineChart
                           className="col-2"
-                          width={500}
-                          height={300}
                           data={this.props.pulstdata}
                         >
                           <CartesianGrid strokeDasharray="3 3" />
@@ -526,11 +522,9 @@ class PatientInfo extends React.Component {
                   {this.props.wedata.length===0?null:
                     <div className="col-2 pl-0">
                       <Row className="justify-content-center"><h5>체중</h5></Row>
-                      <ResponsiveContainer>
+                      <ResponsiveContainer width={200}  height="95%">
                         <LineChart
                           className="col-2"
-                          width={500}
-                          height={300}
                           data={this.props.wedata}
                         >
                           <CartesianGrid strokeDasharray="3 3" />
@@ -560,11 +554,9 @@ class PatientInfo extends React.Component {
                   {this.props.bsdata.length===0?null:
                     <div className="col-2 pl-0">
                       <Row className="justify-content-center"><h5>혈당</h5></Row>
-                      <ResponsiveContainer>
+                      <ResponsiveContainer width={200}  height="95%">
                         <LineChart
                           className="col-2"
-                          width={500}
-                          height={300}
                           data={this.props.bsdata}
                         >
                           <CartesianGrid strokeDasharray="3 3" />
@@ -586,11 +578,9 @@ class PatientInfo extends React.Component {
                   {this.props.tempdata.length===0?null:
                     <div className="col-2 pl-0">
                       <Row className="justify-content-center"><h5>체온</h5></Row>
-                      <ResponsiveContainer>
+                      <ResponsiveContainer width={200}  height="95%">
                         <LineChart
                           className="col-2"
-                          width={500}
-                          height={300}
                           data={this.props.tempdata}
                         >
                           <CartesianGrid strokeDasharray="3 3" />
@@ -613,11 +603,9 @@ class PatientInfo extends React.Component {
                   {this.props.spo2data.length===0?null:
                     <div className="col-2 pl-0">
                       <Row className="justify-content-center"><h5>산소포화도</h5></Row>
-                      <ResponsiveContainer>
+                      <ResponsiveContainer  height="95%">
                         <LineChart
                           className="col-2"
-                          width={500}
-                          height={300}
                           data={this.props.spo2data}
                         >
                           <CartesianGrid strokeDasharray="3 3" />
