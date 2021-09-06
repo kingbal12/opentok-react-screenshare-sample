@@ -150,6 +150,7 @@ class PatientInfo extends React.Component {
     history.push("/vitaldata")
   }
  
+  Completionist = () => <span>진료시간이 시작되었습니다.</span>
   
   render() {
     let file_preview = null;

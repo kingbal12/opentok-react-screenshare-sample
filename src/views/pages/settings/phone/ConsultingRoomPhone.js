@@ -72,7 +72,7 @@ class PatientInfo extends React.Component {
     super(props);
     this.state = {
       cc: props.concookie.cc,
-      diagnosis: props.concookie.cc,
+      diagnosis: props.concookie.diagnosis,
       txrx: props.concookie.txrx,
       recommendation: props.concookie.recommendation,
       pcode: props.pharmacy.P_CODE,
@@ -83,7 +83,6 @@ class PatientInfo extends React.Component {
       filename: "",
       file : "",
       paypatient:"",
-      paytotal:"",
       mdnotemodal: false,
       paytotal: props.concookie.paytotal,
       paypatient: props.concookie.paypatient,
@@ -258,8 +257,8 @@ class PatientInfo extends React.Component {
       this.props.postPrescriptionData(
       this.props.user.login.values.loggedInUser.username,
       this.props.appo.APPOINT_NUM,
-      this.state.file,
-      this.state.filename
+      this.state.filename,
+      this.state.file
       )
     //   this.props.putStateComplete(
     //     this.props.user.login.values.loggedInUser.username,
@@ -299,7 +298,7 @@ class PatientInfo extends React.Component {
       this.props.user.login.values.loggedInUser.username,
       this.props.appo.APPOINT_NUM,
       this.state.paypatient,
-      this.state.paytotal
+      this.state.paypatient
       )
       // this.props.putStateComplete(
       //   this.props.user.login.values.loggedInUser.username,
@@ -321,7 +320,7 @@ class PatientInfo extends React.Component {
   render() {
     let file_preview = null;
 
-    {this.props.appo===null||this.props.appo.FILE_NAME===""?
+    {this.props.appo===null||this.props.appo.FILE_NAME===""||this.props.appo.FILE_NAME==="blob"?
       file_preview = 
         <img
           src={previmg}
@@ -355,9 +354,7 @@ class PatientInfo extends React.Component {
             <b>Past Consulting List</b>
           </ModalHeader>
           <ModalBody>
-            
-              <PastConsultList parsedFilter={queryString.parse(this.props.location.search)} />
-            
+            <PastConsultList parsedFilter={queryString.parse(this.props.location.search)} />        
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.pclModal}>

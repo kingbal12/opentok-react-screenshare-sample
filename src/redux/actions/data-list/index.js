@@ -815,7 +815,7 @@ export const postPayData = (userid, apponum, paypatient, paytotal) => {
           alert("결제정보 저장에 문제가 발생했습니다.\n다시 시도해 주십시오")
         }
       })
-      .catch(err => alert(err+"\n네트워크 문제로 결제정보 저장에 문제가 발생했습니다.\n다시 시도해 주십시오 "),)
+      .catch(err => alert(err+"\n네트워크 문제로 결제정보 저장에 문제가 발생했습니다.\n다시 시도해 주십시오 "))
   }
 }
 
