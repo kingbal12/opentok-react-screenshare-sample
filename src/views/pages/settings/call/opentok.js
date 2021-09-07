@@ -136,8 +136,8 @@ class ConsultingRoom extends React.Component {
             className="otsubscriber"
             properties={{
               showControls: false,
-              subscribeToAudio: this.state.audio,
-              subscribeToVideo: this.state.video
+              // subscribeToAudio: this.state.audio,
+              // subscribeToVideo: this.state.video
             }}
             onSubscribe={this.onSubscribe}
             onError={this.onError}
