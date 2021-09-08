@@ -135,7 +135,7 @@ class ConsultingRoom extends React.Component {
           <OTSubscriber
             className="otsubscriber"
             properties={{
-              showControls: false,
+              showControls: false
               // subscribeToAudio: this.state.audio,
               // subscribeToVideo: this.state.video
             }}

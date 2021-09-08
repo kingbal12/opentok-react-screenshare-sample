@@ -150,7 +150,7 @@ class PatientInfo extends React.Component {
     history.push("/vitaldata")
   }
  
-  Completionist = () => <span>진료시간이 시작되었습니다.</span>
+  Completionist = () => <span>진료중입니다.</span>
   
   render() {
     let file_preview = null;
@@ -325,11 +325,18 @@ class PatientInfo extends React.Component {
                       </UncontrolledTooltip>
                     </th>
                     <th>
-                      {this.props.appo!==null&&moment() >= moment(this.props.rtime).add(-15,"m")?
+                      {this.props.appo===null?"예약된 진료가 없습니다."
+                      :moment(this.props.rtime).add(-15,"m") <= moment() && moment() <= moment(this.props.rtime) ?
                       <Countdown date={moment(this.props.rtime)} >
-                        <this.Completionist />
+                        {/* <this.Completionist /> */}
                       </Countdown>
-                      :"예약된 진료가 없습니다."  
+                      :moment() < moment(this.props.rtime).add(-15,"m")?
+                      "진료시작 전입니다."
+                      :moment(this.props.rtime) < moment() && moment() <= moment(this.props.rtime).add(+15,"m")?
+                      "진료중입니다."
+                      :moment() > moment(this.props.rtime).add(+15,"m")?
+                      "진료시간이 끝났습니다."
+                      :"진료예약 오류"
                       }
                     </th>
                     {
@@ -421,7 +428,7 @@ class PatientInfo extends React.Component {
                     <div className="col-8">
                       <h5>{this.props.pinfo.HEIGHT_VAL}cm&nbsp;/&nbsp;{this.props.pinfo.WEIGHT_VAL}kg</h5>
                       <h5>{this.props.pinfo.SMOKE_YN==="Y"?"흡연":"비흡연"}</h5>
-                      <h5>{this.props.pinfo.DRINK_YN==="Y"?"자주":"가끔"}</h5>
+                      <h5>{this.props.pinfo.DRINK_YN==="N"?"자주":"가끔"}</h5>
                       <h5>{this.props.pinfo.DISEASE_DESC===""? "없음":this.props.pinfo.DISEASE_DESC}</h5>
                       <h5>{this.props.pinfo.FAMILY_DESC===""? "없음":this.props.pinfo.FAMILY_DESC}</h5>
                       <h5>{this.props.pinfo.USE_MED===""? "없음":this.props.pinfo.USE_MED}</h5>

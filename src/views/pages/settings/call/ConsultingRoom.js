@@ -680,7 +680,7 @@ class ConsultingRoom extends React.Component {
             </ModalHeader>
             <ModalBody>
               <Row className="justify-content-center">
-                {this.props.appo===null||this.props.appo.FILE_NAME===""||this.props.FILE_NAME===undefined?null:
+                {this.props.appo===null||this.props.appo.FILE_NAME===""||this.props.FILE_NAME==="bolb"?null:
                 <img
                   maxwidth="500px"
                   height="500px"
@@ -688,8 +688,6 @@ class ConsultingRoom extends React.Component {
                   +this.props.appo.FILE_NAME}
                   className="dz-img"
                   alt=""
-                  style={{cursor:"pointer"}} 
-                  onClick={this.viewFileModal}
                 />
                 }
               </Row>

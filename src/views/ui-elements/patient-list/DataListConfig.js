@@ -116,7 +116,18 @@ const CustomHeader = props => {
     <div className="data-list-header d-flex justify-content-between flex-wrap">    
       <div className="actions-right d-flex flex-wrap mt-sm-0 mt-2 col-8">
         <div className="filter-section col-5">
-            <Input type="text" placeholder="환자 이름으로 검색" onChange={e => props.handleFilter(e)} />
+            <Input 
+              type="text" 
+              placeholder="환자 이름으로 검색" 
+              onChange={e => props.handleFilter(e)} 
+              onKeyPress={
+                (e) => {
+                  if(e.key==="Enter"){
+                    props.search(e)
+                  }
+                }
+              } 
+            />
         </div>
         <Button className="ml-2" color='primary' outline onClick={e => props.search(e)}>검색</Button>
       </div>
@@ -432,13 +443,19 @@ class DataListConfig extends Component {
     this.setState({ name: e.target.value })
   }
 
+  handleKeyPress = e => {
+    e.preventDefault()
+    if(e.key==="Enter"){
+      alert("엔터키 눌림")
+    }
+  }
+
 
   search = e => {
     e.preventDefault()
     if(this.state.name!==""){
       this.props.getNameData(this.state.user,5,1,this.state.name)
     }
-    
   }
 
 
