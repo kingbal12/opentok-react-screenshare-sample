@@ -325,18 +325,12 @@ class PatientInfo extends React.Component {
                       </UncontrolledTooltip>
                     </th>
                     <th>
-                      {this.props.appo===null?"예약된 진료가 없습니다."
+                      {this.props.appo===null?""
                       :moment(this.props.rtime).add(-15,"m") <= moment() && moment() <= moment(this.props.rtime) ?
                       <Countdown date={moment(this.props.rtime)} >
                         {/* <this.Completionist /> */}
                       </Countdown>
-                      :moment() < moment(this.props.rtime).add(-15,"m")?
-                      "진료시작 전입니다."
-                      :moment(this.props.rtime) < moment() && moment() <= moment(this.props.rtime).add(+15,"m")?
-                      "진료중입니다."
-                      :moment() > moment(this.props.rtime).add(+15,"m")?
-                      "진료시간이 끝났습니다."
-                      :"진료예약 오류"
+                      :""
                       }
                     </th>
                     {
