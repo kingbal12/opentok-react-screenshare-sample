@@ -68,19 +68,23 @@ class VitalDataSetting extends React.Component {
       startdate: "",
       enddate: "",
       startpicker : new Date(),
-      endpicker : new Date()   
+      endpicker : new Date(),
+      resetedit: 1   
     }
-
+    
 
   }
 
   toggle = tab => {
     if (this.state.activeTab !== tab) {
       this.setState({
-        activeTab: tab
+        activeTab: tab,
+        resetedit: this.state.resetedit+1
       })
     }
   }
+
+
  
   render() {
     return (
@@ -278,24 +282,24 @@ class VitalDataSetting extends React.Component {
             </ButtonGroup>
           </Col>
         </Row>
-        <TabContent className="mt-5" activeTab={this.state.activeTab}>
+        <TabContent className="mt-5" activeTab={this.state.activeTab} >
           <TabPane tabId="1">
-            <BPSetting />
+            <BPSetting resetedit={this.state.resetedit} />
           </TabPane>
           <TabPane tabId="2">
-            <PulseSetting />
+            <PulseSetting resetedit={this.state.resetedit} />
           </TabPane>
           <TabPane tabId="3">
-            <WESetting />
+            <WESetting resetedit={this.state.resetedit} />
           </TabPane>
           <TabPane tabId="4">
-            <BSSetting />
+            <BSSetting resetedit={this.state.resetedit} />
           </TabPane>
           <TabPane tabId="5">
-            <TempSetting />
+            <TempSetting resetedit={this.state.resetedit} />
           </TabPane>
           <TabPane tabId="6">
-            <SPO2Setting />
+            <SPO2Setting resetedit={this.state.resetedit} />
           </TabPane>
         </TabContent>
         

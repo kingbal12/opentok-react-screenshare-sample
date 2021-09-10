@@ -22,10 +22,17 @@ class VitalDataSetting extends React.Component {
     this.state={
       normalBPM: props.vitaldata.PULSE_VAL1,
       dangerBPM: props.vitaldata.PULSE_VAL2,
-      edit: false
+      edit: props.resetedit
     }
   }
 
+  componentDidUpdate = (prevProps) => {
+    if (this.props.resetedit !== prevProps.resetedit) {
+      this.setState({
+        edit: false
+      });
+    }
+  };
 
   edit = e => {
     e.preventDefault()

@@ -24,7 +24,7 @@ class VitalDataSetting extends React.Component {
       normaldia_val : props.vitaldata.DIA_VAL1,
       dangersys_val : props.vitaldata.SYS_VAL2,
       dangerdia_val : props.vitaldata.DIA_VAL2,
-      edit: false
+      edit: props.resetedit
     }
   }
 
@@ -35,6 +35,8 @@ class VitalDataSetting extends React.Component {
       edit: !prevState.edit
     }))
   }
+
+ 
 
   putBP = e => {
     e.preventDefault()
@@ -63,6 +65,16 @@ class VitalDataSetting extends React.Component {
      object.target.value = object.target.value.slice(0, object.target.maxLength)
     }
   }
+
+
+  componentDidUpdate = (prevProps) => {
+    if (this.props.resetedit !== prevProps.resetedit) {
+      this.setState({
+        edit: false
+      });
+    }
+  };
+
   
  
   render() {

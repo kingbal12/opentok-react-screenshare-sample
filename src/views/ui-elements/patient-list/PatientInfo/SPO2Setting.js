@@ -26,6 +26,13 @@ class VitalDataSetting extends React.Component {
     }
   }
 
+  componentDidUpdate = (prevProps) => {
+    if (this.props.resetedit !== prevProps.resetedit) {
+      this.setState({
+        edit: false
+      });
+    }
+  };
 
   edit = e => {
     e.preventDefault()
