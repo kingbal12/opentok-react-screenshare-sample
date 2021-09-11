@@ -23,7 +23,7 @@ import {
 } from "../../../../redux/actions/calendar/index"
 import { ChevronLeft, ChevronRight } from "react-feather"
 
-import "react-big-calendar/lib/addons/dragAndDrop/styles.scss"
+// import "react-big-calendar/lib/addons/dragAndDrop/styles.scss"
 import "react-big-calendar/lib/css/react-big-calendar.css"
 import "../../../../assets/scss/plugins/calendars/react-big-calendar.scss" 
 import Radio from "../../../../components/@vuexy/radio/RadioVuexy"

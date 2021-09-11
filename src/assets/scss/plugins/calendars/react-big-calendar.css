@@ -1,4 +1,8 @@
 @charset "UTF-8";
+
+.rbc-allday-cell {
+  display: none;
+}
 .rbc-btn {
   color: inherit;
   font: inherit;

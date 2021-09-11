@@ -21,7 +21,7 @@ import {
 } from "../../../../../redux/actions/calendar/index"
 import { ChevronLeft, ChevronRight } from "react-feather"
 
-import "react-big-calendar/lib/addons/dragAndDrop/styles.scss"
+// import "react-big-calendar/lib/addons/dragAndDrop/styles.scss"
 import "react-big-calendar/lib/css/react-big-calendar.css"
 import "../../../../../assets/scss/plugins/calendars/react-big-calendar.scss"
 // import { history } from "../../../../../history"
@@ -116,7 +116,7 @@ class CalendarApp extends React.Component {
     super(props)
     this.state = {
       userid: props.user.register.values.registeruser,
-      // userid: "kingbal999@gmail.com",
+      // userid: "king@king.com",
       // 이벤트가 왜 저장이 안되는지 모르겠음
       events: cookie,
       views: {

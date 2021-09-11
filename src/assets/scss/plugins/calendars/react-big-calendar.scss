@@ -9,6 +9,10 @@
 // Overrides user variable
 @import "../../core/variables/components-variables";
 
+.rbc-allday-cell {
+  display: none;
+}
+
 .app-calendar {
   z-index: 1;
   .add-event-sidebar {
