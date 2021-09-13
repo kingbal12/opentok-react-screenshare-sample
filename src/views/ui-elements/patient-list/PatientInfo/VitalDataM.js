@@ -66,6 +66,7 @@ import spo2_3 from "../../../../assets/img/dashboard/ID12_08_vital_spo2 3.png"
 import spo2_4 from "../../../../assets/img/dashboard/ID12_08_vital_spo2 4.png"
 import spo2_5 from "../../../../assets/img/dashboard/ID12_08_vital_spo2 5.png"
 import setting from "../../../../assets/img/dashboard/ID16_27_setting.png"
+import { FormattedMessage } from "react-intl"
 
 class VitalData extends React.Component {
   constructor(props) {
@@ -208,7 +209,7 @@ class VitalData extends React.Component {
                     <th><h5 className="text-bold-600">{this.props.pinfo.AGE}</h5></th>
                     <th><h5 className="text-bold-600">{this.props.pinfo.BIRTH_DT}</h5></th>
                     <th><h5 className="text-bold-600">{this.props.pinfo.NOTE_DX}</h5></th>
-                    <th><h5 className="text-bold-600">{this.props.pinfo.FIRST_YN==="N"?"재진":"초진"}</h5></th>
+                    <th><h5 className="text-bold-600">{this.props.pinfo.FIRST_YN==="N"?<FormattedMessage id="재진"/>:<FormattedMessage id="초진"/>}</h5></th>
                     <th className="text-center">
                       <h5 id="vitalIcons">
                         {
@@ -270,37 +271,37 @@ class VitalData extends React.Component {
                         placement="bottom"
                         target="혈압"
                       >
-                        혈압
+                        <FormattedMessage id="혈압"/>
                       </UncontrolledTooltip>
                       <UncontrolledTooltip
                         placement="bottom"
                         target="맥박"
                       >
-                        맥박
+                        <FormattedMessage id="맥박"/>
                       </UncontrolledTooltip>
                       <UncontrolledTooltip
                         placement="bottom"
                         target="체중"
                       >
-                        체중
+                        <FormattedMessage id="체중"/>
                       </UncontrolledTooltip>
                       <UncontrolledTooltip
                         placement="bottom"
                         target="혈당"
                       >
-                        혈당
+                        <FormattedMessage id="혈당"/>
                       </UncontrolledTooltip>
                       <UncontrolledTooltip
                         placement="bottom"
                         target="체온"
                       >
-                        체온
+                        <FormattedMessage id="체온"/>
                       </UncontrolledTooltip>
                       <UncontrolledTooltip
                         placement="bottom"
                         target="산소포화도"
                       >
-                        산소포화도
+                        <FormattedMessage id="SPO2"/>
                       </UncontrolledTooltip>
                     </th>
                     <th id="tblBottomBarTh"><img src={setting} onClick={this.goVitatDataSetting}  width="25px" style={{cursor:"pointer"}} /></th>
@@ -314,22 +315,22 @@ class VitalData extends React.Component {
           <Col xl="12" lg="12" md="12" sm="12" className="d-flex">
             <h5 className="text-bold-600 align-self-center">선택 항목</h5>
             <ButtonGroup className="ml-1">
-              <Button.Ripple outline={this.state.bpbutton===true?false:true} color="primary" onClick={this.handlebp}>혈압</Button.Ripple>
-              <Button.Ripple outline={this.state.pulsebutton===true?false:true} color="primary" onClick={this.handlepulse}>맥박</Button.Ripple>{" "}
-              <Button.Ripple outline={this.state.webutton===true?false:true} color="primary" onClick={this.handlewe}>체중</Button.Ripple>{" "}
-              <Button.Ripple outline={this.state.glbutton===true?false:true} color="primary" onClick={this.handlegl}>혈당</Button.Ripple>{" "}
-              <Button.Ripple outline={this.state.tempbutton===true?false:true} color="primary" onClick={this.handletemp}>체온</Button.Ripple>{" "}
-              <Button.Ripple outline={this.state.spo2button===true?false:true} color="primary" onClick={this.handlespo2}>산소포화도</Button.Ripple>{" "}
+              <Button.Ripple outline={this.state.bpbutton===true?false:true} color="primary" onClick={this.handlebp}><FormattedMessage id="혈압"/></Button.Ripple>
+              <Button.Ripple outline={this.state.pulsebutton===true?false:true} color="primary" onClick={this.handlepulse}><FormattedMessage id="맥박"/></Button.Ripple>{" "}
+              <Button.Ripple outline={this.state.webutton===true?false:true} color="primary" onClick={this.handlewe}><FormattedMessage id="체중"/></Button.Ripple>{" "}
+              <Button.Ripple outline={this.state.glbutton===true?false:true} color="primary" onClick={this.handlegl}><FormattedMessage id="혈당"/></Button.Ripple>{" "}
+              <Button.Ripple outline={this.state.tempbutton===true?false:true} color="primary" onClick={this.handletemp}><FormattedMessage id="체온"/></Button.Ripple>{" "}
+              <Button.Ripple outline={this.state.spo2button===true?false:true} color="primary" onClick={this.handlespo2}><FormattedMessage id="SPO2"/></Button.Ripple>{" "}
               {/* <Button.Ripple color="primary" onClick={this.check}>산소포화도</Button.Ripple>{" "} */}
             </ButtonGroup>
           </Col>
 
           <Col xl="12" lg="12" md="12" sm="12" className="d-flex ml-auto mt-1">
-            <h5 className="text-bold-600 align-self-center">기간</h5>
+            <h5 className="text-bold-600 align-self-center"><FormattedMessage id="기간"/></h5>
 
             <ButtonGroup className="ml-4" >
 
-              <button
+             <button
                 // disabled={this.state.startpickerbtn===true || this.state.endpickerbtn===true?true:false}
                 onClick={() => this.handlePeriod("today")}
                 className={`btn ${
@@ -338,7 +339,7 @@ class VitalData extends React.Component {
                     : "btn-outline-primary text-primary"
                 }`}
               >
-                오늘
+                <FormattedMessage id="오늘"/>
               </button>
               <button
                 // disabled={this.state.startpickerbtn===true || this.state.endpickerbtn===true?true:false}
@@ -349,7 +350,7 @@ class VitalData extends React.Component {
                     : "btn-outline-primary text-primary"
                 }`}
               >
-                1주
+                <FormattedMessage id="1주"/>
               </button>
 
               <button
@@ -361,7 +362,7 @@ class VitalData extends React.Component {
                     : "btn-outline-primary text-primary"
                 }`}
               >
-                1개월
+                <FormattedMessage id="1개월"/>
               </button>
               
               <button
@@ -373,7 +374,7 @@ class VitalData extends React.Component {
                     : "btn-outline-primary text-primary"
                 }`}
               >
-                3개월
+                <FormattedMessage id="3개월"/>
               </button>
             </ButtonGroup>
           </Col>
@@ -414,7 +415,7 @@ class VitalData extends React.Component {
                 <CardHeader className="justify-content-center">
                     <Row>
                       <Col lg="12" >
-                        <h5 className="text-bold-600">혈압</h5>
+                        <h5 className="text-bold-600"><FormattedMessage id="혈압"/></h5>
                       </Col>
                     </Row>
                 </CardHeader>
@@ -469,7 +470,7 @@ class VitalData extends React.Component {
                 <CardHeader className="justify-content-center"> 
                   <Row>
                     <Col lg="12" >
-                      <h5 className="text-bold-600">맥박</h5>
+                      <h5 className="text-bold-600"><FormattedMessage id="맥박"/></h5>
                     </Col>
                   </Row>
                 </CardHeader>
@@ -513,7 +514,7 @@ class VitalData extends React.Component {
                 <CardHeader className="justify-content-center">
                   <Row>
                     <Col lg="12" >
-                      <h5 className="text-bold-600">체중</h5>
+                      <h5 className="text-bold-600"><FormattedMessage id="체중"/></h5>
                     </Col>
                   </Row>
                 </CardHeader>
@@ -558,7 +559,7 @@ class VitalData extends React.Component {
                 <CardHeader className="justify-content-center">
                   <Row>
                     <Col lg="12" >
-                      <h5 className="text-bold-600">혈당</h5>
+                      <h5 className="text-bold-600"><FormattedMessage id="혈당"/></h5>
                     </Col>
                   </Row>
                 </CardHeader>
@@ -597,7 +598,7 @@ class VitalData extends React.Component {
                 <CardHeader className="justify-content-center">
                   <Row>
                     <Col lg="12" >
-                      <h5 className="text-bold-600">체온</h5>
+                      <h5 className="text-bold-600"><FormattedMessage id="체온"/></h5>
                     </Col>
                   </Row>
                 </CardHeader>
@@ -645,7 +646,7 @@ class VitalData extends React.Component {
                 <CardHeader className="justify-content-center">
                   <Row>
                     <Col lg="12" >
-                      <h5 className="text-bold-600">산소포화도</h5>
+                      <h5 className="text-bold-600"><FormattedMessage id="SPO2"/></h5>
                     </Col>
                   </Row>
                 </CardHeader>

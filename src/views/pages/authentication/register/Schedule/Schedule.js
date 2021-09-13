@@ -1,6 +1,6 @@
 import React from "react"
-// import AddEventSidebar from "./AddEventSidebar"
-// import AddEventButton from "./AddEventButton"
+import "react-big-calendar/lib/css/react-big-calendar.css"
+import "../../../../../assets/scss/plugins/calendars/react-big-calendar.scss"
 import { Card, CardBody, Button, ButtonGroup, Modal, FormGroup,
   ModalHeader,
   ModalBody,
@@ -22,8 +22,6 @@ import {
 import { ChevronLeft, ChevronRight } from "react-feather"
 
 // import "react-big-calendar/lib/addons/dragAndDrop/styles.scss"
-import "react-big-calendar/lib/css/react-big-calendar.css"
-import "../../../../../assets/scss/plugins/calendars/react-big-calendar.scss"
 // import { history } from "../../../../../history"
 import Radio from "../../../../../components/@vuexy/radio/RadioVuexy"
 import { cookieSchedules } from "../../../../../redux/actions/cookies"

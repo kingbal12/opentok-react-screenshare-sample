@@ -43,7 +43,7 @@ import Vital_4 from "../../../assets/img/dashboard/ID9_07_table_vital4.png"
 import Vital_5 from "../../../assets/img/dashboard/ID9_07_table_vital5.png"
 import chartimage from "../../../assets/img/dashboard/ID09_07_chart.png"
 import moment from "moment"
-
+import { FormattedMessage } from "react-intl"
 
 const chipColors = {
   "on hold": "warning",
@@ -132,7 +132,7 @@ class DataListConfig extends Component {
     currentPage: 1,
     columns: [
       {
-        name: "예약시간",
+        name: <FormattedMessage id="예약시간"/>,
         selector: "gender",
         sortable: false,
         minWidth: "150px",
@@ -140,7 +140,7 @@ class DataListConfig extends Component {
         cell: row => <p className="text-bold-500 mb-0">{moment(row.APPOINT_TIME).format("hh:mm A")}</p>
       },
       {
-        name: "진료수단",
+        name: <FormattedMessage id="진료수단"/>,
         selector: "gender",
         sortable: false,
         center: true,
@@ -148,7 +148,7 @@ class DataListConfig extends Component {
         <img src={Video} alt="Video" />}</p>
       },
       {
-        name: "이름",
+        name: <FormattedMessage id="name"/>,
         selector: "name",
         sortable: false,
         minWidth: "200px",
@@ -167,21 +167,21 @@ class DataListConfig extends Component {
       },
       
       {
-        name: "성별",
+        name: <FormattedMessage id="성별"/>,
         selector: "gender",
         sortable: false,
         center: true,
         cell: row => <p className="text-bold-500 mb-0">{row.GENDER==="1"|| row.GENDER==="3"?"M":"F"}</p>
       },
       {
-        name: "나이",
+        name: <FormattedMessage id="나이"/>,
         selector: "age",
         sortable: false,
         center: true,
         cell: row => <p className="text-bold-500 mb-0">{(row.AGE)}</p>
       },
       {
-        name: "생년월일",
+        name: <FormattedMessage id="생년월일"/>,
         selector: "birthday",
         sortable: false,
         center: true,
@@ -190,21 +190,21 @@ class DataListConfig extends Component {
         )
       },
       {
-        name: "초진/재진",
+        name: <FormattedMessage id="초진/재진"/>,
         center: true,
         cell: row => (
-          <p className="text-bold-500 text-truncate mb-0">{row.FIRST_YN===""?"초진":row.FIRST_YN==="Y"?"초진":row.FIRST_YN==="N"?"재진":null}</p>
+          <p className="text-bold-500 text-truncate mb-0">{row.FIRST_YN===""?<FormattedMessage id="초진"/>:row.FIRST_YN===""?<FormattedMessage id="초진"/>:<FormattedMessage id="재진"/>}</p>
         )
       },
       {
-        name: "주된증상",
+        name: <FormattedMessage id="주된증상"/>,
         center: true,
         cell: row => (
           <p className="text-bold-500 text-truncate mb-0">{row.SYMPTOM}</p>
         )
       },
       {
-        name: "VitalData",
+        name: "Vital Data",
         center: true,
         cell: row => (
             <p className="text-bold-500 text-truncate mb-0">{ row.VITAL_STATE==="00"? 
@@ -247,7 +247,7 @@ class DataListConfig extends Component {
         )
       },
       {
-        name: "차트보기",
+        name: <FormattedMessage id="차트보기"/>,
         center: true,
         cell: row => (
           <img src={chartimage} alt="chartimage"   onClick={() => this.goPatientList(row.PATIENT_ID,row.APPOINT_NUM)} style={{cursor:"pointer", width:"25px"}}/>

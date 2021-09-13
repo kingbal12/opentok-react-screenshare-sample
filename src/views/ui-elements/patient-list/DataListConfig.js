@@ -69,6 +69,7 @@ import spo2_3 from "../../../assets/img/dashboard/ID12_08_vital_spo2 3.png"
 import spo2_4 from "../../../assets/img/dashboard/ID12_08_vital_spo2 4.png"
 import spo2_5 from "../../../assets/img/dashboard/ID12_08_vital_spo2 5.png"
 import chartimage from "../../../assets/img/dashboard/ID09_07_chart.png"
+import { FormattedMessage } from "react-intl"
 
 const chipColors = {
   "on hold": "warning",
@@ -174,7 +175,7 @@ class DataListConfig extends Component {
     currentPage: 1,
     columns: [  
       {
-        name: "이름",
+        name: <FormattedMessage id="name"/>,
         selector: "name",
         sortable: false,
         minWidth: "200px",
@@ -193,21 +194,21 @@ class DataListConfig extends Component {
       },
       
       {
-        name: "성별",
+        name: <FormattedMessage id="성별"/>,
         selector: "gender",
         sortable: false,
         center:true,
         cell: row => <p className="text-bold-500 mb-0">{row.GENDER==="1"||row.GENDER==="3"?"M":"F"}</p>
       },
       {
-        name: "나이",
+        name: <FormattedMessage id="나이"/>,
         selector: "age",
         sortable: false,
         center:true,
         cell: row => <p className="text-bold-500 mb-0">{row.AGE}</p>
       },
       {
-        name: "생년월일",
+        name: <FormattedMessage id="생년월일"/>,
         selector: "birthday",
         sortable: false,
         center:true,
@@ -223,14 +224,14 @@ class DataListConfig extends Component {
       //   )
       // },
       {
-        name: "초진/재진",
+        name: <FormattedMessage id="초진/재진"/>,
         center:true,
         cell: row => (
-          <p className="text-bold-500 text-truncate mb-0">{row.FIRST_YN==="Y"?"초진":row.FIRST_YN===""?"초진":"재진"}</p>
+          <p className="text-bold-500 text-truncate mb-0">{row.FIRST_YN==="Y"?<FormattedMessage id="초진"/>:row.FIRST_YN===""?<FormattedMessage id="초진"/>:<FormattedMessage id="재진"/>}</p>
         )
       },
       {
-        name: "VitalData",
+        name: "Vital Data",
         center:true,
         cell: row => (
           <Fragment>
@@ -331,7 +332,7 @@ class DataListConfig extends Component {
         )
       },
       {
-        name: "차트보기",
+        name: <FormattedMessage id="차트보기"/>,
         center:true,
         cell: row => (
           <img src={chartimage} alt="chartimage"  onClick={() => this.goPatientList(row.PATIENT_ID)} style={{cursor:"pointer", width:"25px"}} />

@@ -73,6 +73,7 @@ import spo2_5 from "../../../../assets/img/dashboard/ID12_08_vital_spo2 5.png"
 import dot from "../../../../assets/img/dashboard/ID13_11_icon.png"
 import moment from "moment"
 import Countdown from 'react-countdown'
+import { FormattedMessage } from "react-intl"
 
 
 
@@ -229,7 +230,7 @@ class PatientInfo extends React.Component {
                     <th><h5 className="text-bold-600">{this.props.pinfo.AGE}</h5></th>
                     <th><h5 className="text-bold-600">{this.props.pinfo.BIRTH_DT}</h5></th>
                     {/* <th><h5 className="text-bold-600">{this.props.pinfo.NOTE_DX}</h5></th> */}
-                    <th><h5 className="text-bold-600">{this.props.pinfo.FIRST_YN==="N"?"재진":"초진"}</h5></th>
+                    <th><h5 className="text-bold-600">{this.props.pinfo.FIRST_YN==="N"?<FormattedMessage id="재진"/>:<FormattedMessage id="초진"/>}</h5></th>
                     <th className="text-center"> 
                       <h5 id="vitalIcons">
                         {
@@ -367,10 +368,10 @@ class PatientInfo extends React.Component {
               </CardTitle>
               <CardBody className="d-flex pl-0">
                 <div className="col-4">
-                  <h5><span className="text-bold-600">이름</span></h5>
-                  <h5><span className="text-bold-600">성별</span></h5>
-                  <h5><span className="text-bold-600">생년월일</span></h5>
-                  <h5><span className="text-bold-600">연락처</span></h5>
+                  <h5><span className="text-bold-600"><FormattedMessage id="name"/></span></h5>
+                  <h5><span className="text-bold-600"><FormattedMessage id="성별"/></span></h5>
+                  <h5><span className="text-bold-600"><FormattedMessage id="생년월일"/></span></h5>
+                  <h5><span className="text-bold-600"><FormattedMessage id="연락처"/></span></h5>
                 </div>
                 <div className="col-8">
                   <h5>{this.props.pinfo.F_NAME}</h5>
@@ -382,7 +383,7 @@ class PatientInfo extends React.Component {
             </Card>
             <Card className="mb-1" style={{height:"310px", border:"solid silver 1px"}}>
               <CardTitle className="px-1 d-flex justify-content-between" style={{paddingTop:"5px"}}>
-                <h4><b>Past Consulting List</b></h4>
+                <h4><b><FormattedMessage id="Past Cosnulting List"/></b></h4>
                 {/* <Menu onClick={() => this.goPastConsultList(this.props.pinfo.PATIENT_ID)} style={{cursor:"pointer"}}/> */}
                 <img src={dot} onClick={() => this.goPastConsultList(this.props.pinfo.PATIENT_ID)} style={{cursor:"pointer", width:"10px"}} />
               </CardTitle>
@@ -411,13 +412,13 @@ class PatientInfo extends React.Component {
                   </CardTitle>
                   <CardBody className="d-flex pl-0">
                     <div className="col-4">
-                      <h5><span className="text-bold-600">신장/체중</span></h5>
-                      <h5><span className="text-bold-600">흡연여부</span></h5>
-                      <h5><span className="text-bold-600">음주여부</span></h5>
-                      <h5><span className="text-bold-600">본인병력</span></h5>
-                      <h5><span className="text-bold-600">가족병력</span></h5>
-                      <h5><span className="text-bold-600">복용중인 약</span></h5>
-                      <h5><span className="text-bold-600">알러지 유무</span></h5>
+                      <h5><span className="text-bold-600"><FormattedMessage id="신장/체중"/></span></h5>
+                      <h5><span className="text-bold-600"><FormattedMessage id="흡연여부"/></span></h5>
+                      <h5><span className="text-bold-600"><FormattedMessage id="음주여부"/></span></h5>
+                      <h5><span className="text-bold-600"><FormattedMessage id="본인병력"/></span></h5>
+                      <h5><span className="text-bold-600"><FormattedMessage id="가족병력"/></span></h5>
+                      <h5><span className="text-bold-600"><FormattedMessage id="복용중인 약"/></span></h5>
+                      <h5><span className="text-bold-600"><FormattedMessage id="알러지 유무"/></span></h5>
                     </div>
                     <div className="col-8">
                       <h5>{this.props.pinfo.HEIGHT_VAL}cm&nbsp;/&nbsp;{this.props.pinfo.WEIGHT_VAL}kg</h5>
@@ -436,7 +437,7 @@ class PatientInfo extends React.Component {
                 <Card className="mb-1" style={{height:"119px", border:"solid silver 1px"}}>
                 
                   <CardTitle className="pl-1" style={{paddingTop:"5px"}}>
-                    <h4><b>Present Condition</b></h4>
+                    <h4><b><FormattedMessage id="Present Condition"/></b></h4>
                   </CardTitle>
                   <CardBody className="d-flex pl-0">
                     <div className="col-12">
@@ -447,7 +448,7 @@ class PatientInfo extends React.Component {
                 </Card>
                 <Card className="mb-1" style={{height:"169px", border:"solid silver 1px"}}>
                   <CardTitle className="pl-1" style={{paddingTop:"5px"}}>
-                    <h4><b>Files</b></h4>
+                    <h4><b><FormattedMessage id="Files"/></b></h4>
                   </CardTitle>
                   <CardBody>
                     {file_preview}
@@ -467,7 +468,7 @@ class PatientInfo extends React.Component {
                   {this.props.bpdata.length===0?null:
                     <div className="col-2 pl-0">
                       <Row className="justify-content-center" ><h5>혈압</h5></Row>
-                      <ResponsiveContainer width={200} height="95%">
+                      <ResponsiveContainer height="95%">
                         <LineChart
                           className="col-2"
                           data={this.props.bpdata}
@@ -498,7 +499,7 @@ class PatientInfo extends React.Component {
                   {this.props.pulstdata.length===0?null:
                     <div className="col-2 pl-0">
                       <Row className="justify-content-center"><h5>맥박</h5></Row>
-                      <ResponsiveContainer width={200}  height="95%">
+                      <ResponsiveContainer  height="95%">
                         <LineChart
                           className="col-2"
                           data={this.props.pulstdata}
@@ -523,7 +524,7 @@ class PatientInfo extends React.Component {
                   {this.props.wedata.length===0?null:
                     <div className="col-2 pl-0">
                       <Row className="justify-content-center"><h5>체중</h5></Row>
-                      <ResponsiveContainer width={200}  height="95%">
+                      <ResponsiveContainer  height="95%">
                         <LineChart
                           className="col-2"
                           data={this.props.wedata}
@@ -555,7 +556,7 @@ class PatientInfo extends React.Component {
                   {this.props.bsdata.length===0?null:
                     <div className="col-2 pl-0">
                       <Row className="justify-content-center"><h5>혈당</h5></Row>
-                      <ResponsiveContainer width={200}  height="95%">
+                      <ResponsiveContainer height="95%">
                         <LineChart
                           className="col-2"
                           data={this.props.bsdata}
@@ -579,7 +580,7 @@ class PatientInfo extends React.Component {
                   {this.props.tempdata.length===0?null:
                     <div className="col-2 pl-0">
                       <Row className="justify-content-center"><h5>체온</h5></Row>
-                      <ResponsiveContainer width={200}  height="95%">
+                      <ResponsiveContainer  height="95%">
                         <LineChart
                           className="col-2"
                           data={this.props.tempdata}

@@ -439,7 +439,7 @@ class Register extends React.Component {
           <Card className="mt-1">
             <CardBody className="pt-1">
               <Row>
-                <h5 className="text-bold-400 ">진료분야</h5>
+                <h5 className="text-bold-400 "><FormattedMessage id="Specialty"/></h5>
               </Row>
               <Row>
                 {this.state.medicalable}
@@ -449,7 +449,7 @@ class Register extends React.Component {
           <Card className="mt-1">
             <CardBody className="pt-1">
               <Row>
-                <h5 className="text-bold-400 ">약력</h5>
+                <h5 className="text-bold-400 "><FormattedMessage id="Introduction"/></h5>
               </Row>
               <Row>
                 <pre>
@@ -461,7 +461,7 @@ class Register extends React.Component {
           <Card className="mt-1">
             <CardBody className="pt-1">
               <Row>
-                <h5 className="text-bold-400 ">자기소개</h5>
+                <h5 className="text-bold-400 "><FormattedMessage id="Introduction"/></h5>
               </Row>
               <Row>
                 <pre>
