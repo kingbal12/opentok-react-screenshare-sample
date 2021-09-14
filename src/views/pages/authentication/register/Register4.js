@@ -429,12 +429,12 @@ class Register extends React.Component {
             <h5 className="text-bold-600">{this.state.name}</h5>
           </Row>
           <Row className="d-flex justify-content-center">
-            {this.state.medicalpart==="01"?"가정의학과":
-             this.state.medicalpart==="02"?"내과":
-             this.state.medicalpart==="03"?"산부인과":
-             this.state.medicalpart==="04"?"피부과":
-             this.state.medicalpart==="05"?"비뇨기과":
-             this.state.medicalpart==="99"?"기타": null}
+            {this.state.medicalpart==="01"?<FormattedMessage id="가정의학과"/>:
+             this.state.medicalpart==="02"?<FormattedMessage id="내과"/>:
+             this.state.medicalpart==="03"?<FormattedMessage id="산부인과"/>:
+             this.state.medicalpart==="04"?<FormattedMessage id="피부과"/>:
+             this.state.medicalpart==="05"?<FormattedMessage id="비뇨기과"/>:
+             this.state.medicalpart==="99"?<FormattedMessage id="기타"/>: null}          
           </Row>
           <Card className="mt-1">
             <CardBody className="pt-1">
@@ -449,7 +449,7 @@ class Register extends React.Component {
           <Card className="mt-1">
             <CardBody className="pt-1">
               <Row>
-                <h5 className="text-bold-400 "><FormattedMessage id="Introduction"/></h5>
+                <h5 className="text-bold-400 "><FormattedMessage id="EMPE"/></h5>
               </Row>
               <Row>
                 <pre>

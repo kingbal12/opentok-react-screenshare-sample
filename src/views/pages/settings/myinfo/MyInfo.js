@@ -300,7 +300,7 @@ class MyInfo extends React.Component {
               <Card className="rounded-0 mb-0 p-2">
                 <CardHeader className="pt-50">
                   <CardTitle>
-                    <h3 className="text-bold-600">개인정보 수정하기</h3>
+                    <h3 className="text-bold-600"><FormattedMessage id="개인정보"/></h3>
                   </CardTitle>
                 </CardHeader>     
                 <CardBody className="pt-1 pb-50">
@@ -309,24 +309,24 @@ class MyInfo extends React.Component {
                   </Col>
                   <Col lg="8" md="12">
                   <div className="form-label-group d-flex">
-                    <div className="col-2 align-self-center"><b>아이디</b></div>
+                    <div className="col-2 align-self-center"><b><FormattedMessage id="ID"/></b></div>
                     <div className="col-3">{this.state.userid}</div>
                     <div className="col-1"></div>
-                    <div className="col-1 align-self-center"><b>이름</b></div>
+                    <div className="col-1 align-self-center"><b><FormattedMessage id="Name"/></b></div>
                     <div className="align-self-center">{this.state.name}</div>
                   </div> 
                   <div className="form-label-group d-flex">
-                    <div className="col-2 align-self-center"><b>생년월일</b></div>
+                    <div className="col-2 align-self-center"><b><FormattedMessage id="생년월일"/></b></div>
                     <div className="col-3">{this.state.birthday}</div>
                     <div className="col-1"></div>
-                    <div className="col-1 align-self-center"><b>성별</b></div>
+                    <div className="col-1 align-self-center"><b><FormattedMessage id="성별"/></b></div>
                     <div>{this.state.gender}</div>
                     <div className="col-2"></div>
-                    <div className="col-2 align-self-center"><b>의사 면허번호</b></div>
+                    <div className="col-2 align-self-center"><b><FormattedMessage id="License"/></b></div>
                     <div>{this.state.medicalnum}</div>
                   </div>
                   <div className="form-label-group d-flex" >
-                    <div className="col-2 align-self-center"><b>휴대폰 번호</b></div>
+                    <div className="col-2 align-self-center"><b><FormattedMessage id="PH"/></b></div>
                     <div className="col-2 align-self-center">{this.state.phonenumber}</div>
 
                     <Button className="ml-1" color="primary" onClick={this.togglePhonenum}>
@@ -362,7 +362,7 @@ class MyInfo extends React.Component {
                   }  
                   <Form action="/" onSubmit={this.handleRegister}>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-2"><b>프로필 사진 등록<span className="text-danger">(필수)</span></b></div>
+                      <div className="col-2"><b><FormattedMessage id="Add Image"/><span className="text-danger">(필수)</span></b></div>
                       <InputGroup>
                         <CustomInput
                           className="col-11" 
@@ -376,19 +376,19 @@ class MyInfo extends React.Component {
                       <div >{profile_preview}</div>
                     </FormGroup> 
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-2 align-self-center"><b>진료과<span className="text-danger">(필수)</span></b></div>
+                      <div className="col-2 align-self-center"><b><FormattedMessage id="Department"/><span className="text-danger">(필수)</span></b></div>
                       <Input type="select" name="select" value={this.state.medicalpart}  onChange={e => this.setState({ medicalpart: e.target.value })}>
-                        <option value="01">가정의학과</option>
-                        <option value="02">내과</option>
-                        <option value="03">산부인과</option>
-                        <option value="04">피부과</option>
-                        <option value="05">비뇨기과</option>
-                        <option value="99">기타</option>
+                        <option value="01"><FormattedMessage id="가정의학과"/></option>
+                        <option value="02"><FormattedMessage id="내과"/></option>
+                        <option value="03"><FormattedMessage id="산부인과"/></option>
+                        <option value="04"><FormattedMessage id="피부과"/></option>
+                        <option value="05"><FormattedMessage id="비뇨기과"/></option>
+                        <option value="99"><FormattedMessage id="기타"/></option>
                       </Input>
                     </FormGroup>
                     
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-2 align-self-center"><b>진료가능분야<span className="text-danger">(필수)</span></b></div>
+                      <div className="col-2 align-self-center"><b><FormattedMessage id="Specialty"/><span className="text-danger">(필수)</span></b></div>
                       <InputGroup>
                         <Input
                           type="text"
@@ -402,7 +402,7 @@ class MyInfo extends React.Component {
 
                     <FormGroup className="form-label-group">
                       <div className="d-flex justify-content-between">
-                        <div className="col-2 align-self-start"><b>약력<span className="text-danger">(필수)</span></b></div>
+                        <div className="col-2 align-self-start"><b><FormattedMessage id="EMPE"/><span className="text-danger">(필수)</span></b></div>
                         <InputGroup>
                           <Input
                             type="textarea"
@@ -425,7 +425,7 @@ class MyInfo extends React.Component {
 
                     <FormGroup className="form-label-group pt-1">
                       <div className="d-flex justify-content-between">
-                        <div className="col-2 align-self-start"><b>자기소개</b></div>
+                        <div className="col-2 align-self-start"><b><FormattedMessage id="Introduction"/></b></div>
                         <InputGroup>
                           <Input
                             type="textarea"
@@ -470,7 +470,7 @@ class MyInfo extends React.Component {
                       color="primary" 
                       type="submit"
                       >
-                        저장하기
+                        <FormattedMessage id="Save"/>
                       </Button>
 
                     </div>
@@ -500,17 +500,17 @@ class MyInfo extends React.Component {
             <h5 className="text-bold-600">{this.state.name}</h5>
           </Row>
           <Row className="d-flex justify-content-center">
-            {this.state.medicalpart==="01"?"가정의학과":
-             this.state.medicalpart==="02"?"내과":
-             this.state.medicalpart==="03"?"산부인과":
-             this.state.medicalpart==="04"?"피부과":
-             this.state.medicalpart==="05"?"비뇨기과":
-             this.state.medicalpart==="99"?"기타": null}
+            {this.state.medicalpart==="01"?<FormattedMessage id="가정의학과"/>:
+             this.state.medicalpart==="02"?<FormattedMessage id="내과"/>:
+             this.state.medicalpart==="03"?<FormattedMessage id="산부인과"/>:
+             this.state.medicalpart==="04"?<FormattedMessage id="피부과"/>:
+             this.state.medicalpart==="05"?<FormattedMessage id="비뇨기과"/>:
+             this.state.medicalpart==="99"?<FormattedMessage id="기타"/>: null}          
           </Row>
           <Card className="mt-1">
             <CardBody className="pt-1">
               <Row>
-                <h5 className="text-bold-400 ">진료분야</h5>
+                <h5 className="text-bold-400 "><FormattedMessage id="Specialty"/></h5>
               </Row>
               <Row>
                 {this.state.medicalable}
@@ -520,7 +520,7 @@ class MyInfo extends React.Component {
           <Card className="mt-1">
             <CardBody className="pt-1">
               <Row>
-                <h5 className="text-bold-400 ">약력</h5>
+                <h5 className="text-bold-400 "><FormattedMessage id="EMPE"/></h5>
               </Row>
               <Row>
                 <pre>
@@ -532,7 +532,7 @@ class MyInfo extends React.Component {
           <Card className="mt-1">
             <CardBody className="pt-1">
               <Row>
-                <h5 className="text-bold-400 ">자기소개</h5>
+                <h5 className="text-bold-400 "><FormattedMessage id="Introduction"/></h5>
               </Row>
               <Row>
                 <pre>

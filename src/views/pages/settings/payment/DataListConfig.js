@@ -41,6 +41,7 @@ import "../../../../assets/scss/pages/data-list.scss"
 import moment from "moment"
 import { CSVLink, CSVDownload } from "react-csv";
 import axios from "axios"
+import { FormattedMessage } from "react-intl"
 
 const chipColors = {
   "on hold": "warning",
@@ -434,11 +435,11 @@ class DataListConfig extends Component {
           this.props.thumbView ? "thumb-view" : "list-view"
         }`}>
         <Row>
-          <h4 className="text-bold-600">진료비 청구내역</h4>
+          <h4 className="text-bold-600"><FormattedMessage id="진료비 청구내역"/></h4>
         </Row>
         <Row className="mt-2">
           <Col lg="6" md="12" className="p-0 d-flex">
-            <h4 className="col-2 align-self-center text-bold-600">기간</h4> 
+            <h4 className="col-2 align-self-center text-bold-600"><FormattedMessage id="기간"/></h4> 
             <Input 
               type="select" 
               name="select"
@@ -478,7 +479,7 @@ class DataListConfig extends Component {
             </Input>
 
             <h5 className="align-self-center  ml-1 text-bold-600">월</h5> 
-            <Button className="ml-1" style={{marginBottom:"0.5em"}} color="primary" onClick={this.getpay}>조회</Button>
+            <Button className="ml-1" style={{marginBottom:"0.5em"}} color="primary" onClick={this.getpay}><FormattedMessage id="검색"/></Button>
           </Col>
           
         </Row>
@@ -491,7 +492,7 @@ class DataListConfig extends Component {
           </Col>
         </Row>
         <div className="data-list-header d-flex justify-content-between flex-wrap mt-2">    
-          <h2>이번달 내역</h2>
+          <h2><FormattedMessage id="이번달 내역"/></h2>
         </div>
 
           {/* <Button className="ml-2" color='primary' outline onClick={this.seeState}>검색</Button> */}
@@ -574,7 +575,7 @@ class DataListConfig extends Component {
             type="button"
             
             >
-              내역서 다운로드
+              <FormattedMessage id="내역서 다운로드"/>
             </Button>
           </CSVLink>
           </Col>

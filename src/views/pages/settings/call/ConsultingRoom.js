@@ -56,6 +56,7 @@ import Countdown from 'react-countdown'
 import Question from "../../../../assets/img/logo/question.png"
 import Clock from 'react-live-clock';
 import HicareLogo from "../../../../assets/img/logo/logo2.png"
+import { FormattedMessage } from "react-intl"
 
 class Cslist extends React.Component { 
   render() { 
@@ -622,7 +623,7 @@ class ConsultingRoom extends React.Component {
               // onClick={()=> history.push("/pages/callsetting")}
               onClick={this.settingModal}
             >
-              설정
+              <FormattedMessage id="설정"/>
             </Button>
           </Col>
         </Row>
@@ -727,12 +728,12 @@ class ConsultingRoom extends React.Component {
               className="modal-lg"
             >
               <ModalHeader toggle={this.settingModal}>
-                <b>영상진료 설정</b>
+                <b><FormattedMessage id="영상 진료 카메라 및 마이크설정"/></b>
               </ModalHeader>
               <ModalBody>
                 <Row className="mt-1">
                   <Col lg="3" md="12" className="align-self-center">
-                    <h5 className="text-bold-600">카메라 설정</h5>
+                    <h5 className="text-bold-600"><FormattedMessage id="카메라 설정"/></h5>
                   </Col>
                   <Col lg="6" md="12">
                     <Select 
@@ -746,13 +747,13 @@ class ConsultingRoom extends React.Component {
                   </Col>
                   <Col lg="3" md="12">
                     <Button.Ripple outline color="primary" size="md" onClick={this.setCamera}>
-                      적용
+                      <FormattedMessage id="적용"/>
                     </Button.Ripple>
                   </Col>
                 </Row>    
                 <Row className="mt-1">
                   <Col lg="3" md="12" className="align-self-center">
-                    <h5 className="text-bold-600">마이크 설정</h5>
+                    <h5 className="text-bold-600"><FormattedMessage id="마이크 설정"/></h5>
                   </Col>
                   <Col lg="6" md="12">
                     <Select 
@@ -766,13 +767,13 @@ class ConsultingRoom extends React.Component {
                   </Col>
                   <Col lg="3" md="12">
                     <Button.Ripple outline color="primary" size="md">
-                      적용
+                      <FormattedMessage id="적용"/>
                     </Button.Ripple>
                   </Col>
                 </Row>
                 <Row className="mt-1">
                   <Col lg="3" md="12" className="align-self-center">
-                    <h5 className="text-bold-600">스피커 설정</h5>
+                    <h5 className="text-bold-600"><FormattedMessage id="스피커 설정"/></h5>
                   </Col>
                   <Col lg="6" md="12">
                     <Select 
@@ -786,14 +787,14 @@ class ConsultingRoom extends React.Component {
                   </Col>
                   <Col lg="3" md="12">
                     <Button.Ripple outline color="primary" size="md" onClick={this.setSpeaker}>
-                      적용
+                      <FormattedMessage id="적용"/>
                     </Button.Ripple>
                   </Col>
                 </Row>  
               </ModalBody>
               <ModalFooter>
                 <Button color="primary" onClick={this.settingModal}>
-                  저장 후 닫기
+                  <FormattedMessage id="저장 후 닫기"/>
                 </Button>
               </ModalFooter>
             </Modal>
@@ -892,7 +893,7 @@ class ConsultingRoom extends React.Component {
               <ModalBody>
                 <Row>
                   <Col lg="3" md="12" className="align-self-center pt-0">
-                    <h5 className="text-bold-600">환자명</h5>
+                    <h5 className="text-bold-600"><FormattedMessage id="환자명"/></h5>
                   </Col>
                   <Col lg="9" md="12" >
                     <h5>{this.props.pinfo.F_NAME}</h5>
@@ -900,7 +901,7 @@ class ConsultingRoom extends React.Component {
                 </Row>
                 <Row className="mt-1">
                   <Col lg="3" md="12" className="align-self-center pt-0">
-                    <h5 className="text-bold-600">약국명</h5>
+                    <h5 className="text-bold-600"><FormattedMessage id="약국명"/></h5>
                   </Col>
                   <Col lg="9" md="12" >
                       <h5>{this.state.pname===undefined?"없음":this.state.pname}</h5>
@@ -908,7 +909,7 @@ class ConsultingRoom extends React.Component {
                 </Row>
                 <Row className="mt-1">
                   <Col lg="3" md="12" className="align-self-center pt-0">
-                    <h5 className="text-bold-600">약국 주소</h5>
+                    <h5 className="text-bold-600"><FormattedMessage id="약국 주소"/></h5>
                   </Col>
                   <Col lg="9" md="12" >
                       <h5>{this.state.paddress===undefined?"없음":this.state.paddress}</h5>
@@ -924,7 +925,7 @@ class ConsultingRoom extends React.Component {
                 </Row>
                 <Row className="mt-1">
                   <Col lg="3" md="12" className="align-self-center pt-0">
-                    <h5 className="text-bold-600">처방전 보내기</h5>
+                    <h5 className="text-bold-600"><FormattedMessage id="처방전 보내기"/></h5>
                   </Col>
                   <Col lg="9" md="12" className="d-flex align-self-center">
                     <Checkbox
@@ -946,7 +947,7 @@ class ConsultingRoom extends React.Component {
                 </Row>
                 <Row className="mt-1">
                   <Col lg="3" md="12" className="align-self-center">
-                    <h5 className="text-bold-600">처방전 업로드</h5>
+                    <h5 className="text-bold-600"><FormattedMessage id="처방전 업로드"/></h5>
                   </Col>
                   
                   <Col lg="9" md="12" className="pt-1 align-self-center">
@@ -964,7 +965,7 @@ class ConsultingRoom extends React.Component {
               </ModalBody>
               <ModalFooter>
                 <Button color="primary" onClick={this.postPrescription}>
-                  전송
+                  <FormattedMessage id="전송"/>
                 </Button>
               </ModalFooter>
             </Modal>
@@ -1060,7 +1061,7 @@ class ConsultingRoom extends React.Component {
                 <Col lg="7" md="12" className="align-self-center pt-0">
                   <Row>
                     <Col lg="5" md="12" className="align-self-center pt-0">
-                      <h5 className="text-bold-600">환자 본인부담금</h5>
+                      <h5 className="text-bold-600"><FormattedMessage id="환자 본인부담금"/></h5>
                     </Col>
                     <Col lg="5" md="11" className="align-self-center pt-0">
                       <FormGroup className="align-self-center pt-1">
@@ -1079,7 +1080,7 @@ class ConsultingRoom extends React.Component {
                 <Col lg="5" md="12" >
                   <Row>
                     <Col lg="4" md="12" className="align-self-center pt-0">
-                      <h5 className="text-bold-600">최종 청구액</h5>
+                      <h5 className="text-bold-600"><FormattedMessage id="최종 청구액"/></h5>
                     </Col>
                     <Col lg="6" md="11" className="align-self-center pt-0">
                       <FormGroup className="align-self-center pt-1">
@@ -1100,7 +1101,7 @@ class ConsultingRoom extends React.Component {
             </ModalBody>
             <ModalFooter className="text-right">
               <Button color="primary" onClick={this.postPayment}>
-                전송
+                <FormattedMessage id="전송"/>
               </Button>
             </ModalFooter>
           </Modal>
@@ -1112,10 +1113,10 @@ class ConsultingRoom extends React.Component {
                   </CardTitle>
                   <CardBody className="d-flex pl-0 pt-0">
                     <div className="col-5">
-                      <h6><span className="text-bold-600">이름</span></h6>
-                      <h6><span className="text-bold-600">성별</span></h6>
-                      <h6><span className="text-bold-600">생년월일</span></h6>
-                      <h6><span className="text-bold-600">연락처</span></h6>
+                      <h6><span className="text-bold-600"><FormattedMessage id="이름"/></span></h6>
+                      <h6><span className="text-bold-600"><FormattedMessage id="성별"/></span></h6>
+                      <h6><span className="text-bold-600"><FormattedMessage id="생년월일"/></span></h6>
+                      <h6><span className="text-bold-600"><FormattedMessage id="연락처"/></span></h6>
                     </div>
                     <div className="col-7">
                       <h6>{this.props.pinfo.F_NAME}</h6>
@@ -1131,13 +1132,13 @@ class ConsultingRoom extends React.Component {
                   </CardTitle>
                   <CardBody className="d-flex pl-0 pt-0">
                     <div className="col-4">
-                      <h6><span className="text-bold-600">신장/체중</span></h6>
-                      <h6><span className="text-bold-600">흡연여부</span></h6>
-                      <h6><span className="text-bold-600">음주여부</span></h6>
-                      <h6><span className="text-bold-600">본인병력</span></h6>
-                      <h6><span className="text-bold-600">가족병력</span></h6>
-                      <h6><span className="text-bold-600">복용중인 약</span></h6>
-                      <h6><span className="text-bold-600">알러지 유무</span></h6>
+                      <h6><span className="text-bold-600"><FormattedMessage id="신장/체중"/></span></h6>
+                      <h6><span className="text-bold-600"><FormattedMessage id="흡연여부"/></span></h6>
+                      <h6><span className="text-bold-600"><FormattedMessage id="음주여부"/></span></h6>
+                      <h6><span className="text-bold-600"><FormattedMessage id="본인병력"/></span></h6>
+                      <h6><span className="text-bold-600"><FormattedMessage id="가족병력"/></span></h6>
+                      <h6><span className="text-bold-600"><FormattedMessage id="복용중인 약"/></span></h6>
+                      <h6><span className="text-bold-600"><FormattedMessage id="알러지 유무"/></span></h6>
                     </div>
                     <div className="col-8">
                       <h6>{this.props.pinfo.HEIGHT_VAL}cm&nbsp;/&nbsp;{this.props.pinfo.WEIGHT_VAL}kg</h6>

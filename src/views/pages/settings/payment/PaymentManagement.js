@@ -11,7 +11,7 @@ import {
 import "../../../../assets/scss/pages/authentication.scss"
 import DataListConfig from "./DataListConfig"
 import queryString from "query-string"
-
+import { FormattedMessage } from "react-intl"
 
 
 class PaymentManagement extends React.Component {
@@ -32,7 +32,7 @@ class PaymentManagement extends React.Component {
               <Card className="rounded-0 mb-0 p-2">
                 <CardHeader className="pt-50">
                   <CardTitle>
-                    <h3 className="text-bold-600">결제 관리</h3>
+                    <h3 className="text-bold-600"><FormattedMessage id="결제관리"/></h3>
                   </CardTitle>
                 </CardHeader>   
               <CardBody className="px-6 pb-50">

@@ -420,7 +420,7 @@ class CalendarApp extends React.Component {
                 size="lg"
                 onClick={this.modifychedule}
               >
-                저장
+                <FormattedMessage id="Save"/>
               </Button>
             </div>
 

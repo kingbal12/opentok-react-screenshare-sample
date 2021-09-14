@@ -292,37 +292,37 @@ class PatientInfo extends React.Component {
                         placement="bottom"
                         target="혈압"
                       >
-                        혈압
+                        <FormattedMessage id="혈압"/>
                       </UncontrolledTooltip>
                       <UncontrolledTooltip
                         placement="bottom"
                         target="맥박"
                       >
-                        맥박
+                        <FormattedMessage id="맥박"/>
                       </UncontrolledTooltip>
                       <UncontrolledTooltip
                         placement="bottom"
                         target="체중"
                       >
-                        체중
+                        <FormattedMessage id="체중"/>
                       </UncontrolledTooltip>
                       <UncontrolledTooltip
                         placement="bottom"
                         target="혈당"
                       >
-                        혈당
+                        <FormattedMessage id="혈당"/>
                       </UncontrolledTooltip>
                       <UncontrolledTooltip
                         placement="bottom"
                         target="체온"
                       >
-                        체온
+                        <FormattedMessage id="체온"/>
                       </UncontrolledTooltip>
                       <UncontrolledTooltip
                         placement="bottom"
                         target="산소포화도"
                       >
-                        산소포화도
+                        <FormattedMessage id="SPO2"/>
                       </UncontrolledTooltip>
                     </th>
                     <th>

@@ -43,6 +43,7 @@ import "../../../../assets/scss/pages/data-list.scss"
 import moment from "moment"
 import { Fragment } from "react"
 import Axios from "axios"
+import { FormattedMessage } from "react-intl"
 
 
 const chipColors = {
@@ -392,7 +393,7 @@ class DataListConfig extends Component {
           </ModalFooter>
         </Modal>
         <Row>
-          <h3 className="text-bold-600 pl-1">공지사항</h3>
+          <h3 className="text-bold-600 pl-1"><FormattedMessage id="공지사항"/></h3>
         </Row>
           {/* <Button className="ml-2" color='primary' outline onClick={this.seeState}>검색</Button> */}
         <DataTable

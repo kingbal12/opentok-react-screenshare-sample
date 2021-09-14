@@ -13,7 +13,7 @@ import {InputGroup, Form, FormGroup, Input, Button,
 import "../../../../assets/scss/pages/authentication.scss"
 import { changepassword } from "../../../../redux/actions/auth/registerActions"
 import { connect } from "react-redux"
-
+import { FormattedMessage } from "react-intl"
 
 
 
@@ -64,7 +64,7 @@ class ChagePassword extends React.Component {
               <Card className="rounded-0 mb-0 p-2">
                 <CardHeader className="pb-1 pt-50">
                   <CardTitle>
-                    <h3 className="text-bold-600">비밀번호 변경</h3>
+                    <h3 className="text-bold-600"><FormattedMessage id="비밀번호 변경"/></h3>
                   </CardTitle>
                 </CardHeader>   
               <CardBody className="pt-1 pb-50">
@@ -74,11 +74,11 @@ class ChagePassword extends React.Component {
                   <Col lg="8" md="12">
                   <Form action="/" onSubmit={this.handlechangepassword}>
                     <div className="form-label-group d-flex">
-                      <div className="col-1 align-self-center"><b>아이디</b></div>
+                      <div className="col-1 align-self-center"><b><FormattedMessage id="ID"/></b></div>
                       <div className="text-primary">{this.state.userid}</div>
                     </div> 
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-2 align-self-center"><b>현재 비밀번호</b></div>
+                      <div className="col-2 align-self-center"><b><FormattedMessage id="현재 비밀번호"/></b></div>
                       <InputGroup>
                         <Input
                           type="password"
@@ -95,7 +95,7 @@ class ChagePassword extends React.Component {
                     </div>
                     
                     <FormGroup className="form-label-group d-flex justify-content-between mt-2">
-                      <div className="col-2 align-self-center"><b>새 비밀번호</b></div>
+                      <div className="col-2 align-self-center"><b><FormattedMessage id="새 비밀번호"/></b></div>
                       <InputGroup>
                         <Input
                           type="password"
@@ -109,7 +109,7 @@ class ChagePassword extends React.Component {
 
                     <FormGroup className="form-label-group">
                       <div className="d-flex justify-content-between">
-                        <div className="col-2 align-self-start"><b>새 비밀번호 확인</b></div>
+                        <div className="col-2 align-self-start"><b><FormattedMessage id="새 비밀번호 확인"/></b></div>
                         <InputGroup>
                           <Input
                             type="password"
@@ -128,7 +128,7 @@ class ChagePassword extends React.Component {
                       color="primary" 
                       type="submit"
                       >
-                        저장하기
+                        <FormattedMessage id="Save"/>
                       </Button>
                     </div>
                   </Form>

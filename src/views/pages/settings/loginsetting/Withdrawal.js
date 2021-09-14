@@ -17,7 +17,7 @@ import { connect } from "react-redux"
 import { Check } from "react-feather"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import { history } from "../../../../history"
-
+import { FormattedMessage } from "react-intl"
 
 
 class Withdrawal extends React.Component {
@@ -136,7 +136,7 @@ class Withdrawal extends React.Component {
               <Card className="rounded-0 mb-0 p-2">
                 <CardHeader className="pb-1 pt-50">
                   <CardTitle>
-                    <h3 className="text-bold-600">회원탈퇴</h3>
+                    <h3 className="text-bold-600"><FormattedMessage id="회원탈퇴"/></h3>
                   </CardTitle>
                 </CardHeader>   
               <CardBody className="pt-1 pb-50">
@@ -167,7 +167,7 @@ class Withdrawal extends React.Component {
                       disabled={this.state.checkwithdrawal===true?false:true}
                       onClick={this.checkModal}
                       >
-                        회원 탈퇴
+                        <FormattedMessage id="회원탈퇴"/>
                       </Button>
                     </div>
                   </Form>

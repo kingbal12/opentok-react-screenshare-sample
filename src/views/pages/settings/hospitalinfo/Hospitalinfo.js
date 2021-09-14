@@ -228,7 +228,7 @@ class Hospitalinfo extends React.Component {
             <Card className="rounded-0 mb-0 p-2">
                 <CardHeader className="pb-1 pt-50">
                   <CardTitle>
-                    <h3><b>병원정보 수정하기</b></h3>
+                    <h3><b><FormattedMessage id="병원정보"/></b></h3>
                   </CardTitle>
                 </CardHeader>   
               <CardBody className="pt-1 pb-50">
@@ -238,7 +238,7 @@ class Hospitalinfo extends React.Component {
                   <Col lg="8" md="12">
                   <Form action="/" onSubmit={this.handleRegister}>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-3 align-self-center"><b>병원명 <span className="text-danger">(필수)</span></b></div>
+                      <div className="col-3 align-self-center"><b><FormattedMessage id="CN"/> <span className="text-danger">(필수)</span></b></div>
                       <InputGroup>
                         <Input
                           type="text"
@@ -250,7 +250,7 @@ class Hospitalinfo extends React.Component {
                       </InputGroup>
                     </FormGroup>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-3 align-self-center"><b>사업자 등록번호 <span className="text-danger">(필수)</span></b></div>
+                      <div className="col-3 align-self-center"><b><FormattedMessage id="CRN"/> <span className="text-danger">(필수)</span></b></div>
                       <InputGroup>
                         <Input
                           type="number"
@@ -265,7 +265,7 @@ class Hospitalinfo extends React.Component {
                     </FormGroup>
                     <FormGroup className="form-label-group">
                       <div className="d-flex justify-content-between">
-                        <div className="col-3 align-self-start"><b>병원 주소 <span className="text-danger">(필수)</span></b></div>
+                        <div className="col-3 align-self-start"><b><FormattedMessage id="Address"/><span className="text-danger">(필수)</span></b></div>
                         <InputGroup className="mb-1" onClick={this.zipModal}>
                           <Input
                             type="text"
@@ -275,7 +275,7 @@ class Hospitalinfo extends React.Component {
                             onChange={e => this.setState({ address1: e.target.value })}
                           />
                           <InputGroupAddon addonType="append">
-                            <Button color="primary" type="button">우편번호 검색</Button>
+                            <Button color="primary" type="button"><FormattedMessage id="우편번호 검색"/></Button>
                           </InputGroupAddon>
                         </InputGroup>
                       </div>
@@ -330,13 +330,13 @@ class Hospitalinfo extends React.Component {
                         </ModalBody>
                         <ModalFooter>
                           <Button color="primary" onClick={this.zipModal}>
-                            저장
+                            <FormattedMessage id="Save"/>
                           </Button>
                         </ModalFooter>
                       </Modal>
                     </FormGroup>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-3 align-self-center"><b>병원 전화번호 <span className="text-danger">(필수)</span></b></div>
+                      <div className="col-3 align-self-center"><b><FormattedMessage id="CNumber"/><span className="text-danger">(필수)</span></b></div>
                       <InputGroup>
                         <Input
                           type="number"
@@ -348,10 +348,10 @@ class Hospitalinfo extends React.Component {
                       </InputGroup>
                     </FormGroup>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-3 self-align-start"><b>병원 계좌정보 <span className="text-danger">(필수)</span></b></div>
+                      <div className="col-3 self-align-start"><b><FormattedMessage id="CAI"/><span className="text-danger">(필수)</span></b></div>
                       <InputGroup className="mr-1">
                         <InputGroupAddon addonType="prepend">
-                          <InputGroupText>예금주</InputGroupText>
+                          <InputGroupText><FormattedMessage id="예금주"/></InputGroupText>
                         </InputGroupAddon>  
                         <Input
                           type="text"
@@ -363,7 +363,7 @@ class Hospitalinfo extends React.Component {
                     
                       <InputGroup className="ml-1">
                         <InputGroupAddon addonType="prepend">
-                          <InputGroupText>은행명</InputGroupText>
+                          <InputGroupText><FormattedMessage id="은행명"/></InputGroupText>
                         </InputGroupAddon>  
                         <Input
                           type="text"
@@ -378,7 +378,7 @@ class Hospitalinfo extends React.Component {
                       <div className="col-3"></div>
                       <InputGroup>
                         <InputGroupAddon addonType="prepend">
-                          <InputGroupText>계좌번호</InputGroupText>
+                          <InputGroupText><FormattedMessage id="계좌번호"/></InputGroupText>
                         </InputGroupAddon>  
                         <Input
                           type="number"
@@ -402,7 +402,7 @@ class Hospitalinfo extends React.Component {
                         color="primary" 
                         type="submit"
                       >
-                        저장하기
+                        <FormattedMessage id="Save"/>
                       </Button>
                     </div>
                       </Form>

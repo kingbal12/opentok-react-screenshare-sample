@@ -13,7 +13,7 @@ import "../../../../assets/scss/pages/authentication.scss"
 import {connect} from "react-redux"
 import { Fragment } from "react"
 import axios from "axios"
-
+import { FormattedMessage } from "react-intl"
 
 
 
@@ -199,7 +199,7 @@ class VitalDataSetting extends React.Component {
               color="primary"
               type="submit"
             >
-              Save
+              <FormattedMessage id="Save"/>
             </Button.Ripple>
             <Button.Ripple
               outline={this.state.edit===true?false:true} 
@@ -207,7 +207,7 @@ class VitalDataSetting extends React.Component {
               className="mr-1"
               onClick={this.edit}
             >
-              Edit
+              <FormattedMessage id="Edit"/>
             </Button.Ripple>
           </Col>
         </Row>

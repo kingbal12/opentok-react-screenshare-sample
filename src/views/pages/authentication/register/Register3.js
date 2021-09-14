@@ -435,7 +435,7 @@ handleComplete = (data) => {
                       <div className="col-3 self-align-start"><b><FormattedMessage id="CAI"/></b></div>
                       <InputGroup className="mr-1">
                         <InputGroupAddon addonType="prepend">
-                          <InputGroupText>예금주</InputGroupText>
+                          <InputGroupText><FormattedMessage id="예금주"/></InputGroupText>
                         </InputGroupAddon>  
                         <Input
                           type="text"
@@ -446,7 +446,7 @@ handleComplete = (data) => {
                     
                       <InputGroup className="ml-1">
                         <InputGroupAddon addonType="prepend">
-                          <InputGroupText>은행명</InputGroupText>
+                          <InputGroupText><FormattedMessage id="은행명"/></InputGroupText>
                         </InputGroupAddon>  
                         <Input
                           type="text"
@@ -460,7 +460,7 @@ handleComplete = (data) => {
                       <div className="col-3"></div>
                       <InputGroup>
                         <InputGroupAddon addonType="prepend">
-                          <InputGroupText>계좌번호</InputGroupText>
+                          <InputGroupText><FormattedMessage id="계좌번호"/></InputGroupText>
                         </InputGroupAddon>  
                         <Input
                           maxLength="15"

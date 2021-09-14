@@ -52,6 +52,7 @@ import VitalDataM from "../../../ui-elements/patient-list/PatientInfo/VitalDataM
 import PastConsultList from "../../../ui-elements/patient-list/PatientInfo/DataListConfigMP"
 import queryString from "query-string"
 import Countdown from 'react-countdown'
+import { FormattedMessage } from "react-intl"
 
 
 class Cslist extends React.Component { 
@@ -489,7 +490,7 @@ class PatientInfo extends React.Component {
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.postMdNote}>
-              저장
+              <FormattedMessage id="Save"/>
             </Button>
           </ModalFooter>
         </Modal>
@@ -505,7 +506,7 @@ class PatientInfo extends React.Component {
           <ModalBody>
             <Row>
               <Col lg="3" md="12" className="align-self-center pt-0">
-                <h5 className="text-bold-600">환자명</h5>
+                <h5 className="text-bold-600"><FormattedMessage id="환자명"/></h5>
               </Col>
               <Col lg="9" md="12" >
                 <h5>{this.props.pinfo.F_NAME}</h5>
@@ -513,7 +514,7 @@ class PatientInfo extends React.Component {
             </Row>
             <Row className="mt-1">
               <Col lg="3" md="12" className="align-self-center pt-0">
-                <h5 className="text-bold-600">약국명</h5>
+                <h5 className="text-bold-600"><FormattedMessage id="약국명"/></h5>
               </Col>
               <Col lg="9" md="12" >
                   <h5>{this.state.pname}</h5>
@@ -521,7 +522,7 @@ class PatientInfo extends React.Component {
             </Row>
             <Row className="mt-1">
               <Col lg="3" md="12" className="align-self-center pt-0">
-                <h5 className="text-bold-600">약국 주소</h5>
+                <h5 className="text-bold-600"><FormattedMessage id="약국 주소"/></h5>
               </Col>
               <Col lg="9" md="12" >
                   <h5>{this.state.paddress}</h5>
@@ -537,7 +538,7 @@ class PatientInfo extends React.Component {
             </Row>
             <Row className="mt-1">
               <Col lg="3" md="12" className="align-self-center pt-0">
-                <h5 className="text-bold-600">처방전 보내기</h5>
+                <h5 className="text-bold-600"><FormattedMessage id="처방전 보내기"/></h5>
               </Col>
               <Col lg="9" md="12" className="d-flex align-self-center">
                 <Checkbox
@@ -559,7 +560,7 @@ class PatientInfo extends React.Component {
             </Row>
             <Row className="mt-1">
               <Col lg="3" md="12" className="align-self-center">
-                <h5 className="text-bold-600">처방전 업로드</h5>
+                <h5 className="text-bold-600"><FormattedMessage id="처방전 업로드"/></h5>
               </Col>
               
               <Col lg="9" md="12" className="pt-1 align-self-center">
@@ -577,7 +578,7 @@ class PatientInfo extends React.Component {
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.postPrescription}>
-              전송
+              <FormattedMessage id="전송"/>
             </Button>
           </ModalFooter>
         </Modal>
@@ -673,7 +674,7 @@ class PatientInfo extends React.Component {
               <Col lg="7" md="12" className="align-self-center pt-0">
                 <Row>
                   <Col lg="5" md="12" className="align-self-center pt-0">
-                    <h5 className="text-bold-600">환자 본인부담금</h5>
+                    <h5 className="text-bold-600"><FormattedMessage id="환자 본인부담금"/></h5>
                   </Col>
                   <Col lg="5" md="11" className="align-self-center pt-0">
                     <FormGroup className="align-self-center pt-1">
@@ -692,7 +693,7 @@ class PatientInfo extends React.Component {
               <Col lg="5" md="12" >
                 <Row>
                   <Col lg="4" md="12" className="align-self-center pt-0">
-                    <h5 className="text-bold-600">최종 청구액</h5>
+                    <h5 className="text-bold-600"><FormattedMessage id="최종 청구액"/></h5>
                   </Col>
                   <Col lg="6" md="11" className="align-self-center pt-0">
                     <FormGroup className="align-self-center pt-1">
@@ -712,7 +713,7 @@ class PatientInfo extends React.Component {
           </ModalBody>
           <ModalFooter className="text-right">
             <Button color="primary" onClick={this.postPayment}>
-              전송
+              <FormattedMessage id="전송"/>
             </Button>
           </ModalFooter>
         </Modal>
@@ -749,7 +750,7 @@ class PatientInfo extends React.Component {
             </Col>
             
             <Col className="mx-2 text-left d-flex" style={{border:"1px solid #B8B8C2", borderRadius: "5px", height:"35px"}}>
-              <h5 className="align-self-center text-primary mr-1" style={{paddingTop:"0.3rem"}}>진료 종료까지 남은시간:</h5>
+              <h5 className="align-self-center text-primary mr-1" style={{paddingTop:"0.3rem"}}><FormattedMessage id="남은시간"/></h5>
                   {this.props.appo===null?null:
                 <span  style={{paddingTop:"0.2rem"}}>
                   <Countdown date={moment(this.props.rtime) + 900000} >
@@ -768,10 +769,10 @@ class PatientInfo extends React.Component {
               </CardTitle>
               <CardBody className="d-flex pl-0">
                 <div className="col-4">
-                  <h5><span className="text-bold-600">이름</span></h5>
-                  <h5><span className="text-bold-600">성별</span></h5>
-                  <h5><span className="text-bold-600">생년월일</span></h5>
-                  <h5><span className="text-bold-600">연락처</span></h5>
+                  <h5><span className="text-bold-600"><FormattedMessage id="이름"/></span></h5>
+                  <h5><span className="text-bold-600"><FormattedMessage id="성별"/></span></h5>
+                  <h5><span className="text-bold-600"><FormattedMessage id="생년월일"/></span></h5>
+                  <h5><span className="text-bold-600"><FormattedMessage id="연락처"/></span></h5>
                 </div>
                 <div className="col-8">
                   <h5>{this.props.pinfo.F_NAME}</h5>
@@ -811,13 +812,13 @@ class PatientInfo extends React.Component {
                   </CardTitle>
                   <CardBody className="d-flex pl-0">
                     <div className="col-4">
-                      <h5><span className="text-bold-600">신장/체중</span></h5>
-                      <h5><span className="text-bold-600">흡연여부</span></h5>
-                      <h5><span className="text-bold-600">음주여부</span></h5>
-                      <h5><span className="text-bold-600">본인병력</span></h5>
-                      <h5><span className="text-bold-600">가족병력</span></h5>
-                      <h5><span className="text-bold-600">복용중인 약</span></h5>
-                      <h5><span className="text-bold-600">알러지 유무</span></h5>
+                      <h5><span className="text-bold-600"><FormattedMessage id="신장/체중"/></span></h5>
+                      <h5><span className="text-bold-600"><FormattedMessage id="흡연여부"/></span></h5>
+                      <h5><span className="text-bold-600"><FormattedMessage id="음주여부"/></span></h5>
+                      <h5><span className="text-bold-600"><FormattedMessage id="본인병력"/></span></h5>
+                      <h5><span className="text-bold-600"><FormattedMessage id="가족병력"/></span></h5>
+                      <h5><span className="text-bold-600"><FormattedMessage id="복용중인 약"/></span></h5>
+                      <h5><span className="text-bold-600"><FormattedMessage id="알러지 유무"/></span></h5>
                     </div>
                     <div className="col-8">
                       <h5>{this.props.pinfo.HEIGHT_VAL}cm&nbsp;/&nbsp;{this.props.pinfo.WEIGHT_VAL}kg</h5>
@@ -835,7 +836,7 @@ class PatientInfo extends React.Component {
               <div style={{width:"50%"}}>
                 <Card className="mb-1" style={{height:"119px", border:"solid silver 1px"}}>
                   <CardTitle className="pl-1" style={{paddingTop:"5px"}}>
-                    <b>Present Condition</b>
+                    <b><FormattedMessage id="Present Condition"/></b>
                   </CardTitle>
                   <CardBody className="d-flex pl-0">
                     <div className="col-12">
@@ -847,7 +848,7 @@ class PatientInfo extends React.Component {
                 </Card>
                 <Card className="mb-1" style={{height:"169px", border:"solid silver 1px"}}>
                   <CardTitle className="pl-1" style={{paddingTop:"5px"}}>
-                    <b>Files</b>
+                    <b><FormattedMessage id="Files"/></b>
                   </CardTitle>
                   <CardBody>
                     {file_preview}

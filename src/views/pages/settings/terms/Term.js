@@ -9,7 +9,7 @@ import {
 
 } from "reactstrap"
 import "../../../../assets/scss/pages/authentication.scss"
-
+import { FormattedMessage } from "react-intl"
 
 
 
@@ -31,7 +31,7 @@ class Term extends React.Component {
               <Card className="rounded-0 mb-0 p-2">
                 <CardHeader className="pb-1 pt-50">
                   <CardTitle>
-                      <h3 className="text-bold-600">이용약관</h3>
+                      <h3 className="text-bold-600"><FormattedMessage id="이용약관"/></h3>
                   </CardTitle>
                 </CardHeader>   
               <CardBody className="px-6 pb-50">

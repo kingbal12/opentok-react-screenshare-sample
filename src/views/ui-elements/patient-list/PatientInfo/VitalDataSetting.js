@@ -50,7 +50,7 @@ import spo2_3 from "../../../../assets/img/dashboard/ID12_08_vital_spo2 3.png"
 import spo2_4 from "../../../../assets/img/dashboard/ID12_08_vital_spo2 4.png"
 import spo2_5 from "../../../../assets/img/dashboard/ID12_08_vital_spo2 5.png"
 import setting from "../../../../assets/img/dashboard/ID16_27_setting.png"
-
+import { FormattedMessage } from "react-intl"
 
 
 class VitalDataSetting extends React.Component {
@@ -163,37 +163,37 @@ class VitalDataSetting extends React.Component {
                         placement="bottom"
                         target="혈압"
                       >
-                        혈압
+                        <FormattedMessage id="혈압"/>
                       </UncontrolledTooltip>
                       <UncontrolledTooltip
                         placement="bottom"
                         target="맥박"
                       >
-                        맥박
+                        <FormattedMessage id="맥박"/>
                       </UncontrolledTooltip>
                       <UncontrolledTooltip
                         placement="bottom"
                         target="체중"
                       >
-                        체중
+                        <FormattedMessage id="체중"/>
                       </UncontrolledTooltip>
                       <UncontrolledTooltip
                         placement="bottom"
                         target="혈당"
                       >
-                        혈당
+                        <FormattedMessage id="혈당"/>
                       </UncontrolledTooltip>
                       <UncontrolledTooltip
                         placement="bottom"
                         target="체온"
                       >
-                        체온
+                        <FormattedMessage id="체온"/>
                       </UncontrolledTooltip>
                       <UncontrolledTooltip
                         placement="bottom"
                         target="산소포화도"
                       >
-                        산소포화도
+                        <FormattedMessage id="SPO2"/>
                       </UncontrolledTooltip>
                     </th>
                     <th id="tblBottomBarTh"><img src={setting} onClick={this.goVitatDataSetting}  width="25px" style={{cursor:"pointer"}} /></th>
@@ -204,7 +204,7 @@ class VitalDataSetting extends React.Component {
           </Row>
         <Row className="mt-5 flex-wrap">
           <Col className="col-12 d-flex">
-            <h4 className="text-bold-600 align-self-center">선택 항목</h4>
+            <h4 className="text-bold-600 align-self-center"><FormattedMessage id="선택 항목"/></h4>
             <ButtonGroup className="ml-1">
               <Button.Ripple 
                 outline={this.state.bpbutton===true?false:true} 
@@ -216,7 +216,7 @@ class VitalDataSetting extends React.Component {
                               this.toggle("1")
                           }}
               >
-                혈압
+                <FormattedMessage id="혈압"/>
               </Button.Ripple>
               <Button.Ripple 
                 outline={this.state.pulsebutton===true?false:true} 
@@ -228,7 +228,7 @@ class VitalDataSetting extends React.Component {
                               this.toggle("2")
                           }}
               >
-                맥박
+                <FormattedMessage id="맥박"/>
               </Button.Ripple>
               <Button.Ripple 
                 outline={this.state.webutton===true?false:true} 
@@ -240,7 +240,7 @@ class VitalDataSetting extends React.Component {
                               this.toggle("3")
                           }}
               >
-                체중
+                <FormattedMessage id="체중"/>
               </Button.Ripple>
               <Button.Ripple 
                 outline={this.state.glbutton===true?false:true} 
@@ -252,7 +252,7 @@ class VitalDataSetting extends React.Component {
                               this.toggle("4")
                           }}
               >
-                혈당
+                <FormattedMessage id="혈당"/>
               </Button.Ripple>
               <Button.Ripple 
                 outline={this.state.tempbutton===true?false:true} 
@@ -264,7 +264,7 @@ class VitalDataSetting extends React.Component {
                               this.toggle("5")
                           }}
               >
-                체온
+                <FormattedMessage id="체온"/>
               </Button.Ripple>
               <Button.Ripple 
                 outline={this.state.spo2button===true?false:true} 
@@ -276,7 +276,7 @@ class VitalDataSetting extends React.Component {
                               this.toggle("6")
                           }}
               >
-                산소포화도
+                <FormattedMessage id="산소포화도"/>
               </Button.Ripple>
               {/* <Button.Ripple color="primary" onClick={this.check}>산소포화도</Button.Ripple>{" "} */}
             </ButtonGroup>

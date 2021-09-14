@@ -44,6 +44,7 @@ import moment from "moment"
 import "../../../../assets/scss/plugins/extensions/react-paginate.scss"
 import "../../../../assets/scss/pages/data-list.scss"
 import Axios from "axios"
+import { FormattedMessage } from "react-intl"
 
 const chipColors = {
   "on hold": "warning",
@@ -102,7 +103,7 @@ const CustomHeader = props => {
             
               <Input className="col-10" type="text" placeholder="Search" onChange={e => props.handleFilter(e)} />
             
-            <Button color='primary' outline onClick={e => props.search(e)}>검색</Button>
+            <Button color='primary' outline onClick={e => props.search(e)}><FormattedMessage id="검색"/></Button>
           </Row>
         </Card>
       </div>
