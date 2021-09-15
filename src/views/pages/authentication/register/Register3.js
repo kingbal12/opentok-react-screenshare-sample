@@ -342,7 +342,7 @@ handleComplete = (data) => {
                           onInput={this.maxLengthCheck}
                           onChange={e => this.setState({ businessnumber: e.target.value })}
                         />
-                        <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.verifyBusinessNumber}>중복확인</Button></InputGroupAddon>
+                        <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.verifyBusinessNumber}><FormattedMessage id="Check"/></Button></InputGroupAddon>
                       </InputGroup>
                     </FormGroup>
                     <FormGroup className="form-label-group">
@@ -479,7 +479,7 @@ handleComplete = (data) => {
                         type="button"
                         onClick={()=> history.push("/pages/register2")}
                       >
-                        이전단계
+                        <FormattedMessage id="Previous"/>
                       </Button>
                       <Button
                         className="mr-1 text-bold-600"

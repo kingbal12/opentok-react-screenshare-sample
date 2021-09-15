@@ -467,7 +467,7 @@ class PatientInfo extends React.Component {
                 <div className="d-flex col-12 pl-0">
                   {this.props.bpdata.length===0?null:
                     <div className="col-2 pl-0">
-                      <Row className="justify-content-center" ><h5>혈압</h5></Row>
+                      <Row className="justify-content-center" ><h5><FormattedMessage id="혈압" /></h5></Row>
                       <ResponsiveContainer height="95%">
                         <LineChart
                           className="col-2"
@@ -498,7 +498,7 @@ class PatientInfo extends React.Component {
 
                   {this.props.pulstdata.length===0?null:
                     <div className="col-2 pl-0">
-                      <Row className="justify-content-center"><h5>맥박</h5></Row>
+                      <Row className="justify-content-center"><h5><FormattedMessage id="맥박" /></h5></Row>
                       <ResponsiveContainer  height="95%">
                         <LineChart
                           className="col-2"
@@ -523,7 +523,7 @@ class PatientInfo extends React.Component {
 
                   {this.props.wedata.length===0?null:
                     <div className="col-2 pl-0">
-                      <Row className="justify-content-center"><h5>체중</h5></Row>
+                      <Row className="justify-content-center"><h5><FormattedMessage id="체중" /></h5></Row>
                       <ResponsiveContainer  height="95%">
                         <LineChart
                           className="col-2"
@@ -555,7 +555,7 @@ class PatientInfo extends React.Component {
 
                   {this.props.bsdata.length===0?null:
                     <div className="col-2 pl-0">
-                      <Row className="justify-content-center"><h5>혈당</h5></Row>
+                      <Row className="justify-content-center"><h5><FormattedMessage id="혈당" /></h5></Row>
                       <ResponsiveContainer height="95%">
                         <LineChart
                           className="col-2"
@@ -579,7 +579,7 @@ class PatientInfo extends React.Component {
                   } 
                   {this.props.tempdata.length===0?null:
                     <div className="col-2 pl-0">
-                      <Row className="justify-content-center"><h5>체온</h5></Row>
+                      <Row className="justify-content-center"><h5><FormattedMessage id="체온" /></h5></Row>
                       <ResponsiveContainer  height="95%">
                         <LineChart
                           className="col-2"
@@ -604,7 +604,7 @@ class PatientInfo extends React.Component {
 
                   {this.props.spo2data.length===0?null:
                     <div className="col-2 pl-0">
-                      <Row className="justify-content-center"><h5>산소포화도</h5></Row>
+                      <Row className="justify-content-center"><h5><FormattedMessage id="SPO2" /></h5></Row>
                       <ResponsiveContainer  height="95%">
                         <LineChart
                           className="col-2"

@@ -257,12 +257,12 @@ class Register extends React.Component {
                       <div className="col-2 align-self-center"><b className="ml-1"><FormattedMessage id="Department"/><span className="text-danger">(필수)</span></b></div>
                       
                       <Input type="select" name="select" value={this.state.medicalpart}  onChange={e => this.setState({ medicalpart: e.target.value })}>
-                        <option value="01">가정의학과</option>
-                        <option value="02">내과</option>
-                        <option value="03">산부인과</option>
-                        <option value="04">피부과</option>
-                        <option value="05">비뇨기과</option>
-                        <option value="99">기타</option>
+                        <FormattedMessage id="familymedicine">{(familymedicine) =><option value="01">{familymedicine}</option>}</FormattedMessage>
+                        <FormattedMessage id="internalmedicine">{(internalmedicine) =><option value="02">{internalmedicine}</option>}</FormattedMessage>
+                        <FormattedMessage id="gynecologyobsterics">{(gynecologyobsterics) =><option value="03">{gynecologyobsterics}</option>}</FormattedMessage>
+                        <FormattedMessage id="dermatology">{(dermatology) =><option value="04">{dermatology}</option>}</FormattedMessage>
+                        <FormattedMessage id="urology">{(urology) =><option value="05">{urology}</option>}</FormattedMessage>
+                        <FormattedMessage id="etc">{(etc) =><option value="99">{etc}</option>}</FormattedMessage>
                       </Input>
                       {/* 차후 적용시킬 select 
                       <Col>

@@ -378,12 +378,12 @@ class MyInfo extends React.Component {
                     <FormGroup className="form-label-group d-flex justify-content-between">
                       <div className="col-2 align-self-center"><b><FormattedMessage id="Department"/><span className="text-danger">(필수)</span></b></div>
                       <Input type="select" name="select" value={this.state.medicalpart}  onChange={e => this.setState({ medicalpart: e.target.value })}>
-                        <option value="01"><FormattedMessage id="가정의학과"/></option>
-                        <option value="02"><FormattedMessage id="내과"/></option>
-                        <option value="03"><FormattedMessage id="산부인과"/></option>
-                        <option value="04"><FormattedMessage id="피부과"/></option>
-                        <option value="05"><FormattedMessage id="비뇨기과"/></option>
-                        <option value="99"><FormattedMessage id="기타"/></option>
+                        <FormattedMessage id="familymedicine">{(familymedicine) =><option value="01">{familymedicine}</option>}</FormattedMessage>
+                        <FormattedMessage id="internalmedicine">{(internalmedicine) =><option value="02">{internalmedicine}</option>}</FormattedMessage>
+                        <FormattedMessage id="gynecologyobsterics">{(gynecologyobsterics) =><option value="03">{gynecologyobsterics}</option>}</FormattedMessage>
+                        <FormattedMessage id="dermatology">{(dermatology) =><option value="04">{dermatology}</option>}</FormattedMessage>
+                        <FormattedMessage id="urology">{(urology) =><option value="05">{urology}</option>}</FormattedMessage>
+                        <FormattedMessage id="etc">{(etc) =><option value="99">{etc}</option>}</FormattedMessage>
                       </Input>
                     </FormGroup>
                     

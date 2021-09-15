@@ -130,7 +130,7 @@ const CustomHeader = props => {
               } 
             />
         </div>
-        <Button className="ml-2" color='primary' outline onClick={e => props.search(e)}>검색</Button>
+        <Button className="ml-2" color='primary' outline onClick={e => props.search(e)}><FormattedMessage id="검색" /></Button>
       </div>
     </div>
   )

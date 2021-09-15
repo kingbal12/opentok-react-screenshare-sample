@@ -260,7 +260,7 @@ class Hospitalinfo extends React.Component {
                           value={this.state.businessnumber}
                           onChange={e => this.setState({ businessnumber: e.target.value })}
                         />
-                        <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.verifyBusinessNumber}>중복확인</Button></InputGroupAddon>
+                        <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.verifyBusinessNumber}><FormattedMessage id="Check"/></Button></InputGroupAddon>
                       </InputGroup>
                     </FormGroup>
                     <FormGroup className="form-label-group">

@@ -101,7 +101,7 @@ class VitalDataSetting extends React.Component {
                     <th><h5 className="text-bold-600">{this.props.pinfo.AGE}</h5></th>
                     <th><h5 className="text-bold-600">{this.props.pinfo.BIRTH_DT}</h5></th>
                     <th><h5 className="text-bold-600">{this.props.pinfo.NOTE_DX}</h5></th>
-                    <th><h5 className="text-bold-600">{this.props.pinfo.FIRST_YN==="N"?"재진":"초진"}</h5></th>
+                    <th><h5 className="text-bold-600">{this.props.pinfo.FIRST_YN==="N"?<FormattedMessage id="재진"/>:<FormattedMessage id="초진"/>}</h5></th>
                     <th className="text-center"> 
                       <h5 id="vitalIcons">
                         {
@@ -276,7 +276,7 @@ class VitalDataSetting extends React.Component {
                               this.toggle("6")
                           }}
               >
-                <FormattedMessage id="산소포화도"/>
+                <FormattedMessage id="SPO2"/>
               </Button.Ripple>
               {/* <Button.Ripple color="primary" onClick={this.check}>산소포화도</Button.Ripple>{" "} */}
             </ButtonGroup>

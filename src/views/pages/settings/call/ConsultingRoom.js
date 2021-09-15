@@ -580,7 +580,7 @@ class ConsultingRoom extends React.Component {
                     <th><h6>{this.props.pinfo.AGE}</h6></th>
                     <th><h6>{this.props.pinfo.BIRTH_DT}</h6></th>
                     <th><h6>{this.props.pinfo.NOTE_DX}</h6></th>
-                    <th><h6>{this.props.pinfo.FIRST_YN==="N"?"재진":"초진"}</h6></th>
+                    <th><h6>{this.props.pinfo.FIRST_YN==="N"?<FormattedMessage id="재진" />:<FormattedMessage id="초진" />}</h6></th>
                   </tr>
                 </thead>
               </Table>
@@ -1113,7 +1113,7 @@ class ConsultingRoom extends React.Component {
                   </CardTitle>
                   <CardBody className="d-flex pl-0 pt-0">
                     <div className="col-5">
-                      <h6><span className="text-bold-600"><FormattedMessage id="이름"/></span></h6>
+                      <h6><span className="text-bold-600"><FormattedMessage id="Name"/></span></h6>
                       <h6><span className="text-bold-600"><FormattedMessage id="성별"/></span></h6>
                       <h6><span className="text-bold-600"><FormattedMessage id="생년월일"/></span></h6>
                       <h6><span className="text-bold-600"><FormattedMessage id="연락처"/></span></h6>
@@ -1131,24 +1131,64 @@ class ConsultingRoom extends React.Component {
                     <b>Physical Data</b>
                   </CardTitle>
                   <CardBody className="d-flex pl-0 pt-0">
-                    <div className="col-4">
-                      <h6><span className="text-bold-600"><FormattedMessage id="신장/체중"/></span></h6>
-                      <h6><span className="text-bold-600"><FormattedMessage id="흡연여부"/></span></h6>
-                      <h6><span className="text-bold-600"><FormattedMessage id="음주여부"/></span></h6>
-                      <h6><span className="text-bold-600"><FormattedMessage id="본인병력"/></span></h6>
-                      <h6><span className="text-bold-600"><FormattedMessage id="가족병력"/></span></h6>
-                      <h6><span className="text-bold-600"><FormattedMessage id="복용중인 약"/></span></h6>
-                      <h6><span className="text-bold-600"><FormattedMessage id="알러지 유무"/></span></h6>
-                    </div>
-                    <div className="col-8">
-                      <h6>{this.props.pinfo.HEIGHT_VAL}cm&nbsp;/&nbsp;{this.props.pinfo.WEIGHT_VAL}kg</h6>
-                      <h6>{this.props.pinfo.SMOKE_YN==="Y"?"흡연":"비흡연"}</h6>
-                      <h6>{this.props.pinfo.DRINK_YN==="Y"?"음주":"금주"}</h6>
-                      <h6>{this.props.pinfo.DISEASE_DESC===""? "없음":this.props.pinfo.DISEASE_DESC}</h6>
-                      <h6>{this.props.pinfo.FAMILY_DESC===""? "없음":this.props.pinfo.FAMILY_DESC}</h6>
-                      <h6>{this.props.pinfo.USE_MED===""? "없음":this.props.pinfo.USE_MED}</h6>
-                      <h6>{this.props.pinfo.ALLERGY_YN==="Y"?"있음":"없음"}&nbsp;/&nbsp;{this.props.pinfo.ALLERGY_DESC===""?"없음":this.props.pinfo.ALLERGY_DESC}</h6>
-                    </div>
+                    <table className="ml-1">
+                      <tr>
+                        <td style={{minWidth:"140px"}}>
+                          <h6><span className="text-bold-600"><FormattedMessage id="신장/체중"/></span></h6>
+                        </td>
+                        <td>
+                          <h6>{this.props.pinfo.HEIGHT_VAL}cm&nbsp;/&nbsp;{this.props.pinfo.WEIGHT_VAL}kg</h6>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <h6><span className="text-bold-600"><FormattedMessage id="흡연여부"/></span></h6>
+                        </td>
+                        <td>
+                          <h6>{this.props.pinfo.SMOKE_YN==="Y"?"흡연":"비흡연"}</h6>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                        <h6><span className="text-bold-600"><FormattedMessage id="음주여부"/></span></h6>
+                        </td>
+                        <td>
+                          <h6>{this.props.pinfo.DRINK_YN==="Y"?"음주":"금주"}</h6>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                        <h6><span className="text-bold-600"><FormattedMessage id="본인병력"/></span></h6>
+                        </td>
+                        <td>
+                          <h6>{this.props.pinfo.DISEASE_DESC===""? "없음":this.props.pinfo.DISEASE_DESC}</h6>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <h6><span className="text-bold-600"><FormattedMessage id="가족병력"/></span></h6>
+                        </td>
+                        <td>
+                          <h6>{this.props.pinfo.FAMILY_DESC===""? "없음":this.props.pinfo.FAMILY_DESC}</h6>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <h6><span className="text-bold-600"><FormattedMessage id="복용중인 약"/></span></h6>
+                        </td>
+                        <td>
+                          <h6>{this.props.pinfo.USE_MED===""? "없음":this.props.pinfo.USE_MED}</h6>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                        <h6><span className="text-bold-600"><FormattedMessage id="알러지 유무"/></span></h6>
+                        </td>
+                        <td>
+                        <h6>{this.props.pinfo.ALLERGY_YN==="Y"?"있음":"없음"}&nbsp;/&nbsp;{this.props.pinfo.ALLERGY_DESC===""?"없음":this.props.pinfo.ALLERGY_DESC}</h6>
+                        </td>
+                      </tr>
+                    </table>
                   </CardBody>
                 </Card>
               </div>
