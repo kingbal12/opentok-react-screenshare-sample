@@ -275,17 +275,17 @@ class Register extends React.Component {
                               <h5 className="text-bold-600"><FormattedMessage id="ID"/></h5>
                             </div>
                             <InputGroup>
-                            <FormattedMessage id="LoginPH">
-                              {(LoginPH) =>
-                              <Input
-                                type="email"
-                                placeholder={LoginPH}
-                                required
-                                value={this.state.userid}
-                                onChange={e => this.setState({ userid: e.target.value })}
-                                // invalid={this.state.useemail.length === 0 ? true : false}
-                              />
-                              }
+                              <FormattedMessage id="LoginPH">
+                                {(LoginPH) =>
+                                <Input
+                                  type="email"
+                                  placeholder={LoginPH}
+                                  required
+                                  value={this.state.userid}
+                                  onChange={e => this.setState({ userid: e.target.value })}
+                                  // invalid={this.state.useemail.length === 0 ? true : false}
+                                />
+                                }
                               </FormattedMessage>
                               <InputGroupAddon addonType="append"><Button disabled={this.state.otheremail===true?true:false} color="primary" type="button" onClick={this.emailauth}><FormattedMessage id="Check"/></Button>
                               </InputGroupAddon>

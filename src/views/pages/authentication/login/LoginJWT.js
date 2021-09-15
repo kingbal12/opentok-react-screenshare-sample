@@ -167,13 +167,17 @@ class LoginJWT extends React.Component {
         <CardBody className="pt-1">
           <Form action="/" onSubmit={this.handleLogin}>
             <FormGroup className="form-label-group position-relative">
-              <Input
-                placeholder="이메일 아이디"
-                value={this.state.email}
-                onChange={e => this.setState({ email: e.target.value })}
-                required
-                invalid={this.state.email.length >= 6 || this.state.email.length === 0 ? false : true}
-              />
+              <FormattedMessage id="emailid">
+                {(emailid) =>
+                <Input
+                  placeholder={emailid}
+                  value={this.state.email}
+                  onChange={e => this.setState({ email: e.target.value })}
+                  required
+                  invalid={this.state.email.length >= 6 || this.state.email.length === 0 ? false : true}
+                />
+                }
+              </FormattedMessage>
               <FormFeedback>{this.state.email.length >= 6 ? "" : "아이디를 6자 이상 입력하십시오"}</FormFeedback>
               {/* <div className="form-control-position">
                 <Mail size={15} />
@@ -181,14 +185,18 @@ class LoginJWT extends React.Component {
               {/* <Label>아이디</Label> */}
             </FormGroup>
             <FormGroup className="form-label-group position-relative ==">
-              <Input
-                type="password"
-                placeholder="비밀번호"
-                value={this.state.password}
-                onChange={e => this.setState({ password: e.target.value })}
-                required
-                invalid={this.state.password.length >= 6 ||this.state.password.length === 0 ? false : true}
-              />
+              <FormattedMessage id="Password">
+                {(Password) =>
+                <Input
+                  type="password"
+                  placeholder={Password}
+                  value={this.state.password}
+                  onChange={e => this.setState({ password: e.target.value })}
+                  required
+                  invalid={this.state.password.length >= 6 ||this.state.password.length === 0 ? false : true}
+                />
+                }
+              </FormattedMessage>
               <FormFeedback>{this.state.password.length >= 6 ? "" : "비밀번호를 6자 이상 입력하십시오"}</FormFeedback>
               {/* <div className="form-control-position">
                 <Lock size={15} />

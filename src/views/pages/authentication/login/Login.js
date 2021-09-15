@@ -94,6 +94,22 @@ class Login extends React.Component {
                                   }
                                   svg
                                 />
+                                <ReactCountryFlag
+                                className="country-flag"
+                                  countryCode={
+                                    context.state.locale === "en"
+                                      ? "us"
+                                      : context.state.locale
+                                  }
+                                  svg
+                                // className="country-flag"
+                                //   countryCode={
+                                //     context.state.locale === "ko"
+                                //       ? "kr"
+                                //       : context.state.locale
+                                //   }
+                                //   svg
+                                />
                                 <span className="d-sm-inline-block d-none text-capitalize align-middle ml-50">
                                   {langArr[context.state.locale]}
                                 </span>
