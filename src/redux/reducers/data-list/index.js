@@ -31,7 +31,8 @@ const initialState = {
   pastconsultlist:[],
   vitaldata:"",
   pharmacy:"",
-  pid:""
+  pid:"",
+  searchName: ""
 }
 
 const determinePopularity = val => {
@@ -167,7 +168,12 @@ const DataListReducer = (state = initialState, action) => {
           action.data,
           state.sortIndex,
           action.params
-        )
+        ),
+        searchName: action.searchName
+      }
+    case "RESET_NAME_DATA": 
+      return {
+        searchName: action.searchName
       }
     case "RESET_PAST_DATA":
       return {

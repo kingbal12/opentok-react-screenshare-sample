@@ -242,10 +242,20 @@ export const getNameData = (userid, pageamount, pagenum, fname) => {
         type: "GET_NAME_DATA",
         data: patientlist,
         totalPages: totalPage,
+        searchName: fname
         // params
       })
     })
     .catch(err => console.log(err))
+  }
+}
+
+export const resetSearchName = () => {
+  return dispatch => {
+    dispatch({
+      type: "RESET_NAME_DATA",
+      searchName: "안녕하세요"
+    })
   }
 }
 
