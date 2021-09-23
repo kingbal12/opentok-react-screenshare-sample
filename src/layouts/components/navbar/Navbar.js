@@ -109,7 +109,7 @@ const ThemeNavbar = props => {
                 ticking={true}  />
               </div>
               {props.horizontal ? (
-                <div className="logo d-flex align-items-center" style={{cursor:"pointer"}} onClick={()=>history.push("/analyticsDashboard")}>
+                <div className="logo d-flex align-items-center" style={{cursor:"pointer"}} onClick={() => history.push("analyticsDashboard")}>
                    <img className="px-5" src={HicareLogo} alt="HicareLogo" style={{width:"100%"}}/>
                 </div>
               ) : null}

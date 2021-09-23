@@ -1,4 +1,5 @@
 {
+  "emailid": "Email ID",
   "Login": "Login",
   "Find ID": "Find ID",
   "Find Password": "Find Password",
@@ -53,12 +54,12 @@
   "다음단계": "Next",
   "우편번호 검색": "Zip Code",
 
-  "가정의학과": "Family Medicine",
-  "내과": "Internal Medicine",
-  "산부인과": "Gynecology & Obsterics",
-  "피부과": "Dermatology",
-  "비뇨기과 ": "Urology ",
-  "기타 ": "Etc. ",
+  "familymedicine": "Family Medicine",
+  "internalmedicine": "Internal Medicine",
+  "gynecologyobsterics": "Gynecology & Obsterics",
+  "dermatology": "Dermatology",
+  "urology": "Urology ",
+  "etc": "Etc. ",
 
   "환자개인정보": "Personal Information",
   "연락처": "Phone Number",
@@ -105,7 +106,7 @@
   "PatientList": "PatientList",
   "Call Setting": "Call Setting",
   "Setting": "Setting",
-  "스케쥴 설정": "스케쥴 설정",
+  "스케쥴 설정": "Schedule Settings",
   "개인정보": "Personal Information",
   "병원정보": "Clinic Information",
   "결제관리": "Billing & Payment",

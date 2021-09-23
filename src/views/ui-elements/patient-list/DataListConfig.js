@@ -28,7 +28,8 @@ import {
   filterData,
   resetVitalData,
   getPatientInfo,
-  getVitalData
+  getVitalData,
+  resetSearchName
   // eData
 } from "../../../redux/actions/data-list"
 import Sidebar from "./DataListSidebar"
@@ -130,7 +131,7 @@ const CustomHeader = props => {
               } 
             />
         </div>
-        <Button className="ml-2" color='primary' outline onClick={e => props.search(e)}>검색</Button>
+        <Button className="ml-2" color='primary' outline onClick={e => props.search(e)}><FormattedMessage id="검색" /></Button>
       </div>
     </div>
   )
@@ -355,8 +356,19 @@ class DataListConfig extends Component {
   componentDidMount() {
     if(this.props.parsedFilter.perPage!==undefined){
       this.props.getData(this.state.user,this.props.parsedFilter.perPage, this.props.parsedFilter.page)
+    } else {
+      window.onpopstate = () =>{
+        if (this.props.dataList.searchName !== "") {
+          this.props.getNameData(this.state.user,5,1,this.props.dataList.searchName)
+        }
+      }
     }
+
+
+    
+    
   }
+  
 
   componentDidUpdate(prevProps, prevState) {
     if (this.thumbView) {
@@ -430,7 +442,11 @@ class DataListConfig extends Component {
       ]
       this.setState({ columns })
     }
+
+    
   }
+
+  
 
   goPatientList(id) {
     // id.preventDefault()
@@ -624,5 +640,6 @@ export default connect(mapStateToProps, {
   filterData,
   resetVitalData,
   getPatientInfo,
-  getVitalData
+  getVitalData,
+  resetSearchName
 })(DataListConfig)
