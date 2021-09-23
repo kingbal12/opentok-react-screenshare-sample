@@ -66,12 +66,12 @@ class FindPw extends React.Component {
                   if(response.data.status==="200"){
                     this.setState({
                       modal:true,
-                      modalmsg: "임시 비밀번호 전송에 성공했습니다."
+                      modalmsg: <FormattedMessage id="비밀번호 전송 성공"/>
                     })
                   } else {
                     this.setState({
                       modal:true,
-                      modalmsg: "임시 비밀번호 전송에 실패했습니다."
+                      modalmsg: <FormattedMessage id="비밀번호 전송 실패"/>
                     })
                   }
                 })
@@ -133,12 +133,12 @@ class FindPw extends React.Component {
       if(response.data.status==="200"){
         this.setState({
           modal:true,
-          modalmsg: "선택하신 이메일로 임시비밀번호를 보냈습니다. 로그인 후 비밀번호를 변경하세요"
+          modalmsg: <FormattedMessage id="선택 비밀번호 전송 성공"/>
         })
       } else {
         this.setState({
           modal:true,
-          modalmsg: "임시 비밀번호 전송에 실패했습니다."
+          modalmsg: <FormattedMessage id="비밀번호 전송 실패"/>
         })
       }
     })
@@ -165,7 +165,7 @@ class FindPw extends React.Component {
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.findEmailModal}>
-              확인
+              <FormattedMessage id="확인"/>
             </Button>{" "}
           </ModalFooter>
         </Modal>
@@ -176,11 +176,11 @@ class FindPw extends React.Component {
           className="modal-dialog-centered"
         >
           <ModalHeader toggle={this.verifyModal}>
-            새로운 비밀번호를 보낼 이메일을 선택하세요
+            <FormattedMessage id="이메일 선택"/>
           </ModalHeader>
           <ModalBody>
             <Row className="d-flex">
-              <h6 className="align-self-center ml-1">아이디: </h6>
+              <h6 className="align-self-center ml-1"><FormattedMessage id="ID"/>: </h6>
               <Radio
                 label={this.state.userid}
                 defaultChecked={this.state.userid===""||this.state.userid?true:false}  
@@ -194,7 +194,7 @@ class FindPw extends React.Component {
             </Row>
 
             <Row className="d-flex">
-              <h6 className="align-self-center ml-1">보안이메일: </h6>
+              <h6 className="align-self-center ml-1"><FormattedMessage id="보안이메일"/>: </h6>
               <Radio
                 label={this.state.emaillabel}
                 color="primary"

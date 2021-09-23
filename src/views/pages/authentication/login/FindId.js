@@ -41,7 +41,7 @@ class FindId extends React.Component {
             if(response.data.status==="200") {
               this.setState({
                 modal:true, 
-                modalmsg:"사용중인 아이디는 "+response.data.data.USER_ID+"입니다."
+                modalmsg: response.data.data.USER_ID
               })
             } else {
               this.setState({
@@ -146,11 +146,11 @@ class FindId extends React.Component {
             
           </ModalHeader>
           <ModalBody>
-            {this.state.modalmsg}
+            <FormattedMessage id="사용중인 아이디1"/> {this.state.modalmsg} <FormattedMessage id="사용중인 아이디2"/>
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.findidModal}>
-              확인
+              <FormattedMessage id="확인"/>
             </Button>
           </ModalFooter>
         </Modal>
@@ -162,12 +162,12 @@ class FindId extends React.Component {
           <ModalHeader toggle={this.noModal}>
           </ModalHeader>
           <ModalBody>
-            등록된 사용자가 없습니다.<br/>
-            회원으로 가입하시겠어요?
+            <FormattedMessage id="아이디없음1"/><br/>
+            <FormattedMessage id="아이디없음2"/>
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.go}>
-              회원가입 시작
+              <FormattedMessage id="회원가입 시작"/>
             </Button>
           </ModalFooter>
         </Modal>

@@ -197,7 +197,7 @@ class LoginJWT extends React.Component {
                 />
                 }
               </FormattedMessage>
-              <FormFeedback>{this.state.password.length >= 6 ? "" : "비밀번호를 6자 이상 입력하십시오"}</FormFeedback>
+              <FormFeedback>{this.state.password.length >= 6 ? "" :  <FormattedMessage id="비밀번호6자" />}</FormFeedback>
               {/* <div className="form-control-position">
                 <Lock size={15} />
               </div> */}

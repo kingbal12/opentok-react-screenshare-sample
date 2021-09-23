@@ -136,6 +136,22 @@
   "새 비밀번호": "New Password",
   "새 비밀번호 확인": "Re-enter New Password",
 
+  "비밀번호6자": "Use 6 ~ 14 characters with a mix of letters, numbers & symbols",
+  "아이디없음1": "No registered users.",
+  "아이디없음2": "Would you like to become a member?",
+  "확인": "Confirm",
+  "사용중인 아이디1": "Your ID is ",
+  "사용중인 아이디2": "",
+  "회원가입 시작": "Start Register",
+  "이메일 선택": "Choose the email to receive your new password.",
+  "비밀번호 전송 성공": "Success  to send temporary password",
+  "비밀번호 전송 실패": "Failed to send temporary password",
+  "선택 비밀번호 전송 성공": "A temporary password has been sent to the selected email address. Change your password after login.",
+  "보안이메일": "Secure E-mail",
+
+
+
+
   "Dashboard": "Dashboard",
   "Analytics": "Analytics",
   "Apps": "Apps",
