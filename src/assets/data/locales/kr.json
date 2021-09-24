@@ -1,11 +1,31 @@
 {
   "emailid": "이메일 아이디",
   "Login": "로그인",
+  "saveID": "아이디 저장",
   "Find ID": "아이디 찾기",
   "Find Password": "비밀번호 찾기",
   "Sign In": "회원가입",
+
+  "privmem": "개인회원",
+  "EnterID": "아이디를 입력하세요",
+  "EnterName": "이름을 입력하세요",
+  "EnterDOB": "생년월일 입력, 숫자만 입력",
+  "EnterPhonenum": "휴대폰 번호를 입력하세요",
+  "EnterLicense": "의사면허번호를 입력하세요",
+
   "TOS": "약관동의",
+  "AgreeTerms": " 사용을 위해 아래의 약관에 동의해주세요.",
+  "OptionalTerms": "선택약관은 동의하지 않아도 회원가입이 가능합니다.",
   "Next": "다음단계",
+
+  "SecureEmail": "보안이메일",
+  "UsedChnge": "(비밀번호 변경에 사용)",
+  "EnterAvailableEmail": "사용가능한 이메일 입력",
+  "EnterCode": "인증번호입력",
+  "Characters": "영어, 숫자, 특수문자 포함 6자~ 14자 이내",
+  "ConfirmPW": "비밀번호 확인",
+  "Yymmdd": "주민번호 앞 6자리",
+
   "Check": "중복확인(이메일인증)",
   "ID": "아이디",
   "Name": "이름",

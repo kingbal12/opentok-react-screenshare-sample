@@ -1,11 +1,32 @@
 {
   "emailid": "Email ID",
   "Login": "Login",
+  "saveID": "Save ID",
   "Find ID": "Find ID",
   "Find Password": "Find Password",
   "Sign In": "Create an Account",
+
+  "privmem": "Private Member",
+  "EnterID": "Enter an email address to use as an ID",
+  "EnterName": "Enter your name.",
+  "EnterDOB": "Enter your DOB(Only number).",
+  "EnterPhonenum": "Enter your phone number.",
+  "EnterLicense": "Enter doctor's license number.",
+
   "TOS": "Terms of Service",
+  "AgreeTerms": "Agree to Terms and Conditions of Use",
+  "OptionalTerms": "You can sign up for membership even if you do not agree to the optional terms and conditions.",
   "Next": "Next",
+
+  "SecureEmail": "Secure e-mail",
+  "UsedChnge": "(Used when changing password)",
+  "EnterAvailableEmail": "Enter an available email",
+  "EnterCode": "Enter the verification code.",
+  "Characters": "Use 6 ~ 14 characters with a mix of letters, numbers & symbols.",
+  "ConfirmPW": "Confirm password.",
+  "Yymmdd": "yymmdd",
+
+
   "Check": "Check",
   "ID": "ID",
   "Name": "Name",

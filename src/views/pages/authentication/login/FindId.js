@@ -9,7 +9,7 @@ import axios from "axios"
 import { FormattedMessage } from "react-intl"
 
 const colourOptions = [
-  { value: "개인회원", label: "개인회원" },
+  { value: <FormattedMessage id="privmem" />, label: <FormattedMessage id="privmem" /> },
   { value: "기업회원", label: "기업회원" }
 ]
 
@@ -96,39 +96,55 @@ class FindId extends React.Component {
               />
             </FormGroup>
             <FormGroup className="form-label-group position-relative">
-              <Input
-                placeholder="이름을 입력하세요"
-                value={this.state.name}
-                onChange={e => this.setState({ name: e.target.value })}
-                required
-              />
+              <FormattedMessage id="EnterName">
+                { (EnterName) =>
+                <Input
+                  placeholder={EnterName}
+                  value={this.state.name}
+                  onChange={e => this.setState({ name: e.target.value })}
+                  required
+                />
+                }
+              </FormattedMessage>
             </FormGroup>
             <FormGroup className="form-label-group position-relative">
-              <Input
-                type="text"
-                placeholder="생년월일 입력, 숫자만 입력"
-                value={this.state.email}
-                onChange={e => this.setState({ bt_date: e.target.value })}
-                required
-              />
+              <FormattedMessage id="EnterDOB">
+                { (EnterDOB) =>
+                <Input
+                  type="text"
+                  placeholder={EnterDOB}
+                  value={this.state.bt_date}
+                  onChange={e => this.setState({ bt_date: e.target.value })}
+                  required
+                />
+                }
+              </FormattedMessage>
             </FormGroup>
             <FormGroup className="form-label-group position-relative">
-              <Input
-                type="text"
-                placeholder="휴대폰 번호를 입력하세요"
-                value={this.state.phone}
-                onChange={e => this.setState({ phone: e.target.value })}
-                required
-              />
+              <FormattedMessage id="EnterPhonenum">
+                { (EnterPhonenum) =>
+                <Input
+                  type="text"
+                  placeholder={EnterPhonenum}
+                  value={this.state.phone}
+                  onChange={e => this.setState({ phone: e.target.value })}
+                  required
+                />
+                }
+              </FormattedMessage>
             </FormGroup>  
             <FormGroup className="form-label-group position-relative">
-              <Input
-                type="text"
-                placeholder="의사면허번호를 입력하세요"
-                value={this.state.docnum}
-                onChange={e => this.setState({ docnum: e.target.value })}
-                required
-              />
+              <FormattedMessage id="EnterLicense">
+                { (EnterLicense) =>
+                <Input
+                  type="text"
+                  placeholder={EnterLicense}
+                  value={this.state.docnum}
+                  onChange={e => this.setState({ docnum: e.target.value })}
+                  required
+                />
+                }
+              </FormattedMessage>
             </FormGroup>            
             <div className="d-flex justify-content-center py-3">
               <Button color="primary" type="submit" size="lg" block>

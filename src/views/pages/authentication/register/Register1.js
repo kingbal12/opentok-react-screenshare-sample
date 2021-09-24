@@ -458,7 +458,7 @@ class Register extends React.Component {
                       <h4 className="text-bold-600"><FormattedMessage id="TOS"/></h4>
                     </CardTitle>
                   </CardHeader>
-                  <p className="ml-2"><img src={HicareLogo} alt="HicareLogo" style={{width:"90px", paddingBottom:"0.6rem"}}/> 사용을 위해 아래의 약관에 동의해 주세요!</p>
+                  <p className="ml-2"><img src={HicareLogo} alt="HicareLogo" style={{width:"90px", paddingBottom:"0.6rem"}}/><FormattedMessage id="AgreeTerms"/></p>
                   {/* <Nav tabs className="px-3 justify-content-center">
                     <NavItem>
                       <NavLink
@@ -532,7 +532,7 @@ class Register extends React.Component {
                                   />
                                 );
                               })}
-                              <small>선택 약관은 동의하지 않아도 회원가입이 가능합니다.</small>
+                              <small><FormattedMessage id="OptionalTerms"/></small>
                           </Col>
                           <Col lg="3" md="3" sm="3" xl="3">
                             <ChevronRight style={{marginTop: "0.2rem", cursor:"pointer"}} onClick={this.termModal1}/><br/>

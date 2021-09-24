@@ -204,13 +204,17 @@ class LoginJWT extends React.Component {
               {/* <Label>비밀번호</Label> */}
             </FormGroup>
             <FormGroup className="d-flex justify-content-between align-items-center">
-              <Checkbox
-                color="primary"
-                icon={<Check className="vx-icon" size={16} />}
-                label="아이디 저장"
-                defaultChecked={this.state.email===""?false:true}
-                onChange={this.handleRemember}
-              />
+              <FormattedMessage id="saveID">
+                {(saveID) =>
+                <Checkbox
+                  color="primary"
+                  icon={<Check className="vx-icon" size={16} />}
+                  label={saveID}
+                  defaultChecked={this.state.email===""?false:true}
+                  onChange={this.handleRemember}
+                />
+                }
+              </FormattedMessage>
               
             </FormGroup>
             <div className="d-flex justify-content-center pb-1">

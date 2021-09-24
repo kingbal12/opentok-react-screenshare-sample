@@ -275,11 +275,11 @@ class Register extends React.Component {
                               <h5 className="text-bold-600"><FormattedMessage id="ID"/></h5>
                             </div>
                             <InputGroup>
-                              <FormattedMessage id="LoginPH">
-                                {(LoginPH) =>
+                              <FormattedMessage id="EnterAvailableEmail">
+                                {(EnterAvailableEmail) =>
                                 <Input
                                   type="email"
-                                  placeholder={LoginPH}
+                                  placeholder={EnterAvailableEmail}
                                   required
                                   value={this.state.userid}
                                   onChange={e => this.setState({ userid: e.target.value })}
@@ -293,7 +293,7 @@ class Register extends React.Component {
                             </div>
                             <div className="col-12 mt-1">
                               <h5 className="text-bold-600">
-                                보안이메일&nbsp;<span className="text-primary">(비밀번호 변경에 사용)</span>
+                                <FormattedMessage id="SecureEmail"/>&nbsp;<span className="text-primary"><FormattedMessage id="UsedChnge"/></span>
                               </h5>
                             </div>
                             <div className="d-flex flex-row-reverse">
@@ -311,14 +311,18 @@ class Register extends React.Component {
                           <FormGroup className="form-label-group d-flex justify-content-between">
                             <div className="col-3"></div>
                             <InputGroup>
-                              <Input
-                                disabled={this.state.otheremail===true?false:true}
-                                type="email"
-                                placeholder="사용 가능한 이메일 입력"
-                                required
-                                value={this.state.email}
-                                onChange={e => this.setState({ email: e.target.value })}
-                              />
+                             <FormattedMessage id="EnterAvailableEmail">
+                                {(EnterAvailableEmail) =>
+                                <Input
+                                  disabled={this.state.otheremail===true?false:true}
+                                  type="email"
+                                  placeholder={EnterAvailableEmail}
+                                  required
+                                  value={this.state.email}
+                                  onChange={e => this.setState({ email: e.target.value })}
+                                />
+                                }
+                              </FormattedMessage>
                               <InputGroupAddon addonType="append"><Button disabled={this.state.otheremail===true?false:true} color="primary" type="button" onClick={this.emailauth}><FormattedMessage id="Check"/></Button></InputGroupAddon>
                             </InputGroup>
                           </FormGroup>
@@ -326,13 +330,17 @@ class Register extends React.Component {
                           <FormGroup className="form-label-group d-flex justify-content-between">
                             <div className="col-3"></div>
                             <InputGroup>
-                              <Input
-                                type="number"
-                                placeholder="인증번호 입력"
-                                required
-                                value={this.state.idnumber}
-                                onChange={e => this.setState({ idnumber: e.target.value })}
-                              />
+                              <FormattedMessage id="EnterCode">
+                                {(EnterCode) =>
+                                <Input
+                                  type="number"
+                                  placeholder={EnterCode}
+                                  required
+                                  value={this.state.idnumber}
+                                  onChange={e => this.setState({ idnumber: e.target.value })}
+                                />
+                                }
+                              </FormattedMessage>
                               <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.verifyauth}>인증 확인</Button></InputGroupAddon>
                             </InputGroup>
                           </FormGroup>
@@ -373,27 +381,35 @@ class Register extends React.Component {
                               <h5 className="text-bold-600"><FormattedMessage id="Password"/></h5>
                             </div>
                             <InputGroup>
-                              <Input
-                                maxLength="14"
-                                type="password"
-                                placeholder="영어, 숫자, 특수문자 포함 6자~14자 이내"
-                                required
-                                value={this.state.password}
-                                onChange={e => this.setState({ password: e.target.value })}
-                              />
+                              <FormattedMessage id="Characters">
+                                {(Characters) =>
+                                <Input
+                                  maxLength="14"
+                                  type="password"
+                                  placeholder={Characters}
+                                  required
+                                  value={this.state.password}
+                                  onChange={e => this.setState({ password: e.target.value })}
+                                />
+                                }
+                              </FormattedMessage>
                             </InputGroup>
                           </FormGroup>
                           <FormGroup className="form-label-group d-flex justify-content-between">
                             <div className="col-3"></div>
                             <InputGroup>
-                              <Input
-                                maxLength="14"
-                                type="password"
-                                placeholder="비밀번호 확인"
-                                required
-                                value={this.state.chkpassword}
-                                onChange={e => this.setState({ chkpassword: e.target.value })}
-                              />
+                              <FormattedMessage id="ConfirmPW">
+                                {(ConfirmPW) =>
+                                <Input
+                                  maxLength="14"
+                                  type="password"
+                                  placeholder={ConfirmPW}
+                                  required
+                                  value={this.state.chkpassword}
+                                  onChange={e => this.setState({ chkpassword: e.target.value })}
+                                />
+                                }
+                              </FormattedMessage>
                             </InputGroup>
                           </FormGroup>
                           <FormGroup className="form-label-group d-flex justify-content-between">
@@ -401,15 +417,19 @@ class Register extends React.Component {
                               <h5 className="text-bold-600"><FormattedMessage id="DOB"/></h5>
                             </div>
                             <InputGroup>
-                              <Input
-                                type="number"
-                                maxLength="6"
-                                placeholder="주민번호 앞 6자리"
-                                required
-                                value={this.state.btdate}
-                                onInput={this.maxLengthCheck}
-                                onChange={e => this.setState({ btdate: e.target.value })}
-                              />
+                              <FormattedMessage id="Yymmdd">
+                                {(Yymmdd) =>
+                                <Input
+                                  type="number"
+                                  maxLength="6"
+                                  placeholder={Yymmdd}
+                                  required
+                                  value={this.state.btdate}
+                                  onInput={this.maxLengthCheck}
+                                  onChange={e => this.setState({ btdate: e.target.value })}
+                                />
+                                }
+                              </FormattedMessage>
                               <div className="align-self-center"><b>&nbsp;-&nbsp;</b></div>
                               <Input
                                 maxLength="1"
