@@ -293,61 +293,77 @@ handleComplete = (data) => {
               <CardBody className="pt-1 pb-50">
                   <Form action="/" onSubmit={this.handleRegister}>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-3 align-self-center"><b>휴대폰인증<span className="text-danger">(필수)</span></b></div>            
+                      <div className="col-3 align-self-center"><b><FormattedMessage id="Mphverification"/><span className="text-danger"><FormattedMessage id="Required"/></span></b></div>            
                       <InputGroup>
-                        <Input
-                          type="number"
-                          placeholder="휴대폰번호를 - 없이 입력해주세요"
-                          required
-                          value={this.state.phonenum}
-                          onChange={e => this.setState({ phonenum: e.target.value })}
-                        />
-                        <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.postPhone}>인증요청</Button></InputGroupAddon>
+                        <FormattedMessage id="Without">
+                          {(Without) =>
+                          <Input
+                            type="number"
+                            placeholder={Without}
+                            required
+                            value={this.state.phonenum}
+                            onChange={e => this.setState({ phonenum: e.target.value })}
+                          />
+                          }
+                        </FormattedMessage>
+                        <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.postPhone}><FormattedMessage id="Verification"/></Button></InputGroupAddon>
                       </InputGroup>                      
                     </FormGroup>
                     <FormGroup className="form-label-group d-flex justify-content-between">
                       <div className="col-3 align-self-center"></div>            
                       <InputGroup>
-                        <Input
-                          type="number"
-                          placeholder="인증번호 입력"
-                          required
-                          value={this.state.phonauthnum}
-                          onChange={e => this.setState({ phonauthnum: e.target.value })}
-                        />
-                        <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.auth}>인증확인</Button></InputGroupAddon>
+                        <FormattedMessage id="EnterCode">
+                          {(EnterCode) =>
+                          <Input
+                            type="number"
+                            placeholder={EnterCode}
+                            required
+                            value={this.state.phonauthnum}
+                            onChange={e => this.setState({ phonauthnum: e.target.value })}
+                          />
+                          }
+                        </FormattedMessage>
+                        <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.auth}><FormattedMessage id="VerificationC"/></Button></InputGroupAddon>
                       </InputGroup>                      
                     </FormGroup>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-3 align-self-center"><b><FormattedMessage id="CN"/> <span className="text-danger">(필수)</span></b></div>
+                      <div className="col-3 align-self-center"><b><FormattedMessage id="CN"/> <span className="text-danger"><FormattedMessage id="Required"/></span></b></div>
                       <InputGroup>
-                        <Input
-                          type="text"
-                          placeholder="병원명 입력"
-                          required
-                          value={this.state.hospitalname}
-                          onChange={e => this.setState({ hospitalname: e.target.value })}
-                        />   
+                        <FormattedMessage id="EnterHospital">
+                          {(EnterHospital) =>
+                          <Input
+                            type="text"
+                            placeholder={EnterHospital}
+                            required
+                            value={this.state.hospitalname}
+                            onChange={e => this.setState({ hospitalname: e.target.value })}
+                          />   
+                          }
+                        </FormattedMessage>
                       </InputGroup>
                     </FormGroup>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-3 align-self-center"><b><FormattedMessage id="CRN"/> <span className="text-danger">(필수)</span></b></div>
+                      <div className="col-3 align-self-center"><b><FormattedMessage id="CRN"/> <span className="text-danger"><FormattedMessage id="Required"/></span></b></div>
                       <InputGroup>
-                        <Input
-                          maxLength="10"
-                          type="number"
-                          placeholder="하이픈(-)을 생략, 숫자만 입력"
-                          required
-                          value={this.state.businessnumber}
-                          onInput={this.maxLengthCheck}
-                          onChange={e => this.setState({ businessnumber: e.target.value })}
-                        />
+                        <FormattedMessage id="OnlyNumber">
+                          {(OnlyNumber) =>
+                          <Input
+                            maxLength="10"
+                            type="number"
+                            placeholder={OnlyNumber}
+                            required
+                            value={this.state.businessnumber}
+                            onInput={this.maxLengthCheck}
+                            onChange={e => this.setState({ businessnumber: e.target.value })}
+                          />
+                          }
+                        </FormattedMessage>
                         <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.verifyBusinessNumber}><FormattedMessage id="Check"/></Button></InputGroupAddon>
                       </InputGroup>
                     </FormGroup>
                     <FormGroup className="form-label-group">
                       <div className="d-flex justify-content-between">
-                        <div className="col-3 align-self-start"><b><FormattedMessage id="Address"/> <span className="text-danger">(필수)</span></b></div>
+                        <div className="col-3 align-self-start"><b><FormattedMessage id="Address"/> <span className="text-danger"><FormattedMessage id="Required"/></span></b></div>
                         <InputGroup className="mb-1" onClick={this.zipModal}>
                           <Input
                             type="text"
@@ -357,7 +373,7 @@ handleComplete = (data) => {
                             onChange={e => this.setState({ address1: e.target.value })}
                           />
                           <InputGroupAddon addonType="append">
-                            <Button color="primary" type="button">주소 검색</Button>
+                            <Button color="primary" type="button"><FormattedMessage id="SearchAddress"/></Button>
                           </InputGroupAddon>
                         </InputGroup>
                       </div>
@@ -418,17 +434,21 @@ handleComplete = (data) => {
                       </Modal>
                     </FormGroup>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-3 align-self-center"><b><FormattedMessage id="CNumber"/> <span className="text-danger">(필수)</span></b></div>
+                      <div className="col-3 align-self-center"><b><FormattedMessage id="CNumber"/> <span className="text-danger"><FormattedMessage id="Required"/></span></b></div>
                       <InputGroup>
-                        <Input
-                          maxLength="15"
-                          type="number"
-                          onInput={this.maxLengthCheck}
-                          placeholder="하이픈(-)을 생략, 숫자만 입력"
-                          required
-                          value={this.state.phonenumber}
-                          onChange={e => this.setState({ phonenumber: e.target.value })}
-                        />
+                        <FormattedMessage id="OnlyNumber">
+                          {(OnlyNumber) =>
+                          <Input
+                            maxLength="15"
+                            type="number"
+                            onInput={this.maxLengthCheck}
+                            placeholder={OnlyNumber}
+                            required
+                            value={this.state.phonenumber}
+                            onChange={e => this.setState({ phonenumber: e.target.value })}
+                          />
+                          }
+                        </FormattedMessage>
                       </InputGroup>
                     </FormGroup>
                     <FormGroup className="form-label-group d-flex justify-content-between">

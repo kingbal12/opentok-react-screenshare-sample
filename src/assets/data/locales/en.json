@@ -25,14 +25,25 @@
   "Characters": "Use 6 ~ 14 characters with a mix of letters, numbers & symbols.",
   "ConfirmPW": "Confirm password.",
   "Yymmdd": "yymmdd",
-
-
   "Check": "Check",
   "ID": "ID",
   "Name": "Name",
   "PH": "Phone Number",
   "Password": "Password",
   "DOB": "Date of Birth / Gender",
+
+  "Mphverification": "Proceed with mobile phone verification.",
+  "Required": "(Required)",
+  "Without": "Enter your phone number without '-'",
+  "Verification": "Verification",
+  "VerificationC": "Verification completed",
+  "EnterHospital": "Enter your hospital name",
+  "OnlyNumber": "Input without '-', Only number",
+  "SearchAddress": "Search for the address",
+  "Text": "Enter text",
+  "EnterSpecialty": "Enter your specialty. Eg) DM, HTN, Insomnia etc.",
+  "EnterDocLicense": "Enter doctor's license number.",
+
   "CI": "Clinic Information",
   "CN": "Clinic Name",
   "CRN": "Company Registration Number",

@@ -25,6 +25,11 @@ class IntlProviderWrapper extends React.Component {
     messages: menu_messages["ko"]
   }
 
+  // state = {
+  //   locale: "en",
+  //   messages: menu_messages["en"]
+  // }
+
   render() {
     const { children } = this.props
     const { locale, messages } = this.state

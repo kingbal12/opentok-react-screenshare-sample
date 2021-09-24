@@ -238,7 +238,7 @@ class Register extends React.Component {
                     <FormGroup className="form-label-group">
                       <Row className="pl-1">
                         
-                          <Col lg="2" md="12" className="align-self-start"><b><FormattedMessage id="Add Image"/><span className="text-danger">(필수)</span></b></Col>
+                          <Col lg="2" md="12" className="align-self-start"><b><FormattedMessage id="Add Image"/><span className="text-danger"><FormattedMessage id="Required"/></span></b></Col>
                           <Col lg="7" md="12" className="p-0 m-0">
                           <InputGroup>
                             <CustomInput
@@ -254,7 +254,7 @@ class Register extends React.Component {
                       
                     </FormGroup> 
                     <FormGroup className="form-label-group d-flex justify-content-between no-gutters">
-                      <div className="col-2 align-self-center"><b className="ml-1"><FormattedMessage id="Department"/><span className="text-danger">(필수)</span></b></div>
+                      <div className="col-2 align-self-center"><b className="ml-1"><FormattedMessage id="Department"/><span className="text-danger"><FormattedMessage id="Required"/></span></b></div>
                       
                       <Input type="select" name="select" value={this.state.medicalpart}  onChange={e => this.setState({ medicalpart: e.target.value })}>
                         <FormattedMessage id="familymedicine">{(familymedicine) =><option value="01">{familymedicine}</option>}</FormattedMessage>
@@ -278,31 +278,39 @@ class Register extends React.Component {
                     </FormGroup>
                     
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-2 align-self-center"><b><FormattedMessage id="Specialty"/><span className="text-danger">(필수)</span></b></div>
+                      <div className="col-2 align-self-center"><b><FormattedMessage id="Specialty"/><span className="text-danger"><FormattedMessage id="Required"/></span></b></div>
                       <InputGroup>
-                        <Input
-                          type="text"
-                          placeholder="TEXT를 입력해주세요"
-                          required
-                          value={this.state.medicalable}
-                          onChange={e => this.setState({ medicalable: e.target.value })}
-                        />   
+                        <FormattedMessage id = "Text" >
+                          {(Text) =>
+                          <Input
+                            type="text"
+                            placeholder={Text}
+                            required
+                            value={this.state.medicalable}
+                            onChange={e => this.setState({ medicalable: e.target.value })}
+                          />
+                          }
+                        </FormattedMessage>
                       </InputGroup>
                     </FormGroup>
 
                     <FormGroup className="form-label-group">
                       <div className="d-flex justify-content-between">
-                        <div className="col-2 align-self-start"><b><FormattedMessage id="EMPE"/><span className="text-danger">(필수)</span></b></div>
+                        <div className="col-2 align-self-start"><b><FormattedMessage id="EMPE"/><span className="text-danger"><FormattedMessage id="Required"/></span></b></div>
                         <InputGroup>
-                          <Input
-                            maxLength="400"
-                            type="textarea"
-                            placeholder="진료분야 입력. 예)당뇨, 고혈압, 수면장애 등"
-                            required
-                            rows="3"
-                            value={this.state.medicaldesc}
-                            onChange={e => this.setState({ medicaldesc: e.target.value })}
-                          />   
+                          <FormattedMessage id = "EnterSpecialty" >
+                            {(EnterSpecialty) =>
+                            <Input
+                              maxLength="400"
+                              type="textarea"
+                              placeholder={EnterSpecialty}
+                              required
+                              rows="3"
+                              value={this.state.medicaldesc}
+                              onChange={e => this.setState({ medicaldesc: e.target.value })}
+                            />
+                            }
+                          </FormattedMessage>   
                         </InputGroup>
                       </div>
                       {/* <small
@@ -316,17 +324,21 @@ class Register extends React.Component {
 
                     <FormGroup className="form-label-group pt-1">
                       <div className="d-flex justify-content-between">
-                        <div className="col-2 align-self-start"><b><FormattedMessage id="Introduction"/><span className="text-danger">(필수)</span></b></div>
+                        <div className="col-2 align-self-start"><b><FormattedMessage id="Introduction"/><span className="text-danger"><FormattedMessage id="Required"/></span></b></div>
                         <InputGroup>
-                          <Input
-                            maxLength="400"
-                            type="textarea"
-                            placeholder="TEXT를 입력해주세요"
-                            required
-                            rows="3"
-                            value={this.state.userdesc}
-                            onChange={e => this.setState({ userdesc: e.target.value })}
-                          />   
+                          <FormattedMessage id = "Text" >
+                            {(Text) =>
+                            <Input
+                              maxLength="400"
+                              type="textarea"
+                              placeholder={Text}
+                              required
+                              rows="3"
+                              value={this.state.userdesc}
+                              onChange={e => this.setState({ userdesc: e.target.value })}
+                            />   
+                            }
+                          </FormattedMessage>  
                         </InputGroup>
                       </div>
                       {/* <small
@@ -339,17 +351,21 @@ class Register extends React.Component {
                     </FormGroup>
 
                     <FormGroup className="form-label-group d-flex justify-content-between pt-1">
-                      <div className="col-2 align-self-center"><b><FormattedMessage id="License"/><br/><span className="text-danger">(필수)</span></b></div>
+                      <div className="col-2 align-self-center"><b><FormattedMessage id="License"/><br/><span className="text-danger"><FormattedMessage id="Required"/></span></b></div>
                       <InputGroup>
-                        <Input
-                          type="number"
-                          maxLength="5"
-                          placeholder="의사 면허번호 입력"
-                          required
-                          value={this.state.medicalnum}
-                          onInput={this.maxLengthCheck}
-                          onChange={e => this.setState({ medicalnum: e.target.value })}
-                        />   
+                        <FormattedMessage id = "EnterDocLicense" >
+                          {(EnterDocLicense) =>
+                          <Input
+                            type="number"
+                            maxLength="5"
+                            placeholder={EnterDocLicense}
+                            required
+                            value={this.state.medicalnum}
+                            onInput={this.maxLengthCheck}
+                            onChange={e => this.setState({ medicalnum: e.target.value })}
+                          />
+                          }
+                        </FormattedMessage>     
                       </InputGroup>
                     </FormGroup>
 
