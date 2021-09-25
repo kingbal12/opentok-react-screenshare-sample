@@ -7,8 +7,10 @@ import decorRight from "../../../assets/img/elements/decore-right.png"
 import DisplayName from "./DisplayName";
 import { connect } from "react-redux";
 import moment from 'moment'
+import { FormattedMessage } from "react-intl"
 
 const today = moment().format("YYYY년 M월 DD일 입니다.")
+const entoday = moment().format("this is M DD, YYYY")
 
 class SalesCard extends React.Component {
   render() {
@@ -23,7 +25,7 @@ class SalesCard extends React.Component {
             </div>
           </div>
           <div className="award-info text-center w-125">
-            <h1 className="mb-2 text-white">안녕하세요.<DisplayName />님</h1>
+            <h1 className="mb-2 text-white"><FormattedMessage id="hello"/><DisplayName /><FormattedMessage id="님"/></h1>
             <h1 className="m-auto mb-0 w-75 text-white">
               {today}
             </h1>

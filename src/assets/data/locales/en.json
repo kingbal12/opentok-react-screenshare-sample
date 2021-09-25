@@ -181,7 +181,11 @@
   "선택 비밀번호 전송 성공": "A temporary password has been sent to the selected email address. Change your password after login.",
   "보안이메일": "Secure E-mail",
 
-
+  "hello": "Hello ",
+  "님": ",",
+  "dayformat": "this is September 15, 2021.",
+  "todayapp": "Number of Appointments(Today)",
+  "monthapp": "Number of Appointments(This month)",
 
 
   "Dashboard": "Dashboard",
