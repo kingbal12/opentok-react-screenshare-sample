@@ -26,7 +26,8 @@ import ReactCountryFlag from "react-country-flag"
 class Login extends React.Component {
   
   state = {
-    activeTab: "1"
+    activeTab: "1",
+    langDropdown: false
   }
   toggle = tab => {
     if (this.state.activeTab !== tab) {
@@ -114,27 +115,6 @@ class Login extends React.Component {
                                 >
                                   <ReactCountryFlag className="country-flag" countryCode="us" svg />
                                   <span className="ml-1">English</span>
-                                </DropdownItem>
-                                <DropdownItem
-                                  tag="a"
-                                  onClick={e => context.switchLanguage("fr")}
-                                >
-                                  <ReactCountryFlag className="country-flag" countryCode="fr" svg />
-                                  <span className="ml-1">French</span>
-                                </DropdownItem>
-                                <DropdownItem
-                                  tag="a"
-                                  onClick={e => context.switchLanguage("de")}
-                                >
-                                  <ReactCountryFlag className="country-flag" countryCode="de" svg />
-                                  <span className="ml-1">German</span>
-                                </DropdownItem>
-                                <DropdownItem
-                                  tag="a"
-                                  onClick={e => context.switchLanguage("pt")}
-                                >
-                                  <ReactCountryFlag className="country-flag" countryCode="pt" svg />
-                                  <span className="ml-1">Portuguese</span>
                                 </DropdownItem>
                               </DropdownMenu>
                             </Dropdown>
