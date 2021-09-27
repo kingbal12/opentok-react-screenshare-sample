@@ -330,39 +330,47 @@ class MyInfo extends React.Component {
                     <div className="col-2 align-self-center">{this.state.phonenumber}</div>
 
                     <Button className="ml-1" color="primary" onClick={this.togglePhonenum}>
-                      {this.state.phonenumtoggle===false?"변경":"취소"}
+                      {this.state.phonenumtoggle===false?<FormattedMessage id="변경"/>:<FormattedMessage id="취소"/>}
                     </Button>
                   </div>
                   {this.state.phonenumtoggle===false? null:
                   <div className="form-label-group d-flex" >
-                    <div className="col-2 align-self-center"><b>변경정보</b></div>
-                    <Input
-                      className="col-2"
-                      type="number"
-                      placeholder="변경할 휴대폰 번호 입력"
-                      required
-                      value={this.state.mdfphonenum}
-                      onChange={e => this.setState({ mdfphonenum: e.target.value })}
-                    />   
+                    <div className="col-2 align-self-center"><b><FormattedMessage id="변경정보"/></b></div>
+                      <FormattedMessage id="enterchnagephone">
+                        {(enterchnagephone) =>
+                        <Input
+                          className="col-2"
+                          type="number"
+                          placeholder={enterchnagephone}
+                          required
+                          value={this.state.mdfphonenum}
+                          onChange={e => this.setState({ mdfphonenum: e.target.value })}
+                        />
+                        }
+                      </FormattedMessage>   
                     <Button className="ml-1" color="primary" onClick={this.postPhone}>
-                      인증 요청
+                      <FormattedMessage id="Verification"/>
                     </Button>
-                    <Input
-                      className="col-2 ml-1"
-                      type="number"
-                      placeholder="인증번호 입력"
-                      required
-                      value={this.state.authnum}
-                      onChange={e => this.setState({ authnum: e.target.value })}
-                    /> 
+                    <FormattedMessage id="enterverification">
+                      {(enterverification) =>
+                      <Input
+                        className="col-2 ml-1"
+                        type="number"
+                        placeholder={enterverification}
+                        required
+                        value={this.state.authnum}
+                        onChange={e => this.setState({ authnum: e.target.value })}
+                      />
+                      }
+                    </FormattedMessage>    
                     <Button className="ml-1" color="primary" onClick={this.auth}>
-                      인증 확인
+                      <FormattedMessage id="VerificationC"/>
                     </Button>
                   </div>  
                   }  
                   <Form action="/" onSubmit={this.handleRegister}>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-2"><b><FormattedMessage id="Add Image"/><span className="text-danger">(필수)</span></b></div>
+                      <div className="col-2"><b><FormattedMessage id="Add Image"/><span className="text-danger"><FormattedMessage id="Required"/></span></b></div>
                       <InputGroup>
                         <CustomInput
                           className="col-11" 
@@ -376,7 +384,7 @@ class MyInfo extends React.Component {
                       <div >{profile_preview}</div>
                     </FormGroup> 
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-2 align-self-center"><b><FormattedMessage id="Department"/><span className="text-danger">(필수)</span></b></div>
+                      <div className="col-2 align-self-center"><b><FormattedMessage id="Department"/><span className="text-danger"><FormattedMessage id="Required"/></span></b></div>
                       <Input type="select" name="select" value={this.state.medicalpart}  onChange={e => this.setState({ medicalpart: e.target.value })}>
                         <FormattedMessage id="familymedicine">{(familymedicine) =><option value="01">{familymedicine}</option>}</FormattedMessage>
                         <FormattedMessage id="internalmedicine">{(internalmedicine) =><option value="02">{internalmedicine}</option>}</FormattedMessage>
@@ -388,30 +396,38 @@ class MyInfo extends React.Component {
                     </FormGroup>
                     
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-2 align-self-center"><b><FormattedMessage id="Specialty"/><span className="text-danger">(필수)</span></b></div>
+                      <div className="col-2 align-self-center"><b><FormattedMessage id="Specialty"/><span className="text-danger"><FormattedMessage id="Required"/></span></b></div>
                       <InputGroup>
-                        <Input
-                          type="text"
-                          placeholder="TEXT를 입력해주세요"
-                          required
-                          value={this.state.medicalable}
-                          onChange={e => this.setState({ medicalable: e.target.value })}
-                        />   
+                        <FormattedMessage id="Text">
+                          {(Text) =>
+                          <Input
+                            type="text"
+                            placeholder={Text}
+                            required
+                            value={this.state.medicalable}
+                            onChange={e => this.setState({ medicalable: e.target.value })}
+                          />   
+                          }
+                        </FormattedMessage>
                       </InputGroup>
                     </FormGroup>
 
                     <FormGroup className="form-label-group">
                       <div className="d-flex justify-content-between">
-                        <div className="col-2 align-self-start"><b><FormattedMessage id="EMPE"/><span className="text-danger">(필수)</span></b></div>
+                        <div className="col-2 align-self-start"><b><FormattedMessage id="EMPE"/><span className="text-danger"><FormattedMessage id="Required"/></span></b></div>
                         <InputGroup>
-                          <Input
-                            type="textarea"
-                            placeholder="TEXT를 입력해주세요"
-                            required
-                            rows="3"
-                            value={this.state.medicaldesc}
-                            onChange={e => this.setState({ medicaldesc: e.target.value })}
-                          />   
+                          <FormattedMessage id="Text">
+                            {(Text) =>
+                            <Input
+                              type="textarea"
+                              placeholder={Text}
+                              required
+                              rows="3"
+                              value={this.state.medicaldesc}
+                              onChange={e => this.setState({ medicaldesc: e.target.value })}
+                            />
+                            }
+                          </FormattedMessage>   
                         </InputGroup>
                       </div>
                       <small
@@ -427,14 +443,18 @@ class MyInfo extends React.Component {
                       <div className="d-flex justify-content-between">
                         <div className="col-2 align-self-start"><b><FormattedMessage id="Introduction"/></b></div>
                         <InputGroup>
-                          <Input
-                            type="textarea"
-                            placeholder="TEXT를 입력해주세요"
-                            required
-                            rows="3"
-                            value={this.state.userdesc}
-                            onChange={e => this.setState({ userdesc: e.target.value })}
-                          />   
+                          <FormattedMessage id="Text">
+                            {(Text) =>
+                            <Input
+                              type="textarea"
+                              placeholder={Text}
+                              required
+                              rows="3"
+                              value={this.state.userdesc}
+                              onChange={e => this.setState({ userdesc: e.target.value })}
+                            />
+                            }
+                          </FormattedMessage>
                         </InputGroup>
                       </div>
                       <small

@@ -80,30 +80,38 @@ class ChagePassword extends React.Component {
                     <FormGroup className="form-label-group d-flex justify-content-between">
                       <div className="col-2 align-self-center"><b><FormattedMessage id="현재 비밀번호"/></b></div>
                       <InputGroup>
-                        <Input
-                          type="password"
-                          placeholder="기존 비밀번호 입력"
-                          required
-                          value={this.state.password}
-                          onChange={e => this.setState({ password: e.target.value })}
-                        />   
+                        <FormattedMessage id="entercurrent">
+                          {(entercurrent) =>
+                          <Input
+                            type="password"
+                            placeholder={entercurrent}
+                            required
+                            value={this.state.password}
+                            onChange={e => this.setState({ password: e.target.value })}
+                          />
+                          }
+                        </FormattedMessage>   
                       </InputGroup>
                     </FormGroup>
                     <div className="ml-1 pb-2 mt-2" style={{borderBottom:"solid silver 1px"}}>
-                      외부로부터 <span className="text-primary">{this.state.userid}</span> 님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인합니다. <br/>
-                      항상 비밀번호는 타인에게 노출되지 않도록 주의하세요
+                      <FormattedMessage id="becareful1"/><span className="text-primary">{this.state.userid}</span><FormattedMessage id="becareful2"/><br/>
+                      <FormattedMessage id="becareful3"/>
                     </div>
                     
                     <FormGroup className="form-label-group d-flex justify-content-between mt-2">
                       <div className="col-2 align-self-center"><b><FormattedMessage id="새 비밀번호"/></b></div>
                       <InputGroup>
-                        <Input
-                          type="password"
-                          placeholder="영어, 숫자, 특수문자 포함 6자~14자 이내"
-                          required
-                          value={this.state.newpassword}
-                          onChange={e => this.setState({ newpassword: e.target.value })}
-                        />   
+                        <FormattedMessage id="Characters">
+                          {(Characters) =>
+                          <Input
+                            type="password"
+                            placeholder={Characters}
+                            required
+                            value={this.state.newpassword}
+                            onChange={e => this.setState({ newpassword: e.target.value })}
+                          />   
+                          }
+                        </FormattedMessage> 
                       </InputGroup>
                     </FormGroup>
 
@@ -111,13 +119,17 @@ class ChagePassword extends React.Component {
                       <div className="d-flex justify-content-between">
                         <div className="col-2 align-self-start"><b><FormattedMessage id="새 비밀번호 확인"/></b></div>
                         <InputGroup>
-                          <Input
-                            type="password"
-                            placeholder="새 비밀번호 재입력"
-                            required
-                            value={this.state.confirmnewpassword}
-                            onChange={e => this.setState({ confirmnewpassword: e.target.value })}
-                          />   
+                          <FormattedMessage id="reenterpass">
+                            {(reenterpass) =>
+                            <Input
+                              type="password"
+                              placeholder={reenterpass}
+                              required
+                              value={this.state.confirmnewpassword}
+                              onChange={e => this.setState({ confirmnewpassword: e.target.value })}
+                            />
+                            }
+                          </FormattedMessage>    
                         </InputGroup>
                       </div>
                     </FormGroup>

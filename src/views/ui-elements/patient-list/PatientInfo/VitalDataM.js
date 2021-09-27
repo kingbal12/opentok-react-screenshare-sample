@@ -383,7 +383,7 @@ class VitalData extends React.Component {
 
 
           <Col xl="12" lg="12" md="12" sm="12" className="d-flex align-self-center">
-            <h5 className="text-bold-600 align-self-center">직접입력</h5>
+            <h5 className="text-bold-600 align-self-center"><FormattedMessage id="직접입력"/></h5>
             <Flatpickr
               className="form-control col-3 align-self-center ml-1"
               value={startpicker}

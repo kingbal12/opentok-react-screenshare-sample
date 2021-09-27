@@ -315,8 +315,8 @@ class PatientInfo extends React.Component {
     this.setState({onsubscribe: data})
   } 
 
-  Completionist = () => <span><h5 className="text-primary" style={{paddingTop:"0.2rem"}}>0분</h5></span>
-  Completephone = () => <span><h5 className="text-primary" style={{paddingTop:"0.2rem"}}>진료시간이 종료되었습니다.</h5></span>
+  Completionist = () => <span><h5 className="text-primary" style={{paddingTop:"0.2rem"}}>0</h5></span>
+  Completephone = () => <span><h5 className="text-primary" style={{paddingTop:"0.2rem"}}><FormattedMessage id="진료시간종료" /></h5></span>
  
   render() {
     let file_preview = null;
@@ -738,7 +738,7 @@ class PatientInfo extends React.Component {
           <Col lg="6" md="12" className="d-flex text-right">
           
             <Col className="mx-2 text-left d-flex" style={{border:"1px solid #B8B8C2", borderRadius: "5px", height:"35px"}}>
-              <h5 className="align-self-center text-primary mr-1" style={{paddingTop:"0.3rem"}}>진료 시작까지</h5>
+              <h5 className="align-self-center text-primary mr-1" style={{paddingTop:"0.3rem"}}><FormattedMessage id="진료 시작까지"/></h5>
                 {this.props.appo===null?null:
                 <span  style={{paddingTop:"0.2rem"}}>
                   <Countdown date={moment(this.props.rtime)} >
@@ -746,7 +746,7 @@ class PatientInfo extends React.Component {
                   </Countdown>
                 </span>  
                 }
-              <h5 className="align-self-center text-primary" style={{paddingTop:"0.3rem"}}>남았습니다.</h5>
+              <h5 className="align-self-center text-primary" style={{paddingTop:"0.3rem"}}><FormattedMessage id="남았습니다"/></h5>
             </Col>
             
             <Col className="mx-2 text-left d-flex" style={{border:"1px solid #B8B8C2", borderRadius: "5px", height:"35px"}}>
@@ -790,9 +790,9 @@ class PatientInfo extends React.Component {
               <CardBody className="pl-0 pt-0">
                 <table className="col-12 pt-0 mt-0">
                   <tr>
-                    <th className="text-center"><h5 className="text-bold-600">진료과 / 진료의</h5></th>
-                    <th className="text-center"><h5 className="text-bold-600">진단명</h5></th>
-                    <th className="text-center"><h5 className="text-bold-600">진료일자</h5></th>  
+                    <th className="text-center"><h5 className="text-bold-600"><FormattedMessage id="진료과/진료의"/></h5></th>
+                    <th className="text-center"><h5 className="text-bold-600"><FormattedMessage id="진단명"/></h5></th>
+                    <th className="text-center"><h5 className="text-bold-600"><FormattedMessage id="진료일자"/></h5></th>  
                   </tr>
                   {
                     this.props.cslist.map(row =>
@@ -825,7 +825,7 @@ class PatientInfo extends React.Component {
                           <h6><span className="text-bold-600"><FormattedMessage id="흡연여부"/></span></h6>
                         </td>
                         <td>
-                          <h6>{this.props.pinfo.SMOKE_YN==="Y"?"흡연":"비흡연"}</h6>
+                          <h6>{this.props.pinfo.SMOKE_YN==="Y"?<FormattedMessage id="흡연"/>:<FormattedMessage id="비흡연"/>}</h6>
                         </td>
                       </tr>
                       <tr>
@@ -833,7 +833,7 @@ class PatientInfo extends React.Component {
                         <h6><span className="text-bold-600"><FormattedMessage id="음주여부"/></span></h6>
                         </td>
                         <td>
-                          <h6>{this.props.pinfo.DRINK_YN==="Y"?"음주":"금주"}</h6>
+                          <h6>{this.props.pinfo.DRINK_YN==="N"?<FormattedMessage id="자주"/>:<FormattedMessage id="가끔"/>}</h6>
                         </td>
                       </tr>
                       <tr>
@@ -841,7 +841,7 @@ class PatientInfo extends React.Component {
                         <h6><span className="text-bold-600"><FormattedMessage id="본인병력"/></span></h6>
                         </td>
                         <td>
-                          <h6>{this.props.pinfo.DISEASE_DESC===""? "없음":this.props.pinfo.DISEASE_DESC}</h6>
+                          <h6>{this.props.pinfo.DISEASE_DESC===""? <FormattedMessage id="없음"/>:this.props.pinfo.DISEASE_DESC}</h6>
                         </td>
                       </tr>
                       <tr>
@@ -849,7 +849,7 @@ class PatientInfo extends React.Component {
                           <h6><span className="text-bold-600"><FormattedMessage id="가족병력"/></span></h6>
                         </td>
                         <td>
-                          <h6>{this.props.pinfo.FAMILY_DESC===""? "없음":this.props.pinfo.FAMILY_DESC}</h6>
+                          <h6>{this.props.pinfo.FAMILY_DESC===""? <FormattedMessage id="없음"/>:this.props.pinfo.FAMILY_DESC}</h6>
                         </td>
                       </tr>
                       <tr>
@@ -857,7 +857,7 @@ class PatientInfo extends React.Component {
                           <h6><span className="text-bold-600"><FormattedMessage id="복용중인 약"/></span></h6>
                         </td>
                         <td>
-                          <h6>{this.props.pinfo.USE_MED===""? "없음":this.props.pinfo.USE_MED}</h6>
+                          <h6>{this.props.pinfo.USE_MED===""? <FormattedMessage id="없음"/>:this.props.pinfo.USE_MED}</h6>
                         </td>
                       </tr>
                       <tr>
@@ -865,7 +865,7 @@ class PatientInfo extends React.Component {
                         <h6><span className="text-bold-600"><FormattedMessage id="알러지 유무"/></span></h6>
                         </td>
                         <td>
-                        <h6>{this.props.pinfo.ALLERGY_YN==="Y"?"있음":"없음"}&nbsp;/&nbsp;{this.props.pinfo.ALLERGY_DESC===""?"없음":this.props.pinfo.ALLERGY_DESC}</h6>
+                        <h6>{this.props.pinfo.ALLERGY_YN==="Y"?<FormattedMessage id="알러지있음"/>:<FormattedMessage id="알러지없음"/>}&nbsp;/&nbsp;{this.props.pinfo.ALLERGY_DESC===""?<FormattedMessage id="없음"/>:this.props.pinfo.ALLERGY_DESC}</h6>
                         </td>
                       </tr>
                     </table>
@@ -919,13 +919,13 @@ class PatientInfo extends React.Component {
                           <Tooltip />
                           <Legend />
                           <Line
-                            name="수축기"
+                            name="Sys"
                             type="monotone"
                             dataKey="SYS_VAL"
                             stroke="#EA5455"
                           />
                           <Line
-                            name="이완기"
+                            name="Dia"
                             type="monotone"
                             dataKey="DIA_VAL"
                             stroke="#7367F0"

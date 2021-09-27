@@ -238,34 +238,42 @@ class Hospitalinfo extends React.Component {
                   <Col lg="8" md="12">
                   <Form action="/" onSubmit={this.handleRegister}>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-3 align-self-center"><b><FormattedMessage id="CN"/> <span className="text-danger">(필수)</span></b></div>
+                      <div className="col-3 align-self-center"><b><FormattedMessage id="CN"/> <span className="text-danger"><FormattedMessage id="Required"/></span></b></div>
                       <InputGroup>
-                        <Input
-                          type="text"
-                          placeholder="상호명을 입력해주세요"
-                          required
-                          value={this.state.hospitalname}
-                          onChange={e => this.setState({ hospitalname: e.target.value })}
-                        />   
+                        <FormattedMessage id="EnterHospital">
+                          {(EnterHospital) =>
+                          <Input
+                            type="text"
+                            placeholder={EnterHospital}
+                            required
+                            value={this.state.hospitalname}
+                            onChange={e => this.setState({ hospitalname: e.target.value })}
+                          /> 
+                          }
+                        </FormattedMessage> 
                       </InputGroup>
                     </FormGroup>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-3 align-self-center"><b><FormattedMessage id="CRN"/> <span className="text-danger">(필수)</span></b></div>
+                      <div className="col-3 align-self-center"><b><FormattedMessage id="CRN"/> <span className="text-danger"><FormattedMessage id="Required"/></span></b></div>
                       <InputGroup>
-                        <Input
-                          type="number"
-                          placeholder="하이픈(-)을 생략하고 입력해주세요"
-                          required
-                          maxLength="10"
-                          value={this.state.businessnumber}
-                          onChange={e => this.setState({ businessnumber: e.target.value })}
-                        />
+                        <FormattedMessage id="OnlyNumber">
+                          {(OnlyNumber) =>
+                          <Input
+                            type="number"
+                            placeholder={OnlyNumber}
+                            required
+                            maxLength="10"
+                            value={this.state.businessnumber}
+                            onChange={e => this.setState({ businessnumber: e.target.value })}
+                          />
+                          }
+                        </FormattedMessage> 
                         <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.verifyBusinessNumber}><FormattedMessage id="Check"/></Button></InputGroupAddon>
                       </InputGroup>
                     </FormGroup>
                     <FormGroup className="form-label-group">
                       <div className="d-flex justify-content-between">
-                        <div className="col-3 align-self-start"><b><FormattedMessage id="Address"/><span className="text-danger">(필수)</span></b></div>
+                        <div className="col-3 align-self-start"><b><FormattedMessage id="Address"/><span className="text-danger"><FormattedMessage id="Required"/></span></b></div>
                         <InputGroup className="mb-1" onClick={this.zipModal}>
                           <Input
                             type="text"
@@ -336,19 +344,24 @@ class Hospitalinfo extends React.Component {
                       </Modal>
                     </FormGroup>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-3 align-self-center"><b><FormattedMessage id="CNumber"/><span className="text-danger">(필수)</span></b></div>
+                      <div className="col-3 align-self-center"><b><FormattedMessage id="CNumber"/><span className="text-danger"><FormattedMessage id="Required"/></span></b></div>
                       <InputGroup>
-                        <Input
-                          type="number"
-                          placeholder="하이픈(-)을 생략하고 입력해주세요"
-                          required
-                          value={this.state.phonenumber}
-                          onChange={e => this.setState({ phonenumber: e.target.value })}
-                        />
+                        <FormattedMessage id="OnlyNumber">
+                          {(OnlyNumber) =>
+                          <Input
+                            type="number"
+                            placeholder={OnlyNumber}
+                            required
+                            maxLength="10"
+                            value={this.state.phonenumber}
+                            onChange={e => this.setState({ phonenumber: e.target.value })}
+                          />
+                          }
+                        </FormattedMessage> 
                       </InputGroup>
                     </FormGroup>
                     <FormGroup className="form-label-group d-flex justify-content-between">
-                      <div className="col-3 self-align-start"><b><FormattedMessage id="CAI"/><span className="text-danger">(필수)</span></b></div>
+                      <div className="col-3 self-align-start"><b><FormattedMessage id="CAI"/><span className="text-danger"><FormattedMessage id="Required"/></span></b></div>
                       <InputGroup className="mr-1">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText><FormattedMessage id="예금주"/></InputGroupText>

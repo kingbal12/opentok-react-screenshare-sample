@@ -146,17 +146,21 @@ class Withdrawal extends React.Component {
                   <Col lg="8" md="12">
                   <Form>
                     <div>
-                      <div><strong>내 정보 및 서비스 이용기록 삭제 안내</strong></div>
+                      <div><strong><FormattedMessage id="기록삭제" /></strong></div>
                       <iframe src="https://health.iot4health.co.kr/lv1/_agree/agree.all.php?ids=secession" width="100%" height="600px" style={{border:"1px solid silver"}} />
                     </div>
                     <FormGroup className="form-label-group mt-2">
-                     <Checkbox
-                        color="primary"
-                        icon={<Check className="vx-icon" size={16} />}
-                        label="상기 내용을 모두 확인하였습니다."
-                        defaultChecked={false}
-                        onChange={this.handleChkWithdrawal}
-                      />
+                      <FormattedMessage id="checkall">
+                        {(checkall) =>
+                        <Checkbox
+                          color="primary"
+                          icon={<Check className="vx-icon" size={16} />}
+                          label={checkall}
+                          defaultChecked={false}
+                          onChange={this.handleChkWithdrawal}
+                        />
+                        }
+                      </FormattedMessage>
                     </FormGroup>
 
                     <div className="text-right">

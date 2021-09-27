@@ -9,13 +9,16 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter
+  ModalFooter,
+  Dropdown
 } from "reactstrap"
 import axios from "axios"
 import * as Icon from "react-feather"
 import { useAuth0 } from "../../../authServices/auth0/auth0Service"
 import { history } from "../../../history"
 import Question from "../../../assets/img/logo/question.png"
+import { IntlContext } from "../../../utility/context/Internationalization"
+import ReactCountryFlag from "react-country-flag"
 
 
 const handleNavigation = (e, path) => {
@@ -273,7 +276,7 @@ class NavbarUser extends React.PureComponent {
         </Modal> 
         {/* <img className="pt-1" onClick={this.questionModal} 
              style={{width:"2rem", height:"3rem", cursor:"pointer"}}  src={Question} alt="question"/> */}
-        {/* <IntlContext.Consumer>
+        <IntlContext.Consumer>
           {context => {
             let langArr = {
               "en" : "English",
@@ -339,7 +342,7 @@ class NavbarUser extends React.PureComponent {
               </Dropdown>
             )
           }}
-        </IntlContext.Consumer>  */}
+        </IntlContext.Consumer> 
 
         {/* <NavItem className="nav-search" onClick={this.handleNavbarSearch}>
           <NavLink className="nav-link-search">

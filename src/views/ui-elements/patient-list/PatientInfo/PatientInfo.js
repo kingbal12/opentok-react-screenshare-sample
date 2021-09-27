@@ -390,9 +390,9 @@ class PatientInfo extends React.Component {
               <CardBody className="p-0 m-0">
                 <table className="col-12  pt-0 mt-0">
                   <tr>
-                    <th className="text-center"><h5 className="text-bold-600">진료과 / 진료의</h5></th>
-                    <th className="text-center"><h5 className="text-bold-600">진단명</h5></th>
-                    <th className="text-center"><h5 className="text-bold-600">진료일자</h5></th>  
+                    <th className="text-center"><h5 className="text-bold-600"><FormattedMessage id="진료과/진료의"/></h5></th>
+                    <th className="text-center"><h5 className="text-bold-600"><FormattedMessage id="진단명"/></h5></th>
+                    <th className="text-center"><h5 className="text-bold-600"><FormattedMessage id="진료일자"/></h5></th>  
                   </tr>
                   {
                     this.props.cslist.map(row =>
@@ -422,12 +422,12 @@ class PatientInfo extends React.Component {
                     </div>
                     <div className="col-8">
                       <h5>{this.props.pinfo.HEIGHT_VAL}cm&nbsp;/&nbsp;{this.props.pinfo.WEIGHT_VAL}kg</h5>
-                      <h5>{this.props.pinfo.SMOKE_YN==="Y"?"흡연":"비흡연"}</h5>
-                      <h5>{this.props.pinfo.DRINK_YN==="N"?"자주":"가끔"}</h5>
-                      <h5>{this.props.pinfo.DISEASE_DESC===""? "없음":this.props.pinfo.DISEASE_DESC}</h5>
-                      <h5>{this.props.pinfo.FAMILY_DESC===""? "없음":this.props.pinfo.FAMILY_DESC}</h5>
-                      <h5>{this.props.pinfo.USE_MED===""? "없음":this.props.pinfo.USE_MED}</h5>
-                      <h5>{this.props.pinfo.ALLERGY_YN==="Y"?"있음":"없음"}&nbsp;/&nbsp;{this.props.pinfo.ALLERGY_DESC===""?"없음":this.props.pinfo.ALLERGY_DESC}</h5>
+                      <h5>{this.props.pinfo.SMOKE_YN==="Y"?<FormattedMessage id="흡연"/>:<FormattedMessage id="비흡연"/>}</h5>
+                      <h5>{this.props.pinfo.DRINK_YN==="N"?<FormattedMessage id="자주"/>:<FormattedMessage id="가끔"/>}</h5>
+                      <h5>{this.props.pinfo.DISEASE_DESC===""? <FormattedMessage id="없음"/>:this.props.pinfo.DISEASE_DESC}</h5>
+                      <h5>{this.props.pinfo.FAMILY_DESC===""? <FormattedMessage id="없음"/>:this.props.pinfo.FAMILY_DESC}</h5>
+                      <h5>{this.props.pinfo.USE_MED===""? <FormattedMessage id="없음"/>:this.props.pinfo.USE_MED}</h5>
+                      <h5>{this.props.pinfo.ALLERGY_YN==="Y"?<FormattedMessage id="알러지있음"/>:<FormattedMessage id="알러지없음"/>}&nbsp;/&nbsp;{this.props.pinfo.ALLERGY_DESC===""?<FormattedMessage id="없음"/>:this.props.pinfo.ALLERGY_DESC}</h5>
                     </div>
                   </CardBody>
                 </Card>
@@ -479,13 +479,13 @@ class PatientInfo extends React.Component {
                           <Tooltip />
                           <Legend style={{marginTop:"1px"}} />
                           <Line
-                            name="수축기"
+                            name="Sys"
                             type="monotone"
                             dataKey="SYS_VAL"
                             stroke="#EA5455"
                           />
                           <Line
-                            name="이완기"
+                            name="Dia"
                             type="monotone"
                             dataKey="DIA_VAL"
                             stroke="#7367F0"

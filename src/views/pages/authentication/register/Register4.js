@@ -61,7 +61,7 @@ class Register extends React.Component {
   handleFileOnChange = e => {
     
     e.preventDefault();
-    
+
     let reader = new FileReader();
     let file = e.target.files[0];
     let filename = e.target.files[0].name

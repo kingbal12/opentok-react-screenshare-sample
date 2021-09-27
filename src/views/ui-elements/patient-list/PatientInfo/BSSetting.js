@@ -86,7 +86,7 @@ class VitalDataSetting extends React.Component {
               <tbody>
                 <tr>
                   <th scope="row" className="text-center">
-                    <h5>정상</h5>
+                    <h5><FormattedMessage id="정상" /></h5>
                   </th>
                   <td className="d-flex align-self-center">
                     <FormGroup className="pt-1 ml-2">
@@ -137,7 +137,7 @@ class VitalDataSetting extends React.Component {
                   </td>
                 </tr>
                 <tr>
-                  <th scope="row" className="text-center"><h5>주의</h5></th>
+                  <th scope="row" className="text-center"><h5><FormattedMessage id="주의" /></h5></th>
                   <td className="d-flex align-self-center">
                     <FormGroup className="pt-1 ml-2">
                       <Input 
@@ -162,7 +162,7 @@ class VitalDataSetting extends React.Component {
                   </td>
                 </tr>
                 <tr>
-                  <th scope="row" className="text-center"><h5>위험</h5></th>
+                  <th scope="row" className="text-center"><h5><FormattedMessage id="위험" /></h5></th>
                   <td className="d-flex align-self-center">
                     <FormGroup className="pt-1 ml-2">
                       <Input 

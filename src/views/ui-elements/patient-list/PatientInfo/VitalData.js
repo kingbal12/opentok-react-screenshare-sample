@@ -388,7 +388,7 @@ class VitalData extends React.Component {
           </Col>
 
           <Col className="col-4 d-flex ml-auto align-self-center">
-            <h5 className="text-bold-600 align-self-center">직접입력</h5>
+            <h5 className="text-bold-600 align-self-center"><FormattedMessage id="직접입력"/></h5>
             <Flatpickr
               className="form-control col-3 align-self-center ml-1"
               value={startpicker}
@@ -449,13 +449,13 @@ class VitalData extends React.Component {
                         <Tooltip />
                         <Legend/>
                         <Line
-                          name="수축기"
+                          name="Sys"
                           type="monotone"
                           dataKey="SYS_VAL"
                           stroke="#EA5455"
                         />
                         <Line
-                          name="이완기"
+                          name="Dia"
                           type="monotone"
                           dataKey="DIA_VAL"
                           stroke="#7367F0"

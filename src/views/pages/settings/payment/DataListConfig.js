@@ -455,7 +455,7 @@ class DataListConfig extends Component {
               
             </Input>
             
-            <h5 className="align-self-center ml-1 text-bold-600">년</h5> 
+            <h5 className="align-self-center ml-1 text-bold-600"><FormattedMessage id="년"/></h5> 
             <Input
               style={{marginBottom:"0.5rem"}} 
               type="select" 
@@ -478,7 +478,7 @@ class DataListConfig extends Component {
               <option value="12">12</option>                 
             </Input>
 
-            <h5 className="align-self-center  ml-1 text-bold-600">월</h5> 
+            <h5 className="align-self-center  ml-1 text-bold-600"><FormattedMessage id="월"/></h5> 
             <Button className="ml-1" style={{marginBottom:"0.5em"}} color="primary" onClick={this.getpay}><FormattedMessage id="검색"/></Button>
           </Col>
           
@@ -486,9 +486,9 @@ class DataListConfig extends Component {
         <Row className="col-12 mt-5 pb-1" style={{borderBottom:"solid silver 1px"}}>
           <Col lg="9" md="12"></Col>
           <Col lg="3" md="12" className="d-flex">
-            <h5 className="align-self-end">총</h5>
+            <h5 className="align-self-end"><FormattedMessage id="총"/></h5>
             <h1 className="align-self-end pl-5">{this.props.dataList.totalpay}</h1>
-            <h5 className="align-self-end pl-1">원</h5>
+            <h5 className="align-self-end pl-1"><FormattedMessage id="원"/></h5>
           </Col>
         </Row>
         <div className="data-list-header d-flex justify-content-between flex-wrap mt-2">    

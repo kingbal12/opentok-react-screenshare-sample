@@ -448,7 +448,7 @@ class ConsultingRoom extends React.Component {
     this.setState({onsubscribe: data})
   } 
 
-  Completionist = () => <span>진료시간이 종료되었습니다.</span>
+  Completionist = () => <span><FormattedMessage id="진료시간종료"/></span>
 
   questionModal = () => {
     this.setState(prevState => ({
@@ -593,7 +593,7 @@ class ConsultingRoom extends React.Component {
               outline
               type="button">
                 {/* 타이머 */}
-              {this.props.appo===null?"진료 시작 전입니다.":
+              {this.props.appo===null?<FormattedMessage id="진료시작전" />:
                 <Countdown date={moment(this.props.rtime) + 900000} >
                   <this.Completionist />
                 </Countdown>
@@ -1145,7 +1145,7 @@ class ConsultingRoom extends React.Component {
                           <h6><span className="text-bold-600"><FormattedMessage id="흡연여부"/></span></h6>
                         </td>
                         <td>
-                          <h6>{this.props.pinfo.SMOKE_YN==="Y"?"흡연":"비흡연"}</h6>
+                          <h6>{this.props.pinfo.SMOKE_YN==="Y"?<FormattedMessage id="흡연"/>:<FormattedMessage id="비흡연"/>}</h6>
                         </td>
                       </tr>
                       <tr>
@@ -1153,7 +1153,7 @@ class ConsultingRoom extends React.Component {
                         <h6><span className="text-bold-600"><FormattedMessage id="음주여부"/></span></h6>
                         </td>
                         <td>
-                          <h6>{this.props.pinfo.DRINK_YN==="Y"?"음주":"금주"}</h6>
+                          <h6>{this.props.pinfo.DRINK_YN==="N"?<FormattedMessage id="자주"/>:<FormattedMessage id="가끔"/>}</h6>
                         </td>
                       </tr>
                       <tr>
@@ -1161,7 +1161,7 @@ class ConsultingRoom extends React.Component {
                         <h6><span className="text-bold-600"><FormattedMessage id="본인병력"/></span></h6>
                         </td>
                         <td>
-                          <h6>{this.props.pinfo.DISEASE_DESC===""? "없음":this.props.pinfo.DISEASE_DESC}</h6>
+                          <h6>{this.props.pinfo.DISEASE_DESC===""? <FormattedMessage id="없음"/>:this.props.pinfo.DISEASE_DESC}</h6>
                         </td>
                       </tr>
                       <tr>
@@ -1169,7 +1169,7 @@ class ConsultingRoom extends React.Component {
                           <h6><span className="text-bold-600"><FormattedMessage id="가족병력"/></span></h6>
                         </td>
                         <td>
-                          <h6>{this.props.pinfo.FAMILY_DESC===""? "없음":this.props.pinfo.FAMILY_DESC}</h6>
+                          <h6>{this.props.pinfo.FAMILY_DESC===""? <FormattedMessage id="없음"/>:this.props.pinfo.FAMILY_DESC}</h6>
                         </td>
                       </tr>
                       <tr>
@@ -1177,7 +1177,7 @@ class ConsultingRoom extends React.Component {
                           <h6><span className="text-bold-600"><FormattedMessage id="복용중인 약"/></span></h6>
                         </td>
                         <td>
-                          <h6>{this.props.pinfo.USE_MED===""? "없음":this.props.pinfo.USE_MED}</h6>
+                          <h6>{this.props.pinfo.USE_MED===""? <FormattedMessage id="없음"/>:this.props.pinfo.USE_MED}</h6>
                         </td>
                       </tr>
                       <tr>
@@ -1185,7 +1185,7 @@ class ConsultingRoom extends React.Component {
                         <h6><span className="text-bold-600"><FormattedMessage id="알러지 유무"/></span></h6>
                         </td>
                         <td>
-                        <h6>{this.props.pinfo.ALLERGY_YN==="Y"?"있음":"없음"}&nbsp;/&nbsp;{this.props.pinfo.ALLERGY_DESC===""?"없음":this.props.pinfo.ALLERGY_DESC}</h6>
+                        <h6>{this.props.pinfo.ALLERGY_YN==="Y"?<FormattedMessage id="알러지있음"/>:<FormattedMessage id="알러지없음"/>}&nbsp;/&nbsp;{this.props.pinfo.ALLERGY_DESC===""?<FormattedMessage id="없음"/>:this.props.pinfo.ALLERGY_DESC}</h6>
                         </td>
                       </tr>
                     </table>
@@ -1219,9 +1219,9 @@ class ConsultingRoom extends React.Component {
                   <CardBody className="pl-0 pt-0">
                     <table className="col-12 pt-0 mt-0">
                       <tr>
-                        <th className="text-center"><h5 className="text-bold-600">진료과 / 진료의</h5></th>
-                        <th className="text-center"><h5 className="text-bold-600">진단명</h5></th>
-                        <th className="text-center"><h5 className="text-bold-600">진료일자</h5></th>  
+                        <th className="text-center"><h5 className="text-bold-600"><FormattedMessage id="진료과/진료의"/></h5></th>
+                        <th className="text-center"><h5 className="text-bold-600"><FormattedMessage id="진단명"/></h5></th>
+                        <th className="text-center"><h5 className="text-bold-600"><FormattedMessage id="진료일자"/></h5></th>  
                       </tr>
                       {
                         this.props.cslist.map(row =>
@@ -1257,13 +1257,13 @@ class ConsultingRoom extends React.Component {
                           <Tooltip />
                           <Legend />
                           <Line
-                            name="수축기"
+                            name="Sys"
                             type="monotone"
                             dataKey="SYS_VAL"
                             stroke="#EA5455"
                           />
                           <Line
-                            name="이완기"
+                            name="Dia"
                             type="monotone"
                             dataKey="DIA_VAL"
                             stroke="#7367F0"

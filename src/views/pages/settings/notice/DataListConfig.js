@@ -141,7 +141,7 @@ class DataListConfig extends Component {
         cell: row => <p data-tag="allowRowEvents" className="text-bold-500 mb-0">{row.SEQ}</p>
       },
       {
-        name: "제목",
+        name: <FormattedMessage id="Title" />,
         selector: "gender",
         sortable: false,
         center: true,
@@ -156,7 +156,7 @@ class DataListConfig extends Component {
       //   cell: row => <p data-tag="allowRowEvents" className="text-bold-500 mb-0">{row.AUTH_NM}</p>
       // },
       {
-        name: "작성일",
+        name: <FormattedMessage id="Date" />,
         selector: "age",
         sortable: false,
         center: true,

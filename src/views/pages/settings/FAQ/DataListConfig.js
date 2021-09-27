@@ -94,10 +94,10 @@ const CustomHeader = props => {
         <h3 className="text-bold-600">FAQ</h3>    
         <Card className="mt-1" style={{ backgroundColor:"#F8F8F8", height:"11rem"}}>
           <Row className="px-3 pt-1">
-            <h4 className="text-bold-600">자주 묻는 질문들입니다.</h4>
+            <h4 className="text-bold-600"><FormattedMessage id="faq타이틀1"/></h4>
           </Row>
           <Row className="px-3">
-            <h4 className="text-bold-600">궁금한 사항은 먼저 검색해보세요</h4>
+            <h4 className="text-bold-600"><FormattedMessage id="faq타이틀2"/></h4>
           </Row>
           <Row className=" d-flex  justify-content-between  mt-2  px-3">
             
@@ -170,7 +170,7 @@ class DataListConfig extends Component {
       },
       
       {
-        name: "제목",
+        name: <FormattedMessage id="Title" />,
         selector: "gender",
         sortable: false,
         center:true,
@@ -184,7 +184,7 @@ class DataListConfig extends Component {
       //   cell: row => <p data-tag="allowRowEvents" className="text-bold-500 mb-0">{row.AUTH_NM}</p>
       // },
       {
-        name: "작성일",
+        name: <FormattedMessage id="Date" />,
         selector: "birthday",
         sortable: false,
         center:true,
