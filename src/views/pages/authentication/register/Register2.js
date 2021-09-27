@@ -27,6 +27,7 @@ import Loader from "react-loading"
 
 
 
+
 class Register extends React.Component {
   constructor(props) {
     super(props);
@@ -59,7 +60,7 @@ class Register extends React.Component {
   emailauth = e => {
     e.preventDefault()
     if(this.state.userid===this.state.email){
-      alert("아이디용 이메일과 보안이메일은 다른 이메일로 입력해주시기 바랍니다.")
+      alert(<FormattedMessage id="enterotheremail"/>)
     } else {
       this.setState({loadingmodal:true})
       if(this.state.otheremail===false){

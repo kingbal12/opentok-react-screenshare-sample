@@ -206,6 +206,12 @@
   "기록삭제": "Information on deleting my information and service usage records",
   "checkall": "I have checked all of the above.",
 
+  "hello": "Hello ",
+  "님": ",",
+  "dayformat": "this is September 15, 2021.",
+  "todayapp": "Number of Appointments(Today)",
+  "monthapp": "Number of Appointments(This month)",
+
   "비밀번호6자": "Use 6 ~ 14 characters with a mix of letters, numbers & symbols",
   "아이디없음1": "No registered users.",
   "아이디없음2": "Would you like to become a member?",
@@ -219,11 +225,16 @@
   "선택 비밀번호 전송 성공": "A temporary password has been sent to the selected email address. Change your password after login.",
   "보안이메일": "Secure E-mail",
 
-  "hello": "Hello ",
-  "님": ",",
-  "dayformat": "this is September 15, 2021.",
-  "todayapp": "Number of Appointments(Today)",
-  "monthapp": "Number of Appointments(This month)",
+  "enterotheremail": "Enter the e-mail for ID and secure e-mail as different e-mails.",
+  "checkpassword1": "The password format is incorrect.",
+  "checkpassword2": "Use 6 ~ 14 characters with a mix of letters, numbers & symbols.",
+  "emailvfc": "Complete email verification.",
+  "availalbleid": "Availabe ID.",
+  "enterdob": "Enter your DOB.",
+  "vfc": "Verification completed",
+  "notmatch1": "Passwords do not match.",
+  "notmatch2": "Please check again.",
+ 
 
 
   "Dashboard": "Dashboard",
