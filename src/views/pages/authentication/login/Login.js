@@ -29,6 +29,7 @@ class Login extends React.Component {
     activeTab: "1",
     langDropdown: false
   }
+
   toggle = tab => {
     if (this.state.activeTab !== tab) {
       this.setState({
@@ -36,8 +37,10 @@ class Login extends React.Component {
       })
     }
   }
+
   handleLangDropdown = () =>
   this.setState({ langDropdown: !this.state.langDropdown })
+  
   render() {
     return (
       <Row className="m-0 justify-content-center">
