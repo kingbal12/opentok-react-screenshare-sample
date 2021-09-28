@@ -235,6 +235,17 @@
   "notmatch1": "Passwords do not match.",
   "notmatch2": "Please check again.",
  
+  "notmatchcell1": "Not the same as the number you entered.",
+  "notmatchcell2": "Enter your phone number.",
+  "bankname": "Don`t enter the account holder or bank name only as numbers.",
+  "hospitalname": "Don`t enter the hospital name only with numbers.",
+  "cellvfc": "Proceed with mobile phone verification.",
+  "hospitalinfo": "Hospital information is saved.",
+  "onlynum": "Business Registration Number Please enter numbers only",
+  "adress": "Adress:",
+  "details": "Details:",
+  "confirmed": "Confirmed",
+  "confirmedtw": "This number is already in use.",
 
 
   "Dashboard": "Dashboard",

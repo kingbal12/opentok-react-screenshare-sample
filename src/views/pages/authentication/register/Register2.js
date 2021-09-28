@@ -21,7 +21,7 @@ import axios from "axios"
 import 'react-perfect-scrollbar/dist/css/styles.css'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import HicareLogo from "../../../../assets/img/logo/logo1.png"
-import { FormattedMessage} from "react-intl"
+import { FormattedMessage, IntlProvider, useIntl } from "react-intl"
 import { history } from "../../../../history"
 import Loader from "react-loading"
 
@@ -60,7 +60,8 @@ class Register extends React.Component {
   emailauth = e => {
     e.preventDefault()
     if(this.state.userid===this.state.email){
-      alert(<FormattedMessage id="enterotheremail"/>)
+        alert(<FormattedMessage id="enterotheremail"/>)
+  
     } else {
       this.setState({loadingmodal:true})
       if(this.state.otheremail===false){

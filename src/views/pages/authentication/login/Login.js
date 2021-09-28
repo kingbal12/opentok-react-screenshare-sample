@@ -19,6 +19,7 @@ import LoginJWT from "./LoginJWT"
 import HicareLogo from "../../../../assets/img/logo/logo1.png"
 import { IntlContext } from "../../../../utility/context/Internationalization"
 import ReactCountryFlag from "react-country-flag"
+import selecticon from "../../../../assets/img/dashboard/down-chevron.png"
 
 
 
@@ -55,12 +56,13 @@ class Login extends React.Component {
             <Row className="m-0">
               <Col md="12" className="p-0">
                 <Card className="rounded-0 mb-0 px-2 login-tabs-container">
-                  <CardHeader className="pb-3 pt-3 d-flex justify-content-center">      
+                  <CardHeader className="pb-3 pt-3 d-flex justify-content-center" >      
                       <img className="px-3" src={HicareLogo} alt="HicareLogo" style={{width:"90%"}}/>
                   </CardHeader>
-                  <Row className="d-flex justify-content-center">
+                  <Row className="d-flex justify-content-center" >
                     <Col lg="6" md="6" className="d-flex justify-content-center">
                     <ul className="nav">
+                      
                       <IntlContext.Consumer>
                         {context => {
                           let langArr = {
@@ -77,6 +79,7 @@ class Login extends React.Component {
                               isOpen={this.state.langDropdown}
                               toggle={this.handleLangDropdown}
                               data-tour="language"
+                              
                             >
                               <DropdownToggle
                                 tag="a"
@@ -103,6 +106,7 @@ class Login extends React.Component {
                                 <span className="d-sm-inline-block d-none text-capitalize align-middle ml-50">
                                   {langArr[context.state.locale]}
                                 </span>
+                                <img src={selecticon} width="30px" height="22px" style={{paddingTop:"3px", paddingLeft:"15px" }}/>
                               </DropdownToggle>
                               <DropdownMenu right>
                                 <DropdownItem
@@ -123,8 +127,11 @@ class Login extends React.Component {
                             </Dropdown>
                           )
                         }}
+                        
                       </IntlContext.Consumer> 
+                      
                     </ul>
+                   
                     </Col>
                     </Row>
                   <TabContent activeTab={this.state.activeTab}>
