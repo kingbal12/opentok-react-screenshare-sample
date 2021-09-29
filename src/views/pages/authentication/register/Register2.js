@@ -21,7 +21,7 @@ import axios from "axios"
 import 'react-perfect-scrollbar/dist/css/styles.css'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import HicareLogo from "../../../../assets/img/logo/logo1.png"
-import { FormattedMessage, IntlProvider, useIntl } from "react-intl"
+import { FormattedMessage, injectIntl } from "react-intl"
 import { history } from "../../../../history"
 import Loader from "react-loading"
 
@@ -55,6 +55,7 @@ class Register extends React.Component {
       idmodal: !prevState.idmodal
     }))
   }
+
   
 
   emailauth = e => {
