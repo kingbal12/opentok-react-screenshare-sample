@@ -7,7 +7,7 @@ import decorRight from "../../../assets/img/elements/decore-right.png"
 import DisplayName from "./DisplayName";
 import { connect } from "react-redux";
 import moment from 'moment'
-import { FormattedMessage } from "react-intl"
+import { FormattedMessage, injectIntl } from "react-intl"
 
 const today = moment().format("YYYY년 M월 DD일 입니다.")
 const entoday = moment().format("this is M DD, YYYY")
