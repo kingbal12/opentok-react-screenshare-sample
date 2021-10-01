@@ -20,7 +20,7 @@ import axios from "axios"
 import 'react-perfect-scrollbar/dist/css/styles.css'
 import PerfectScrollbar from "react-perfect-scrollbar";
 import HicareLogo from "../../../../assets/img/logo/logo1.png"
-import { FormattedMessage } from "react-intl"
+import { FormattedMessage, injectIntl } from "react-intl"
 import { history } from "../../../../history"
 
 class Register extends React.Component {
@@ -53,7 +53,7 @@ class Register extends React.Component {
 
 postPhone = e => {
   e.preventDefault()
- 
+  const { intl } = this.props;
     if(this.props.user.register.values.phone === this.state.phonenum){
       axios
         .post("https://health.iot4health.co.kr:9300/signup-sms", {
@@ -69,7 +69,7 @@ postPhone = e => {
 
         })
     } else {
-      alert("본인의 휴대폰번호와 다릅니다.\n본인의 휴대폰 번호를 입력해 주세요")
+      alert(intl.formatMessage({id: "notmatchcell1"}) + "\n" + intl.formatMessage({id: "notmatchcell2"}))
     }
   
 }
@@ -121,6 +121,7 @@ handleComplete = (data) => {
 
   handleRegister = e => {
     e.preventDefault()
+    const { intl } = this.props;
     let regexp = /^[0-9]*$/
     if(this.state.phoneauthveryfied==="Y"){
       if(!regexp.test(this.state.hospitalname)){
@@ -137,13 +138,13 @@ handleComplete = (data) => {
             this.state.bankname,
             this.state.accountnumber)
         } else{
-          alert("예금주나 은행이름을 숫자로만 입력할 수 없습니다.")
+          alert(intl.formatMessage({id: "bankname"}))
         }
       } else{
-        alert("병원 이름을 숫자로만 입력할수 없습니다.")
+        alert(intl.formatMessage({id: "hospitalname"}))
       }
     } else {
-      alert("휴대폰 인증을 진행해주시기 바랍니다.")
+      alert(intl.formatMessage({id: "cellvfc"}))
     }
     
     
@@ -164,6 +165,7 @@ handleComplete = (data) => {
 
   saveRe3 = e => {
     e.preventDefault()
+    const { intl } = this.props;
     this.props.saveRegister3(
       this.state.hospitalname,
       this.state.businessnumber,
@@ -175,15 +177,16 @@ handleComplete = (data) => {
       this.state.bankname,
       this.state.accountnumber
     )
-    alert("병원정보가 저장되었습니다.")
+    alert(intl.formatMessage({id: "hospitalinfo"}))
   }
 
 
   // 여기부터 수정
   postBusinessNumber = businessnumber => {
+    const { intl } = this.props;
     let regexp = /^[0-9]*$/
       if(!regexp.test(this.state.businessnumber)) {
-        alert("사업자 등록번호에는 숫자만 입력하세요")
+        alert(intl.formatMessage({id: "onlynum"}))
       } else {
       axios
         .get("https://health.iot4health.co.kr:9300/v1/doctor/account/hospital-verify", {
@@ -197,13 +200,13 @@ handleComplete = (data) => {
             
             if(response.data.data.COUNT===0) {
               this.setState({
-                businessmodal:true, 
-                businessmodalmsg:"확인 완료되었습니다."
+                businessmodal: true, 
+                businessmodalmsg: intl.formatMessage({id: "confirmed"})
               })
             }else{
               this.setState({
-                businessmodal:true, 
-                businessmodalmsg:"이미 등록된 번호입니다."
+                businessmodal: true, 
+                businessmodalmsg: intl.formatMessage({id: "confirmedtw"})
               })
             }
 
@@ -254,8 +257,8 @@ handleComplete = (data) => {
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.businessnumModal}>
-              확인
-            </Button>{" "}
+              <FormattedMessage id="확인"/>
+            </Button>
           </ModalFooter>
         </Modal>
         <Col
@@ -538,4 +541,4 @@ const mapStateToProps = state =>{
   }
 }
 
-export default connect(mapStateToProps, {register3, postPhonenumber, phoneAuth, saveRegister3})(Register)
+export default injectIntl(connect(mapStateToProps, {register3, postPhonenumber, phoneAuth, saveRegister3})(Register))
