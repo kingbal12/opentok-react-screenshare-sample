@@ -400,7 +400,7 @@ handleComplete = (data) => {
                         className="modal-dialog-centered"
                       >
                         <ModalHeader toggle={this.zipModal}>
-                          주소 찾기
+                          <FormattedMessage id="SearchAddress"/>
                         </ModalHeader>
                         <ModalBody>
                           <DaumPostcode 
@@ -409,24 +409,32 @@ handleComplete = (data) => {
                             height={200}
                           />
                             <FormGroup>
-                              <Label for="adress1">주소:</Label>
-                              <Input
-                                type="text"
-                                id="adress1"
-                                placeholder="주소"
-                                value={this.state.address1}
-                                onChange={e => this.setState({ address1: e.target.value })}
-                              />
+                              <Label for="adress1"><FormattedMessage id="adress"/></Label>
+                              <FormattedMessage id="adress2">
+                                {(adress2) =>
+                                <Input
+                                  type="text"
+                                  id="adress1"
+                                  placeholder={adress2}
+                                  value={this.state.address1}
+                                  onChange={e => this.setState({ address1: e.target.value })}
+                                />
+                                }
+                              </FormattedMessage>
                             </FormGroup>
                             <FormGroup>
-                              <Label for="address2">상세주소:</Label>
-                              <Input
-                                type="text"
-                                id="address2"
-                                placeholder="상세주소"
-                                value={this.state.address2}
-                                onChange={e => this.setState({ address2: e.target.value })}
-                              />
+                              <Label for="address2"><FormattedMessage id="details"/></Label>
+                              <FormattedMessage id="details2">
+                                {(details2) =>
+                                <Input
+                                  type="text"
+                                  id="address2"
+                                  placeholder={details2}
+                                  value={this.state.address2}
+                                  onChange={e => this.setState({ address2: e.target.value })}
+                                />
+                                }
+                              </FormattedMessage>
                             </FormGroup>
                         </ModalBody>
                         <ModalFooter>

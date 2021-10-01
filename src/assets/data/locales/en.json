@@ -243,7 +243,9 @@
   "hospitalinfo": "Hospital information is saved.",
   "onlynum": "Business Registration Number Please enter numbers only",
   "adress": "Adress:",
+  "adress2": "Adress",
   "details": "Details:",
+  "details2": "Details",
   "confirmed": "Confirmed",
   "confirmedtw": "This number is already in use.",
 
