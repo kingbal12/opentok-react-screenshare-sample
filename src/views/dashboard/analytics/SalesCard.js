@@ -13,6 +13,7 @@ const today = moment().format("YYYY년 M월 DD일 입니다.")
 const entoday = moment().format("this is M DD, YYYY")
 
 class SalesCard extends React.Component {
+
   render() {
     return (
       <Card className="bg-analytics text-white sales-card">
@@ -37,4 +38,4 @@ class SalesCard extends React.Component {
 }
 
 
-export default SalesCard
+export default injectIntl(SalesCard)
