@@ -59,9 +59,10 @@ class Register extends React.Component {
   
 
   emailauth = e => {
+    const { intl } = this.props;
     e.preventDefault()
     if(this.state.userid===this.state.email){
-        alert(<FormattedMessage id="enterotheremail"/>)
+        alert(intl.formatMessage({id: "enterotheremail"}))
   
     } else {
       this.setState({loadingmodal:true})
@@ -116,7 +117,6 @@ class Register extends React.Component {
   }
 
   verifyemail = (email,idnumber) => {
-    
       axios
         .post("https://health.iot4health.co.kr:9300/signup-verify", {
           user_id: email,
@@ -144,13 +144,14 @@ class Register extends React.Component {
 
   handleRegister1 = e => {
     e.preventDefault()
+    const { intl } = this.props;
     if(this.state.verifyemailyn==="Y") {
       let pwcheck = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,14}$/;
       let btdatecheck = /([0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[1,2][0-9]|3[0,1]))/;
       if(!pwcheck.test(this.state.password)){
-        alert("비밀번호 형식이 올바르지 않습니다.\n비밀번호 형식은 영어, 숫자, 특수문자 포함 6자~14자 이내 입니다.")
+        alert(intl.formatMessage({id: "checkpassword1"})+"\n"+intl.formatMessage({id: "checkpassword2"}))
       } else if (!btdatecheck.test(this.state.btdate)){
-        alert("올바른 생년월일을 입력해주십시오")
+        alert(intl.formatMessage({id: "enterdob"}))
       } else{
       if(this.state.password===this.state.chkpassword) {
         if(this.state.otheremail===false) {
@@ -201,7 +202,7 @@ class Register extends React.Component {
       }
     }
     } else {
-      alert("이메일인증을 완료해주십시오")
+      alert(intl.formatMessage({id: "emailvfc"}))
     }
     
     
@@ -483,12 +484,12 @@ class Register extends React.Component {
             
           </ModalHeader>
           <ModalBody>
-            사용가능한 아이디입니다.
+            <FormattedMessage id="availalbleid"/>
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.idModal}>
-              확인
-            </Button>{" "}
+              <FormattedMessage id="확인"/>
+            </Button>
           </ModalFooter>
         </Modal>
 
@@ -501,11 +502,11 @@ class Register extends React.Component {
             
           </ModalHeader>
           <ModalBody>
-            인증이 완료되었습니다.
+            <FormattedMessage id="vfc"/>
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.verifyEmailModal}>
-              확인
+              <FormattedMessage id="확인"/>
             </Button>
           </ModalFooter>
         </Modal>
@@ -519,12 +520,13 @@ class Register extends React.Component {
             
           </ModalHeader>
           <ModalBody>
-            비밀번호가 동일하지 않습니다.
-            다시 입력하여 주십시오.
+            <FormattedMessage id="notmatch1"/>
+            <br/>
+            <FormattedMessage id="notmatch2"/>
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.chkpasswordModal}>
-              확인
+              <FormattedMessage id="확인"/>
             </Button>
           </ModalFooter>
         </Modal>
@@ -544,5 +546,5 @@ const mapStateToProps = state => {
     // vfemail: state.auth.register.verify
   }
 }
-export default connect(mapStateToProps, { register2, authemail, postTerms })(Register)
+export default injectIntl(connect(mapStateToProps, { register2, authemail, postTerms })(Register))
 
