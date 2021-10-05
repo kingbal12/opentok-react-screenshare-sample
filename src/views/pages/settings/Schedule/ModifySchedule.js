@@ -344,6 +344,7 @@ class CalendarApp extends React.Component {
         <Card>
           <CardBody>
             <DragAndDropCalendar style={{height:"600px", position:"relative"}}
+              
               // formats={dayFormat}
               min={
                 new Date(

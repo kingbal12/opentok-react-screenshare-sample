@@ -9,6 +9,21 @@ const formatDate = (scheduleda)=>{
    return formatted_date;
   }
 
+const utcFormatDate = (scheduleda)=>{
+  // let utcscheduleda = moment.utc(scheduleda.toISOString()).format("YYYY-MM-DD HH:mm")
+  let utcscheduleda = moment.utc(scheduleda.toISOString())
+  utcscheduleda = moment(utcscheduleda).format()
+  console.log("utc:",utcscheduleda)
+    return utcscheduleda;
+  }
+
+const localFormDate = (scheduleda)=>{
+  let localscheduledate = moment.utc(scheduleda).toDate()
+  localscheduledate = moment(localscheduledate).format()
+  console.log("locale:",localscheduledate)
+    return localscheduledate;
+  }
+
 export const fisrtFetchEvents = () => {
   return async dispatch => {
     await axios
@@ -72,18 +87,29 @@ export const fetchEvents = (user_id, weekstart, weekend) => {
         }
       })
       .then(response => {
+        if(response.data.status==="200"){
+        let schelength = response.data.data.length
         let weekempty
-        if(response.data.data.length===0) {
+        if(schelength===0) {
           weekempty="Y"
         } else {
           weekempty="N"
         }
-        // 배열안의 데이터 이름을 바꿀 수 있는 방안 연구
-        // fake-db의 데이터 항목 참고 
-        // react-big-calendar의 dataformat 과 api에서 오는 dataformat이 다르지만
-        // fake=db에 있는 데이터 항목대로 substring을 통해 가공해서 보낸다면 해결될것 같음
-        
-        dispatch({ type: "FETCH_EVENTS", events: response.data.data, empty:weekempty })
+
+        let scheduledata 	= new Array();
+        for (let i=0; i<schelength; i++) {
+          let jsonObj		= new Object();         
+          jsonObj.start	= localFormDate(response.data.data[i].start)
+          jsonObj.end	= localFormDate(response.data.data[i].end)
+          jsonObj.id	= response.data.data[i].id
+          jsonObj = JSON.stringify(jsonObj);
+          //String 형태로 파싱한 객체를 다시 json으로 변환
+          scheduledata.push(JSON.parse(jsonObj));
+        }
+        console.log(scheduledata)
+
+        dispatch({ type: "FETCH_EVENTS", events: scheduledata, empty:weekempty })
+      }
       })
       .catch(err => console.log(err))
   }
@@ -106,6 +132,7 @@ export const nextfetchEvents = (user_id, weekstart, weekend) => {
         } else {
           nextweekempty="N"
         }
+
         dispatch({ type: "NEXT_FETCH_EVENTS", events: response.data.data, empty:nextweekempty })
       })
       .catch(err => console.log(err))
@@ -156,11 +183,13 @@ export const postSchedules = (userid, holiday, rperiod, events) => {
   }
 }
 
+
+
 export const mdfpostSchedules = (userid, holiday, rperiod, events) => {
   return dispatch => {
     let dateToObj = events.map(event => {
-      event.start = formatDate(event.start)
-      event.end = formatDate(event.end)
+      event.start = utcFormatDate(event.start)
+      event.end = utcFormatDate(event.end)
       return event
     })
     console.log(events)
@@ -175,7 +204,7 @@ export const mdfpostSchedules = (userid, holiday, rperiod, events) => {
         console.log(response)
         if(response.data.status==="200") {
           alert("수정된 스케줄이 저장되었습니다.")
-          window.location.reload()
+          // window.location.reload()
         } else if(response.data.status==="400") {
           alert("수정된 스케줄 저장에 문제가 발생했습니다. 스케줄이 비어있는 주부터 설정을 시작해주세요")
         } else{
@@ -211,8 +240,8 @@ export const startschedules = (userid, weekstart, weekend, events) => {
 export const endchedules = (userid, weekstart, weekend, events) => {
   return dispatch => {
     let dateToObj = events.map(event => {
-      event.start = formatDate(event.start)
-      event.end = formatDate(event.end)
+      event.start = utcFormatDate(event.start)
+      event.end = utcFormatDate(event.end)
       return event
     })
     axios
@@ -226,7 +255,7 @@ export const endchedules = (userid, weekstart, weekend, events) => {
         console.log(response)
         if(response.data.status==="200") {
           alert("스케쥴이 정상적으로 수정되었습니다.")
-          window.location.reload()
+          // window.location.reload()
         }
       })
       .catch(err => console.log(err))
