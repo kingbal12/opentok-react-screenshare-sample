@@ -17,7 +17,8 @@ const calenderReducer = (state = initialState, action) => {
     case "NEXT_FETCH_EVENTS":
       return { ...state, nextevents: action.events, nextweekempty: action.empty }
     case "CLEAR_EVENTS":
-      console.log(action.event)
+    return { ...state, events: action.events }
+    case "DELETE_EVENTS":
     return { ...state, events: action.events }
     
     case "ADD_EVENT":

@@ -17,12 +17,12 @@ firebase.initializeApp(config);
 const messaging = firebase.messaging();
 //messaging.usePublicVapidKey("BL0eTL3wIbAxmATwORsjQ-pNPCQBYrFNofCAr1xnArzbBjkRDreJLmiXYd-ySpazU-GTEAhtThWIhCLxYLvTGvY");
 
-messaging.setBackgroundMessageHandler(function(payload) {
+messaging.setBackgroundMessageHandler(function(payload) { 
 	const title = "Hello World"; 
 	const options = { 
 		body: payload.data.status 
 	}; 
-	return self.registration.showNotification(title,options); 	
+	return self.registration.showNotification(title,options); 
 });
 
 

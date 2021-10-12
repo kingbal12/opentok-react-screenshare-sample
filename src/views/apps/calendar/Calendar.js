@@ -229,25 +229,25 @@ class CalendarApp extends React.Component {
     let start, end
     if (view === 'month') {
       console.log(this.state.events)
-      start = moment(date).startOf('month')._d
-      end = moment(date).endOf('month')._d
+      start = moment.utc(date).startOf('month')._d
+      end = moment.utc(date).endOf('month')._d
       this.setState({monthstart: start, monthend: end})
       if(action === "PREV" || action === "NEXT" || action ==="TODAY") {
         
-        start = moment(date).startOf('month')._d
-        end = moment(date).endOf('month')._d
+        start = moment.utc(date).startOf('month')._d
+        end = moment.utc(date).endOf('month')._d
         this.setState({monthstart: start, monthend: end}, () => {
           this.props.calendarfetchEvents(this.state.userid, this.state.monthstart, this.state.monthend)
         })
       }
     }else{
       console.log(this.state.events)
-      start = moment(date).startOf('month')._d
-      end = moment(date).endOf('month')._d
+      start = moment.utc(date).startOf('month')._d
+      end = moment.utc(date).endOf('month')._d
       this.setState({monthstart: start, monthend: end})
       if(action === "PREV" || action === "NEXT" || action ==="TODAY") {
-        start = moment(date).startOf('month')._d
-        end = moment(date).endOf('month')._d
+        start = moment.utc(date).startOf('month')._d
+        end = moment.utc(date).endOf('month')._d
         this.setState({monthstart: start, monthend: end}, () => {
           this.props.calendarfetchEvents(this.state.userid, this.state.monthstart, this.state.monthend)
         })

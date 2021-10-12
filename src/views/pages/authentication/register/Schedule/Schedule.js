@@ -17,7 +17,8 @@ import {
   updateEvent,
   updateDrag,
   updateResize,
-  postSchedules
+  postSchedules,
+  deleteSchedule
 } from "../../../../../redux/actions/calendar/index"
 import { ChevronLeft, ChevronRight } from "react-feather"
 
@@ -113,8 +114,8 @@ class CalendarApp extends React.Component {
     }
     super(props)
     this.state = {
-      userid: props.user.register.values.registeruser,
-      // userid: "king@king.com",
+      // userid: props.user.register.values.registeruser,
+      userid: "kjh@iot4health.co.kr",
       // 이벤트가 왜 저장이 안되는지 모르겠음
       events: cookie,
       views: {
@@ -235,6 +236,24 @@ class CalendarApp extends React.Component {
       
   }
 
+  // 이벤트 개별 삭제 함수
+  onSelectEvent(pEvent) {
+    const r = window.confirm("이 스케쥴을 삭제하시겠습니까?")
+    if(r === true){ 
+      this.setState((prevState, props) => {
+        const revents = [...prevState.events]
+        const idx = revents.indexOf(pEvent)
+        revents.splice(idx, 1);
+        this.state.events= revents
+        },
+      
+      ()=>this.props.deleteSchedule(this.state.events)
+
+      );
+    }
+  }
+
+
   
 
 
@@ -303,6 +322,7 @@ class CalendarApp extends React.Component {
               }}
               
               selectable={true}
+              onSelectEvent = {event => this.onSelectEvent(event)}
             />
             <div className="pt-1 text-right">
               <Button
@@ -472,5 +492,6 @@ export default connect(mapStateToProps, {
   updateDrag,
   updateResize,
   postSchedules,
-  cookieSchedules
+  cookieSchedules,
+  deleteSchedule
 })(CalendarApp)

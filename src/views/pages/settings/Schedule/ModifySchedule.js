@@ -21,7 +21,8 @@ import {
   startschedules,
   clearSchedule,
   mdfpostSchedules,
-  nextfetchEvents
+  nextfetchEvents,
+  deleteSchedule
 } from "../../../../redux/actions/calendar/index"
 import { ChevronLeft, ChevronRight } from "react-feather"
 
@@ -314,16 +315,21 @@ class CalendarApp extends React.Component {
       this.state.events)
   }
 
+
+  // 이벤트 개별 삭제 함수
   onSelectEvent(pEvent) {
-    const r = window.confirm("이 스케줄을 삭제 하시겠습니까?")
-    if(r === true){
-      
+    const r = window.confirm("이 스케쥴을 삭제하시겠습니까?")
+    if(r === true){ 
       this.setState((prevState, props) => {
-        const events = [...prevState.events]
-        const idx = events.indexOf(pEvent)
-        events.splice(idx, 1);
-        return { events };
-      });
+        const revents = [...prevState.events]
+        const idx = revents.indexOf(pEvent)
+        revents.splice(idx, 1);
+        this.state.events= revents
+        },
+
+      ()=>this.props.deleteSchedule(this.state.events)
+
+      );
     }
   }
 
@@ -391,8 +397,11 @@ class CalendarApp extends React.Component {
                 this.handleAddEvent(this.state.id)
                 console.log("---------------------", this.state.startDate)
               }}
-              
+
               selectable={true}
+
+              // 이벤트 클릭 시 함수 설정
+              onSelectEvent = {event => this.onSelectEvent(event)}
             />
             <div className="pt-1 text-right">
               {/* <Button
@@ -580,5 +589,6 @@ export default connect(mapStateToProps, {
   startschedules,
   clearSchedule,
   mdfpostSchedules,
-  nextfetchEvents
+  nextfetchEvents,
+  deleteSchedule
 })(CalendarApp)

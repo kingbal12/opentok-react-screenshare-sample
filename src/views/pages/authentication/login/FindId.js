@@ -179,11 +179,12 @@ class FindId extends React.Component {
           </ModalHeader>
           <ModalBody>
             <FormattedMessage id="아이디없음1"/><br/>
-            <FormattedMessage id="아이디없음2"/>
+            {/* <FormattedMessage id="아이디없음2"/> */}
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.go}>
-              <FormattedMessage id="회원가입 시작"/>
+            <Button color="primary" onClick={this.noModal}>
+              {/* <FormattedMessage id="회원가입 시작"/> */}
+              <FormattedMessage id="확인"/>
             </Button>
           </ModalFooter>
         </Modal>

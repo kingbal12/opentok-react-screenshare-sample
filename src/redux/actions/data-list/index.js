@@ -14,6 +14,23 @@ import moment from "moment"
 //   }
 // }
 
+// const localFormDate = (scheduleda)=>{
+//   console.log(scheduleda)
+//   let localscheduledate = moment.utc(scheduleda).toDate();
+//   console.log(localscheduledate)
+//   localscheduledate =  moment(localscheduledate).local().format('YYYY-MM-DD HH:mm:ss');
+//   console.log("locale:",localscheduledate)
+//     return localscheduledate;
+//   }
+
+
+const localFormDate = (scheduleda)=>{
+  console.log("utc", scheduleda)
+  let localscheduledate = moment.utc(scheduleda).toDate()
+  localscheduledate = moment(localscheduledate).format()
+  console.log("locale:",localscheduledate)
+    return localscheduledate;
+  }
 export const gettokbox = (userid, appointnum) => {
   return dispatch => {
     axios
@@ -122,7 +139,7 @@ export const getAppData = (userid, pageamount, pagenum) => {
           let jsonObj		= new Object();         
           jsonObj.APPOINT_KIND		= response.data.data.APPOINT_LIST[i].APPOINT_KIND
           jsonObj.APPOINT_NUM = response.data.data.APPOINT_LIST[i].APPOINT_NUM
-          jsonObj.APPOINT_TIME	= response.data.data.APPOINT_LIST[i].APPOINT_TIME
+          jsonObj.APPOINT_TIME = localFormDate(response.data.data.APPOINT_LIST[i].APPOINT_TIME)
           jsonObj.BIRTH_DT = response.data.data.APPOINT_LIST[i].BIRTH_DT
           jsonObj.FIRST_YN = response.data.data.APPOINT_LIST[i].FIRST_YN
           jsonObj.F_NAME = response.data.data.APPOINT_LIST[i].F_NAME
@@ -135,7 +152,7 @@ export const getAppData = (userid, pageamount, pagenum) => {
           jsonObj = JSON.stringify(jsonObj);
           //String 형태로 파싱한 객체를 다시 json으로 변환
           appointlist.push(JSON.parse(jsonObj));
-            }
+          }
 
       dispatch({
         type: "GET_APPOINT_DATA",
@@ -294,8 +311,8 @@ export const getPatientInfo = (userid,patientid, appointnum) => {
         personalinfo.BS = response.data.data.PERSONAL_INFO["4_STATE"]
         personalinfo.SPO2 = response.data.data.PERSONAL_INFO["5_STATE"]
         personalinfo.BW = response.data.data.PERSONAL_INFO["6_STATE"]
-        if(appoint !== null) {rtime= response.data.data.APPOINT_INFO.APPOINT_TIME}
-        if(appoint !== null){appoint.APPOINT_TIME = moment(appoint.APPOINT_TIME).format("hh:mm A")}
+        if(appoint !== null) {rtime= localFormDate(response.data.data.APPOINT_INFO.APPOINT_TIME)}
+        if(appoint !== null){appoint.APPOINT_TIME = moment(localFormDate(appoint.APPOINT_TIME)).format("hh:mm A")}
         
         personalinfo.BIRTH_DT = moment(personalinfo.BIRTH_DT).format("MMMM DD, YYYY")
 

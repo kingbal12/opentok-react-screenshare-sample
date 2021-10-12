@@ -23,45 +23,45 @@ const config =  {
 	, measurementId: "G-5H09HRTQQT"  
 }; 
 
-firebase.initializeApp(config);  
-const messaging = firebase.messaging();
+// firebase.initializeApp(config);  
+// const messaging = firebase.messaging();
 
-messaging.usePublicVapidKey("BL0eTL3wIbAxmATwORsjQ-pNPCQBYrFNofCAr1xnArzbBjkRDreJLmiXYd-ySpazU-GTEAhtThWIhCLxYLvTGvY");
+// messaging.usePublicVapidKey("BL0eTL3wIbAxmATwORsjQ-pNPCQBYrFNofCAr1xnArzbBjkRDreJLmiXYd-ySpazU-GTEAhtThWIhCLxYLvTGvY");
 
-//허가를 요청합니다!
-Notification.requestPermission()
-.then(function() {
-  console.log('허가!');
-  return messaging.getToken();
-})
+// //허가를 요청합니다!
+// Notification.requestPermission()
+// .then(function() {
+//   console.log('허가!');
+//   return messaging.getToken();
+// })
 
-.then(token => {
-  console.log(token); //토큰을 출력!
-  // this.setState({tokendata:token})
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('firebase-messaging-sw.js')
-    .then(handleSWRegistration);
-  }
+// .then(token => {
+//   console.log(token); //토큰을 출력!
+//   // this.setState({tokendata:token})
+//   if ('serviceWorker' in navigator) {
+//     navigator.serviceWorker.register('firebase-messaging-sw.js')
+//     .then(handleSWRegistration);
+//   }
 
-  function handleSWRegistration(reg) {
-    if (reg.installing) {
-        console.log('Service worker installing');
-    } else if (reg.waiting) {
-        console.log('Service worker installed');
-    } else if (reg.active) {
-        console.log('Service worker active');
-    }
+//   function handleSWRegistration(reg) {
+//     if (reg.installing) {
+//         console.log('Service worker installing');
+//     } else if (reg.waiting) {
+//         console.log('Service worker installed');
+//     } else if (reg.active) {
+//         console.log('Service worker active');
+//     }
   
-  }
-})
+//   }
+// })
 
-.catch(function(err) {
-  console.log('fcm에러 : ', err);
-})
+// .catch(function(err) {
+//   console.log('fcm에러 : ', err);
+// })
 
-messaging.onMessage(function(payload){
-  console.log(payload);
-})
+// messaging.onMessage(function(payload){
+//   console.log(payload);
+// })
 
 
 class LoginJWT extends React.Component {
@@ -79,54 +79,53 @@ class LoginJWT extends React.Component {
 
   
 
-  // componentDidMount() {
-  //   if (!firebase.apps.length) {
+  componentDidMount() {
+    if (!firebase.apps.length) {
 
-  //     firebase.initializeApp(config);  
-  //     const messaging = firebase.messaging();
+      firebase.initializeApp(config);  
+      const messaging = firebase.messaging();
 
-  //     messaging.usePublicVapidKey("BL0eTL3wIbAxmATwORsjQ-pNPCQBYrFNofCAr1xnArzbBjkRDreJLmiXYd-ySpazU-GTEAhtThWIhCLxYLvTGvY");
+      messaging.usePublicVapidKey("BL0eTL3wIbAxmATwORsjQ-pNPCQBYrFNofCAr1xnArzbBjkRDreJLmiXYd-ySpazU-GTEAhtThWIhCLxYLvTGvY");
 
-  //     //허가를 요청합니다!
-  //     Notification.requestPermission()
-  //     .then(function() {
-  //       console.log('허가!');
-  //       return messaging.getToken();
-  //     })
+      //허가를 요청합니다!
+      Notification.requestPermission()
+      .then(function() {
+        console.log('허가!');
+        return messaging.getToken();
+      })
 
-  //     .then(token => {
-  //       console.log(token); //토큰을 출력!
-  //       this.setState({tokendata:token})
-  //       if ('serviceWorker' in navigator) {
-  //         navigator.serviceWorker.register('firebase-messaging-sw.js')
-  //         .then(handleSWRegistration);
-  //       }
+      .then(token => {
+        console.log(token); //토큰을 출력!
+        this.setState({tokendata:token})
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('firebase-messaging-sw.js')
+          .then(handleSWRegistration);
+        }
 
-  //       function handleSWRegistration(reg) {
-  //         if (reg.installing) {
-  //             console.log('Service worker installing');
-  //         } else if (reg.waiting) {
-  //             console.log('Service worker installed');
-  //         } else if (reg.active) {
-  //             console.log('Service worker active');
-  //         }
-        
-  //       }
-  //     })
+        function handleSWRegistration(reg) {
+          if (reg.installing) {
+              console.log('Service worker installing');
+          } else if (reg.waiting) {
+              console.log('Service worker installed');
+          } else if (reg.active) {
+              console.log('Service worker active');
+          }
+        }
+      })
 
-  //     .catch(function(err) {
-  //       console.log('fcm에러 : ', err);
-  //     })
+      .catch(function(err) {
+        console.log('fcm에러 : ', err);
+      })
 
-  //     messaging.onMessage(function(payload){
-  //       console.log(payload);
-  //     })
+      messaging.onMessage(function(payload){
+        console.log(payload);
+      })
 
-  //   } else {  
-  //     firebase.app();   
-  //   }
+    } else {  
+      firebase.app();   
+    }
     
-  // }
+  }
 
   // componentWillMount() {
   //   const messaging = firebase.messaging();
@@ -230,7 +229,7 @@ class LoginJWT extends React.Component {
               </Link>
             </div>
             
-            <div className="d-flex justify-content-center">
+            {/* <div className="d-flex justify-content-center">
               <Button
                   color="light"
                   size="lg" 
@@ -243,7 +242,7 @@ class LoginJWT extends React.Component {
                 >
                   <FormattedMessage id="Sign In"/>
               </Button>
-            </div>
+            </div> */}
           </Form>
         </CardBody>
       </React.Fragment>

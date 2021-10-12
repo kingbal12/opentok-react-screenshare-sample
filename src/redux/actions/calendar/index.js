@@ -10,14 +10,13 @@ const formatDate = (scheduleda)=>{
   }
 
 const utcFormatDate = (scheduleda)=>{
-  // let utcscheduleda = moment.utc(scheduleda.toISOString()).format("YYYY-MM-DD HH:mm")
-  let utcscheduleda = moment.utc(scheduleda.toISOString())
-  utcscheduleda = moment(utcscheduleda).format()
+  let utcscheduleda = moment.utc(scheduleda.toISOString()).format("YYYY-MM-DD HH:mm")
   console.log("utc:",utcscheduleda)
     return utcscheduleda;
   }
 
 const localFormDate = (scheduleda)=>{
+  console.log("utc", scheduleda)
   let localscheduledate = moment.utc(scheduleda).toDate()
   localscheduledate = moment(localscheduledate).format()
   console.log("locale:",localscheduledate)
@@ -41,6 +40,14 @@ export const clearSchedule = () => {
   }
 }
 
+
+export const deleteSchedule = (revents) => {
+  return dispatch => {
+    dispatch({ type: "DELETE_EVENTS", events: revents })
+  }
+}
+
+
 export const calendarfetchEvents = (userid, monthstart, monthend) => {
   return async dispatch => {
     await axios
@@ -55,6 +62,7 @@ export const calendarfetchEvents = (userid, monthstart, monthend) => {
         if(response.data.status==="200"){
           let length = response.data.data.length
           console.log(length)
+          console.log(response.data.data)
           let appointmentsdata 	= new Array();
           for (let i=0; i<length; i++) {
             let jsonObj		= new Object();         
@@ -153,8 +161,8 @@ export const addEvent = event => {
 export const postSchedules = (userid, holiday, rperiod, events) => {
   return dispatch => {
     let dateToObj = events.map(event => {
-      event.start = formatDate(event.start)
-      event.end = formatDate(event.end)
+      event.start = utcFormatDate(event.start)
+      event.end = utcFormatDate(event.end)
       return event
     })
     console.log(events)
@@ -204,7 +212,7 @@ export const mdfpostSchedules = (userid, holiday, rperiod, events) => {
         console.log(response)
         if(response.data.status==="200") {
           alert("수정된 스케줄이 저장되었습니다.")
-          // window.location.reload()
+          window.location.reload()
         } else if(response.data.status==="400") {
           alert("수정된 스케줄 저장에 문제가 발생했습니다. 스케줄이 비어있는 주부터 설정을 시작해주세요")
         } else{
@@ -224,8 +232,8 @@ export const startschedules = (userid, weekstart, weekend, events) => {
       .delete("https://health.iot4health.co.kr:9300/v1/doctor/appointment/schedules",{
         data: {
           user_id:userid,
-          start_date:weekstart,
-          end_date:weekend,
+          start_date:utcFormatDate(weekstart),
+          end_date:utcFormatDate(weekend),
         }    
       })
       .then(response => {
@@ -255,7 +263,7 @@ export const endchedules = (userid, weekstart, weekend, events) => {
         console.log(response)
         if(response.data.status==="200") {
           alert("스케쥴이 정상적으로 수정되었습니다.")
-          // window.location.reload()
+          window.location.reload()
         }
       })
       .catch(err => console.log(err))
