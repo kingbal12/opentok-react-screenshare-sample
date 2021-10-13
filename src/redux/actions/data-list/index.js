@@ -14,16 +14,18 @@ import moment from "moment"
 //   }
 // }
 
-// const localFormDate = (scheduleda)=>{
-//   console.log(scheduleda)
-//   let localscheduledate = moment.utc(scheduleda).toDate();
-//   console.log(localscheduledate)
-//   localscheduledate =  moment(localscheduledate).local().format('YYYY-MM-DD HH:mm:ss');
-//   console.log("locale:",localscheduledate)
-//     return localscheduledate;
-//   }
+const utcFormatDate = (scheduleda)=>{
+  let utcscheduleda = moment.utc(scheduleda.toISOString()).format("YYYY-MM-DD HH:mm")
+  console.log("utc:",utcscheduleda)
+    return utcscheduleda;
+  }
 
-
+const utcFormatDateApp = (scheduleda)=>{
+  let utcscheduleda = moment.utc(scheduleda.toISOString()).format("YYYY-MM-DD")
+  console.log("utc:",utcscheduleda)
+    return utcscheduleda;
+  }
+    
 const localFormDate = (scheduleda)=>{
   console.log("utc", scheduleda)
   let localscheduledate = moment.utc(scheduleda).toDate()
@@ -127,7 +129,7 @@ export const getAppData = (userid, pageamount, pagenum) => {
     .get("https://health.iot4health.co.kr:9300/v1/doctor/appointment/dashboard", {
       params: {
         user_id: userid,
-        start_date: new Date(),
+        start_date: utcFormatDateApp(new Date()),
         page_amount: npagemount,
         page_num: npagenum
       }
@@ -342,8 +344,8 @@ export const getVitalData = (patientid) => {
       .get("https://health.iot4health.co.kr:9300/v1/doctor/patient/patient-vital", {
         params: {
           patient_id: patientid,
-          start_date: moment().add(-6,'days').format("YYYYMMDD"),
-          end_date: moment().format("YYYYMMDD")
+          start_date: moment().utc().add(-6,'days').format("YYYYMMDD"),
+          end_date: moment().utc().format("YYYYMMDD")
         }
   })
     .then(response => {
@@ -473,7 +475,7 @@ export const getVitalDataAll = (patientid, startdate) => {
         params: {
           patient_id: patientid,
           start_date: startdate,
-          end_date: moment().format("YYYYMMDD")
+          end_date: moment().utc().format("YYYYMMDD")
         }
   })
     .then(response => {
@@ -520,8 +522,8 @@ export const serachVitalData = (patientid, startdate, enddate) => {
       .get("https://health.iot4health.co.kr:9300/v1/doctor/patient/patient-vital", {
         params: {
           patient_id: patientid,
-          start_date: moment(startdate[0]).format("YYYYMMDD"),
-          end_date: moment(enddate[0]).format("YYYYMMDD")
+          start_date: moment(startdate[0]).utc().format("YYYYMMDD"),
+          end_date: moment(enddate[0]).utc().format("YYYYMMDD")
         }
   })
 

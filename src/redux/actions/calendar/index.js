@@ -15,10 +15,27 @@ const utcFormatDate = (scheduleda)=>{
     return utcscheduleda;
   }
 
+
 const localFormDate = (scheduleda)=>{
   console.log("utc", scheduleda)
   let localscheduledate = moment.utc(scheduleda).toDate()
   localscheduledate = moment(localscheduledate).format()
+  console.log("locale:",localscheduledate)
+    return localscheduledate;
+  }
+
+const localFormDateCal = (scheduleda)=>{
+  console.log("utc", scheduleda)
+  let localscheduledate = moment.utc(scheduleda).add(9, 'hours').toDate()
+  localscheduledate = moment(localscheduledate).format()
+  console.log("locale:",localscheduledate)
+    return localscheduledate;
+  }
+
+const localFormDateSub = (scheduleda)=>{
+  console.log("utc", scheduleda)
+  let localscheduledate = moment.utc(scheduleda).add(9, 'hours').toDate()
+  localscheduledate = moment(localscheduledate).format("hh:mm A")
   console.log("locale:",localscheduledate)
     return localscheduledate;
   }
@@ -59,17 +76,17 @@ export const calendarfetchEvents = (userid, monthstart, monthend) => {
         }
       })
       .then(response => {
+          console.log("캘린더 :",response.data.data)
         if(response.data.status==="200"){
           let length = response.data.data.length
-          console.log(length)
-          console.log(response.data.data)
+          
           let appointmentsdata 	= new Array();
           for (let i=0; i<length; i++) {
             let jsonObj		= new Object();         
             jsonObj.id		= (i+1);
-            jsonObj.title = moment(response.data.data[i].APPOINT_TIME).format("hh:mm A") + " " +  response.data.data[i].F_NAME
-            jsonObj.start	= response.data.data[i].APPOINT_TIME
-            jsonObj.end = response.data.data[i].APPOINT_TIME
+            jsonObj.title = localFormDateSub(response.data.data[i].APPOINT_TIME) + " " +  response.data.data[i].F_NAME
+            jsonObj.start	= localFormDateCal(response.data.data[i].APPOINT_TIME)
+            jsonObj.end = localFormDateCal(response.data.data[i].APPOINT_TIME)
             jsonObj.label = "others"
             jsonObj.selectable = false  
             jsonObj = JSON.stringify(jsonObj);

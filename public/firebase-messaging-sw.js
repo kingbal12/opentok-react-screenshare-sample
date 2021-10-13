@@ -25,6 +25,16 @@ messaging.setBackgroundMessageHandler(function(payload) {
 	return self.registration.showNotification(title,options); 
 });
 
+messaging.onBackgroundMessage(function(payload){
+
+	let strDT = payload.data["gcm.notification.doctor_id"];
+	let docdata = payload.data
+	console.log("백그라운드",docdata)
+	
+	// sessionStorage.setItem("orderDetail", JSON.stringify(docdata));
+	// let orderDetail = JSON.parse(sessionStorage.getItem("orderDetail"));
+	// console.log(orderDetail)
+  })
 
 
 

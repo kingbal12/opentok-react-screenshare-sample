@@ -75,7 +75,19 @@ import moment from "moment"
 import Countdown from 'react-countdown'
 import { FormattedMessage } from "react-intl"
 
+const localFormDate = (scheduleda)=>{
+  let localscheduledate = moment.utc(scheduleda).toDate()
+  localscheduledate = moment(localscheduledate).format("YYYY-MM-DD hh:mm A")
 
+  return localscheduledate;
+}
+
+const localFormDateGraph = (scheduleda)=>{
+  let localscheduledate = moment.utc(scheduleda).toDate()
+  localscheduledate = moment(localscheduledate).format()
+
+  return localscheduledate;
+}
 
 class Cslist extends React.Component { 
   render() { 
@@ -83,7 +95,7 @@ class Cslist extends React.Component {
       <tr>
         <th className="text-center"><h6>{this.props.row.PART_NAME} / {this.props.row.F_NAME}</h6></th>
         <th className="text-center"><h6>{this.props.row.NOTE_DX}</h6></th>
-        <th className="text-center"><h6>{moment(this.props.row.APPOINT_TIME).format("YYYY-MM-DD hh:mm A")}</h6></th>  
+        <th className="text-center"><h6>{localFormDate(this.props.row.APPOINT_TIME)}</h6></th>  
       </tr>  
     ); 
   } 

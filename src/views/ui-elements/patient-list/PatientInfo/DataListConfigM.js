@@ -277,6 +277,13 @@ const CustomHeader = props => {
   )
 }
 
+const localFormDate = (scheduleda)=>{
+  let localscheduledate = moment.utc(scheduleda).toDate()
+  localscheduledate = moment(localscheduledate).format("MMMM DD, YYYY")
+
+  return localscheduledate;
+}
+
 class DataListConfig extends Component {
   constructor(props) {
     super(props);
@@ -345,7 +352,7 @@ class DataListConfig extends Component {
         name: "진료일자",
         selector: "age",
         sortable: false,
-        cell: row => <p className="text-bold-500 mb-0">{moment(row.APPOINT_TIME).format("MMMM DD, YYYY")}</p>
+        cell: row => <p className="text-bold-500 mb-0">{localFormDate(row.APPOINT_TIME)}</p>
       }
       
     ],

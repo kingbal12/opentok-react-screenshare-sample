@@ -16,9 +16,14 @@ import { getappoints } from "../../../redux/actions/appoint"
 import axios from "axios"
 import ListViewConfig from "./DataListConfig"
 import queryString from "query-string"
+import firebase from 'firebase'; 
+import moment from "moment"
 
-
-
+const utcFormatDate = (scheduleda)=>{
+  let utcscheduleda = moment.utc(scheduleda.toISOString()).format("YYYY-MM-DD")
+  console.log("utc:",utcscheduleda)
+    return utcscheduleda;
+  }
  
 class AnalyticsDashboard extends React.Component {
   constructor(props){
@@ -34,22 +39,23 @@ class AnalyticsDashboard extends React.Component {
   }
 
 
-
+ 
 
 
 
   componentDidMount() {
-    
+    console.log()
         axios
           .get("https://health.iot4health.co.kr:9300/v1/doctor/appointment/dashboard", {
             params: {
               user_id: this.state.userid,
-              start_date: new Date(),
+              start_date: utcFormatDate(new Date()),
               page_amount: 5,
               page_num: 1
             }
           })
           .then(response => {
+            console.log(response.data.data)
             let appoints;
             if (response.data.status==="200") {
               appoints=response.data.data
@@ -60,7 +66,11 @@ class AnalyticsDashboard extends React.Component {
             }
           })
           .catch(err => console.log(err))
+
+          
   } 
+
+  
 
   render() {
     return (

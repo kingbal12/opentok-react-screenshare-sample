@@ -109,7 +109,7 @@ const ThemeNavbar = props => {
                 ticking={true}  />
               </div>
               {props.horizontal ? (
-                <div className="logo d-flex align-items-center" style={{cursor:"pointer"}} onClick={() => window.location.replace("http://localhost:3000/analyticsDashboard")}>
+                <div className="logo d-flex align-items-center" style={{cursor:"pointer"}} onClick={() => window.location.replace("https://health.iot4health.co.kr:8443/analyticsDashboard")}>
                    <img className="px-5" src={HicareLogo} alt="HicareLogo" style={{width:"100%"}}/>
                 </div>
               ) : null}

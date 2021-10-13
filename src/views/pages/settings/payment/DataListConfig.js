@@ -127,8 +127,8 @@ class DataListConfig extends Component {
 
   state = {
     user: this.props.user.login.values.loggedInUser.username,
-    year: moment().format("YYYY"),
-    month: moment().format("MM"),
+    year: moment().utc().format("YYYY"),
+    month: moment().utc().format("MM"),
     lastday: "",
     name: "",
     data: [],

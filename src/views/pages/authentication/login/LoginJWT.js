@@ -23,6 +23,7 @@ const config =  {
 	, measurementId: "G-5H09HRTQQT"  
 }; 
 
+
 // firebase.initializeApp(config);  
 // const messaging = firebase.messaging();
 
@@ -72,7 +73,8 @@ class LoginJWT extends React.Component {
       password: "",
       tokendata: "",
       devicekind: "W",
-      remember: false
+      remember: false,
+      doctername: ""
     }
   }
 
@@ -118,8 +120,13 @@ class LoginJWT extends React.Component {
       })
 
       messaging.onMessage(function(payload){
-        console.log(payload);
+
+        let strDT = payload.data["gcm.notification.doctor_id"];
+
+        console.log("닥터아이디 :", strDT)
       })
+
+     
 
     } else {  
       firebase.app();   

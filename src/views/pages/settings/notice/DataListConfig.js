@@ -87,9 +87,13 @@ const ActionsComponent = props => {
   )
 }
 
-const CustomHeader = props => {
-
-}
+const localFormDate = (scheduleda)=>{
+  console.log("utc", scheduleda)
+  let localscheduledate = moment.utc(scheduleda).toDate()
+  localscheduledate = moment(localscheduledate).format("MMMM, DD")
+  console.log("locale:",localscheduledate)
+    return localscheduledate;
+  }
 
 class DataListConfig extends Component {
  constructor(props) {
@@ -160,7 +164,7 @@ class DataListConfig extends Component {
         selector: "age",
         sortable: false,
         center: true,
-        cell: row => <p  data-tag="allowRowEvents" className="text-bold-500 mb-0">{moment(row.CREATE_TIME).format("MMMM, DD")}</p>
+        cell: row => <p  data-tag="allowRowEvents" className="text-bold-500 mb-0">{localFormDate(row.CREATE_TIME)}</p>
       },
     ],
     allData: [],
