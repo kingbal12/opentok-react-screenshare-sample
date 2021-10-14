@@ -54,7 +54,9 @@ class Toolbar extends React.Component {
               >
                 Today
               </button>
+            </ButtonGroup>
 
+            <ButtonGroup className="ml-5">
               <button
                 className={`btn ${
                   this.props.view === "month"

@@ -268,23 +268,26 @@ class Hospitalinfo extends React.Component {
                           />
                           }
                         </FormattedMessage> 
-                        <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.verifyBusinessNumber}><FormattedMessage id="Check"/></Button></InputGroupAddon>
+                        {/* <InputGroupAddon addonType="append"><Button color="primary" type="button" onClick={this.verifyBusinessNumber}><FormattedMessage id="Check"/></Button></InputGroupAddon> */}
                       </InputGroup>
                     </FormGroup>
                     <FormGroup className="form-label-group">
                       <div className="d-flex justify-content-between">
                         <div className="col-3 align-self-start"><b><FormattedMessage id="Address"/><span className="text-danger"><FormattedMessage id="Required"/></span></b></div>
-                        <InputGroup className="mb-1" onClick={this.zipModal}>
+                        <InputGroup
+                          className="mb-1" 
+                          // onClick={this.zipModal}
+                        >
                           <Input
                             type="text"
                             required
-                            disabled
+                            // disabled
                             value={this.state.address1}
                             onChange={e => this.setState({ address1: e.target.value })}
                           />
-                          <InputGroupAddon addonType="append">
+                          {/* <InputGroupAddon addonType="append">
                             <Button color="primary" type="button"><FormattedMessage id="우편번호 검색"/></Button>
-                          </InputGroupAddon>
+                          </InputGroupAddon> */}
                         </InputGroup>
                       </div>
 

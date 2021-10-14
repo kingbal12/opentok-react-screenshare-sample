@@ -321,9 +321,10 @@ class MyInfo extends React.Component {
                     <div className="col-1"></div>
                     <div className="col-1 align-self-center"><b><FormattedMessage id="성별"/></b></div>
                     <div>{this.state.gender}</div>
-                    <div className="col-2"></div>
+                  </div>
+                  <div className="form-label-group d-flex">
                     <div className="col-2 align-self-center"><b><FormattedMessage id="License"/></b></div>
-                    <div>{this.state.medicalnum}</div>
+                    <div className="col-3">{this.state.medicalnum}</div>
                   </div>
                   <div className="form-label-group d-flex" >
                     <div className="col-2 align-self-center"><b><FormattedMessage id="PH"/></b></div>

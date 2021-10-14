@@ -138,6 +138,7 @@ const ThemeNavbar = props => {
                 changeCurrentLang={props.changeCurrentLang}
                 userName={<UserName userdata={user} {...props} />}
                 userImg={
+                  props.user.login.values.loggedInUser===undefined? history.push("/"):
                   props.user.login.values !== undefined &&
                   props.user.login.values.loggedInWith === "jwt" &&
                   props.user.login.values.loggedInUser.file_path &&

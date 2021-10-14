@@ -1,6 +1,10 @@
 importScripts('https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/8.7.1/firebase-messaging.js');
 console.log("sw.js 실행됨")
+
+
+let docdata = ""
+
 // Initialize Firebase 
 var config = { 
 	apiKey: "AIzaSyAMiyzuGLBHAk4K18Q4Bla4ljA4cfUf-oM"
@@ -28,11 +32,12 @@ messaging.setBackgroundMessageHandler(function(payload) {
 messaging.onBackgroundMessage(function(payload){
 
 	let strDT = payload.data["gcm.notification.doctor_id"];
-	let docdata = payload.data
+	docdata = payload.data
+	messagedata = payload.data
 	console.log("백그라운드",docdata)
 	
-	// sessionStorage.setItem("orderDetail", JSON.stringify(docdata));
-	// let orderDetail = JSON.parse(sessionStorage.getItem("orderDetail"));
+	// window.sessionStorage.setItem("orderDetail", JSON.stringify(docdata));
+	// let orderDetail = JSON.parse(window.sessionStorage.getItem("orderDetail"));
 	// console.log(orderDetail)
   })
 
