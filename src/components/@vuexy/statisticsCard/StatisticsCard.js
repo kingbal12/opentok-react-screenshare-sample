@@ -1,13 +1,15 @@
-import React from "react"
-import { Card, CardBody } from "reactstrap"
+import React from "react";
+import { Card, CardBody } from "reactstrap";
 // import Chart from "react-apexcharts"
 
 class StatisticsCards extends React.Component {
   render() {
     return (
-      <Card>
+      <Card className="shadow-none">
         <CardBody
-          className={`${this.props.className ? this.props.className : "stats-card-body"} d-flex ${
+          className={`${
+            this.props.className ? this.props.className : "stats-card-body"
+          } d-flex ${
             !this.props.iconRight && !this.props.hideChart
               ? "flex-column align-items-start"
               : this.props.iconRight
@@ -24,22 +26,26 @@ class StatisticsCards extends React.Component {
                   ? `bg-rgba-${this.props.iconBg}`
                   : "bg-rgba-primary"
               }`}
+              style={{ cursor: "default" }}
             >
               <div className="avatar-content">{this.props.icon}</div>
             </div>
           </div>
           <div className="title-section">
-            <h1 className={`mb-0 mt-2 text-bold-600 ${
-              this.props.iconBg
-                ? `warning`
-                : "primary"
-            }`}>{this.props.statTitle}</h1>
+            <h1
+              className={`mb-0 mt-2 text-bold-600 ${
+                this.props.iconBg ? `warning` : "primary"
+              }`}
+            >
+              {this.props.statTitle}
+            </h1>
           </div>
-          
         </CardBody>
-          <div>
-            <h1 className="col-12 text-bold-600 text-right mb-2">{this.props.stat}</h1>
-          </div>
+        <div>
+          <h1 className="col-12 text-bold-600 text-right mb-2">
+            {this.props.stat}
+          </h1>
+        </div>
         {/* {!this.props.hideChart && (
           <Chart
             options={this.props.options}
@@ -49,7 +55,7 @@ class StatisticsCards extends React.Component {
           />
         )} */}
       </Card>
-    )
+    );
   }
 }
-export default StatisticsCards
+export default StatisticsCards;

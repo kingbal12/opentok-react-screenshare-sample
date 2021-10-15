@@ -1,6 +1,6 @@
-import React from "react"
-import * as  icon from "react-feather"
-import {logoutWithJWT} from "../redux/actions/auth/loginActions"
+import React from "react";
+import * as icon from "react-feather";
+import { logoutWithJWT } from "../redux/actions/auth/loginActions";
 
 const horizontalMenuConfig = [
   {
@@ -9,7 +9,7 @@ const horizontalMenuConfig = [
     type: "item",
     // icon: <// icon.Home size={16} />,
     navLink: "/analyticsDashboard",
-    permissions: ["admin", "editor"]
+    permissions: ["admin", "editor"],
   },
   {
     id: "calendar",
@@ -17,7 +17,7 @@ const horizontalMenuConfig = [
     type: "item",
     // icon: <// icon.Calendar size={16} />,
     navLink: "/calendar",
-    permissions: ["admin", "editor"]
+    permissions: ["admin", "editor"],
   },
   // {
   //   id: "dashboard",
@@ -25,7 +25,7 @@ const horizontalMenuConfig = [
   //   type: "dropdown",
   //   // icon: <// icon.Home size={16} />,
   //   children: [
-     
+
   //     {
   //       id: "eCommerceDash",
   //       title: "eCommerce",
@@ -68,7 +68,7 @@ const horizontalMenuConfig = [
   //       filterBase: "/todo/all",
   //       permissions: ["admin", "editor"]
   //     },
-     
+
   //     {
   //       id: "eCommerce",
   //       title: "Ecommerce",
@@ -149,7 +149,7 @@ const horizontalMenuConfig = [
     // // icon: <// icon.List size={16} />,
     type: "item",
     permissions: ["admin", "editor"],
-    navLink: "/patients-list"
+    navLink: "/patients-list",
   },
   // {
   //   id: "Call Setting",
@@ -974,7 +974,7 @@ const horizontalMenuConfig = [
         type: "item",
         // icon: <// icon.User size={16} />,
         navLink: "/pages/myinfo",
-        permissions: ["admin", "editor"]
+        permissions: ["admin", "editor"],
       },
       {
         id: "hospitaldata",
@@ -982,7 +982,7 @@ const horizontalMenuConfig = [
         type: "item",
         // icon: <// icon.Trello size={16} />,
         navLink: "/pages/hospitalinfo",
-        permissions: ["admin", "editor"]
+        permissions: ["admin", "editor"],
       },
       {
         id: "shcedulesetting",
@@ -990,7 +990,7 @@ const horizontalMenuConfig = [
         type: "item",
         // icon: <// icon.Calendar size={16} />,
         navLink: "/pages/modifyschedule",
-        permissions: ["admin", "editor"]
+        permissions: ["admin", "editor"],
       },
       {
         id: "paymentsetting",
@@ -998,7 +998,7 @@ const horizontalMenuConfig = [
         type: "item",
         // icon: <// icon.DollarSign size={16} />,
         navLink: "/pages/paymentmanagement",
-        permissions: ["admin", "editor"]
+        permissions: ["admin", "editor"],
       },
       {
         id: "termsofservice",
@@ -1006,7 +1006,7 @@ const horizontalMenuConfig = [
         type: "item",
         // icon: <// icon.Info size={16} />,
         navLink: "/pages/terms",
-        permissions: ["admin", "editor"]
+        permissions: ["admin", "editor"],
       },
       {
         id: "servicecenter",
@@ -1022,7 +1022,7 @@ const horizontalMenuConfig = [
             type: "item",
             // icon: <// icon.Circle size={10} />,
             navLink: "/pages/notice",
-            permissions: ["admin", "editor"]
+            permissions: ["admin", "editor"],
           },
           {
             id: "faq",
@@ -1030,7 +1030,7 @@ const horizontalMenuConfig = [
             type: "item",
             // icon: <// icon.Circle size={10} />,
             navLink: "/pages/newfaq",
-            permissions: ["admin", "editor"]
+            permissions: ["admin", "editor"],
           },
           {
             id: "1:1",
@@ -1038,44 +1038,44 @@ const horizontalMenuConfig = [
             type: "item",
             // icon: <// icon.Circle size={10} />,
             navLink: "/pages/question",
-            permissions: ["admin", "editor"]
+            permissions: ["admin", "editor"],
           },
-        ]
+        ],
       },
-      {
-        id: "loginsetting",
-        title: "로그인 설정",
-        type: "item",
-        // icon: <// icon.Tool size={16} />,
-        permissions: ["admin", "editor"],
-        children: [
-          {
-            id: "logout",
-            title: "로그아웃",
-            type: "item",
-            // icon: <// icon.Circle size={10} />,
-            navLink: "/pages/loginsetting",
-            permissions: ["admin", "editor"]
-          },
-          {
-            id: "changepassword",
-            title: "비밀번호 변경",
-            type: "item",
-            // icon: <// icon.Circle size={10} />,
-            navLink: "/pages/changepassword",
-            permissions: ["admin", "editor"]
-          },
-          {
-            id: "withdrawal",
-            title: "회원탈퇴",
-            type: "item",
-            // icon: <// icon.Circle size={10} />,
-            navLink: "/pages/withdrawal",
-            permissions: ["admin", "editor"]
-          }
-        ]
-      }
-    ]
+      // {
+      //   id: "loginsetting",
+      //   title: "로그인 설정",
+      //   type: "item",
+      //   // icon: <// icon.Tool size={16} />,
+      //   permissions: ["admin", "editor"],
+      //   children: [
+      //     {
+      //       id: "logout",
+      //       title: "로그아웃",
+      //       type: "item",
+      //       // icon: <// icon.Circle size={10} />,
+      //       navLink: "/pages/loginsetting",
+      //       permissions: ["admin", "editor"]
+      //     },
+      //     {
+      //       id: "changepassword",
+      //       title: "비밀번호 변경",
+      //       type: "item",
+      //       // icon: <// icon.Circle size={10} />,
+      //       navLink: "/pages/changepassword",
+      //       permissions: ["admin", "editor"]
+      //     },
+      //     {
+      //       id: "withdrawal",
+      //       title: "회원탈퇴",
+      //       type: "item",
+      //       // icon: <// icon.Circle size={10} />,
+      //       navLink: "/pages/withdrawal",
+      //       permissions: ["admin", "editor"]
+      //     }
+      //   ]
+      // }
+    ],
   },
   // {
   //   id: "charts-maps",
@@ -1201,7 +1201,6 @@ const horizontalMenuConfig = [
   //     }
   //   ]
   // }
-  
-]
+];
 
-export default horizontalMenuConfig
+export default horizontalMenuConfig;
