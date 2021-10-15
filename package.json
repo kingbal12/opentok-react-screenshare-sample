@@ -35,6 +35,7 @@
     "opentok-react": "^0.11.0",
     "opentok-screen-sharing": "^1.0.34",
     "postcss-rtl": "^1.5.0",
+    "prettier": "^2.4.1",
     "prismjs": "^1.19.0",
     "prop-types": "~15.7.2",
     "query-string": "^6.10.1",

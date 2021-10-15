@@ -1,19 +1,15 @@
-import React from "react"
-import { Navbar } from "reactstrap"
-import { connect } from "react-redux"
-import classnames from "classnames"
-import { useAuth0 } from "../../../authServices/auth0/auth0Service"
-import {
-  logoutWithJWT
-} from "../../../redux/actions/auth/loginActions"
-import NavbarBookmarks from "./NavbarBookmarks"
-import NavbarUser from "./NavbarUser"
-import userImg from "../../../assets/img/portrait/small/avatar-s-11.jpg"
-import { history } from "../../../history"
-import Clock from 'react-live-clock';
-import HicareLogo from "../../../assets/img/logo/logo2.png"
-
-
+import React from "react";
+import { Navbar } from "reactstrap";
+import { connect } from "react-redux";
+import classnames from "classnames";
+import { useAuth0 } from "../../../authServices/auth0/auth0Service";
+import { logoutWithJWT } from "../../../redux/actions/auth/loginActions";
+import NavbarBookmarks from "./NavbarBookmarks";
+import NavbarUser from "./NavbarUser";
+import userImg from "../../../assets/img/portrait/small/avatar-s-11.jpg";
+import { history } from "../../../history";
+import Clock from "react-live-clock";
+import HicareLogo from "../../../assets/img/logo/logo2.png";
 
 // 원본
 //  const UserName = props => {
@@ -34,37 +30,37 @@ import HicareLogo from "../../../assets/img/logo/logo2.png"
 //     return username
 //   }
 
-const UserName = props => {
-  let username = ""
+const UserName = (props) => {
+  let username = "";
   if (props.user.login.values !== undefined) {
-    if (props.user.login.values.loggedInWith ==="jwt") {
-      username = props.user.login.values.loggedInUser.username
-    }else {
-      history.push("/")
+    if (props.user.login.values.loggedInWith === "jwt") {
+      username = props.user.login.values.loggedInUser.username;
+    } else {
+      history.push("/");
     }
-  }else {
-    history.push("/")
+  } else {
+    history.push("/");
   }
 
-  return username
-}
+  return username;
+};
 
-
-const ThemeNavbar = props => {
-  const { user } = useAuth0()
-  const colorsArr = [ "primary", "danger", "success", "info", "warning", "dark"]
-  const navbarTypes = ["floating" , "static" , "sticky" , "hidden"]
+const ThemeNavbar = (props) => {
+  const { user } = useAuth0();
+  const colorsArr = ["primary", "danger", "success", "info", "warning", "dark"];
+  const navbarTypes = ["floating", "static", "sticky", "hidden"];
   return (
     <React.Fragment>
       <div className="content-overlay" />
-      
-      <div className="header-navbar-shadow"  />
+
+      <div className="header-navbar-shadow" />
       <Navbar
-        
         className={classnames(
           "header-navbar navbar-expand-lg navbar navbar-with-menu navbar-shadow",
           {
-            "navbar-light": props.navbarColor === "default" || !colorsArr.includes(props.navbarColor),
+            "navbar-light":
+              props.navbarColor === "default" ||
+              !colorsArr.includes(props.navbarColor),
             "navbar-dark": colorsArr.includes(props.navbarColor),
             "bg-primary":
               props.navbarColor === "primary" && props.navbarType !== "static",
@@ -80,16 +76,16 @@ const ThemeNavbar = props => {
               props.navbarColor === "dark" && props.navbarType !== "static",
             "d-none": props.navbarType === "hidden" && !props.horizontal,
             "floating-nav":
-              (props.navbarType === "floating" && !props.horizontal) || (!navbarTypes.includes(props.navbarType) && !props.horizontal),
+              (props.navbarType === "floating" && !props.horizontal) ||
+              (!navbarTypes.includes(props.navbarType) && !props.horizontal),
             "navbar-static-top":
               props.navbarType === "static" && !props.horizontal,
             "fixed-top": props.navbarType === "sticky" || props.horizontal,
-            "scrolling": props.horizontal && props.scrolling
-
+            scrolling: props.horizontal && props.scrolling,
           }
         )}
       >
-         <div className="navbar-wrapper">
+        <div className="navbar-wrapper">
           <div className="navbar-container content">
             <div
               className="navbar-collapse d-flex justify-content-between align-items-center"
@@ -100,20 +96,29 @@ const ThemeNavbar = props => {
                   sidebarVisibility={props.sidebarVisibility}
                   handleAppOverlay={props.handleAppOverlay}
                 /> */}
-                <Clock 
-                format={'YYYY-MM-DD'} 
-                ticking={true}  />
+                <Clock format={"YYYY-MM-DD"} ticking={true} />
                 <p></p>
-                <Clock 
-                format={'hh:mm A'} 
-                ticking={true}  />
+                <Clock format={"hh:mm A"} ticking={true} />
               </div>
               {props.horizontal ? (
-                <div className="logo d-flex align-items-center" style={{cursor:"pointer"}} onClick={() => window.location.replace("https://health.iot4health.co.kr:8443/analyticsDashboard")}>
-                   <img className="px-5" src={HicareLogo} alt="HicareLogo" style={{width:"100%"}}/>
+                <div
+                  className="logo d-flex align-items-center"
+                  style={{ cursor: "pointer" }}
+                  onClick={() =>
+                    window.location.replace(
+                      "https://health.iot4health.co.kr:8443/analyticsDashboard"
+                    )
+                  }
+                >
+                  <img
+                    className="px-5"
+                    src={HicareLogo}
+                    alt="HicareLogo"
+                    style={{ width: "100%" }}
+                  />
                 </div>
               ) : null}
-        {/* <div className="navbar-wrapper">
+              {/* <div className="navbar-wrapper">
           <div className="navbar-container content">
             <div
               className="navbar-collapse d-flex justify-content-between align-items-center"
@@ -132,35 +137,40 @@ const ThemeNavbar = props => {
                   <h2 className="text-primary brand-text mb-0"><img className="col-3" src={HicareLogo} alt="HicareLogo"/></h2>
                 </div>
               ) : null} */}
-              
+
               <NavbarUser
                 handleAppOverlay={props.handleAppOverlay}
                 changeCurrentLang={props.changeCurrentLang}
                 userName={<UserName userdata={user} {...props} />}
                 userImg={
-                  props.user.login.values.loggedInUser===undefined? history.push("/"):
-                  props.user.login.values !== undefined &&
-                  props.user.login.values.loggedInWith === "jwt" &&
-                  props.user.login.values.loggedInUser.file_path &&
-                  props.filename===""||props.filename===undefined
-                    ? "https://health.iot4health.co.kr:9300"+props.user.login.values.loggedInUser.file_path
-                      +props.user.login.values.loggedInUser.file_name 
+                  props.user.login.values.loggedInUser === undefined
+                    ? history.push("/")
+                    : (props.user.login.values !== undefined &&
+                        props.user.login.values.loggedInWith === "jwt" &&
+                        props.user.login.values.loggedInUser.file_path &&
+                        props.filename === "") ||
+                      props.filename === undefined
+                    ? "https://health.iot4health.co.kr:9300" +
+                      props.user.login.values.loggedInUser.file_path +
+                      props.user.login.values.loggedInUser.file_name
                     : props.user.login.values !== undefined &&
-                    props.user.login.values.loggedInWith === "jwt" &&
-                    props.user.login.values.loggedInUser.file_path &&
-                    props.filename!==""
-                    ?
-                    // "https://health.iot4health.co.kr:9300"+props.user.login.values.loggedInUser.file_path
-                    //   +props.user.login.values.loggedInUser.username + "-" + props.filename
-                    props.filename
-                     
-                    : user !== undefined && user.picture ? user.picture
+                      props.user.login.values.loggedInWith === "jwt" &&
+                      props.user.login.values.loggedInUser.file_path &&
+                      props.filename !== ""
+                    ? // "https://health.iot4health.co.kr:9300"+props.user.login.values.loggedInUser.file_path
+                      //   +props.user.login.values.loggedInUser.username + "-" + props.filename
+                      props.filename
+                    : user !== undefined && user.picture
+                    ? user.picture
                     : userImg
                 }
-                medicalpartnm={props.user.login.values === undefined || props.user.login.values.loggedInUser === undefined
-                  ? window.location.replace("/")
-                  : props.user.login.values.loggedInUser.medical_part_nm}
-                f_name= {props.user.login.values.loggedInUser.f_name}
+                medicalpartnm={
+                  props.user.login.values === undefined ||
+                  props.user.login.values.loggedInUser === undefined
+                    ? window.location.replace("/")
+                    : props.user.login.values.loggedInUser.medical_part_nm
+                }
+                f_name={props.user.login.values.loggedInUser.f_name}
                 loggedInWith={
                   props.user !== undefined &&
                   props.user.login.values !== undefined
@@ -175,17 +185,17 @@ const ThemeNavbar = props => {
         </div>
       </Navbar>
     </React.Fragment>
-  )
-}
+  );
+};
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     user: state.auth,
-    filename: state.cookies.filename.filename
-  }
-}
+    filename: state.cookies.filename.filename,
+  };
+};
 
 export default connect(mapStateToProps, {
   logoutWithJWT,
-  useAuth0
-})(ThemeNavbar)
+  useAuth0,
+})(ThemeNavbar);
