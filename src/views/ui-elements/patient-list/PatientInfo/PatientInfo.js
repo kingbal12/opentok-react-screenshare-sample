@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import {
   Button,
   Card,
@@ -10,8 +10,8 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  UncontrolledTooltip
-} from "reactstrap"
+  UncontrolledTooltip,
+} from "reactstrap";
 import {
   LineChart,
   Line,
@@ -20,207 +20,215 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ResponsiveContainer
-} from "recharts"
+  ResponsiveContainer,
+} from "recharts";
 import {
   resetVitalData,
   goPCL,
-  getPharmacy
-} from "../../../../redux/actions/data-list/"
-import { history } from "../../../../history"
-import "../../../../assets/scss/pages/authentication.scss"
-import {connect} from "react-redux"
-import { Fragment } from "react"
-import previmg from "../../../../assets/img/dashboard/ID13_11_file.png"
-import { Menu } from "react-feather"
-import "../../../../assets/scss/plugins/forms/flatpickr/flatpickr.scss"
-import "../../../../assets/scss/plugins/extensions/recharts.scss"
-import {gettokbox} from "../../../../redux/actions/data-list/"
-import ncall from "../../../../assets/img/dashboard/ID13_11_method_call1.png"
-import call from "../../../../assets/img/dashboard/ID13_11_method_call2.png"
-import nvideo from "../../../../assets/img/dashboard/ID13_11_method_video1.png"
-import video from "../../../../assets/img/dashboard/ID13_11_method_video2.png"
-import pressure_1 from "../../../../assets/img/dashboard/ID12_08_vital_pressure1.png"
-import pressure_2 from "../../../../assets/img/dashboard/ID12_08_vital_pressure2.png"
-import pressure_3 from "../../../../assets/img/dashboard/ID12_08_vital_pressure3.png"
-import pressure_4 from "../../../../assets/img/dashboard/ID12_08_vital_pressure4.png"
-import pressure_5 from "../../../../assets/img/dashboard/ID12_08_vital_pressure5.png"
-import pulse_1 from "../../../../assets/img/dashboard/ID12_08_vital_pulse1.png"
-import pulse_2 from "../../../../assets/img/dashboard/ID12_08_vital_pulse2.png"
-import pulse_3 from "../../../../assets/img/dashboard/ID12_08_vital_pulse3.png"
-import pulse_4 from "../../../../assets/img/dashboard/ID12_08_vital_pulse4.png"
-import pulse_5 from "../../../../assets/img/dashboard/ID12_08_vital_pulse5.png"
-import weight_1 from "../../../../assets/img/dashboard/ID12_08_vital_weight1.png"
-import weight_2 from "../../../../assets/img/dashboard/ID12_08_vital_weight2.png"
-import weight_3 from "../../../../assets/img/dashboard/ID12_08_vital_weight3.png"
-import weight_4 from "../../../../assets/img/dashboard/ID12_08_vital_weight4.png"
-import weight_5 from "../../../../assets/img/dashboard/ID12_08_vital_weight5.png"
-import glucose_1 from "../../../../assets/img/dashboard/ID12_08_vital_glucose1.png"
-import glucose_2 from "../../../../assets/img/dashboard/ID12_08_vital_glucose2.png"
-import glucose_3 from "../../../../assets/img/dashboard/ID12_08_vital_glucose3.png"
-import glucose_4 from "../../../../assets/img/dashboard/ID12_08_vital_glucose4.png"
-import glucose_5 from "../../../../assets/img/dashboard/ID12_08_vital_glucose5.png"
-import temperature_1 from "../../../../assets/img/dashboard/ID12_08_vital_temperature1.png"
-import temperature_2 from "../../../../assets/img/dashboard/ID12_08_vital_temperature2.png"
-import temperature_3 from "../../../../assets/img/dashboard/ID12_08_vital_temperature3.png"
-import temperature_4 from "../../../../assets/img/dashboard/ID12_08_vital_temperature4.png"
-import temperature_5 from "../../../../assets/img/dashboard/ID12_08_vital_temperature5.png"
-import spo2_1 from "../../../../assets/img/dashboard/ID12_08_vital_spo2 1.png"
-import spo2_2 from "../../../../assets/img/dashboard/ID12_08_vital_spo2 2.png"
-import spo2_3 from "../../../../assets/img/dashboard/ID12_08_vital_spo2 3.png"
-import spo2_4 from "../../../../assets/img/dashboard/ID12_08_vital_spo2 4.png"
-import spo2_5 from "../../../../assets/img/dashboard/ID12_08_vital_spo2 5.png"
-import dot from "../../../../assets/img/dashboard/ID13_11_icon.png"
-import moment from "moment"
-import Countdown from 'react-countdown'
-import { FormattedMessage } from "react-intl"
+  getPharmacy,
+} from "../../../../redux/actions/data-list/";
+import { history } from "../../../../history";
+import "../../../../assets/scss/pages/authentication.scss";
+import { connect } from "react-redux";
+import { Fragment } from "react";
+import previmg from "../../../../assets/img/dashboard/ID13_11_file.png";
+import { Menu } from "react-feather";
+import "../../../../assets/scss/plugins/forms/flatpickr/flatpickr.scss";
+import "../../../../assets/scss/plugins/extensions/recharts.scss";
+import { gettokbox } from "../../../../redux/actions/data-list/";
+import ncall from "../../../../assets/img/dashboard/ID13_11_method_call1.png";
+import call from "../../../../assets/img/dashboard/ID13_11_method_call2.png";
+import nvideo from "../../../../assets/img/dashboard/ID13_11_method_video1.png";
+import video from "../../../../assets/img/dashboard/ID13_11_method_video2.png";
+import pressure_1 from "../../../../assets/img/dashboard/ID12_08_vital_pressure1.png";
+import pressure_2 from "../../../../assets/img/dashboard/ID12_08_vital_pressure2.png";
+import pressure_3 from "../../../../assets/img/dashboard/ID12_08_vital_pressure3.png";
+import pressure_4 from "../../../../assets/img/dashboard/ID12_08_vital_pressure4.png";
+import pressure_5 from "../../../../assets/img/dashboard/ID12_08_vital_pressure5.png";
+import pulse_1 from "../../../../assets/img/dashboard/ID12_08_vital_pulse1.png";
+import pulse_2 from "../../../../assets/img/dashboard/ID12_08_vital_pulse2.png";
+import pulse_3 from "../../../../assets/img/dashboard/ID12_08_vital_pulse3.png";
+import pulse_4 from "../../../../assets/img/dashboard/ID12_08_vital_pulse4.png";
+import pulse_5 from "../../../../assets/img/dashboard/ID12_08_vital_pulse5.png";
+import weight_1 from "../../../../assets/img/dashboard/ID12_08_vital_weight1.png";
+import weight_2 from "../../../../assets/img/dashboard/ID12_08_vital_weight2.png";
+import weight_3 from "../../../../assets/img/dashboard/ID12_08_vital_weight3.png";
+import weight_4 from "../../../../assets/img/dashboard/ID12_08_vital_weight4.png";
+import weight_5 from "../../../../assets/img/dashboard/ID12_08_vital_weight5.png";
+import glucose_1 from "../../../../assets/img/dashboard/ID12_08_vital_glucose1.png";
+import glucose_2 from "../../../../assets/img/dashboard/ID12_08_vital_glucose2.png";
+import glucose_3 from "../../../../assets/img/dashboard/ID12_08_vital_glucose3.png";
+import glucose_4 from "../../../../assets/img/dashboard/ID12_08_vital_glucose4.png";
+import glucose_5 from "../../../../assets/img/dashboard/ID12_08_vital_glucose5.png";
+import temperature_1 from "../../../../assets/img/dashboard/ID12_08_vital_temperature1.png";
+import temperature_2 from "../../../../assets/img/dashboard/ID12_08_vital_temperature2.png";
+import temperature_3 from "../../../../assets/img/dashboard/ID12_08_vital_temperature3.png";
+import temperature_4 from "../../../../assets/img/dashboard/ID12_08_vital_temperature4.png";
+import temperature_5 from "../../../../assets/img/dashboard/ID12_08_vital_temperature5.png";
+import spo2_1 from "../../../../assets/img/dashboard/ID12_08_vital_spo2 1.png";
+import spo2_2 from "../../../../assets/img/dashboard/ID12_08_vital_spo2 2.png";
+import spo2_3 from "../../../../assets/img/dashboard/ID12_08_vital_spo2 3.png";
+import spo2_4 from "../../../../assets/img/dashboard/ID12_08_vital_spo2 4.png";
+import spo2_5 from "../../../../assets/img/dashboard/ID12_08_vital_spo2 5.png";
+import dot from "../../../../assets/img/dashboard/ID13_11_icon.png";
+import moment from "moment";
+import Countdown from "react-countdown";
+import { FormattedMessage } from "react-intl";
 
-const localFormDate = (scheduleda)=>{
-  let localscheduledate = moment.utc(scheduleda).toDate()
-  localscheduledate = moment(localscheduledate).format("YYYY-MM-DD hh:mm A")
-
-  return localscheduledate;
-}
-
-const localFormDateGraph = (scheduleda)=>{
-  let localscheduledate = moment.utc(scheduleda).toDate()
-  localscheduledate = moment(localscheduledate).format()
+const localFormDate = (scheduleda) => {
+  let localscheduledate = moment.utc(scheduleda).toDate();
+  localscheduledate = moment(localscheduledate).format("YYYY-MM-DD hh:mm A");
 
   return localscheduledate;
-}
+};
 
-class Cslist extends React.Component { 
-  render() { 
-    return(
+const localFormDateGraph = (scheduleda) => {
+  let localscheduledate = moment.utc(scheduleda).toDate();
+  localscheduledate = moment(localscheduledate).format();
+
+  return localscheduledate;
+};
+
+class Cslist extends React.Component {
+  render() {
+    return (
       <tr>
-        <th className="text-center"><h6>{this.props.row.PART_NAME} / {this.props.row.F_NAME}</h6></th>
-        <th className="text-center"><h6>{this.props.row.NOTE_DX}</h6></th>
-        <th className="text-center"><h6>{localFormDate(this.props.row.APPOINT_TIME)}</h6></th>  
-      </tr>  
-    ); 
-  } 
+        <th className="text-center">
+          <h6>
+            {this.props.row.PART_NAME} / {this.props.row.F_NAME}
+          </h6>
+        </th>
+        <th className="text-center">
+          <h6>{this.props.row.NOTE_DX}</h6>
+        </th>
+        <th className="text-center">
+          <h6>{localFormDate(this.props.row.APPOINT_TIME)}</h6>
+        </th>
+      </tr>
+    );
+  }
 }
 
-class CunsultName extends React.Component { 
-  render() { 
-    return( 
-    <h6>
-      {this.props.row.PART_NAME}/{this.props.row.F_NAME}
-    </h6>
-    ); 
-  } 
+class CunsultName extends React.Component {
+  render() {
+    return (
+      <h6>
+        {this.props.row.PART_NAME}/{this.props.row.F_NAME}
+      </h6>
+    );
+  }
 }
-
 
 class PatientInfo extends React.Component {
-  
   state = {
-    viewfilemodal: false
-  }
+    viewfilemodal: false,
+  };
 
   viewFileModal = () => {
-    this.setState(prevState => ({
-      viewfilemodal: !prevState.viewfilemodal
-    }))
-  }
+    this.setState((prevState) => ({
+      viewfilemodal: !prevState.viewfilemodal,
+    }));
+  };
 
   componentDidMount() {
-    console.log(this.props.user)
-    console.log(this.props.dataList)
-    console.log("환자 개인정보:", this.props.pinfo)
-
-    
-  
-  }
-  
-  goCallSetting = e => {
-    e.preventDefault()
-    if(moment() >= moment(this.props.rtime).add(-5,"m") && moment() <= moment(this.props.rtime).add(15,"m")) {
-      this.props.gettokbox(this.props.user.login.values.loggedInUser.username, this.props.appo.APPOINT_NUM)
-      this.props.getPharmacy(this.props.pinfo.PATIENT_ID)
-    } else {
-      alert("진료실은 5분 전부터 입장 가능합니다.")
-    }
+    console.log(this.props.user);
+    console.log(this.props.dataList);
+    console.log("환자 개인정보:", this.props.pinfo);
   }
 
-  goPhoneConsult= e => {
-    e.preventDefault() 
-    if(moment() >= moment(this.props.rtime).add(-5,"m") && moment() <= moment(this.props.rtime).add(15,"m")) {
-      this.props.getPharmacy(this.props.pinfo.PATIENT_ID)
-      history.push("/pages/phoneconsulting")
+  goCallSetting = (e) => {
+    e.preventDefault();
+    if (
+      moment() >= moment(this.props.rtime).add(-5, "m") &&
+      moment() <= moment(this.props.rtime).add(15, "m")
+    ) {
+      this.props.gettokbox(
+        this.props.user.login.values.loggedInUser.username,
+        this.props.appo.APPOINT_NUM
+      );
+      this.props.getPharmacy(this.props.pinfo.PATIENT_ID);
     } else {
-      alert("진료실은 5분 전부터 입장 가능합니다.")
+      alert("진료실은 5분 전부터 입장 가능합니다.");
     }
-  }
+  };
+
+  goPhoneConsult = (e) => {
+    e.preventDefault();
+    if (
+      moment() >= moment(this.props.rtime).add(-5, "m") &&
+      moment() <= moment(this.props.rtime).add(15, "m")
+    ) {
+      this.props.getPharmacy(this.props.pinfo.PATIENT_ID);
+      history.push("/pages/phoneconsulting");
+    } else {
+      alert("진료실에 입장합니다.\n전화진료 시각을 참고해 주시기 바랍니다.");
+      history.push("/pages/phoneconsulting");
+    }
+  };
 
   goPastConsultList(pid) {
-    this.props.goPCL(pid)
+    this.props.goPCL(pid);
   }
 
-  goVitalData = e => {
-    e.preventDefault()
+  goVitalData = (e) => {
+    e.preventDefault();
     // this.props.resetVitalData()
-    history.push("/vitaldata")
-  }
- 
-  Completionist = () => <span>진료중입니다.</span>
-  
+    history.push("/vitaldata");
+  };
+
+  Completionist = () => <span>진료중입니다.</span>;
+
   render() {
     let file_preview = null;
 
-    {this.props.appo===null||this.props.appo.FILE_NAME===""||this.props.appo.FILE_NAME==="blob"
-      ?
-      file_preview = 
-        <img
-          src={previmg}
-          className="dz-img"
-          alt=""
-        />
-      : this.props.appo.FILE_NAME===""?
-      file_preview = 
-        <img
-          src={previmg}
-          className="dz-img"
-          alt=""
-        />
-      :file_preview = 
-        <img
-          width="70px"
-          height="70px" 
-          src={"https://health.iot4health.co.kr:9300"+this.props.appo.FILE_PATH
-          +this.props.appo.FILE_NAME}
-          className="dz-img"
-          alt=""
-          style={{cursor:"pointer"}} 
-          onClick={this.viewFileModal}
-        />
+    {
+      this.props.appo === null ||
+      this.props.appo.FILE_NAME === "" ||
+      this.props.appo.FILE_NAME === "blob"
+        ? (file_preview = <img src={previmg} className="dz-img" alt="" />)
+        : this.props.appo.FILE_NAME === ""
+        ? (file_preview = <img src={previmg} className="dz-img" alt="" />)
+        : (file_preview = (
+            <img
+              width="70px"
+              height="70px"
+              src={
+                "https://health.iot4health.co.kr:9300" +
+                this.props.appo.FILE_PATH +
+                this.props.appo.FILE_NAME
+              }
+              className="dz-img"
+              alt=""
+              style={{ cursor: "pointer" }}
+              onClick={this.viewFileModal}
+            />
+          ));
     }
-       
 
     return (
-      
-      
       <Fragment>
         <Modal
           isOpen={this.state.viewfilemodal}
           toggle={this.viewFileModal}
           className="modal-dialog-centered modal-lg"
         >
-          <ModalHeader toggle={this.viewFileModal}>
-            
-          </ModalHeader>
+          <ModalHeader toggle={this.viewFileModal}></ModalHeader>
           <ModalBody>
             <Row className="justify-content-center">
-              {this.props.appo===null||this.props.appo.FILE_NAME===""?null:
-              <img
-                src={"https://health.iot4health.co.kr:9300"+this.props.appo.FILE_PATH
-                +this.props.appo.FILE_NAME}
-                maxwidth="500px"
-                height="500px"
-                style={{cursor:"pointer"}} 
-                onClick={this.viewFileModal}
-              />
-              }
+              {this.props.appo === null ||
+              this.props.appo.FILE_NAME === "" ? null : (
+                <img
+                  src={
+                    "https://health.iot4health.co.kr:9300" +
+                    this.props.appo.FILE_PATH +
+                    this.props.appo.FILE_NAME
+                  }
+                  maxwidth="500px"
+                  height="500px"
+                  style={{ cursor: "pointer" }}
+                  onClick={this.viewFileModal}
+                />
+              )}
             </Row>
           </ModalBody>
           <ModalFooter className="justify-content-center">
@@ -230,266 +238,657 @@ class PatientInfo extends React.Component {
           </ModalFooter>
         </Modal>
         {/* 환자정보, 버튼 모음 Row */}
-       
-          <Row>
-            <Col className="col-12">
-              <table id="tblTopBar">
-                <thead>
-                  <tr className="table-primary text-center">
-                    <th id="tblTopBarTh"><h5 style={{}}>{this.props.appo===null?null:this.props.appo.APPOINT_TIME}</h5></th>
-                    <th><h5 className="text-bold-600">{this.props.pinfo.F_NAME}</h5></th>
-                    <th><h5 className="text-bold-600">{this.props.pinfo.GENDER==="1"||this.props.pinfo.GENDER==="3"?"M":"F"}</h5></th>
-                    <th><h5 className="text-bold-600">{this.props.pinfo.AGE}</h5></th>
-                    <th><h5 className="text-bold-600">{this.props.pinfo.BIRTH_DT}</h5></th>
-                    {/* <th><h5 className="text-bold-600">{this.props.pinfo.NOTE_DX}</h5></th> */}
-                    <th><h5 className="text-bold-600">{this.props.pinfo.FIRST_YN==="N"?<FormattedMessage id="재진"/>:<FormattedMessage id="초진"/>}</h5></th>
-                    <th className="text-center"> 
-                      <h5 id="vitalIcons">
-                        {
-                          this.props.pinfo.BP==="00"?<img id="혈압" src={pressure_2} width="35px" alt="pressure_2"/>:
-                          this.props.pinfo.BP==="01"?<img id="혈압" src={pressure_1} width="35px" alt="pressure_1"/>:
-                          this.props.pinfo.BP==="99"?<img id="혈압" src={pressure_1} width="35px" alt="pressure_1"/>:
-                          this.props.pinfo.BP==="02"?<img id="혈압" src={pressure_5} width="35px" alt="pressure_5"/>:
-                          this.props.pinfo.BP==="03"?<img id="혈압" src={pressure_4} width="35px" alt="pressure_4"/>:
-                          this.props.pinfo.BP==="04"?<img id="혈압" src={pressure_3} width="35px" alt="pressure_3"/>:
-                          null 
-                        }
-                        {
-                          this.props.pinfo.PULSE==="00"?<img id="맥박" src={pulse_2} width="35px"  alt="pulse_2"/>:
-                          this.props.pinfo.PULSE==="01"?<img id="맥박" src={pulse_1} width="35px"  alt="pulse_1"/>:
-                          this.props.pinfo.PULSE==="99"?<img id="맥박" src={pulse_1} width="35px"  alt="pulse_1"/>:
-                          this.props.pinfo.PULSE==="02"?<img id="맥박" src={pulse_5} width="35px"  alt="pulse_5"/>:
-                          this.props.pinfo.PULSE==="03"?<img id="맥박" src={pulse_4} width="35px"  alt="pulse_4"/>:
-                          this.props.pinfo.PULSE==="04"?<img id="맥박" src={pulse_3} width="35px"  alt="pulse_3"/>:
-                          null  
-                        }
-                        {
-                          this.props.pinfo.BW==="00"?<img id="체중" src={weight_2} width="35px" alt="weight_2"/>:
-                          this.props.pinfo.BW==="01"?<img id="체중" src={weight_1} width="35px" alt="weight_1"/>:
-                          this.props.pinfo.BW==="99"?<img id="체중" src={weight_1} width="35px" alt="weight_1"/>:
-                          this.props.pinfo.BW==="02"?<img id="체중" src={weight_5} width="35px" alt="weight_5"/>:
-                          this.props.pinfo.BW==="03"?<img id="체중" src={weight_4} width="35px" alt="weight_4"/>:
-                          this.props.pinfo.BW==="04"?<img id="체중" src={weight_3} width="35px" alt="weight_3"/>:
-                          null
-                        }
-                        {
-                          this.props.pinfo.BS==="00"?<img id="혈당" src={glucose_2} width="35px" alt="glucose_2"/>:
-                          this.props.pinfo.BS==="01"?<img id="혈당" src={glucose_1} width="35px" alt="glucose_1"/>:
-                          this.props.pinfo.BS==="99"?<img id="혈당" src={glucose_1} width="35px" alt="glucose_1"/>:
-                          this.props.pinfo.BS==="02"?<img id="혈당" src={glucose_5} width="35px" alt="glucose_5"/>:
-                          this.props.pinfo.BS==="03"?<img id="혈당" src={glucose_4} width="35px" alt="glucose_4"/>:
-                          this.props.pinfo.BS==="04"?<img id="혈당" src={glucose_3} width="35px" alt="glucose_3"/>:
-                          null 
-                        }
-                        {
-                          this.props.pinfo.TEMPERATURE==="00"?<img id="체온" src={temperature_2} width="35px" alt="temperature_2"/>:
-                          this.props.pinfo.TEMPERATURE==="01"?<img id="체온" src={temperature_1} width="35px" alt="temperature_1"/>:
-                          this.props.pinfo.TEMPERATURE==="99"?<img id="체온" src={temperature_1} width="35px" alt="temperature_1"/>:
-                          this.props.pinfo.TEMPERATURE==="02"?<img id="체온" src={temperature_5} width="35px" alt="temperature_5"/>:
-                          this.props.pinfo.TEMPERATURE==="03"?<img id="체온" src={temperature_4} width="35px" alt="temperature_4"/>:
-                          this.props.pinfo.TEMPERATURE==="04"?<img id="체온" src={temperature_3} width="35px" alt="temperature_3"/>:
-                          null 
-                        }
-                        {
-                          this.props.pinfo.SPO2==="00"?<img id="산소포화도" src={spo2_2} width="35px" alt="spo2_2"/>:
-                          this.props.pinfo.SPO2==="01"?<img id="산소포화도" src={spo2_1} width="35px" alt="spo2_1"/>:
-                          this.props.pinfo.SPO2==="99"?<img id="산소포화도" src={spo2_1} width="35px" alt="spo2_1"/>:
-                          this.props.pinfo.SPO2==="02"?<img id="산소포화도" src={spo2_5} width="35px" alt="spo2_5"/>:
-                          this.props.pinfo.SPO2==="03"?<img id="산소포화도" src={spo2_4} width="35px" alt="spo2_4"/>:
-                          this.props.pinfo.SPO2==="04"?<img id="산소포화도" src={spo2_3} width="35px" alt="spo2_3"/>:
-                          null 
-                        }
-                      </h5>
-                      <UncontrolledTooltip
-                        placement="bottom"
-                        target="혈압"
-                      >
-                        <FormattedMessage id="혈압"/>
-                      </UncontrolledTooltip>
-                      <UncontrolledTooltip
-                        placement="bottom"
-                        target="맥박"
-                      >
-                        <FormattedMessage id="맥박"/>
-                      </UncontrolledTooltip>
-                      <UncontrolledTooltip
-                        placement="bottom"
-                        target="체중"
-                      >
-                        <FormattedMessage id="체중"/>
-                      </UncontrolledTooltip>
-                      <UncontrolledTooltip
-                        placement="bottom"
-                        target="혈당"
-                      >
-                        <FormattedMessage id="혈당"/>
-                      </UncontrolledTooltip>
-                      <UncontrolledTooltip
-                        placement="bottom"
-                        target="체온"
-                      >
-                        <FormattedMessage id="체온"/>
-                      </UncontrolledTooltip>
-                      <UncontrolledTooltip
-                        placement="bottom"
-                        target="산소포화도"
-                      >
-                        <FormattedMessage id="SPO2"/>
-                      </UncontrolledTooltip>
-                    </th>
-                    <th>
-                      {this.props.appo===null?""
-                      :moment(this.props.rtime).add(-15,"m") <= moment() && moment() <= moment(this.props.rtime) ?
-                      <Countdown date={moment(this.props.rtime)} >
+
+        <Row>
+          <Col className="col-12">
+            <table id="tblTopBar">
+              <thead>
+                <tr className="table-primary text-center">
+                  <th id="tblTopBarTh">
+                    <h5 style={{}}>
+                      {this.props.appo === null
+                        ? null
+                        : this.props.appo.APPOINT_TIME}
+                    </h5>
+                  </th>
+                  <th>
+                    <h5 className="text-bold-600">{this.props.pinfo.F_NAME}</h5>
+                  </th>
+                  <th>
+                    <h5 className="text-bold-600">
+                      {this.props.pinfo.GENDER === "1" ||
+                      this.props.pinfo.GENDER === "3"
+                        ? "M"
+                        : "F"}
+                    </h5>
+                  </th>
+                  <th>
+                    <h5 className="text-bold-600">{this.props.pinfo.AGE}</h5>
+                  </th>
+                  <th>
+                    <h5 className="text-bold-600">
+                      {this.props.pinfo.BIRTH_DT}
+                    </h5>
+                  </th>
+                  {/* <th><h5 className="text-bold-600">{this.props.pinfo.NOTE_DX}</h5></th> */}
+                  <th>
+                    <h5 className="text-bold-600">
+                      {this.props.pinfo.FIRST_YN === "N" ? (
+                        <FormattedMessage id="재진" />
+                      ) : (
+                        <FormattedMessage id="초진" />
+                      )}
+                    </h5>
+                  </th>
+                  <th className="text-center">
+                    <h5 id="vitalIcons">
+                      {this.props.pinfo.BP === "00" ? (
+                        <img
+                          id="혈압"
+                          src={pressure_2}
+                          width="35px"
+                          alt="pressure_2"
+                        />
+                      ) : this.props.pinfo.BP === "01" ? (
+                        <img
+                          id="혈압"
+                          src={pressure_1}
+                          width="35px"
+                          alt="pressure_1"
+                        />
+                      ) : this.props.pinfo.BP === "99" ? (
+                        <img
+                          id="혈압"
+                          src={pressure_1}
+                          width="35px"
+                          alt="pressure_1"
+                        />
+                      ) : this.props.pinfo.BP === "02" ? (
+                        <img
+                          id="혈압"
+                          src={pressure_5}
+                          width="35px"
+                          alt="pressure_5"
+                        />
+                      ) : this.props.pinfo.BP === "03" ? (
+                        <img
+                          id="혈압"
+                          src={pressure_4}
+                          width="35px"
+                          alt="pressure_4"
+                        />
+                      ) : this.props.pinfo.BP === "04" ? (
+                        <img
+                          id="혈압"
+                          src={pressure_3}
+                          width="35px"
+                          alt="pressure_3"
+                        />
+                      ) : null}
+                      {this.props.pinfo.PULSE === "00" ? (
+                        <img
+                          id="맥박"
+                          src={pulse_2}
+                          width="35px"
+                          alt="pulse_2"
+                        />
+                      ) : this.props.pinfo.PULSE === "01" ? (
+                        <img
+                          id="맥박"
+                          src={pulse_1}
+                          width="35px"
+                          alt="pulse_1"
+                        />
+                      ) : this.props.pinfo.PULSE === "99" ? (
+                        <img
+                          id="맥박"
+                          src={pulse_1}
+                          width="35px"
+                          alt="pulse_1"
+                        />
+                      ) : this.props.pinfo.PULSE === "02" ? (
+                        <img
+                          id="맥박"
+                          src={pulse_5}
+                          width="35px"
+                          alt="pulse_5"
+                        />
+                      ) : this.props.pinfo.PULSE === "03" ? (
+                        <img
+                          id="맥박"
+                          src={pulse_4}
+                          width="35px"
+                          alt="pulse_4"
+                        />
+                      ) : this.props.pinfo.PULSE === "04" ? (
+                        <img
+                          id="맥박"
+                          src={pulse_3}
+                          width="35px"
+                          alt="pulse_3"
+                        />
+                      ) : null}
+                      {this.props.pinfo.BW === "00" ? (
+                        <img
+                          id="체중"
+                          src={weight_2}
+                          width="35px"
+                          alt="weight_2"
+                        />
+                      ) : this.props.pinfo.BW === "01" ? (
+                        <img
+                          id="체중"
+                          src={weight_1}
+                          width="35px"
+                          alt="weight_1"
+                        />
+                      ) : this.props.pinfo.BW === "99" ? (
+                        <img
+                          id="체중"
+                          src={weight_1}
+                          width="35px"
+                          alt="weight_1"
+                        />
+                      ) : this.props.pinfo.BW === "02" ? (
+                        <img
+                          id="체중"
+                          src={weight_5}
+                          width="35px"
+                          alt="weight_5"
+                        />
+                      ) : this.props.pinfo.BW === "03" ? (
+                        <img
+                          id="체중"
+                          src={weight_4}
+                          width="35px"
+                          alt="weight_4"
+                        />
+                      ) : this.props.pinfo.BW === "04" ? (
+                        <img
+                          id="체중"
+                          src={weight_3}
+                          width="35px"
+                          alt="weight_3"
+                        />
+                      ) : null}
+                      {this.props.pinfo.BS === "00" ? (
+                        <img
+                          id="혈당"
+                          src={glucose_2}
+                          width="35px"
+                          alt="glucose_2"
+                        />
+                      ) : this.props.pinfo.BS === "01" ? (
+                        <img
+                          id="혈당"
+                          src={glucose_1}
+                          width="35px"
+                          alt="glucose_1"
+                        />
+                      ) : this.props.pinfo.BS === "99" ? (
+                        <img
+                          id="혈당"
+                          src={glucose_1}
+                          width="35px"
+                          alt="glucose_1"
+                        />
+                      ) : this.props.pinfo.BS === "02" ? (
+                        <img
+                          id="혈당"
+                          src={glucose_5}
+                          width="35px"
+                          alt="glucose_5"
+                        />
+                      ) : this.props.pinfo.BS === "03" ? (
+                        <img
+                          id="혈당"
+                          src={glucose_4}
+                          width="35px"
+                          alt="glucose_4"
+                        />
+                      ) : this.props.pinfo.BS === "04" ? (
+                        <img
+                          id="혈당"
+                          src={glucose_3}
+                          width="35px"
+                          alt="glucose_3"
+                        />
+                      ) : null}
+                      {this.props.pinfo.TEMPERATURE === "00" ? (
+                        <img
+                          id="체온"
+                          src={temperature_2}
+                          width="35px"
+                          alt="temperature_2"
+                        />
+                      ) : this.props.pinfo.TEMPERATURE === "01" ? (
+                        <img
+                          id="체온"
+                          src={temperature_1}
+                          width="35px"
+                          alt="temperature_1"
+                        />
+                      ) : this.props.pinfo.TEMPERATURE === "99" ? (
+                        <img
+                          id="체온"
+                          src={temperature_1}
+                          width="35px"
+                          alt="temperature_1"
+                        />
+                      ) : this.props.pinfo.TEMPERATURE === "02" ? (
+                        <img
+                          id="체온"
+                          src={temperature_5}
+                          width="35px"
+                          alt="temperature_5"
+                        />
+                      ) : this.props.pinfo.TEMPERATURE === "03" ? (
+                        <img
+                          id="체온"
+                          src={temperature_4}
+                          width="35px"
+                          alt="temperature_4"
+                        />
+                      ) : this.props.pinfo.TEMPERATURE === "04" ? (
+                        <img
+                          id="체온"
+                          src={temperature_3}
+                          width="35px"
+                          alt="temperature_3"
+                        />
+                      ) : null}
+                      {this.props.pinfo.SPO2 === "00" ? (
+                        <img
+                          id="산소포화도"
+                          src={spo2_2}
+                          width="35px"
+                          alt="spo2_2"
+                        />
+                      ) : this.props.pinfo.SPO2 === "01" ? (
+                        <img
+                          id="산소포화도"
+                          src={spo2_1}
+                          width="35px"
+                          alt="spo2_1"
+                        />
+                      ) : this.props.pinfo.SPO2 === "99" ? (
+                        <img
+                          id="산소포화도"
+                          src={spo2_1}
+                          width="35px"
+                          alt="spo2_1"
+                        />
+                      ) : this.props.pinfo.SPO2 === "02" ? (
+                        <img
+                          id="산소포화도"
+                          src={spo2_5}
+                          width="35px"
+                          alt="spo2_5"
+                        />
+                      ) : this.props.pinfo.SPO2 === "03" ? (
+                        <img
+                          id="산소포화도"
+                          src={spo2_4}
+                          width="35px"
+                          alt="spo2_4"
+                        />
+                      ) : this.props.pinfo.SPO2 === "04" ? (
+                        <img
+                          id="산소포화도"
+                          src={spo2_3}
+                          width="35px"
+                          alt="spo2_3"
+                        />
+                      ) : null}
+                    </h5>
+                    <UncontrolledTooltip placement="bottom" target="혈압">
+                      <FormattedMessage id="혈압" />
+                    </UncontrolledTooltip>
+                    <UncontrolledTooltip placement="bottom" target="맥박">
+                      <FormattedMessage id="맥박" />
+                    </UncontrolledTooltip>
+                    <UncontrolledTooltip placement="bottom" target="체중">
+                      <FormattedMessage id="체중" />
+                    </UncontrolledTooltip>
+                    <UncontrolledTooltip placement="bottom" target="혈당">
+                      <FormattedMessage id="혈당" />
+                    </UncontrolledTooltip>
+                    <UncontrolledTooltip placement="bottom" target="체온">
+                      <FormattedMessage id="체온" />
+                    </UncontrolledTooltip>
+                    <UncontrolledTooltip placement="bottom" target="산소포화도">
+                      <FormattedMessage id="SPO2" />
+                    </UncontrolledTooltip>
+                  </th>
+                  <th>
+                    {this.props.appo === null ? (
+                      ""
+                    ) : moment(this.props.rtime).add(-15, "m") <= moment() &&
+                      moment() <= moment(this.props.rtime) ? (
+                      <Countdown date={moment(this.props.rtime)}>
                         {/* <this.Completionist /> */}
                       </Countdown>
-                      :""
-                      }
+                    ) : (
+                      ""
+                    )}
+                  </th>
+                  {this.props.appo === null ? (
+                    <th id="tblBottomBarTh" className="text-right">
+                      <img src={ncall} alt="call" className="mr-1" />
+                      <img src={nvideo} alt="nvideo" />
                     </th>
-                    {
-                      this.props.appo===null?
-                      <th id="tblBottomBarTh" className="text-right">
-                        <img src={ncall} alt="call" className="mr-1"/>
-                        <img src={nvideo} alt="nvideo" />
-                      </th>
-                      :
-                      this.props.appo.APPOINT_KIND==="1"?
-                      <th id="tblBottomBarTh" className="text-right">
-                        <img onClick={this.goPhoneConsult}  src={call} alt="call" style={{cursor:"pointer"}} className="mr-1"/>
-                        <img src={nvideo} alt="nvideo"/>
-                      </th>
-                      :this.props.appo.APPOINT_KIND==="2"?
-                      <th id="tblBottomBarTh" className="text-right">
-                        <img src={ncall} alt="call" className="mr-1"/>
-                        <img onClick={this.goCallSetting} src={video} alt="video" style={{cursor:"pointer"}} />
-                      </th>
-                      : null
-                    }
-                    
-                  </tr>
-                </thead>
-              </table>
-            </Col>   
-          </Row>
-        
+                  ) : this.props.appo.APPOINT_KIND === "1" ? (
+                    <th id="tblBottomBarTh" className="text-right">
+                      <img
+                        onClick={this.goPhoneConsult}
+                        src={call}
+                        alt="call"
+                        style={{ cursor: "pointer" }}
+                        className="mr-1"
+                      />
+                      <img src={nvideo} alt="nvideo" />
+                    </th>
+                  ) : this.props.appo.APPOINT_KIND === "2" ? (
+                    <th id="tblBottomBarTh" className="text-right">
+                      <img src={ncall} alt="call" className="mr-1" />
+                      <img
+                        onClick={this.goCallSetting}
+                        src={video}
+                        alt="video"
+                        style={{ cursor: "pointer" }}
+                      />
+                    </th>
+                  ) : null}
+                </tr>
+              </thead>
+            </table>
+          </Col>
+        </Row>
+
         <Row className="mt-1">
-          <Col className="col-4"> 
-            <Card className="mb-1" style={{height:"300px", border:"solid silver 1px"}}>
-              <CardTitle className="pl-1" style={{paddingTop:"5px"}}>
-                <h4><b>Personal Information</b></h4>
+          <Col className="col-4">
+            <Card
+              className="mb-1"
+              style={{ height: "300px", border: "solid silver 1px" }}
+            >
+              <CardTitle className="pl-1" style={{ paddingTop: "5px" }}>
+                <h4>
+                  <b>Personal Information</b>
+                </h4>
               </CardTitle>
               <CardBody className="d-flex pl-0">
                 <div className="col-4">
-                  <h5><span className="text-bold-600"><FormattedMessage id="name"/></span></h5>
-                  <h5><span className="text-bold-600"><FormattedMessage id="성별"/></span></h5>
-                  <h5><span className="text-bold-600"><FormattedMessage id="생년월일"/></span></h5>
-                  <h5><span className="text-bold-600"><FormattedMessage id="연락처"/></span></h5>
+                  <h5>
+                    <span className="text-bold-600">
+                      <FormattedMessage id="name" />
+                    </span>
+                  </h5>
+                  <h5>
+                    <span className="text-bold-600">
+                      <FormattedMessage id="성별" />
+                    </span>
+                  </h5>
+                  <h5>
+                    <span className="text-bold-600">
+                      <FormattedMessage id="생년월일" />
+                    </span>
+                  </h5>
+                  <h5>
+                    <span className="text-bold-600">
+                      <FormattedMessage id="연락처" />
+                    </span>
+                  </h5>
                 </div>
                 <div className="col-8">
                   <h5>{this.props.pinfo.F_NAME}</h5>
-                  <h5>{this.props.pinfo.GENDER==="1"||this.props.pinfo.GENDER==="3"?"M":"F"}</h5>
+                  <h5>
+                    {this.props.pinfo.GENDER === "1" ||
+                    this.props.pinfo.GENDER === "3"
+                      ? "M"
+                      : "F"}
+                  </h5>
                   <h5>{this.props.pinfo.BIRTH_DT}</h5>
-                  <h5>{this.props.pinfo.MOBILE_NUM.substring(0,3)+"-"+this.props.pinfo.MOBILE_NUM.substring(3,7)+"-"+this.props.pinfo.MOBILE_NUM.substring(7,11)}</h5>
+                  <h5>
+                    {this.props.pinfo.MOBILE_NUM.substring(0, 3) +
+                      "-" +
+                      this.props.pinfo.MOBILE_NUM.substring(3, 7) +
+                      "-" +
+                      this.props.pinfo.MOBILE_NUM.substring(7, 11)}
+                  </h5>
                 </div>
               </CardBody>
             </Card>
-            <Card className="mb-1" style={{height:"310px", border:"solid silver 1px"}}>
-              <CardTitle className="px-1 d-flex justify-content-between" style={{paddingTop:"5px"}}>
-                <h4><b><FormattedMessage id="Past Cosnulting List"/></b></h4>
+            <Card
+              className="mb-1"
+              style={{ height: "310px", border: "solid silver 1px" }}
+            >
+              <CardTitle
+                className="px-1 d-flex justify-content-between"
+                style={{ paddingTop: "5px" }}
+              >
+                <h4>
+                  <b>
+                    <FormattedMessage id="Past Cosnulting List" />
+                  </b>
+                </h4>
                 {/* <Menu onClick={() => this.goPastConsultList(this.props.pinfo.PATIENT_ID)} style={{cursor:"pointer"}}/> */}
-                <img src={dot} onClick={() => this.goPastConsultList(this.props.pinfo.PATIENT_ID)} style={{cursor:"pointer", width:"10px"}} />
+                <img
+                  src={dot}
+                  onClick={() =>
+                    this.goPastConsultList(this.props.pinfo.PATIENT_ID)
+                  }
+                  style={{ cursor: "pointer", width: "10px" }}
+                />
               </CardTitle>
               <CardBody className="p-0 m-0">
                 <table className="col-12  pt-0 mt-0">
                   <tr>
-                    <th className="text-center"><h5 className="text-bold-600"><FormattedMessage id="진료과/진료의"/></h5></th>
-                    <th className="text-center"><h5 className="text-bold-600"><FormattedMessage id="진단명"/></h5></th>
-                    <th className="text-center"><h5 className="text-bold-600"><FormattedMessage id="진료일자"/></h5></th>  
+                    <th className="text-center">
+                      <h5 className="text-bold-600">
+                        <FormattedMessage id="진료과/진료의" />
+                      </h5>
+                    </th>
+                    <th className="text-center">
+                      <h5 className="text-bold-600">
+                        <FormattedMessage id="진단명" />
+                      </h5>
+                    </th>
+                    <th className="text-center">
+                      <h5 className="text-bold-600">
+                        <FormattedMessage id="진료일자" />
+                      </h5>
+                    </th>
                   </tr>
-                  {
-                    this.props.cslist.map(row =>
-                    ( <Cslist key={row.APPOINT_TIME} row={row}/> )
-                    )
-                  }
+                  {this.props.cslist.map((row) => (
+                    <Cslist key={row.APPOINT_TIME} row={row} />
+                  ))}
                 </table>
               </CardBody>
             </Card>
           </Col>
           <Col className="col-8">
             <div className="d-flex justify-content-between">
-              <div className="mr-1" style={{width:"50%"}}>
-                <Card className="mb-1"  style={{height:"300px", border:"solid silver 1px"}}>
-                  <CardTitle className="pl-1" style={{paddingTop:"5px"}}>
-                    <h4><b>Physical Data</b></h4>
+              <div className="mr-1" style={{ width: "50%" }}>
+                <Card
+                  className="mb-1"
+                  style={{ height: "300px", border: "solid silver 1px" }}
+                >
+                  <CardTitle className="pl-1" style={{ paddingTop: "5px" }}>
+                    <h4>
+                      <b>Physical Data</b>
+                    </h4>
                   </CardTitle>
                   <CardBody className="d-flex pl-0">
                     <div className="col-4">
-                      <h5><span className="text-bold-600"><FormattedMessage id="신장/체중"/></span></h5>
-                      <h5><span className="text-bold-600"><FormattedMessage id="흡연여부"/></span></h5>
-                      <h5><span className="text-bold-600"><FormattedMessage id="음주여부"/></span></h5>
-                      <h5><span className="text-bold-600"><FormattedMessage id="본인병력"/></span></h5>
-                      <h5><span className="text-bold-600"><FormattedMessage id="가족병력"/></span></h5>
-                      <h5><span className="text-bold-600"><FormattedMessage id="복용중인 약"/></span></h5>
-                      <h5><span className="text-bold-600"><FormattedMessage id="알러지 유무"/></span></h5>
+                      <h5>
+                        <span className="text-bold-600">
+                          <FormattedMessage id="신장/체중" />
+                        </span>
+                      </h5>
+                      <h5>
+                        <span className="text-bold-600">
+                          <FormattedMessage id="흡연여부" />
+                        </span>
+                      </h5>
+                      <h5>
+                        <span className="text-bold-600">
+                          <FormattedMessage id="음주여부" />
+                        </span>
+                      </h5>
+                      <h5>
+                        <span className="text-bold-600">
+                          <FormattedMessage id="본인병력" />
+                        </span>
+                      </h5>
+                      <h5>
+                        <span className="text-bold-600">
+                          <FormattedMessage id="가족병력" />
+                        </span>
+                      </h5>
+                      <h5>
+                        <span className="text-bold-600">
+                          <FormattedMessage id="복용중인 약" />
+                        </span>
+                      </h5>
+                      <h5>
+                        <span className="text-bold-600">
+                          <FormattedMessage id="알러지 유무" />
+                        </span>
+                      </h5>
                     </div>
                     <div className="col-8">
-                      <h5>{this.props.pinfo.HEIGHT_VAL}cm&nbsp;/&nbsp;{this.props.pinfo.WEIGHT_VAL}kg</h5>
-                      <h5>{this.props.pinfo.SMOKE_YN==="Y"?<FormattedMessage id="흡연"/>:<FormattedMessage id="비흡연"/>}</h5>
-                      <h5>{this.props.pinfo.DRINK_YN==="N"?<FormattedMessage id="자주"/>:<FormattedMessage id="가끔"/>}</h5>
-                      <h5>{this.props.pinfo.DISEASE_DESC===""? <FormattedMessage id="없음"/>:this.props.pinfo.DISEASE_DESC}</h5>
-                      <h5>{this.props.pinfo.FAMILY_DESC===""? <FormattedMessage id="없음"/>:this.props.pinfo.FAMILY_DESC}</h5>
-                      <h5>{this.props.pinfo.USE_MED===""? <FormattedMessage id="없음"/>:this.props.pinfo.USE_MED}</h5>
-                      <h5>{this.props.pinfo.ALLERGY_YN==="Y"?<FormattedMessage id="알러지있음"/>:<FormattedMessage id="알러지없음"/>}&nbsp;/&nbsp;{this.props.pinfo.ALLERGY_DESC===""?<FormattedMessage id="없음"/>:this.props.pinfo.ALLERGY_DESC}</h5>
+                      <h5>
+                        {this.props.pinfo.HEIGHT_VAL}cm&nbsp;/&nbsp;
+                        {this.props.pinfo.WEIGHT_VAL}kg
+                      </h5>
+                      <h5>
+                        {this.props.pinfo.SMOKE_YN === "Y" ? (
+                          <FormattedMessage id="흡연" />
+                        ) : (
+                          <FormattedMessage id="비흡연" />
+                        )}
+                      </h5>
+                      <h5>
+                        {this.props.pinfo.DRINK_YN === "N" ? (
+                          <FormattedMessage id="자주" />
+                        ) : (
+                          <FormattedMessage id="가끔" />
+                        )}
+                      </h5>
+                      <h5>
+                        {this.props.pinfo.DISEASE_DESC === "" ? (
+                          <FormattedMessage id="없음" />
+                        ) : (
+                          this.props.pinfo.DISEASE_DESC
+                        )}
+                      </h5>
+                      <h5>
+                        {this.props.pinfo.FAMILY_DESC === "" ? (
+                          <FormattedMessage id="없음" />
+                        ) : (
+                          this.props.pinfo.FAMILY_DESC
+                        )}
+                      </h5>
+                      <h5>
+                        {this.props.pinfo.USE_MED === "" ? (
+                          <FormattedMessage id="없음" />
+                        ) : (
+                          this.props.pinfo.USE_MED
+                        )}
+                      </h5>
+                      <h5>
+                        {this.props.pinfo.ALLERGY_YN === "Y" ? (
+                          <FormattedMessage id="알러지있음" />
+                        ) : (
+                          <FormattedMessage id="알러지없음" />
+                        )}
+                        &nbsp;/&nbsp;
+                        {this.props.pinfo.ALLERGY_DESC === "" ? (
+                          <FormattedMessage id="없음" />
+                        ) : (
+                          this.props.pinfo.ALLERGY_DESC
+                        )}
+                      </h5>
                     </div>
                   </CardBody>
                 </Card>
               </div>
 
-              <div style={{width:"50%"}}>
-                <Card className="mb-1" style={{height:"119px", border:"solid silver 1px"}}>
-                
-                  <CardTitle className="pl-1" style={{paddingTop:"5px"}}>
-                    <h4><b><FormattedMessage id="Present Condition"/></b></h4>
+              <div style={{ width: "50%" }}>
+                <Card
+                  className="mb-1"
+                  style={{ height: "119px", border: "solid silver 1px" }}
+                >
+                  <CardTitle className="pl-1" style={{ paddingTop: "5px" }}>
+                    <h4>
+                      <b>
+                        <FormattedMessage id="Present Condition" />
+                      </b>
+                    </h4>
                   </CardTitle>
                   <CardBody className="d-flex pl-0">
                     <div className="col-12">
-                      <h5>{this.props.appo===null?"":this.props.appo.SYMPTOM}</h5>
+                      <h5>
+                        {this.props.appo === null
+                          ? ""
+                          : this.props.appo.SYMPTOM}
+                      </h5>
                     </div>
                   </CardBody>
-
                 </Card>
-                <Card className="mb-1" style={{height:"169px", border:"solid silver 1px"}}>
-                  <CardTitle className="pl-1" style={{paddingTop:"5px"}}>
-                    <h4><b><FormattedMessage id="Files"/></b></h4>
+                <Card
+                  className="mb-1"
+                  style={{ height: "169px", border: "solid silver 1px" }}
+                >
+                  <CardTitle className="pl-1" style={{ paddingTop: "5px" }}>
+                    <h4>
+                      <b>
+                        <FormattedMessage id="Files" />
+                      </b>
+                    </h4>
                   </CardTitle>
-                  <CardBody>
-                    {file_preview}
-                  </CardBody>
+                  <CardBody>{file_preview}</CardBody>
                 </Card>
               </div>
             </div>
-            
-            <Card className="mb-1" style={{height:"310px", border:"solid silver 1px"}}>
-              <CardTitle className="px-1 d-flex justify-content-between" style={{paddingTop:"5px"}}>
-                <h4><b>Vital Data</b></h4>
-                 {/* <Menu onClick={this.goVitalData} style={{cursor:"pointer"}}/> */}
-                 <img src={dot} onClick={this.goVitalData} style={{cursor:"pointer", width:"10px"}} />
+
+            <Card
+              className="mb-1"
+              style={{ height: "310px", border: "solid silver 1px" }}
+            >
+              <CardTitle
+                className="px-1 d-flex justify-content-between"
+                style={{ paddingTop: "5px" }}
+              >
+                <h4>
+                  <b>Vital Data</b>
+                </h4>
+                {/* <Menu onClick={this.goVitalData} style={{cursor:"pointer"}}/> */}
+                <img
+                  src={dot}
+                  onClick={this.goVitalData}
+                  style={{ cursor: "pointer", width: "10px" }}
+                />
               </CardTitle>
               <CardBody className="d-flex pl-0">
                 <div className="d-flex col-12 pl-0">
-                  {this.props.bpdata.length===0?null:
+                  {this.props.bpdata.length === 0 ? null : (
                     <div className="col-2 pl-0">
-                      <Row className="justify-content-center" ><h5><FormattedMessage id="혈압" /></h5></Row>
+                      <Row className="justify-content-center">
+                        <h5>
+                          <FormattedMessage id="혈압" />
+                        </h5>
+                      </Row>
                       <ResponsiveContainer height="95%">
-                        <LineChart
-                          className="col-2"
-                          data={this.props.bpdata}
-                        >
+                        <LineChart className="col-2" data={this.props.bpdata}>
                           <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis tick={{fontSize: 10}} dataKey="CREATE_TIME" />
+                          <XAxis
+                            tick={{ fontSize: 10 }}
+                            dataKey="CREATE_TIME"
+                          />
                           <YAxis />
                           <Tooltip />
-                          <Legend style={{marginTop:"1px"}} />
+                          <Legend style={{ marginTop: "1px" }} />
                           <Line
                             name="Sys"
                             type="monotone"
@@ -502,25 +901,32 @@ class PatientInfo extends React.Component {
                             dataKey="DIA_VAL"
                             stroke="#7367F0"
                             activeDot={{ r: 8 }}
-                          /> 
+                          />
                         </LineChart>
                       </ResponsiveContainer>
                     </div>
-                  }
+                  )}
 
-                  {this.props.pulstdata.length===0?null:
+                  {this.props.pulstdata.length === 0 ? null : (
                     <div className="col-2 pl-0">
-                      <Row className="justify-content-center"><h5><FormattedMessage id="맥박" /></h5></Row>
-                      <ResponsiveContainer  height="95%">
+                      <Row className="justify-content-center">
+                        <h5>
+                          <FormattedMessage id="맥박" />
+                        </h5>
+                      </Row>
+                      <ResponsiveContainer height="95%">
                         <LineChart
                           className="col-2"
                           data={this.props.pulstdata}
                         >
                           <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis tick={{fontSize: 10}} dataKey="CREATE_TIME"/>
+                          <XAxis
+                            tick={{ fontSize: 10 }}
+                            dataKey="CREATE_TIME"
+                          />
                           <YAxis />
                           <Tooltip />
-                          <Legend/>
+                          <Legend />
                           <Line
                             name="맥박"
                             type="monotone"
@@ -531,21 +937,25 @@ class PatientInfo extends React.Component {
                         </LineChart>
                       </ResponsiveContainer>
                     </div>
-                  }
+                  )}
 
-                  {this.props.wedata.length===0?null:
+                  {this.props.wedata.length === 0 ? null : (
                     <div className="col-2 pl-0">
-                      <Row className="justify-content-center"><h5><FormattedMessage id="체중" /></h5></Row>
-                      <ResponsiveContainer  height="95%">
-                        <LineChart
-                          className="col-2"
-                          data={this.props.wedata}
-                        >
+                      <Row className="justify-content-center">
+                        <h5>
+                          <FormattedMessage id="체중" />
+                        </h5>
+                      </Row>
+                      <ResponsiveContainer height="95%">
+                        <LineChart className="col-2" data={this.props.wedata}>
                           <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis tick={{fontSize: 10}} dataKey="CREATE_TIME"/>
+                          <XAxis
+                            tick={{ fontSize: 10 }}
+                            dataKey="CREATE_TIME"
+                          />
                           <YAxis />
                           <Tooltip />
-                          <Legend/>
+                          <Legend />
                           <Line
                             name="몸무게"
                             type="monotone"
@@ -563,21 +973,25 @@ class PatientInfo extends React.Component {
                         </LineChart>
                       </ResponsiveContainer>
                     </div>
-                  }
+                  )}
 
-                  {this.props.bsdata.length===0?null:
+                  {this.props.bsdata.length === 0 ? null : (
                     <div className="col-2 pl-0">
-                      <Row className="justify-content-center"><h5><FormattedMessage id="혈당" /></h5></Row>
+                      <Row className="justify-content-center">
+                        <h5>
+                          <FormattedMessage id="혈당" />
+                        </h5>
+                      </Row>
                       <ResponsiveContainer height="95%">
-                        <LineChart
-                          className="col-2"
-                          data={this.props.bsdata}
-                        >
+                        <LineChart className="col-2" data={this.props.bsdata}>
                           <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis tick={{fontSize: 10}} dataKey="CREATE_TIME"/>
+                          <XAxis
+                            tick={{ fontSize: 10 }}
+                            dataKey="CREATE_TIME"
+                          />
                           <YAxis />
                           <Tooltip />
-                          <Legend/>
+                          <Legend />
                           <Line
                             name="혈당"
                             type="monotone"
@@ -588,20 +1002,24 @@ class PatientInfo extends React.Component {
                         </LineChart>
                       </ResponsiveContainer>
                     </div>
-                  } 
-                  {this.props.tempdata.length===0?null:
+                  )}
+                  {this.props.tempdata.length === 0 ? null : (
                     <div className="col-2 pl-0">
-                      <Row className="justify-content-center"><h5><FormattedMessage id="체온" /></h5></Row>
-                      <ResponsiveContainer  height="95%">
-                        <LineChart
-                          className="col-2"
-                          data={this.props.tempdata}
-                        >
+                      <Row className="justify-content-center">
+                        <h5>
+                          <FormattedMessage id="체온" />
+                        </h5>
+                      </Row>
+                      <ResponsiveContainer height="95%">
+                        <LineChart className="col-2" data={this.props.tempdata}>
                           <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis tick={{fontSize: 10}} dataKey="CREATE_TIME"/>
+                          <XAxis
+                            tick={{ fontSize: 10 }}
+                            dataKey="CREATE_TIME"
+                          />
                           <YAxis />
                           <Tooltip />
-                          <Legend/>
+                          <Legend />
                           <Line
                             name="체온"
                             type="monotone"
@@ -612,21 +1030,25 @@ class PatientInfo extends React.Component {
                         </LineChart>
                       </ResponsiveContainer>
                     </div>
-                  }  
+                  )}
 
-                  {this.props.spo2data.length===0?null:
+                  {this.props.spo2data.length === 0 ? null : (
                     <div className="col-2 pl-0">
-                      <Row className="justify-content-center"><h5><FormattedMessage id="SPO2" /></h5></Row>
-                      <ResponsiveContainer  height="95%">
-                        <LineChart
-                          className="col-2"
-                          data={this.props.spo2data}
-                        >
+                      <Row className="justify-content-center">
+                        <h5>
+                          <FormattedMessage id="SPO2" />
+                        </h5>
+                      </Row>
+                      <ResponsiveContainer height="95%">
+                        <LineChart className="col-2" data={this.props.spo2data}>
                           <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis tick={{fontSize: 10}} dataKey="CREATE_TIME"/>
+                          <XAxis
+                            tick={{ fontSize: 10 }}
+                            dataKey="CREATE_TIME"
+                          />
                           <YAxis />
                           <Tooltip />
-                          <Legend/>
+                          <Legend />
                           <Line
                             name="SPO2"
                             type="monotone"
@@ -637,18 +1059,18 @@ class PatientInfo extends React.Component {
                         </LineChart>
                       </ResponsiveContainer>
                     </div>
-                  }
+                  )}
                 </div>
               </CardBody>
             </Card>
           </Col>
         </Row>
       </Fragment>
-    )
+    );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     user: state.auth,
     dataList: state.dataList,
@@ -658,11 +1080,16 @@ const mapStateToProps = state => {
     bpdata: state.dataList.BP,
     pulstdata: state.dataList.PULSE,
     tempdata: state.dataList.TEMP,
-    bsdata : state.dataList.BS,
-    wedata : state.dataList.WE,
-    spo2data : state.dataList.SPO2,
-    rtime: state.dataList.rtime
-  }
-}
+    bsdata: state.dataList.BS,
+    wedata: state.dataList.WE,
+    spo2data: state.dataList.SPO2,
+    rtime: state.dataList.rtime,
+  };
+};
 
-export default connect(mapStateToProps, {goPCL, resetVitalData, gettokbox, getPharmacy}) (PatientInfo)
+export default connect(mapStateToProps, {
+  goPCL,
+  resetVitalData,
+  gettokbox,
+  getPharmacy,
+})(PatientInfo);
