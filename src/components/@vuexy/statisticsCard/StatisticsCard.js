@@ -5,7 +5,7 @@ import { Card, CardBody } from "reactstrap";
 class StatisticsCards extends React.Component {
   render() {
     return (
-      <Card className="shadow-none">
+      <Card className="shadow-sm">
         <CardBody
           className={`${
             this.props.className ? this.props.className : "stats-card-body"
@@ -32,13 +32,13 @@ class StatisticsCards extends React.Component {
             </div>
           </div>
           <div className="title-section">
-            <h1
+            <h2
               className={`mb-0 mt-2 text-bold-600 ${
                 this.props.iconBg ? `warning` : "primary"
               }`}
             >
               {this.props.statTitle}
-            </h1>
+            </h2>
           </div>
         </CardBody>
         <div>

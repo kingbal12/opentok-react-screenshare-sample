@@ -1,6 +1,6 @@
 import React from "react";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import "../../../../assets/scss/plugins/calendars/react-big-calendar.scss";
+// import "../../../../assets/scss/plugins/calendars/react-big-calendar.scss";
 import AddEventSidebar from "./AddEventSidebar";
 import {
   Card,
@@ -33,7 +33,7 @@ import {
 } from "../../../../redux/actions/calendar/index";
 import { ChevronLeft, ChevronRight } from "react-feather";
 
-// import "react-big-calendar/lib/addons/dragAndDrop/styles.scss"
+// import "react-big-calendar/lib/addons/dragAndDrop/styles.scss";
 import Radio from "../../../../components/@vuexy/radio/RadioVuexy";
 import { FormattedMessage } from "react-intl";
 
@@ -234,12 +234,6 @@ class CalendarApp extends React.Component {
       end: this.state.endDate,
     });
   };
-
-  // onRemove = () => {
-  //   // filter 메소드를 사용하여 선택한 객체의 id값을 가져와 동일하지 않은 것만 가져온다.
-  //   // 즉, 1,2,3,4의 아이디 중 3번을 눌렀다면 1,2,4의 아이디만 가진 상태로 변경한다. (삭제)
-  //   this.setState(users.filter(user => user.id !== id));
-  // }
 
   onNavigate = (date, view, action) => {
     let start, end, nextstart, nextend;

@@ -19,12 +19,12 @@ class SalesCard extends React.Component {
         <CardBody className="text-center">
           <img src={decorLeft} alt="card-img-left" className="img-left" />
           <img src={decorRight} alt="card-img-right" className="img-right" />
-          <div className="avatar avatar-xl bg-primary shadow avatar-dashboard mt-0">
-            <div className="avatar-content" style={{ cursor: "default" }}>
+          <div className="avatar avatar-xl bg-primary shadow avatar-dashboard mt-2">
+            {/* <div className="avatar-content" style={{ cursor: "default" }}>
               <Award className="text-white" size={28} />
-            </div>
+            </div> */}
           </div>
-          <div className="award-info text-center w-125">
+          <div className="award-info text-center w-125 mb-3">
             <h1 className="mb-2 text-white">
               <FormattedMessage id="hello" />
               <DisplayName />
