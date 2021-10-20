@@ -72,21 +72,21 @@ class ConsultingRoom extends React.Component {
 
   childText = "childText";
 
-  onError2 = (err) => {
-    this.setState({ error: `Failed to publish: ${err.message}` });
-    alert(
-      "인터넷 상태로 인해 화면공유에 오류가 발생하였습니다\n화면공유를 다시 시도해 주십시오"
-    );
-    window.location.reload();
-  };
+  // onError2 = (err) => {
+  //   this.setState({ error: `Failed to publish: ${err.message}` });
+  //   alert(
+  //     "인터넷 상태로 인해 화면공유에 오류가 발생하였습니다\n화면공유를 다시 시도해 주십시오"
+  //   );
+  //   window.location.reload();
+  // };
 
-  onError = (err) => {
-    this.setState({ error: `Failed to publish: ${err.message}` });
-    alert(
-      "기기설정에 문제가 발생하였습니다.\n기기설정을 다시 시도해 주시거나 카메라,마이크를 사용하시던 프로그램을 종료해주십시오"
-    );
-    window.location.reload();
-  };
+  // onError = (err) => {
+  //   this.setState({ error: `Failed to publish: ${err.message}` });
+  //   alert(
+  //     "기기설정에 문제가 발생하였습니다.\n기기설정을 다시 시도해 주시거나 카메라,마이크를 사용하시던 프로그램을 종료해주십시오"
+  //   );
+  //   window.location.reload();
+  // };
 
   render() {
     return (

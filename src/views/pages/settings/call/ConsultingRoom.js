@@ -58,6 +58,7 @@ import Question from "../../../../assets/img/logo/question.png";
 import Clock from "react-live-clock";
 import HicareLogo from "../../../../assets/img/logo/logo2.png";
 import { FormattedMessage } from "react-intl";
+import Draggable from "react-draggable";
 
 class Cslist extends React.Component {
   render() {
@@ -746,8 +747,12 @@ class ConsultingRoom extends React.Component {
           </Col>
           <Col lg="7" md="12">
             <Modal
-              style={{ position: "absolute", right: "4%", top: "10%" }}
-              backdrop={false}
+              style={{
+                position: "absolute",
+                right: "4%",
+                top: "10%",
+              }}
+              // backdrop={false}
               isOpen={this.state.vitaldatamodal}
               toggle={this.vitaldataModal}
               className="modal-lg"
@@ -795,33 +800,34 @@ class ConsultingRoom extends React.Component {
                 </Button>{" "}
               </ModalFooter>
             </Modal>
-
-            <Modal
-              style={{
-                position: "absolute",
-                right: "4%",
-                top: "10%",
-                width: "45%",
-              }}
-              backdrop={false}
-              isOpen={this.state.pclmodal}
-              toggle={this.pclModal}
-              className="modal-lg"
-            >
-              <ModalHeader toggle={this.pclModal}>
-                <b>Past Consulting List</b>
-              </ModalHeader>
-              <ModalBody>
-                <PastConsultList
-                  parsedFilter={queryString.parse(this.props.location.search)}
-                />
-              </ModalBody>
-              <ModalFooter>
-                <Button color="primary" onClick={this.pclModal}>
-                  닫기
-                </Button>
-              </ModalFooter>
-            </Modal>
+            <Draggable>
+              <Modal
+                style={{
+                  position: "absolute",
+                  right: "4%",
+                  top: "10%",
+                  width: "45%",
+                }}
+                backdrop={false}
+                isOpen={this.state.pclmodal}
+                toggle={this.pclModal}
+                className="modal-lg"
+              >
+                <ModalHeader toggle={this.pclModal}>
+                  <b>Past Consulting List</b>
+                </ModalHeader>
+                <ModalBody>
+                  <PastConsultList
+                    parsedFilter={queryString.parse(this.props.location.search)}
+                  />
+                </ModalBody>
+                <ModalFooter>
+                  <Button color="primary" onClick={this.pclModal}>
+                    닫기
+                  </Button>
+                </ModalFooter>
+              </Modal>
+            </Draggable>
 
             <Modal
               style={{

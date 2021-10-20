@@ -39,7 +39,6 @@
   }
 }
 
-
 .login-tabs-container {
   min-height: 505px;
 }
@@ -51,7 +50,6 @@
     margin-top: 1rem;
   }
 }
-
 
 .allagree {
   border-bottom: 1px solid silver;
@@ -107,12 +105,16 @@
 
 #tblTopBar {
   height: 47px;
-  width:100%
+  width: 100%;
 }
 .dz-img {
   object-fit: cover;
 }
 
 #select {
-  background-image:url("../../img/dashboard/down-chevron.png")
+  background-image: url("../../img/dashboard/down-chevron.png");
+}
+
+.modal-backdrop {
+  opacity: 0 !important;
 }
