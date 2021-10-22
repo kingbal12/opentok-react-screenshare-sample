@@ -352,14 +352,7 @@ class ConsultingRoom extends React.Component {
   };
 
   pushGoHome = () => {
-    this.props.saveCookieConsult(
-      this.state.cc,
-      this.state.diagnosis,
-      this.state.txrx,
-      this.state.recommendation,
-      this.state.paytotal,
-      this.state.paypatient
-    );
+    this.props.saveCookieConsult("", "", "", "", "", "");
     history.push("/analyticsDashboard");
   };
 
