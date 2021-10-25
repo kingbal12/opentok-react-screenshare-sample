@@ -959,3 +959,21 @@ export const getPharmacy = (patientid) => {
       .catch((err) => console.log(err));
   };
 };
+
+export const pushCloseSignal = (userid, appointnum, state) => {
+  return (dispatch) => {
+    axios
+      .put(
+        "https://health.iot4health.co.kr:9300/v1/doctor/treatment/involve-state",
+        {
+          user_id: userid,
+          appoint_num: appointnum,
+          state_doc: state,
+        }
+      )
+      .then((response) => {
+        console.log("화상진료상태", response);
+      })
+      .catch((err) => console.log(err));
+  };
+};

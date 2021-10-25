@@ -1,5 +1,22 @@
 import React from "react";
 import {
+  FormGroup,
+  Button,
+  InputGroup,
+  Input,
+  CustomInput,
+  Card,
+  CardTitle,
+  CardBody,
+  Row,
+  Col,
+  Table,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from "reactstrap";
+import {
   OTSession,
   OTStreams,
   preloadScript,
@@ -12,6 +29,9 @@ import mic from "../../../../assets/img/call/ID25_14_btn_op_mic.png";
 import video_off from "../../../../assets/img/call/ID25_14_btn_op_video_off.png";
 import mic_off from "../../../../assets/img/call/ID25_14_btn_op_mic_off.png";
 import call from "../../../../assets/img/call/ID25_14_btn_op_end-call.png";
+import Axios from "axios";
+import { connect } from "react-redux";
+import { history } from "../../../../history";
 
 class ConsultingRoom extends React.Component {
   constructor(props) {
@@ -25,16 +45,78 @@ class ConsultingRoom extends React.Component {
       disconnect: false,
       onsubscribe: false,
       connectedtag: true,
+      conncheckmodal: false,
+      okmodal: false,
     };
-    this.sessionEvents = {
-      sessionConnected: () => {
-        this.setState({ connected: true });
+
+    this.connectionCheck = this.connectionCheck.bind(this);
+    this.sessionEventHandlers = {
+      connectionCreated: (event) => {
+        console.log("connection created", event);
       },
-      sessionDisconnected: () => {
-        this.setState({ connected: false });
+      connectionDestroyed: (event) => {
+        console.log("connection destroyed", event);
+        this.connectionCheck();
+      },
+      sessionConnected: (event) => {
+        console.log("Client connect to a session");
+      },
+      sessionDisconnected: (event) => {
+        console.log("Client disConnect to a session");
+      },
+      sessionReconnected: (event) => {
+        console.log("session reconnected");
+      },
+    };
+
+    this.publishEvents = {
+      publishConnected: () => {
+        this.setState({ pconnected: true });
+      },
+      publishDisconnected: () => {
+        this.setState({ pconnected: false });
       },
     };
   }
+
+  connCheckModal = () => {
+    this.setState((prevState) => ({
+      conncheckmodal: !prevState.conncheckmodal,
+    }));
+  };
+
+  okModal = () => {
+    this.setState((prevState) => ({
+      okmodal: !prevState.okmodal,
+    }));
+  };
+
+  goPatientInfo = () => {
+    history.push("/patientinfo");
+  };
+
+  connectionCheck = () => {
+    Axios.get(
+      "https://health.iot4health.co.kr:9300/v1/doctor/treatment/involve-state",
+      {
+        params: {
+          user_id: this.props.user.login.values.loggedInUser.username,
+          appoint_num: this.props.appo.APPOINT_NUM,
+        },
+      }
+    )
+      .then((response) => {
+        if (
+          response.data.data.STATE_PAT === "" ||
+          response.data.data.STATE_PAT === "1"
+        ) {
+          this.connCheckModal();
+        } else {
+          this.okModal();
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
   cameraState = () => {
     this.setState((prevState) => ({
@@ -47,6 +129,7 @@ class ConsultingRoom extends React.Component {
       micstate: !prevState.micstate,
     }));
   };
+
   onError = (err) => {
     this.setState({ error: `Failed to connect: ${err.message}` });
   };
@@ -70,23 +153,29 @@ class ConsultingRoom extends React.Component {
     this.childFunction();
   };
 
+  subscribeCheck = () => {
+    this.setState((prevState) => ({
+      sconnected: !prevState.sconnected,
+    }));
+  };
+
   childText = "childText";
 
-  // onError2 = (err) => {
-  //   this.setState({ error: `Failed to publish: ${err.message}` });
-  //   alert(
-  //     "인터넷 상태로 인해 화면공유에 오류가 발생하였습니다\n화면공유를 다시 시도해 주십시오"
-  //   );
-  //   window.location.reload();
-  // };
+  onError2 = (err) => {
+    this.setState({ error: `Failed to publish: ${err.message}` });
+    alert(
+      "인터넷 상태로 인해 화면공유에 오류가 발생하였습니다\n화면공유를 다시 시도해 주십시오"
+    );
+    window.location.reload();
+  };
 
-  // onError = (err) => {
-  //   this.setState({ error: `Failed to publish: ${err.message}` });
-  //   alert(
-  //     "기기설정에 문제가 발생하였습니다.\n기기설정을 다시 시도해 주시거나 카메라,마이크를 사용하시던 프로그램을 종료해주십시오"
-  //   );
-  //   window.location.reload();
-  // };
+  onError = (err) => {
+    this.setState({ error: `Failed to publish: ${err.message}` });
+    alert(
+      "기기설정에 문제가 발생하였습니다.\n기기설정을 다시 시도해 주시거나 카메라,마이크를 사용하시던 프로그램을 종료해주십시오"
+    );
+    window.location.reload();
+  };
 
   render() {
     return (
@@ -96,7 +185,7 @@ class ConsultingRoom extends React.Component {
         sessionId={this.props.session}
         token={this.props.token}
         onError={this.onError}
-        eventHandlers={this.sessionEvents}
+        eventHandlers={this.sessionEventHandlers}
       >
         {this.state.error ? <div id="error">{this.state.error}</div> : null}
         {/* {this.connectedtag=== true? */}
@@ -166,6 +255,35 @@ class ConsultingRoom extends React.Component {
           />
           {/* <button onClick={this.check}>확인용</button> */}
         </div>
+        <Modal isOpen={this.state.conncheckmodal} toggle={this.connCheckModal}>
+          <ModalHeader toggle={this.connCheckModal}>
+            <b>비정상 진료 종료</b>
+          </ModalHeader>
+          <ModalBody>
+            화상통화가 비정상 종료 되었습니다.
+            <br />재 입장 할 때까지 대기 하시겠습니까?
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this.connCheckModal}>
+              대기하기
+            </Button>
+            <Button color="primary" outline onClick={this.goPatientInfo}>
+              전화끊기
+            </Button>
+          </ModalFooter>
+        </Modal>
+
+        <Modal isOpen={this.state.okmodal} toggle={this.okModal}>
+          <ModalHeader toggle={this.okModal}>
+            <b>정상 진료 종료</b>
+          </ModalHeader>
+          <ModalBody>화상통화가 종료되었습니다.</ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this.okModal}>
+              확인
+            </Button>
+          </ModalFooter>
+        </Modal>
       </OTSession>
     );
   }
@@ -187,4 +305,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default preloadScript(ConsultingRoom);
+export default preloadScript(connect(mapStateToProps)(ConsultingRoom));

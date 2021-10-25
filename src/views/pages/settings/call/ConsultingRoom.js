@@ -33,6 +33,7 @@ import {
   postPrescriptionData,
   postPayData,
   putStateComplete,
+  pushCloseSignal,
 } from "../../../../redux/actions/data-list/";
 import { saveCookieConsult } from "../../../../redux/actions/cookies/";
 import { Check } from "react-feather";
@@ -353,6 +354,11 @@ class ConsultingRoom extends React.Component {
 
   pushGoHome = () => {
     this.props.saveCookieConsult("", "", "", "", "", "");
+    this.props.pushCloseSignal(
+      this.props.user.login.values.loggedInUser.username,
+      this.props.appo.APPOINT_NUM,
+      "2"
+    );
     history.push("/analyticsDashboard");
   };
 
@@ -1805,4 +1811,5 @@ export default connect(mapStateToProps, {
   postPayData,
   putStateComplete,
   saveCookieConsult,
+  pushCloseSignal,
 })(ConsultingRoom);

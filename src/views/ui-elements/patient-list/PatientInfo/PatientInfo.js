@@ -26,6 +26,7 @@ import {
   resetVitalData,
   goPCL,
   getPharmacy,
+  pushCloseSignal,
 } from "../../../../redux/actions/data-list/";
 import { history } from "../../../../history";
 import "../../../../assets/scss/pages/authentication.scss";
@@ -147,6 +148,11 @@ class PatientInfo extends React.Component {
         this.props.appo.APPOINT_NUM
       );
       this.props.getPharmacy(this.props.pinfo.PATIENT_ID);
+      this.props.pushCloseSignal(
+        this.props.user.login.values.loggedInUser.username,
+        this.props.appo.APPOINT_NUM,
+        "1"
+      );
     } else {
       alert("진료실은 5분 전부터 입장 가능합니다.");
     }
@@ -1092,4 +1098,5 @@ export default connect(mapStateToProps, {
   resetVitalData,
   gettokbox,
   getPharmacy,
+  pushCloseSignal,
 })(PatientInfo);
