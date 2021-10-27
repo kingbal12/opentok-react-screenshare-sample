@@ -168,6 +168,7 @@ class PatientInfo extends React.Component {
       history.push("/pages/phoneconsulting");
     } else {
       alert("진료실에 입장합니다.\n전화진료 시각을 참고해 주시기 바랍니다.");
+      this.props.getPharmacy(this.props.pinfo.PATIENT_ID);
       history.push("/pages/phoneconsulting");
     }
   };
