@@ -36,6 +36,14 @@ const localFormDate = (scheduleda) => {
   return localscheduledate;
 };
 
+const localVitalFormDate = (scheduleda) => {
+  console.log("utc", scheduleda);
+  let localscheduledate = moment.utc(scheduleda).toDate();
+  localscheduledate = moment(localscheduledate).format("YYYY-MM-DD HH:mm");
+  console.log("locale:", localscheduledate);
+  return localscheduledate;
+};
+
 export const gettokbox = (userid, appointnum) => {
   return (dispatch) => {
     axios
@@ -414,6 +422,9 @@ export const getVitalData = (patientid) => {
             let bsobj = new Object();
 
             bsobj = response.data.data.GLUCOSE_LIST[i];
+            bsobj.CREATE_TIME = localVitalFormDate(
+              response.data.data.GLUCOSE_LIST[i].CREATE_TIME
+            );
 
             bsobj = JSON.stringify(bsobj);
             //String 형태로 파싱한 객체를 다시 json으로 변환
@@ -427,8 +438,12 @@ export const getVitalData = (patientid) => {
             let jsonObj = new Object();
 
             bpobj = response.data.data.PRESSURE_LIST[i];
+            bpobj.CREATE_TIME = localVitalFormDate(
+              response.data.data.PRESSURE_LIST[i].CREATE_TIME
+            );
             jsonObj.CREATE_TIME =
               response.data.data.PRESSURE_LIST[i].CREATE_TIME;
+
             jsonObj.PULSE_VAL = response.data.data.PRESSURE_LIST[i].PULSE_VAL;
 
             bpobj = JSON.stringify(bpobj);
@@ -447,8 +462,12 @@ export const getVitalData = (patientid) => {
             let spo2obj = new Object();
 
             spo2obj = response.data.data.SPO2_LIST[i];
+            spo2obj.CREATE_TIME = localVitalFormDate(
+              response.data.data.SPO2_LIST[i].CREATE_TIME
+            );
 
             spo2obj = JSON.stringify(spo2obj);
+
             //String 형태로 파싱한 객체를 다시 json으로 변환
             if (spo2obj !== undefined) {
               spo2.push(JSON.parse(spo2obj));
@@ -459,6 +478,9 @@ export const getVitalData = (patientid) => {
             let tempobj = new Object();
 
             tempobj = response.data.data.TEMP_LIST[i];
+            tempobj.CREATE_TIME = localVitalFormDate(
+              response.data.data.TEMP_LIST[i].CREATE_TIME
+            );
 
             tempobj = JSON.stringify(tempobj);
             //String 형태로 파싱한 객체를 다시 json으로 변환
@@ -467,10 +489,13 @@ export const getVitalData = (patientid) => {
             }
           }
 
-          for (let i = 0; i < tforLimit; i++) {
+          for (let i = 0; i < wforLimit; i++) {
             let weobj = new Object();
 
             weobj = response.data.data.WEIGHT_LIST[i];
+            weobj.CREATE_TIME = localVitalFormDate(
+              response.data.data.WEIGHT_LIST[i].CREATE_TIME
+            );
 
             weobj = JSON.stringify(weobj);
 
@@ -534,24 +559,113 @@ export const getVitalDataAll = (patientid, startdate) => {
       .then((response) => {
         if (response.data.status === "200") {
           console.log("단위데이터", response.data.data);
-          let pulselength = response.data.data.PRESSURE_LIST.length;
-          let bp = response.data.data.PRESSURE_LIST;
+          let bp = new Array();
           let pulse = new Array();
-          for (let i = 0; i < pulselength; i++) {
-            let jsonObj = new Object();
-            jsonObj.CREATE_TIME =
-              response.data.data.PRESSURE_LIST[i].CREATE_TIME;
-            jsonObj.PULSE_VAL = response.data.data.PRESSURE_LIST[i].PULSE_VAL;
+          let temp = new Array();
+          let bs = new Array();
+          let we = new Array();
+          let spo2 = new Array();
+          let gforLimit = 100;
+          let forLimit = 100;
+          let sforLimit = 100;
+          let tforLimit = 100;
+          let wforLimit = 100;
+          if (response.data.data.GLUCOSE_LIST.length < gforLimit)
+            gforLimit = response.data.data.GLUCOSE_LIST.length;
+          if (response.data.data.PRESSURE_LIST.length < forLimit)
+            forLimit = response.data.data.PRESSURE_LIST.length;
+          if (response.data.data.SPO2_LIST.length < sforLimit)
+            sforLimit = response.data.data.SPO2_LIST.length;
+          if (response.data.data.TEMP_LIST.length < tforLimit)
+            tforLimit = response.data.data.TEMP_LIST.length;
+          if (response.data.data.WEIGHT_LIST.length < wforLimit)
+            wforLimit = response.data.data.WEIGHT_LIST.length;
 
-            jsonObj = JSON.stringify(jsonObj);
+          for (let i = 0; i < gforLimit; i++) {
+            let bsobj = new Object();
+
+            bsobj = response.data.data.GLUCOSE_LIST[i];
+            bsobj.CREATE_TIME = localVitalFormDate(
+              response.data.data.GLUCOSE_LIST[i].CREATE_TIME
+            );
+
+            bsobj = JSON.stringify(bsobj);
             //String 형태로 파싱한 객체를 다시 json으로 변환
-            pulse.push(JSON.parse(jsonObj));
+            if (bsobj !== undefined) {
+              bs.push(JSON.parse(bsobj));
+            }
           }
 
-          let temp = response.data.data.TEMP_LIST;
-          let bs = response.data.data.GLUCOSE_LIST;
-          let we = response.data.data.WEIGHT_LIST;
-          let spo2 = response.data.data.SPO2_LIST;
+          for (let i = 0; i < forLimit; i++) {
+            let bpobj = new Object();
+            let jsonObj = new Object();
+
+            bpobj = response.data.data.PRESSURE_LIST[i];
+            bpobj.CREATE_TIME = localVitalFormDate(
+              response.data.data.PRESSURE_LIST[i].CREATE_TIME
+            );
+            jsonObj.CREATE_TIME =
+              response.data.data.PRESSURE_LIST[i].CREATE_TIME;
+
+            jsonObj.PULSE_VAL = response.data.data.PRESSURE_LIST[i].PULSE_VAL;
+
+            bpobj = JSON.stringify(bpobj);
+            jsonObj = JSON.stringify(jsonObj);
+
+            //String 형태로 파싱한 객체를 다시 json으로 변환
+            if (bpobj !== undefined) {
+              bp.push(JSON.parse(bpobj));
+            }
+            if (jsonObj !== undefined) {
+              pulse.push(JSON.parse(jsonObj));
+            }
+          }
+
+          for (let i = 0; i < sforLimit; i++) {
+            let spo2obj = new Object();
+
+            spo2obj = response.data.data.SPO2_LIST[i];
+            spo2obj.CREATE_TIME = localVitalFormDate(
+              response.data.data.SPO2_LIST[i].CREATE_TIME
+            );
+
+            spo2obj = JSON.stringify(spo2obj);
+
+            //String 형태로 파싱한 객체를 다시 json으로 변환
+            if (spo2obj !== undefined) {
+              spo2.push(JSON.parse(spo2obj));
+            }
+          }
+
+          for (let i = 0; i < tforLimit; i++) {
+            let tempobj = new Object();
+
+            tempobj = response.data.data.TEMP_LIST[i];
+            tempobj.CREATE_TIME = localVitalFormDate(
+              response.data.data.TEMP_LIST[i].CREATE_TIME
+            );
+
+            tempobj = JSON.stringify(tempobj);
+            //String 형태로 파싱한 객체를 다시 json으로 변환
+            if (tempobj !== undefined) {
+              temp.push(JSON.parse(tempobj));
+            }
+          }
+
+          for (let i = 0; i < wforLimit; i++) {
+            let weobj = new Object();
+
+            weobj = response.data.data.WEIGHT_LIST[i];
+            weobj.CREATE_TIME = localVitalFormDate(
+              response.data.data.WEIGHT_LIST[i].CREATE_TIME
+            );
+
+            weobj = JSON.stringify(weobj);
+
+            if (weobj !== undefined) {
+              we.push(JSON.parse(weobj));
+            }
+          }
 
           dispatch({
             type: "GET_VITAL_DATA_ALL",
@@ -585,24 +699,113 @@ export const serachVitalData = (patientid, startdate, enddate) => {
       .then((response) => {
         if (response.data.status === "200") {
           console.log("단위데이터", response);
-          let pulselength = response.data.data.PRESSURE_LIST.length;
-          let bp = response.data.data.PRESSURE_LIST;
+          let bp = new Array();
           let pulse = new Array();
-          for (let i = 0; i < pulselength; i++) {
-            let jsonObj = new Object();
-            jsonObj.CREATE_TIME =
-              response.data.data.PRESSURE_LIST[i].CREATE_TIME;
-            jsonObj.PULSE_VAL = response.data.data.PRESSURE_LIST[i].PULSE_VAL;
+          let temp = new Array();
+          let bs = new Array();
+          let we = new Array();
+          let spo2 = new Array();
+          let gforLimit = 100;
+          let forLimit = 100;
+          let sforLimit = 100;
+          let tforLimit = 100;
+          let wforLimit = 100;
+          if (response.data.data.GLUCOSE_LIST.length < gforLimit)
+            gforLimit = response.data.data.GLUCOSE_LIST.length;
+          if (response.data.data.PRESSURE_LIST.length < forLimit)
+            forLimit = response.data.data.PRESSURE_LIST.length;
+          if (response.data.data.SPO2_LIST.length < sforLimit)
+            sforLimit = response.data.data.SPO2_LIST.length;
+          if (response.data.data.TEMP_LIST.length < tforLimit)
+            tforLimit = response.data.data.TEMP_LIST.length;
+          if (response.data.data.WEIGHT_LIST.length < wforLimit)
+            wforLimit = response.data.data.WEIGHT_LIST.length;
 
-            jsonObj = JSON.stringify(jsonObj);
+          for (let i = 0; i < gforLimit; i++) {
+            let bsobj = new Object();
+
+            bsobj = response.data.data.GLUCOSE_LIST[i];
+            bsobj.CREATE_TIME = localVitalFormDate(
+              response.data.data.GLUCOSE_LIST[i].CREATE_TIME
+            );
+
+            bsobj = JSON.stringify(bsobj);
             //String 형태로 파싱한 객체를 다시 json으로 변환
-            pulse.push(JSON.parse(jsonObj));
+            if (bsobj !== undefined) {
+              bs.push(JSON.parse(bsobj));
+            }
           }
 
-          let temp = response.data.data.TEMP_LIST;
-          let bs = response.data.data.GLUCOSE_LIST;
-          let we = response.data.data.WEIGHT_LIST;
-          let spo2 = response.data.data.SPO2_LIST;
+          for (let i = 0; i < forLimit; i++) {
+            let bpobj = new Object();
+            let jsonObj = new Object();
+
+            bpobj = response.data.data.PRESSURE_LIST[i];
+            bpobj.CREATE_TIME = localVitalFormDate(
+              response.data.data.PRESSURE_LIST[i].CREATE_TIME
+            );
+            jsonObj.CREATE_TIME =
+              response.data.data.PRESSURE_LIST[i].CREATE_TIME;
+
+            jsonObj.PULSE_VAL = response.data.data.PRESSURE_LIST[i].PULSE_VAL;
+
+            bpobj = JSON.stringify(bpobj);
+            jsonObj = JSON.stringify(jsonObj);
+
+            //String 형태로 파싱한 객체를 다시 json으로 변환
+            if (bpobj !== undefined) {
+              bp.push(JSON.parse(bpobj));
+            }
+            if (jsonObj !== undefined) {
+              pulse.push(JSON.parse(jsonObj));
+            }
+          }
+
+          for (let i = 0; i < sforLimit; i++) {
+            let spo2obj = new Object();
+
+            spo2obj = response.data.data.SPO2_LIST[i];
+            spo2obj.CREATE_TIME = localVitalFormDate(
+              response.data.data.SPO2_LIST[i].CREATE_TIME
+            );
+
+            spo2obj = JSON.stringify(spo2obj);
+
+            //String 형태로 파싱한 객체를 다시 json으로 변환
+            if (spo2obj !== undefined) {
+              spo2.push(JSON.parse(spo2obj));
+            }
+          }
+
+          for (let i = 0; i < tforLimit; i++) {
+            let tempobj = new Object();
+
+            tempobj = response.data.data.TEMP_LIST[i];
+            tempobj.CREATE_TIME = localVitalFormDate(
+              response.data.data.TEMP_LIST[i].CREATE_TIME
+            );
+
+            tempobj = JSON.stringify(tempobj);
+            //String 형태로 파싱한 객체를 다시 json으로 변환
+            if (tempobj !== undefined) {
+              temp.push(JSON.parse(tempobj));
+            }
+          }
+
+          for (let i = 0; i < wforLimit; i++) {
+            let weobj = new Object();
+
+            weobj = response.data.data.WEIGHT_LIST[i];
+            weobj.CREATE_TIME = localVitalFormDate(
+              response.data.data.WEIGHT_LIST[i].CREATE_TIME
+            );
+
+            weobj = JSON.stringify(weobj);
+
+            if (weobj !== undefined) {
+              we.push(JSON.parse(weobj));
+            }
+          }
 
           dispatch({
             type: "SEARCH_VITAL_DATA",

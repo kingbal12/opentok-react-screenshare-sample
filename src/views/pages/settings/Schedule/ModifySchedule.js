@@ -33,7 +33,7 @@ import {
 } from "../../../../redux/actions/calendar/index";
 import { ChevronLeft, ChevronRight } from "react-feather";
 
-// import "react-big-calendar/lib/addons/dragAndDrop/styles.scss";
+import "react-big-calendar/lib/addons/dragAndDrop/styles.scss";
 import Radio from "../../../../components/@vuexy/radio/RadioVuexy";
 import { FormattedMessage } from "react-intl";
 
