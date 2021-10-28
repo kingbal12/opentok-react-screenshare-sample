@@ -311,7 +311,7 @@ class PatientInfo extends React.Component {
   );
   Completephone = () => (
     <span>
-      <h5 className="text-primary" style={{ paddingTop: "0.2rem" }}>
+      <h5 className="text-primary" style={{ marginTop: "1px" }}>
         <FormattedMessage id="진료시간종료" />
       </h5>
     </span>
@@ -825,7 +825,7 @@ class PatientInfo extends React.Component {
                 border: "1px solid #B8B8C2",
                 borderRadius: "5px",
                 height: "35px",
-                maxWidth: "300px",
+                maxWidth: "500px",
                 marginTop: "0.6rem",
               }}
             >

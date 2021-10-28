@@ -1,14 +1,21 @@
-import React from "react"
-import "react-big-calendar/lib/css/react-big-calendar.css"
-import "../../../../../assets/scss/plugins/calendars/react-big-calendar.scss"
-import { Card, CardBody, Button, ButtonGroup, Modal, FormGroup,
+import React from "react";
+import "../../../../../assets/scss/plugins/mdfschedule/react-big-calendar.css";
+import "../../../../../assets/scss/plugins/mdfschedule/react-big-calendar.scss";
+import {
+  Card,
+  CardBody,
+  Button,
+  ButtonGroup,
+  Modal,
+  FormGroup,
   ModalHeader,
   ModalBody,
-  ModalFooter, } from "reactstrap"
-import { Calendar, momentLocalizer } from "react-big-calendar"
-import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop"
-import moment from "moment"
-import { connect } from "react-redux"
+  ModalFooter,
+} from "reactstrap";
+import { Calendar, momentLocalizer } from "react-big-calendar";
+import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
+import moment from "moment";
+import { connect } from "react-redux";
 import {
   clearSchedule,
   handleSidebar,
@@ -18,26 +25,25 @@ import {
   updateDrag,
   updateResize,
   postSchedules,
-  deleteSchedule
-} from "../../../../../redux/actions/calendar/index"
-import { ChevronLeft, ChevronRight } from "react-feather"
+  deleteSchedule,
+} from "../../../../../redux/actions/calendar/index";
+import { ChevronLeft, ChevronRight } from "react-feather";
 
 // import "react-big-calendar/lib/addons/dragAndDrop/styles.scss"
 // import { history } from "../../../../../history"
-import Radio from "../../../../../components/@vuexy/radio/RadioVuexy"
-import { cookieSchedules } from "../../../../../redux/actions/cookies"
-import HicareLogo from "../../../../../assets/img/logo/logo1.png"
-import { FormattedMessage } from "react-intl"
+import Radio from "../../../../../components/@vuexy/radio/RadioVuexy";
+import { cookieSchedules } from "../../../../../redux/actions/cookies";
+import HicareLogo from "../../../../../assets/img/logo/logo1.png";
+import { FormattedMessage } from "react-intl";
 
-
-const DragAndDropCalendar = withDragAndDrop(Calendar)
-const localizer = momentLocalizer(moment)
+const DragAndDropCalendar = withDragAndDrop(Calendar);
+const localizer = momentLocalizer(moment);
 const eventColors = {
   business: "bg-success",
   work: "bg-warning",
   personal: "bg-danger",
-  others: "bg-primary"
-}
+  others: "bg-primary",
+};
 
 class Toolbar extends React.Component {
   render() {
@@ -64,22 +70,19 @@ class Toolbar extends React.Component {
             <div className="month d-inline-block mx-75 text-bold-500 font-medium-2 align-middle">
               {this.props.label}
             </div>
-           
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
 class CalendarApp extends React.Component {
   schedulemodal = () => {
-    this.setState(prevState => ({
-      modal: !prevState.modal
-    }))
-  }
-
-  
+    this.setState((prevState) => ({
+      modal: !prevState.modal,
+    }));
+  };
 
   static getDerivedStateFromProps(props, state) {
     if (
@@ -87,32 +90,30 @@ class CalendarApp extends React.Component {
       props.app.sidebar !== state.sidebar ||
       props.app.selectedEvent !== state.eventInfo
     ) {
-      let dateToObj = props.app.events.map(event => {
-
-
+      let dateToObj = props.app.events.map((event) => {
         // 여기서 날짜 포맷이 다시 바뀌는중
-        event.start = new Date(event.start)
-        event.end = new Date(event.end)
-        
-        return event
-      })
+        event.start = new Date(event.start);
+        event.end = new Date(event.end);
+
+        return event;
+      });
       return {
         events: dateToObj,
         sidebar: props.app.sidebar,
-        eventInfo: props.app.selectedEvent
-      }
+        eventInfo: props.app.selectedEvent,
+      };
     }
     // Return null if the state hasn't changed
-    return null
+    return null;
   }
   constructor(props) {
-    let cookie 
-    if(props.cookiesche.events===undefined) {
-      cookie = props.cookiesche
+    let cookie;
+    if (props.cookiesche.events === undefined) {
+      cookie = props.cookiesche;
     } else {
-      cookie = props.cookiesche.events
+      cookie = props.cookiesche.events;
     }
-    super(props)
+    super(props);
     this.state = {
       // userid: props.user.register.values.registeruser,
       userid: "kjh@iot4health.co.kr",
@@ -121,7 +122,7 @@ class CalendarApp extends React.Component {
       views: {
         month: true,
         week: true,
-        day: true
+        day: true,
       },
       id: 1,
       // eventInfo: null,
@@ -134,73 +135,70 @@ class CalendarApp extends React.Component {
       auto: "true",
       rperiod: "1",
       holiday: "Y",
-      modal: false
-      
-    }
+      modal: false,
+    };
   }
 
-  clearschedule = e => {
-    e.preventDefault()
-    this.props.clearSchedule()
-  }
-  
-  handleRepeatPeriod = rperiod => {
+  clearschedule = (e) => {
+    e.preventDefault();
+    this.props.clearSchedule();
+  };
+
+  handleRepeatPeriod = (rperiod) => {
     this.setState({
-      rperiod
-    })
-  }
- 
+      rperiod,
+    });
+  };
 
-  handleEventColors = event => {
-    return { className: eventColors[event.label] }
-  }
+  handleEventColors = (event) => {
+    return { className: eventColors[event.label] };
+  };
 
   moveEvent = ({ event, start, end, isAllDay: droppedOnAllDaySlot }) => {
-    const { events } = this.state
-    const idx = events.indexOf(event)
-    let allDay = event.allDay
+    const { events } = this.state;
+    const idx = events.indexOf(event);
+    let allDay = event.allDay;
     if (!event.allDay && droppedOnAllDaySlot) {
-      allDay = true
+      allDay = true;
     } else if (event.allDay && !droppedOnAllDaySlot) {
-      allDay = false
+      allDay = false;
     }
-    const updatedEvent = { ...event, start, end, allDay }
-    const nextEvents = [...events]
-    nextEvents.splice(idx, 1, updatedEvent)
+    const updatedEvent = { ...event, start, end, allDay };
+    const nextEvents = [...events];
+    nextEvents.splice(idx, 1, updatedEvent);
     this.setState({
-      events: nextEvents
-    })
-    this.props.updateDrag(updatedEvent)
-  }
+      events: nextEvents,
+    });
+    this.props.updateDrag(updatedEvent);
+  };
 
   resizeEvent = ({ event, start, end }) => {
-    const { events } = this.state
-    const nextEvents = events.map(existingEvent => {
+    const { events } = this.state;
+    const nextEvents = events.map((existingEvent) => {
       return existingEvent.id === event.id
         ? { ...existingEvent, start, end }
-        : existingEvent
-    })
+        : existingEvent;
+    });
 
     this.setState({
-      events: nextEvents
-    })
+      events: nextEvents,
+    });
 
-    this.props.updateResize({ ...event, start, end })
-  }
+    this.props.updateResize({ ...event, start, end });
+  };
 
-  handleSelectEvent = event => {
-    let filteredState = this.state.events.filter(i => i.id === event.id)
+  handleSelectEvent = (event) => {
+    let filteredState = this.state.events.filter((i) => i.id === event.id);
     // this.props.handleSidebar(true)
-    this.props.handleSelectedEvent(filteredState[0])
+    this.props.handleSelectedEvent(filteredState[0]);
     this.setState({
-      eventInfo: filteredState[0]
-    })
-  }
+      eventInfo: filteredState[0],
+    });
+  };
 
-  handleAddEvent = id => {
-    this.setState({id: this.state.id+1})
-    this.props.addEvent(
-      {
+  handleAddEvent = (id) => {
+    this.setState({ id: this.state.id + 1 });
+    this.props.addEvent({
       id,
       // title: this.state.title,
       start: this.state.startDate,
@@ -208,90 +206,82 @@ class CalendarApp extends React.Component {
       // label: this.state.label === null ? "others" : this.state.label,
       // allDay: this.state.allDay,
       // selectable: this.state.selectable
-    })
+    });
+  };
 
-  }
+  saveSchedule = (e) => {
+    e.preventDefault();
+    this.props.cookieSchedules(this.state.events);
+    alert("스케줄 임시저장이 완료되었습니다.");
+  };
 
-  saveSchedule = e => {
-    e.preventDefault()
-    this.props.cookieSchedules(
-      this.state.events
-    )
-    alert("스케줄 임시저장이 완료되었습니다.")
-  }
+  check = (e) => {
+    e.preventDefault();
+    console.log(this.state);
+  };
 
-  check = e => {
-    e.preventDefault()
-    console.log(this.state)
-  }
-
-
-  postschedule = e => {
-    e.preventDefault()
+  postschedule = (e) => {
+    e.preventDefault();
     this.props.postSchedules(
       this.state.userid,
       this.state.holiday,
       this.state.rperiod,
-      this.state.events)
-      
-  }
+      this.state.events
+    );
+  };
 
   // 이벤트 개별 삭제 함수
   onSelectEvent(pEvent) {
-    const r = window.confirm("이 스케쥴을 삭제하시겠습니까?")
-    if(r === true){ 
-      this.setState((prevState, props) => {
-        const revents = [...prevState.events]
-        const idx = revents.indexOf(pEvent)
-        revents.splice(idx, 1);
-        this.state.events= revents
+    const r = window.confirm("이 스케쥴을 삭제하시겠습니까?");
+    if (r === true) {
+      this.setState(
+        (prevState, props) => {
+          const revents = [...prevState.events];
+          const idx = revents.indexOf(pEvent);
+          revents.splice(idx, 1);
+          this.state.events = revents;
         },
-      
-      ()=>this.props.deleteSchedule(this.state.events)
 
+        () => this.props.deleteSchedule(this.state.events)
       );
     }
   }
 
-
-  
-
-
   render() {
-    const { events, views, sidebar } = this.state
+    const { events, views, sidebar } = this.state;
     const today = new Date();
- 
+
     return (
       <div className="app-calendar position-relative">
         <div
           className={`app-content-overlay ${sidebar ? "show" : "hidden"}`}
           onClick={() => {
-            this.props.handleSidebar(false)
-            this.props.handleSelectedEvent(null)
+            this.props.handleSidebar(false);
+            this.props.handleSelectedEvent(null);
           }}
         ></div>
         <Card>
           <CardBody>
-            <DragAndDropCalendar style={{height:"600px", position:"relative"}}
+            <DragAndDropCalendar
+              style={{ height: "600px", position: "relative" }}
               // formats={dayFormat}
               min={
                 new Date(
-                  today.getFullYear(), 
-                  today.getMonth(), 
-                  today.getDate(), 
+                  today.getFullYear(),
+                  today.getMonth(),
+                  today.getDate(),
                   8
                 )
               }
-
               max={
                 new Date(
-                  today.getFullYear(), 
-                  today.getMonth(), 
-                  today.getDate(), 
+                  today.getFullYear(),
+                  today.getMonth(),
+                  today.getDate(),
                   20
                 )
               }
-              culture='kr'
+              culture="kr"
               localizer={localizer}
               events={events}
               onEventDrop={this.moveEvent}
@@ -299,7 +289,7 @@ class CalendarApp extends React.Component {
               startAccessor="start"
               endAccessor="end"
               resourceAccessor="url"
-              defaultView='week'
+              defaultView="week"
               views={views}
               // 15분 간격 설정(기존은 30분)
               step={15}
@@ -314,15 +304,14 @@ class CalendarApp extends React.Component {
                   // title: "테스트",
                   // label: null,
                   startDate: new Date(start),
-                  endDate: new Date(end)
+                  endDate: new Date(end),
                   // url: ""
-                })
-                this.handleAddEvent(this.state.id)
-                console.log("---------------------", this.state.startDate)
+                });
+                this.handleAddEvent(this.state.id);
+                console.log("---------------------", this.state.startDate);
               }}
-              
               selectable={true}
-              onSelectEvent = {event => this.onSelectEvent(event)}
+              onSelectEvent={(event) => this.onSelectEvent(event)}
             />
             <div className="pt-1 text-right">
               <Button
@@ -333,7 +322,7 @@ class CalendarApp extends React.Component {
                 size="lg"
                 onClick={this.saveSchedule}
               >
-                <FormattedMessage id="Drafts"/>
+                <FormattedMessage id="Drafts" />
               </Button>
               <Button
                 className="mr-2"
@@ -343,7 +332,7 @@ class CalendarApp extends React.Component {
                 size="lg"
                 onClick={this.clearschedule}
               >
-                <FormattedMessage id="Reset"/>
+                <FormattedMessage id="Reset" />
               </Button>
               <Button
                 color="primary"
@@ -351,7 +340,7 @@ class CalendarApp extends React.Component {
                 size="lg"
                 onClick={this.schedulemodal}
               >
-                <FormattedMessage id="Save"/>
+                <FormattedMessage id="Save" />
               </Button>
             </div>
             <Modal
@@ -359,101 +348,111 @@ class CalendarApp extends React.Component {
               toggle={this.toggleModal}
               className="modal-dialog-centered"
             >
-              <ModalHeader toggle={this.toggleModal}>
-                설정
-              </ModalHeader>
+              <ModalHeader toggle={this.toggleModal}>설정</ModalHeader>
               <ModalBody>
-                  <FormGroup>
-                    <div>1. 자동반복을 설정하시겠습니까?</div>
-                    <div id="auto" className="d-inline-block mr-1">
-                      <Radio 
-                        label="네" 
-                        defaultChecked={this.state.auto==="true"?true:false}  
-                        name="auto" 
-                        value="true"
-                        onChange={e => this.setState({ auto: e.target.value })}
-                      />
-                    </div>
-                    <div className="d-inline-block mr-1">
-                      <Radio
-                        label="아니오"
-                        defaultChecked={this.state.auto==="false"?true:false}
-                        name="auto"
-                        value="false"
-                        onChange={e => this.setState({ auto: e.target.value, rperiod: "1" })}
-                      />
-                    </div>
-                  </FormGroup>
-                  <FormGroup>
-                    {/* <Label for="repeat-period">2. 반복기간</Label> */}
-                    <div>2. 반복기간</div>
-                    <ButtonGroup 
-                      // id="repeat-period" 
-                      // size="sm"
+                <FormGroup>
+                  <div>1. 자동반복을 설정하시겠습니까?</div>
+                  <div id="auto" className="d-inline-block mr-1">
+                    <Radio
+                      label="네"
+                      defaultChecked={this.state.auto === "true" ? true : false}
+                      name="auto"
+                      value="true"
+                      onChange={(e) => this.setState({ auto: e.target.value })}
+                    />
+                  </div>
+                  <div className="d-inline-block mr-1">
+                    <Radio
+                      label="아니오"
+                      defaultChecked={
+                        this.state.auto === "false" ? true : false
+                      }
+                      name="auto"
+                      value="false"
+                      onChange={(e) =>
+                        this.setState({ auto: e.target.value, rperiod: "1" })
+                      }
+                    />
+                  </div>
+                </FormGroup>
+                <FormGroup>
+                  {/* <Label for="repeat-period">2. 반복기간</Label> */}
+                  <div>2. 반복기간</div>
+                  <ButtonGroup
+                  // id="repeat-period"
+                  // size="sm"
+                  >
+                    <button
+                      disabled={this.state.auto == "true" ? false : true}
+                      onClick={() => this.handleRepeatPeriod("4")}
+                      className={`btn ${
+                        this.state.rperiod === "4"
+                          ? "btn-primary"
+                          : "btn-outline-primary text-primary"
+                      }`}
                     >
-                      <button
-                        disabled={this.state.auto=="true"?false:true}
-                        onClick={() => this.handleRepeatPeriod("4")}
-                        className={`btn ${
-                          this.state.rperiod === "4"
-                            ? "btn-primary"
-                            : "btn-outline-primary text-primary"
-                        }`}
-                      >
-                        1개월
-                      </button>
+                      1개월
+                    </button>
 
-                      <button
-                        disabled={this.state.auto=="true"?false:true}
-                        onClick={() => this.handleRepeatPeriod("8")}
-                        className={`btn ${
-                          this.state.rperiod === "8"
-                            ? "btn-primary"
-                            : "btn-outline-primary text-primary"
-                        }`}
-                      >
-                        2개월
-                      </button>
-                      
-                      <button
-                        disabled={this.state.auto=="true"?false:true}
-                        onClick={() => this.handleRepeatPeriod("12")}
-                        className={`btn ${
-                          this.state.rperiod === "12"
-                            ? "btn-primary"
-                            : "btn-outline-primary text-primary"
-                        }`}
-                      >
-                        3개월
-                      </button>
-                    </ButtonGroup>
-                  </FormGroup>
-                  <FormGroup>
-                    <div>3. 공휴일을 제외하시겠습니까?</div>
-                    <div id="holiday" className="d-inline-block mr-1">
-                      <Radio label="네" 
-                        defaultChecked={this.state.holiday==="Y"?true:false}  
-                        name="holiday" 
-                        value="Y"
-                        onChange={e => this.setState({ holiday: e.target.value })}
-                      />
-                    </div>
-                    <div className="d-inline-block mr-1">
-                      <Radio
-                        label="아니오"
-                        defaultChecked={this.state.holiday==="N"?true:false}
-                        name="holiday"
-                        value="N"
-                        onChange={e => this.setState({ holiday: e.target.value })}
-                      />
-                    </div>
-                  </FormGroup>
+                    <button
+                      disabled={this.state.auto == "true" ? false : true}
+                      onClick={() => this.handleRepeatPeriod("8")}
+                      className={`btn ${
+                        this.state.rperiod === "8"
+                          ? "btn-primary"
+                          : "btn-outline-primary text-primary"
+                      }`}
+                    >
+                      2개월
+                    </button>
+
+                    <button
+                      disabled={this.state.auto == "true" ? false : true}
+                      onClick={() => this.handleRepeatPeriod("12")}
+                      className={`btn ${
+                        this.state.rperiod === "12"
+                          ? "btn-primary"
+                          : "btn-outline-primary text-primary"
+                      }`}
+                    >
+                      3개월
+                    </button>
+                  </ButtonGroup>
+                </FormGroup>
+                <FormGroup>
+                  <div>3. 공휴일을 제외하시겠습니까?</div>
+                  <div id="holiday" className="d-inline-block mr-1">
+                    <Radio
+                      label="네"
+                      defaultChecked={this.state.holiday === "Y" ? true : false}
+                      name="holiday"
+                      value="Y"
+                      onChange={(e) =>
+                        this.setState({ holiday: e.target.value })
+                      }
+                    />
+                  </div>
+                  <div className="d-inline-block mr-1">
+                    <Radio
+                      label="아니오"
+                      defaultChecked={this.state.holiday === "N" ? true : false}
+                      name="holiday"
+                      value="N"
+                      onChange={(e) =>
+                        this.setState({ holiday: e.target.value })
+                      }
+                    />
+                  </div>
+                </FormGroup>
               </ModalBody>
               <ModalFooter>
                 <Button color="primary" outline onClick={this.schedulemodal}>
                   취소
                 </Button>
-                <Button color="primary" onClick={this.schedulemodal, this.postschedule}>
+                <Button
+                  color="primary"
+                  onClick={(this.schedulemodal, this.postschedule)}
+                >
                   저장
                 </Button>
               </ModalFooter>
@@ -471,17 +470,17 @@ class CalendarApp extends React.Component {
           resizable
         /> */}
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     user: state.auth,
     app: state.calendar,
-    cookiesche: state.cookies.events
-  }
-}
+    cookiesche: state.cookies.events,
+  };
+};
 
 export default connect(mapStateToProps, {
   clearSchedule,
@@ -493,5 +492,5 @@ export default connect(mapStateToProps, {
   updateResize,
   postSchedules,
   cookieSchedules,
-  deleteSchedule
-})(CalendarApp)
+  deleteSchedule,
+})(CalendarApp);

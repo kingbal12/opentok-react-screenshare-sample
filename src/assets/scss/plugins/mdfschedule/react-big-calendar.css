@@ -1,8 +1,4 @@
 @charset "UTF-8";
-
-.rbc-allday-cell {
-  display: none;
-}
 .rbc-btn {
   color: inherit;
   font: inherit;
@@ -224,7 +220,7 @@ button.rbc-input::-moz-focus-inner {
 }
 
 .rbc-event-label {
-  display: none;
+  font-size: 80%;
 }
 
 .rbc-event-overlaps {
@@ -425,7 +421,7 @@ button.rbc-input::-moz-focus-inner {
 
 .rbc-timeslot-group {
   border-bottom: 1px solid #ddd;
-  min-height: 94px;
+  min-height: 40px;
   display: flex;
   flex-flow: column nowrap;
 }
@@ -447,11 +443,11 @@ button.rbc-input::-moz-focus-inner {
   left: 0;
   position: absolute;
   right: 0;
-  margin-right: 10px;
+  /* margin-right: 10px; */
   top: 0;
 }
 .rbc-day-slot .rbc-events-container.rbc-rtl {
-  left: 10px;
+  /* left: 10px; */
   right: 0;
 }
 .rbc-day-slot .rbc-event {
@@ -521,7 +517,6 @@ button.rbc-input::-moz-focus-inner {
 }
 
 .rbc-time-slot {
-  min-height: 1.1rem;
   flex: 1 0 0;
 }
 .rbc-time-slot.rbc-now {

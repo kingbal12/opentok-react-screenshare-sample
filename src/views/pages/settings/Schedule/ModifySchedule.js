@@ -1,6 +1,6 @@
 import React from "react";
-import "react-big-calendar/lib/css/react-big-calendar.css";
-// import "../../../../assets/scss/plugins/calendars/react-big-calendar.scss";
+import "../../../../assets/scss/plugins/mdfschedule/react-big-calendar.css";
+import "../../../../assets/scss/plugins/mdfschedule/react-big-calendar.scss";
 import AddEventSidebar from "./AddEventSidebar";
 import {
   Card,
@@ -32,8 +32,6 @@ import {
   deleteSchedule,
 } from "../../../../redux/actions/calendar/index";
 import { ChevronLeft, ChevronRight } from "react-feather";
-
-import "react-big-calendar/lib/addons/dragAndDrop/styles.scss";
 import Radio from "../../../../components/@vuexy/radio/RadioVuexy";
 import { FormattedMessage } from "react-intl";
 
