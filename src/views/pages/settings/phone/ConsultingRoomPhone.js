@@ -330,7 +330,7 @@ class PatientInfo extends React.Component {
               width="70px"
               height="70px"
               src={
-                "https://health.iot4health.co.kr:9300" +
+                "https://teledoc.hicare.net:446" +
                 this.props.appo.FILE_PATH +
                 this.props.appo.FILE_NAME
               }
@@ -404,7 +404,7 @@ class PatientInfo extends React.Component {
                 <img
                   maxwidth="500px"
                   src={
-                    "https://health.iot4health.co.kr:9300" +
+                    "https://teledoc.hicare.net:446" +
                     this.props.appo.FILE_PATH +
                     this.props.appo.FILE_NAME
                   }

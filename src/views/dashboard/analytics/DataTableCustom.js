@@ -1,12 +1,8 @@
-import React from "react"
-import axios from "axios"
-import {
-  Card,
-  CardBody,
-  Badge
-} from "reactstrap"
-import DataTable from "react-data-table-component"
-import { Star, Search } from "react-feather"
+import React from "react";
+import axios from "axios";
+import { Card, CardBody, Badge } from "reactstrap";
+import DataTable from "react-data-table-component";
+import { Star, Search } from "react-feather";
 import {
   Edit,
   Link,
@@ -17,11 +13,11 @@ import {
   Plus,
   Check,
   ChevronLeft,
-  ChevronRight
-} from "react-feather"
-import { connect } from "react-redux"
+  ChevronRight,
+} from "react-feather";
+import { connect } from "react-redux";
 
-const ActionsComponent = props => {
+const ActionsComponent = (props) => {
   return (
     <div className="data-list-action">
       <Edit
@@ -39,58 +35,56 @@ const ActionsComponent = props => {
         }}
       /> */}
     </div>
-  )
-}
+  );
+};
 
 class DataTableCustom extends React.Component {
   componentDidMount() {
     axios
-      .get("https://health.iot4health.co.kr:9300/v1/doctor/appointment/dashboard", {
+      .get("https://teledoc.hicare.net:446/v1/doctor/appointment/dashboard", {
         params: {
           user_id: this.props.user.login.values.loggedInUser.username,
           start_date: new Date(),
           page_amount: 5,
-          page_num: 1
-        }
+          page_num: 1,
+        },
       })
-      .then(response => {
+      .then((response) => {
         let appoints;
-        if (response.data.status==="200") {
-          appoints=response.data.data
-          console.log("대시보드 리스트 데이터",appoints)
+        if (response.data.status === "200") {
+          appoints = response.data.data;
+          console.log("대시보드 리스트 데이터", appoints);
           this.setState({
-            data: appoints.APPOINT_LIST
-          })     
+            data: appoints.APPOINT_LIST,
+          });
         }
       })
-      .catch(err => console.log(err))
-  } 
-  
+      .catch((err) => console.log(err));
+  }
+
   state = {
     columns: [
       {
         name: "예약시간",
         selector: "date",
         sortable: true,
-        cell: row => (
+        cell: (row) => (
           <p className="text-bold-500 text-truncate mb-0">{row.APPOINT_TIME}</p>
-        )
+        ),
       },
       {
         name: "진료수단",
         // selector: "date",
         // sortable: true,
-        cell: row => (
-          <p className="text-bold-500 text-truncate mb-0"></p>
-        )
+        cell: (row) => <p className="text-bold-500 text-truncate mb-0"></p>,
       },
-      
+
       {
         name: "이름",
         selector: "name",
         sortable: true,
         minWidth: "200px",
-        cell: row => <p className="text-bold-500 mb-0">{row.F_NAME}</p>
+        cell: (row) => <p className="text-bold-500 mb-0">{row.F_NAME}</p>,
         // (
         //   <div className="d-flex flex-xl-row flex-column align-items-xl-center align-items-start py-xl-0 py-1">
         //     {/* <div className="user-img ml-xl-0 ml-2">
@@ -113,12 +107,12 @@ class DataTableCustom extends React.Component {
         //   </div>
         // )
       },
-      
+
       {
         name: "성별",
         selector: "gender",
         sortable: true,
-        cell: row => <p className="text-bold-500 mb-0">{row.GENDER}</p>
+        cell: (row) => <p className="text-bold-500 mb-0">{row.GENDER}</p>,
         // (
         //   <Badge
         //     color={row.GENDER === "inactive" ? "light-danger" : "light-success"}
@@ -131,49 +125,48 @@ class DataTableCustom extends React.Component {
         name: "나이",
         selector: "age",
         sortable: true,
-        cell: row => <p className="text-bold-500 mb-0">{row.AGE}</p>
+        cell: (row) => <p className="text-bold-500 mb-0">{row.AGE}</p>,
       },
       {
         name: "생년월일",
         selector: "birthday",
         sortable: true,
-        cell: row => (
+        cell: (row) => (
           <p className="text-bold-500 text-truncate mb-0">{row.BIRTH_DT}</p>
-        )
+        ),
       },
       {
         name: "진단명",
         // selector: "date",
         // sortable: true,
-        cell: row => (
+        cell: (row) => (
           <p className="text-bold-500 text-truncate mb-0">{row.NOTE_DX}</p>
-        )
+        ),
       },
       {
         name: "초진/재진",
         // selector: "date",
         // sortable: true,
-        cell: row => (
+        cell: (row) => (
           <p className="text-bold-500 text-truncate mb-0">{row.FIRST_YN}</p>
-        )
+        ),
       },
       {
         name: "주된 증상",
         // selector: "date",
         // sortable: true,
-        cell: row => (
+        cell: (row) => (
           <p className="text-bold-500 text-truncate mb-0">{row.SYMPTOM}</p>
-        )
+        ),
       },
       {
         name: "VitalData",
         // selector: "",
         // sortable: true,
-        cell: row => (
-          <Link stroke={row.STATE} style={{borderRadius:"5px"}}></Link>
+        cell: (row) => (
+          <Link stroke={row.STATE} style={{ borderRadius: "5px" }}></Link>
           // 가운데로 옮길것
-          
-        )
+        ),
         // cell: row => {
         //   return (
         //     <div className="d-flex flex-column align-items-center">
@@ -219,7 +212,7 @@ class DataTableCustom extends React.Component {
         name: "차트보기",
         // selector: "date",
         // sortable: true,
-        cell: row => (
+        cell: (row) => (
           <Edit></Edit>
           // 가운데로 옮길것
           // <ActionsComponent
@@ -228,155 +221,155 @@ class DataTableCustom extends React.Component {
           //   parsedFilter={this.props.parsedFilter}
           //   currentData={this.handleCurrentData}
           // />
-        )
+        ),
       },
     ],
     data:
-    // this.props.list,
-    [     
-      {
-        APPOINT_TIME: "09:00",
-        F_NAME: "김지선",
-        email: "alillecrop0@twitpic.com",
-        GENDER: "F",
-        AGE: "29",
-        BIRTH_DT:"Apr22. 1993",
-        NOTE_DX:"-",
-        FIRST_YN:"초진",
-        SYMPTOM:"눈이 아파요",
-        STATE: "black"
-      },
-      {
-        APPOINT_TIME: "09:15",
-        F_NAME: "주승기",
-        email: "alillecrop0@twitpic.com",
-        GENDER: "M",
-        AGE: "45",
-        BIRTH_DT:"Sep27. 1977",
-        NOTE_DX:"HTN",
-        FIRST_YN:"재진",
-        SYMPTOM:"피곤해요",
-        STATE: "red"
-      },
-      {
-        APPOINT_TIME: "10:45",
-        F_NAME: "정혜인",
-        email: "alillecrop0@twitpic.com",
-        GENDER: "F",
-        AGE: "29",
-        BIRTH_DT:"Mar12. 1995",
-        NOTE_DX:"DM",
-        FIRST_YN:"재진",
-        SYMPTOM:"별일없이 잘 지내요",
-        STATE: "yellow"
-      },
-      {
-        APPOINT_TIME: "11:15",
-        F_NAME: "송현준",
-        email: "alillecrop0@twitpic.com",
-        GENDER: "M",
-        AGE: "37",
-        BIRTH_DT:"Jan06. 1985",
-        NOTE_DX:"-",
-        FIRST_YN:"초진",
-        SYMPTOM:"두통이 심해요",
-        STATE: "silver"
-      },
-      {
-        APPOINT_TIME: "01:00",
-        F_NAME: "홍지효",
-        email: "alillecrop0@twitpic.com",
-        GENDER: "F",
-        AGE: "22",
-        BIRTH_DT:"July18. 2000",
-        NOTE_DX:"-",
-        FIRST_YN:"초진",
-        SYMPTOM:"목이 아파요",
-        STATE: "green"
-      },
-      // {
-      //   image: require("../../../assets/img/portrait/small/avatar-s-1.jpg"),
-      //   name: "Shep Pentlow",
-      //   email: "spentlow1@home.pl",
-      //   date: "June 5, 2019",
-      //   status: "active",
-      //   revenue: "$50,000",
-      //   ratings: "good"
-      // },
-      // {
-      //   image: require("../../../assets/img/portrait/small/avatar-s-3.jpg"),
-      //   name: "Gasper Morley",
-      //   email: "gmorley2@chronoengine.com",
-      //   date: "December 24, 2019",
-      //   status: "active",
-      //   revenue: "$78,000",
-      //   ratings: "average"
-      // },
-      // {
-      //   image: require("../../../assets/img/portrait/small/avatar-s-4.jpg"),
-      //   name: "Phaedra Jerrard",
-      //   email: "pjerrard3@blogs.com",
-      //   date: "November 30, 2018",
-      //   status: "inactive",
-      //   revenue: "$10,000",
-      //   ratings: "bad"
-      // },
-      // {
-      //   image: require("../../../assets/img/portrait/small/avatar-s-5.jpg"),
-      //   name: "Conn Plose",
-      //   email: "cplose4@geocities.com",
-      //   date: "April 8, 2017",
-      //   status: "active",
-      //   revenue: "$22,000",
-      //   ratings: "average"
-      // },
-      // {
-      //   image: require("../../../assets/img/portrait/small/avatar-s-6.jpg"),
-      //   name: "Tootsie Brandsma",
-      //   email: "tbrandsma5@theatlantic.com",
-      //   date: "August 12, 2019",
-      //   status: "inactive",
-      //   revenue: "$49,000",
-      //   ratings: "bad"
-      // }
-    ],
+      // this.props.list,
+      [
+        {
+          APPOINT_TIME: "09:00",
+          F_NAME: "김지선",
+          email: "alillecrop0@twitpic.com",
+          GENDER: "F",
+          AGE: "29",
+          BIRTH_DT: "Apr22. 1993",
+          NOTE_DX: "-",
+          FIRST_YN: "초진",
+          SYMPTOM: "눈이 아파요",
+          STATE: "black",
+        },
+        {
+          APPOINT_TIME: "09:15",
+          F_NAME: "주승기",
+          email: "alillecrop0@twitpic.com",
+          GENDER: "M",
+          AGE: "45",
+          BIRTH_DT: "Sep27. 1977",
+          NOTE_DX: "HTN",
+          FIRST_YN: "재진",
+          SYMPTOM: "피곤해요",
+          STATE: "red",
+        },
+        {
+          APPOINT_TIME: "10:45",
+          F_NAME: "정혜인",
+          email: "alillecrop0@twitpic.com",
+          GENDER: "F",
+          AGE: "29",
+          BIRTH_DT: "Mar12. 1995",
+          NOTE_DX: "DM",
+          FIRST_YN: "재진",
+          SYMPTOM: "별일없이 잘 지내요",
+          STATE: "yellow",
+        },
+        {
+          APPOINT_TIME: "11:15",
+          F_NAME: "송현준",
+          email: "alillecrop0@twitpic.com",
+          GENDER: "M",
+          AGE: "37",
+          BIRTH_DT: "Jan06. 1985",
+          NOTE_DX: "-",
+          FIRST_YN: "초진",
+          SYMPTOM: "두통이 심해요",
+          STATE: "silver",
+        },
+        {
+          APPOINT_TIME: "01:00",
+          F_NAME: "홍지효",
+          email: "alillecrop0@twitpic.com",
+          GENDER: "F",
+          AGE: "22",
+          BIRTH_DT: "July18. 2000",
+          NOTE_DX: "-",
+          FIRST_YN: "초진",
+          SYMPTOM: "목이 아파요",
+          STATE: "green",
+        },
+        // {
+        //   image: require("../../../assets/img/portrait/small/avatar-s-1.jpg"),
+        //   name: "Shep Pentlow",
+        //   email: "spentlow1@home.pl",
+        //   date: "June 5, 2019",
+        //   status: "active",
+        //   revenue: "$50,000",
+        //   ratings: "good"
+        // },
+        // {
+        //   image: require("../../../assets/img/portrait/small/avatar-s-3.jpg"),
+        //   name: "Gasper Morley",
+        //   email: "gmorley2@chronoengine.com",
+        //   date: "December 24, 2019",
+        //   status: "active",
+        //   revenue: "$78,000",
+        //   ratings: "average"
+        // },
+        // {
+        //   image: require("../../../assets/img/portrait/small/avatar-s-4.jpg"),
+        //   name: "Phaedra Jerrard",
+        //   email: "pjerrard3@blogs.com",
+        //   date: "November 30, 2018",
+        //   status: "inactive",
+        //   revenue: "$10,000",
+        //   ratings: "bad"
+        // },
+        // {
+        //   image: require("../../../assets/img/portrait/small/avatar-s-5.jpg"),
+        //   name: "Conn Plose",
+        //   email: "cplose4@geocities.com",
+        //   date: "April 8, 2017",
+        //   status: "active",
+        //   revenue: "$22,000",
+        //   ratings: "average"
+        // },
+        // {
+        //   image: require("../../../assets/img/portrait/small/avatar-s-6.jpg"),
+        //   name: "Tootsie Brandsma",
+        //   email: "tbrandsma5@theatlantic.com",
+        //   date: "August 12, 2019",
+        //   status: "inactive",
+        //   revenue: "$49,000",
+        //   ratings: "bad"
+        // }
+      ],
     filteredData: [],
-    value: ""
-  }
+    value: "",
+  };
 
-  handleFilter = e => {
-    let value = e.target.value
-    let data = this.state.data
-    let filteredData = this.state.filteredData
-    this.setState({ value })
+  handleFilter = (e) => {
+    let value = e.target.value;
+    let data = this.state.data;
+    let filteredData = this.state.filteredData;
+    this.setState({ value });
 
     if (value.length) {
-      filteredData = data.filter(item => {
+      filteredData = data.filter((item) => {
         let startsWithCondition =
           item.name.toLowerCase().startsWith(value.toLowerCase()) ||
           item.date.toLowerCase().startsWith(value.toLowerCase()) ||
           item.email.toLowerCase().startsWith(value.toLowerCase()) ||
           item.revenue.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.status.toLowerCase().startsWith(value.toLowerCase())
+          item.status.toLowerCase().startsWith(value.toLowerCase());
         let includesCondition =
           item.name.toLowerCase().includes(value.toLowerCase()) ||
           item.date.toLowerCase().includes(value.toLowerCase()) ||
           item.email.toLowerCase().includes(value.toLowerCase()) ||
           item.revenue.toLowerCase().includes(value.toLowerCase()) ||
-          item.status.toLowerCase().includes(value.toLowerCase())
+          item.status.toLowerCase().includes(value.toLowerCase());
 
         if (startsWithCondition) {
-          return startsWithCondition
+          return startsWithCondition;
         } else if (!startsWithCondition && includesCondition) {
-          return includesCondition
-        } else return null
-      })
-      this.setState({ filteredData })
+          return includesCondition;
+        } else return null;
+      });
+      this.setState({ filteredData });
     }
-  }
+  };
 
   render() {
-    let { data, columns, value, filteredData } = this.state
+    let { data, columns, value, filteredData } = this.state;
     return (
       <Card>
         <CardBody className="rdt_Wrapper">
@@ -389,14 +382,13 @@ class DataTableCustom extends React.Component {
           />
         </CardBody>
       </Card>
-    )
+    );
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    user: state.auth
-  }
-}
+    user: state.auth,
+  };
+};
 
-export default connect(mapStateToProps)(DataTableCustom)
-
+export default connect(mapStateToProps)(DataTableCustom);

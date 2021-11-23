@@ -81,7 +81,7 @@ class MyInfo extends React.Component {
   postPhone = (e) => {
     e.preventDefault();
     axios
-      .post("https://health.iot4health.co.kr:9300/signup-sms", {
+      .post("https://teledoc.hicare.net:446/signup-sms", {
         mobile_num: this.state.mdfphonenum,
       })
       .then((response) => {
@@ -97,7 +97,7 @@ class MyInfo extends React.Component {
   auth = (e) => {
     e.preventDefault();
     axios
-      .get("https://health.iot4health.co.kr:9300/signup-sms", {
+      .get("https://teledoc.hicare.net:446/signup-sms", {
         params: {
           mobile_num: this.state.mdfphonenum,
           auth_code: Number(this.state.authnum),
@@ -117,14 +117,11 @@ class MyInfo extends React.Component {
   componentDidMount() {
     if (this.props.cookiemyinfo.medicalable === "") {
       axios
-        .get(
-          "https://health.iot4health.co.kr:9300/v1/doctor/account/user-info",
-          {
-            params: {
-              user_id: this.state.userid,
-            },
-          }
-        )
+        .get("https://teledoc.hicare.net:446/v1/doctor/account/user-info", {
+          params: {
+            user_id: this.state.userid,
+          },
+        })
         .then((response) => {
           console.log(response);
           let myinfo;
@@ -238,7 +235,7 @@ class MyInfo extends React.Component {
           width="150px"
           height="150px"
           src={
-            "https://health.iot4health.co.kr:9300" +
+            "https://teledoc.hicare.net:446" +
             this.state.getfilepath +
             this.state.getfilename
           }
@@ -253,7 +250,7 @@ class MyInfo extends React.Component {
     //     <img
     //       width="150px"
     //       height="150px"
-    //       src={"https://health.iot4health.co.kr:9300/images/doc-img/"
+    //       src={"https://teledoc.hicare.net:446/images/doc-img/"
     //           +this.props.user.login.values.loggedInUser.username+"-"+this.state.filename }
     //       className="dz-img"
     //       alt=""

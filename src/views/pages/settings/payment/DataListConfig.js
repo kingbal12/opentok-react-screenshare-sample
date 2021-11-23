@@ -1,15 +1,9 @@
-import React, { Component } from "react"
-import {
-  Progress,
-  Row,
-  Col,
-  Input,
-  Button
-} from "reactstrap"
-import DataTable from "react-data-table-component"
-import classnames from "classnames"
-import ReactPaginate from "react-paginate"
-import { history } from "../../../../history"
+import React, { Component } from "react";
+import { Progress, Row, Col, Input, Button } from "reactstrap";
+import DataTable from "react-data-table-component";
+import classnames from "classnames";
+import ReactPaginate from "react-paginate";
+import { history } from "../../../../history";
 import {
   Edit,
   Trash,
@@ -17,9 +11,9 @@ import {
   Check,
   ChevronLeft,
   ChevronRight,
-  ChevronsDown
-} from "react-feather"
-import { connect } from "react-redux"
+  ChevronsDown,
+} from "react-feather";
+import { connect } from "react-redux";
 import {
   getPaymentData,
   getPaymentTotalData,
@@ -31,24 +25,24 @@ import {
   filterData,
   resetVitalData,
   getPatientInfo,
-  getVitalData
-} from "../../../../redux/actions/data-list"
-import Sidebar from "../notice/DataListSidebar"
-import Chip from "../../../../components/@vuexy/chips/ChipComponent"
-import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
-import "../../../../assets/scss/plugins/extensions/react-paginate.scss"
-import "../../../../assets/scss/pages/data-list.scss"
-import moment from "moment"
+  getVitalData,
+} from "../../../../redux/actions/data-list";
+import Sidebar from "../notice/DataListSidebar";
+import Chip from "../../../../components/@vuexy/chips/ChipComponent";
+import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy";
+import "../../../../assets/scss/plugins/extensions/react-paginate.scss";
+import "../../../../assets/scss/pages/data-list.scss";
+import moment from "moment";
 import { CSVLink, CSVDownload } from "react-csv";
-import axios from "axios"
-import { FormattedMessage } from "react-intl"
+import axios from "axios";
+import { FormattedMessage } from "react-intl";
 
 const chipColors = {
   "on hold": "warning",
   delivered: "success",
   pending: "primary",
-  canceled: "danger"
-}
+  canceled: "danger",
+};
 
 const selectedStyle = {
   rows: {
@@ -57,51 +51,53 @@ const selectedStyle = {
       color: "#7367F0 !important",
       boxShadow: "0 0 1px 0 #7367F0 !important",
       "&:hover": {
-        transform: "translateY(0px) !important"
-      }
-    }
-  }
-}
+        transform: "translateY(0px) !important",
+      },
+    },
+  },
+};
 
-const ActionsComponent = props => {
+const ActionsComponent = (props) => {
   return (
     <div className="data-list-action">
       <Edit
         className="cursor-pointer mr-1"
         size={20}
         onClick={() => {
-          return props.currentData(props.row)
+          return props.currentData(props.row);
         }}
       />
       <Trash
         className="cursor-pointer"
         size={20}
         onClick={() => {
-          props.deleteRow(props.row)
+          props.deleteRow(props.row);
         }}
       />
     </div>
-  )
-}
+  );
+};
 
-const CustomHeader = props => {
-  return (
-    <div></div>
-  )
-}
+const CustomHeader = (props) => {
+  return <div></div>;
+};
 
 class DataListConfig extends Component {
- constructor(props) {
+  constructor(props) {
     super(props);
-    let lastday = String(new Date(this.state.year, this.state.month, 0).getDate())
-    if(this.props.parsedFilter.perPage===undefined) {
+    let lastday = String(
+      new Date(this.state.year, this.state.month, 0).getDate()
+    );
+    if (this.props.parsedFilter.perPage === undefined) {
       this.props.getPaymentData(
         this.state.user,
-        this.state.year+this.state.month+"01",
-        this.state.year+this.state.month+ lastday,
-        this.state.rowsPerPage, this.state.currentPage)
+        this.state.year + this.state.month + "01",
+        this.state.year + this.state.month + lastday,
+        this.state.rowsPerPage,
+        this.state.currentPage
+      );
     }
- }
+  }
 
   static getDerivedStateFromProps(props, state) {
     if (
@@ -115,14 +111,12 @@ class DataListConfig extends Component {
         currentPage: parseInt(props.parsedFilter.page) - 1,
         rowsPerPage: parseInt(props.parsedFilter.perPage),
         totalRecords: props.dataList.totalRecords,
-        sortIndex: props.dataList.sortIndex
-        
-      }
-      
+        sortIndex: props.dataList.sortIndex,
+      };
     }
 
     // Return null if the state hasn't changed
-    return null
+    return null;
   }
 
   state = {
@@ -141,14 +135,18 @@ class DataListConfig extends Component {
         sortable: false,
         minWidth: "150px",
         center: true,
-        cell: row => <p className="text-bold-500 mb-0">{row.APPOINT_NUM}</p>
+        cell: (row) => <p className="text-bold-500 mb-0">{row.APPOINT_NUM}</p>,
       },
       {
         name: "진료날짜",
         selector: "gender",
         sortable: false,
         center: true,
-        cell: row => <p className="text-bold-500 mb-0">{moment(row.APPOINT_TIME).format("MMMM DD, YYYY")}</p>
+        cell: (row) => (
+          <p className="text-bold-500 mb-0">
+            {moment(row.APPOINT_TIME).format("MMMM DD, YYYY")}
+          </p>
+        ),
       },
       {
         name: "환자명",
@@ -156,32 +154,37 @@ class DataListConfig extends Component {
         sortable: false,
         minWidth: "200px",
         center: true,
-        cell: row => (
+        cell: (row) => (
           <div className="d-flex flex-xl-row flex-column align-items-xl-center align-items-start py-xl-0 py-1">
             <div className="user-info text-truncate ml-xl-50 ml-0">
               <span
                 title={row.F_NAME}
-                className="d-block text-bold-500 text-truncate mb-0">
+                className="d-block text-bold-500 text-truncate mb-0"
+              >
                 {row.F_NAME}
               </span>
             </div>
           </div>
-        )
+        ),
       },
-      
+
       {
         name: "진료수단",
         selector: "gender",
         sortable: false,
         center: true,
-        cell: row => <p className="text-bold-500 mb-0">{row.APPOINT_KIND==="1"?"전화":"화상"}</p>
+        cell: (row) => (
+          <p className="text-bold-500 mb-0">
+            {row.APPOINT_KIND === "1" ? "전화" : "화상"}
+          </p>
+        ),
       },
       {
         name: "금액",
         selector: "age",
         sortable: false,
         center: true,
-        cell: row => <p className="text-bold-500 mb-0">{row.PAY_TOTAL}</p>
+        cell: (row) => <p className="text-bold-500 mb-0">{row.PAY_TOTAL}</p>,
       },
     ],
     allData: [],
@@ -193,119 +196,127 @@ class DataListConfig extends Component {
     totalRecords: 0,
     sortIndex: [],
     addNew: "",
-    totaldata: this.props.dataList.totalpaydata
-  }
+    totaldata: this.props.dataList.totalpaydata,
+  };
 
-  thumbView = this.props.thumbView
+  thumbView = this.props.thumbView;
 
   componentDidMount() {
-    if(this.props.parsedFilter.perPage!==undefined) {
-      this.setState({lastday: String(new Date(this.state.year, this.state.month, 0).getDate())})
+    if (this.props.parsedFilter.perPage !== undefined) {
+      this.setState({
+        lastday: String(
+          new Date(this.state.year, this.state.month, 0).getDate()
+        ),
+      });
 
       this.props.getPaymentData(
         this.state.user,
-        this.state.year+this.state.month+"01",
-        this.state.year+this.state.month+this.state.lastday,
-        this.props.parsedFilter.perPage, 
-        this.props.parsedFilter.page)
+        this.state.year + this.state.month + "01",
+        this.state.year + this.state.month + this.state.lastday,
+        this.props.parsedFilter.perPage,
+        this.props.parsedFilter.page
+      );
     }
 
-    this.setState({lastday: String(new Date(this.state.year, this.state.month, 0).getDate())}
-    ,() => 
-    // axios
-    // .get("https://health.iot4health.co.kr:9300/v1/doctor/treatment/payments", {
-    //   params: {
-    //     user_id: this.state.user,
-    //     start_date: this.state.year+this.state.month+"01",
-    //     end_date: this.state.year+this.state.month+this.state.lastday,
-    //     page_amount: 500000,
-    //     page_num: 1
-    //   }
-    // })
-    // .then(response => {
-    //   let len = response.data.data.PAY_LIST.length
-    //   let totalPay = new Array();
-    //   let sumtotal = 0;
-    //   for (let i=0; i<len; i++) {
-    //     let jsonObj		= new Object();
-    //     jsonObj.PAY_TOTAL = response.data.data.PAY_LIST[i].PAY_TOTAL
-    //     jsonObj = JSON.stringify(jsonObj);
-    //     totalPay.push(JSON.parse(jsonObj));
-    //     if (len>0) {sumtotal= totalPay[i].PAY_TOTAL+sumtotal}
-    //   }
-    //  this.setState({totaldata:totalPay})
-    // })
-    // .catch(err => console.log(err))
-    this.props.getPaymentTotalData(
-      this.state.user,
-      this.state.year+this.state.month+"01",
-      this.state.year+this.state.month+this.state.lastday
-      )
-    )
-
-   
+    this.setState(
+      {
+        lastday: String(
+          new Date(this.state.year, this.state.month, 0).getDate()
+        ),
+      },
+      () =>
+        // axios
+        // .get("https://teledoc.hicare.net:446/v1/doctor/treatment/payments", {
+        //   params: {
+        //     user_id: this.state.user,
+        //     start_date: this.state.year+this.state.month+"01",
+        //     end_date: this.state.year+this.state.month+this.state.lastday,
+        //     page_amount: 500000,
+        //     page_num: 1
+        //   }
+        // })
+        // .then(response => {
+        //   let len = response.data.data.PAY_LIST.length
+        //   let totalPay = new Array();
+        //   let sumtotal = 0;
+        //   for (let i=0; i<len; i++) {
+        //     let jsonObj		= new Object();
+        //     jsonObj.PAY_TOTAL = response.data.data.PAY_LIST[i].PAY_TOTAL
+        //     jsonObj = JSON.stringify(jsonObj);
+        //     totalPay.push(JSON.parse(jsonObj));
+        //     if (len>0) {sumtotal= totalPay[i].PAY_TOTAL+sumtotal}
+        //   }
+        //  this.setState({totaldata:totalPay})
+        // })
+        // .catch(err => console.log(err))
+        this.props.getPaymentTotalData(
+          this.state.user,
+          this.state.year + this.state.month + "01",
+          this.state.year + this.state.month + this.state.lastday
+        )
+    );
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.thumbView) {
-      this.thumbView = false
+      this.thumbView = false;
       let columns = [
         {
           name: "Image",
           selector: "img",
           minWidth: "220px",
-          cell: row => <img src={row.img} height="100" alt={row.name} />
+          cell: (row) => <img src={row.img} height="100" alt={row.name} />,
         },
         {
           name: "Name",
           selector: "name",
           sortable: false,
           minWidth: "250px",
-          cell: row => (
+          cell: (row) => (
             <p title={row.name} className="text-truncate text-bold-500 mb-0">
               {row.name}
             </p>
-          )
+          ),
         },
         {
           name: "Category",
           selector: "category",
-          sortable: false
+          sortable: false,
         },
         {
           name: "Popularity",
           selector: "popularity",
           sortable: false,
-          cell: row => (
+          cell: (row) => (
             <Progress
               className="w-100 mb-0"
               color={row.popularity.color}
               value={row.popularity.popValue}
             />
-          )
+          ),
         },
         {
           name: "Order Status",
           selector: "order_status",
           sortable: false,
-          cell: row => (
+          cell: (row) => (
             <Chip
               className="m-0"
               color={chipColors[row.order_status]}
               text={row.order_status}
             />
-          )
+          ),
         },
         {
           name: "Price",
           selector: "price",
           sortable: false,
-          cell: row => `$${row.price}`
+          cell: (row) => `$${row.price}`,
         },
         {
           name: "Actions",
           sortable: false,
-          cell: row => (
+          cell: (row) => (
             <ActionsComponent
               row={row}
               getPaymentData={this.props.getPaymentData}
@@ -313,99 +324,109 @@ class DataListConfig extends Component {
               currentData={this.handleCurrentData}
               deleteRow={this.handleDelete}
             />
-          )
-        }
-      ]
-      this.setState({ columns })
+          ),
+        },
+      ];
+      this.setState({ columns });
     }
   }
 
   goPatientList(id) {
     // id.preventDefault()
-    this.props.resetVitalData()
-    this.props.getPatientInfo(this.state.user,id)
-    this.props.getVitalData(id)
+    this.props.resetVitalData();
+    this.props.getPatientInfo(this.state.user, id);
+    this.props.getVitalData(id);
   }
 
-  
-  handleFilter = e => {
-    this.setState({ name: e.target.value })
-  }
+  handleFilter = (e) => {
+    this.setState({ name: e.target.value });
+  };
 
-
-  search = e => {
-    e.preventDefault()
-    if(this.state.name!==""){
-      this.props.getNameData(5,1,this.state.name)
+  search = (e) => {
+    e.preventDefault();
+    if (this.state.name !== "") {
+      this.props.getNameData(5, 1, this.state.name);
     }
-  }
+  };
 
-
-  handleRowsPerPage = value => {
-    let { parsedFilter, getPaymentData } = this.props
-    let page = parsedFilter.page !== undefined ? parsedFilter.page : 1
-    history.push(`/pages/paymentmanagement?page=${page}&perPage=${value}`)
-    this.setState({currentPage: page, rowsPerPage: value })
+  handleRowsPerPage = (value) => {
+    let { parsedFilter, getPaymentData } = this.props;
+    let page = parsedFilter.page !== undefined ? parsedFilter.page : 1;
+    history.push(`/pages/paymentmanagement?page=${page}&perPage=${value}`);
+    this.setState({ currentPage: page, rowsPerPage: value });
     getPaymentData({
-      user_id: this.state.user, 
-      start_date: this.state.year+this.state.month+"01",
-      end_date: this.state.year+this.state.month+this.state.lastday,
-      page: parsedFilter.page, 
-      perPage: value })
+      user_id: this.state.user,
+      start_date: this.state.year + this.state.month + "01",
+      end_date: this.state.year + this.state.month + this.state.lastday,
+      page: parsedFilter.page,
+      perPage: value,
+    });
     // getData({ user_id: this.state.user, page_num: parsedFilter.page, page_amount: value })
-  }
+  };
 
   handleSidebar = (boolean, addNew = false) => {
-    this.setState({ sidebar: boolean })
-    if (addNew === true) this.setState({ currentData: null, addNew: true })
-  }
+    this.setState({ sidebar: boolean });
+    if (addNew === true) this.setState({ currentData: null, addNew: true });
+  };
 
+  handleCurrentData = (obj) => {
+    this.setState({ currentData: obj });
+    this.handleSidebar(true);
+  };
 
-  handleCurrentData = obj => {
-    this.setState({ currentData: obj })
-    this.handleSidebar(true)
-  }
-
-  handlePagination = page => {
-    let { parsedFilter, getPaymentData } = this.props
-    let perPage = parsedFilter.perPage !== undefined ? parsedFilter.perPage : 5
+  handlePagination = (page) => {
+    let { parsedFilter, getPaymentData } = this.props;
+    let perPage = parsedFilter.perPage !== undefined ? parsedFilter.perPage : 5;
     let urlPrefix = this.props.thumbView
       ? "/data-list/thumb-view/"
-      : "/pages/paymentmanagement"
-    history.push(
-      `${urlPrefix}?page=${page.selected + 1}&perPage=${perPage}`
-    )
+      : "/pages/paymentmanagement";
+    history.push(`${urlPrefix}?page=${page.selected + 1}&perPage=${perPage}`);
     // getData({ page: page.selected + 1, perPage: perPage })
     getPaymentData(
       this.state.user,
-      this.state.year+this.state.month+"01",
-      this.state.year+this.state.month+this.state.lastday,
-      perPage, 
-      page.selected + 1 )
-    this.setState({ currentPage: page.selected })
-  }
+      this.state.year + this.state.month + "01",
+      this.state.year + this.state.month + this.state.lastday,
+      perPage,
+      page.selected + 1
+    );
+    this.setState({ currentPage: page.selected });
+  };
 
   getpay = () => {
-    this.setState({lastday: String(new Date(this.state.year, this.state.month, 0).getDate())},() => 
-    this.props.getPaymentData(
-      this.state.user,
-      this.state.year+this.state.month+"01",
-      this.state.year+this.state.month+this.state.lastday,
-      5, 
-      1))
+    this.setState(
+      {
+        lastday: String(
+          new Date(this.state.year, this.state.month, 0).getDate()
+        ),
+      },
+      () =>
+        this.props.getPaymentData(
+          this.state.user,
+          this.state.year + this.state.month + "01",
+          this.state.year + this.state.month + this.state.lastday,
+          5,
+          1
+        )
+    );
 
     this.props.getPaymentTotalData(
       this.state.user,
-      this.state.year+this.state.month+"01",
-      this.state.year+this.state.month+this.state.lastday
-      )
-  }
+      this.state.year + this.state.month + "01",
+      this.state.year + this.state.month + this.state.lastday
+    );
+  };
 
   check = () => {
-    this.setState({lastday: String(new Date(this.state.year, this.state.month, 0).getDate())},() => console.log(this.state))  
-  }
+    this.setState(
+      {
+        lastday: String(
+          new Date(this.state.year, this.state.month, 0).getDate()
+        ),
+      },
+      () => console.log(this.state)
+    );
+  };
 
-  
   render() {
     let {
       columns,
@@ -417,8 +438,8 @@ class DataListConfig extends Component {
       currentData,
       sidebar,
       totalRecords,
-      sortIndex
-    } = this.state
+      sortIndex,
+    } = this.state;
 
     let headers = [
       { label: "No", key: "APPOINT_NUM" },
@@ -426,44 +447,53 @@ class DataListConfig extends Component {
       { label: "환자ID", key: "USER_ID" },
       { label: "진료날짜", key: "APPOINT_TIME" },
       { label: "진료종류(1=전화, 2=영상)", key: "APPOINT_KIND" },
-      { label: "최종청구액", key: "PAY_TOTAL" }
+      { label: "최종청구액", key: "PAY_TOTAL" },
     ];
-  
+
     return (
       <div
         className={`data-list ${
           this.props.thumbView ? "thumb-view" : "list-view"
-        }`}>
+        }`}
+      >
         <Row>
-          <h4 className="text-bold-600"><FormattedMessage id="진료비 청구내역"/></h4>
+          <h4 className="text-bold-600">
+            <FormattedMessage id="진료비 청구내역" />
+          </h4>
         </Row>
         <Row className="mt-2">
           <Col lg="6" md="12" className="p-0 d-flex">
-            <h4 className="col-2 align-self-center text-bold-600"><FormattedMessage id="기간"/></h4> 
-            <Input 
-              type="select" 
+            <h4 className="col-2 align-self-center text-bold-600">
+              <FormattedMessage id="기간" />
+            </h4>
+            <Input
+              type="select"
               name="select"
               id="select"
-              className="col-2" 
-              value={this.state.year}  onChange={e => this.setState({ year: e.target.value })}>            
+              className="col-2"
+              value={this.state.year}
+              onChange={(e) => this.setState({ year: e.target.value })}
+            >
               <option value="2021">2021</option>
               <option value="2022">2022</option>
               <option value="2023">2023</option>
               <option value="2024">2024</option>
               <option value="2025">2025</option>
               <option value="2026">2026</option>
-              
             </Input>
-            
-            <h5 className="align-self-center ml-1 text-bold-600"><FormattedMessage id="년"/></h5> 
+
+            <h5 className="align-self-center ml-1 text-bold-600">
+              <FormattedMessage id="년" />
+            </h5>
             <Input
-              style={{marginBottom:"0.5rem"}} 
-              type="select" 
+              style={{ marginBottom: "0.5rem" }}
+              type="select"
               name="select"
               id="select"
-              className="col-2 ml-2"  
-              value={this.state.month}  onChange={e => this.setState({ month: e.target.value })}>
-                
+              className="col-2 ml-2"
+              value={this.state.month}
+              onChange={(e) => this.setState({ month: e.target.value })}
+            >
               <option value="01">01</option>
               <option value="02">02</option>
               <option value="03">03</option>
@@ -475,27 +505,46 @@ class DataListConfig extends Component {
               <option value="09">09</option>
               <option value="10">10</option>
               <option value="11">11</option>
-              <option value="12">12</option>                 
+              <option value="12">12</option>
             </Input>
 
-            <h5 className="align-self-center  ml-1 text-bold-600"><FormattedMessage id="월"/></h5> 
-            <Button className="ml-1" style={{marginBottom:"0.5em"}} color="primary" onClick={this.getpay}><FormattedMessage id="검색"/></Button>
+            <h5 className="align-self-center  ml-1 text-bold-600">
+              <FormattedMessage id="월" />
+            </h5>
+            <Button
+              className="ml-1"
+              style={{ marginBottom: "0.5em" }}
+              color="primary"
+              onClick={this.getpay}
+            >
+              <FormattedMessage id="검색" />
+            </Button>
           </Col>
-          
         </Row>
-        <Row className="col-12 mt-5 pb-1" style={{borderBottom:"solid silver 1px"}}>
+        <Row
+          className="col-12 mt-5 pb-1"
+          style={{ borderBottom: "solid silver 1px" }}
+        >
           <Col lg="9" md="12"></Col>
           <Col lg="3" md="12" className="d-flex">
-            <h5 className="align-self-end"><FormattedMessage id="총"/></h5>
-            <h1 className="align-self-end pl-5">{this.props.dataList.totalpay}</h1>
-            <h5 className="align-self-end pl-1"><FormattedMessage id="원"/></h5>
+            <h5 className="align-self-end">
+              <FormattedMessage id="총" />
+            </h5>
+            <h1 className="align-self-end pl-5">
+              {this.props.dataList.totalpay}
+            </h1>
+            <h5 className="align-self-end pl-1">
+              <FormattedMessage id="원" />
+            </h5>
           </Col>
         </Row>
-        <div className="data-list-header d-flex justify-content-between flex-wrap mt-2">    
-          <h2><FormattedMessage id="이번달 내역"/></h2>
+        <div className="data-list-header d-flex justify-content-between flex-wrap mt-2">
+          <h2>
+            <FormattedMessage id="이번달 내역" />
+          </h2>
         </div>
 
-          {/* <Button className="ml-2" color='primary' outline onClick={this.seeState}>검색</Button> */}
+        {/* <Button className="ml-2" color='primary' outline onClick={this.seeState}>검색</Button> */}
         <DataTable
           columns={columns}
           data={value.length ? allData : data}
@@ -515,7 +564,7 @@ class DataListConfig extends Component {
                   ? parseInt(this.props.parsedFilter.page - 1)
                   : 0
               }
-              onPageChange={page => this.handlePagination(page)}
+              onPageChange={(page) => this.handlePagination(page)}
             />
           )}
           noHeader
@@ -524,7 +573,7 @@ class DataListConfig extends Component {
           responsive
           // pointerOnHover
           selectableRowsHighlight
-          onSelectedRowsChange={data =>
+          onSelectedRowsChange={(data) =>
             this.setState({ selected: data.selectedRows })
           }
           customStyles={selectedStyle}
@@ -540,13 +589,13 @@ class DataListConfig extends Component {
             />
           }
           sortIcon={<ChevronDown />}
-            selectableRowsComponent={Checkbox}
-            selectableRowsComponentProps={{
-              color: "primary",
-              icon: <Check className="vx-icon" size={12} />,
-              label: "",
-              size: "sm"
-            }}
+          selectableRowsComponent={Checkbox}
+          selectableRowsComponentProps={{
+            color: "primary",
+            icon: <Check className="vx-icon" size={12} />,
+            label: "",
+            size: "sm",
+          }}
         />
         <Sidebar
           show={sidebar}
@@ -561,36 +610,37 @@ class DataListConfig extends Component {
         />
         <div
           className={classnames("data-list-overlay", {
-            show: sidebar
+            show: sidebar,
           })}
           onClick={() => this.handleSidebar(false, true)}
         />
         <Row className="d-flex mt-5">
           <Col lg="9" md="12"></Col>
           <Col lg="3" md="12">
-          <CSVLink data={this.props.dataList.totalpaydata} headers={headers}>
-            <Button 
-            disabled={this.props.dataList.paydata.length===0?true:false}
-            color="primary" 
-            type="button"
-            
-            >
-              <FormattedMessage id="내역서 다운로드"/>
-            </Button>
-          </CSVLink>
+            <CSVLink data={this.props.dataList.totalpaydata} headers={headers}>
+              <Button
+                disabled={
+                  this.props.dataList.paydata.length === 0 ? true : false
+                }
+                color="primary"
+                type="button"
+              >
+                <FormattedMessage id="내역서 다운로드" />
+              </Button>
+            </CSVLink>
           </Col>
         </Row>
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     user: state.auth,
-    dataList: state.dataList
-  }
-}
+    dataList: state.dataList,
+  };
+};
 
 export default connect(mapStateToProps, {
   getPaymentData,
@@ -603,5 +653,5 @@ export default connect(mapStateToProps, {
   filterData,
   resetVitalData,
   getPatientInfo,
-  getVitalData
-})(DataListConfig)
+  getVitalData,
+})(DataListConfig);

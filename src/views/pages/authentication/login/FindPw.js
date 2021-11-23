@@ -1,154 +1,161 @@
-import React from "react"
-import { CardBody, FormGroup, Form, Input, Button, Modal, Row,
+import React from "react";
+import {
+  CardBody,
+  FormGroup,
+  Form,
+  Input,
+  Button,
+  Modal,
+  Row,
   ModalHeader,
   ModalBody,
-  ModalFooter, } from "reactstrap"
+  ModalFooter,
+} from "reactstrap";
 
-import Select from "react-select"
+import Select from "react-select";
 
-import axios from "axios"
-import Radio from "../../../../components/@vuexy/radio/RadioVuexy"
-import { FormattedMessage } from "react-intl"
+import axios from "axios";
+import Radio from "../../../../components/@vuexy/radio/RadioVuexy";
+import { FormattedMessage } from "react-intl";
 
 const colourOptions = [
   { value: "개인회원", label: "개인회원" },
-  { value: "기업회원", label: "기업회원" }
-]
-
-
-
+  { value: "기업회원", label: "기업회원" },
+];
 
 class FindPw extends React.Component {
   state = {
     userid: "",
     name: "",
     bt_date: "",
-    phone:"",
-    docnum:"",
-    modal:false,
+    phone: "",
+    docnum: "",
+    modal: false,
     verifymodal: false,
     useridchecked: false,
     emailchecked: true,
     email: "",
     emaillabel: "",
-    modalmsg:"",
-  }
+    modalmsg: "",
+  };
 
-  searchemail = e => {
-    e.preventDefault()
+  searchemail = (e) => {
+    e.preventDefault();
     axios
-          .get("https://health.iot4health.co.kr:9300/v1/doctor/account/password", {
-            params: {
-              user_id: this.state.userid,
-              f_name: this.state.name,
-              birth_dt: this.state.bt_date,
-              mobile_num: this.state.phone,
-              medical_num: this.state.docnum
-            }
-          })
-          .then(response => {
-            console.log(response)
-            if(response.data.status==="200") {
-              this.setState({
-                email: response.data.data.EMAIL,
-                emaillabel: response.data.data.EMAIL
-              })
-              if(response.data.data.USER_ID===response.data.data.EMAIL){
-                axios.post("https://health.iot4health.co.kr:9300/v1/doctor/account/password", {
-                    user_id: this.state.userid,
-                    email: this.state.email,
-                    f_name: this.state.name,
-                    birth_dt: this.state.bt_date,
-                    mobile_num: this.state.phone,
-                    medical_num: this.state.docnum
-                })
-                .then(response =>{
-                  if(response.data.status==="200"){
-                    this.setState({
-                      modal:true,
-                      modalmsg: <FormattedMessage id="비밀번호 전송 성공"/>
-                    })
-                  } else {
-                    this.setState({
-                      modal:true,
-                      modalmsg: <FormattedMessage id="비밀번호 전송 실패"/>
-                    })
-                  }
-                })
-              } else{
-                this.setState({
-                  userid: response.data.data.USER_ID,
-                  email: response.data.data.EMAIL,
-                  emaillabel: response.data.data.EMAIL,
-                  verifymodal:true
-                })
-              }
-              
-            } else {
-              this.setState({
-                modal:true,
-                modalmsg: response.data.message
-              })
-            }
-          })
-  }
+      .get("https://teledoc.hicare.net:446/v1/doctor/account/password", {
+        params: {
+          user_id: this.state.userid,
+          f_name: this.state.name,
+          birth_dt: this.state.bt_date,
+          mobile_num: this.state.phone,
+          medical_num: this.state.docnum,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        if (response.data.status === "200") {
+          this.setState({
+            email: response.data.data.EMAIL,
+            emaillabel: response.data.data.EMAIL,
+          });
+          if (response.data.data.USER_ID === response.data.data.EMAIL) {
+            axios
+              .post(
+                "https://teledoc.hicare.net:446/v1/doctor/account/password",
+                {
+                  user_id: this.state.userid,
+                  email: this.state.email,
+                  f_name: this.state.name,
+                  birth_dt: this.state.bt_date,
+                  mobile_num: this.state.phone,
+                  medical_num: this.state.docnum,
+                }
+              )
+              .then((response) => {
+                if (response.data.status === "200") {
+                  this.setState({
+                    modal: true,
+                    modalmsg: <FormattedMessage id="비밀번호 전송 성공" />,
+                  });
+                } else {
+                  this.setState({
+                    modal: true,
+                    modalmsg: <FormattedMessage id="비밀번호 전송 실패" />,
+                  });
+                }
+              });
+          } else {
+            this.setState({
+              userid: response.data.data.USER_ID,
+              email: response.data.data.EMAIL,
+              emaillabel: response.data.data.EMAIL,
+              verifymodal: true,
+            });
+          }
+        } else {
+          this.setState({
+            modal: true,
+            modalmsg: response.data.message,
+          });
+        }
+      });
+  };
 
   findEmailModal = () => {
-    this.setState(prevState => ({
-      modal: !prevState.modal
-    }))
-  }
+    this.setState((prevState) => ({
+      modal: !prevState.modal,
+    }));
+  };
 
   verifyModal = () => {
-    this.setState(prevState => ({
-      verifymodal: !prevState.verifymodal
-    }))
-    console.log(this.state)
-  }
+    this.setState((prevState) => ({
+      verifymodal: !prevState.verifymodal,
+    }));
+    console.log(this.state);
+  };
 
-  onSiteChanged = e => {
+  onSiteChanged = (e) => {
     this.setState({
-      site: e.currentTarget.value
-      });
-  }
+      site: e.currentTarget.value,
+    });
+  };
 
-  onAddressChanged = e => {
+  onAddressChanged = (e) => {
     this.setState({
-      address: e.currentTarget.value
-      });
-  }
+      address: e.currentTarget.value,
+    });
+  };
 
   changePassword = () => {
     axios
-    .post("https://health.iot4health.co.kr:9300/v1/doctor/account/password", {
+      .post("https://teledoc.hicare.net:446/v1/doctor/account/password", {
         user_id: this.state.userid,
         email: this.state.email,
         f_name: this.state.name,
         birth_dt: this.state.bt_date,
         mobile_num: this.state.phone,
-        medical_num: this.state.docnum
-    })
-    .then(response => {
-      console.log(response)
-      if(response.data.status==="200"){
-        this.setState({
-          modal:true,
-          modalmsg: <FormattedMessage id="선택 비밀번호 전송 성공"/>
-        })
-      } else {
-        this.setState({
-          modal:true,
-          modalmsg: <FormattedMessage id="비밀번호 전송 실패"/>
-        })
-      }
-    })
+        medical_num: this.state.docnum,
+      })
+      .then((response) => {
+        console.log(response);
+        if (response.data.status === "200") {
+          this.setState({
+            modal: true,
+            modalmsg: <FormattedMessage id="선택 비밀번호 전송 성공" />,
+          });
+        } else {
+          this.setState({
+            modal: true,
+            modalmsg: <FormattedMessage id="비밀번호 전송 실패" />,
+          });
+        }
+      });
 
-    this.setState(prevState => ({
-      verifymodal: !prevState.verifymodal
-    }))
-    
-  }
-  
+    this.setState((prevState) => ({
+      verifymodal: !prevState.verifymodal,
+    }));
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -157,15 +164,11 @@ class FindPw extends React.Component {
           toggle={this.findEmailModal}
           className="modal-dialog-centered"
         >
-          <ModalHeader toggle={this.findEmailModal}>
-            
-          </ModalHeader>
-          <ModalBody>
-            {this.state.modalmsg}
-          </ModalBody>
+          <ModalHeader toggle={this.findEmailModal}></ModalHeader>
+          <ModalBody>{this.state.modalmsg}</ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.findEmailModal}>
-              <FormattedMessage id="확인"/>
+              <FormattedMessage id="확인" />
             </Button>{" "}
           </ModalFooter>
         </Modal>
@@ -176,17 +179,21 @@ class FindPw extends React.Component {
           className="modal-dialog-centered"
         >
           <ModalHeader toggle={this.verifyModal}>
-            <FormattedMessage id="이메일 선택"/>
+            <FormattedMessage id="이메일 선택" />
           </ModalHeader>
           <ModalBody>
             <Row className="d-flex">
-              <h6 className="align-self-center ml-1"><FormattedMessage id="ID"/>: </h6>
+              <h6 className="align-self-center ml-1">
+                <FormattedMessage id="ID" />:{" "}
+              </h6>
               <Radio
                 label={this.state.userid}
-                defaultChecked={this.state.userid===""||this.state.userid?true:false}  
-                name="exampleRadioSizes" 
+                defaultChecked={
+                  this.state.userid === "" || this.state.userid ? true : false
+                }
+                name="exampleRadioSizes"
                 value={this.state.userid}
-                onChange={e => this.setState({ email: e.target.value })}
+                onChange={(e) => this.setState({ email: e.target.value })}
                 color="primary"
                 defaultChecked={this.state.useridchecked}
                 className="ml-1"
@@ -194,17 +201,19 @@ class FindPw extends React.Component {
             </Row>
 
             <Row className="d-flex">
-              <h6 className="align-self-center ml-1"><FormattedMessage id="보안이메일"/>: </h6>
+              <h6 className="align-self-center ml-1">
+                <FormattedMessage id="보안이메일" />:{" "}
+              </h6>
               <Radio
                 label={this.state.emaillabel}
                 color="primary"
                 value={this.state.email}
                 defaultChecked={this.state.emailchecked}
-                onChange={e => this.setState({ email: e.target.value })}
+                onChange={(e) => this.setState({ email: e.target.value })}
                 name="exampleRadioSizes"
                 className="ml-1"
-              /> 
-            </Row>         
+              />
+            </Row>
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.changePassword}>
@@ -213,7 +222,7 @@ class FindPw extends React.Component {
           </ModalFooter>
         </Modal>
         <CardBody className="pt-1">
-          <Form action="/" onSubmit={this.searchemail}>       
+          <Form action="/" onSubmit={this.searchemail}>
             <FormGroup className="form-label-group position-relative">
               <Select
                 className="React"
@@ -225,77 +234,77 @@ class FindPw extends React.Component {
             </FormGroup>
             <FormGroup className="form-label-group position-relative">
               <FormattedMessage id="EnterID">
-                { (EnterID) =>
-                <Input
-                  placeholder={EnterID}
-                  value={this.state.userid}
-                  onChange={e => this.setState({ userid: e.target.value })}
-                  required
-                />
-                }
+                {(EnterID) => (
+                  <Input
+                    placeholder={EnterID}
+                    value={this.state.userid}
+                    onChange={(e) => this.setState({ userid: e.target.value })}
+                    required
+                  />
+                )}
               </FormattedMessage>
             </FormGroup>
             <FormGroup className="form-label-group position-relative">
               <FormattedMessage id="EnterName">
-                { (EnterName) =>
-                <Input
-                  placeholder={EnterName}
-                  value={this.state.name}
-                  onChange={e => this.setState({ name: e.target.value })}
-                  required
-                />
-                }
+                {(EnterName) => (
+                  <Input
+                    placeholder={EnterName}
+                    value={this.state.name}
+                    onChange={(e) => this.setState({ name: e.target.value })}
+                    required
+                  />
+                )}
               </FormattedMessage>
             </FormGroup>
             <FormGroup className="form-label-group position-relative">
               <FormattedMessage id="EnterDOB">
-                { (EnterDOB) =>
-                <Input
-                  type="text"
-                  placeholder={EnterDOB}
-                  value={this.state.bt_date}
-                  onChange={e => this.setState({ bt_date: e.target.value })}
-                  required
-                />
-                }
+                {(EnterDOB) => (
+                  <Input
+                    type="text"
+                    placeholder={EnterDOB}
+                    value={this.state.bt_date}
+                    onChange={(e) => this.setState({ bt_date: e.target.value })}
+                    required
+                  />
+                )}
               </FormattedMessage>
             </FormGroup>
             <FormGroup className="form-label-group position-relative">
               <FormattedMessage id="EnterPhonenum">
-                { (EnterPhonenum) =>
-                <Input
-                  type="text"
-                  placeholder={EnterPhonenum}
-                  value={this.state.phone}
-                  onChange={e => this.setState({ phone: e.target.value })}
-                  required
-                />
-                }
+                {(EnterPhonenum) => (
+                  <Input
+                    type="text"
+                    placeholder={EnterPhonenum}
+                    value={this.state.phone}
+                    onChange={(e) => this.setState({ phone: e.target.value })}
+                    required
+                  />
+                )}
               </FormattedMessage>
-            </FormGroup>  
+            </FormGroup>
             <FormGroup className="form-label-group position-relative">
               <FormattedMessage id="EnterLicense">
-                { (EnterLicense) =>
-                <Input
-                  type="text"
-                  placeholder={EnterLicense}
-                  value={this.state.docnum}
-                  onChange={e => this.setState({ docnum: e.target.value })}
-                  required
-                />
-                }
+                {(EnterLicense) => (
+                  <Input
+                    type="text"
+                    placeholder={EnterLicense}
+                    value={this.state.docnum}
+                    onChange={(e) => this.setState({ docnum: e.target.value })}
+                    required
+                  />
+                )}
               </FormattedMessage>
-            </FormGroup>             
+            </FormGroup>
             <div className="d-flex justify-content-center py-3">
               <Button color="primary" type="submit" size="lg" block>
-                <FormattedMessage id="Send"/>
+                <FormattedMessage id="Send" />
               </Button>
             </div>
           </Form>
         </CardBody>
       </React.Fragment>
-    )
+    );
   }
 }
 
-export default FindPw
+export default FindPw;

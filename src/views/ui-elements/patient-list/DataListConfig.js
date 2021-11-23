@@ -1,5 +1,14 @@
 import React, { Component } from "react";
-import { Button, Progress, Input, UncontrolledTooltip } from "reactstrap";
+import {
+  Button,
+  Progress,
+  UncontrolledDropdown,
+  DropdownMenu,
+  DropdownToggle,
+  DropdownItem,
+  Input,
+  UncontrolledTooltip,
+} from "reactstrap";
 import DataTable from "react-data-table-component";
 import classnames from "classnames";
 import ReactPaginate from "react-paginate";
@@ -109,22 +118,33 @@ const ActionsComponent = (props) => {
 };
 
 const CustomHeader = (props) => {
+  let rowPage;
+  if (isNaN(props.rowsPerPage)) {
+    rowPage = 5;
+  } else {
+    rowPage = props.rowsPerPage;
+  }
   return (
     <div className="data-list-header d-flex justify-content-between flex-wrap">
       <div className="actions-right d-flex flex-wrap mt-sm-0 mt-2 col-8">
         <div className="filter-section col-5">
-          <Input
-            type="text"
-            placeholder="환자 이름으로 검색"
-            onChange={(e) => props.handleFilter(e)}
-            onKeyPress={(e) => {
-              if (e.key === "Enter") {
-                props.search(e);
-              }
-            }}
-          />
+          <FormattedMessage id="nameSearch">
+            {(nameSearch) => (
+              <Input
+                type="text"
+                placeholder={nameSearch}
+                onChange={(e) => props.handleFilter(e)}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    props.search(e);
+                  }
+                }}
+              />
+            )}
+          </FormattedMessage>
         </div>
         <Button
+          style={{ maxHeight: "43px" }}
           className="ml-2"
           color="primary"
           outline
@@ -133,6 +153,20 @@ const CustomHeader = (props) => {
           <FormattedMessage id="검색" />
         </Button>
       </div>
+      <UncontrolledDropdown className="data-list-rows-dropdown d-md-block d-none mt-3 mb-1">
+        <DropdownToggle color="" className="sort-dropdown">
+          <span className="align-middle mx-50">{`${rowPage} Page`}</span>
+          <ChevronDown size={15} />
+        </DropdownToggle>
+        <DropdownMenu tag="div" right>
+          <DropdownItem tag="a" onClick={() => props.handleRowsPerPage(5)}>
+            5 Page
+          </DropdownItem>
+          <DropdownItem tag="a" onClick={() => props.handleRowsPerPage(10)}>
+            10 Page
+          </DropdownItem>
+        </DropdownMenu>
+      </UncontrolledDropdown>
     </div>
   );
 };
@@ -592,79 +626,79 @@ class DataListConfig extends Component {
     // }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.thumbView) {
-      this.thumbView = false;
-      let columns = [
-        {
-          name: "Image",
-          selector: "img",
-          minWidth: "220px",
-          cell: (row) => <img src={row.img} height="100" alt={row.name} />,
-        },
-        {
-          name: "Name",
-          selector: "name",
-          sortable: false,
-          minWidth: "250px",
-          cell: (row) => (
-            <p title={row.name} className="text-truncate text-bold-500 mb-0">
-              {row.name}
-            </p>
-          ),
-        },
-        {
-          name: "Category",
-          selector: "category",
-          sortable: false,
-        },
-        {
-          name: "Popularity",
-          selector: "popularity",
-          sortable: false,
-          cell: (row) => (
-            <Progress
-              className="w-100 mb-0"
-              color={row.popularity.color}
-              value={row.popularity.popValue}
-            />
-          ),
-        },
-        {
-          name: "Order Status",
-          selector: "order_status",
-          sortable: false,
-          cell: (row) => (
-            <Chip
-              className="m-0"
-              color={chipColors[row.order_status]}
-              text={row.order_status}
-            />
-          ),
-        },
-        {
-          name: "Price",
-          selector: "price",
-          sortable: false,
-          cell: (row) => `$${row.price}`,
-        },
-        {
-          name: "Actions",
-          sortable: false,
-          cell: (row) => (
-            <ActionsComponent
-              row={row}
-              getData={this.props.getData}
-              parsedFilter={this.props.parsedFilter}
-              currentData={this.handleCurrentData}
-              deleteRow={this.handleDelete}
-            />
-          ),
-        },
-      ];
-      this.setState({ columns });
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (this.thumbView) {
+  //     this.thumbView = false;
+  //     let columns = [
+  //       {
+  //         name: "Image",
+  //         selector: "img",
+  //         minWidth: "220px",
+  //         cell: (row) => <img src={row.img} height="100" alt={row.name} />,
+  //       },
+  //       {
+  //         name: "Name",
+  //         selector: "name",
+  //         sortable: false,
+  //         minWidth: "250px",
+  //         cell: (row) => (
+  //           <p title={row.name} className="text-truncate text-bold-500 mb-0">
+  //             {row.name}
+  //           </p>
+  //         ),
+  //       },
+  //       {
+  //         name: "Category",
+  //         selector: "category",
+  //         sortable: false,
+  //       },
+  //       {
+  //         name: "Popularity",
+  //         selector: "popularity",
+  //         sortable: false,
+  //         cell: (row) => (
+  //           <Progress
+  //             className="w-100 mb-0"
+  //             color={row.popularity.color}
+  //             value={row.popularity.popValue}
+  //           />
+  //         ),
+  //       },
+  //       {
+  //         name: "Order Status",
+  //         selector: "order_status",
+  //         sortable: false,
+  //         cell: (row) => (
+  //           <Chip
+  //             className="m-0"
+  //             color={chipColors[row.order_status]}
+  //             text={row.order_status}
+  //           />
+  //         ),
+  //       },
+  //       {
+  //         name: "Price",
+  //         selector: "price",
+  //         sortable: false,
+  //         cell: (row) => `$${row.price}`,
+  //       },
+  //       {
+  //         name: "Actions",
+  //         sortable: false,
+  //         cell: (row) => (
+  //           <ActionsComponent
+  //             row={row}
+  //             getData={this.props.getData}
+  //             parsedFilter={this.props.parsedFilter}
+  //             currentData={this.handleCurrentData}
+  //             deleteRow={this.handleDelete}
+  //           />
+  //         ),
+  //       },
+  //     ];
+  //     this.setState({ columns });
+  //   }
+  // }
 
   goPatientList(id) {
     // id.preventDefault()
@@ -693,15 +727,16 @@ class DataListConfig extends Component {
 
   handleRowsPerPage = (value) => {
     let { parsedFilter, getData } = this.props;
-    let page = parsedFilter.page !== undefined ? parsedFilter.page : 1;
-    history.push(`/patients-list?page=${page}&perPage=${value}`);
-    this.setState({ currentPage: page, rowsPerPage: value });
-    getData({
-      user_id: this.state.user,
-      page: parsedFilter.page,
-      perPage: value,
-    });
-    // getData({ user_id: this.state.user, page_num: parsedFilter.page, page_amount: value })
+    // let page = parsedFilter.page !== undefined ? parsedFilter.page : 1;
+    // history.push(`/patients-list?page=${page}&perPage=${value}`);
+    history.push(`/patients-list?page=1&perPage=${value}`);
+    this.setState({ rowsPerPage: value });
+    // this.props.getData({
+    //   user_id: this.state.user,
+    //   page: 1,
+    //   perPage: value,
+    // });
+    getData(this.state.user, value, 1);
   };
 
   handleSidebar = (boolean, addNew = false) => {
@@ -736,9 +771,7 @@ class DataListConfig extends Component {
   handlePagination = (page) => {
     let { parsedFilter, getData } = this.props;
     let perPage = parsedFilter.perPage !== undefined ? parsedFilter.perPage : 5;
-    let urlPrefix = this.props.thumbView
-      ? "/data-list/thumb-view/"
-      : "/patients-list";
+    let urlPrefix = "/patients-list";
     history.push(`${urlPrefix}?page=${page.selected + 1}&perPage=${perPage}`);
     // getData({ page: page.selected + 1, perPage: perPage })
     getData(this.state.user, perPage, page.selected + 1);

@@ -41,17 +41,14 @@ class AnalyticsDashboard extends React.Component {
   componentDidMount() {
     console.log();
     axios
-      .get(
-        "https://health.iot4health.co.kr:9300/v1/doctor/appointment/dashboard",
-        {
-          params: {
-            user_id: this.state.userid,
-            start_date: utcFormatDate(new Date()),
-            page_amount: 5,
-            page_num: 1,
-          },
-        }
-      )
+      .get("https://teledoc.hicare.net:446/v1/doctor/appointment/dashboard", {
+        params: {
+          user_id: this.state.userid,
+          start_date: utcFormatDate(new Date()),
+          page_amount: 5,
+          page_num: 1,
+        },
+      })
       .then((response) => {
         console.log(response.data.data);
         let appoints;

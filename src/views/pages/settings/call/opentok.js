@@ -97,7 +97,7 @@ class ConsultingRoom extends React.Component {
 
   connectionCheck = () => {
     Axios.get(
-      "https://health.iot4health.co.kr:9300/v1/doctor/treatment/involve-state",
+      "https://teledoc.hicare.net:446/v1/doctor/treatment/involve-state",
       {
         params: {
           user_id: this.props.user.login.values.loggedInUser.username,

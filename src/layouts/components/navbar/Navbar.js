@@ -157,7 +157,7 @@ const ThemeNavbar = (props) => {
                       props.user.login.values.loggedInWith === "jwt" &&
                       props.user.login.values.loggedInUser.file_path &&
                       props.filename !== ""
-                    ? // "https://health.iot4health.co.kr:9300"+props.user.login.values.loggedInUser.file_path
+                    ? // "https://teledoc.hicare.net:446"+props.user.login.values.loggedInUser.file_path
                       //   +props.user.login.values.loggedInUser.username + "-" + props.filename
                       props.filename
                     : user !== undefined && user.picture

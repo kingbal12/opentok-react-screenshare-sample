@@ -517,7 +517,7 @@ class ConsultingRoom extends React.Component {
               width="50px"
               height="50px"
               src={
-                "https://health.iot4health.co.kr:9300" +
+                "https://teledoc.hicare.net:446" +
                 this.props.appo.FILE_PATH +
                 this.props.appo.FILE_NAME
               }
@@ -563,7 +563,7 @@ class ConsultingRoom extends React.Component {
             <div className="align-self-center">
               <img
                 src={
-                  "https://health.iot4health.co.kr:9300" +
+                  "https://teledoc.hicare.net:446" +
                   this.props.user.login.values.loggedInUser.file_path +
                   this.props.user.login.values.loggedInUser.file_name
                 }
@@ -783,7 +783,7 @@ class ConsultingRoom extends React.Component {
                       maxwidth="500px"
                       height="500px"
                       src={
-                        "https://health.iot4health.co.kr:9300" +
+                        "https://teledoc.hicare.net:446" +
                         this.props.appo.FILE_PATH +
                         this.props.appo.FILE_NAME
                       }

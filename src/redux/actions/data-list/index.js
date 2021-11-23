@@ -47,15 +47,12 @@ const localVitalFormDate = (scheduleda) => {
 export const gettokbox = (userid, appointnum) => {
   return (dispatch) => {
     axios
-      .get(
-        "https://health.iot4health.co.kr:9300/v1/doctor/treatment/video-call",
-        {
-          params: {
-            user_id: userid,
-            appoint_num: appointnum,
-          },
-        }
-      )
+      .get("https://teledoc.hicare.net:446/v1/doctor/treatment/video-call", {
+        params: {
+          user_id: userid,
+          appoint_num: appointnum,
+        },
+      })
 
       .then((response) => {
         console.log(response);
@@ -79,18 +76,15 @@ export const gettokbox = (userid, appointnum) => {
 export const getPaymentTotalData = (userid, startdate, enddate) => {
   return async (dispatch) => {
     await axios
-      .get(
-        "https://health.iot4health.co.kr:9300/v1/doctor/treatment/payments",
-        {
-          params: {
-            user_id: userid,
-            start_date: startdate,
-            end_date: enddate,
-            page_amount: 500000,
-            page_num: 1,
-          },
-        }
-      )
+      .get("https://teledoc.hicare.net:446/v1/doctor/treatment/payments", {
+        params: {
+          user_id: userid,
+          start_date: startdate,
+          end_date: enddate,
+          page_amount: 500000,
+          page_num: 1,
+        },
+      })
       .then((response) => {
         let len = response.data.data.PAY_LIST.length;
         let totalPay = new Array();
@@ -124,18 +118,15 @@ export const getPaymentData = (
 ) => {
   return async (dispatch) => {
     await axios
-      .get(
-        "https://health.iot4health.co.kr:9300/v1/doctor/treatment/payments",
-        {
-          params: {
-            user_id: userid,
-            start_date: startdate,
-            end_date: enddate,
-            page_amount: pageamount,
-            page_num: pagenum,
-          },
-        }
-      )
+      .get("https://teledoc.hicare.net:446/v1/doctor/treatment/payments", {
+        params: {
+          user_id: userid,
+          start_date: startdate,
+          end_date: enddate,
+          page_amount: pageamount,
+          page_num: pagenum,
+        },
+      })
       .then((response) => {
         let totalPage = Math.ceil(response.data.data.COUNT / 5);
 
@@ -154,17 +145,14 @@ export const getAppData = (userid, pageamount, pagenum) => {
   let npagenum = Number(pagenum);
   return async (dispatch) => {
     await axios
-      .get(
-        "https://health.iot4health.co.kr:9300/v1/doctor/appointment/dashboard",
-        {
-          params: {
-            user_id: userid,
-            start_date: utcFormatDateApp(new Date()),
-            page_amount: npagemount,
-            page_num: npagenum,
-          },
-        }
-      )
+      .get("https://teledoc.hicare.net:446/v1/doctor/appointment/dashboard", {
+        params: {
+          user_id: userid,
+          start_date: utcFormatDateApp(new Date()),
+          page_amount: npagemount,
+          page_num: npagenum,
+        },
+      })
       .then((response) => {
         let totalPage = Math.ceil(response.data.data.COUNT_DAY / 5);
         console.log(totalPage, "예약페이지:", response);
@@ -207,7 +195,7 @@ export const getData = (userid, pageamount, pagenum) => {
   let npagenum = Number(pagenum);
   return async (dispatch) => {
     await axios
-      .get("https://health.iot4health.co.kr:9300/v1/doctor/patient/patients", {
+      .get("https://teledoc.hicare.net:446/v1/doctor/patient/patients", {
         params: {
           user_id: userid,
           page_amount: npagemount,
@@ -215,7 +203,7 @@ export const getData = (userid, pageamount, pagenum) => {
         },
       })
       .then((response) => {
-        let totalPage = Math.ceil(response.data.data.COUNT / 5);
+        let totalPage = Math.ceil(response.data.data.COUNT / npagemount);
         console.log(totalPage, response);
 
         let length = response.data.data.PATIENT_LIST.length;
@@ -256,7 +244,7 @@ export const getData = (userid, pageamount, pagenum) => {
 export const getNameData = (userid, pageamount, pagenum, fname) => {
   return async (dispatch) => {
     await axios
-      .get("https://health.iot4health.co.kr:9300/v1/doctor/patient/patients", {
+      .get("https://teledoc.hicare.net:446/v1/doctor/patient/patients", {
         params: {
           user_id: userid,
           page_amount: pageamount,
@@ -325,16 +313,13 @@ export const resetPastConsult = () => {
 export const getPatientInfo = (userid, patientid, appointnum) => {
   return async (dispatch) => {
     await axios
-      .get(
-        "https://health.iot4health.co.kr:9300/v1/doctor/patient/patient-info",
-        {
-          params: {
-            user_id: userid,
-            patient_id: patientid,
-            appoint_num: appointnum,
-          },
-        }
-      )
+      .get("https://teledoc.hicare.net:446/v1/doctor/patient/patient-info", {
+        params: {
+          user_id: userid,
+          patient_id: patientid,
+          appoint_num: appointnum,
+        },
+      })
       .then((response) => {
         console.log("환자정보: ", response);
         if (response.data.status === "200") {
@@ -383,16 +368,13 @@ export const getPatientInfo = (userid, patientid, appointnum) => {
 export const getVitalData = (patientid) => {
   return async (dispatch) => {
     await axios
-      .get(
-        "https://health.iot4health.co.kr:9300/v1/doctor/patient/patient-vital",
-        {
-          params: {
-            patient_id: patientid,
-            start_date: moment().utc().add(-6, "days").format("YYYYMMDD"),
-            end_date: moment().utc().format("YYYYMMDD"),
-          },
-        }
-      )
+      .get("https://teledoc.hicare.net:446/v1/doctor/patient/patient-vital", {
+        params: {
+          patient_id: patientid,
+          start_date: moment().utc().add(-6, "days").format("YYYYMMDD"),
+          end_date: moment().utc().format("YYYYMMDD"),
+        },
+      })
       .then((response) => {
         if (response.data.status === "200") {
           // let pulselength = response.data.data.PRESSURE_LIST.length
@@ -546,16 +528,13 @@ export const resetappodata = () => {
 export const getVitalDataAll = (patientid, startdate) => {
   return async (dispatch) => {
     await axios
-      .get(
-        "https://health.iot4health.co.kr:9300/v1/doctor/patient/patient-vital",
-        {
-          params: {
-            patient_id: patientid,
-            start_date: startdate,
-            end_date: moment().utc().format("YYYYMMDD"),
-          },
-        }
-      )
+      .get("https://teledoc.hicare.net:446/v1/doctor/patient/patient-vital", {
+        params: {
+          patient_id: patientid,
+          start_date: startdate,
+          end_date: moment().utc().format("YYYYMMDD"),
+        },
+      })
       .then((response) => {
         if (response.data.status === "200") {
           console.log("단위데이터", response.data.data);
@@ -685,16 +664,13 @@ export const getVitalDataAll = (patientid, startdate) => {
 export const serachVitalData = (patientid, startdate, enddate) => {
   return async (dispatch) => {
     await axios
-      .get(
-        "https://health.iot4health.co.kr:9300/v1/doctor/patient/patient-vital",
-        {
-          params: {
-            patient_id: patientid,
-            start_date: moment(startdate[0]).utc().format("YYYYMMDD"),
-            end_date: moment(enddate[0]).utc().format("YYYYMMDD"),
-          },
-        }
-      )
+      .get("https://teledoc.hicare.net:446/v1/doctor/patient/patient-vital", {
+        params: {
+          patient_id: patientid,
+          start_date: moment(startdate[0]).utc().format("YYYYMMDD"),
+          end_date: moment(enddate[0]).utc().format("YYYYMMDD"),
+        },
+      })
 
       .then((response) => {
         if (response.data.status === "200") {
@@ -894,7 +870,7 @@ export const mPCL = (patientid) => {
 export const getPastConulstList = (patientid, pageamount, pagenum) => {
   return async (dispatch) => {
     await axios
-      .get("https://health.iot4health.co.kr:9300/v1/doctor/patient/consults", {
+      .get("https://teledoc.hicare.net:446/v1/doctor/patient/consults", {
         params: {
           patient_id: patientid,
           page_amount: pageamount,
@@ -922,7 +898,7 @@ export const getPastConulstList = (patientid, pageamount, pagenum) => {
 export const getFaq = (pageamount, pagenum) => {
   return async (dispatch) => {
     await axios
-      .get("https://health.iot4health.co.kr:9300/v1/doctor/setting/faqs", {
+      .get("https://teledoc.hicare.net:446/v1/doctor/setting/faqs", {
         params: {
           search_text: "",
           page_amount: pageamount,
@@ -949,7 +925,7 @@ export const getFaq = (pageamount, pagenum) => {
 export const getNameFaqData = (pageamount, pagenum, fname) => {
   return async (dispatch) => {
     await axios
-      .get("https://health.iot4health.co.kr:9300/v1/doctor/setting/faqs", {
+      .get("https://teledoc.hicare.net:446/v1/doctor/setting/faqs", {
         params: {
           search_text: fname,
           page_amount: pageamount,
@@ -976,7 +952,7 @@ export const getNameFaqData = (pageamount, pagenum, fname) => {
 export const getNotice = (pageamount, pagenum) => {
   return async (dispatch) => {
     await axios
-      .get("https://health.iot4health.co.kr:9300/v1/doctor/setting/notices", {
+      .get("https://teledoc.hicare.net:446/v1/doctor/setting/notices", {
         params: {
           page_amount: pageamount,
           page_num: pagenum,
@@ -1002,15 +978,12 @@ export const getNotice = (pageamount, pagenum) => {
 export const getVitalSettingData = (userid, patientid) => {
   return async (dispatch) => {
     await axios
-      .get(
-        "https://health.iot4health.co.kr:9300/v1/doctor/vital/base-patient",
-        {
-          params: {
-            user_id: userid,
-            patient_id: patientid,
-          },
-        }
-      )
+      .get("https://teledoc.hicare.net:446/v1/doctor/vital/base-patient", {
+        params: {
+          user_id: userid,
+          patient_id: patientid,
+        },
+      })
       .then((response) => {
         if (response.data.status === "200" && response.data.data !== null) {
           dispatch({
@@ -1031,17 +1004,14 @@ export const getVitalSettingData = (userid, patientid) => {
 export const postMDNoteData = (userid, apponum, cc, dx, rx, notevital) => {
   return (dispatch) => {
     axios
-      .post(
-        "https://health.iot4health.co.kr:9300/v1/doctor/treatment/md-note",
-        {
-          user_id: userid,
-          appoint_num: apponum,
-          note_cc: cc,
-          note_dx: dx,
-          note_rx: rx,
-          note_vital: notevital,
-        }
-      )
+      .post("https://teledoc.hicare.net:446/v1/doctor/treatment/md-note", {
+        user_id: userid,
+        appoint_num: apponum,
+        note_cc: cc,
+        note_dx: dx,
+        note_rx: rx,
+        note_vital: notevital,
+      })
       .then((response) => {
         if (response.data.status === "200") {
           alert("진료노트 저장이 완료되었습니다.");
@@ -1067,7 +1037,7 @@ export const postPrescriptionData = (userid, apponum, filename, file) => {
   return (dispatch) => {
     axios
       .post(
-        "https://health.iot4health.co.kr:9300/v1/doctor/treatment/prescription",
+        "https://teledoc.hicare.net:446/v1/doctor/treatment/prescription",
         frm,
         {
           headers: {
@@ -1096,15 +1066,12 @@ export const postPrescriptionData = (userid, apponum, filename, file) => {
 export const postPayData = (userid, apponum, paypatient, paytotal) => {
   return (dispatch) => {
     axios
-      .post(
-        "https://health.iot4health.co.kr:9300/v1/doctor/treatment/payment",
-        {
-          user_id: userid,
-          appoint_num: apponum,
-          pay_patient: paypatient,
-          pay_total: paytotal,
-        }
-      )
+      .post("https://teledoc.hicare.net:446/v1/doctor/treatment/payment", {
+        user_id: userid,
+        appoint_num: apponum,
+        pay_patient: paypatient,
+        pay_total: paytotal,
+      })
       .then((response) => {
         if (response.data.status === "200") {
           alert("결제정보가 저장되었습니다.");
@@ -1124,7 +1091,7 @@ export const postPayData = (userid, apponum, paypatient, paytotal) => {
 export const putStateComplete = (userid, apnum) => {
   return (dispatch) => {
     axios.put(
-      "https://health.iot4health.co.kr:9300/v1/doctor/treatment/state-complete",
+      "https://teledoc.hicare.net:446/v1/doctor/treatment/state-complete",
       {
         user_id: userid,
         appoint_num: apnum,
@@ -1136,14 +1103,11 @@ export const putStateComplete = (userid, apnum) => {
 export const getPharmacy = (patientid) => {
   return async (dispatch) => {
     await axios
-      .get(
-        "https://health.iot4health.co.kr:9300/v1/doctor/treatment/pharmacy",
-        {
-          params: {
-            patient_id: patientid,
-          },
-        }
-      )
+      .get("https://teledoc.hicare.net:446/v1/doctor/treatment/pharmacy", {
+        params: {
+          patient_id: patientid,
+        },
+      })
       .then((response) => {
         console.log(response.data.data);
         if (
@@ -1166,14 +1130,11 @@ export const getPharmacy = (patientid) => {
 export const pushCloseSignal = (userid, appointnum, state) => {
   return (dispatch) => {
     axios
-      .put(
-        "https://health.iot4health.co.kr:9300/v1/doctor/treatment/involve-state",
-        {
-          user_id: userid,
-          appoint_num: appointnum,
-          state_doc: state,
-        }
-      )
+      .put("https://teledoc.hicare.net:446/v1/doctor/treatment/involve-state", {
+        user_id: userid,
+        appoint_num: appointnum,
+        state_doc: state,
+      })
       .then((response) => {
         console.log("화상진료상태", response);
       })
